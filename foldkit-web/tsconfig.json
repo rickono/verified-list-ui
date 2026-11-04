@@ -11,16 +11,11 @@
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
     "noUnusedLocals": true,
-    "types": ["vite/client"],
-    "paths": {
-      "@program": ["../_build/default/foldkit/counter.program.ts"],
-      "@list-program": ["../_build/default/foldkit/list.program.ts"]
-    }
+    "types": ["vite/client"]
   },
-  "include": [
-    "src",
-    "vite.config.ts",
-    "../_build/default/foldkit/counter.program.ts",
-    "../_build/default/foldkit/list.program.ts"
-  ]
+  // TypeScript 7.1: src/*.fold are type-checked as the module Rocq prints
+  // for them, and failed proofs are reported on the rule (fold/mapper).
+  // Needs tsc --runExternalCode.
+  "contentMappers": [{ "package": "fold-content-mapper", "extensions": [".fold"] }],
+  "include": ["src", "vite.config.ts"]
 }

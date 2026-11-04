@@ -15,10 +15,12 @@
     "@vitejs/plugin-react": "6.1.2",
     "@xstate/react": "6.1.0",
     "effect": "4.0.0",
+    "fold-content-mapper": "link:fold/mapper",
     "foldkit": "0.168.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "typescript": "7.0.2",
+    "typescript-7.1": "npm:typescript@7.1.0-beta",
     "vite": "8.3.5",
     "xstate": "5.33.3",
     "zod": "4.6.7"

@@ -5,11 +5,12 @@
  (targets assumptions.txt Assumptions.vo Assumptions.glob .Assumptions.aux)
  (deps
   Assumptions.v
-  (glob_files %{project_root}/theories/*.vo))
+  (glob_files %{project_root}/theories/*.vo)
+  (glob_files %{project_root}/fold/apps/*.vo))
  (action
   (with-stdout-to
    assumptions.txt
-   (run rocq c -q -Q %{project_root}/theories VerifiedListUI Assumptions.v))))
+   (run rocq c -q -Q %{project_root}/theories VerifiedListUI -Q %{project_root}/fold/apps FoldApps Assumptions.v))))
 
 (rule
  (alias runtest)

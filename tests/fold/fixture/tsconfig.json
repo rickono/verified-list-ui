@@ -1,0 +1,16 @@
+{
+  // tests/fold/mapper.test.mjs type-checks this project with TypeScript 7.1
+  // and the fold content mapper, and tests/fold/vite.test.mjs bundles it
+  // with the fold Vite plugin.  level.fold has a proof that fails.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "contentMappers": [{ "package": "fold-content-mapper", "extensions": [".fold"] }],
+  "include": ["src"]
+}

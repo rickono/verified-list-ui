@@ -1,0 +1,31 @@
+; The .fold apps, checked by Rocq.  fold/ (untrusted JavaScript) turns each
+; source into a .v file; this theory compiles them, so the build fails unless
+; fwfb accepts each program and every invariant the source states is proved.
+; AppsSame.v then checks that each is exactly the program the hand-written
+; theory defines (theories/CounterFold.v, theories/ListFold.v), so the
+; theorems proved there hold for the .fold sources too.
+
+(rule
+ (targets CounterApp.v)
+ (deps
+  (glob_files %{project_root}/fold/src/*.mjs)
+  %{project_root}/fold/bin/foldc.mjs)
+ (action
+  (with-stdout-to
+   CounterApp.v
+   (run node %{project_root}/fold/bin/foldc.mjs v %{dep:../../foldkit-web/src/counter.fold} --file foldkit-web/src/counter.fold))))
+
+(rule
+ (targets ListApp.v)
+ (deps
+  (glob_files %{project_root}/fold/src/*.mjs)
+  %{project_root}/fold/bin/foldc.mjs)
+ (action
+  (with-stdout-to
+   ListApp.v
+   (run node %{project_root}/fold/bin/foldc.mjs v %{dep:../../foldkit-web/src/list.fold} --file foldkit-web/src/list.fold))))
+
+(rocq.theory
+ (name FoldApps)
+ (modules CounterApp ListApp AppsSame)
+ (theories Stdlib VerifiedListUI))

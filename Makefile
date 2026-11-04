@@ -1,9 +1,11 @@
 # Every target runs inside the project-local opam switch (./_opam).
 OPAM_EXEC := opam exec --switch=$(CURDIR) --set-switch --
 DUNE := $(OPAM_EXEC) dune
+# TypeScript 7.1 (beta) for the .fold content mapper; the plain tsc is 7.0.
+TSC71 := node node_modules/typescript-7.1/bin/tsc --runExternalCode
 PORT ?= 8080
 
-.PHONY: setup build proofs assumptions xstate test-xstate counter test-counter foldkit test-foldkit react foldkit-web test-browser check serve serve-react serve-foldkit clean
+.PHONY: setup build proofs assumptions xstate test-xstate counter test-counter foldkit test-foldkit fold test-fold react foldkit-web test-browser check serve serve-react serve-foldkit clean
 
 # One-time toolchain setup (see README.md for prerequisites).
 setup:
@@ -50,9 +52,20 @@ foldkit:
 # Effect and Foldkit, as theories/Fold.v models them: against oracles
 # computed from the spec, at the message Schemas, and (counter) through the
 # save command and the store.
-test-foldkit: foldkit
-	pnpm exec tsc -p foldkit-web
+test-foldkit: foldkit proofs
+	$(TSC71) -p foldkit-web
 	node --test tests/foldkit/program.test.mjs tests/foldkit/boundary.test.mjs tests/foldkit/list.test.mjs
+
+# Build the .fold apps through fold/ and check them in Rocq: fwfb, every
+# stated invariant, and that each is the program the theory defines.
+fold:
+	$(DUNE) build fold/apps
+
+# Check the builder (rejections, failed-proof diagnostics, span mappings,
+# the printed modules), the content mapper (over the protocol and through
+# tsc 7.1), and the Vite plugin (a failed proof stops the build).
+test-fold: foldkit fold
+	node --test tests/fold/builder.test.mjs tests/fold/mapper.test.mjs tests/fold/vite.test.mjs
 
 # React pages that run the emitted machines (output: _build/react):
 # / is the list UI, /counter.html is the counter.
@@ -62,8 +75,8 @@ react: xstate counter
 
 # The Foldkit pages (output: _build/foldkit-web): / is the list UI,
 # /counter.html is the counter.
-foldkit-web: foldkit
-	pnpm exec tsc -p foldkit-web
+foldkit-web: foldkit fold
+	$(TSC71) -p foldkit-web
 	pnpm exec vite build --config foldkit-web/vite.config.ts
 
 # Same Playwright scenarios against every front end (jsoo, react, foldkit).
@@ -71,9 +84,9 @@ test-browser: build react foldkit-web
 	pnpm exec playwright test
 
 # Proofs + assumptions audit + extraction + JS bundle + XState config
-# + XState validation (list and counter) + Foldkit validation + React and
-# Foldkit builds + browser tests.
-check: build assumptions test-xstate test-counter test-foldkit test-browser
+# + XState validation (list and counter) + Foldkit validation + the .fold
+# builder and content mapper + React and Foldkit builds + browser tests.
+check: build assumptions test-xstate test-counter test-foldkit test-fold test-browser
 
 serve: build
 	node scripts/serve.mjs _build/default/browser $(PORT)

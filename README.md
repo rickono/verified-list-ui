@@ -2,7 +2,7 @@
 
 UI logic written and proved correct in [Rocq](https://rocq-prover.org), then compiled to the browser three ways: with js_of_ocaml, as an [XState](https://stately.ai/docs/xstate) machine under React, and as a [Foldkit](https://foldkit.dev) TypeScript program. Rocq generates the code the browser runs, and the proofs are about that code. None of the app logic is written by hand.
 
-> **Status: research spike.** 113 theorems, no axioms, and `make check` passes on macOS (arm64). The point is to find out how much of a real UI stack a proof can reach, and what has to stay trusted.
+> **Status: research spike.** 123 theorems, no axioms, and `make check` passes on macOS (arm64). The point is to find out how much of a real UI stack a proof can reach, and what has to stay trusted.
 
 ## The apps
 
@@ -26,6 +26,7 @@ flowchart LR
   xc -- "useMachine" --> react
   spec -- "printer" --> fk["Foldkit program .ts<br/>(list, counter)"]
   fk -- "makeApplication" --> fkweb["Foldkit pages<br/>+ localStorage"]
+  fold[".fold source<br/>(TypeScript-flavored)"] -- "fold/ builder<br/>(untrusted)" --> spec
 ```
 
 Each back end answers a different question.
@@ -68,6 +69,48 @@ case "ClickedDelete": {
 }
 ```
 
+## Writing an app in `.fold`
+
+The Foldkit programs can also be written in a small TypeScript-flavored syntax. Here is a cut-down version of `foldkit-web/src/counter.fold`:
+
+```ts
+export const limit = 500;
+
+model {
+  saved locked: boolean = false;
+  saved count: Nat<limit - 1> = 0;
+}
+
+store "counter" { save: SaveCounter; done: CompletedSaveCounter; failed: FailedSaveCounter; }
+
+on ClickedAdd(n: Nat<999_999_999_999_999>) {
+  if (!model.locked && model.count + n < limit) {
+    next.count = model.count + n;
+    save();
+  }
+}
+
+invariant belowCap: model.count < limit;
+```
+
+An untrusted builder (`fold/`) turns the file into a `.v` file. Rocq checks it, proves each `invariant` for any messages and any stored value, and prints the TypeScript module. The page imports that module as `import { Message, update } from "./counter.fold"`:
+
+- **`make foldkit-web`.** A Vite plugin runs the strict build, so a failed proof fails the bundle.
+- **`tsc` 7.1 and editors.** A [content mapper](https://github.com/microsoft/TypeScript/pull/63800) gives TypeScript the printed module as the file's types, and reports a failed proof on the rule that breaks it, with the goal Rocq could not prove:
+
+```
+src/level.fold:11:3 - error fold3: belowCap might not hold after this branch of Raised. Rocq's lia could not prove it, with model as it was before the message:
+  needs:  (model.level + n) < 10
+  knows:
+    model.level + n <= 10   (the condition)
+    model.level < 10   (belowCap before)
+    n <= 10   (the parameter's Schema)
+```
+
+- **`make fold`.** dune builds `counter.fold` and `list.fold` the same way, then proves they are exactly the programs written by hand in `theories/`. Every theorem about those programs therefore holds for the `.fold` sources.
+
+The builder is not trusted for what runs: Rocq prints the TypeScript from the same term it checked. It is trusted to translate each invariant faithfully, which you can read in the generated file (`node fold/bin/foldc.mjs v counter.fold`). See [Writing apps in `.fold`](docs/DETAILS.md#writing-apps-in-fold) for the language, the diagnostics, and the limits.
+
 ## What is proved
 
 Some of the headline results. The [details](docs/DETAILS.md) have every theorem.
@@ -84,7 +127,7 @@ Some of the headline results. The [details](docs/DETAILS.md) have every theorem.
 | A save restores to exactly what was saved | `save_restore`, `fold_saves_restore` |
 | Every number the printed code computes is a safe integer | `js_exact`, `fold_exact` |
 
-`make assumptions` runs `Print Assumptions` on 113 theorems, and the build fails unless every one is closed under the global context. The development has no `Admitted`, `admit`, or `Axiom`.
+`make assumptions` runs `Print Assumptions` on 123 theorems, and the build fails unless every one is closed under the global context. The development has no `Admitted`, `admit`, or `Axiom`.
 
 ## What is trusted
 
@@ -92,6 +135,7 @@ The proofs are about Rocq models. These pieces connect the models to the running
 
 - **Rocq's kernel and extraction, OCaml, and js_of_ocaml.**
 - **The printers** (`Json.v`, `CtxJs.v`, `FoldTs.v`). They are written in Rocq, but nothing models what their output means. `tsc` type-checks the printed modules.
+- **The `.fold` builder's reading of the source.** It decides what program and which invariant statements a `.fold` file means. Rocq checks whatever the builder produces, and prints the code that runs from it.
 - **The frameworks.** XState and Foldkit must run the printed code the way `XState.v`, `XStateCtx.v`, and `Fold.v` model them. Node tests run the printed code under the pinned versions against oracles that Rocq computes from the models. They cover thousands of sampled steps, random traces, a 40,000-message fuzz, malformed payloads, and malformed stored strings.
 - **Hand-written glue.** This means the jsoo host, the React components, and the Foldkit views (`list.ts` is 79 lines). 49 Playwright tests check them across all three front ends.
 - **The browser and `localStorage`.** Pixels, CSS, layout, and accessibility are not verified.
@@ -108,6 +152,8 @@ opam init --bare --no-setup -y   # once per machine
 make setup   # local opam switch in ./_opam (several minutes), pnpm install, Playwright's Chromium
 make check   # proofs, axiom audit, code generation, Node tests, all front ends, browser tests
 ```
+
+`make setup` also installs TypeScript 7.1 (beta) for the `.fold` content mapper. It runs only with `--runExternalCode`: `node node_modules/typescript-7.1/bin/tsc -p foldkit-web --runExternalCode`.
 
 Then serve a front end at http://127.0.0.1:8080/ (set `PORT=…` to change the port):
 
@@ -127,8 +173,9 @@ All commands run inside the project's local opam switch, so you don't need `eval
 | `extraction/`, `xstate/`, `counter/`, `foldkit/` | extraction entry points, and small emitters that write the generated files into `_build/` |
 | `browser/` | the js_of_ocaml host and its static page |
 | `react/` | React pages that run the generated XState machines |
-| `foldkit-web/` | Foldkit pages that run the generated programs |
-| `tests/` | Node oracle tests (`xstate/`, `counter/`, `foldkit/`) and Playwright specs (`browser/`) |
+| `foldkit-web/` | Foldkit pages that run the generated programs, and the programs in `.fold` syntax (`src/*.fold`) |
+| `fold/` | the `.fold` builder, its command line (`foldc`), the Vite plugin, the TypeScript 7.1 content mapper, and the dune rules that check the two apps |
+| `tests/` | Node oracle tests (`xstate/`, `counter/`, `foldkit/`), `.fold` tests (`fold/`), and Playwright specs (`browser/`) |
 | `assumptions/`, `scripts/` | the axiom audit, and a static file server |
 | `docs/` | the long-form write-ups |
 
@@ -139,6 +186,6 @@ All commands run inside the project's local opam switch, so you don't need `eval
 
 ## Toolchain
 
-Rocq 9.2.0 · OCaml 5.3.0 · dune 3.23.1 · js_of_ocaml 6.5.0 · XState 5.33.3 · Zod 4.6.7 · Foldkit 0.168.0 · Effect 4.0.0 · React 19.3.1 · Vite 8.3.5 · TypeScript 7.0.2 · Playwright 1.64.1
+Rocq 9.2.0 · OCaml 5.3.0 · dune 3.23.1 · js_of_ocaml 6.5.0 · XState 5.33.3 · Zod 4.6.7 · Foldkit 0.168.0 · Effect 4.0.0 · React 19.3.1 · Vite 8.3.5 · TypeScript 7.0.2 (7.1.0-beta for `.fold`) · Playwright 1.64.1
 
 `verified-list-ui.opam.locked` and `pnpm-lock.yaml` pin every transitive dependency.
