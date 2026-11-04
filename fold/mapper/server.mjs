@@ -11,12 +11,13 @@
 //   rocq      the rocq binary      (default: <repo>/_opam/bin/rocq)
 //   theories  the compiled theory  (default: <repo>/_build/default/theories)
 //
-// dynamicConfig: the result also depends on the compiled theory and on the
-// builder's own source, so openProject returns their hash as configIdentity
-// and lists them in watchedFiles.
+// dynamicConfig: the result also depends on the compiled theory, on the
+// builder's own source, and on the acorn it parses with, so openProject
+// returns their hash as configIdentity and lists them in watchedFiles.
 
 import { createHash } from "node:crypto";
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -114,6 +115,8 @@ function configFiles(theories) {
     for (const f of fs.readdirSync(theories)) if (f.endsWith(".vo")) files.push(path.join(theories, f));
   } catch {}
   for (const f of fs.readdirSync(builderDir)) if (f.endsWith(".mjs")) files.push(path.join(builderDir, f));
+  // The acorn the builder imports: its package.json carries the version.
+  files.push(createRequire(path.join(builderDir, "parse.mjs")).resolve("acorn/package.json"));
   return files.sort();
 }
 

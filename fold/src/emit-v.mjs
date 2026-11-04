@@ -5,7 +5,7 @@
 // soft:   every obligation is tried and Admitted, printing FOLD-* lines that
 //         rocq.mjs reads back into diagnostics (the content mapper).
 
-import { FoldError } from "./lex.mjs";
+import { FoldError } from "./error.mjs";
 
 const str = (s) => `"${s.replaceAll('"', '""')}"`;
 const list = (xs) => `[${xs.join("; ")}]`;

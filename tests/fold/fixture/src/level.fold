@@ -3,18 +3,18 @@
 
 export const cap = 10;
 
-model {
-  level: Nat<cap> = 0;
-}
+model({
+  level: local(nat(cap), 0),
+});
 
-on Raised(n: Nat<cap>) {
+on("Raised", nat(cap), (n) => {
   if (model.level + n <= cap) {
     next.level = model.level + n;
   }
-}
+});
 
-on Lowered() {
+on("Lowered", () => {
   next.level = 0;
-}
+});
 
-invariant belowCap: model.level < cap;
+invariant("belowCap", () => model.level < cap);

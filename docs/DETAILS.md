@@ -839,7 +839,7 @@ Each printed-module mutation was made on a copy and run with `FOLDKIT_OUT` point
 
 ## Writing apps in `.fold`
 
-Before this, each Foldkit program was a Rocq term written by hand (`theories/CounterFold.v`, `theories/ListFold.v`). Now both apps are written in `.fold` files (`foldkit-web/src/counter.fold`, `foldkit-web/src/list.fold`), which use a small TypeScript-flavored syntax. An untrusted builder in `fold/` turns each file into a `.v` file. Rocq then checks the program's well-formedness (`fwfb`), proves every invariant the file states, and prints the TypeScript module. The pages import that module directly: `import { Message, update } from "./counter.fold"`.
+Before this, each Foldkit program was a Rocq term written by hand (`theories/CounterFold.v`, `theories/ListFold.v`). Now both apps are written in `.fold` files (`foldkit-web/src/counter.fold`, `foldkit-web/src/list.fold`), which are valid JavaScript: a few calls such as `model(...)`, `on(...)`, and `invariant(...)`. An untrusted builder in `fold/` turns each file into a `.v` file. Rocq then checks the program's well-formedness (`fwfb`), proves every invariant the file states, and prints the TypeScript module. The pages import that module directly: `import { Message, update } from "./counter.fold"`.
 
 There are three ways to build a `.fold` file, and all of them go through Rocq:
 
@@ -855,41 +855,50 @@ There are three ways to build a `.fold` file, and all of them go through Rocq:
 export const limit = 500;
 const payloadMax = 999_999_999_999_999;
 
-model {
-  saved locked: boolean = false;
-  saved count: Nat<limit - 1> = 0;
-  amount: Nat<payloadMax> = 250;
+model({
+  locked: saved(bool, false),
+  count: saved(nat(limit - 1), 0),
+  amount: local(nat(payloadMax), 250),
   // ...
-}
+});
 
-store "counter" { save: SaveCounter; done: CompletedSaveCounter; failed: FailedSaveCounter; }
+store("counter", { save: "SaveCounter", done: "CompletedSaveCounter", failed: "FailedSaveCounter" });
 
-on ClickedAdd(n: Nat<payloadMax>) {
+on("ClickedAdd", nat(payloadMax), (n) => {
   if (!model.locked && model.count + n < limit) {
     next.count = model.count + n;
     save();
   }
-}
+});
 
-invariant belowCap: model.count < limit;
+on("ClickedLock", () => {
+  if (!model.locked) {
+    next.locked = true;
+    save();
+  }
+});
+
+invariant("belowCap", () => model.count < limit);
 ```
+
+The file is read with [acorn](https://github.com/acornjs/acorn) as an ES module, so any JavaScript tool can parse it. The builder then accepts only the forms below. Everything else is rejected, even when it is valid JavaScript (`let`, `+=`, `++`, `?:`, `==`, `function`, `import`, a nested `if`, an `if` without braces).
 
 | construct | meaning in `Fold.v` |
 | --- | --- |
-| `const x = …;`, `export const x = …;` | A number (`+ - *` of numbers and earlier constants) or a list of `{ id, label }` items. Exported numbers are printed as `export const`. |
-| `model { … }` | The fields and their initial values. Fields marked `saved` are written by the save command and read back by `restore`. |
-| field types | `boolean`; `Nat` or `Nat<max>`, optionally `\| null`; `Item<max>[]` (`{ id, label }` items with ids at most `max`); `IdOf<list> \| null` (an id of an item in `list`, saved together with it). |
-| `store "key" { save: …; done: …; failed: …; }` | The `localStorage` key, the save command's name, and its two result messages. |
-| `on Tag(n: T) { … }` | A message and its payload Schema: `Nat`, `Nat<max>`, or `IdOf<list>`. The body is statements, or an `if` / `else if` / `else` chain. Each branch is one clause. |
+| `const x = …;`, `export const x = …;` | A number (`+ - *` of numbers and earlier constants) or a list of `{ id, label }` items. Exported numbers are printed as `export const`. Numbers are decimal digits, with `_` separators allowed, and are read exactly, so a number above 2^53 is not rounded. A constant may not take a name the language uses (`model`, `nat`, `save`, and so on). |
+| `model({ field: saved(type, init), … })` | The fields and their initial values. `saved(…)` fields are written by the save command and read back by `restore`; `local(…)` fields are not. |
+| field types | `bool`; `nat()` or `nat(max)`; `nullable(nat(max))`; `items(max)` (`{ id, label }` items with ids at most `max`); `nullable(idOf("list"))` (an id of an item in `list`, saved together with it). |
+| `store("key", { save: "…", done: "…", failed: "…" })` | The `localStorage` key, the save command's name, and its two result messages. |
+| `on("Tag", () => { … })`, `on("Tag", type, (n) => { … })` | A message, and its payload Schema if it carries one: `nat()`, `nat(max)`, or `idOf("list")`. The body is statements, or an `if` / `else if` / `else` chain with braces on every branch. Each branch is one clause. |
 | statements | `next.field = …;` and `save();`. A field a branch does not set keeps its value. |
 | conditions | `&&`, `!`, the comparisons `< <= > >= === !==` on number expressions, boolean fields, `model.x !== null`, and `model.items.some((it) => it.id === e)`. |
 | number expressions | Numbers, constants, `n`, `model.field`, `+`, and `Math.max(0, a - b)`. Plain `a - b` is rejected because subtraction stops at 0 in the model, and the printed code does the same. |
 | list updates | A list constant, or `model.items.filter((it) => it.id !== model.selected)`. A callback's parameter may have any name except `model`, `next`, the message parameter, or a constant, since those would hide the outer name. |
-| `invariant name: …;` | A condition over the boolean and number fields. Rocq proves that it holds after any messages, from any stored value. |
+| `invariant("name", () => …)` | A condition over the boolean and number fields. Rocq proves that it holds after any messages, from any stored value. |
 
 Rules that may surprise:
 
-- **The payload parameter is named `n`.** The printed message is `Message.Tag({ n })`, so `on ClickedItem(id: …)` is rejected with a message that says so.
+- **The payload parameter is named `n`.** The printed message is `Message.Tag({ n })`, so `on("ClickedItem", idOf("items"), (id) => …)` is rejected with a message that says so.
 - **There is no `||`.** A clause's guard is a conjunction, so use `else if` branches instead.
 - **Each branch is proved on its own.** A branch's proof assumes its own condition, but not that the earlier conditions failed. The diagnostic for a later branch says so.
 - **Invariants are about boolean and number fields only.** The list's validity (distinct ids, the selection names an item) is still proved in `ListFold.v`. `list.fold` states no invariant; `AppsSame.v` connects it to those theorems.
@@ -900,7 +909,8 @@ The builder rejects anything `Fold.v` cannot express. It reports the error on th
 
 | file | lines | role |
 | --- | --- | --- |
-| `fold/src/lex.mjs`, `parse.mjs` | 90, 378 | tokens, and a syntax tree with source spans |
+| `fold/src/parse.mjs` | 326 | reads the file with acorn, accepts only the `.fold` forms, and builds a syntax tree with source spans |
+| `fold/src/error.mjs` | 12 | `FoldError`, a message with a code and a source span |
 | `fold/src/check.mjs` | 557 | the program: fields, Schemas, clauses, and the invariants as Rocq propositions |
 | `fold/src/emit-v.mjs` | 225 | the generated `.v` file, strict or soft |
 | `fold/src/rocq.mjs` | 109 | runs `rocq c` on it and reads back what Rocq printed |
@@ -939,9 +949,9 @@ node fold/bin/foldc.mjs check foldkit-web/src/*.fold             # diagnostics, 
 
 | code | meaning | reported on |
 | --- | --- | --- |
-| 1 | the file does not parse | the token |
+| 1 | the file is not JavaScript, or uses JavaScript that `.fold` gives no meaning to (`let`, `+=`, `==`, a nested `if`) | the token or the construct |
 | 2 | `Fold.v` cannot express it (e.g. `a - b`, `\|\|`, an unknown field, a parameter not named `n`) | the offending span |
-| 3 | an invariant might not hold after a branch | the branch's `if (…)`, or the rule's name if it has no condition |
+| 3 | an invariant might not hold after a branch | the branch's `if (…)`, or the rule's head, `on("Tag", …) =>`, if it has no condition |
 | 4 | an invariant fails for the initial model, or might fail for a stored value | the invariant's name |
 | 5 | `fwfb` rejects the program (a builder bug: its own checks should catch this first) | the start of the file |
 | 6 | Rocq itself failed | the start of the file |
@@ -1007,7 +1017,7 @@ All ten are in `assumptions/Assumptions.v`, for 123 in all. Because of `AppsSame
 
 | file | checks |
 | --- | --- |
-| `tests/fold/builder.test.mjs` (8) | Seven kinds of bad source are rejected with the right code and span. A callback parameter that hides `model`, `n`, or a constant is rejected. `compile` on `counter.fold` and `list.fold` prints the modules dune extracts, apart from line 1. Both files check cleanly. A rule that can break an invariant is reported on its branch, with the goal. An invariant false at the start is reported once. The strict build refuses a failed proof. The span mappings are in range and do not overlap, and their Verbatim spans have the same text. |
+| `tests/fold/builder.test.mjs` (10) | Seven kinds of bad source are rejected with the right code and span, and so are fourteen kinds of JavaScript that `.fold` gives no meaning to, including the old syntax. A 17-digit number is read exactly. A callback parameter that hides `model`, `n`, or a constant is rejected. `compile` on `counter.fold` and `list.fold` prints the modules dune extracts, apart from line 1. Both files check cleanly. A rule that can break an invariant is reported on its branch, with the goal. An invariant false at the start is reported once. The strict build refuses a failed proof. The span mappings are in range and do not overlap, and their Verbatim spans have the same text. |
 | `tests/fold/mapper.test.mjs` (4) | The protocol, through a spawned `server.mjs`: the printed module, the mapping of each `case`, the code-3 diagnostic, the last-good fallback, option errors, and UTF-8 offsets. Then `tsc` 7.1 on `tests/fold/fixture`: exit 2, with the diagnostic at `level.fold(11,3)`. |
 | `tests/fold/vite.test.mjs` (2) | The Vite plugin stops the fixture's build with the diagnostic. With the guard fixed, it bundles the printed module. |
 

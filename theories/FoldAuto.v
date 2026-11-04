@@ -1,6 +1,6 @@
 (** * Proof support for programs written in [.fold] files.
 
-    A [.fold] file is a Fold.v program in TypeScript-flavored syntax, with
+    A [.fold] file is a Fold.v program in JavaScript syntax, with
     the invariants it should keep.  [fold/] (untrusted JavaScript) turns it
     into a [.v] file: the program as a [Definition], one lemma per (rule,
     invariant) pair, one for [restore], and the theorem that the invariant
