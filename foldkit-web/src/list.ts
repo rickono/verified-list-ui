@@ -12,7 +12,7 @@
 import { BrowserKeyValueStore } from "@effect/platform-browser";
 import { Runtime } from "foldkit";
 import type { Document, HtmlBuilder } from "foldkit/html";
-import { Message, Model, can, flags, init, update } from "@list-program";
+import { Message, Model, can, flags, init, update } from "./list.fold";
 import "../../browser/styles.css";
 
 const view = (model: Model, h: HtmlBuilder<Message>): Document => {

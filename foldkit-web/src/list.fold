@@ -1,0 +1,42 @@
+// The list UI, as a Foldkit program.  fold/ turns this file into Rocq
+// (ListApp.v), and Rocq prints the TypeScript module that list.ts runs.
+// Rocq checks that the selection always names an item (IdOf<items>).
+
+const maxId = 1000;
+const initialItems = [
+  { id: 1, label: "Alpha" },
+  { id: 2, label: "Beta" },
+  { id: 3, label: "Gamma" },
+];
+
+model {
+  saved selected: IdOf<items> | null = null;
+  saved items: Item<maxId>[] = initialItems;
+}
+
+store "list" {
+  save: SaveList;
+  done: CompletedSaveList;
+  failed: FailedSaveList;
+}
+
+on ClickedItem(n: IdOf<items>) {
+  if (model.items.some((it) => it.id === n)) {
+    next.selected = n;
+    save();
+  }
+}
+
+on ClickedDelete() {
+  if (model.selected !== null) {
+    next.selected = null;
+    next.items = model.items.filter((it) => it.id !== model.selected);
+    save();
+  }
+}
+
+on ClickedReset() {
+  next.selected = null;
+  next.items = initialItems;
+  save();
+}

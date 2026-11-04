@@ -259,3 +259,48 @@ Limits:
 - Labels are printable ASCII other than `"` and `\`. A list someone stores with other characters, such as `é`, is rejected whole at start-up, and the page falls back to the three starting items. The app itself never creates such a label, since labels come only from the program's list literal.
 - The order in which saves land is trusted, as for the counter. The page reads the store only at start-up, so two tabs each keep their own list, and the last save wins.
 - Both Foldkit programs now save. `FoldTs.v`'s branch for a program that saves nothing (`flags = Effect.succeed(initialModel)`) is no longer exercised by any program or test.
+
+## Follow-up: the `.fold` authoring path
+
+Date: 2026-11-03. Both Foldkit apps are now written in `.fold` files (`foldkit-web/src/counter.fold`, 70 lines; `list.fold`, 42 lines), a small TypeScript-flavored syntax. An untrusted builder (`fold/`) turns each file into a `.v` file. Rocq checks `fwfb`, proves each stated invariant, and prints the TypeScript module, which the pages import as `./counter.fold` and `./list.fold`. A TypeScript 7.1 content mapper shows failed proofs as `tsc` errors on the rule that breaks them. See "Writing apps in `.fold`" in [DETAILS.md](DETAILS.md).
+
+| item | evidence |
+| --- | --- |
+| The `.fold` sources are exactly the hand-written programs | `counter_same`, `list_same` (`reflexivity`), and `counter_ts_same`, `list_ts_same` for the printed modules, in `fold/apps/AppsSame.v` (24 lines). dune builds them in `make fold`, so every earlier theorem about `counter_program` and `list_program` holds for the `.fold` files |
+| The counter's invariants are proved from the source | `CounterApp.wf`, `belowCap_always`, `amountFits_always`, `belowCap_saves`, `amountFits_saves`, in the generated `CounterApp.v`, through `fold_holds` and `fold_holds_saves` in `theories/FoldAuto.v` (164 lines). `ListApp.wf` for the list |
+| No axioms | `assumptions check: all 123 theorems closed under the global context (no axioms)`. The 10 new entries are included |
+| The builder | `tests/fold/builder.test.mjs`: 8 of 8 pass. Seven kinds of bad source are rejected with the right code and span, and so is a callback parameter that hides an outer name. `compile` reproduces dune's modules, apart from line 1. A breakable rule and an invariant false at the start are reported with the right codes and spans. The strict build refuses both. The span mappings are sound |
+| The content mapper | `tests/fold/mapper.test.mjs`: 4 of 4 pass, over the protocol and through `tsc` 7.1 on `tests/fold/fixture`, which exits 2 with `level.fold(11,3): error fold3: belowCap might not hold after this branch of Raised` |
+| The Vite plugin | `tests/fold/vite.test.mjs`: 2 of 2 pass. A failed proof stops the bundle, and a fixed one bundles Rocq's module. `make foldkit-web` builds the real pages through the plugin |
+| The pages are unchanged | Playwright: 49 of 49, against pages built from the `.fold` files |
+| Speed | One soft analysis (all proofs tried, with diagnostics): 0.7 s for `counter.fold`, 0.4 s for `list.fold`. A strict compile: 0.9 s and 0.4 s. `foldc check` on three files: about 1.4 s |
+| Wired into the one command | `make clean && make check` exited 0 in 35 seconds. Node: 7 XState, 11 counter, 28 Foldkit, and 13 `.fold` tests, all passed. Playwright: 49 passed. After the review fix below, `make check` exited 0 again, with 14 `.fold` tests |
+
+What it took:
+
+1. **The builder**, `fold/src`, has 1,646 lines in eight modules: a lexer, a parser that keeps source spans, a checker, the `.v` emitter, the Rocq runner, the diagnostics, the span mappings, and the entry points. The checker builds the `Fold.v` program and states each invariant as a Rocq proposition. It rejects anything `Fold.v` cannot express before Rocq runs, with a message in `.fold` terms.
+2. **`theories/FoldAuto.v`** (164 lines). `fold_holds` and `fold_holds_saves` restate `fold_keeps` and `fold_saves_keep` for an invariant proved clause by clause. The tactics `clause_start` and `stored_start` set up each obligation, and `fold_report` prints the goal `lia` was left with.
+3. **Two builds of the same `.v` file.** The strict build ends every lemma in `Qed`, and is the only one bundled. The soft build tries every obligation, ends each in `Admitted`, and prints `FOLD-*` lines that `diagnose.mjs` turns back into `.fold` terms.
+4. **Three front ends.** `fold/bin/foldc.mjs` (98 lines), the Vite plugin `fold/vite.mjs` (49 lines), and the content mapper `fold/mapper/server.mjs` (229 lines).
+5. **Wiring.** `package.json` adds `typescript-7.1` (`npm:typescript@7.1.0-beta`) and links `fold-content-mapper`. `foldkit-web` drops its `@program` path aliases for the plugin and the mapper. The Makefile gains `fold` and `test-fold`, and type-checks `foldkit-web` with 7.1 and `--runExternalCode`. `assumptions/` also reads `fold/apps`.
+
+Problems on the way:
+
+- `idtac` is a tactic, so the soft build's `idtac "FOLD-…"` markers could not run at top level. Each one is now wrapped in `Goal True. idtac "…". Abort.`
+- After the `destruct` that splits a clause into cases, the generated proof had to chain its tactics with `;`. Otherwise `fold_simpl` and the `try discriminate` dispatch reached only the first goal. The steps before the split stay as separate sentences.
+- The goals `lia` was left with were hard to read. Boolean fields destructured into `true || …` and `false || …`, and hypotheses like `true = true` filled the list. The diagnostic now simplifies those forms and drops trivial hypotheses before printing "needs" and "knows".
+- `||` in a guard cannot be expressed, because a clause's guard is a conjunction. The checker reports it on the `||` and suggests `else if`.
+- The printed message payload is always `n`, so `on Raised(by: …)` would have printed `Message.Raised({ n })` and broken a `main.ts` that wrote `{ by }`. The builder now requires the parameter to be named `n`, and says so.
+- An invariant false at the start was reported twice, once for init and again for stored. With nothing saved, `restore` returns the initial model, so the stored failure repeats the init one. It is now reported once.
+- `foldc` printed `FOLD3` while `tsc` prints `fold3`. Both now use `fold3`.
+- `tsc` counts a mapper's diagnostics as syntactic, so while a `.fold` proof fails, it skips the semantic pass for the whole program. A type error in `main.ts` stays hidden until the proof goes through. This is documented, not fixed.
+- The Vite test first matched minified output, which was fragile. It now builds with `minify: false` and matches the printed lines.
+- A design review found that the checker ignored scope in callbacks. `model.items.filter((model) => model.id !== model.selected)` was read as "drop the selected item", although in TypeScript `model.selected` there is the item's field. A callback parameter named `model`, `next`, the message parameter, or a constant is now rejected.
+
+Limits:
+
+- TypeScript 7.1 and content mappers are in beta. Only the `tsc` CLI was tested, not an editor.
+- The builder is trusted to state the invariants faithfully. For the counter, `Q_belowCap` should be read in `foldc v` output. `AppsSame` pins the programs, but not the invariants, which are new statements.
+- Invariants cannot mention lists, so the list's validity is still proved in `ListFold.v`, and `list.fold` states no invariant. Messages carry only numbers. There is no `||` and no multiplication in rules.
+- Each branch is proved on its own, without assuming that earlier conditions failed. A later branch that relies on this will be reported even though it is safe.
+- Each analysis runs Rocq on the whole file. That is fast enough for these two apps, but it will not stay fast as the files grow.

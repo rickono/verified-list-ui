@@ -1,0 +1,20 @@
+// A level that should stay below its cap.  The guard is off by one, so
+// Rocq cannot prove belowCap after Raised.
+
+export const cap = 10;
+
+model {
+  level: Nat<cap> = 0;
+}
+
+on Raised(n: Nat<cap>) {
+  if (model.level + n <= cap) {
+    next.level = model.level + n;
+  }
+}
+
+on Lowered() {
+  next.level = 0;
+}
+
+invariant belowCap: model.level < cap;

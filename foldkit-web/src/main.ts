@@ -7,7 +7,7 @@
 import { BrowserKeyValueStore } from "@effect/platform-browser";
 import { Runtime } from "foldkit";
 import type { Document, HtmlBuilder } from "foldkit/html";
-import { Message, Model, can, flags, init, initialModel, limit, update } from "@program";
+import { Message, Model, can, flags, init, initialModel, limit, update } from "./counter.fold";
 import "../../browser/styles.css";
 import "../../react/src/counter.css";
 
