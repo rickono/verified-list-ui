@@ -81,7 +81,7 @@ test("the mapper prints the module, maps it, and reports the failed proof", asyn
     assert.equal(levelSrc.slice(hit[2], hit[2] + hit[3]), "Raised");
 
     // While the file does not parse, the last printed module stands in, unmapped.
-    const broken = await m.call("transform", { fileName: level, content: "model {", projectHandle: "p" });
+    const broken = await m.call("transform", { fileName: level, content: "model({", projectHandle: "p" });
     assert.equal(broken.text, r.text);
     assert.deepEqual(broken.mappings, []);
     assert.deepEqual(broken.diagnostics.map((x) => x.code), [1]);

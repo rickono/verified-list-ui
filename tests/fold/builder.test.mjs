@@ -10,7 +10,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { analyze, build, compile, FoldBuildError, FoldError, spanMappings } from "../../fold/src/index.mjs";
+import { analyze, build, compile, FoldBuildError, FoldError, parse, spanMappings } from "../../fold/src/index.mjs";
 
 const read = (p) => readFileSync(resolve(p), "utf8");
 const counter = read("foldkit-web/src/counter.fold");
@@ -30,35 +30,66 @@ const rejection = (src) => {
 
 const small = (rules, invariants = "") => `
 export const cap = 10;
-model {
-  saved level: Nat<cap> = 0;
-  open: boolean = true;
-}
-store "level" { save: SaveLevel; done: SavedLevel; failed: FailedLevel; }
+model({
+  level: saved(nat(cap), 0),
+  open: local(bool, true),
+});
+store("level", { save: "SaveLevel", done: "SavedLevel", failed: "FailedLevel" });
 ${rules}
 ${invariants}
 `;
 
-test("rejects source it cannot translate, on the offending span", () => {
-  const cases = [
-    [small(`on Up(n: Nat<cap>) { if (model.level == n) { next.level = n; } }`), "==", 1, /===/],
-    [small(`on Up(n: Nat<cap>) { next.levl = n; }`), "levl", 2, /no field levl/],
-    [small(`on Up(by: Nat<cap>) { next.level = by; }`), "by", 2, /Name the parameter n/],
-    [small(`on Down(n: Nat<cap>) { next.level = model.level - n; }`), "-", 2, /Math\.max\(0, a - b\)/],
-    [small(`on Up(n: Nat<cap>) { if (model.open || n < 2) { next.level = n; } }`), "||", 2, /else if/],
-    [small(`on Up() { next.level = 1; }\non Up() { next.level = 2; }`), "Up", 2, /already a rule for Up/],
-    [small(`on Up() { next.level = 1; }`).replace("saved level", "level"), 'store "level"', 2, /Nothing is saved/],
-  ];
+// Each case: the source, the text the error is on, its code, its message.
+// The span is on one occurrence of the text (the second rule, for a
+// repeated name).
+const rejects = (cases) => {
   for (const [src, at, code, message] of cases) {
     const e = rejection(src);
     assert.ok(e, `accepted: ${at}`);
     assert.equal(e.code, code, e.message);
     assert.match(e.message, message);
-    // The span is on one occurrence of [at] (the second rule, for a repeated name).
-    const starts = [...src.matchAll(new RegExp(at.replace(/[|\\-]/g, "\\$&"), "g"))].map((m) => m.index);
+    const starts = [];
+    for (let i = src.indexOf(at); i >= 0; i = src.indexOf(at, i + 1)) starts.push(i);
     assert.ok(starts.includes(e.start), `${e.message} at ${e.start}, expected one of ${starts}`);
     assert.equal(src.slice(e.start, e.end), at);
   }
+};
+
+test("rejects source it cannot translate, on the offending span", () => {
+  rejects([
+    [small(`on("Up", nat(cap), (n) => { if (model.level == n) { next.level = n; } });`), "==", 1, /===/],
+    [small(`on("Up", nat(cap), (n) => { next.levl = n; });`), "levl", 2, /no field levl/],
+    [small(`on("Up", nat(cap), (by) => { next.level = by; });`), "by", 2, /Name the parameter n/],
+    [small(`on("Down", nat(cap), (n) => { next.level = model.level - n; });`), "-", 2, /Math\.max\(0, a - b\)/],
+    [small(`on("Up", nat(cap), (n) => { if (model.open || n < 2) { next.level = n; } });`), "||", 2, /else if/],
+    [small(`on("Up", () => { next.level = 1; });\non("Up", () => { next.level = 2; });`), "Up", 2, /already a rule for Up/],
+    [small(`on("Up", () => { next.level = 1; });`).replace("saved(nat", "local(nat"), "store", 2, /Nothing is saved/],
+  ]);
+});
+
+test("rejects JavaScript that .fold gives no meaning to", () => {
+  rejects([
+    [small(`on("Up", nat(cap), (n) => { next.level += n; });`), "next.level += n", 1, /with =, not \+=/],
+    [small(`on("Up", () => { next.level++; });`), "next.level++", 1, /\+\+ is not supported/],
+    [small(`on("Up", () => { const x = 1; next.level = x; });`), "const", 1, /Expected next\.<field>/],
+    [small(`on("Up", () => { if (model.open) next.level = 1; });`), "next.level = 1;", 1, /braces/],
+    [small(`on("Up", () => { if (model.open) { if (model.open) { next.level = 1; } } });`), "if", 1, /do not nest/],
+    [small(`on("Up", () => { next.level = model["level"]; });`), 'model["level"]', 1, /\[ \]/],
+    [small(`on("Up", () => { next.level = model?.level; });`), "model?.level", 1, /\?\./],
+    [small(`on("Up", () => { next.level = 0x1; });`), "0x1", 1, /decimal/],
+    [small(`on("Up", () => { next.level = model.open ? 1 : 0; });`), "model.open ? 1 : 0", 1, /\?:/],
+    [small(`function up() {}`), "function", 1, /Expected const, model/],
+    [small(`let x = 1;`), "let", 1, /Use const/],
+    [small(`const nat = 3;`), "nat", 2, /part of \.fold/],
+    [small(`invariant("low", () => { return model.level < cap; });`), 'invariant("low", () => { return model.level < cap; })', 1, /\(\) => condition/],
+    // The old syntax is not JavaScript.
+    [small(`on Up() { next.level = 1; }`), "Up", 1, /^Unexpected token\.$/],
+  ]);
+});
+
+test("numbers are read exactly, from their digits", () => {
+  const [c] = parse("const big = 9_007_199_254_740_993;").items;
+  assert.equal(c.value.v, 9007199254740993n);
 });
 
 test("a callback parameter may not hide model, next, n, or a constant", () => {
@@ -66,7 +97,7 @@ test("a callback parameter may not hide model, next, n, or a constant", () => {
   // as the item's field, so the builder must not translate it as the model's.
   const cases = [
     [list.replace("(it) => it.id !== model.selected", "(model) => model.id !== model.selected"), "(model) =>"],
-    [list.replace("(it) => it.id === n", "(n) => n.id === n"), "(n) =>"],
+    [list.replace("(it) => it.id === n", "(n) => n.id === n"), ".some((n) =>"],
     [list.replace("(it) => it.id === n", "(maxId) => maxId.id === n"), "(maxId) =>"],
   ];
   for (const [src, at] of cases) {
@@ -74,7 +105,7 @@ test("a callback parameter may not hide model, next, n, or a constant", () => {
     assert.ok(e, `accepted: ${at}`);
     assert.equal(e.code, 2, e.message);
     assert.match(e.message, /hides the outer/);
-    assert.equal(e.start, src.indexOf(at) + 1);
+    assert.equal(e.start, src.indexOf(at) + at.lastIndexOf("(") + 1);
   }
   // Any other name is fine.
   assert.equal(rejection(list.replace("(it) => it.id !== model.selected", "(item) => item.id !== model.selected")), null);
@@ -103,16 +134,16 @@ test("the .fold apps check cleanly", async () => {
 
 test("a rule that can break an invariant is reported on that rule", async () => {
   const src = small(
-    `on Up(n: Nat<cap>) {
+    `on("Up", nat(cap), (n) => {
   if (model.level + n <= cap) {
     next.level = model.level + n;
     save();
   } else {
     next.level = 0;
   }
-}
-on Close() { next.open = false; }`,
-    `invariant belowCap: model.level < cap;`,
+});
+on("Close", () => { next.open = false; });`,
+    `invariant("belowCap", () => model.level < cap);`,
   );
   const { ts, diagnostics } = await analyze(src);
   assert.ok(ts, "Rocq still prints the module");
@@ -131,7 +162,9 @@ on Close() { next.open = false; }`,
 });
 
 test("an invariant that fails initially is reported on the invariant", async () => {
-  const src = small(`on Close() { next.open = false; }`, `invariant opened: !model.open;`).replace("saved level", "level").replace(/store .*\n/, "");
+  const src = small(`on("Close", () => { next.open = false; });`, `invariant("opened", () => !model.open);`)
+    .replace("saved(nat", "local(nat")
+    .replace(/store\(.*\n/, "");
   const { diagnostics } = await analyze(src);
   assert.deepEqual(
     diagnostics.map((d) => [d.code, src.slice(d.start, d.start + d.length)]),
@@ -141,10 +174,13 @@ test("an invariant that fails initially is reported on the invariant", async () 
 });
 
 test("the strict build refuses a failed proof, with the soft build's diagnostics", async () => {
-  const src = small(`on Up(n: Nat<cap>) { next.level = n; save(); }`, `invariant small: model.level < 5;`);
+  const src = small(`on("Up", nat(cap), (n) => { next.level = n; save(); });`, `invariant("small", () => model.level < 5);`);
   await assert.rejects(compile(src), (e) => {
     assert.ok(e instanceof FoldBuildError);
     assert.deepEqual(e.diagnostics.map((d) => d.code).sort(), [3, 4]);
+    // A rule with no condition is reported on its head.
+    const rule = e.diagnostics.find((d) => d.code === 3);
+    assert.equal(src.slice(rule.start, rule.start + rule.length), 'on("Up", nat(cap), (n) =>');
     return true;
   });
 });

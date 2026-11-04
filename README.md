@@ -26,7 +26,7 @@ flowchart LR
   xc -- "useMachine" --> react
   spec -- "printer" --> fk["Foldkit program .ts<br/>(list, counter)"]
   fk -- "makeApplication" --> fkweb["Foldkit pages<br/>+ localStorage"]
-  fold[".fold source<br/>(TypeScript-flavored)"] -- "fold/ builder<br/>(untrusted)" --> spec
+  fold[".fold source<br/>(JavaScript syntax)"] -- "fold/ builder<br/>(untrusted)" --> spec
 ```
 
 Each back end answers a different question.
@@ -71,26 +71,26 @@ case "ClickedDelete": {
 
 ## Writing an app in `.fold`
 
-The Foldkit programs can also be written in a small TypeScript-flavored syntax. Here is a cut-down version of `foldkit-web/src/counter.fold`:
+The Foldkit programs can also be written in `.fold` files. A `.fold` file is valid JavaScript: a few calls such as `model(...)`, `on(...)`, and `invariant(...)`. Any JavaScript parser reads it, so highlighters and formatters work once the extension is mapped to JavaScript. The builder rejects anything outside the forms it gives a meaning to. Here is a cut-down version of `foldkit-web/src/counter.fold`:
 
 ```ts
 export const limit = 500;
 
-model {
-  saved locked: boolean = false;
-  saved count: Nat<limit - 1> = 0;
-}
+model({
+  locked: saved(bool, false),
+  count: saved(nat(limit - 1), 0),
+});
 
-store "counter" { save: SaveCounter; done: CompletedSaveCounter; failed: FailedSaveCounter; }
+store("counter", { save: "SaveCounter", done: "CompletedSaveCounter", failed: "FailedSaveCounter" });
 
-on ClickedAdd(n: Nat<999_999_999_999_999>) {
+on("ClickedAdd", nat(999_999_999_999_999), (n) => {
   if (!model.locked && model.count + n < limit) {
     next.count = model.count + n;
     save();
   }
-}
+});
 
-invariant belowCap: model.count < limit;
+invariant("belowCap", () => model.count < limit);
 ```
 
 An untrusted builder (`fold/`) turns the file into a `.v` file. Rocq checks it, proves each `invariant` for any messages and any stored value, and prints the TypeScript module. The page imports that module as `import { Message, update } from "./counter.fold"`:

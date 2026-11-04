@@ -1,7 +1,7 @@
 // The builder: .fold source -> IR -> generated .v (strict or soft).
 
 import { createHash } from "node:crypto";
-import { FoldError } from "./lex.mjs";
+import { FoldError } from "./error.mjs";
 import { parse } from "./parse.mjs";
 import { check } from "./check.mjs";
 import { emitV, obligations } from "./emit-v.mjs";

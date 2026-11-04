@@ -3,7 +3,7 @@
 // with [fwfb] and proves the invariants.  These checks are only there so
 // mistakes are reported on the right line, in .fold terms, before Rocq runs.
 
-import { FoldError } from "./lex.mjs";
+import { FoldError } from "./error.mjs";
 
 const MAX_SAFE = 9007199254740991n;
 // A nat literal in a generated .v file is unary until Rocq's number
@@ -51,15 +51,15 @@ export function check(ast) {
         if (it.exported) exported.push({ name: it.name, value: v, span: it.nameSpan });
       }
     } else if (it.kind === "model") {
-      if (model) throw err("There is already a model block.", it.headSpan);
+      if (model) throw err("There is already a model(...).", it.headSpan);
       model = it;
     } else if (it.kind === "store") {
-      if (store) throw err("There is already a store block.", it.headSpan);
+      if (store) throw err("There is already a store(...).", it.headSpan);
       store = it;
     } else if (it.kind === "rule") rules.push(it);
     else invariants.push(it);
   }
-  if (!model) throw new FoldError("A program needs a model block.", 0, 0);
+  if (!model) throw new FoldError("A program needs a model({ ... }).", 0, 0);
 
   // The model.
   const fields = new Map(); // name -> { kind, ... }
@@ -84,14 +84,14 @@ export function check(ast) {
         field = { kind: "opt", name: f.name, init, max };
         opts.push(field);
       } else {
-        if (f.init.k === "null") throw err("This field is not nullable. Add | null to its type.", f.init);
+        if (f.init.k === "null") throw err("This field is not nullable. Wrap its type in nullable(...).", f.init);
         field = { kind: "num", name: f.name, init: natInit(f.init, consts, max), max };
         nums.push(field);
       }
     } else if (t.k === "idof") {
       const l = model.fields.find((g) => g.name === t.list);
       if (!l || l.type.k !== "items") throw err(`${t.list} is not a list field of the model.`, t.listSpan);
-      if (!t.nullable) throw err("A model field that refers to an item is nullable: IdOf<list> | null.", t);
+      if (!t.nullable) throw err(`A model field that refers to an item is nullable: nullable(idOf("${t.list}")).`, t);
       if (f.saved !== l.saved) {
         throw err(`${f.name} refers to ${t.list}, so they are saved together or not at all.`, f.nameSpan);
       }
@@ -121,8 +121,8 @@ export function check(ast) {
   const maxes = [...nums, ...opts, ...lists].map((f) => [f.name, f.max]);
 
   // The store.
-  if (saved.length && !store) throw err("Saved fields need a store block.", model.headSpan);
-  if (store && !saved.length) throw err("Nothing is saved. Mark fields saved, or drop the store.", store.headSpan);
+  if (saved.length && !store) throw err("Saved fields need a store(...).", model.headSpan);
+  if (store && !saved.length) throw err("Nothing is saved. Make a field saved(...), or drop the store.", store.headSpan);
   let storeIR = null;
   if (store) {
     if (!IDENT.test(store.key)) throw err("The store key is a name: letters, digits, and _, starting with a letter.", store.keySpan);
@@ -157,7 +157,7 @@ export function check(ast) {
         const l = fields.get(pt.list);
         if (!l || l.kind !== "list") throw err(`${pt.list} is not a list field of the model.`, pt.listSpan);
         schema = { k: "nat", max: l.max };
-      } else throw err("A message parameter is Nat, Nat<max>, or IdOf<list>.", pt);
+      } else throw err('A message parameter is nat(), nat(max), or idOf("list").', pt);
       if (schema.max > MAX_SAFE) throw err(`The maximum is at most Number.MAX_SAFE_INTEGER (${MAX_SAFE}).`, pt);
     }
     if (storeIR && (r.tag === storeIR.done || r.tag === storeIR.failed) && schema.k !== "none") {
@@ -435,7 +435,7 @@ function body(stmts, env) {
   const done = new Set();
   for (const s of stmts) {
     if (s.k === "save") {
-      if (!env.store) throw err("save() needs a store block.", s);
+      if (!env.store) throw err("save() needs a store(...).", s);
       if (out.save) throw err("save() is already called in this branch.", s);
       out.save = true;
       out.saveSpan = s;
@@ -475,7 +475,7 @@ function listExpr(v, f, env) {
   // model.l.filter((it) => it.id !== model.o)
   if (v.k === "call" && v.callee.k === "member" && v.callee.prop === "filter") {
     const l = modelField(v.callee.obj);
-    const bad = () => err(`Write model.${f.name}.filter((it) => it.id !== model.<field>), where the field is IdOf<${f.name}> | null.`, v);
+    const bad = () => err(`Write model.${f.name}.filter((it) => it.id !== model.<field>), where the field is nullable(idOf("${f.name}")).`, v);
     if (l !== f.name || v.args.length !== 1 || v.args[0].k !== "arrow") throw bad();
     const a = v.args[0];
     lambdaParam(a, env);

@@ -304,3 +304,38 @@ Limits:
 - Invariants cannot mention lists, so the list's validity is still proved in `ListFold.v`, and `list.fold` states no invariant. Messages carry only numbers. There is no `||` and no multiplication in rules.
 - Each branch is proved on its own, without assuming that earlier conditions failed. A later branch that relies on this will be reported even though it is safe.
 - Each analysis runs Rocq on the whole file. That is fast enough for these two apps, but it will not stay fast as the files grow.
+
+## Follow-up: `.fold` in JavaScript syntax
+
+Date: 2026-11-03. The `.fold` language above had its own syntax. It looked like TypeScript, but no JavaScript or TypeScript tool could parse it. A design review recommended making it valid JavaScript before anything more is built on it. A `.fold` file is now an ES module of calls: `model({ … })`, `store("key", { … })`, `on("Tag", nat(max), (n) => { … })`, and `invariant("name", () => …)`, with fields written `saved(type, init)` or `local(type, init)`. What a program means is unchanged.
+
+| item | evidence |
+| --- | --- |
+| The meaning did not change | `foldc v` on `counter.fold`, `list.fold`, and the fixture's `level.fold`, strict and soft, prints the same `.v` file as before the swap, byte for byte, apart from the source hash in the header |
+| Rocq | `make check` exited 0. dune regenerated `CounterApp.v` and `ListApp.v` from the new files, and `AppsSame` still proves them equal to the hand-written programs. The assumptions audit passed |
+| The builder | `tests/fold/builder.test.mjs`: 10 of 10 pass. The seven earlier rejections are rewritten in the new syntax. Fourteen kinds of JavaScript that `.fold` gives no meaning to are rejected on the right span, among them `+=`, `let`, `?:`, a nested `if`, and the old syntax. A 17-digit number is read exactly |
+| The content mapper and the Vite plugin | 4 of 4 and 2 of 2 pass, unchanged apart from the unparseable input (now `model({`). `tsc` 7.1 still reports `level.fold(11,3): error fold3`, since the fixture keeps its `if` at line 11, column 3 |
+| The pages are unchanged | Playwright: 49 of 49. Node: 7 XState, 11 counter, 28 Foldkit, and 16 `.fold` tests, all passed |
+
+What it took:
+
+1. **`fold/src/parse.mjs`** (326 lines) replaces the lexer and the parser (90 and 378 lines). It reads the file with acorn 8.19.0 (ES2022, module) and walks acorn's tree. It accepts only the forms `.fold` gives a meaning to, and builds the same syntax tree as before, so the checker, the emitter, the diagnostics, and the mappings did not change beyond the wording of some messages. `FoldError` moved to `error.mjs`. The builder is now 1,516 lines in eight modules.
+2. **The three `.fold` files**, rewritten. `counter.fold` is still 70 lines and `list.fold` 42.
+3. **Wiring.** `package.json` pins `acorn` 8.19.0. The content mapper's `configIdentity` also hashes acorn's `package.json`, so an acorn upgrade invalidates cached results.
+
+Decisions:
+
+- Numbers are read from their source text, not from acorn's `value`, which is a double. `9_007_199_254_740_993` therefore stays exact. Only decimal digits with `_` separators are accepted, so `0x1` and `1.5` are rejected.
+- acorn's syntax errors become code 1. `==` and `!=` are rejected with a hint to use `===` and `!==`. A constant may not take a name the language uses, such as `nat` or `save` (code 2).
+- A rule with no condition reports a failed proof on its head, `on("Up", nat(cap), (n) =>`.
+- Unsaved fields are written `local(…)`, so every field states whether it is saved.
+
+Problems on the way:
+
+- A test case with an empty span made the test helper's search loop forever. It became a case for the old syntax, rejected on `Up`.
+- `(n) =>` now also appears in a rule's head, so the scope test found the wrong occurrence. It now searches for `.some((n) =>`.
+- acorn is not declared as a dune dependency. `foldc` resolves it by walking up from `_build/default` to the repository's `node_modules`. Declaring it in dune would copy only its `package.json` into `_build` and break that resolution.
+
+Limits:
+
+- The syntax is JavaScript, but the calls (`model`, `on`, `nat`, and the rest) have no TypeScript declarations. TypeScript sees the module Rocq prints, not the source, so tools get valid syntax but no types for the source itself.

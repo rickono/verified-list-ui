@@ -5,66 +5,66 @@
 export const limit = 500;
 const payloadMax = 999_999_999_999_999;
 
-model {
-  saved locked: boolean = false;
-  amountOk: boolean = true;
-  saved count: Nat<limit - 1> = 0;
-  saved changes: Nat = 0;
-  amount: Nat<payloadMax> = 250;
-}
+model({
+  locked: saved(bool, false),
+  amountOk: local(bool, true),
+  count: saved(nat(limit - 1), 0),
+  changes: saved(nat(), 0),
+  amount: local(nat(payloadMax), 250),
+});
 
-store "counter" {
-  save: SaveCounter;
-  done: CompletedSaveCounter;
-  failed: FailedSaveCounter;
-}
+store("counter", {
+  save: "SaveCounter",
+  done: "CompletedSaveCounter",
+  failed: "FailedSaveCounter",
+});
 
-on ClickedAdd(n: Nat<payloadMax>) {
+on("ClickedAdd", nat(payloadMax), (n) => {
   if (!model.locked && model.count + n < limit) {
     next.count = model.count + n;
     next.changes = model.changes + 1;
     save();
   }
-}
+});
 
-on ClickedSubtract(n: Nat<payloadMax>) {
+on("ClickedSubtract", nat(payloadMax), (n) => {
   if (!model.locked && n <= model.count) {
     next.count = Math.max(0, model.count - n);
     next.changes = model.changes + 1;
     save();
   }
-}
+});
 
-on ClickedReset() {
+on("ClickedReset", () => {
   if (!model.locked) {
     next.count = 0;
     next.changes = 0;
     save();
   }
-}
+});
 
-on ClickedLock() {
+on("ClickedLock", () => {
   if (!model.locked) {
     next.locked = true;
     save();
   }
-}
+});
 
-on ClickedUnlock() {
+on("ClickedUnlock", () => {
   if (model.locked) {
     next.locked = false;
     save();
   }
-}
+});
 
-on ChangedAmount(n: Nat<payloadMax>) {
+on("ChangedAmount", nat(payloadMax), (n) => {
   next.amountOk = true;
   next.amount = n;
-}
+});
 
-on ClearedAmount() {
+on("ClearedAmount", () => {
   next.amountOk = false;
-}
+});
 
-invariant belowCap: model.count < limit;
-invariant amountFits: model.amount <= payloadMax;
+invariant("belowCap", () => model.count < limit);
+invariant("amountFits", () => model.amount <= payloadMax);
