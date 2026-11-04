@@ -1,0 +1,11 @@
+(executable
+ (name host)
+ (modes js)
+ (libraries js_of_ocaml verified_core)
+ (preprocess (pps js_of_ocaml-ppx)))
+
+; The servable app: _build/default/browser/{index.html,styles.css,host.bc.js}.
+(rule
+ (alias app)
+ (deps index.html styles.css host.bc.js)
+ (action (progn)))

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verified list</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Verified list</h1>
+      <p class="hint">Select an item, then delete it. Reset restores the three starting items.</p>
+      <ul id="items" aria-label="Items"></ul>
+      <p id="empty" style="display: none">No items left.</p>
+      <div class="actions">
+        <button type="button" id="delete" disabled>Delete selected</button>
+        <button type="button" id="reset">Reset</button>
+      </div>
+    </main>
+    <script src="host.bc.js" defer></script>
+  </body>
+</html>

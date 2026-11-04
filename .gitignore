@@ -1,0 +1,8 @@
+_build/
+_opam/
+node_modules/
+test-results/
+playwright-report/
+.lia.cache
+.DS_Store
+*.log

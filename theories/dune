@@ -1,0 +1,4 @@
+(rocq.theory
+ (name VerifiedListUI)
+ (modules ListUI ListUIProofs View XState Compile Json XStateCtx CtxJs Counter CounterMachine CounterOut Fold FoldTs FoldOut CounterFold CounterFoldOut ListFold ListFoldOut)
+ (theories Stdlib))

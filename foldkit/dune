@@ -1,0 +1,21 @@
+(rocq.extraction
+ (prelude ExtractFold)
+ (extracted_modules fold_out)
+ (theories Stdlib VerifiedListUI))
+
+(executable
+ (name emit)
+ (modules fold_out emit)
+ (flags (:standard -w -a)))
+
+(rule
+ (with-stdout-to counter.program.ts (run ./emit.exe program)))
+
+(rule
+ (with-stdout-to counter.oracle.json (run ./emit.exe oracle)))
+
+(rule
+ (with-stdout-to list.program.ts (run ./emit.exe list-program)))
+
+(rule
+ (with-stdout-to list.oracle.json (run ./emit.exe list-oracle)))

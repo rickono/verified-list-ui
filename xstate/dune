@@ -1,0 +1,15 @@
+(rocq.extraction
+ (prelude ExtractJson)
+ (extracted_modules xstate_json)
+ (theories Stdlib VerifiedListUI))
+
+(executable
+ (name emit)
+ (modules xstate_json emit)
+ (flags (:standard -w -a)))
+
+(rule
+ (with-stdout-to list.machine.json (run ./emit.exe config)))
+
+(rule
+ (with-stdout-to list.oracle.json (run ./emit.exe oracle)))

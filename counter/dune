@@ -1,0 +1,15 @@
+(rocq.extraction
+ (prelude ExtractCounter)
+ (extracted_modules counter_out)
+ (theories Stdlib VerifiedListUI))
+
+(executable
+ (name emit)
+ (modules counter_out emit)
+ (flags (:standard -w -a)))
+
+(rule
+ (with-stdout-to counter.machine.js (run ./emit.exe machine)))
+
+(rule
+ (with-stdout-to counter.oracle.json (run ./emit.exe oracle)))

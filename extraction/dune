@@ -1,0 +1,12 @@
+; Regenerated from the checked theory on every build; never edit or commit
+; the output.  It lives in _build/default/extraction/verified_core.ml.
+(rocq.extraction
+ (prelude Extract)
+ (extracted_modules verified_core)
+ (theories Stdlib VerifiedListUI))
+
+(library
+ (name verified_core)
+ (modules verified_core)
+ ; Extracted code is not handwritten; do not fail the build on its style.
+ (flags (:standard -w -a)))

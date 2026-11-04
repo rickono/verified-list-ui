@@ -1,0 +1,17 @@
+; Compile the report against the checked theory and capture what Rocq prints.
+; Depending on the .vo files means any change to a definition or proof
+; re-checks the theory and regenerates this report.
+(rule
+ (targets assumptions.txt Assumptions.vo Assumptions.glob .Assumptions.aux)
+ (deps
+  Assumptions.v
+  (glob_files %{project_root}/theories/*.vo))
+ (action
+  (with-stdout-to
+   assumptions.txt
+   (run rocq c -q -Q %{project_root}/theories VerifiedListUI Assumptions.v))))
+
+(rule
+ (alias runtest)
+ (action
+  (run sh %{dep:../scripts/check-assumptions.sh} %{dep:Assumptions.v} %{dep:assumptions.txt})))

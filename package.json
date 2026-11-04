@@ -1,0 +1,26 @@
+{
+  "name": "verified-list-ui-tests",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "test:browser": "playwright test",
+    "test:xstate": "node --test tests/xstate/machine.test.mjs"
+  },
+  "devDependencies": {
+    "@effect/platform-browser": "4.0.0",
+    "@playwright/test": "1.64.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "@xstate/react": "6.1.0",
+    "effect": "4.0.0",
+    "foldkit": "0.168.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.5",
+    "xstate": "5.33.3",
+    "zod": "4.6.7"
+  }
+}

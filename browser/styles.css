@@ -1,0 +1,65 @@
+:root {
+  color-scheme: light dark;
+  --accent: #2459d6;
+  --border: #8a8f98;
+  font-family: system-ui, sans-serif;
+}
+
+main {
+  max-width: 24rem;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  font-size: 1.4rem;
+}
+
+.hint {
+  color: GrayText;
+}
+
+#items {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: Canvas;
+  color: CanvasText;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.row {
+  width: 100%;
+  text-align: left;
+}
+
+.row.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
