@@ -237,3 +237,27 @@ The collections design selected structural views over bounded tuples or SMT aggr
 `tests/verify/calls.test.mjs` covers modular calls, evaluation order, short circuits, opaque summaries, optional results, replay namespaces, dependency failures, and unsupported calls. The domain table checks symbolic call requirements against concrete replay conformance. CLI tests cover call diagnostics, replay budgets, and transitive gating after replay. `tests/verify/remeda-calls.test.mjs` checks real prefix composition and a shifted wrapper.
 
 `tests/verify/imports.test.mjs` and `imports-cli.test.mjs` cover aliases, module scopes, canonical diamonds, helper edits, opaque contracts, dependency positions, post-replay gating, exact resolution, UTF-8 and BOM handling, and rejected import forms. `remeda-imports.test.mjs` checks the pinned helper across actual files and confirms that weakening its contract removes the unchanged caller's proof.
+
+## Run the independent conformance corpus
+
+`make test-verify-conformance` runs native V8 comparisons and eight semantic or
+verdict-policy mutants in temporary verifier copies. `make test-verify` includes
+these tests. The corpus covers the current supported subset with explicit edge
+cases, small seeded binary64 samples, and original JavaScript execution.
+
+To capture source, assumption, provenance, witness-replay, and mutation evidence:
+
+```sh
+node verify/conformance/run.mjs --seed 1592643597 --mutations > conformance.json
+```
+
+The corpus command exits 0 when expected outcomes and mutation detections match,
+including the deliberate bad programs.
+
+The default seed is `0x5eedd00d`. Each reported counterexample must reproduce in
+an independent native execution. Call failures use separate native domain and
+precondition checks. Mutation controls must pass before a changed verifier can
+count as detected. Crashes and exhausted solver budgets do not count as mutation
+detections. The [corpus design](design/conformance-corpus.md) describes the
+supported fixtures and extension points. These finite checks provide conformance
+evidence; the translator and solver remain trusted.
