@@ -16,11 +16,44 @@ import * as data from "./data.mjs";
 const { and, not, need, implies } = data;
 const SELF = { sort: "function" };
 
-function bind(env, id, value) {
-  if (id.type !== "Identifier" || RESERVED.has(id.name) || env.has(id.name) && env.get(id.name) !== SELF) {
+function bind(env, id, value, kind = "contract") {
+  if (id.type !== "Identifier" || RESERVED.has(id.name) || env.has(id.name) && env.get(id.name).value !== SELF) {
     fail("Use distinct, nonreserved simple names; shadowing is unsupported.", id);
   }
-  env.set(id.name, value);
+  env.set(id.name, { declaration: id, kind, value });
+}
+
+function binding(env, id) {
+  const found = env.get(id.name);
+  if (!found) fail(`Unknown local binding ${id.name}.`, id);
+  if (found.value === null) fail(`Reading or writing ${id.name} before its declaration is unsupported (TDZ or var hoisting).`, id);
+  return found;
+}
+
+function writable(node, env, cx) {
+  if (cx.contract) fail("Assignments and updates are unsupported in contracts.", node);
+  while (node.type === "ParenthesizedExpression") node = node.expression;
+  if (node.type !== "Identifier") fail("Only local scalar bindings can be assigned; heap writes and destructuring are unsupported.", node);
+  const found = binding(env, node);
+  if (!["let", "var"].includes(found.kind)) fail(`Cannot write ${found.kind} binding ${node.name}; parameter contracts describe entry arguments.`, node);
+  if (!["number", "boolean", "undefined"].includes(found.value.sort)) fail("Array and record bindings retain immutable views; reference assignments are unsupported.", node);
+  return { name: node.name, found };
+}
+
+function assign(env, target, value, node) {
+  const old = target.found.value;
+  if (value.sort === "undefined" && ["number", "boolean"].includes(old.sort)) value = { ...old, present: "false" };
+  if (value.sort !== old.sort) fail("Local assignments must preserve the primitive scalar type; type changes are unsupported.", node);
+  env.set(target.name, { ...target.found, value });
+  return value;
+}
+
+function joinEnvironment(env, condition, yes, no, node) {
+  for (const [name, original] of env) {
+    const a = yes.get(name), b = no.get(name);
+    if (a === b) continue;
+    env.set(name, { ...original, value: data.merge(condition, a.value, b.value, node) });
+  }
 }
 
 function every(node, env, cx) {
@@ -41,7 +74,7 @@ function every(node, env, cx) {
 function call(node, env, cx) {
   const name = node.callee.name, unit = cx.unit;
   if (cx.contract) fail("Contracts cannot call source functions yet; only every is supported.", node);
-  if (env.has(name)) fail(env.get(name) === SELF ? "Recursive calls are unsupported." : `${name} is a local data value, not a top-level function.`, node.callee);
+  if (env.has(name)) fail(binding(env, node.callee).value === SELF ? "Recursive calls are unsupported." : `${name} is a local data value, not a top-level function.`, node.callee);
   const callee = cx.scope.names.get(name);
   if (!callee) fail(`Unknown function ${name}. Only top-level functions and named imports can be called.`, node.callee);
   if (node.arguments.some((a) => a.type === "SpreadElement") || node.arguments.length !== callee.params.length) {
@@ -54,12 +87,12 @@ function call(node, env, cx) {
   const { requires, ensures, value } = blame(callee.file, callee.name, () => {
     const spec = { guard: "true", contract: true, unit, scope: cx.scope.program.scopes.get(callee.file) };
     const penv = new Map();
-    callee.params.forEach((p, i) => penv.set(p.name, bound[i].value));
+    callee.params.forEach((p, i) => bind(penv, p.node, bound[i].value));
     const clauses = (list) => and(...list.map((c) => need(expression(c.ast, penv, spec), "boolean", c.span)));
     const requires = clauses(callee.requires);
     const fresh = data.input(target.resultType, unit.fresh("call"));
     unit.declarations.push(...fresh.declarations);
-    penv.set("result", fresh.value);
+    penv.set("result", { kind: "contract", value: fresh.value });
     return { requires, ensures: clauses(callee.ensures), value: fresh.value };
   });
   unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), requires), assume: ensures, callee: callee.id });
@@ -68,15 +101,19 @@ function call(node, env, cx) {
 
 function expression(node, env, cx) {
   const read = (child) => expression(child, env, cx);
-  const under = (child, guard) => expression(child, env, { ...cx, guard: and(cx.guard, guard) });
+  const under = (child, guard, inner) => expression(child, inner, { ...cx, guard: and(cx.guard, guard) });
   if (node.type === "ParenthesizedExpression") return read(node.expression);
   if (node.type === "Literal") {
     if (["number", "boolean"].includes(typeof node.value)) return data.literal(node.value);
     return fail("Only primitive data literals are supported.", node);
   }
   if (node.type === "Identifier") {
-    if (env.get(node.name) === SELF || cx.scope.names.has(node.name) && !env.has(node.name)) fail("Function values are unsupported; call a top-level function directly.", node);
-    if (env.has(node.name)) return env.get(node.name);
+    if (env.has(node.name)) {
+      const value = binding(env, node).value;
+      if (value === SELF) fail("Function values are unsupported; call a top-level function directly.", node);
+      return value;
+    }
+    if (cx.scope.names.has(node.name)) fail("Function values are unsupported; call a top-level function directly.", node);
     if (node.name === "undefined") return data.undef();
     if (CONSTANTS.has(node.name)) return data.literal(CONSTANTS.get(node.name));
     return fail(`Unknown value ${node.name}. Calls and ambient values need explicit support.`, node);
@@ -116,11 +153,39 @@ function expression(node, env, cx) {
     return value;
   }
   if (node.type === "UnaryExpression") return data.unary(node.operator, read(node.argument), node);
-  if (node.type === "LogicalExpression") return data.logical(node.operator, read(node.left), (runs) => under(node.right, runs), node);
+  if (node.type === "LogicalExpression") return data.logical(node.operator, read(node.left), (runs) => {
+    const skipped = new Map(env), taken = new Map(env);
+    const value = under(node.right, runs, taken);
+    joinEnvironment(env, runs, taken, skipped, node);
+    return value;
+  }, node);
   if (node.type === "BinaryExpression") return data.binary(node.operator, read(node.left), read(node.right), node);
   if (node.type === "ConditionalExpression") {
     const c = need(read(node.test), "boolean", node.test);
-    return data.merge(c, under(node.consequent, c), under(node.alternate, not(c)), node);
+    const yes = new Map(env), no = new Map(env);
+    const a = under(node.consequent, c, yes), b = under(node.alternate, not(c), no);
+    joinEnvironment(env, c, yes, no, node);
+    return data.merge(c, a, b, node);
+  }
+  if (node.type === "AssignmentExpression") {
+    const target = writable(node.left, env, cx);
+    if (!["=", "+=", "-=", "*=", "/="].includes(node.operator)) fail(`Unsupported compound assignment ${node.operator}.`, node);
+    const right = read(node.right);
+    const value = node.operator === "=" ? right : data.binary(node.operator.slice(0, -1), target.found.value, right, node);
+    return assign(env, target, value, node);
+  }
+  if (node.type === "UpdateExpression") {
+    const target = writable(node.argument, env, cx);
+    if (target.found.value.sort !== "number") fail("Increment and decrement require numeric local bindings; other coercions are unsupported.", node);
+    const before = data.unary("+", target.found.value, node);
+    const after = data.binary(node.operator === "++" ? "+" : "-", before, data.literal(1), node);
+    assign(env, target, after, node);
+    return node.prefix ? after : before;
+  }
+  if (node.type === "SequenceExpression") {
+    let value;
+    for (const child of node.expressions) value = read(child);
+    return value;
   }
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "Identifier") return call(node, env, cx);
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "MemberExpression" && !node.callee.computed && !node.callee.optional) {
@@ -201,8 +266,52 @@ function blockStatements(node) {
   return node.type === "BlockStatement" ? node.body : [node];
 }
 
-// A continuation is a source path plus its lexical environment. No mutable
-// bindings exist in this subset; branch locals cannot escape their scope.
+function localName(id) {
+  if (id.type !== "Identifier" || RESERVED.has(id.name)) fail("Local declarations need simple, nonreserved names.", id);
+}
+
+function varBindings(node, env) {
+  if (node.type === "VariableDeclaration" && node.kind === "var") {
+    for (const d of node.declarations) {
+      localName(d.id);
+      if (env.has(d.id.name) && env.get(d.id.name).value !== SELF) fail("Repeated var declarations and var redeclarations of parameters are unsupported.", d.id);
+      env.set(d.id.name, { declaration: d.id, kind: "var", value: null });
+    }
+  } else if (node.type === "BlockStatement") node.body.forEach((n) => varBindings(n, env));
+  else if (node.type === "IfStatement") {
+    varBindings(node.consequent, env);
+    if (node.alternate) varBindings(node.alternate, env);
+  }
+}
+
+function lexicalBindings(list, outer, functionBody) {
+  const env = new Map(outer), names = new Set();
+  for (const node of list) if (node.type === "VariableDeclaration" && node.kind !== "var") {
+    for (const d of node.declarations) {
+      localName(d.id);
+      if (names.has(d.id.name) || functionBody && env.has(d.id.name) && env.get(d.id.name).value !== SELF) fail("Duplicate local declaration in this scope.", d.id);
+      names.add(d.id.name);
+      env.set(d.id.name, { declaration: d.id, kind: node.kind, value: null });
+    }
+  }
+  return env;
+}
+
+function scopedStatements(list, states, returns, cx, functionBody = false) {
+  return states.flatMap((s) => {
+    const env = lexicalBindings(list, s.env, functionBody);
+    return statements(list, [{ path: s.path, env }], returns, cx).map((v) => ({
+      path: v.path,
+      env: new Map([...s.env].map(([name, original]) => {
+        const current = v.env.get(name);
+        return [name, current.declaration === original.declaration ? current : original];
+      })),
+    }));
+  });
+}
+
+// Continuations remain disjoint paths. Binding replacement preserves captured
+// values, while scope exit keeps writes to outer declaration identities.
 function statements(list, states, returns, cx) {
   const at = (s) => ({ ...cx, guard: s.path });
   for (const node of list) {
@@ -211,31 +320,33 @@ function statements(list, states, returns, cx) {
       if (!node.argument) fail("Every path must return a supported value.", node);
       for (const s of states) returns.push({ path: s.path, value: expression(node.argument, s.env, at(s)) });
       states = [];
-    } else if (node.type === "VariableDeclaration" && node.kind === "const") {
+    } else if (node.type === "VariableDeclaration") {
       for (const d of node.declarations) {
-        if (d.id.type !== "Identifier" || !d.init) fail("Use an initialized const with a simple name.", d);
-        states = states.map((s) => {
-          const env = new Map(s.env);
-          bind(env, d.id, expression(d.init, s.env, at(s)));
-          return { ...s, env };
-        });
+        if (!d.init) fail("Uninitialized local declarations are unsupported; provide an initializer.", d);
+        for (const s of states) {
+          const value = expression(d.init, s.env, at(s));
+          s.env.set(d.id.name, { declaration: d.id, kind: node.kind, value });
+        }
       }
     } else if (node.type === "IfStatement") {
       const next = [];
       for (const s of states) {
         const condition = need(expression(node.test, s.env, at(s)), "boolean", node.test);
-        const yes = statements(blockStatements(node.consequent), [{ env: new Map(s.env), path: and(s.path, condition) }], returns, cx);
+        const yes = scopedStatements(blockStatements(node.consequent), [{ env: new Map(s.env), path: and(s.path, condition) }], returns, cx);
         const no = node.alternate
-          ? statements(blockStatements(node.alternate), [{ env: new Map(s.env), path: and(s.path, not(condition)) }], returns, cx)
-          : [{ env: s.env, path: and(s.path, not(condition)) }];
-        next.push(...yes.map((v) => ({ path: v.path, env: s.env })), ...no.map((v) => ({ path: v.path, env: s.env })));
+          ? scopedStatements(blockStatements(node.alternate), [{ env: new Map(s.env), path: and(s.path, not(condition)) }], returns, cx)
+          : [{ env: new Map(s.env), path: and(s.path, not(condition)) }];
+        next.push(...yes, ...no);
       }
       states = next;
     } else if (node.type === "BlockStatement") {
-      states = states.flatMap((s) => statements(node.body, [{ env: new Map(s.env), path: s.path }], returns, cx)
-        .map((v) => ({ path: v.path, env: s.env })));
+      states = scopedStatements(node.body, states, returns, cx);
+    } else if (node.type === "ExpressionStatement") {
+      for (const s of states) expression(node.expression, s.env, at(s));
+    } else if (node.type === "EmptyStatement") {
+      continue;
     } else {
-      fail(`Unsupported ${node.type}. Loops, mutation, effects, and unmodeled calls are rejected.`, node);
+      fail(`Unsupported ${node.type}. Loops, heap effects, and unmodeled calls are rejected.`, node);
     }
     if (states.length + returns.length > 128) fail("This function exceeds the first slice's 128-path limit.", node);
   }
@@ -280,11 +391,11 @@ function body(h, scope) {
     let next = 0;
     const unit = { declarations: [], events: [], fresh: (tag) => `${tag}${next++}` };
     const env = new Map();
-    if (fn.type === "FunctionExpression" && fn.id) bind(env, fn.id, SELF);
+    if (fn.type === "FunctionExpression" && fn.id) bind(env, fn.id, SELF, "self");
     const declarations = [], lengths = [];
     const params = h.params.map((p, index) => {
       const value = data.input(p.type, `input_${index}`);
-      bind(env, p.node, value.value);
+      bind(env, p.node, value.value, "parameter");
       declarations.push(...value.declarations);
       lengths.push(...value.lengths);
       return { name: p.name, type: p.type, model: value.model };
@@ -294,13 +405,15 @@ function body(h, scope) {
     const returns = [];
     const cx = { guard: "true", contract: false, unit, scope };
     if (fn.body.type === "BlockStatement") {
-      const remaining = statements(fn.body.body, [{ env: new Map(env), path: "true" }], returns, cx);
+      const bodyEnv = new Map(env);
+      varBindings(fn.body, bodyEnv);
+      const remaining = scopedStatements(fn.body.body, [{ env: bodyEnv, path: "true" }], returns, cx, true);
       if (remaining.length || !returns.length) fail("Every syntactic path must return a supported value.", fn.body);
     } else returns.push({ path: "true", value: expression(fn.body, env, cx) });
     let result = returns.at(-1).value;
     for (const r of returns.slice(0, -1).reverse()) result = data.merge(r.path, r.value, result, fn.body);
     const callerEvents = unit.events;
-    env.set("result", result);
+    env.set("result", { kind: "contract", value: result });
     const ensures = and(...h.ensures.map((c) => need(expression(c.ast, env, spec), "boolean", c.span)));
     // Call k is safe under earlier facts only; ensures uses every fact.
     const facts = [], defs = [];
