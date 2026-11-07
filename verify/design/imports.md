@@ -1,5 +1,7 @@
 # Named local imports
 
+This document records the baseline import design. [Project frontend](project-frontend.md) extends its syntax and resolution policy, including resolving type imports and hashing metadata. The identity, replay, and snapshot rules below remain in force.
+
 `verifyFile(entry, {timeoutMs})` verifies contracts across local files. `verify(source, {file})` remains a source-string interface and performs no filesystem reads. Both feed one proof, replay, and outcome policy.
 
 ```js

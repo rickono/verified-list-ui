@@ -108,10 +108,10 @@ test("source-string verification rejects imports without loading dependencies", 
 
 test("import syntax and local builtin shadowing fail closed", async () => {
   for (const statement of [
-    "import identity from './helper.ts';", "import * as helpers from './helper.ts';",
+    "import {} from './helper.ts';", "import * as helpers from './helper.ts';",
     "import { identity } from 'package';", "import { identity } from '/helper.ts';",
     "import { identity as Number } from './helper.ts';", "import { identity as result } from './helper.ts';",
-    "export { identity } from './helper.ts';", "export * from './helper.ts';",
+    "import './helper.ts';", "export * as helpers from './helper.ts';",
   ]) await fixture({ "helper.ts": identity, "entry.ts": `${statement}\n// ensures true\nconst f = () => true;` }, async (_, check) => {
     const report = await check();
     assert.equal(report.outcomes[0].status, "unsupported", statement + JSON.stringify(report));
@@ -142,15 +142,17 @@ test("dependency syntax errors keep dependency offsets and files", async () => {
   });
 });
 
-test("type-only imports do not resolve files; unresolved type aliases still fail", async () => {
+test("type-only imports resolve files, including unused imported bindings", async () => {
   await fixture({ "entry.ts": "import type { Missing } from './absent.ts';\n// ensures result\nexport const okay = () => true;" }, async (_, check) => {
     const report = await check();
-    verified(report);
+    assert.equal(report.outcomes[0].status, "error");
+    assert.match(report.outcomes[0].message, /Cannot resolve/);
     assert.equal(report.modules.length, 1);
   });
   await fixture({ "entry.ts": "import type { Box } from './absent.ts';\n// ensures true\nconst bad = (x: Box) => true;" }, async (_, check) => {
     const report = await check();
-    assert.equal(report.outcomes[0].status, "unsupported");
+    assert.equal(report.outcomes[0].status, "error");
+    assert.match(report.outcomes[0].message, /Cannot resolve/);
   });
 });
 
@@ -164,15 +166,15 @@ test("exact extensions do not remap JavaScript imports or guess filenames", asyn
   }
 });
 
-test("JavaScript and TypeScript modules can mix; mixed type specifiers are erased", async () => {
+test("JavaScript and TypeScript modules can mix; all type specifiers resolve", async () => {
   await fixture({
     "helper.mjs": "/** @param {number} x */\n// ensures Object.is(result, x)\nexport function identity(x) { return x; }",
-    "entry.mts": "import { type Box, identity } from './helper.mjs';\n// ensures Object.is(result, x)\nconst f = (x: number) => identity(x);",
+    "types.ts": "export type Box<T> = {value: T};",
+    "entry.mts": "import { identity } from './helper.mjs';\nimport type {Box} from './types.ts';\n// ensures Object.is(result, x.value)\nconst f = (x: Box<number>) => identity(x.value);",
   }, async (_, check) => verified(await check("entry.mts")));
-  await fixture({ "helper.ts": identity, "entry.ts": "import { type Box } from './helper.ts';\n// ensures true\nconst f = () => true;" }, async (_, check) => {
+  await fixture({ "helper.ts": `${identity}\nexport type Box = number;`, "entry.ts": "import { type Box } from './helper.ts';\n// ensures true\nconst f = () => true;" }, async (_, check) => {
     const report = await check();
-    assert.equal(report.outcomes[0].status, "unsupported");
-    assert.match(report.outcomes[0].message, /import type/);
+    verified(report);
   });
 });
 

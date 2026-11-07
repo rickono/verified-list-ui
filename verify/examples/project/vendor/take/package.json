@@ -1,0 +1,6 @@
+{
+  "name": "@ready/take",
+  "private": true,
+  "type": "module",
+  "exports": { ".": { "types": "./types.ts", "import": "./index.js" } }
+}

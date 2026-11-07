@@ -188,7 +188,8 @@ export function slice(owner, args, node) {
 }
 
 // The accepted type grammar describes plain data, rather than all of TS.
-export function parseType(text, node) {
+export function parseType(text, node, resolve) {
+  text = text.replace(/\/\*[\s\S]*?\*\/|\/\/[^\r\n]*/g, " ");
   const tokens = [];
   const re = /\s*([A-Za-z_$][\w$]*|[{}\[\]<>:;,?()|])/y;
   let offset = 0;
@@ -226,7 +227,15 @@ export function parseType(text, node) {
       const name = tokens[i++];
       if (primitive(name)) t = name;
       else if (["Array", "ReadonlyArray", "Readonly"].includes(name)) { expect("<"); const inner = type(); expect(">"); t = name === "Readonly" ? inner : arr(inner); }
-      else fail(`Unsupported type ${name ?? "(missing)"}. Use inline data types; aliases are not resolved yet.`, node);
+      else {
+        const args = [];
+        if (take("<")) {
+          do { args.push(type()); } while (take(","));
+          expect(">");
+        }
+        if (!resolve) fail(`Unsupported or unresolved type ${name ?? "(missing)"}.`, node);
+        t = resolve(name, args, node);
+      }
     }
     while (take("[")) { expect("]"); t = arr(t); }
     if (take("|")) {

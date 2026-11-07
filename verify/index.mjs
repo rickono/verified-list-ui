@@ -6,7 +6,7 @@ import { SourceError } from "./error.mjs";
 import { single, load, graphDigest } from "./modules.mjs";
 import { materialize, conforms, display, domain } from "./data.mjs";
 
-const TRUSTED = ["Acorn parser", "Node TypeScript type stripping", "local module resolution and source snapshots", "source-to-SMT translation", "Z3 and its WASM bindings", "unmodified standard Number/Math/Object/Array builtins and prototypes", "JavaScript runtime"];
+const TRUSTED = ["Acorn parser", "Node TypeScript type stripping", "project type and module resolution and source snapshots", "source-to-SMT translation", "Z3 and its WASM bindings", "unmodified standard Number/Math/Object/Array builtins and prototypes", "JavaScript runtime"];
 
 function solve(targets, timeoutMs) {
   return new Promise((resolve) => {
@@ -116,15 +116,15 @@ export async function verify(source, { file = "input.ts", timeoutMs = 10_000 } =
 }
 
 /** Verify an entry file and every module it imports, read once into a snapshot. */
-export async function verifyFile(entry, { timeoutMs = 10_000 } = {}) {
-  if (typeof entry !== "string" || !Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 60_000) {
-    throw new TypeError("Expected an entry path string and a timeoutMs integer between 1 and 60000.");
+export async function verifyFile(entry, { timeoutMs = 10_000, tsconfig } = {}) {
+  if (typeof entry !== "string" || tsconfig !== undefined && typeof tsconfig !== "string" || !Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 60_000) {
+    throw new TypeError("Expected entry/tsconfig path strings and a timeoutMs integer between 1 and 60000.");
   }
-  return check(load(entry), entry, timeoutMs);
+  return check(load(entry, { tsconfig }), entry, timeoutMs);
 }
 
-async function check({ files, records, error }, file, timeoutMs) {
-  const text = new Map(files.map((f) => [f.file, f.source]));
+async function check({ files, dependencies, records, error }, file, timeoutMs) {
+  const text = new Map([...files, ...dependencies].map((f) => [f.file, f.source]));
   const position = (where, offset) => {
     const prefix = (text.get(where) ?? "").slice(0, offset).split("\n");
     return { line: prefix.length, column: prefix.at(-1).length + 1 };
@@ -132,7 +132,8 @@ async function check({ files, records, error }, file, timeoutMs) {
   const report = {
     file, sha256: files[0]?.sha256, trusted: [...TRUSTED],
     modules: files.map((f) => ({ file: f.file, sha256: f.sha256, imports: f.imports })),
-    graphSha256: graphDigest(files), outcomes: [],
+    dependencies: dependencies.map(({ file, sha256, kind }) => ({ file, sha256, kind })),
+    graphSha256: graphDigest(files, dependencies), outcomes: [],
   };
   let targets, modules;
   try { if (error) throw error; ({ targets, modules } = compile(records)); }
@@ -151,7 +152,7 @@ async function check({ files, records, error }, file, timeoutMs) {
     const base = {
       fn: t.name, file: t.file, span: t.span, ...position(t.file, t.span.start),
       assumptions: [
-        ...t.params.map(({ name, type }) => ({ kind: "param-type", name, type, ...(domain(type) ? { domain: domain(type) } : {}) })),
+        ...t.params.map(({ name, type, typeAliases }) => ({ kind: "param-type", name, type, ...(typeAliases.length ? { typeAliases } : {}), ...(domain(type) ? { domain: domain(type) } : {}) })),
         ...t.requires,
       ],
     };
