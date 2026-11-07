@@ -26,7 +26,7 @@ Call proof rules are unchanged. Preconditions stay separate from helper facts; o
 
 Only exact relative `.js`, `.mjs`, `.ts`, and `.mts` imports resolve. The loader rejects import cycles at the closing import. A completed file is reused for diamonds and symlinks. Missing entry files reject the API request; missing dependencies become source errors at the import. Invalid UTF-8 becomes an error with its raw-byte hash retained. Decoding preserves a leading BOM, and TypeScript stripping restores it to preserve offsets.
 
-The snapshot keeps discovery order for provenance, entry first, and dependency order for compilation and solving. This preserves source order within each module while placing imported helpers before their callers. All targets share one solver-process deadline. The graph digest covers entry-relative paths, raw-byte hashes, and import edges.
+The snapshot keeps discovery order for provenance, entry first, and dependency order for compilation and the initial proof queue. This preserves source order within each module while placing imported helpers before their callers. The [backend scheduler](proof-backends.md) may complete targets in a different order; every target and worker shares one request deadline. The graph digest covers entry-relative paths, raw-byte hashes, and import edges.
 
 `source.mjs` parses and links the records without executing top-level code. Only supported pure function bindings, named imports, and local named exports are accepted. Every loaded function requires a contract and a supported body. An unsupported construct aborts the graph with the owning source file.
 

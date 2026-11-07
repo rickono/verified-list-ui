@@ -301,7 +301,7 @@ function body(h, scope) {
     for (const r of returns.slice(0, -1).reverse()) result = data.merge(r.path, r.value, result, fn.body);
     const callerEvents = unit.events;
     env.set("result", result);
-    const ensures = and(...h.ensures.map((c) => need(expression(c.ast, env, spec), "boolean", c.span)));
+    const ensures = h.ensures.map((c) => need(expression(c.ast, env, spec), "boolean", c.span));
     // Call k is safe under earlier facts only; ensures uses every fact.
     const facts = [], defs = [];
     const obligations = callerEvents.map((e, k) => {
@@ -310,7 +310,11 @@ function body(h, scope) {
       if (fact !== "true") { defs.push(`(define-fun call_fact${k} () Bool ${fact})`); facts.push(`call_fact${k}`); }
       return safe;
     });
-    const post = and(...obligations, implies(and(...facts), ensures));
+    const allFacts = and(...facts);
+    const post = and(...obligations, implies(allFacts, and(...ensures)));
+    // Splitting the conjunction keeps every call guard and callee fact while
+    // letting the backend prove each ensures without unrelated disjuncts.
+    const postconditions = [...obligations, ...ensures.map((c) => implies(allFacts, c))].filter((c) => c !== "true");
     return {
       id: h.id, file: h.file, name, span: { start: top.start, end: top.end }, params, resultType: data.valueType(result),
       requires: h.requires.map(({ ast, ...c }) => c), ensures: h.ensures.map(({ ast, ...c }) => c),
@@ -318,7 +322,7 @@ function body(h, scope) {
       executable: scope.stripped.slice(fn.start, fn.end),
       declarations: [...declarations, ...unit.declarations, ...defs].join("\n"),
       smallWitness: and(...lengths.map((len) => `(bvule ${len} (_ bv${data.REPLAY_LIMIT} 32))`)),
-      pre, post,
+      pre, post, postconditions: postconditions.length ? postconditions : ["true"],
     };
   });
 }

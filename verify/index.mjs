@@ -1,39 +1,11 @@
-import { spawn } from "node:child_process";
 import { Script, createContext } from "node:vm";
-import { fileURLToPath } from "node:url";
 import { compile } from "./source.mjs";
 import { SourceError } from "./error.mjs";
 import { single, load, graphDigest } from "./modules.mjs";
 import { materialize, conforms, display, domain } from "./data.mjs";
+import { solve } from "./proofs.mjs";
 
 const TRUSTED = ["Acorn parser", "Node TypeScript type stripping", "local module resolution and source snapshots", "source-to-SMT translation", "Z3 and its WASM bindings", "unmodified standard Number/Math/Object/Array builtins and prototypes", "JavaScript runtime"];
-
-function solve(targets, timeoutMs) {
-  return new Promise((resolve) => {
-    const child = spawn(process.execPath, [fileURLToPath(new URL("./solver.mjs", import.meta.url))], { stdio: ["pipe", "pipe", "pipe"] });
-    let out = "", err = "", settled = false;
-    const done = (value) => {
-      if (settled) return;
-      settled = true;
-      clearTimeout(timer);
-      resolve(value);
-    };
-    const timer = setTimeout(() => {
-      child.kill("SIGKILL");
-      done({ unknown: "Wall-clock verification budget exhausted." });
-    }, timeoutMs);
-    child.stdout.on("data", (b) => { out += b; });
-    child.stderr.on("data", (b) => { err += b; });
-    child.on("error", (e) => done({ error: e.message }));
-    child.stdin.on("error", (e) => done({ error: e.message }));
-    child.on("close", (code) => {
-      if (code !== 0) return done({ error: err.trim() || `Solver process exited ${code}.` });
-      try { done(JSON.parse(out)); }
-      catch { done({ error: "The solver returned an invalid response." }); }
-    });
-    child.stdin.end(JSON.stringify({ targets, timeoutMs }));
-  });
-}
 
 // Replays one root against the whole linked graph. Each module gets its own
 // null-prototype realm; every function identity has one host wrapper, bound
@@ -156,9 +128,8 @@ async function check({ files, records, error }, file, timeoutMs) {
       ],
     };
     const put = (o) => own.set(t.id, { ...base, ...o });
-    if (results.error || results.unknown) { put({ status: results.error ? "error" : "unknown", message: results.error ?? results.unknown }); continue; }
     const r = results[i];
-    if (r.status === "vacuous" || r.status === "unknown") { put(r); continue; }
+    if (r.status === "vacuous" || r.status === "unknown" || r.status === "error") { put(r); continue; }
     try {
       const actual = replay(targets, modules, t, r.witness);
       const v = actual.violation;
