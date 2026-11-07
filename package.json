@@ -4,6 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@10.15.0",
   "scripts": {
+    "verify": "node verify/bin/jsverify.mjs",
     "test:browser": "playwright test",
     "test:xstate": "node --test tests/xstate/machine.test.mjs"
   },
@@ -24,6 +25,7 @@
     "typescript-7.1": "npm:typescript@7.1.0-beta",
     "vite": "8.3.5",
     "xstate": "5.33.3",
+    "z3-solver": "5.3.3",
     "zod": "4.6.7"
   }
 }

@@ -5,7 +5,7 @@ DUNE := $(OPAM_EXEC) dune
 TSC71 := node node_modules/typescript-7.1/bin/tsc --runExternalCode
 PORT ?= 8080
 
-.PHONY: setup build proofs assumptions xstate test-xstate counter test-counter foldkit test-foldkit fold test-fold react foldkit-web test-browser check serve serve-react serve-foldkit clean
+.PHONY: setup build proofs assumptions xstate test-xstate counter test-counter foldkit test-foldkit fold test-fold test-verify react foldkit-web test-browser check serve serve-react serve-foldkit clean
 
 # One-time toolchain setup (see README.md for prerequisites).
 setup:
@@ -67,6 +67,10 @@ fold:
 test-fold: foldkit fold
 	node --test tests/fold/builder.test.mjs tests/fold/mapper.test.mjs tests/fold/vite.test.mjs
 
+# Source contracts under binary64 semantics, checked by Z3 and replayed in Node.
+test-verify:
+	node --test --test-concurrency=1 tests/verify/*.test.mjs
+
 # React pages that run the emitted machines (output: _build/react):
 # / is the list UI, /counter.html is the counter.
 react: xstate counter
@@ -86,7 +90,7 @@ test-browser: build react foldkit-web
 # Proofs + assumptions audit + extraction + JS bundle + XState config
 # + XState validation (list and counter) + Foldkit validation + the .fold
 # builder and content mapper + React and Foldkit builds + browser tests.
-check: build assumptions test-xstate test-counter test-foldkit test-fold test-browser
+check: build assumptions test-xstate test-counter test-foldkit test-fold test-browser test-verify
 
 serve: build
 	node scripts/serve.mjs _build/default/browser $(PORT)

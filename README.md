@@ -71,6 +71,8 @@ case "ClickedDelete": {
 
 ## Writing an app in `.fold`
 
+For the experimental Verus-style path that checks contracts on existing pure JS/TS functions over primitives, dense arrays, and plain records, see [the source verifier](verify/README.md). It uses binary64 SMT verification with Z3 and source replay, with a different trust boundary from the Rocq-backed `.fold` path below.
+
 The Foldkit programs can also be written in `.fold` files. A `.fold` file is valid JavaScript: a few calls such as `model(...)`, `on(...)`, and `invariant(...)`. Any JavaScript parser reads it, so highlighters and formatters work once the extension is mapped to JavaScript. The builder rejects anything outside the forms it gives a meaning to. Here is a cut-down version of `foldkit-web/src/counter.fold`:
 
 ```ts

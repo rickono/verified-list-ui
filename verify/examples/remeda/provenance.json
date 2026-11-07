@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/remeda/remeda",
+  "commit": "004b09194f6d39f727118c0a71adc9986bcc13e1",
+  "path": "packages/remeda/src/take.ts",
+  "sha256": "64ccd5ad15d4c387b2aa57cb6173a541b8bd79dcdfa06cc57e0136141e539bdf",
+  "declaration": "takeImplementation",
+  "license": "MIT",
+  "licensePath": "LICENSE",
+  "declarationSha256": "13c5bb5511ccc94ce8a711a2a20c523928a8251c4624f4059b531ba1f48f6a91"
+}
