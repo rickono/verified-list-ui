@@ -3,7 +3,7 @@ import { Parser } from "acorn";
 
 const OPTIONS = { ecmaVersion: 2022, sourceType: "module", preserveParens: true };
 const BUILTINS = new Set(["Number", "Math", "Object", "Array"]);
-const RESERVED = new Set(["result", ...BUILTINS, "NaN", "Infinity", "undefined", "real"]);
+const RESERVED = new Set(["result", ...BUILTINS, "NaN", "Infinity", "undefined", "real", "old"]);
 const CONSTANTS = new Map([
   ["NaN", NaN], ["Infinity", Infinity],
   ...["MAX_VALUE", "MIN_VALUE", "MAX_SAFE_INTEGER", "MIN_SAFE_INTEGER", "POSITIVE_INFINITY", "NEGATIVE_INFINITY", "NaN"]
@@ -13,8 +13,28 @@ const CONSTANTS = new Map([
 export { SourceError } from "./error.mjs";
 import { fail, blame } from "./error.mjs";
 import * as data from "./data.mjs";
+import * as specifications from "./specifications.mjs";
 const { and, not, need, implies } = data;
 const SELF = { sort: "function" };
+const oblige = (cx, safe) => cx.checks.push(implies(cx.guard, safe));
+
+function identifiers(node, names) {
+  if (!node || typeof node !== "object") return;
+  if (node.type === "Identifier") names.add(node.name);
+  for (const value of Object.values(node)) {
+    if (Array.isArray(value)) value.forEach((child) => identifiers(child, names));
+    else if (value && typeof value === "object") identifiers(value, names);
+  }
+}
+
+function preconditions(clauses, env, cx) {
+  const values = [], checks = [];
+  for (const c of clauses) {
+    const value = need(expression(c.ast, env, { ...cx, guard: and(...values), checks }), "boolean", c.span);
+    values.push(value);
+  }
+  return { value: and(...values), defined: and(...checks) };
+}
 
 function bind(env, id, value) {
   if (id.type !== "Identifier" || RESERVED.has(id.name) || env.has(id.name) && env.get(id.name) !== SELF) {
@@ -31,36 +51,67 @@ function every(node, env, cx) {
   }
   const owner = expression(node.callee.object, env, cx);
   const bound = cx.unit.fresh("every_q");
-  return data.every(owner, bound, (value, index) => {
+  const checks = [];
+  const value = data.every(owner, bound, (value, index) => {
     const inner = new Map(env);
     callback.params.forEach((p, i) => bind(inner, p, i ? index : value));
-    return expression(callback.body, inner, cx);
+    return expression(callback.body, inner, { ...cx, guard: "true", checks });
   }, node);
+  // Definedness has its own universal closure. It must not change polarity
+  // when the predicate is negated, nor leak its bound index into a unit event.
+  oblige(cx, data.every(owner, bound, () => data.bool(and(...checks)), node).smt);
+  return value;
 }
 
 function call(node, env, cx) {
   const name = node.callee.name, unit = cx.unit;
-  if (cx.contract) fail("Contracts cannot call source functions yet; only every is supported.", node);
+  if (name === "real" || name === "old") {
+    if (!cx.contract) fail(`${name}(...) is specification-only.`, node);
+    if (node.arguments.length !== 1 || node.arguments[0].type === "SpreadElement") fail(`${name}(...) takes exactly one expression.`, node);
+    const arg = node.arguments[0];
+    if (name === "old") {
+      if (cx.phase !== "ensures") fail("old(...) is supported only in ensures, over entry parameters.", node);
+      return expression(arg, cx.entry, { ...cx, phase: "old" });
+    }
+    if (arg.type === "Literal" && typeof arg.value === "string") return specifications.exact(arg.value, arg);
+    return specifications.embed(expression(arg, env, cx), node, (safe) => oblige(cx, safe));
+  }
   if (env.has(name)) fail(env.get(name) === SELF ? "Recursive calls are unsupported." : `${name} is a local data value, not a top-level function.`, node.callee);
   const callee = cx.scope.names.get(name);
   if (!callee) fail(`Unknown function ${name}. Only top-level functions and named imports can be called.`, node.callee);
+  if (cx.contract && !callee.spec) fail("Contracts can call only marked @spec functions.", node);
+  if (!cx.contract && callee.spec) fail("@spec functions cannot be called by runtime bodies.", node);
   if (node.arguments.some((a) => a.type === "SpreadElement") || node.arguments.length !== callee.params.length) {
     fail(`${name} takes exactly ${callee.params.length} argument(s); spread, missing and extra arguments are unsupported.`, node);
   }
   const args = node.arguments.map((a) => expression(a, env, cx));
   const target = cx.scope.program.build(callee, node);
   const bound = callee.params.map((p, i) => data.argument(p.type, args[i], node.arguments[i], unit.fresh));
+  if (callee.spec) {
+    unit.dependencies.add(callee.id);
+    return blame(callee.file, callee.name, () => {
+      const penv = new Map(callee.params.map((p, i) => [p.name, bound[i].value]));
+      const spec = { ...cx, scope: cx.scope.program.scopes.get(callee.file), entry: new Map(penv), phase: "body" };
+      const pre = preconditions(callee.requires, penv, spec);
+      oblige(cx, and(...bound.map((b) => b.safe), pre.defined, pre.value));
+      // Definitions are transparent. No ensures clause becomes an assumed fact.
+      return expression(callee.fn.body, penv, spec);
+    });
+  }
   // Callee clauses: caller's SMT unit, callee's lexical scope and blame.
   const { requires, ensures, value } = blame(callee.file, callee.name, () => {
-    const spec = { guard: "true", contract: true, unit, scope: cx.scope.program.scopes.get(callee.file) };
+    const spec = { guard: "true", contract: true, checks: [], unit, scope: cx.scope.program.scopes.get(callee.file), phase: "requires" };
     const penv = new Map();
     callee.params.forEach((p, i) => penv.set(p.name, bound[i].value));
+    spec.entry = new Map(penv);
     const clauses = (list) => and(...list.map((c) => need(expression(c.ast, penv, spec), "boolean", c.span)));
-    const requires = clauses(callee.requires);
+    const pre = preconditions(callee.requires, penv, spec);
     const fresh = data.input(target.resultType, unit.fresh("call"));
     unit.declarations.push(...fresh.declarations);
     penv.set("result", fresh.value);
-    return { requires, ensures: clauses(callee.ensures), value: fresh.value };
+    spec.phase = "ensures";
+    const ensures = clauses(callee.ensures);
+    return { requires: and(pre.value, pre.defined), ensures: and(ensures, ...spec.checks), value: fresh.value };
   });
   unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), requires), assume: ensures, callee: callee.id });
   return value;
@@ -110,14 +161,23 @@ function expression(node, env, cx) {
         if (p.kind !== "init" || p.method || p.computed || !["Identifier", "Literal"].includes(p.key.type)) fail("Use ordinary data properties, without methods, accessors, or computed keys.", p);
         const key = p.key.type === "Identifier" ? p.key.name : String(p.key.value);
         if (key === "__proto__") fail("__proto__ is not an ordinary object-literal data field.", p);
-        value = data.property(value, key, read(p.value));
+        const field = read(p.value);
+        if (field.sort === "real") fail("Mathematical values cannot be stored in JavaScript records.", p.value);
+        value = data.property(value, key, field);
       }
     }
     return value;
   }
-  if (node.type === "UnaryExpression") return data.unary(node.operator, read(node.argument), node);
+  if (node.type === "UnaryExpression") {
+    const value = read(node.argument);
+    return value.sort === "real" ? specifications.unary(node.operator, value, node) : data.unary(node.operator, value, node);
+  }
   if (node.type === "LogicalExpression") return data.logical(node.operator, read(node.left), (runs) => under(node.right, runs), node);
-  if (node.type === "BinaryExpression") return data.binary(node.operator, read(node.left), read(node.right), node);
+  if (node.type === "BinaryExpression") {
+    const a = read(node.left), b = read(node.right);
+    return a.sort === "real" || b.sort === "real"
+      ? specifications.binary(node.operator, a, b, node, (safe) => oblige(cx, safe)) : data.binary(node.operator, a, b, node);
+  }
   if (node.type === "ConditionalExpression") {
     const c = need(read(node.test), "boolean", node.test);
     return data.merge(c, under(node.consequent, c), under(node.alternate, not(c)), node);
@@ -126,7 +186,11 @@ function expression(node, env, cx) {
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "MemberExpression" && !node.callee.computed && !node.callee.optional) {
     const c = node.callee;
     if (c.property.name === "every") return every(node, env, cx);
-    if (c.object.type === "Identifier" && BUILTINS.has(c.object.name)) return data.builtin(`${c.object.name}.${c.property.name}`, node.arguments.map(read), node);
+    if (c.object.type === "Identifier" && BUILTINS.has(c.object.name)) {
+      const args = node.arguments.map(read);
+      if (args.some((v) => v.sort === "real")) fail("JavaScript builtins do not accept mathematical values.", node);
+      return data.builtin(`${c.object.name}.${c.property.name}`, args, node);
+    }
     if (c.property.name === "slice") {
       const owner = read(c.object);
       return data.slice(owner, node.arguments.map(read), node);
@@ -158,6 +222,7 @@ function clause(comment, kind, text, start) {
 function contracts(comments) {
   const clauses = [];
   const types = new Map();
+  let spec = false;
   for (const comment of comments) {
     const pattern = /@param\s+\{/g;
     for (let match; (match = pattern.exec(comment.value));) {
@@ -175,6 +240,7 @@ function contracts(comments) {
     }
     let offset = comment.start + 2;
     for (const line of comment.value.split("\n")) {
+      if (/^\s*\*?\s*@spec\s*$/.test(line)) spec = true;
       const match = /^\s*\*?\s*@?(requires|ensures)\b(.*)$/.exec(line);
       if (match) {
         const text = match[2].trim();
@@ -183,7 +249,7 @@ function contracts(comments) {
       offset += line.length + 1;
     }
   }
-  return { clauses, types };
+  return { clauses, types, spec };
 }
 
 function leadingComments(source, comments, start) {
@@ -259,6 +325,7 @@ function header(top, file, source, comments, tokens) {
   if (RESERVED.has(name) || (fn.id && RESERVED.has(fn.id.name))) fail("A function cannot shadow a verifier builtin.", top);
   return blame(file, name, () => {
     const info = contracts(leadingComments(source, comments, top.start));
+    if (info.spec && fn.body.type === "BlockStatement") fail("@spec functions need a single expression body.", fn.body);
     if (!info.clauses.some((c) => c.kind === "ensures")) fail("A function needs at least one ensures contract.", top, "error");
     const params = fn.params.map((p) => {
       if (p.type !== "Identifier") fail("Parameters need simple names, without defaults or destructuring.", p);
@@ -270,7 +337,7 @@ function header(top, file, source, comments, tokens) {
       return { name: p.name, node: p, type: data.parseType(text, p) };
     });
     const own = (kind) => info.clauses.filter((c) => c.kind === kind).map((c) => ({ ...c, file }));
-    return { id: `${file}#${name}`, file, name, top, fn, params, requires: own("requires"), ensures: own("ensures") };
+    return { id: `${file}#${name}`, file, name, top, fn, params, spec: info.spec, requires: own("requires"), ensures: own("ensures") };
   });
 }
 
@@ -278,7 +345,7 @@ function body(h, scope) {
   const { fn, name, top } = h;
   return blame(h.file, name, () => {
     let next = 0;
-    const unit = { declarations: [], events: [], fresh: (tag) => `${tag}${next++}` };
+    const unit = { declarations: [], events: [], dependencies: new Set(), fresh: (tag) => `${tag}${next++}` };
     const env = new Map();
     if (fn.type === "FunctionExpression" && fn.id) bind(env, fn.id, SELF);
     const declarations = [], lengths = [];
@@ -289,10 +356,10 @@ function body(h, scope) {
       lengths.push(...value.lengths);
       return { name: p.name, type: p.type, model: value.model };
     });
-    const spec = { guard: "true", contract: true, unit, scope };
-    const pre = and(...h.requires.map((c) => need(expression(c.ast, env, spec), "boolean", c.span)));
+    const spec = { guard: "true", contract: true, unit, scope, checks: [], entry: new Map(env), phase: "requires" };
+    const pre = preconditions(h.requires, env, spec);
     const returns = [];
-    const cx = { guard: "true", contract: false, unit, scope };
+    const cx = { ...spec, contract: h.spec, phase: "body", checks: [] };
     if (fn.body.type === "BlockStatement") {
       const remaining = statements(fn.body.body, [{ env: new Map(env), path: "true" }], returns, cx);
       if (remaining.length || !returns.length) fail("Every syntactic path must return a supported value.", fn.body);
@@ -301,6 +368,7 @@ function body(h, scope) {
     for (const r of returns.slice(0, -1).reverse()) result = data.merge(r.path, r.value, result, fn.body);
     const callerEvents = unit.events;
     env.set("result", result);
+    spec.phase = "ensures";
     const ensures = and(...h.ensures.map((c) => need(expression(c.ast, env, spec), "boolean", c.span)));
     // Call k is safe under earlier facts only; ensures uses every fact.
     const facts = [], defs = [];
@@ -310,15 +378,29 @@ function body(h, scope) {
       if (fact !== "true") { defs.push(`(define-fun call_fact${k} () Bool ${fact})`); facts.push(`call_fact${k}`); }
       return safe;
     });
-    const post = and(...obligations, implies(and(...facts), ensures));
+    const post = and(...obligations, implies(and(...facts), and(...cx.checks, ...spec.checks, ensures)));
+    const names = new Set(scope.names.keys());
+    identifiers(fn, names);
+    for (const c of [...h.requires, ...h.ensures]) identifiers(c.ast, names);
+    let library = "__specification", entry = "__entry_values";
+    while (names.has(library)) library += "_";
+    while (names.has(entry)) entry += "_";
+    const replay = { library, entry, params: params.map((p) => p.name) };
     return {
       id: h.id, file: h.file, name, span: { start: top.start, end: top.end }, params, resultType: data.valueType(result),
       requires: h.requires.map(({ ast, ...c }) => c), ensures: h.ensures.map(({ ast, ...c }) => c),
-      callees: [...new Set(callerEvents.map((e) => e.callee))],
+      callees: [...new Set([...callerEvents.map((e) => e.callee), ...unit.dependencies])],
+      spec: h.spec,
+      predicates: {
+        ...replay,
+        requires: h.requires.map((c) => specifications.replayExpression(c.ast, replay)),
+        ensures: h.ensures.map((c) => specifications.replayExpression(c.ast, replay)),
+        ...(h.spec ? { body: specifications.replayExpression(fn.body, replay) } : {}),
+      },
       executable: scope.stripped.slice(fn.start, fn.end),
       declarations: [...declarations, ...unit.declarations, ...defs].join("\n"),
       smallWitness: and(...lengths.map((len) => `(bvule ${len} (_ bv${data.REPLAY_LIMIT} 32))`)),
-      pre, post,
+      pre: pre.value, preDefined: pre.defined, post,
     };
   });
 }
