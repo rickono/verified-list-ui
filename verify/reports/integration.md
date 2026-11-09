@@ -46,6 +46,16 @@ The conformance run covers 53 fixtures, 565 reported outcomes and 643 native sam
 
 The new [integration tests](../../tests/verify/integration.test.mjs) exercise aliases with local updates and entry snapshots, imported specifications through barrels, exact-arithmetic definedness, short-circuit effects and scheduler witness policy. [The decision record](integration-decisions.tsv) records the merge choices and evidence. Local raw logs are under `/Users/rick/verification-vibes/artifacts/integration/`.
 
+## Review and evidence notes
+
+Claude Opus 5.5 reviewed the conflict resolutions, decision trail and retained evidence. The review found no blocking defects.
+
+The C command included a negative test-name pattern. Its actual TAP output records all 38 tests passing with zero skips, including the pinned project fixture. That fixture also passes in the full suite.
+
+The first native-baseline comparison failed because the parameter projection included new provenance metadata. The active-run transcript retains that failure. The successful rerun replaced `native-baseline.log` after the projection was narrowed to the baseline's original parameter fields.
+
+The full suite ran against the runtime implementation at `962e88d`. Later changes affect only the baseline comparison script, reports and roadmap. The suite does not import the comparison script, which was checked separately. No runtime verifier implementation changed after the successful full run.
+
 ## Remaining limits
 
 The verifier handles an explicit subset of JavaScript and TypeScript. Local scalar mutation is supported; parameter writes, mutable heap semantics, loops, general higher-order code and async effects remain unsupported. Type aliases and project loading use the documented frontend subset.
