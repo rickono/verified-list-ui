@@ -29,6 +29,8 @@ all Fj implies caller ensures
 
 Facts are named Boolean definitions to share terms. No body facts enter caller `pre`, which stays the caller's requires alone. A call's own or later postcondition cannot prove its precondition. An impossible helper postcondition cannot make a caller vacuous.
 
+The [backend scheduler](proof-backends.md) proves these call-safety conjuncts and individual ensures separately. It requires every conjunct and retains the same earlier-fact rule for each call. Every ensures uses all callee facts.
+
 `data.mjs` owns both the value and execution guard for short-circuit operators, plus argument-domain checks and symbolic values. Ordinary reads accept one argument; guarded reads use a separate helper, so array mapping cannot accidentally pass an index as a guard. Method receivers are evaluated before arguments.
 
 This fold relies on the current statement compiler's disjoint branch paths. Mutation, overlapping execution paths, loops, and recursion require a new argument before they can extend it.
@@ -39,7 +41,7 @@ This fold relies on the current statement compiler's disjoint branch paths. Muta
 
 A direct call violation can confirm a caller counterexample. A violation inside a helper yields `dependency-violation` and records an alarm against that helper. An unreproduced abstract counterexample yields `contract-gap`. Final statuses are resolved dependency-first after all replays; any unverified helper prevents a verified caller. Gating includes inactive syntactic calls. Locations are whole caller spans, not asserted call-site traces.
 
-The solver protocol is unchanged. Witness bounds apply only to caller input materialization. Fresh call result lengths and native input array lengths have no additional proof bound.
+The backend owns the query protocol and one shared request deadline. Witness bounds apply only to caller input materialization. Fresh call result lengths and native input array lengths have no additional proof bound.
 
 ## Synthesis decision
 

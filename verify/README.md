@@ -32,7 +32,7 @@ The calls example verifies a clamp wrapper and a first-element wrapper through h
 
 The imports check uses separate helper and caller files. It verifies the composed prefix, confirms the shifted wrapper's content failure, then weakens the helper's length contract. The helper still verifies, but the unchanged caller loses its proof and the graph hash changes. The pinned declaration stays unchanged. `make test-verify` runs test files serially because concurrent quantified proofs can exhaust their solver budgets.
 
-The command exits 0 only when every loaded function is verified. Other verification outcomes exit 1. Invalid invocation and entry-file I/O errors exit 2. Missing dependencies are `error` outcomes at the import. `--timeout MS` sets a wall-clock solver-process budget per entry and its dependencies, including solver initialization. The default is 10000 ms. `--json` includes source and dependency SHA-256 hashes, input assumptions, and trusted components. Witnesses are arrays/records with string leaves, including `NaN`, `Infinity`, `-Infinity`, `-0`, and `undefined`, so JSON preserves those values. Missing record keys remain missing.
+The command exits 0 only when every loaded function is verified. Other verification outcomes exit 1. Invalid invocation and entry-file I/O errors exit 2. Missing dependencies are `error` outcomes at the import. `--timeout MS` sets one wall-clock solver-process budget per entry and its dependencies, including solver initialization and any worker restarts. The default is 10000 ms. Compilation and JavaScript replay retain their separate limits. `--json` includes source and dependency SHA-256 hashes, input assumptions, and trusted components. Witnesses are arrays/records with string leaves, including `NaN`, `Infinity`, `-Infinity`, `-0`, and `undefined`, so JSON preserves those values. Missing record keys remain missing.
 
 ## Write a contract
 
@@ -175,7 +175,23 @@ Two modules can declare the same private name. Imports bind aliases to the defin
 
 All functions in every loaded module need supported bodies and contracts and are checked, even when unused by the entry. Any unsupported construct aborts the run with its defining file and span. An unused failing helper is reported and causes a nonzero CLI exit; it does not block an otherwise independent function's `verified` status. Syntactic call dependencies do block callers until every callee's final status is `verified`.
 
-Dependencies are solved before importers, with source order preserved within each module. One solver budget covers the graph. Large graphs can return `unknown`. The [import design](design/imports.md) records identity, replay, and snapshot ownership.
+Dependencies enter the solver queue before importers, with source order preserved within each module. Scheduling can defer a costly dependency while independent targets run. Reports retain the original order. One solver budget covers the graph. Large graphs can return `unknown`. The [import design](design/imports.md) records identity, replay, and snapshot ownership.
+
+## Proof scheduling and backend capabilities
+
+Each request uses at most two isolated workers, with one active query per worker. A target's turn receives the remaining wall-clock budget divided by the number of rounds needed to serve unfinished targets in two slots. With two targets, both can run up to the original deadline, so a costly proof does not need an artificial interruption to give a cheap target an opportunity. A timeout yields to a queued target. The unfinished target returns at the end of the queue with completed phase evidence retained. Initialization and restarts consume the same original deadline. Very small budgets can expire before every target gets a turn.
+
+This policy explicitly permits two workers' CPU and memory use. The worker cap is fixed, independent of graph size. `timeoutMs` remains one wall-clock request budget, not a fresh budget per worker or target. All workers stop at the original deadline and are reaped before the request returns.
+
+The parent retains completed query evidence and outcomes. A worker crash or hard timeout cannot erase unrelated completed results. A hard timeout kills and reaps the worker, and a later target can use a replacement if time remains. A caller still needs every callee's final post-replay status to be verified.
+
+`backend.mjs` exposes the internal worker boundary: `start(remainingMs)`, `check(obligation, turnRemainingMs)`, and `close()`. Z3 advertises SMT-LIB 2, binary64, bitvectors, uninterpreted functions, quantifiers, and model extraction. The current frontend requires that conservative capability profile. The worker returns only `sat`, `unsat`, or `unknown`; the parent combines those answers and replays witnesses. The public API has no backend override or additional budget option.
+
+Queries identify their target, phase, and domain. Full-domain phases are `feasibility` and `postcondition`. Separate `feasibility-witness` and `counterexample-witness` phases may limit array lengths solely to obtain replayable inputs after a full-domain sat result. An unsat bounded witness query never establishes a proof or vacuity.
+
+The compiler emits separate call-safety obligations and individual ensures under the same callee facts as the combined formula. Every full-domain conjunct must prove unsat before a target can verify. A sat conjunct supplies a candidate for source replay. Completed conjuncts survive retries; each remaining conjunct still uses the original turn and request deadline. A bounded counterexample search negates only the same failing conjunct. Splitting these queries adds no assumptions or trusted axioms.
+
+Resource and backend diagnostics include an `obligation` object with `target`, `phase`, `domain`, and `backend`, plus the number of attempted queries. Postcondition phases also include one-based `postcondition` and `postconditionCount` fields, including call-safety conjuncts. `request-timeout` identifies the pending phase when the original deadline expires. `solver-unknown` includes `solverReason`. `worker-error`, `invalid-response`, and `backend-capability` are errors. Missing capabilities, malformed witnesses, and invalid query results fail closed. The CLI prints this attribution. See the [backend design](design/proof-backends.md) for the policy and test commands.
 
 ## Interpret the outcomes
 
@@ -186,7 +202,7 @@ Dependencies are solved before importers, with source order preserved within eac
 - `unsupported`: the source or contract uses a construct the verifier cannot faithfully interpret.
 - `error`: invalid syntax, a missing postcondition, or a solver failure prevents checking.
 
-`unknown` reasons include `contract-gap`, `dependency`, `dependency-violation`, `replay-timeout`, and `replay-mismatch`. The CLI prints the reason and explains a call violation separately from a returned-value counterexample.
+`unknown` reasons include `request-timeout`, `solver-unknown`, `witness-too-large`, `contract-gap`, `dependency`, `dependency-violation`, `replay-timeout`, and `replay-mismatch`. The CLI prints the reason and explains a call violation separately from a returned-value counterexample.
 
 ## JavaScript number semantics
 
@@ -212,7 +228,7 @@ The pinned Remeda checks verify an extracted eager declaration after type stripp
 
 ## Architecture and trust
 
-`modules.mjs` owns file resolution and source snapshots. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and replay data conversion. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `index.mjs` owns outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
+`modules.mjs` owns file resolution and source snapshots. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and replay data conversion. `proofs.mjs` owns obligations, proof evidence, and scheduling. `backend.mjs` owns the worker protocol, capability checks, response validation, and hard deadlines. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `index.mjs` owns replay outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
 
 Number inputs are raw 64-bit bitvectors reinterpreted as binary64. This covers all JavaScript numbers and preserves signed zero without decoding the unspecified IEEE-bit conversion of a solver NaN. NaN payloads cannot be observed by this subset. Every arithmetic operation has explicit floating-point semantics, and numeric equality uses `fp.eq` rather than SMT structural equality.
 
@@ -220,7 +236,7 @@ Arrays are compiler views: a 32-bit length and an indexed primitive-value functi
 
 The model describes these operations with adequate runtime resources; allocation failures and out-of-memory behavior are outside its guarantees.
 
-Each verification request gets its own solver subprocess, so concurrent API calls do not share Z3 state. Each target has a fresh solver, and all targets in one request share a deadline. The parent kills a process that exceeds its wall-clock budget. Initialization errors and killed workers cannot produce a verified verdict. A satisfiable precondition also gets a JavaScript witness check; a counterexample requires an actual failing source execution.
+Each verification request owns its solver subprocesses, so concurrent API calls do not share Z3 state. Each distinct obligation has its own solver, and all targets and workers in one request share a deadline. The parent kills a process that exceeds its turn budget. Initialization errors and killed workers cannot produce new verified verdicts. Completed evidence remains available. A satisfiable precondition also gets a JavaScript witness check; a counterexample requires an actual failing source execution.
 
 Trusted components are Acorn, Node's type stripping, local module resolution and snapshots, our source translation, Z3 and its WASM bindings, standard unmodified `Number`/`Math`/`Object`/`Array` builtins and prototypes, and the JavaScript runtime. Tests check this connection but do not formally prove the translation correct. Successful verification is not an independently checkable Rocq certificate.
 
@@ -237,3 +253,5 @@ The collections design selected structural views over bounded tuples or SMT aggr
 `tests/verify/calls.test.mjs` covers modular calls, evaluation order, short circuits, opaque summaries, optional results, replay namespaces, dependency failures, and unsupported calls. The domain table checks symbolic call requirements against concrete replay conformance. CLI tests cover call diagnostics, replay budgets, and transitive gating after replay. `tests/verify/remeda-calls.test.mjs` checks real prefix composition and a shifted wrapper.
 
 `tests/verify/imports.test.mjs` and `imports-cli.test.mjs` cover aliases, module scopes, canonical diamonds, helper edits, opaque contracts, dependency positions, post-replay gating, exact resolution, UTF-8 and BOM handling, and rejected import forms. `remeda-imports.test.mjs` checks the pinned helper across actual files and confirms that weakening its contract removes the unchanged caller's proof.
+
+`tests/verify/proof-backends.test.mjs` uses a controlled clock and backend to check scheduling in both target orders, retained evidence, one shared budget, and fail-closed witness policy. `backend-process.test.mjs` checks actual process interruption, worker/protocol failures, capability rejection, real Z3 assertion isolation, and independent concurrent source requests. Deadline tests trigger the timer directly instead of asserting machine speed.
