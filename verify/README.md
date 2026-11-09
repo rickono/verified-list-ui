@@ -203,7 +203,7 @@ Resource and backend diagnostics include an `obligation` object with `target`, `
 ## Interpret the outcomes
 
 - `verified`: the preconditions are satisfiable, and Z3 finds the negated postcondition unsatisfiable under the source encoding.
-- `counterexample`: Z3 finds inputs, and executing the actual functions in a fresh Node VM confirms a postcondition failure or an unmet call requirement. The report contains the return value or the failed call, with actual arguments and failed contract spans.
+- `counterexample`: Z3 finds inputs, and replay confirms a postcondition failure, an unmet call requirement, or an undefined specification operation. Native bodies run in a fresh Node VM; exact contracts use rational replay. The report contains inputs and failed clauses, with a return value or failed call when execution reaches one.
 - `vacuous`: the preconditions contradict each other. This is not reported as verified.
 - `unknown`: a resource limit, solver uncertainty, or disagreement between the encoding and JavaScript replay prevents a verdict.
 - `unsupported`: the source or contract uses a construct the verifier cannot faithfully interpret.
@@ -213,7 +213,7 @@ Resource and backend diagnostics include an `obligation` object with `target`, `
 
 ## JavaScript number semantics
 
-Source and contract arithmetic both use IEEE-754 binary64 with round-to-nearest, ties-to-even. They are not mathematical integer or real arithmetic.
+Ordinary source and contract arithmetic use IEEE-754 binary64 with round-to-nearest, ties-to-even. Explicit `real(...)` expressions select exact specification arithmetic.
 
 Numeric `==` and `===` use `fp.eq`: `NaN` is unequal to itself and positive zero equals negative zero. Primitive `Object.is` equates NaNs and distinguishes zero signs. Strict equality preserves type differences. Loose equality requires compatible primitive types, with explicit undefined handling.
 
@@ -221,7 +221,75 @@ Undefined values retain their own tag. For example, an empty `values[0]` is unde
 
 Consequently, `ensures x * 2 == result` fails on `NaN` but allows infinity after overflow. Add `Number.isFinite(result)` when a finite result is required. `Number.isSafeInteger` is available when that is the desired property; exact representability and safe-integer status are different requirements.
 
-`real(...)` and mathematical specification arithmetic are not implemented. The verifier rejects them explicitly. Supporting them requires checking finiteness and giving replay an exact mathematical interpretation. It must not reinterpret JavaScript operations as unbounded arithmetic.
+## Exact contracts, entry values, and checked specifications
+
+`real(numberExpression)` embeds the exact rational value of a binary64 number.
+The verifier must prove that the value is present and finite wherever the
+expression executes. `real("0.1")` constructs the exact decimal 1/10;
+`real("1/3")` constructs a fraction. String literals have at most 1024
+characters and decimal exponents between -1000 and 1000.
+
+Real values support `+ - * /`, unary signs, comparisons, equality, and
+conditionals. Both operands must be real. Division adds a nonzero-divisor
+obligation. Real zero has no sign. JavaScript `Object.is` still distinguishes
+signed zeros on native values. Real values cannot enter runtime bodies,
+parameters, arrays, records, or JavaScript builtins. There is no implicit
+conversion or mathematical-to-JavaScript cast.
+
+```ts
+// requires x === 0.5
+// ensures real(result) === real(old(x)) + real("1/2")
+const addHalf = (x: number) => x + 0.5;
+```
+
+The bridge on `result` checks finiteness; the equality checks exactness of the
+runtime operation. With unrestricted finite `x`, this example can round or
+overflow and the exact contract fails. `real(0.1 + 0.2)` embeds a rounded
+JavaScript addition, while `real(0.1) + real(0.2)` adds the exact binary64
+operands. Neither equals the exact decimal `real("0.3")`.
+
+Requires clauses are ordered. Earlier true clauses can establish a bridge's
+domain, as can short-circuit guards within a clause. `requires real(x) >
+real("0")` alone has a definedness counterexample on nonfinite inputs. It
+cannot silently exclude those inputs. Such outcomes carry
+`phase: "requires-definedness"`. Postcondition definedness is checked under
+the explicit requires. Quantified callbacks require definedness for every
+element, independently of Boolean polarity.
+
+`old(expression)` in ensures evaluates over entry parameters. It cannot read
+`result`, body locals, or callback locals. Each invocation captures a recursive
+snapshot of supported plain data, preserving absent keys, explicit undefined,
+NaN, and signed zero. Mutation and heap identity remain unsupported.
+
+An exact `// @spec` marker selects a specification-only expression-bodied
+function. It accepts existing JavaScript data types and can return a native
+data value or a real scalar. Its body uses the contract expression language.
+Every specification needs ensures and is checked independently:
+
+```ts
+// @spec
+// requires Number.isFinite(x)
+// ensures result
+const reflexive = (x: number) => real(x) + real("0") === real(x);
+
+// requires Number.isFinite(x)
+// ensures reflexive(old(x))
+const identity = (x: number) => x;
+```
+
+Calls in contracts and specification bodies can name only marked functions,
+including named local imports. Each call proves its parameter domain and
+requires. Definitions are expanded; their postconditions are never assumed.
+Final dependency gating still requires every used specification to verify,
+including inactive syntactic calls. False, vacuous, unknown, recursive, and
+circular lemmas cannot justify a verified consumer. Runtime bodies cannot call
+specification functions, and specifications cannot call runtime functions.
+
+Mathematical replay uses reduced BigInt fractions and exact binary64 bit
+decomposition. Native operations keep their JavaScript behavior. The exact
+interpreter is an added trusted component; successful checks are not Rocq
+certificates. The [specification design](design/specifications.md) records the
+proof rules and limits.
 
 ## Supported source
 
@@ -239,7 +307,7 @@ The pinned Remeda checks verify an extracted eager declaration after type stripp
 
 ## Architecture and trust
 
-`modules.mjs` owns file resolution and source snapshots. `types.mjs` reads erased type declarations and module bindings. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and replay data conversion. `proofs.mjs` owns obligations, proof evidence, and scheduling. `backend.mjs` owns the worker protocol, capability checks, response validation, and hard deadlines. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `index.mjs` owns replay outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
+`modules.mjs` owns file resolution and source snapshots. `types.mjs` reads erased type declarations and module bindings. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and replay data conversion. `specifications.mjs` owns exact real operations, rational replay, entry snapshots, and contract replay generation. `proofs.mjs` owns obligations, proof evidence, and scheduling. `backend.mjs` owns the worker protocol, capability checks, response validation, and hard deadlines. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `index.mjs` owns replay outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
 
 Number inputs are raw 64-bit bitvectors reinterpreted as binary64. This covers all JavaScript numbers and preserves signed zero without decoding the unspecified IEEE-bit conversion of a solver NaN. NaN payloads cannot be observed by this subset. Every arithmetic operation has explicit floating-point semantics, and numeric equality uses `fp.eq` rather than SMT structural equality.
 
@@ -249,9 +317,13 @@ The model describes these operations with adequate runtime resources; allocation
 
 Each verification request owns its solver subprocesses, so concurrent API calls do not share Z3 state. Each distinct obligation has its own solver, and all targets and workers in one request share a deadline. The parent kills a process that exceeds its turn budget. Initialization errors and killed workers cannot produce new verified verdicts. Completed evidence remains available. A satisfiable precondition also gets a JavaScript witness check; a counterexample requires an actual failing source execution.
 
-Trusted components are Acorn, Node's type stripping, local module resolution and snapshots, our source translation, Z3 and its WASM bindings, standard unmodified `Number`/`Math`/`Object`/`Array` builtins and prototypes, and the JavaScript runtime. Tests check this connection but do not formally prove the translation correct. Successful verification is not an independently checkable Rocq certificate.
+Trusted components are Acorn, Node's type stripping, local module resolution and snapshots, our source translation, exact rational specification replay, Z3 and its WASM bindings, standard unmodified `Number`/`Math`/`Object`/`Array` builtins and prototypes, and the JavaScript runtime. Tests check this connection but do not formally prove the translation correct. Successful verification is not an independently checkable Rocq certificate.
 
-Two design candidates and an independent cross-judge selected this split over a single verifier module using the TypeScript compiler API. The installed native TypeScript 7 package has no stable `createSourceFile` API. The synthesis retains explicit missing-contract and vacuity outcomes, JSON-safe witnesses, and per-file solver isolation. It defers mathematical specification arithmetic instead of hiding its additional semantics inside the first slice.
+Two design candidates and an independent cross-judge selected this split over a single verifier module using the TypeScript compiler API. The installed native TypeScript 7 package has no stable `createSourceFile` API. The synthesis retains explicit missing-contract and vacuity outcomes, JSON-safe witnesses, and per-file solver isolation. The initial slice deferred mathematical specification arithmetic.
+
+The exact specification layer adds explicit bridges and definedness checks to
+that initial design. It keeps runtime arithmetic unchanged and expands checked
+pure definitions rather than trusting user-supplied axioms.
 
 The collections design selected structural views over bounded tuples or SMT aggregate datatypes. It retains native undefined behavior instead of adding out-of-bounds obligations. The independent design review identified key presence during spread and inherited optional names as necessary distinctions. The [prefix-contract design](design/prefix.md) adds native `every` contracts over those views. An object identity and heap model remains deferred.
 
@@ -270,3 +342,8 @@ The collections design selected structural views over bounded tuples or SMT aggr
 `tests/verify/proof-backends.test.mjs` uses a controlled clock and backend to check scheduling in both target orders, retained evidence, one shared budget, and fail-closed witness policy. `backend-process.test.mjs` checks actual process interruption, worker/protocol failures, capability rejection, real Z3 assertion isolation, and independent concurrent source requests. Deadline tests trigger the timer directly instead of asserting machine speed.
 
 `tests/verify/project-frontend.test.mjs` checks concrete aliases, type provenance, barrels, default bindings, package/config policy, metadata invalidation, read-once snapshots, unsupported erased syntax, and the pinned offline project.
+
+`tests/verify/specifications.test.mjs` covers exact rational replay, finite
+bridges and ordered requires, fractional and rounded operands, overflow,
+entry snapshots, checked lemma reuse, imported specifications, recursive and
+false lemmas, and scoped obligations under quantified and negated contracts.

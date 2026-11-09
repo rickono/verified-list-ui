@@ -1,0 +1,87 @@
+{
+  "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
+  "identical": true,
+  "cases": [
+    {
+      "name": "nested-callbacks",
+      "targets": 2,
+      "sha256": "9040baf6a1770fe754f3dbe322b94270e73e79e814429edaeb4054ac89ae09d1"
+    },
+    {
+      "name": "prefix",
+      "targets": 1,
+      "sha256": "d9be99f0222548f921555d6bb4bff45bc6efc94d4b646a23154013a25fa9d71c"
+    },
+    {
+      "name": "exact-length-and-prefix",
+      "targets": 1,
+      "sha256": "43973de8be9223001223274209bbfd95bbecbbcc7fce7701849c1a03cef65bd1"
+    },
+    {
+      "name": "shifted-prefix-mutant",
+      "targets": 1,
+      "sha256": "935877f18e1383daba57e5decfc579bfd49583ab9f2e28007cb72b491b6a7204"
+    },
+    {
+      "name": "composed-calls",
+      "targets": 2,
+      "sha256": "18c6e660a90480ae6ffb373b4f272766be412ab8cb751873f1cd6d0490e286b1"
+    },
+    {
+      "name": "shifted-calls",
+      "targets": 2,
+      "sha256": "ca086f9e2a42c3a3ba37482cef229418fe58b7bc39e084cf61c41f36bc041b84"
+    },
+    {
+      "name": "import-composed.js",
+      "targets": 2,
+      "sha256": "ae96e166f066ad074b9ddcc4b5876c82047f2d329043f125aac2d78e29a5a7a5"
+    },
+    {
+      "name": "import-shifted.js",
+      "targets": 2,
+      "sha256": "e0550fa35f0e91ca02d33e6b43e4c91b0f79b5d7421d3b3528dc0650ce153d96"
+    }
+  ],
+  "baselineOutcomes": [
+    {
+      "name": "nested-callbacks",
+      "outcomes": [
+        {
+          "fn": "copy",
+          "status": "verified"
+        },
+        {
+          "fn": "literal",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "name": "composed-calls",
+      "outcomes": [
+        {
+          "fn": "takeImplementation",
+          "status": "verified"
+        },
+        {
+          "fn": "firstTwo",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "name": "import-shifted.js",
+      "outcomes": [
+        {
+          "fn": "takeImplementation",
+          "status": "verified"
+        },
+        {
+          "fn": "shifted",
+          "status": "counterexample"
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 import { performance } from "node:perf_hooks";
 import { createBackend } from "./backend.mjs";
 
-const SMALL = new Set(["feasibility-witness", "counterexample-witness"]);
+const SMALL = new Set(["requires-definedness-witness", "feasibility-witness", "counterexample-witness"]);
+const DEFINED = new Set(["requires-definedness", "requires-definedness-witness"]);
 const POST = new Set(["postcondition", "counterexample-witness"]);
 const attribution = (target, phase, index) => ({
   target: target.id, phase, domain: SMALL.has(phase) ? "replay-witness" : "full",
@@ -12,7 +13,7 @@ export function obligation(target, phase, index = 0) {
   return {
     ...attribution(target, phase, index),
     declarations: target.declarations,
-    assertions: [target.pre,
+    assertions: [DEFINED.has(phase) ? `(not ${target.preDefined})` : target.pre,
       ...(POST.has(phase) ? [`(not ${target.postconditions[index]})`] : []),
       ...(SMALL.has(phase) ? [target.smallWitness] : [])],
     models: target.params.map((p) => p.model),
@@ -23,7 +24,10 @@ export function obligation(target, phase, index = 0) {
 // resolve final dependencies. The injectable connection/clock are internal.
 export async function solve(targets, timeoutMs, { connect = createBackend, now = () => performance.now() } = {}) {
   const deadline = now() + timeoutMs;
-  const states = targets.map((target) => ({ target, phase: "feasibility", postcondition: 0, attempts: 0 }));
+  const states = targets.map((target) => ({ target,
+    phase: target.preDefined && target.preDefined !== "true" ? "requires-definedness" : "feasibility",
+    postcondition: 0, attempts: 0,
+  }));
   const queue = [...states];
   const width = Math.min(2, targets.length), active = new Set();
   const remaining = () => Math.max(0, Math.floor(deadline - now()));
@@ -67,6 +71,14 @@ export async function solve(targets, timeoutMs, { connect = createBackend, now =
             s.detail = result.reason;
             if (/^(timeout|canceled)$/.test(result.reason)) break;
             s.outcome = diagnostic(s, "solver-unknown", "The solver could not decide this obligation.", result.reason);
+          } else if (s.phase === "requires-definedness") {
+            if (result.status === "unsat") s.phase = "feasibility";
+            else if (result.oversized) s.phase = "requires-definedness-witness";
+            else s.outcome = { status: "counterexample", phase: "requires-definedness", witness: result.witness };
+          } else if (s.phase === "requires-definedness-witness") {
+            s.outcome = result.status === "unsat" || result.oversized
+              ? diagnostic(s, "witness-too-large", "No replayable definedness witness was found; the proof domain was not bounded.")
+              : { status: "counterexample", phase: "requires-definedness", witness: result.witness };
           } else if (s.phase === "feasibility") {
             if (result.status === "unsat") s.outcome = { status: "vacuous" };
             else if (result.oversized) s.phase = "feasibility-witness";

@@ -35,12 +35,13 @@ try {
       if (o.solverReason) console.log(`  solver detail: ${o.solverReason}`);
       if (o.status === "counterexample") {
         console.log(`  inputs: ${Object.entries(o.inputs).map(([k, v]) => `${k} = ${show(v)}`).join(", ") || "(none)"}`);
+        if (o.phase === "requires-definedness") console.log("  requires evaluation is undefined (confirmed by specification replay)");
         if (o.call) {
           const actual = Object.entries(o.call.arguments).map(([k, v]) => `${k} = ${show(v)}`).join(", ");
           console.log(`  call: ${o.call.callee}(${actual})${o.call.calleeFile === o.file ? "" : ` in ${where(o.call.calleeFile)}`} (replayed in JavaScript)`);
           for (const c of o.call.violated) console.log(c.text ? `  failed call requires: ${c.text}${c.file && c.file !== o.file ? ` (${where(c.file)})` : ""}` : `  failed parameter domain: ${c.name}`);
         } else {
-          console.log(`  returned: ${show(o.result)} (replayed in JavaScript)`);
+          if (o.phase !== "requires-definedness") console.log(`  returned: ${show(o.result)} (replayed in JavaScript)`);
           for (const c of o.failed) console.log(`  failed: ${c.text}`);
         }
       }

@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { REPLAY_LIMIT } from "./data.mjs";
 
 // Conservative theory/model profile required by the current source compiler.
-export const CAPABILITIES = Object.freeze(["smtlib2", "binary64", "bitvectors", "uninterpreted-functions", "quantifiers", "models"]);
+export const CAPABILITIES = Object.freeze(["smtlib2", "binary64", "bitvectors", "reals", "fp-to-real", "uninterpreted-functions", "quantifiers", "models"]);
 export const Z3 = Object.freeze({ name: "z3", protocol: 1, capabilities: CAPABILITIES, certificates: false });
 
 export class BackendError extends Error {
