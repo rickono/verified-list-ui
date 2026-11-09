@@ -347,3 +347,27 @@ The collections design selected structural views over bounded tuples or SMT aggr
 bridges and ordered requires, fractional and rounded operands, overflow,
 entry snapshots, checked lemma reuse, imported specifications, recursive and
 false lemmas, and scoped obligations under quantified and negated contracts.
+
+## Run the independent conformance corpus
+
+`make test-verify-conformance` runs native V8 comparisons and eight semantic or
+verdict-policy mutants in temporary verifier copies. `make test-verify` includes
+these tests. The corpus covers the current supported subset with explicit edge
+cases, small seeded binary64 samples, and original JavaScript execution.
+
+To capture source, assumption, provenance, witness-replay, and mutation evidence:
+
+```sh
+node verify/conformance/run.mjs --seed 1592643597 --mutations > conformance.json
+```
+
+The corpus command exits 0 when expected outcomes and mutation detections match,
+including the deliberate bad programs.
+
+The default seed is `0x5eedd00d`. Each reported counterexample must reproduce in
+an independent native execution. Call failures use separate native domain and
+precondition checks. Mutation controls must pass before a changed verifier can
+count as detected. Crashes and exhausted solver budgets do not count as mutation
+detections. The [corpus design](design/conformance-corpus.md) describes the
+supported fixtures and extension points. These finite checks provide conformance
+evidence; the translator and solver remain trusted.

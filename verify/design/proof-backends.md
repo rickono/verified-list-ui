@@ -39,6 +39,8 @@ The standalone prefix comparison verified on the baseline but timed out through 
 
 ## Fairness and one deadline
 
+Specification-definedness is a separate full-domain phase before feasibility. It negates `preDefined` without assuming the target's `requires`. A satisfiable result is a replay candidate with phase `requires-definedness`; an oversized candidate gets a separate bounded witness search. Unsatisfiability of that bounded search cannot establish vacuity or verification. Native targets whose definedness is `true` retain their existing query sequence. The backend capability profile includes exact reals and finite floating-point-to-real conversion.
+
 `timeoutMs` remains one wall-clock solver-process budget for the entire request, including initialization and restarts. Compilation and JavaScript replay remain outside that solver budget. A request owns at most two workers, with one active query per worker. Requests share no worker, solver, or schedule state.
 
 Targets enter a shared queue in original order. A worker takes the next target. Its turn receives the remaining request time divided by `ceil(unfinishedTargets / workerSlots)`, with at least one millisecond when time remains. Two targets can therefore each continue until the original deadline. A cheap independent target gets an immediate slot alongside a costly target. Larger queues receive bounded turns so later targets get opportunities. A timeout requeues the target with its completed phase evidence. Reports retain their original target order.
