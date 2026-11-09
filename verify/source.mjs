@@ -1,5 +1,5 @@
 import { stripTypeScriptTypes } from "node:module";
-import { Parser } from "acorn";
+import { Parser, tokenizer } from "acorn";
 
 const OPTIONS = { ecmaVersion: 2022, sourceType: "module", preserveParens: true };
 const BUILTINS = new Set(["Number", "Math", "Object", "Array"]);
@@ -13,6 +13,7 @@ const CONSTANTS = new Map([
 export { SourceError } from "./error.mjs";
 import { fail, blame } from "./error.mjs";
 import * as data from "./data.mjs";
+import { frontend, TYPE_BUILTINS } from "./types.mjs";
 const { and, not, need, implies } = data;
 const SELF = { sort: "function" };
 
@@ -266,6 +267,13 @@ function blockStatements(node) {
   return node.type === "BlockStatement" ? node.body : [node];
 }
 
+function readAnnotation(text, node) {
+  const first = tokenizer(text, OPTIONS).getToken();
+  if (first.type.label === "eof") return undefined;
+  if (first.type.label !== ":") fail("Unsupported or optional type annotation; use an explicit primitive | undefined parameter type.", node);
+  return text.slice(first.end).trim();
+}
+
 function localName(id) {
   if (id.type !== "Identifier" || RESERVED.has(id.name)) fail("Local declarations need simple, nonreserved names.", id);
 }
@@ -323,6 +331,9 @@ function statements(list, states, returns, cx) {
     } else if (node.type === "VariableDeclaration") {
       for (const d of node.declarations) {
         if (!d.init) fail("Uninitialized local declarations are unsupported; provide an initializer.", d);
+        const assignment = cx.scope.tokens.find((t) => t.start >= d.id.end && t.start < d.init.start && t.value === "=");
+        const annotation = readAnnotation(cx.scope.source.slice(d.id.end, assignment.start), d.id);
+        if (annotation !== undefined) cx.scope.validateType(annotation, d.id);
         for (const s of states) {
           const value = expression(d.init, s.env, at(s));
           s.env.set(d.id.name, { declaration: d.id, kind: node.kind, value });
@@ -355,8 +366,8 @@ function statements(list, states, returns, cx) {
 
 // Header: everything a caller needs except the result shape, which comes from
 // compiling the body (memoized, dependency-first, cycles rejected at the call).
-function header(top, file, source, comments, tokens) {
-  const declaration = top.type === "ExportNamedDeclaration" ? top.declaration : top;
+function header(top, file, source, stripped, comments, tokens) {
+  const declaration = ["ExportNamedDeclaration", "ExportDefaultDeclaration"].includes(top.type) ? top.declaration : top;
   let fn, name;
   if (declaration?.type === "FunctionDeclaration" && declaration.id) {
     fn = declaration; name = fn.id.name;
@@ -368,20 +379,51 @@ function header(top, file, source, comments, tokens) {
   }
   if (!fn || fn.async || fn.generator) fail("Only ordinary top-level functions and const function expressions are supported.", top);
   if (RESERVED.has(name) || (fn.id && RESERVED.has(fn.id.name))) fail("A function cannot shadow a verifier builtin.", top);
+  const assignment = declaration.type === "VariableDeclaration" ? tokens.find((t) => t.start >= declaration.declarations[0].id.end && t.value === "=") : null;
   return blame(file, name, () => {
     const info = contracts(leadingComments(source, comments, top.start));
     if (!info.clauses.some((c) => c.kind === "ensures")) fail("A function needs at least one ensures contract.", top, "error");
     const params = fn.params.map((p) => {
       if (p.type !== "Identifier") fail("Parameters need simple names, without defaults or destructuring.", p);
       const after = tokens.find((t) => t.start >= p.end);
-      const annotation = source.slice(p.end, after.start).trim();
-      if (annotation && !annotation.startsWith(":")) fail("Optional parameters are unsupported; use an explicit primitive | undefined type.", p);
-      const text = annotation ? annotation.slice(1).trim() : info.types.get(p.name);
+      const annotation = readAnnotation(source.slice(p.end, after.start), p);
+      const text = annotation ?? info.types.get(p.name);
       if (!text) fail(`Give ${p.name} a supported data annotation or a JSDoc @param type. Types are input assumptions.`, p);
-      return { name: p.name, node: p, type: data.parseType(text, p) };
+      return { name: p.name, node: p, text, typeSpan: { start: p.end, end: after.start } };
     });
+    const annotations = [];
+    if (assignment) {
+      const binding = readAnnotation(source.slice(declaration.declarations[0].id.end, assignment.start), declaration.declarations[0].id);
+      if (binding !== undefined) annotations.push({ text: binding, node: { start: declaration.declarations[0].id.end, end: assignment.start } });
+    }
+    const close = tokens.find((t) => t.start >= (fn.params.at(-1)?.end ?? fn.start) && t.start < fn.body.start && t.type.label === ")");
+    if (close) {
+      const next = tokens.find((t) => t.start >= close.end);
+      const result = readAnnotation(source.slice(close.end, next.start), close);
+      if (result !== undefined) annotations.push({ text: result, node: { start: close.end, end: next.start } });
+    }
+    // Account for erased tokens explicitly. Unmodeled syntax must not become
+    // an ordinary verified function merely because Node removed it first.
+    const ranges = [...params.map((p) => p.typeSpan), ...annotations.map((a) => a.node)];
+    const locals = (n) => {
+      if (!n || typeof n !== "object") return;
+      if (n.type === "VariableDeclarator" && n.id.type === "Identifier" && n.init) {
+        const eq = tokens.find((t) => t.start >= n.id.end && t.start < n.init.start && t.value === "=");
+        if (eq) ranges.push({ start: n.id.end, end: eq.start });
+      }
+      for (const v of Object.values(n)) if (Array.isArray(v)) v.forEach(locals); else if (v && typeof v === "object") locals(v);
+    };
+    locals(fn.body);
+    for (const t of tokenizer(source.slice(top.start, top.end), OPTIONS)) {
+      const start = top.start + t.start, end = top.start + t.end;
+      const unmodeled = Array.from({ length: end - start }, (_, i) => start + i)
+        .some((i) => source[i] !== stripped[i] && !ranges.some((r) => i >= r.start && i < r.end));
+      if (unmodeled) {
+        fail("Runtime generic arguments, type assertions, non-null assertions and unmodeled erased runtime syntax are unsupported.", { start, end });
+      }
+    }
     const own = (kind) => info.clauses.filter((c) => c.kind === kind).map((c) => ({ ...c, file }));
-    return { id: `${file}#${name}`, file, name, top, fn, params, requires: own("requires"), ensures: own("ensures") };
+    return { id: `${file}#${name}`, file, name, top, fn, params, annotations, requires: own("requires"), ensures: own("ensures") };
   });
 }
 
@@ -398,7 +440,7 @@ function body(h, scope) {
       bind(env, p.node, value.value, "parameter");
       declarations.push(...value.declarations);
       lengths.push(...value.lengths);
-      return { name: p.name, type: p.type, model: value.model };
+      return { name: p.name, type: p.type, typeAliases: p.typeAliases, model: value.model };
     });
     const spec = { guard: "true", contract: true, unit, scope };
     const pre = and(...h.requires.map((c) => need(expression(c.ast, env, spec), "boolean", c.span)));
@@ -440,65 +482,119 @@ function body(h, scope) {
   });
 }
 
-function importRecord(top, resolve) {
-  if (top.specifiers.some((s) => s.type !== "ImportSpecifier")) fail("Only named imports are supported; default and namespace imports are not.", top);
-  if (!top.specifiers.length) fail("Side-effect and empty imports are unsupported. For type-only names, use import type { T } from './file.ts'.", top);
-  const bindings = top.specifiers.map((s) => {
-    if (s.imported.type !== "Identifier" || s.imported.name === "default") fail("Import ordinary named exports; string and default names are unsupported.", top);
-    if (RESERVED.has(s.local.name)) fail(`Import local ${s.local.name} cannot shadow a verifier builtin.`, top);
-    return { imported: s.imported.name, local: s.local.name, node: top };
-  });
-  return { specifier: top.source.value, file: resolve(top.source.value, top), bindings };
-}
-
-/**
- * One module record, without executing it. `resolve(specifier, node)` returns
- * a canonical file id or throws; the source-string API passes a rejecting one.
- */
+/** Parse captured source without executing it or reading dependencies directly. */
 export function parse(file, source, resolve) {
   return blame(file, undefined, () => {
     let stripped = source;
     if (/\.[cm]?ts$/.test(file)) {
       try {
-        // Node removes a leading BOM. Restore it so every AST offset still
-        // indexes the captured source, just as type erasure preserves offsets.
         const bom = source.startsWith("\uFEFF") ? "\uFEFF" : "";
         stripped = bom + stripTypeScriptTypes(source.slice(bom.length), { mode: "strip" });
-      }
-      catch (e) { fail(`TypeScript type stripping failed: ${e.message}`, null, "error"); }
+      } catch (e) { fail(`TypeScript type stripping failed: ${e.message}`, null, "error"); }
       if (stripped.length !== source.length) fail("Type stripping changed source offsets.", null);
     }
     let program;
     const comments = [], tokens = [];
     try { program = Parser.parse(stripped, { ...OPTIONS, onComment: comments, onToken: tokens }); }
     catch (e) { fail(e.message, { start: e.pos ?? 0, end: (e.pos ?? 0) + 1 }, "error"); }
-    if (!program.body.length) fail("No functions to verify.", null, "error");
-    const headers = new Map(), exports = new Map(), imports = [], lists = [];
-    for (const top of program.body) {
-      if (top.type === "ImportDeclaration") { imports.push(importRecord(top, resolve)); continue; }
-      if (top.type === "ExportNamedDeclaration" && !top.declaration) {
-        if (top.source) fail("Re-exports are unsupported; export local function declarations.", top);
-        lists.push(top);
-        continue;
+    const syntax = frontend(file, source, program);
+    const headers = new Map(), imports = [], exports = [...syntax.exports];
+    const locals = new Set(syntax.aliases.keys());
+    const bindLocal = (name, node) => {
+      if (RESERVED.has(name) || locals.has(name)) fail(`Duplicate or reserved module binding ${name}.`, node);
+      locals.add(name);
+    };
+    for (const name of syntax.aliases.keys()) if (RESERVED.has(name)) fail(`Reserved type binding ${name}.`, syntax.aliases.get(name).node);
+    for (const imp of syntax.imports) {
+      for (const b of imp.bindings) {
+        if (b.kind === "type" && TYPE_BUILTINS.has(b.local)) fail(`Reserved type import binding ${b.local}.`, imp.node);
+        bindLocal(b.local, imp.node);
       }
-      const h = header(top, file, source, comments, tokens);
-      if (headers.has(h.name)) fail(`Duplicate function ${h.name}.`, top);
+      for (const kind of new Set(imp.bindings.map((b) => b.kind))) {
+        imports.push({ ...imp, file: resolve(imp.specifier, imp.node, kind), bindings: imp.bindings.filter((b) => b.kind === kind) });
+      }
+    }
+    for (const top of program.body) {
+      if (syntax.handled.has(top)) continue;
+      const h = header(top, file, source, stripped, comments, tokens);
+      bindLocal(h.name, top);
       headers.set(h.name, h);
-      if (top.type === "ExportNamedDeclaration") exports.set(h.name, h);
+      if (top.type === "ExportNamedDeclaration" || top.type === "ExportDefaultDeclaration") {
+        exports.push({ local: h.name, exported: top.type === "ExportDefaultDeclaration" ? "default" : h.name, kind: "value", node: top });
+      }
     }
-    // Export aliases name a declaration; they never create local bindings.
-    for (const s of lists.flatMap((top) => top.specifiers)) {
-      if (s.exported.type !== "Identifier" || s.exported.name === "default") fail("Export ordinary names; string and default exports are unsupported.", s);
-      exports.set(s.exported.name, headers.get(s.local.name) ?? fail(`${s.local.name} is imported; re-exports are unsupported.`, s));
-    }
-    return { file, source, stripped, headers, exports, imports };
+    for (const e of exports) if (e.specifier) e.file = resolve(e.specifier, e.node, e.kind);
+    if (!headers.size && !syntax.aliases.size && !imports.length && !exports.length) fail("No functions or types to verify.", null, "error");
+    return { file, source, stripped, tokens, headers, aliases: syntax.aliases, imports, exports };
   });
 }
 
-/** Link parsed records (imports already resolved and loaded) and compile every function. */
+/** Link type and runtime namespaces, then compile every loaded function. */
 export function compile(records) {
   const byFile = new Map(records.map((r) => [r.file, r]));
   const built = new Map(), scopes = new Map();
+  const local = (r, name, kind, at) => {
+    const own = (kind === "type" ? r.aliases : r.headers).get(name);
+    if (own) return own;
+    const imp = r.imports.find((i) => i.bindings.some((b) => b.kind === kind && b.local === name));
+    if (imp) {
+      const b = imp.bindings.find((b) => b.kind === kind && b.local === name);
+      return exported(byFile.get(imp.file), b.imported, kind, at);
+    }
+    return undefined;
+  };
+  const exported = (r, name, kind, at) => {
+    const entries = r.exports.filter((e) => !e.star && e.kind === kind && e.exported === name);
+    if (entries.length > 1) fail(`Duplicate exported ${kind} ${name}.`, entries[1].node, "error");
+    if (entries.length) {
+      const e = entries[0];
+      return blame(r.file, undefined, () => (e.file ? exported(byFile.get(e.file), e.local, kind, e.node) : local(r, e.local, kind, e.node))
+        ?? fail(`No local ${kind} binding ${e.local} to export.`, e.node, "error"));
+    }
+    if (name === "default") return undefined;
+    const found = r.exports.filter((e) => e.star && (e.kind === kind || e.kind === "value" && kind === "type"))
+      .map((e) => blame(r.file, undefined, () => exported(byFile.get(e.file), name, kind, e.node))).filter(Boolean);
+    if (new Set(found.map((h) => h.id)).size > 1) fail(`Ambiguous exported ${kind} ${name}.`, at, "error");
+    return found[0];
+  };
+  // Validate explicit bindings, including unused type imports and re-exports.
+  for (const r of records) blame(r.file, undefined, () => {
+    for (const imp of r.imports) for (const b of imp.bindings) {
+      if (!exported(byFile.get(imp.file), b.imported, b.kind, imp.node)) fail(`${imp.specifier} has no exported ${b.kind === "value" ? "function" : "type"} ${b.imported}.`, imp.node, "error");
+    }
+    for (const e of r.exports) if (!e.star) {
+      const h = r.headers.get(e.local);
+      if (e.evaluated && h && h.top.start > e.node.start && h.fn.type !== "FunctionDeclaration") fail("Default export reads an uninitialized const function binding.", e.node);
+      exported(r, e.exported, e.kind, e.node);
+    }
+  });
+  const expand = (r, text, node, args, stack, used) => data.parseType(text, node, (name, actual, at) => {
+    if (args.has(name)) {
+      if (actual.length) fail(`Type parameter ${name} is not generic.`, at);
+      return args.get(name);
+    }
+    const a = local(r, name, "type", at);
+    if (!a) fail(`Unresolved type ${name}; use a declared alias or explicit type import.`, at);
+    used.set(a.id, { file: a.file, name: a.name, span: a.node });
+    return blame(a.file, undefined, () => {
+      if (stack.includes(a.id)) fail(`Recursive type alias ${a.name} is unsupported.`, a.node);
+      if (actual.length !== a.params.length) fail(`Type alias ${a.name} needs exactly ${a.params.length} concrete type argument(s).`, a.node);
+      return expand(byFile.get(a.file), a.text, a.node, new Map(a.params.map((p, i) => [p, actual[i]])), [...stack, a.id], used);
+    });
+  });
+  for (const r of records) blame(r.file, undefined, () => {
+    // Validate generic templates with primitive placeholders. Each actual use
+    // is expanded and checked again with its concrete argument shapes.
+    for (const a of r.aliases.values()) expand(r, a.text, a.node, new Map(a.params.map((p) => [p, "number"])), [a.id], new Map());
+    for (const h of r.headers.values()) blame(r.file, h.name, () => {
+      for (const a of h.annotations) expand(r, a.text, a.node, new Map(), [], new Map());
+      h.params = h.params.map((p) => {
+        const used = new Map();
+        const type = expand(r, p.text, p.node, new Map(), [], used);
+        return { ...p, type, typeAliases: [...used.values()] };
+      });
+    });
+  });
   const program = {
     scopes,
     build(h, node) {
@@ -508,11 +604,12 @@ export function compile(records) {
   };
   for (const r of records) blame(r.file, undefined, () => {
     const names = new Map(r.headers);
-    for (const imp of r.imports) for (const b of imp.bindings) {
-      names.set(b.local, byFile.get(imp.file).exports.get(b.imported) ?? fail(`${imp.specifier} has no exported function ${b.imported}.`, b.node, "error"));
-    }
-    scopes.set(r.file, { file: r.file, names, stripped: r.stripped, program });
+    for (const imp of r.imports) for (const b of imp.bindings) if (b.kind === "value") names.set(b.local, exported(byFile.get(imp.file), b.imported, "value", imp.node));
+    scopes.set(r.file, { file: r.file, source: r.source, names, stripped: r.stripped, tokens: r.tokens, program,
+      validateType: (text, at) => expand(r, text, at, new Map(), [], new Map()),
+    });
   });
   const targets = records.flatMap((r) => [...r.headers.values()].map((h) => program.build(h, h.top)));
+  if (!targets.length) blame(records.at(-1).file, undefined, () => fail("No functions to verify.", null, "error"));
   return { targets, modules: records.map((r) => ({ file: r.file, bindings: [...scopes.get(r.file).names].map(([local, h]) => [local, h.id]) })) };
 }

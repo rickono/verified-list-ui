@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/d3/d3-array",
+  "commit": "94d4541626ae3ac6c847e3d4c6e31aca1a8879b4",
+  "tag": "v3.2.4",
+  "path": "src/identity.js",
+  "sha256": "9ef78f0410542ac2fe2d3f93a3ce9b4e4de3cf52bedf8f9cc3e2583dafa8abf1",
+  "license": "ISC",
+  "licensePath": "LICENSE"
+}

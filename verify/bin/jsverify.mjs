@@ -3,14 +3,15 @@ import { relative } from "node:path";
 import { verifyFile } from "../index.mjs";
 
 const files = [];
-let json = false, timeoutMs = 10_000;
+let json = false, timeoutMs = 10_000, tsconfig;
 const args = process.argv.slice(2);
 for (let i = 0; i < args.length; i++) {
   if (args[i] === "--help") {
-    console.log("Usage: node verify/bin/jsverify.mjs [--json] [--timeout MS] FILE...\nChecks requires/ensures comments on the supported JS/TS source subset.\nExit 0 means every function was verified; other outcomes exit 1.");
+    console.log("Usage: node verify/bin/jsverify.mjs [--json] [--timeout MS] [--project TSCONFIG] FILE...\nChecks requires/ensures comments on the supported JS/TS source subset.\nExit 0 means every function was verified; other outcomes exit 1.");
     process.exit(0);
   } else if (args[i] === "--json") json = true;
   else if (args[i] === "--timeout") timeoutMs = Number(args[++i]);
+  else if (args[i] === "--project") { tsconfig = args[++i]; if (!tsconfig) { console.error("--project requires a tsconfig path."); process.exit(2); } }
   else if (args[i].startsWith("-")) { console.error(`Unknown option ${args[i]}`); process.exit(2); }
   else files.push(args[i]);
 }
@@ -19,7 +20,7 @@ const reports = [];
 const show = (value) => typeof value === "string" ? value : JSON.stringify(value);
 try {
   for (const file of files) {
-    const report = await verifyFile(file, { timeoutMs });
+    const report = await verifyFile(file, { timeoutMs, tsconfig });
     const entry = report.modules[0]?.file;
     const where = (f) => f === entry ? file : relative(process.cwd(), f);
     reports.push(report);

@@ -1,0 +1,6 @@
+{
+  "name": "@ready/d3",
+  "private": true,
+  "type": "module",
+  "exports": "./identity.js"
+}
