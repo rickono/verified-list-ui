@@ -1,14 +1,14 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-09",
-  "status": "Agent deliveries finished; integration not started",
-  "edgeMeaning": "All prerequisites apply. Inputs to I are delivered branch artifacts, including D with partial acceptance. Edges out of I require successful combined integration and validation before downstream capabilities are available.",
+  "status": "A, B, C, D and F are integrated and validated for their documented subsets. I is complete. No downstream work has started.",
+  "edgeMeaning": "All prerequisites apply. I combines the five delivered branches and passes combined validation. E, G, H, P and T are ready to start. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
     "The async extension can advance alongside pure-library work once its own prerequisites are ready.",
     "No duration, cost or capacity estimates have been assigned.",
-    "Agent completion does not imply integrated capability; downstream work remains gated on I. D artifacts are delivered, but its acceptance gap must close at integration."
+    "Integrated status refers to the documented first-layer subsets. Readiness of downstream work does not mean those capabilities exist."
   ],
   "goals": {
     "pure": "Q",
@@ -32,13 +32,13 @@
       "deps": [
         "NOW"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Compiler / control flow",
       "detail": "Model local let/var bindings, assignments, updates such as ++, early returns and control-flow joins. Preserve JavaScript evaluation order and binary64 semantics.",
       "doneWhen": "Local scalar state changes compile and replay faithfully, with unsupported effects rejected.",
       "deliveryStatus": "finished",
-      "integrated": false,
-      "resultSummary": "Local let/var scalar updates, expression effects and control-flow joins are implemented in its isolated branch. Parameter writes, reference writes and loops remain unsupported.",
+      "integrated": true,
+      "resultSummary": "Local let/var scalar updates, expression effects and control-flow joins are integrated. Parameter writes, reference writes and loops remain unsupported.",
       "result": {
         "acceptance": "Fully met within documented subset; not integrated",
         "branch": "t3/implement-ready-node-a",
@@ -52,7 +52,8 @@
           "failed": 0
         },
         "reportUrl": "https://github.com/rickono/verified-list-ui/blob/46c8f7884b3447a72ccae7e2cc95f43390baf4a2/verify/reports/ready-A.md"
-      }
+      },
+      "integrationAcceptance": "Met for the documented subset in the combined 168-test suite"
     },
     {
       "id": "B",
@@ -61,13 +62,13 @@
       "deps": [
         "NOW"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Solver / outcome policy",
       "detail": "Make proof obligations and backend capabilities explicit. Improve timeout attribution and isolate expensive queries. Keep solver choice behind a small boundary; add other engines when a concrete obligation needs one.",
       "doneWhen": "One costly obligation cannot erase unrelated useful results; backend uncertainty never becomes a proof.",
       "deliveryStatus": "finished",
-      "integrated": false,
-      "resultSummary": "Independent postcondition obligations, a fixed two-worker scheduler, explicit backend capabilities and useful timeout attribution are implemented in its isolated branch. Z3 remains the only backend.",
+      "integrated": true,
+      "resultSummary": "Independent obligations, fair two-worker scheduling and explicit backend capabilities are integrated. Z3 remains the only backend.",
       "result": {
         "acceptance": "Fully met for documented subset; not integrated",
         "branch": "t3/proof-backend-scheduling",
@@ -93,7 +94,8 @@
           "Fair turns cannot guarantee completion under a tiny budget"
         ],
         "reportUrl": "https://github.com/rickono/verified-list-ui/blob/abd0bf5202729b1fa0872613c7bfdd46a06a1d93/verify/reports/ready-B.md"
-      }
+      },
+      "integrationAcceptance": "Met for the documented subset in the combined 168-test suite"
     },
     {
       "id": "C",
@@ -102,13 +104,13 @@
       "deps": [
         "NOW"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Parser / module loader",
       "detail": "Resolve the type and module forms needed by pinned target projects: aliases, useful generics, export forms and package/config resolution. Preserve exact source and dependency provenance.",
       "doneWhen": "Selected real modules load without hand-rewriting their implementations; unsupported project features are diagnosed explicitly.",
       "deliveryStatus": "finished",
-      "integrated": false,
-      "resultSummary": "Concrete aliases and generic aliases, selected ESM exports/packages and explicit config paths are implemented in its isolated branch. Full runtime generics and higher-order verification remain unsupported.",
+      "integrated": true,
+      "resultSummary": "Concrete generic aliases, selected ESM exports/packages and explicit config paths are integrated. Full runtime generics and higher-order verification remain unsupported.",
       "result": {
         "acceptance": "Fully met for explicit supported subset; not integrated",
         "branch": "t3/implement-ready-node-c",
@@ -134,7 +136,8 @@
           "Helper-later quantified graphs can still exhaust the shared solver budget"
         ],
         "reportUrl": "https://github.com/rickono/verified-list-ui/blob/304587c9a827b3bf38912b4c5acf1ed9a12da11e/verify/reports/ready-C.md"
-      }
+      },
+      "integrationAcceptance": "Met for the documented subset in the combined 168-test suite"
     },
     {
       "id": "D",
@@ -143,13 +146,13 @@
       "deps": [
         "NOW"
       ],
-      "status": "partial",
+      "status": "integrated",
       "area": "Semantics / independent validation",
       "detail": "Expand existing differential and mutation tests, preserve minimal discrepancies as regressions, and test failure/replay/dependency policy independently of the encoding that produces it. This continues throughout the roadmap.",
       "doneWhen": "Every new supported operation has executable conformance evidence; deliberate bugs are caught and regressions remain reproducible.",
       "deliveryStatus": "finished",
-      "integrated": false,
-      "resultSummary": "The independent corpus covers 565 outcomes, reproduces 16 counterexamples and detects 8 seeded verifier mutants. Three unchanged baseline Remeda checks returned unknown, so acceptance remains partial.",
+      "integrated": true,
+      "resultSummary": "The independent corpus and all eight seeded verifier mutants pass on the combined code. The combined suite also passes the three Remeda checks that timed out on the isolated branch.",
       "result": {
         "acceptance": "Partially met: corpus delivered; baseline Remeda resource failures unresolved; not integrated",
         "branch": "t3/implement-ready-node-d",
@@ -174,7 +177,8 @@
           "Existing take prefix test: unknown, reason not retained in assertion"
         ],
         "reportUrl": "https://github.com/rickono/verified-list-ui/blob/4a628d3d5c76f6d0d0b893e2019073d7fbf8740d/verify/reports/ready-D.md"
-      }
+      },
+      "integrationAcceptance": "Met for the documented subset in the combined 168-test suite"
     },
     {
       "id": "F",
@@ -183,13 +187,13 @@
       "deps": [
         "NOW"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Contract language / semantics",
       "detail": "Add the specification tools demanded by real proofs: pre-state values, reusable pure specifications and lemmas, and exact mathematical reasoning with explicit bridges to JavaScript numbers. Separate specification-only values from runtime operations.",
       "doneWhen": "Specs compose without unchecked axioms, and every numeric bridge states its finiteness and exactness obligations.",
       "deliveryStatus": "finished",
-      "integrated": false,
-      "resultSummary": "Entry snapshots with old(...), checked @spec functions/lemmas and exact rational contracts are implemented in its isolated branch. Mutable-heap old semantics remain unsupported.",
+      "integrated": true,
+      "resultSummary": "Entry snapshots with old(...), checked @spec definitions/lemmas and exact rational contracts are integrated. Mutable-heap old semantics remain unsupported.",
       "result": {
         "acceptance": "Fully met for documented first-layer subset; not integrated",
         "branch": "t3/implement-ready-now-node-f",
@@ -209,12 +213,13 @@
           "Definition expansion and mixed-theory quantifiers may exhaust budgets"
         ],
         "reportUrl": "https://github.com/rickono/verified-list-ui/blob/3aa07f3fa9901057e62de195ff5d2210c69679c2/verify/reports/ready-F.md"
-      }
+      },
+      "integrationAcceptance": "Met for the documented subset in the combined 168-test suite"
     },
     {
       "id": "I",
       "title": "Integrate & validate",
-      "short": "Next shared checkpoint",
+      "short": "Combined validation complete",
       "deps": [
         "A",
         "B",
@@ -222,12 +227,12 @@
         "D",
         "F"
       ],
-      "status": "next",
+      "status": "integrated",
       "area": "Integration and combined verification",
-      "detail": "Combine the five delivered branches. Reconcile scalar-state, type-scope and specification changes in the compiler, preserve specification definedness in the new backend protocol, and run the combined conformance and proof suites. D's timeout failures must be resolved or explicitly bounded by an accepted verification policy. This work has not started.",
+      "detail": "The five branches are combined. Compiler scopes, scalar bindings, exact specifications, independent proof obligations and corpus mutations work together. All 168 combined tests pass without weakening contracts, assertions or proof domains.",
       "doneWhen": "The branches work together, all combined checks pass without weaker contracts, assertions or proof bounds, and D's acceptance gap is closed. Only then count this batch as integrated.",
       "dependencyMode": "delivered_artifacts",
-      "integrated": false
+      "integrated": true
     },
     {
       "id": "E",
@@ -236,7 +241,7 @@
       "deps": [
         "I"
       ],
-      "status": "planned",
+      "status": "ready",
       "area": "Compiler / verification conditions",
       "detail": "Check invariant initialization and preservation at loop heads, then derive exit and early-return properties. Check a well-founded decreasing measure when termination is claimed. Use induction rather than bounded unrolling.",
       "doneWhen": "Read-only-array loops verify for every native length; bad invariants and non-decreasing termination measures fail.",
@@ -252,7 +257,7 @@
       "deps": [
         "I"
       ],
-      "status": "planned",
+      "status": "ready",
       "area": "Data model / state semantics",
       "detail": "Model object/array identity, shared references and writes. Contracts describe pre-state values and permitted mutation footprints, so helper calls preserve facts outside their effects.",
       "doneWhen": "Proofs distinguish a fresh copy from an alias and remain sound when two arguments share storage.",
@@ -269,7 +274,7 @@
       "deps": [
         "I"
       ],
-      "status": "planned",
+      "status": "ready",
       "area": "Function types / call verification",
       "detail": "Give callbacks and closures checked parameter/result contracts, with explicit captured-value and effect assumptions. Begin with pure callbacks; stateful callbacks also require the heap model when used.",
       "doneWhen": "Selected generic/callback helpers compose through checked function contracts without treating arbitrary callbacks as trusted.",
@@ -324,7 +329,7 @@
       "deps": [
         "I"
       ],
-      "status": "planned",
+      "status": "ready",
       "area": "Developer tooling / CI",
       "detail": "Select proof targets, rerun affected functions in CI, shrink and replay witnesses, and report useful source-level failures. Any cached result includes source dependencies, contracts, semantic model, configuration and backend identity.",
       "doneWhen": "A dependency or verification-model change invalidates affected results; a reviewer can reproduce every reported bug or proof.",
@@ -397,7 +402,7 @@
       "deps": [
         "I"
       ],
-      "status": "planned",
+      "status": "ready",
       "extension": true,
       "area": "Boundary models / protocol assumptions",
       "detail": "Specify external operations through nondeterministic outcomes and protocol contracts: success, failure, timing and response shape. Assumptions about servers and the browser remain visible rather than becoming implicit guarantees.",
@@ -600,20 +605,43 @@
     }
   ],
   "progress": {
-    "branchReady": [
+    "branchReady": [],
+    "partial": [],
+    "integratedFromBatch": [
       "A",
       "B",
       "C",
+      "D",
       "F"
     ],
-    "partial": [
-      "D"
+    "next": [
+      "E",
+      "G",
+      "H",
+      "P",
+      "T"
     ],
-    "integratedFromBatch": [],
-    "next": "I",
     "agentRunFinished": true,
     "downstreamStarted": false,
-    "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586"
+    "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
+    "integrationComplete": true
   },
-  "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs."
+  "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs.",
+  "validation": {
+    "fullSuite": {
+      "passed": 168,
+      "failed": 0,
+      "skipped": 0
+    },
+    "conformance": {
+      "outcomes": 565,
+      "nativeSamples": 643,
+      "reproducedCounterexamples": 16,
+      "detectedMutants": 8
+    },
+    "crossFeatureTests": 5,
+    "nativeBaselineComparison": true,
+    "projectBaselineComparison": true,
+    "report": "../verify/reports/integration.md"
+  }
 }

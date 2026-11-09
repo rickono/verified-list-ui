@@ -1,28 +1,28 @@
 # Source verifier roadmap
 
-Status as of 2026-11-09: A, B, C and F are ready in separate branches for their documented subsets. D is partial because three baseline Remeda checks returned unknown. No implementation branches are merged, and no downstream work has started.
+Status as of 2026-11-09: A, B, C, D and F are integrated and validated for their documented subsets. I is complete. No downstream work has started.
 
-I is the next integration and combined-validation checkpoint. All incoming prerequisites apply. Inputs to I are delivered branch artifacts, including D with its unresolved acceptance gap. Downstream work requires I to pass. Transitively redundant edges are omitted.
+All prerequisites apply. I combines the five delivered branches and passes combined validation. E, G, H, P and T are ready to start. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
   NOW["NOW: Current verifier<br/>integrated baseline"]
-  A["A: Scalar state &amp; control flow<br/>branch-ready"]
-  B["B: Proof scaling &amp; backend API<br/>branch-ready"]
-  C["C: Project frontend<br/>branch-ready"]
-  D["D: Expand soundness checks<br/>PARTIAL"]
-  F["F: Richer specifications<br/>branch-ready"]
-  I{{"I: Integrate &amp; validate<br/>NEXT"}}
-  E["E: Loops with induction"]
-  G["G: Heap, aliases &amp; frames"]
-  H["H: Higher-order contracts"]
+  A["A: Scalar state &amp; control flow<br/>integrated"]
+  B["B: Proof scaling &amp; backend API<br/>integrated"]
+  C["C: Project frontend<br/>integrated"]
+  D["D: Expand soundness checks<br/>integrated"]
+  F["F: Richer specifications<br/>integrated"]
+  I{{"I: Integrate &amp; validate<br/>integrated"}}
+  E["E: Loops with induction<br/>READY"]
+  G["G: Heap, aliases &amp; frames<br/>READY"]
+  H["H: Higher-order contracts<br/>READY"]
   J["J: Search proof pilot"]
   K["K: Broader library proofs"]
-  P["P: Project proof workflow"]
+  P["P: Project proof workflow<br/>READY"]
   Q["Q: Pure JS/TS proofs &amp; bugs"]
   R["R: Event &amp; lifecycle semantics"]
   S["S: Async ordering model"]
-  T["T: Environment contracts"]
+  T["T: Environment contracts<br/>READY"]
   U["U: Temporal verification"]
   V["V: Stateful app pilots"]
   W["W: Existing JS/TS verification"]
@@ -60,9 +60,13 @@ flowchart TD
   V --> W
 ```
 
-## Independent branch results
+## Combined validation
 
-Test counts below describe each isolated branch. There is no combined integration result.
+The combined verifier suite passed 168/168 tests, including the three Remeda checks that timed out on D's isolated branch. The independent corpus still detects all eight seeded verifier mutants. [Integration report](../verify/reports/integration.md).
+
+## Original branch results
+
+These counts describe the original isolated branches. D's original partial result is retained as historical evidence; the combined validation above closes that acceptance gap.
 
 | Work | Commit and report | Reported validation |
 | --- | --- | --- |
@@ -74,7 +78,7 @@ Test counts below describe each isolated branch. There is no combined integratio
 
 ## Data and updates
 
-[The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The baseline is `ff2518cd7494300084f2ab54da71f4d79185e586` on `js-source-verifier`. This roadmap is on `ready-now-coordinator`.
+[The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`. The next ready packages are E, G, H, P and T. No downstream work has started.
 
 To regenerate this document after editing the data:
 

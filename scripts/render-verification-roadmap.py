@@ -6,6 +6,8 @@ root = Path(__file__).resolve().parents[1]
 data = json.loads((root / "docs/verification-roadmap.json").read_text())
 labels = {
     "done": "integrated baseline",
+    "integrated": "integrated",
+    "ready": "READY",
     "branch_ready": "branch-ready",
     "partial": "PARTIAL",
     "next": "NEXT",
@@ -13,9 +15,9 @@ labels = {
 lines = [
     "# Source verifier roadmap",
     "",
-    f"Status as of {data['asOf']}: A, B, C and F are ready in separate branches for their documented subsets. D is partial because three baseline Remeda checks returned unknown. No implementation branches are merged, and no downstream work has started.",
+    f"Status as of {data['asOf']}: {data['status']}",
     "",
-    "I is the next integration and combined-validation checkpoint. All incoming prerequisites apply. Inputs to I are delivered branch artifacts, including D with its unresolved acceptance gap. Downstream work requires I to pass. Transitively redundant edges are omitted.",
+    data["edgeMeaning"],
     "",
     "```mermaid",
     "flowchart TD",
@@ -29,8 +31,10 @@ for node in data["nodes"]:
     lines.append(f"  {node['id']}{shape}")
 lines.extend(f"  {edge['from']} --> {edge['to']}" for edge in data["edges"])
 lines += [
-    "```", "", "## Independent branch results", "",
-    "Test counts below describe each isolated branch. There is no combined integration result.", "",
+    "```", "", "## Combined validation", "",
+    f"The combined verifier suite passed {data['validation']['fullSuite']['passed']}/{data['validation']['fullSuite']['passed']} tests, including the three Remeda checks that timed out on D's isolated branch. The independent corpus still detects all eight seeded verifier mutants. [Integration report](../verify/reports/integration.md).", "",
+    "## Original branch results", "",
+    "These counts describe the original isolated branches. D's original partial result is retained as historical evidence; the combined validation above closes that acceptance gap.", "",
     "| Work | Commit and report | Reported validation |",
     "| --- | --- | --- |",
 ]
@@ -47,7 +51,7 @@ for node in data["nodes"]:
     lines.append(f"| {node['id']}: {node['title']} | [{result['commit'][:7]}]({result['reportUrl']}) on `{result['branch']}` | {checks} |")
 lines += [
     "", "## Data and updates", "",
-    "[The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The baseline is `ff2518cd7494300084f2ab54da71f4d79185e586` on `js-source-verifier`. This roadmap is on `ready-now-coordinator`.",
+    "[The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`. The next ready packages are E, G, H, P and T. No downstream work has started.",
     "", "To regenerate this document after editing the data:", "",
     "```sh", "python3 scripts/render-verification-roadmap.py", "```", "",
 ]

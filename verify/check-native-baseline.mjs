@@ -45,7 +45,8 @@ const shifted = (array) => takeImplementation(array.slice(1), 2);` });
   for (const file of ["composed.js", "shifted.js"]) cases.push({ name: `import-${file}`, entry: join(here, "examples/remeda", file) });
   const evidence = [];
   const projection = ({ name, params, declarations, pre, post, smallWitness, resultType, executable }) =>
-    ({ name, params, declarations, pre, post, smallWitness, resultType, executable });
+    ({ name, params: params.map(({ name, type, model }) => ({ name, type, model })),
+      declarations, pre, post, smallWitness, resultType, executable });
   for (const c of cases) {
     const snapshot = c.entry ? load(c.entry) : single(c.file ?? `${c.name}.js`, c.source);
     const before = c.entry ? modules.load(c.entry) : modules.single(c.file ?? `${c.name}.js`, c.source);
