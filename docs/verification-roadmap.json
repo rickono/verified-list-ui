@@ -1,0 +1,619 @@
+{
+  "title": "From source contracts to verification of existing JS/TS",
+  "asOf": "2026-11-09",
+  "status": "Agent deliveries finished; integration not started",
+  "edgeMeaning": "All prerequisites apply. Inputs to I are delivered branch artifacts, including D with partial acceptance. Edges out of I require successful combined integration and validation before downstream capabilities are available.",
+  "assumptions": [
+    "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
+    "Each node is a work package, not an equal-duration task or one person.",
+    "The async extension can advance alongside pure-library work once its own prerequisites are ready.",
+    "No duration, cost or capacity estimates have been assigned.",
+    "Agent completion does not imply integrated capability; downstream work remains gated on I. D artifacts are delivered, but its acceptance gap must close at integration."
+  ],
+  "goals": {
+    "pure": "Q",
+    "extended": "W"
+  },
+  "nodes": [
+    {
+      "id": "NOW",
+      "title": "Current verifier",
+      "short": "Numbers, collections, calls, imports",
+      "deps": [],
+      "status": "done",
+      "area": "Existing implementation",
+      "detail": "Binary64 scalars, dense arrays and plain records, every contracts, same-file calls, named local imports, source hashes, JavaScript replay and dependency gating.",
+      "doneWhen": "Current baseline exists; 84 verifier tests passed in the latest implementation run."
+    },
+    {
+      "id": "A",
+      "title": "Scalar state & control flow",
+      "short": "Local updates and loop control",
+      "deps": [
+        "NOW"
+      ],
+      "status": "branch_ready",
+      "area": "Compiler / control flow",
+      "detail": "Model local let/var bindings, assignments, updates such as ++, early returns and control-flow joins. Preserve JavaScript evaluation order and binary64 semantics.",
+      "doneWhen": "Local scalar state changes compile and replay faithfully, with unsupported effects rejected.",
+      "deliveryStatus": "finished",
+      "integrated": false,
+      "resultSummary": "Local let/var scalar updates, expression effects and control-flow joins are implemented in its isolated branch. Parameter writes, reference writes and loops remain unsupported.",
+      "result": {
+        "acceptance": "Fully met within documented subset; not integrated",
+        "branch": "t3/implement-ready-node-a",
+        "commit": "46c8f7884b3447a72ccae7e2cc95f43390baf4a2",
+        "focusedTests": {
+          "passed": 51,
+          "failed": 0
+        },
+        "fullSuite": {
+          "passed": 100,
+          "failed": 0
+        },
+        "reportUrl": "https://github.com/rickono/verified-list-ui/blob/46c8f7884b3447a72ccae7e2cc95f43390baf4a2/verify/reports/ready-A.md"
+      }
+    },
+    {
+      "id": "B",
+      "title": "Proof scaling & backend API",
+      "short": "Budgets, query isolation, adapters",
+      "deps": [
+        "NOW"
+      ],
+      "status": "branch_ready",
+      "area": "Solver / outcome policy",
+      "detail": "Make proof obligations and backend capabilities explicit. Improve timeout attribution and isolate expensive queries. Keep solver choice behind a small boundary; add other engines when a concrete obligation needs one.",
+      "doneWhen": "One costly obligation cannot erase unrelated useful results; backend uncertainty never becomes a proof.",
+      "deliveryStatus": "finished",
+      "integrated": false,
+      "resultSummary": "Independent postcondition obligations, a fixed two-worker scheduler, explicit backend capabilities and useful timeout attribution are implemented in its isolated branch. Z3 remains the only backend.",
+      "result": {
+        "acceptance": "Fully met for documented subset; not integrated",
+        "branch": "t3/proof-backend-scheduling",
+        "commit": "abd0bf5202729b1fa0872613c7bfdd46a06a1d93",
+        "implemented": [
+          "Independent postcondition obligations",
+          "Explicit backend capability and query API",
+          "Two-worker fair scheduling within one request deadline",
+          "Preserved completed evidence across worker deadlines and errors",
+          "Attributed resource/backend failures"
+        ],
+        "focusedTests": {
+          "passed": 39,
+          "failed": 0
+        },
+        "fullSuite": {
+          "passed": 104,
+          "failed": 0
+        },
+        "limitations": [
+          "Z3 remains the only backend",
+          "No independent certificates",
+          "Fair turns cannot guarantee completion under a tiny budget"
+        ],
+        "reportUrl": "https://github.com/rickono/verified-list-ui/blob/abd0bf5202729b1fa0872613c7bfdd46a06a1d93/verify/reports/ready-B.md"
+      }
+    },
+    {
+      "id": "C",
+      "title": "Project frontend",
+      "short": "Types and real project imports",
+      "deps": [
+        "NOW"
+      ],
+      "status": "branch_ready",
+      "area": "Parser / module loader",
+      "detail": "Resolve the type and module forms needed by pinned target projects: aliases, useful generics, export forms and package/config resolution. Preserve exact source and dependency provenance.",
+      "doneWhen": "Selected real modules load without hand-rewriting their implementations; unsupported project features are diagnosed explicitly.",
+      "deliveryStatus": "finished",
+      "integrated": false,
+      "resultSummary": "Concrete aliases and generic aliases, selected ESM exports/packages and explicit config paths are implemented in its isolated branch. Full runtime generics and higher-order verification remain unsupported.",
+      "result": {
+        "acceptance": "Fully met for explicit supported subset; not integrated",
+        "branch": "t3/implement-ready-node-c",
+        "commit": "304587c9a827b3bf38912b4c5acf1ed9a12da11e",
+        "implemented": [
+          "Concrete aliases and generic aliases",
+          "Type imports and runtime re-exports/barrels/default function exports",
+          "Explicit tsconfig paths and ESM package export resolution",
+          "Configuration/package provenance"
+        ],
+        "focusedTests": {
+          "passed": 22,
+          "failed": 0
+        },
+        "fullSuite": {
+          "passed": 105,
+          "failed": 0,
+          "note": "Full run covered 21 frontend tests; final literal path substitution fix and 22nd regression covered by the final 22/22 focused suite."
+        },
+        "limitations": [
+          "Explicit strict JSON config subset",
+          "No runtime generics, higher-order verification or full Node resolution",
+          "Helper-later quantified graphs can still exhaust the shared solver budget"
+        ],
+        "reportUrl": "https://github.com/rickono/verified-list-ui/blob/304587c9a827b3bf38912b4c5acf1ed9a12da11e/verify/reports/ready-C.md"
+      }
+    },
+    {
+      "id": "D",
+      "title": "Expand soundness checks",
+      "short": "V8 comparisons and mutation corpus",
+      "deps": [
+        "NOW"
+      ],
+      "status": "partial",
+      "area": "Semantics / independent validation",
+      "detail": "Expand existing differential and mutation tests, preserve minimal discrepancies as regressions, and test failure/replay/dependency policy independently of the encoding that produces it. This continues throughout the roadmap.",
+      "doneWhen": "Every new supported operation has executable conformance evidence; deliberate bugs are caught and regressions remain reproducible.",
+      "deliveryStatus": "finished",
+      "integrated": false,
+      "resultSummary": "The independent corpus covers 565 outcomes, reproduces 16 counterexamples and detects 8 seeded verifier mutants. Three unchanged baseline Remeda checks returned unknown, so acceptance remains partial.",
+      "result": {
+        "acceptance": "Partially met: corpus delivered; baseline Remeda resource failures unresolved; not integrated",
+        "branch": "t3/implement-ready-node-d",
+        "commit": "4a628d3d5c76f6d0d0b893e2019073d7fbf8740d",
+        "focusedTests": {
+          "passed": 3,
+          "failed": 0
+        },
+        "fullSuite": {
+          "passed": 84,
+          "failed": 3
+        },
+        "corpus": {
+          "outcomes": 565,
+          "nativeSamples": 643,
+          "reproducedCounterexamples": 16,
+          "detectedMutants": 8
+        },
+        "failures": [
+          "Existing remeda-calls test: wall-clock budget exhausted",
+          "Existing remeda-imports test: wall-clock budget exhausted",
+          "Existing take prefix test: unknown, reason not retained in assertion"
+        ],
+        "reportUrl": "https://github.com/rickono/verified-list-ui/blob/4a628d3d5c76f6d0d0b893e2019073d7fbf8740d/verify/reports/ready-D.md"
+      }
+    },
+    {
+      "id": "F",
+      "title": "Richer specifications",
+      "short": "Old values, lemmas, math specs",
+      "deps": [
+        "NOW"
+      ],
+      "status": "branch_ready",
+      "area": "Contract language / semantics",
+      "detail": "Add the specification tools demanded by real proofs: pre-state values, reusable pure specifications and lemmas, and exact mathematical reasoning with explicit bridges to JavaScript numbers. Separate specification-only values from runtime operations.",
+      "doneWhen": "Specs compose without unchecked axioms, and every numeric bridge states its finiteness and exactness obligations.",
+      "deliveryStatus": "finished",
+      "integrated": false,
+      "resultSummary": "Entry snapshots with old(...), checked @spec functions/lemmas and exact rational contracts are implemented in its isolated branch. Mutable-heap old semantics remain unsupported.",
+      "result": {
+        "acceptance": "Fully met for documented first-layer subset; not integrated",
+        "branch": "t3/implement-ready-now-node-f",
+        "commit": "3aa07f3fa9901057e62de195ff5d2210c69679c2",
+        "implemented": [
+          "old entry snapshots",
+          "checked @spec definitions and lemmas",
+          "exact rational contracts with finite binary64 bridges"
+        ],
+        "fullSuite": {
+          "passed": 102,
+          "failed": 0
+        },
+        "limitations": [
+          "Scalar rational specification values only",
+          "No mutable-heap old semantics",
+          "Definition expansion and mixed-theory quantifiers may exhaust budgets"
+        ],
+        "reportUrl": "https://github.com/rickono/verified-list-ui/blob/3aa07f3fa9901057e62de195ff5d2210c69679c2/verify/reports/ready-F.md"
+      }
+    },
+    {
+      "id": "I",
+      "title": "Integrate & validate",
+      "short": "Next shared checkpoint",
+      "deps": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "status": "next",
+      "area": "Integration and combined verification",
+      "detail": "Combine the five delivered branches. Reconcile scalar-state, type-scope and specification changes in the compiler, preserve specification definedness in the new backend protocol, and run the combined conformance and proof suites. D's timeout failures must be resolved or explicitly bounded by an accepted verification policy. This work has not started.",
+      "doneWhen": "The branches work together, all combined checks pass without weaker contracts, assertions or proof bounds, and D's acceptance gap is closed. Only then count this batch as integrated.",
+      "dependencyMode": "delivered_artifacts",
+      "integrated": false
+    },
+    {
+      "id": "E",
+      "title": "Loops with induction",
+      "short": "Invariants and termination",
+      "deps": [
+        "I"
+      ],
+      "status": "planned",
+      "area": "Compiler / verification conditions",
+      "detail": "Check invariant initialization and preservation at loop heads, then derive exit and early-return properties. Check a well-founded decreasing measure when termination is claimed. Use induction rather than bounded unrolling.",
+      "doneWhen": "Read-only-array loops verify for every native length; bad invariants and non-decreasing termination measures fail.",
+      "integrated": false,
+      "capabilityDeps": [
+        "A"
+      ]
+    },
+    {
+      "id": "G",
+      "title": "Heap, aliases & frames",
+      "short": "Identity and mutation footprints",
+      "deps": [
+        "I"
+      ],
+      "status": "planned",
+      "area": "Data model / state semantics",
+      "detail": "Model object/array identity, shared references and writes. Contracts describe pre-state values and permitted mutation footprints, so helper calls preserve facts outside their effects.",
+      "doneWhen": "Proofs distinguish a fresh copy from an alias and remain sound when two arguments share storage.",
+      "integrated": false,
+      "capabilityDeps": [
+        "A",
+        "F"
+      ]
+    },
+    {
+      "id": "H",
+      "title": "Higher-order contracts",
+      "short": "Callbacks and captured values",
+      "deps": [
+        "I"
+      ],
+      "status": "planned",
+      "area": "Function types / call verification",
+      "detail": "Give callbacks and closures checked parameter/result contracts, with explicit captured-value and effect assumptions. Begin with pure callbacks; stateful callbacks also require the heap model when used.",
+      "doneWhen": "Selected generic/callback helpers compose through checked function contracts without treating arbitrary callbacks as trusted.",
+      "integrated": false,
+      "capabilityDeps": [
+        "C",
+        "F"
+      ]
+    },
+    {
+      "id": "J",
+      "title": "Search proof pilot",
+      "short": "Unchanged index-search helper",
+      "deps": [
+        "E"
+      ],
+      "status": "planned",
+      "area": "Real-code proof fixture",
+      "detail": "Pin a small numeric-array search helper such as Lodash strictIndexOf. State valid starting-index assumptions and prove bounds, first match, absence and termination. Replay off-by-one mutants.",
+      "doneWhen": "The unchanged helper verifies and a seeded implementation bug gives a replay-confirmed counterexample.",
+      "integrated": false,
+      "capabilityDeps": [
+        "E",
+        "D"
+      ]
+    },
+    {
+      "id": "K",
+      "title": "Broader library proofs",
+      "short": "Loops + mutation + callbacks",
+      "deps": [
+        "J",
+        "G",
+        "H"
+      ],
+      "status": "planned",
+      "area": "Library verification / integration",
+      "detail": "Verify a selected corpus of unchanged library implementations, including helpers that mutate local storage or accept callbacks. Record contracts, assumptions, unsupported code and confirmed counterexamples.",
+      "doneWhen": "Multiple realistic functions compose, seeded bugs are caught, and results survive contract/source changes honestly.",
+      "integrated": false,
+      "capabilityDeps": [
+        "J",
+        "G",
+        "H",
+        "B"
+      ]
+    },
+    {
+      "id": "P",
+      "title": "Project proof workflow",
+      "short": "Incremental runs and review evidence",
+      "deps": [
+        "I"
+      ],
+      "status": "planned",
+      "area": "Developer tooling / CI",
+      "detail": "Select proof targets, rerun affected functions in CI, shrink and replay witnesses, and report useful source-level failures. Any cached result includes source dependencies, contracts, semantic model, configuration and backend identity.",
+      "doneWhen": "A dependency or verification-model change invalidates affected results; a reviewer can reproduce every reported bug or proof.",
+      "integrated": false,
+      "capabilityDeps": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "id": "Q",
+      "title": "Pure JS/TS proofs & bugs",
+      "short": "Useful proofs and real bug finding",
+      "deps": [
+        "K",
+        "P"
+      ],
+      "status": "planned",
+      "area": "Primary milestone",
+      "detail": "Take existing JS/TS in the supported subset, add explicit contracts and purity/environment assumptions, and produce useful property proofs or reproducible real bugs in substantial software. Unknown remains an honest outcome.",
+      "doneWhen": "Independent real-code campaigns produce reproducible bug reports and maintained universal proofs, without rewriting the implementations.",
+      "integrated": false,
+      "capabilityDeps": [
+        "K",
+        "P"
+      ]
+    },
+    {
+      "id": "R",
+      "title": "Event & lifecycle semantics",
+      "short": "Listeners, ownership, disposal",
+      "deps": [
+        "G",
+        "H"
+      ],
+      "status": "planned",
+      "extension": true,
+      "area": "Stateful runtime semantics",
+      "detail": "Model registering/removing listeners, callback identity, lifecycle ownership and legal state transitions. Callback writes use heap footprints rather than assumed purity.",
+      "doneWhen": "Listener/disposal safety properties hold across arbitrary modeled event sequences, including stale events.",
+      "integrated": false,
+      "capabilityDeps": [
+        "G",
+        "H"
+      ]
+    },
+    {
+      "id": "S",
+      "title": "Async ordering model",
+      "short": "Promises, awaits, cancellation",
+      "deps": [
+        "G",
+        "H"
+      ],
+      "status": "planned",
+      "extension": true,
+      "area": "Async semantics / execution order",
+      "detail": "Model suspension, resumption, Promise outcomes, cancellation and relevant happens-before relations. Specify the supported event-loop scheduling abstraction and its environment assumptions.",
+      "doneWhen": "Proofs account for allowed interleavings and detect a seeded stale-response or cancellation bug.",
+      "integrated": false,
+      "capabilityDeps": [
+        "G",
+        "H"
+      ]
+    },
+    {
+      "id": "T",
+      "title": "Environment contracts",
+      "short": "Fetch, timers, external services",
+      "deps": [
+        "I"
+      ],
+      "status": "planned",
+      "extension": true,
+      "area": "Boundary models / protocol assumptions",
+      "detail": "Specify external operations through nondeterministic outcomes and protocol contracts: success, failure, timing and response shape. Assumptions about servers and the browser remain visible rather than becoming implicit guarantees.",
+      "doneWhen": "External behaviors and fairness assumptions are explicit, replayable and distinct from properties proved about application code.",
+      "integrated": false,
+      "capabilityDeps": [
+        "F"
+      ]
+    },
+    {
+      "id": "U",
+      "title": "Temporal verification",
+      "short": "Safety and conditional liveness",
+      "deps": [
+        "R",
+        "S",
+        "T"
+      ],
+      "status": "planned",
+      "extension": true,
+      "area": "Transition systems / backend integration",
+      "detail": "Translate supported stateful source behavior into transition obligations. Check safety across event sequences and liveness under stated scheduling/fairness assumptions. Choose SMT, induction or model-checking backends by the property.",
+      "doneWhen": "Source-linked state properties and counterexample traces are supported without a hidden event-count bound.",
+      "integrated": false,
+      "capabilityDeps": [
+        "R",
+        "S",
+        "T",
+        "B"
+      ]
+    },
+    {
+      "id": "V",
+      "title": "Stateful app pilots",
+      "short": "Trace replay and race regressions",
+      "deps": [
+        "U",
+        "P"
+      ],
+      "status": "planned",
+      "extension": true,
+      "area": "Application verification / integration",
+      "detail": "Pin representative applications or subsystems. Connect actual code, transition models, environment contracts and executable event traces; preserve known race/lifecycle failures as regressions.",
+      "doneWhen": "A real lifecycle or async bug is reproduced from a source-linked trace, and the corrected code satisfies the stated property.",
+      "integrated": false,
+      "capabilityDeps": [
+        "U",
+        "D",
+        "P"
+      ]
+    },
+    {
+      "id": "W",
+      "title": "Existing JS/TS verification",
+      "short": "Existing JS/TS, including effects",
+      "deps": [
+        "Q",
+        "V"
+      ],
+      "status": "planned",
+      "extension": true,
+      "area": "Long-term milestone",
+      "detail": "Human-assisted verification and bug finding for supported existing JS/TS, covering both algorithms and stateful async behavior under explicit assumptions. This does not promise decidable or automatic proof of every JavaScript program.",
+      "doneWhen": "Real pure and stateful software has maintained proofs and reproducible bugs, with supported semantics, dependencies and trust boundaries visible.",
+      "integrated": false,
+      "capabilityDeps": [
+        "Q",
+        "V"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "NOW",
+      "to": "A"
+    },
+    {
+      "from": "NOW",
+      "to": "B"
+    },
+    {
+      "from": "NOW",
+      "to": "C"
+    },
+    {
+      "from": "NOW",
+      "to": "D"
+    },
+    {
+      "from": "NOW",
+      "to": "F"
+    },
+    {
+      "from": "A",
+      "to": "I"
+    },
+    {
+      "from": "B",
+      "to": "I"
+    },
+    {
+      "from": "C",
+      "to": "I"
+    },
+    {
+      "from": "D",
+      "to": "I"
+    },
+    {
+      "from": "F",
+      "to": "I"
+    },
+    {
+      "from": "I",
+      "to": "E"
+    },
+    {
+      "from": "I",
+      "to": "G"
+    },
+    {
+      "from": "I",
+      "to": "H"
+    },
+    {
+      "from": "E",
+      "to": "J"
+    },
+    {
+      "from": "J",
+      "to": "K"
+    },
+    {
+      "from": "G",
+      "to": "K"
+    },
+    {
+      "from": "H",
+      "to": "K"
+    },
+    {
+      "from": "I",
+      "to": "P"
+    },
+    {
+      "from": "K",
+      "to": "Q"
+    },
+    {
+      "from": "P",
+      "to": "Q"
+    },
+    {
+      "from": "G",
+      "to": "R"
+    },
+    {
+      "from": "H",
+      "to": "R"
+    },
+    {
+      "from": "G",
+      "to": "S"
+    },
+    {
+      "from": "H",
+      "to": "S"
+    },
+    {
+      "from": "I",
+      "to": "T"
+    },
+    {
+      "from": "R",
+      "to": "U"
+    },
+    {
+      "from": "S",
+      "to": "U"
+    },
+    {
+      "from": "T",
+      "to": "U"
+    },
+    {
+      "from": "U",
+      "to": "V"
+    },
+    {
+      "from": "P",
+      "to": "V"
+    },
+    {
+      "from": "Q",
+      "to": "W"
+    },
+    {
+      "from": "V",
+      "to": "W"
+    }
+  ],
+  "progress": {
+    "branchReady": [
+      "A",
+      "B",
+      "C",
+      "F"
+    ],
+    "partial": [
+      "D"
+    ],
+    "integratedFromBatch": [],
+    "next": "I",
+    "agentRunFinished": true,
+    "downstreamStarted": false,
+    "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586"
+  },
+  "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs."
+}
