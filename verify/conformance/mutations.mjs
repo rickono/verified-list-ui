@@ -23,6 +23,10 @@ const mutants = [
     from: 'o.status === "verified" && bad', to: 'false', status: "verified"},
   {id: "replay-limit-becomes-proof-bound", file: "proofs.mjs", fixture: "full-length-domain", fn: "tooLong",
     from: 'assertions: [DEFINED.has(phase) ?', to: 'assertions: [target.smallWitness, DEFINED.has(phase) ?', status: "verified", failure: "false-verification"},
+  {id: "loop-preservation-erased", file: "source.mjs", fixture: "loop-preserve", fn: "count",
+    from: 'safe: invariant(b.env)', to: 'safe: "true"', status: "verified"},
+  {id: "loop-termination-erased", file: "source.mjs", fixture: "loop-rank", fn: "count",
+    from: 'safe: and(rank.defined, next.defined, specifications.rankDecrease(rank.value, next.value))', to: 'safe: "true"', status: "verified"},
 ];
 
 export async function runMutations({seed = DEFAULT_SEED} = {}) {

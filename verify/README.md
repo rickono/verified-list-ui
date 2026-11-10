@@ -14,6 +14,8 @@ pnpm verify verify/examples/bugs.ts
 pnpm verify --timeout 60000 verify/examples/collections.ts
 pnpm verify verify/examples/calls.ts
 pnpm verify verify/examples/calls-bugs.ts
+pnpm verify --timeout 60000 verify/examples/loops.ts
+pnpm verify --timeout 60000 verify/examples/loop-gaps.ts
 node verify/bin/jsverify.mjs --json verify/examples/bugs.ts
 node verify/examples/remeda/check.mjs
 node verify/examples/remeda/check-calls.mjs
@@ -256,7 +258,7 @@ cannot silently exclude those inputs. Such outcomes carry
 the explicit requires. Quantified callbacks require definedness for every
 element, independently of Boolean polarity.
 
-`old(expression)` in ensures evaluates over entry parameters. It cannot read
+`old(expression)` in ensures, loop invariants and decreases evaluates over function-entry parameters. It cannot read
 `result`, body locals, or callback locals. Each invocation captures a recursive
 snapshot of supported plain data, preserving absent keys, explicit undefined,
 NaN, and signed zero. Mutation and heap identity remain unsupported.
@@ -291,6 +293,31 @@ interpreter is an added trusted component; successful checks are not Rocq
 certificates. The [specification design](design/specifications.md) records the
 proof rules and limits.
 
+## Loops with induction
+
+Use `invariant` and `decreases` comments immediately above a `while` or C-style `for` loop:
+
+```ts
+// ensures result === values.length
+function scan(values: readonly number[]) {
+	let i = 0;
+	// invariant Number.isInteger(i) && 0 <= i && i <= values.length
+	// decreases real(values.length) - real(i)
+	while (i < values.length) { i++; }
+	return i;
+}
+```
+
+The verifier checks initialization, preservation and each back-edge's rank. The measure must be defined, nonnegative and drop by at least one exact unit. Normal exits and early returns must establish ensures. Proofs cover all native array lengths without unrolling. `break` and `continue` preserve JavaScript scope and update order. Loop contracts may use checked specifications; `old` reads function-entry parameters.
+
+Native measure arithmetic stays rounded: `n - i` means `real(n - i)`. Use `real(n) - real(i)` to request an exact difference. A stalled binary64 increment cannot establish termination.
+
+A weak or wrong invariant can produce `unknown/induction-gap`, with its phase, source location and candidate input. Only replay of the unchanged source can confirm a contract bug. Witness searches prefer arrays and entry measures at most 256; these limits never enter proof queries. A timeout or unavailable small witness remains `unknown`.
+
+The [loop examples](examples/loops.ts) prove first-match search and counting bounds. The [loop design](design/loops.md) describes the proof rules, numeric shadows and limitations. Nested loops, labeled jumps, `do`, `for-in`, `for-of`, `var` declarations inside a loop and heap mutation remain unsupported.
+
+The [gap examples](examples/loop-gaps.ts) contain correct implementations with an incorrect invariant and a constant measure. Both return `unknown/induction-gap`, and the CLI exits 1. Correcting an annotation can close a proof gap without changing the function body.
+
 ## Supported source
 
 Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
@@ -299,7 +326,7 @@ Local scalar bindings support `=`, numeric `+=`, `-=`, `*=`, `/=`, and numeric p
 
 Assignments preserve a binding's primitive scalar type. Number and boolean bindings can receive undefined and later regain a value of their original type. A binding initialized with only undefined cannot change to another type. Uninitialized declarations, reads or writes before declaration, repeated `var` declarations, and `var` redeclarations of parameters are rejected explicitly. A later declaration still masks an outer name, so a read before a local declaration cannot accidentally resolve a module function. Assignments and updates are unsupported in contracts. The [scalar-state design](design/scalar-state.md) records the scope and evaluation rules.
 
-The builtin allowlist is `Math.abs`, `Number.isFinite`, `Number.isNaN`, `Number.isInteger`, `Number.isSafeInteger`, primitive `Object.is`, `Array.isArray`, and the standard numeric constants. Direct calls to supported top-level functions and named imports use their contracts. Conditions accept booleans or undefined; numeric/object truthiness is unsupported. Unknown calls, heap writes, reference assignments, logical/bitwise compound assignments, loops, async functions, generators, and optional/default/rest/destructured parameters are unsupported. Sparse arrays, nested array elements, array concatenation/spread appends, methods/getters and optional reference fields are unsupported. Runtime generic functions/calls, recursive aliases, interfaces, ambient declarations, namespaces, type assertions, non-null assertions, local type declarations, conditional/mapped types, and unresolved types are rejected explicitly. `%` is rejected because IEEE remainder would not implement JavaScript remainder correctly. An analysis has a limit of 128 source paths.
+The builtin allowlist is `Math.abs`, `Number.isFinite`, `Number.isNaN`, `Number.isInteger`, `Number.isSafeInteger`, primitive `Object.is`, `Array.isArray`, and the standard numeric constants. Direct calls to supported top-level functions and named imports use their contracts. Conditions accept booleans or undefined; numeric/object truthiness is unsupported. Unknown calls, heap writes, reference assignments, logical/bitwise compound assignments, async functions, generators, and optional/default/rest/destructured parameters are unsupported. Sparse arrays, nested array elements, array concatenation/spread appends, methods/getters and optional reference fields are unsupported. Runtime generic functions/calls, recursive aliases, interfaces, ambient declarations, namespaces, type assertions, non-null assertions, local type declarations, conditional/mapped types, and unresolved types are rejected explicitly. `%` is rejected because IEEE remainder would not implement JavaScript remainder correctly. An analysis has a limit of 128 source paths.
 
 Runtime top-level statements are supported function declarations, `const` function expressions, named imports, and local named exports. TypeScript uses Node's experimental `stripTypeScriptTypes` in offset-preserving mode, followed by Acorn; Node may emit an experimental-feature warning. A small type grammar reads runtime parameter annotations from the original source, including nested field separators that stripping erased.
 
@@ -350,7 +377,7 @@ false lemmas, and scoped obligations under quantified and negated contracts.
 
 ## Run the independent conformance corpus
 
-`make test-verify-conformance` runs native V8 comparisons and eight semantic or
+`make test-verify-conformance` runs native V8 comparisons and ten semantic or
 verdict-policy mutants in temporary verifier copies. `make test-verify` includes
 these tests. The corpus covers the current supported subset with explicit edge
 cases, small seeded binary64 samples, and original JavaScript execution.

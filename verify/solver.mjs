@@ -9,8 +9,9 @@ const api = await init();
 const ctx = new api.Context("source_verification");
 const tooLarge = Symbol("witness-too-large");
 
-function inputs(solver, models) {
+function inputs(solver, models, replayGuards) {
   const model = solver.model();
+  if (replayGuards.some((symbol) => String(model.eval(ctx.Bool.const(symbol), true)) !== "true")) return { oversized: true };
   const read = (m) => {
     if (m.kind === "undefined") return null;
     if (m.kind === "optional") return String(model.eval(ctx.Bool.const(m.flag), true)) === "true" ? read(m.value) : null;
@@ -47,7 +48,7 @@ process.on("message", async (message) => {
     // turn budget. No grace period extends the shared request deadline.
     solver.set("timeout", Math.max(1, Math.floor(deadline - performance.now() - Math.min(100, timeoutMs / 10))));
     const status = await solver.check();
-    const answer = status === "sat" ? { status, ...inputs(solver, query.models) }
+    const answer = status === "sat" ? { status, ...inputs(solver, query.models, query.replayGuards ?? []) }
       : status === "unknown" ? { status, reason: solver.reasonUnknown() } : { status };
     process.send({ type: "result", id: message.id, answer });
   } catch (e) {

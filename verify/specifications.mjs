@@ -1,5 +1,5 @@
 import { fail } from "./error.mjs";
-import { bool, builtin, not, literal, binary as nativeBinary } from "./data.mjs";
+import { and, bool, builtin, not, need, natOf, literal, binary as nativeBinary } from "./data.mjs";
 
 const real = (smt) => ({ sort: "real", smt, present: "true" });
 const integer = (n) => n < 0n ? `(- ${-n})` : String(n);
@@ -7,14 +7,16 @@ const integer = (n) => n < 0n ? `(- ${-n})` : String(n);
 export function embed(value, node, require) {
   if (value.sort !== "number") fail("real(...) requires a JavaScript number or an exact rational string literal.", node);
   require(builtin("Number.isFinite", [value], node).smt);
-  return { ...real(`(fp.to_real ${value.smt})`), embedded: value };
+  return { ...real(`(fp.to_real ${value.smt})`), embedded: value,
+    linear: { terms: new Map([[need(value, "number", node), { view: value, coeff: 1n }]]), constant: 0n } };
 }
 
 export function exact(text, node) {
   let value;
   try { value = rational(text); }
   catch (e) { fail(e.message, node); }
-  return { ...real(`(/ ${integer(value.n)} ${integer(value.d)})`), constant: value };
+  return { ...real(`(/ ${integer(value.n)} ${integer(value.d)})`), constant: value,
+    ...(value.d === 1n ? { linear: { terms: new Map(), constant: value.n } } : {}) };
 }
 
 function nativeOperand(value) {
@@ -30,7 +32,8 @@ function nativeOperand(value) {
 
 export function unary(op, value, node) {
   if (op === "+") return value;
-  if (op === "-") return real(`(- ${value.smt})`);
+  if (op === "-") return { ...real(`(- ${value.smt})`),
+    ...(value.linear ? { linear: combineLinear({ terms: new Map(), constant: 0n }, value.linear, -1n) } : {}) };
   return fail(`Unsupported real unary operator ${op}.`, node);
 }
 
@@ -45,7 +48,8 @@ export function binary(op, a, b, node, require) {
   const args = `${a.smt} ${b.smt}`;
   if (["+", "-", "*", "/"].includes(op)) {
     if (op === "/") require(not(`(= ${b.smt} 0.0)`));
-    return real(`(${op} ${args})`);
+    return { ...real(`(${op} ${args})`),
+      ...(["+", "-"].includes(op) && a.linear && b.linear ? { linear: combineLinear(a.linear, b.linear, op === "+" ? 1n : -1n) } : {}) };
   }
   if (["<", "<=", ">", ">="].includes(op)) return bool(`(${op} ${args})`);
   if (["===", "==", "!==", "!="].includes(op)) {
@@ -53,6 +57,54 @@ export function binary(op, a, b, node, require) {
     return bool(op.includes("!") ? not(eq) : eq);
   }
   return fail(`Unsupported real operator ${op}.`, node);
+}
+
+function combineLinear(a, b, sign) {
+  const terms = new Map([...a.terms].map(([key, term]) => [key, { ...term }]));
+  for (const [key, term] of b.terms) terms.set(key, { view: term.view, coeff: (terms.get(key)?.coeff ?? 0n) + sign * term.coeff });
+  return { terms, constant: a.constant + sign * b.constant };
+}
+
+// Lower exact linear ranks, never native arithmetic. Directed rounding gives
+// the least/greatest binary64 threshold satisfying the exact real inequality.
+function rankAtLeast(value, k) {
+  if (!value.linear) return `(>= ${value.smt} ${integer(k)})`;
+  k -= value.linear.constant;
+  const live = [...value.linear.terms.values()].filter((term) => term.coeff !== 0n);
+  if (!live.length) return String(k <= 0n);
+  const lit = (n) => literal(Number(n));
+  if (k >= -(2n ** 53n) && k <= 2n ** 53n) {
+    if (live.length === 1 && live[0].coeff === 1n) return nativeBinary(">=", live[0].view, lit(k)).smt;
+    if (live.length === 1 && live[0].coeff === -1n) return nativeBinary("<=", live[0].view, lit(-k)).smt;
+    if (live.length === 2) {
+      const [x, y] = live[0].coeff === 1n ? live : [live[1], live[0]];
+      const a = need(x.view, "number"), b = need(y.view, "number");
+      if (x.coeff === 1n && y.coeff === -1n) {
+        if (k === 0n) return nativeBinary(">=", x.view, y.view).smt;
+        if (k > 0n && k <= 0xffffffffn && natOf(x.view) && natOf(y.view)) {
+          const sum = nativeBinary("+", y.view, lit(k));
+          if (natOf(sum)) return nativeBinary(">=", x.view, sum).smt;
+        }
+        return `(fp.geq ${a} (fp.add RTP ${b} ${lit(k).smt}))`;
+      }
+      if (x.coeff === 1n && y.coeff === 1n) return `(fp.geq ${a} (fp.sub RTP ${lit(k).smt} ${b}))`;
+      if (x.coeff === -1n && y.coeff === -1n) return `(fp.leq ${a} (fp.sub RTN ${lit(-k).smt} ${b}))`;
+    }
+  }
+  const terms = live.map((term) => `(* ${integer(term.coeff)} (fp.to_real ${need(term.view, "number")}))`);
+  return `(>= (+ 0.0 ${terms.join(" ")}) ${integer(k)})`;
+}
+
+// Each back-edge starts nonnegative and drops by at least one exact unit.
+// Strict decrease without this minimum would not be a well-founded real rank.
+export function rankDecrease(previous, next) {
+  const difference = binary("-", previous, next);
+  return and(rankAtLeast(previous, 0n), rankAtLeast(difference, 1n));
+}
+
+// A witness preference only. The proof query never assumes this bound.
+export function rankAtMost(value, limit) {
+  return rankAtLeast(unary("-", value), -BigInt(limit));
 }
 
 class Rational {

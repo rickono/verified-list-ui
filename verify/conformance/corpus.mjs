@@ -85,6 +85,41 @@ export function buildCorpus(seed = DEFAULT_SEED) {
   fixtures.push(fixture("numeric-constants", "scalar", ["MAX_VALUE", "MIN_VALUE", "MAX_SAFE_INTEGER", "MIN_SAFE_INTEGER", "POSITIVE_INFINITY", "NEGATIVE_INFINITY", "NaN"].map((key, i) =>
     concrete(`constant${i}`, [], `Number.${key}`, [])), "V8 supplies each allowlisted Number constant"));
 
+  const scan = `{
+    let i = 0;
+    // invariant Number.isInteger(i) && 0 <= i && i <= xs.length
+    // invariant xs.every((v, k) => k >= i || v !== target)
+    // decreases real(xs.length) - real(i)
+    while (i < xs.length) { if (xs[i] === target) return i; i++; }
+    return -1;
+  }`;
+  const searchPost = ["result === -1 || (0 <= result && result < xs.length && xs[result] === target)",
+    "result !== -1 || xs.every((v) => v !== target)",
+    "result === -1 || xs.every((v, k) => k >= result || v !== target)"];
+  fixtures.push(fixture("loop-search", "loop", [
+    fn("search", [["xs", "number[]"], ["target", "number"]], scan, {
+      ensures: searchPost,
+      samples: [sample([], 0), sample([NaN, -0, Infinity, 2, 2], 2), sample([NaN], NaN), sample([-0, 0], 0), sample([1, 2], 3)],
+    }),
+    fn("shiftedSearch", [["xs", "number[]"], ["target", "number"]], scan.replace("return i;", "return i + 1;"), {
+      ensures: searchPost, expected: {status: "counterexample"}, samples: [{args: [[1], 1], expect: "fail"}],
+    }),
+  ], "Original native while scan: empty, duplicate, NaN and signed-zero samples; independently replay the off-by-one witness"));
+  const countLoop = `{
+    let i = 0;
+    // invariant Number.isInteger(i) && 0 <= i && i <= n
+    // decreases real(n) - real(i)
+    while (i < n) { i++; }
+    return n;
+  }`;
+  for (const [id, expression] of [
+    ["loop-preserve", countLoop.replace("i <= n", "i <= 1")],
+    ["loop-rank", countLoop.replace("real(n) - real(i)", 'real("0")')],
+  ]) fixtures.push(fixture(id, "loop", [fn("count", [["n", "number"]], expression, {
+    requires: ["Number.isInteger(n) && 0 <= n && n <= 100"], ensures: ["result === n"],
+    expected: {status: "unknown", reason: "induction-gap"}, samples: [sample(0), sample(1), sample(2), sample(10)],
+  })], "Native source meets ensures; invalid induction annotations must still block verification"));
+
   const optional = [];
   for (const x of [true, false, undefined]) for (const y of [true, false, undefined]) {
     for (const expression of ["x && y", "x || y", "x ?? y", "!x", "x ? y : !y", "x === y", "x == y", "Object.is(x, y)"]) {

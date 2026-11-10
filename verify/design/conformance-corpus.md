@@ -2,10 +2,12 @@
 
 ## Scope and grounding
 
-The baseline is ff2518cd7494300084f2ab54da71f4d79185e586. This corpus tests
-that baseline's scalar, collection, call, import, and outcome semantics. It
-makes no claims about the parallel state, backend, frontend, or specification
-extensions. Frontend translation, builtins, V8, and Z3 remain trusted. Passing
+The corpus started at ff2518cd7494300084f2ab54da71f4d79185e586 and tests
+scalar, collection, call, import, and outcome semantics. Loop fixtures now add
+native array-search execution, independently replayed off-by-one witnesses and
+negative checks for invalid preservation and termination annotations. These
+fixtures do not exhaust every supported language feature. Frontend translation,
+builtins, V8, and Z3 remain trusted. Passing
 finite tests is evidence against mistakes, not a soundness proof or a Rocq
 certificate.
 
@@ -66,7 +68,7 @@ and resource exhaustion do not count as successful mutation detections.
 
 Targets include arithmetic, SameValue, slice normalization, own-key spread,
 call obligations, replay confirmation, final dependency gating, and witness-only
-bounds. Deliberately bad source programs are separate fixtures; their reported
+bounds, loop preservation and loop termination. Deliberately bad source programs are separate fixtures; their reported
 counterexamples must execute and fail in JavaScript. Module identity fixtures
 use separate native ESM namespaces and raw source hashes.
 

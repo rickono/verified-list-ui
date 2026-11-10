@@ -26,7 +26,7 @@ test("the seeded corpus compares accepted semantics and reported witnesses with 
 
 test("semantic and verdict-policy mutants are detected in isolated verifier copies after passing controls", async (t) => {
   const evidence = cliEvidence().mutations;
-  assert.equal(evidence.length, 8);
+  assert.equal(evidence.length, 10);
   assert.ok(evidence.every((m) => m.detected));
   t.diagnostic(JSON.stringify(evidence.map(({id, observed}) => ({id, observed}))));
 });
