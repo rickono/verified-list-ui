@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { REPLAY_LIMIT } from "./data.mjs";
+import { validPredicateTable } from "./predicate-witness.mjs";
 
 // Conservative theory/model profile required by the current source compiler.
 export const CAPABILITIES = Object.freeze(["smtlib2", "binary64", "bitvectors", "reals", "fp-to-real", "uninterpreted-functions", "quantifiers", "models"]);
@@ -24,6 +25,9 @@ function witness(model, value) {
   if (model.kind === "optional") return value === null || witness(model.value, value);
   if (model.kind === "number") return typeof value === "string" && /^[0-9a-f]{16}$/.test(value);
   if (model.kind === "boolean") return value === "true" || value === "false";
+  if (model.kind === "function") {
+    return model.params.length === 1 && model.params[0] === "number" && model.result === "boolean" && validPredicateTable(value, REPLAY_LIMIT);
+  }
   if (model.kind === "array") return Array.isArray(value) && value.length <= REPLAY_LIMIT && value.every((v) => witness({ kind: model.element }, v));
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   return Object.keys(value).every((key) => model.fields.some((f) => f.name === key)) &&

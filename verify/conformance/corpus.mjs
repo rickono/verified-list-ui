@@ -1,6 +1,11 @@
 // Oracles use native JavaScript, never compiler/data-model helpers.
 export const DEFAULT_SEED = 0x5eed_d00d;
 export const BASELINE = "ff2518cd7494300084f2ab54da71f4d79185e586";
+export const SAMPLE_PREDICATES = Object.freeze({
+  one: (x) => x === 1,
+  negativeZero: (x) => Object.is(x, -0),
+  nan: (x) => Number.isNaN(x),
+});
 
 export function literal(value) {
   if (Array.isArray(value)) return `[${value.map(literal).join(", ")}]`;
@@ -119,6 +124,19 @@ export function buildCorpus(seed = DEFAULT_SEED) {
     requires: ["Number.isInteger(n) && 0 <= n && n <= 100"], ensures: ["result === n"],
     expected: {status: "unknown", reason: "induction-gap"}, samples: [sample(0), sample(1), sample(2), sample(10)],
   })], "Native source meets ensures; invalid induction annotations must still block verification"));
+
+  const predicateType = "(value: number) => boolean";
+  fixtures.push(fixture("predicate-values", "callback", [
+    fn("numbers", [["p", predicateType]], "p(1) === p(2)", { ensures: ["result"], expected: {status: "counterexample"}, samples: [{args: [SAMPLE_PREDICATES.one], expect: "fail"}] }),
+    fn("zeros", [["p", predicateType]], "p(0) === p(-0)", { ensures: ["result"], expected: {status: "counterexample"}, samples: [{args: [SAMPLE_PREDICATES.negativeZero], expect: "fail"}] }),
+    fn("nan", [["p", predicateType]], "p(NaN) === p(0)", { ensures: ["result"], expected: {status: "counterexample"}, samples: [{args: [SAMPLE_PREDICATES.nan], expect: "fail"}] }),
+  ], "Independent native predicates and decoded SameValue tables refute false function-equality claims"));
+  fixtures.push(fixture("predicate-captures", "callback", [
+    fn("invoke", [["p", predicateType], ["x", "number"]], "p(x)", { ensures: ["result === p(x)"],
+      samples: [sample(SAMPLE_PREDICATES.one, 1), sample(SAMPLE_PREDICATES.negativeZero, -0), sample(SAMPLE_PREDICATES.nan, NaN)] }),
+    fn("captured", [["x", "number"], ["threshold", "number"]], "{ const p = (value) => value > threshold; return invoke(p, x); }", {
+      ensures: ["result === (x > threshold)"], samples: [sample(3, 1), sample(0, -0), sample(NaN, 1), sample(Infinity, Number.MAX_VALUE)] }),
+  ], "Ordinary source callbacks compose through opaque contracts with immutable primitive captures"));
 
   const optional = [];
   for (const x of [true, false, undefined]) for (const y of [true, false, undefined]) {

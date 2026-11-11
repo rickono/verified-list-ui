@@ -27,6 +27,10 @@ const mutants = [
     from: 'safe: invariant(b.env)', to: 'safe: "true"', status: "verified"},
   {id: "loop-termination-erased", file: "source.mjs", fixture: "loop-rank", fn: "count",
     from: 'safe: and(rank.defined, next.defined, specifications.rankDecrease(rank.value, next.value))', to: 'safe: "true"', status: "verified"},
+  {id: "predicate-zeros-collapsed", file: "predicate-witness.mjs", fixture: "predicate-values", fn: "zeros",
+    from: 'Object.is(at, value)', to: 'at === value', status: "unknown", reason: "replay-mismatch"},
+  {id: "predicate-number-keys-collapsed", file: "predicate-witness.mjs", fixture: "predicate-values", fn: "numbers",
+    from: 'return ((bits[0] << 63n) | (bits[1] << 52n) | bits[2]).toString(16).padStart(16, "0");', to: 'return "0000000000000000";', status: "unknown", reason: "replay-mismatch"},
 ];
 
 export async function runMutations({seed = DEFAULT_SEED} = {}) {

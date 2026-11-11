@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
-  "asOf": "2026-11-10",
-  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) is merged through PR #3. J proves the pinned unchanged Lodash search helper and is validated on a feature branch, awaiting integration.",
-  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E is integrated; J builds on it. G, H, P and T are ready to start. Transitively redundant edges are omitted.",
+  "asOf": "2026-11-11",
+  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) and J (upstream search) are merged. H (pure callback contracts) is validated on a feature branch, awaiting integration. G is next.",
+  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E and J are integrated; H is branch-ready. G, P and T are ready to start. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -276,7 +276,7 @@
       "deps": [
         "I"
       ],
-      "status": "ready",
+      "status": "branch_ready",
       "area": "Function types / call verification",
       "detail": "Give callbacks and closures checked parameter/result contracts, with explicit captured-value and effect assumptions. Begin with pure callbacks; stateful callbacks also require the heap model when used.",
       "doneWhen": "Selected generic/callback helpers compose through checked function contracts without treating arbitrary callbacks as trusted.",
@@ -284,7 +284,9 @@
       "capabilityDeps": [
         "C",
         "F"
-      ]
+      ],
+      "deliveryStatus": "finished",
+      "resultSummary": "Pure total unary numeric predicates compose through checked callback admission, immutable primitive captures and named contracts. The unchanged Ramda eager findIndex verifies; two seeded bugs replay. Final suite passes 219/219 and all 12 verifier mutants are detected. Stateful callbacks remain unsupported."
     },
     {
       "id": "J",
@@ -293,11 +295,11 @@
       "deps": [
         "E"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Real-code proof fixture",
       "detail": "Pin Lodash strictIndexOf at c6e281b. Prove bounds, first match, absence and termination for dense numeric arrays and valid integer starts. Replay off-by-one and skipped-first-match mutants.",
       "doneWhen": "The unchanged helper verifies and a seeded implementation bug gives a replay-confirmed counterexample.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "E",
         "D"
@@ -610,7 +612,7 @@
   ],
   "progress": {
     "branchReady": [
-      "J"
+      "H"
     ],
     "partial": [],
     "integratedFromBatch": [
@@ -622,7 +624,6 @@
     ],
     "next": [
       "G",
-      "H",
       "P",
       "T"
     ],
@@ -631,7 +632,7 @@
     "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
     "integrationComplete": true,
     "pendingIntegration": [
-      "J"
+      "H"
     ]
   },
   "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs.",
@@ -675,6 +676,18 @@
     "nativeComparisons": 261,
     "seededBugs": 2,
     "report": "../verify/reports/upstream-search.md",
+    "integrated": true,
+    "mergeCommit": "91c2806d883a8a647c0cfb540a218ff01c19baf4"
+  },
+  "callbackDelivery": {
+    "branch": "feat/pure-callback-contracts",
+    "tests": 219,
+    "focusedTests": 20,
+    "mutants": 12,
+    "nativeComparisons": 42,
+    "seededBugs": 2,
+    "upstreamCommit": "980b3bf7712adb8ad8b5d9b2c6aca525cb3cf143",
+    "report": "../verify/reports/callbacks.md",
     "integrated": false
   }
 }

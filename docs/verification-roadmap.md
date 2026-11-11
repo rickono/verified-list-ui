@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-10: A, B, C, D and F are integrated. I is complete. E (loop induction) is merged through PR #3. J proves the pinned unchanged Lodash search helper and is validated on a feature branch, awaiting integration.
+Status as of 2026-11-11: A, B, C, D and F are integrated. I is complete. E (loop induction) and J (upstream search) are merged. H (pure callback contracts) is validated on a feature branch, awaiting integration. G is next.
 
-All prerequisites apply. I combines the five original branches. E is integrated; J builds on it. G, H, P and T are ready to start. Transitively redundant edges are omitted.
+All prerequisites apply. I combines the five original branches. E and J are integrated; H is branch-ready. G, P and T are ready to start. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -15,8 +15,8 @@ flowchart TD
   I{{"I: Integrate &amp; validate<br/>integrated"}}
   E["E: Loops with induction<br/>integrated"]
   G["G: Heap, aliases &amp; frames<br/>READY"]
-  H["H: Higher-order contracts<br/>READY"]
-  J["J: Search proof pilot<br/>branch-ready"]
+  H["H: Higher-order contracts<br/>branch-ready"]
+  J["J: Search proof pilot<br/>integrated"]
   K["K: Broader library proofs"]
   P["P: Project proof workflow<br/>READY"]
   Q["Q: Pure JS/TS proofs &amp; bugs"]
@@ -70,7 +70,11 @@ E was merged at `80ed2fd`. Its delivery suite passes 189 tests, including 21 loo
 
 ## Upstream search delivery
 
-J is implemented and awaiting integration on `feat/upstream-search-proof`. The pinned Lodash strictIndexOf function verifies unchanged, and 2 seeded bugs produce replay-confirmed counterexamples. The combined run passed 199/199 tests. The raw export passes 261 native comparisons. [Search validation report](../verify/reports/upstream-search.md).
+J was merged at `91c2806`. The pinned Lodash strictIndexOf function verifies unchanged, and 2 seeded bugs produce replay-confirmed counterexamples. The combined run passed 199/199 tests. The raw export passes 261 native comparisons. [Search validation report](../verify/reports/upstream-search.md).
+
+## Pure callback delivery
+
+H is implemented and awaiting integration on `feat/pure-callback-contracts`. Pure total unary numeric predicates compose with immutable primitive captures and checked named callbacks. The pinned Ramda eager findIndex verifies unchanged; 2 seeded bugs replay, with 42 independent native comparisons. The full suite passes 219/219 and all 12 verifier mutants are detected. [Callback validation report](../verify/reports/callbacks.md). G is next; stateful callbacks remain outside this delivery.
 
 ## Original branch results
 
@@ -88,8 +92,8 @@ These counts describe the original isolated branches. D's original partial resul
 
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
-Ready packages: G, H, P, T.
-Branches awaiting integration: J.
+Ready packages: G, P, T.
+Branches awaiting integration: H.
 
 To regenerate this document after editing the data:
 

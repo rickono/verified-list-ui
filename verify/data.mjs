@@ -1,4 +1,6 @@
 import { fail } from "./error.mjs";
+import { TABLE, PREDICATE_DOMAIN, predicateFromTable } from "./predicate-witness.mjs";
+export { TABLE } from "./predicate-witness.mjs";
 
 export const REPLAY_LIMIT = 256;
 const MAX_LENGTH = 0xffff_ffff;
@@ -9,6 +11,7 @@ export const not = (x) => x === "true" ? "false" : x === "false" ? "true" : `(no
 const ite = (c, a, b) => c === "true" || a === b ? a : c === "false" ? b : `(ite ${c} ${a} ${b})`;
 const bv = (n) => `#x${n.toString(16).padStart(8, "0")}`;
 const num = (smt, present = "true", u32, nat) => ({ sort: "number", smt, present, u32, nat });
+export const numberView = (smt) => num(smt);
 // An exact natural shadow: a present number numerically equal to this unsigned
 // bit-vector (either zero sign). Widths stay <= 53, so binary64 sums are exact.
 export const natOf = (v) => v.sort !== "number" || v.present !== "true" ? undefined : v.nat ?? (v.u32 ? { smt: v.u32, width: 32 } : undefined);
@@ -36,6 +39,12 @@ const integerPair = (a, b) => {
 export const bool = (smt, present = "true") => ({ sort: "boolean", smt, present });
 export const undef = () => ({ sort: "undefined", present: "false" });
 const isReference = (v) => v.sort === "array" || v.sort === "object";
+const FP = "(_ FloatingPoint 11 53)";
+// Function values: {sort:"function", kind:"symbol"|"closure"|"named", type?}.
+// They are immutable, never stored, merged, compared or returned.
+export const isFunctionType = (t) => !!t && typeof t === "object" && t.kind === "function";
+export const sameSignature = (a, b) => a.params.length === b.params.length && a.params.every((p, i) => p === b.params[i]) && a.result === b.result;
+const noFunctions = (v, node, what) => { if (v.sort === "function") fail(`Function values cannot be ${what}; pass them directly as call arguments.`, node); };
 
 // Every numeric value admitted by the proven u32 invariant is represented,
 // including both zero signs. The exact BV shadow is not an input assumption.
@@ -70,6 +79,7 @@ export function need(v, sort, node) {
 export function merge(c, a, b, node) {
   if (c === "true") return a;
   if (c === "false") return b;
+  if (a.sort === "function" || b.sort === "function") fail("Conditional merges of function values are unsupported.", node);
   if (a.sort === "undefined" && ["number", "boolean"].includes(b.sort)) a = { ...b, present: "false" };
   if (b.sort === "undefined" && ["number", "boolean"].includes(a.sort)) b = { ...a, present: "false" };
   if (a.sort !== b.sort) fail("These branches return incompatible types. Optional references are unsupported.", node);
@@ -95,6 +105,7 @@ export function merge(c, a, b, node) {
 }
 
 function equal(a, b, sameValue, node) {
+  if (a.sort === "function" || b.sort === "function") fail("Function identity is not modeled; compare results instead.", node);
   if (isReference(a) || isReference(b)) fail("Array/object reference identity is unsupported. Compare fields or elements instead.", node);
   const pair = !sameValue && integerPair(a, b);
   const payload = a.sort !== b.sort || a.sort === "undefined" ? "false" : pair ? `(= ${pair[0]} ${pair[1]})`
@@ -170,6 +181,7 @@ export function record(fields = []) {
 }
 
 export function property(owner, key, value) {
+  noFunctions(value, undefined, "stored in records");
   return record(new Map(owner.fields).set(key, { hasKey: "true", value }));
 }
 
@@ -195,6 +207,7 @@ export function member(owner, key, node) {
 }
 
 export function array(values, node) {
+  values.forEach((v) => noFunctions(v, node, "stored in arrays"));
   const element = values.find((v) => v.sort !== "undefined")?.sort ?? "number";
   if (!["number", "boolean"].includes(element) || values.some((v) => v.sort !== element && v.sort !== "undefined")) fail("Arrays currently contain one primitive type, optionally undefined in constructed arrays.", node);
   return { sort: "array", element, length: literal(values.length), empty: !values.length,
@@ -252,7 +265,7 @@ export function slice(owner, args, node) {
 export function parseType(text, node, resolve) {
   text = text.replace(/\/\*[\s\S]*?\*\/|\/\/[^\r\n]*/g, " ");
   const tokens = [];
-  const re = /\s*([A-Za-z_$][\w$]*|[{}\[\]<>:;,?()|])/y;
+  const re = /\s*(=>|[A-Za-z_$][\w$]*|[{}\[\]<>:;,?()|])/y;
   let offset = 0;
   while (text.slice(offset).trim()) {
     re.lastIndex = offset;
@@ -269,6 +282,24 @@ export function parseType(text, node, resolve) {
   function type() {
     take("readonly");
     let t;
+    const ident = (x) => /^[A-Za-z_$][\w$]*$/.test(x ?? "");
+    if (tokens[i] === "(" && (tokens[i + 1] === ")" && tokens[i + 2] === "=>" || ident(tokens[i + 1]) && tokens[i + 2] === ":")) {
+      // (x: number, ...) => boolean: a pure total callback over primitives.
+      i++;
+      const params = [];
+      while (!take(")")) {
+        if (!ident(tokens[i])) fail("Callback type parameters need simple names.", node);
+        i++; expect(":");
+        const p = type();
+        if (!["number", "boolean"].includes(p)) fail("Callback parameters are present numbers or booleans in this slice.", node);
+        params.push(p);
+        if (tokens[i] !== ")") expect(",");
+      }
+      expect("=>");
+      const result = type();
+      if (params.length !== 1 || params[0] !== "number" || result !== "boolean") fail("This callback slice supports only (x: number) => boolean: one present number and a present boolean result.", node);
+      return { kind: "function", params, result };
+    }
     if (take("(")) { t = type(); expect(")"); }
     else if (take("{")) {
       const fields = [];
@@ -279,6 +310,7 @@ export function parseType(text, node, resolve) {
         const isOptional = take("?"); expect(":");
         const value = type();
         if (isOptional && Object.hasOwn(Object.prototype, name)) fail("Optional fields must not expose inherited Object.prototype properties.", node);
+        if (isFunctionType(value)) fail("Function-valued record fields are unsupported (no function storage).", node);
         if (isOptional && !primitive(value) && value.kind !== "optional") fail("Optional record fields currently hold primitives only.", node);
         fields.push({ name, type: isOptional && primitive(value) ? optional(value) : value, optional: isOptional });
         if (tokens[i] !== "}") { if (!take(";") && !take(",")) fail("Separate record fields with ; or ,.", node); }
@@ -318,6 +350,13 @@ export function input(type, prefix) {
     return { value: type === "number" ? num(`((_ to_fp 11 53) ${prefix})`) : bool(prefix),
       declarations: [`(declare-const ${prefix} ${type === "number" ? "(_ BitVec 64)" : "Bool"})`], model: { kind: type, symbol: prefix }, lengths: [] };
   }
+  if (type.kind === "function") {
+    // The uninterpreted symbol ranges over binary64 VALUES, not bit patterns:
+    // It separates +0/-0; the admitted predicate domain excludes NaN-payload inspection.
+    return { value: { sort: "function", kind: "symbol", symbol: prefix, type, purity: { kind: "assumed", domain: PREDICATE_DOMAIN } },
+      declarations: [`(declare-fun ${prefix} (${FP}) Bool)`],
+      model: { kind: "function", symbol: prefix, params: type.params, result: type.result }, lengths: [] };
+  }
   if (type.kind === "optional") {
     const child = input(type.type, `${prefix}_value`), flag = `${prefix}_defined`;
     if (child.value.sort === "undefined") return child;
@@ -344,6 +383,7 @@ export function input(type, prefix) {
 }
 
 export function valueType(v) {
+  if (v.sort === "function") return v.type;
   if (v.sort === "array") return { kind: "array", element: v.element, allowUndefined: v.allowUndefined };
   if (v.sort === "object") return { kind: "object", fields: [...v.fields].map(([name, field]) => ({ name, type: valueType(field.value), optional: field.hasKey !== "true" })) };
   return v.present !== "true" && v.sort !== "undefined" ? { kind: "optional", type: v.sort } : v.sort;
@@ -354,6 +394,9 @@ export function materialize(model, raw) {
   if (model.kind === "optional") return materialize(model.value, raw);
   if (model.kind === "number") return Buffer.from(raw, "hex").readDoubleBE();
   if (model.kind === "boolean") return raw === "true";
+  if (model.kind === "function") {
+    return predicateFromTable(raw);
+  }
   if (model.kind === "array") return raw.map((v) => materialize({ kind: model.element }, v));
   return Object.fromEntries(model.fields.filter((f) => Object.hasOwn(raw, f.name))
     .map((f) => [f.name, materialize(f.model, raw[f.name])]));
@@ -361,6 +404,7 @@ export function materialize(model, raw) {
 
 export function conforms(type, v) {
   if (typeof type === "string") return typeof v === type;
+  if (type.kind === "function") return typeof v === "function";
   if (type.kind === "optional") return v === undefined || conforms(type.type, v);
   if (type.kind === "array") return Array.isArray(v) && Array.from({ length: v.length }, (_, i) => Object.hasOwn(v, i) && (type.allowUndefined && v[i] === undefined || typeof v[i] === type.element)).every(Boolean);
   if (!v || typeof v !== "object" || Array.isArray(v)) return false;
@@ -369,6 +413,7 @@ export function conforms(type, v) {
 }
 
 export function display(v) {
+  if (typeof v === "function") return v[TABLE] ?? "[function]";
   if (Array.isArray(v)) return Array.from(v, display);
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, value]) => [k, display(value)]));
   return Object.is(v, -0) ? "-0" : String(v);
@@ -376,6 +421,7 @@ export function display(v) {
 
 export function domain(type) {
   if (typeof type === "string" || type.kind === "optional") return undefined;
+  if (type.kind === "function") return PREDICATE_DOMAIN;
   return type.kind === "array" ? "Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included."
     : "Plain records with declared own enumerable data fields; no extra properties, accessors, proxies, or custom prototypes. Collection fields obey the same domain recursively.";
 }
@@ -386,6 +432,18 @@ const placeholder = (sort) => sort === "number" ? num(literal(0).smt, "false") :
 // errors; presence, element definedness and own keys become obligations.
 export function argument(type, v, node, fresh) {
   const wrong = () => fail(`This argument does not have the parameter's data type ${JSON.stringify(type)}.`, node);
+  if (isFunctionType(type)) {
+    if (v.sort !== "function") return wrong();
+    // Closures take the contextual type; annotations must agree with it.
+    if (v.kind === "closure") {
+      const ann = v.annotations;
+      if (ann.params.length !== type.params.length || ann.params.some((p, i) => p !== undefined && p !== type.params[i]) || ann.result !== undefined && ann.result !== type.result) wrong();
+      return { value: { ...v, type }, safe: "true" };
+    }
+    if (!sameSignature(v.type, type)) return wrong();
+    return { value: v, safe: "true" };
+  }
+  if (v.sort === "function") return wrong();
   if (type === "undefined") {
     if (v.sort === "undefined") return { value: v, safe: "true" };
     if (v.sort === "number" || v.sort === "boolean") return { value: undef(), safe: not(v.present) };

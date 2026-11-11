@@ -41,13 +41,18 @@ if delivery := data.get("loopDelivery"):
     lines += ["## Loop induction delivery", "",
         f"{state} Its delivery suite passes {delivery['tests']} tests, including {delivery['loopTests']} loop tests. The expanded corpus detects {delivery['mutants']} verifier mutants. [Loop validation report]({delivery['reportUrl']}). {next_step}", ""]
 if delivery := data.get("searchDelivery"):
-    state = "integrated" if delivery["integrated"] else "implemented and awaiting integration"
+    state = (f"J was merged at `{delivery['mergeCommit'][:7]}`."
+        if delivery["integrated"] else f"J is implemented on `{delivery['branch']}` and awaits integration.")
     suite = delivery["fullSuite"]
     validation = f"The combined run passed {suite['passed']}/{delivery['tests']} tests."
     if suite["failed"]:
         validation += f" {suite['failed']} existing tests hit resource limits; see the report for isolated rechecks."
     lines += ["## Upstream search delivery", "",
-        f"J is {state} on `{delivery['branch']}`. The pinned Lodash strictIndexOf function verifies unchanged, and {delivery['seededBugs']} seeded bugs produce replay-confirmed counterexamples. {validation} The raw export passes {delivery['nativeComparisons']} native comparisons. [Search validation report]({delivery['report']}).", ""]
+        f"{state} The pinned Lodash strictIndexOf function verifies unchanged, and {delivery['seededBugs']} seeded bugs produce replay-confirmed counterexamples. {validation} The raw export passes {delivery['nativeComparisons']} native comparisons. [Search validation report]({delivery['report']}).", ""]
+if delivery := data.get("callbackDelivery"):
+    state = "integrated" if delivery["integrated"] else "implemented and awaiting integration"
+    lines += ["## Pure callback delivery", "",
+        f"H is {state} on `{delivery['branch']}`. Pure total unary numeric predicates compose with immutable primitive captures and checked named callbacks. The pinned Ramda eager findIndex verifies unchanged; {delivery['seededBugs']} seeded bugs replay, with {delivery['nativeComparisons']} independent native comparisons. The full suite passes {delivery['tests']}/{delivery['tests']} and all {delivery['mutants']} verifier mutants are detected. [Callback validation report]({delivery['report']}). G is next; stateful callbacks remain outside this delivery.", ""]
 lines += [
     "## Original branch results", "",
     "These counts describe the original isolated branches. D's original partial result is retained as historical evidence; the combined validation above closes that acceptance gap.", "",

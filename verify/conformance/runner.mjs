@@ -7,10 +7,12 @@ import { join, relative } from "node:path";
 import { pathToFileURL } from "node:url";
 import { Script } from "node:vm";
 import * as defaultVerifier from "../index.mjs";
-import { BASELINE, DEFAULT_SEED, buildCorpus, source } from "./corpus.mjs";
+import { BASELINE, DEFAULT_SEED, SAMPLE_PREDICATES, buildCorpus, source } from "./corpus.mjs";
 
 // This deliberately does not use display/materialize/conforms from data.mjs.
+const decodedPredicates = new WeakMap();
 export function encode(value) {
+  if (typeof value === "function") return decodedPredicates.get(value) ?? {predicate: Object.entries(SAMPLE_PREDICATES).find(([, fn]) => fn === value)?.[0] ?? "native"};
   if (Array.isArray(value)) return value.map(encode);
   if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, encode(v)]));
   return Object.is(value, -0) ? "-0" : String(value);
@@ -21,6 +23,22 @@ function decode(value) {
   if (value === "undefined") return undefined;
   if (value === "true" || value === "false") return value === "true";
   return Number(value);
+}
+function argument(type, value) {
+  if (!type.includes("=>")) return decode(value);
+  assert.ok(value && Array.isArray(value.entries) && ["true", "false"].includes(value.else), "Missing predicate table");
+  const points = value.entries.map(([args, result]) => {
+    assert.equal(args.length, 1);
+    assert.ok(["true", "false"].includes(result));
+    return [Number(args[0]), result === "true"];
+  });
+  const predicate = (x) => {
+    assert.equal(typeof x, "number", "Native predicate call is outside its numeric domain");
+    const point = points.find(([at]) => Object.is(at, x));
+    return point ? point[1] : value.else === "true";
+  };
+  decodedPredicates.set(predicate, value);
+  return predicate;
 }
 const sha256 = (text) => createHash("sha256").update(text).digest("hex");
 const predicate = (text, f, args, result) => new Script(`(${text})`).runInNewContext(
@@ -106,7 +124,7 @@ export async function runCorpus({seed = DEFAULT_SEED, verifier = defaultVerifier
         if (outcome?.status !== "counterexample") continue;
         try {
           assert.equal(outcome.confirmed, true);
-          const args = f.params.map(([name]) => decode(outcome.inputs[name]));
+          const args = f.params.map(([name, type]) => argument(type, outcome.inputs[name]));
           assert.ok(clauses(f.requires, f, args).every((p) => p === true), "Reported input violates native requires");
           const value = await execute(file, f, args);
           const checks = clauses(f.ensures, f, args, value);

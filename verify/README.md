@@ -16,12 +16,15 @@ pnpm verify verify/examples/calls.ts
 pnpm verify verify/examples/calls-bugs.ts
 pnpm verify --timeout 60000 verify/examples/loops.ts
 pnpm verify --timeout 60000 verify/examples/loop-gaps.ts
+pnpm verify --timeout 60000 verify/examples/callbacks.ts
+pnpm verify --timeout 60000 verify/examples/callback-bugs.ts
 node verify/bin/jsverify.mjs --json verify/examples/bugs.ts
 node verify/examples/remeda/check.mjs
 node verify/examples/remeda/check-calls.mjs
 node verify/examples/remeda/check-imports.mjs
 node verify/examples/project/check-project.mjs
 node verify/examples/lodash/check.mjs
+node verify/examples/ramda/check.mjs
 pnpm verify --timeout 60000 verify/examples/remeda/composed.js
 make test-verify
 ```
@@ -127,7 +130,7 @@ export const caller = (value: number) => identity(value);
 export const identity = (value: number) => value;
 ```
 
-Forward references work because all supported top-level statements are function bindings. Every function needs an `ensures` contract and a supported body. Calls take exactly the declared number of arguments. Recursion, dependency cycles, unresolved callees, function values, spread arguments, and calls to source functions inside contracts are unsupported. Local data bindings take precedence over top-level function names and cannot be called.
+Forward references work because all supported top-level statements are function bindings. Every function needs an `ensures` contract and a supported body. Calls take exactly the declared number of arguments. Recursion, dependency cycles, unresolved callees, spread arguments, and ordinary source calls inside contracts are unsupported. Local bindings take precedence over top-level names; typed predicate bindings use the callback rules below.
 
 A caller must establish the helper's parameter domain and `requires` on every path where the call executes. Optional values need proof of definedness before entering required parameters. Records must meet the helper's own-field requirements and contain no extra fields. Arrays passed to dense-array parameters must have defined elements of the right type. Statically incompatible data shapes are unsupported; symbolic domain failures become call obligations.
 
@@ -142,6 +145,45 @@ A reproduced violation made directly by the caller is a `counterexample` with a 
 An abstract counterexample that does not reproduce is `unknown` with reason `contract-gap`. Strengthening a helper's `ensures` may make the caller prove. Each helper is checked independently, and a caller becomes `verified` only if every dependency's final status remains `verified` after replay. Dependency checks are conservative: a syntactically present call to an unverified helper blocks a verified verdict even when its branch never executes. Unrelated functions can still verify.
 
 The solver budget applies to the whole entry and its dependencies. Long call chains and repeated quantified contracts can exhaust it and return `unknown`.
+
+## Pure callbacks and captured values
+
+Generic helpers can take `(x: number) => boolean` predicates. The type states an
+explicit input-domain assumption: pure total predicates on every binary64 number,
+including NaN, infinities and both zeros, with present Boolean results and no NaN
+payload inspection. Reports expose this assumption. Concrete source callbacks
+must establish it; arbitrary JavaScript callbacks are not implicitly trusted.
+
+```ts
+// ensures result === predicate(value)
+function apply(predicate: (x: number) => boolean, value: number) {
+  return predicate(value);
+}
+
+// ensures result === (value > threshold)
+function above(value: number, threshold: number) {
+  const matches = (x: number): boolean => x > threshold;
+  return apply(matches, value);
+}
+```
+
+Expression arrows may capture immutable primitive parameters and `const` values.
+Named callbacks use independently checked contracts and dependency gating.
+Callback admission checks the full numeric domain before assuming its summary;
+a callback requiring only positive arguments fails admission even when passed to
+a search over an empty list. Applications also work inside `every` contracts.
+
+The pinned [Ramda pilot](examples/ramda/README.md) proves the unchanged eager
+`findIndex` function, then composes its generic contract with captured thresholds,
+NaN tests and a named negative-zero predicate. Two seeded implementation bugs
+produce confirmed counterexamples. Reports serialize predicates as SameValue
+lookup tables with constant fallbacks, preserving NaN and signed zero.
+
+The first slice supports only unary numeric-to-Boolean predicates. Mutable or
+reference captures, effects, function storage/returns/identity, and higher-order
+calls inside closures remain unsupported. Complex quantified queries and
+unreplayable model tables remain unknown. See [the callback design](design/callbacks.md)
+and [validation](reports/callbacks.md).
 
 ## Imports between local files
 
@@ -337,7 +379,7 @@ The pinned Remeda checks verify an extracted eager declaration after type stripp
 
 ## Architecture and trust
 
-`modules.mjs` owns file resolution and source snapshots. `types.mjs` reads erased type declarations and module bindings. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and replay data conversion. `specifications.mjs` owns exact real operations, rational replay, entry snapshots, and contract replay generation. `proofs.mjs` owns obligations, proof evidence, and scheduling. `backend.mjs` owns the worker protocol, capability checks, response validation, and hard deadlines. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `index.mjs` owns replay outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
+`modules.mjs` owns file resolution and source snapshots. `types.mjs` reads erased type declarations and module bindings. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and replay data conversion. `specifications.mjs` owns exact real operations, rational replay, entry snapshots, and contract replay generation. `proofs.mjs` owns obligations, proof evidence, and scheduling. `backend.mjs` owns the worker protocol, capability checks, response validation, and hard deadlines. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `predicate-witness.mjs` owns predicate table validation, bit-level keys and SameValue lookup. `index.mjs` owns replay outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
 
 Number inputs are raw 64-bit bitvectors reinterpreted as binary64. This covers all JavaScript numbers and preserves signed zero without decoding the unspecified IEEE-bit conversion of a solver NaN. NaN payloads cannot be observed by this subset. Every arithmetic operation has explicit floating-point semantics, and numeric equality uses `fp.eq` rather than SMT structural equality.
 
@@ -363,6 +405,8 @@ The collections design selected structural views over bounded tuples or SMT aggr
 
 `tests/verify/collections.test.mjs` covers array/object examples, V8 slice edge cases, structured counterexamples, key presence, undefined coercions, large-witness handling, and explicit rejection of reference identity, mutation, sparse arrays, and exotic objects.
 
+`tests/verify/predicates.test.mjs` and `predicate-models.test.mjs` cover callback admission, captures, identities, quantifier scope, native probe replay, table limits and numeric keys. `ramda-find-index.test.mjs` checks the pinned generic search and seeded bugs.
+
 `tests/verify/prefix.test.mjs` covers universal array contracts, nesting and Boolean polarity, callback scopes, native value semantics, unsupported syntax, and witness limits. `tests/verify/remeda-take.test.mjs` checks the pinned upstream eager body, a mutation that changes contents while preserving length, and fixture drift.
 
 `tests/verify/calls.test.mjs` covers modular calls, evaluation order, short circuits, opaque summaries, optional results, replay namespaces, dependency failures, and unsupported calls. The domain table checks symbolic call requirements against concrete replay conformance. CLI tests cover call diagnostics, replay budgets, and transitive gating after replay. `tests/verify/remeda-calls.test.mjs` checks real prefix composition and a shifted wrapper.
@@ -380,7 +424,7 @@ false lemmas, and scoped obligations under quantified and negated contracts.
 
 ## Run the independent conformance corpus
 
-`make test-verify-conformance` runs native V8 comparisons and ten semantic or
+`make test-verify-conformance` runs native V8 comparisons and twelve semantic or
 verdict-policy mutants in temporary verifier copies. `make test-verify` includes
 these tests. The corpus covers the current supported subset with explicit edge
 cases, small seeded binary64 samples, and original JavaScript execution.
