@@ -15,7 +15,55 @@ import { fail, blame } from "./error.mjs";
 import * as data from "./data.mjs";
 import { frontend, TYPE_BUILTINS } from "./types.mjs";
 import * as specifications from "./specifications.mjs";
+import * as heap from "./heap.mjs";
 const { and, or, not, need, implies } = data;
+// One heap-state binding per environment, keyed by a symbol so
+// scope exit (restore) and joins treat it like an outer declaration.
+const { HEAP } = heap;
+const HEAP_DECL = Object.freeze({ type: "HeapState" });
+function getHeap(env, node) {
+  const found = env.get(HEAP);
+  if (!found) fail("Heap contents are unavailable in this context.", node);
+  return found.value;
+}
+const setHeap = (env, state) => env.set(HEAP, { ...env.get(HEAP), value: state });
+function focused(v, env, cx, node) {
+  if (!heap.isRef(v)) return v;
+  if (cx.pure) fail("Pure callbacks cannot read the heap; capture a primitive snapshot (const v = a.x) instead.", node);
+  if (!cx.contract) heap.registry(cx.unit).reads = true;
+  return heap.focus(cx.unit, getHeap(env, node), v);
+}
+// Evaluate `modifies` paths in a contract environment at one heap state.
+function footprint(clauses, env, cx) {
+  const checks = [];
+  return clauses.flatMap((c) => heap.footprintPaths(c)).map((p) => {
+    const scx = { ...cx, contract: true, phase: "requires", checks };
+    let owner = expression(p.object, env, scx), key = p.key, path = pathOf(p.object);
+    if (p.expression && owner.sort === "object") {
+      const field = focused(owner, env, scx, p.node).fields.get(key)?.value;
+      if (field?.sort === "array") { owner = field; path = pathOf(p.expression); key = undefined; }
+    }
+    if (!heap.isRef(owner)) fail("modifies paths must start at a collection parameter.", p.node);
+    if (checks.some((c) => c !== "true")) fail("modifies paths must be total (required fields only).", p.node);
+    if (owner.sort === "array" && key === undefined) return { ref: owner.ref, key: "@elements", sort: owner.type.element, path };
+    if (p.whole) fail("A record modifies path must name a primitive field.", p.node);
+    return { ref: owner.ref, key, sort: heap.writableField(owner.type, key, p.node), path };
+  });
+}
+
+function allocateView(view, node, env, cx) {
+  if (cx.contract) {
+    const ref = `(- ${cx.unit.specRefs = (cx.unit.specRefs ?? 0) + 1})`;
+    return { ...view, ref, type: data.valueType(view), spec: true };
+  }
+  if (cx.pure) fail("Pure callbacks cannot allocate collections.", node);
+  if (cx.loop) fail("Loops that allocate collections are outside the first heap slice.", node);
+  const made = heap.alloc(cx.unit, getHeap(env, node), view, node);
+  cx.unit.events.push({ guard: cx.guard, safe: "true", assume: made.facts, label: { kind: "alloc", span: { start: node.start, end: node.end } } });
+  heap.registry(cx.unit).allocated = true;
+  setHeap(env, made.state);
+  return made.value;
+}
 const SELF = Symbol("named-function-self");
 const oblige = (cx, safe) => cx.checks.push(implies(cx.guard, safe));
 
@@ -34,6 +82,7 @@ function identifiers(node, names) {
 }
 
 function preconditions(clauses, env, cx) {
+  if (env.get(HEAP)?.value.role === "summary") fail("Requires must read the pre-call heap, not its summary.", clauses[0]?.span);
   const values = [], checks = [];
   for (const c of clauses) {
     const value = need(expression(c.ast, env, { ...cx, guard: and(...values), checks }), "boolean", c.span);
@@ -74,10 +123,11 @@ function assign(env, target, value, node) {
   return value;
 }
 
-function joinEnvironment(env, condition, yes, no, node) {
+function joinEnvironment(env, condition, yes, no, node, unit) {
   for (const [name, original] of env) {
     const a = yes.get(name), b = no.get(name);
     if (a === b) continue;
+    if (name === HEAP) { env.set(HEAP, { ...original, value: heap.join(unit, condition, a.value, b.value) }); continue; }
     env.set(name, { ...original, value: data.merge(condition, a.value, b.value, node) });
   }
 }
@@ -88,7 +138,7 @@ function every(node, env, cx) {
   if (extra.length || callback?.type !== "ArrowFunctionExpression" || callback.async || callback.body.type === "BlockStatement" || callback.params.length > 2) {
     fail("every takes one expression-bodied arrow (value, index) => condition, without thisArg or the array parameter.", callback ?? node);
   }
-  const owner = expression(node.callee.object, env, cx);
+  const owner = focused(expression(node.callee.object, env, cx), env, cx, node);
   const bound = cx.unit.fresh("every_q");
   const checks = [];
   const value = data.every(owner, bound, (value, index) => {
@@ -162,7 +212,7 @@ function namedValue(h, node, cx) {
   if (h.spec) fail("@spec functions cannot be passed as callbacks.", node);
   const target = cx.scope.program.build(h, node);
   if (h.params.length !== 1 || h.params[0].type !== "number" || target.resultType !== "boolean") fail(`Named predicate ${h.name} must take one number and return a present boolean.`, node);
-  if (target.effects?.kind !== "pure") fail(`Named predicate ${h.name} has no checked purity certificate.`, node);
+  if (target.effects?.kind !== "pure") fail(`Named predicate ${h.name} has derived heap effects (${target.effects?.kind}); only pure functions can be callbacks.`, node);
   cx.unit.dependencies.add(h.id);
   return { sort: "function", kind: "named", callee: h, purity: { kind: "checked", origin: "named", target: h.id }, type: { kind: "function", params: ["number"], result: "boolean" } };
 }
@@ -270,6 +320,17 @@ function totality(f, type, callee, index, argNode, callNode, cx) {
   return and(...checks);
 }
 
+function refArgument(type, v, node, env, cx) {
+  if (!heap.isRef(v) || v.sort !== type.kind) fail("Collection parameters need a reference of the same collection kind.", node);
+  if (v.spec) {
+    const { ref, type: _type, spec, ...view } = v;
+    const checked = data.argument(type, view, node, cx.unit.fresh);
+    return { value: { ...checked.value, ref, type, spec }, safe: checked.safe };
+  }
+  if (heap.sameType(v.type, type)) return { value: { ...v, type }, safe: "true" };
+  return { value: { ...v, type }, safe: heap.typing(cx.unit, type, v.ref, undefined, getHeap(env, node)) };
+}
+
 function call(node, env, cx) {
   const name = node.callee.name, unit = cx.unit;
   if ((name === "real" || name === "old") && !env.has(name) && !cx.scope.names.has(name)) {
@@ -302,13 +363,15 @@ function call(node, env, cx) {
   }
   const args = node.arguments.map((a) => expression(a, env, cx));
   const target = cx.scope.program.build(callee, node);
-  const bound = callee.params.map((p, i) => data.argument(p.type, args[i], node.arguments[i], unit.fresh));
+  if (cx.loop && (target.effects?.kind === "writes" || heap.isReferenceType(target.resultType))) fail("Loops cannot call heap-writing or reference-returning helpers in this slice.", node);
+  const bound = callee.params.map((p, i) => heap.isReferenceType(p.type) ? refArgument(p.type, args[i], node.arguments[i], env, cx) : data.argument(p.type, args[i], node.arguments[i], unit.fresh));
   if (callee.spec && bound.some((b) => b.value.sort === "function")) fail("Function values cannot be passed to @spec functions in this slice.", node);
   if (callee.spec) {
     unit.dependencies.add(callee.id);
     return blame(callee.file, callee.name, () => {
       const penv = new Map();
       callee.params.forEach((p, i) => bind(penv, p.node, bound[i].value));
+      if (env.has(HEAP)) penv.set(HEAP, { ...env.get(HEAP), value: { ...getHeap(env, node), role: "current" } });
       const spec = { ...cx, scope: cx.scope.program.scopes.get(callee.file), entry: new Map(penv), phase: "body" };
       const pre = preconditions(callee.requires, penv, spec);
       oblige(cx, and(...bound.map((b) => b.safe), pre.defined, pre.value));
@@ -321,24 +384,91 @@ function call(node, env, cx) {
   if (total.some((t) => t !== "true")) unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), ...total), assume: "true", callee: callee.id,
     label: { kind: "call", span: { start: node.start, end: node.end }, abstract: unit.cutpoints > 0 } });
   // Callee clauses: caller's SMT unit, callee's lexical scope and blame.
-  const { requires, ensures, value } = blame(callee.file, callee.name, () => {
+  const { requires, inclusion, ensures, value, state } = blame(callee.file, callee.name, () => {
     const spec = { guard: "true", contract: true, checks: [], unit, scope: cx.scope.program.scopes.get(callee.file), phase: "requires", callbackGuard: cx.guard };
     const penv = new Map();
     callee.params.forEach((p, i) => bind(penv, p.node, bound[i].value));
+    const pre0 = env.has(HEAP) ? getHeap(env, node) : undefined;
+    if (pre0) penv.set(HEAP, { declaration: HEAP_DECL, kind: "heap", value: pre0 });
     spec.entry = new Map(penv);
     const clauses = (list) => and(...list.map((c) => need(expression(c.ast, penv, spec), "boolean", c.span)));
     const pre = preconditions(callee.requires, penv, spec);
-    const fresh = data.input(target.resultType, unit.fresh("call"));
-    unit.declarations.push(...fresh.declarations);
+    // Call-time frame inclusion: callee footprint within caller footprint or
+    // caller-fresh refs. It is a safe part, so no callee ensures can prove it.
+    const locs = pre0 ? footprint(callee.modifies, penv, spec) : [];
+    const inclusion = and(...locs.map((l) => or(l.key === "@elements" ? `(= (heap_length ${l.ref}) #x00000000)` : "false", heap.permission(unit.frame ?? [], l.ref, l.key))));
+    let state, facts = "true", fresh;
+    if (pre0) {
+      const refResult = heap.isReferenceType(target.resultType);
+      ({ state, facts } = heap.havoc(unit, pre0, locs, refResult));
+      penv.set(HEAP, { declaration: HEAP_DECL, kind: "heap", value: state });
+      if (refResult) {
+        const symbol = `${unit.fresh("call")}_ref`;
+        unit.declarations.push(`(declare-const ${symbol} Int)`);
+        // Not fresh: any typed ref below the post-call allocator.
+        facts = and(facts, heap.typing(unit, target.resultType, symbol, state.next, state), heap.resultDomain({ sort: target.resultType.kind, ref: symbol, type: target.resultType }, args, pre0.next));
+        fresh = { value: { sort: target.resultType.kind, ref: symbol, type: target.resultType } };
+      }
+      if (target.effects?.kind === "writes") heap.registry(unit).writes = true;
+      else if (target.effects?.kind === "heap") heap.registry(unit).reads = true;
+    }
+    if (!fresh) { fresh = data.input(target.resultType, unit.fresh("call")); unit.declarations.push(...fresh.declarations); }
     penv.set("result", { kind: "contract", value: fresh.value });
     spec.phase = "ensures";
     const ensures = clauses(callee.ensures);
-    return { requires: and(pre.value, pre.defined), ensures: and(ensures, ...spec.checks), value: fresh.value };
+    return { requires: and(pre.value, pre.defined), inclusion, ensures: and(facts, ensures, ...spec.checks), value: fresh.value, state };
   });
   flushAxioms(unit);
-  unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), requires), assume: ensures, callee: callee.id,
-    label: { kind: "call", span: { start: node.start, end: node.end }, abstract: unit.cutpoints > 0 } });
+  const label = { kind: "call", span: { start: node.start, end: node.end }, abstract: unit.cutpoints > 0 };
+  unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), requires), assume: inclusion === "true" ? ensures : "true", callee: callee.id, label });
+  if (inclusion !== "true") unit.events.push({ guard: cx.guard, safe: inclusion, assume: ensures, callee: callee.id,
+    label: { ...label, kind: "frame-inclusion", callee: callee.name } });
+  if (state) setHeap(env, { ...state, role: "current" });
   return value;
+}
+
+// One primitive heap store. JS order: owner reference, then (compound) the
+// current value, then the right side, then the store at the post-RHS state.
+function store(node, left, operator, rhs, env, cx, prefix) {
+  if (cx.contract) fail("Assignments and updates are unsupported in contracts.", node);
+  if (cx.pure) fail("Pure callbacks cannot write the heap.", node);
+  if (cx.loop) fail("Loops that write the heap are outside the first heap slice.", node);
+  if (left.optional) fail("Optional heap writes are unsupported.", left);
+  const owner = expression(left.object, env, cx);
+  if (!heap.isRef(owner)) fail("Heap writes need a collection reference.", left);
+  let key, index, valid = "true", current;
+  if (owner.sort === "array") {
+    if (!left.computed) fail("Array writes must use an in-bounds numeric index; length changes are unsupported.", left);
+    const at = expression(left.property, env, cx), view = focused(owner, env, cx, left);
+    if (at.sort !== "number") fail("Array writes require a numeric index.", left);
+    if (at.literal !== undefined && (!Number.isInteger(at.literal) || at.literal < 0 || at.literal >= 4294967295)) fail("Named/out-of-range array properties are unsupported.", left);
+    valid = and(at.present, data.builtin("Number.isInteger", [at], left).smt, data.binary(">=", at, data.literal(0), left).smt, data.binary("<", at, view.length, left).smt);
+    index = at.u32 ?? `((_ fp.to_ubv 32) RTZ ${at.smt})`; key = "@elements";
+    current = operator === "=" ? undefined : data.index(view, at, left);
+  } else {
+    if (left.computed && left.property.type !== "Literal") fail("Record writes need a fixed field name.", left);
+    key = left.computed ? String(left.property.value) : left.property.name;
+    heap.writableField(owner.type, key, left);
+    current = operator === "=" ? undefined : data.member(focused(owner, env, cx, left), key, left);
+  }
+  let value, out;
+  if (rhs) {
+    const right = expression(rhs, env, cx);
+    value = operator === "=" ? right : data.binary(operator.slice(0, -1), current, right, node); out = value;
+  } else {
+    if (current.sort !== "number") fail("Increment and decrement require numeric cells.", node);
+    const before = data.unary("+", current, node);
+    value = data.binary(operator === "++" ? "+" : "-", before, data.literal(1), node); out = prefix ? value : before;
+  }
+  if (owner.sort === "array") {
+    if (value.sort !== owner.type.element) fail("Array stores must preserve the primitive element type.", node);
+  } else heap.checkStore(owner.type, key, value, node);
+  const label = { span: { start: node.start, end: node.end }, abstract: cx.unit.cutpoints > 0 };
+  cx.unit.events.push({ guard: cx.guard, safe: and(valid, value.present), assume: "true", label: { ...label, kind: "store-domain" } });
+  cx.unit.events.push({ guard: cx.guard, safe: heap.permission(cx.unit.frame ?? [], owner.ref, key), assume: "true", label: { ...label, kind: "frame-write", key } });
+  setHeap(env, owner.sort === "array" ? heap.writeIndex(cx.unit, getHeap(env, node), owner.ref, index, value) : heap.write(cx.unit, getHeap(env, node), owner.ref, key, value));
+  heap.registry(cx.unit).writes = true;
+  return out;
 }
 
 function expression(node, env, cx) {
@@ -368,26 +498,31 @@ function expression(node, env, cx) {
       const name = `${node.object.name}.${node.property.name}`;
       if (CONSTANTS.has(name)) return data.literal(CONSTANTS.get(name));
     }
-    const owner = read(node.object);
+    const reference = read(node.object);
+    const literalKey = reference.sort === "object" && node.property.type === "Literal";
+    const index = node.computed && !literalKey ? read(node.property) : undefined;
+    const owner = focused(reference, env, cx, node);
     if (!node.computed) return data.member(owner, node.property.name, node);
     if (owner.sort === "object" && node.property.type === "Literal") return data.member(owner, String(node.property.value), node);
-    return data.index(owner, read(node.property), node);
+    return data.index(owner, index, node);
   }
   if (node.type === "ArrayExpression") {
     if (node.elements.some((e) => !e)) fail("Sparse array literals are unsupported.", node);
     if (node.elements.length === 1 && node.elements[0].type === "SpreadElement") {
-      const value = read(node.elements[0].argument);
+      const value = focused(read(node.elements[0].argument), env, cx, node);
       if (value.sort !== "array") fail("Array spread requires an ordinary array.", node);
-      return value;
+      return allocateView(value, node, env, cx);
     }
     if (node.elements.some((e) => e.type === "SpreadElement")) fail("Array spread currently supports copying one array, not concatenation.", node);
-    return data.array(node.elements.map(read), node);
+    const elements = node.elements.map(read);
+    if (elements.some(heap.isRef)) fail("Arrays of heap records are outside the first heap slice.", node);
+    return allocateView(data.array(elements, node), node, env, cx);
   }
   if (node.type === "ObjectExpression") {
     let value = data.record();
     for (const p of node.properties) {
       if (p.type === "SpreadElement") {
-        value = data.spread(value, read(p.argument), p);
+        value = data.spread(value, focused(read(p.argument), env, cx, p), p);
       } else {
         if (p.kind !== "init" || p.method || p.computed || !["Identifier", "Literal"].includes(p.key.type)) fail("Use ordinary data properties, without methods, accessors, or computed keys.", p);
         const key = p.key.type === "Identifier" ? p.key.name : String(p.key.value);
@@ -397,7 +532,7 @@ function expression(node, env, cx) {
         value = data.property(value, key, field);
       }
     }
-    return value;
+    return allocateView(value, node, env, cx);
   }
   if (node.type === "UnaryExpression") {
     const value = read(node.argument);
@@ -406,7 +541,7 @@ function expression(node, env, cx) {
   if (node.type === "LogicalExpression") return data.logical(node.operator, read(node.left), (runs) => {
     const skipped = new Map(env), taken = new Map(env);
     const value = under(node.right, runs, taken);
-    joinEnvironment(env, runs, taken, skipped, node);
+    joinEnvironment(env, runs, taken, skipped, node, cx.unit);
     return value;
   }, node);
   if (node.type === "BinaryExpression") {
@@ -418,8 +553,15 @@ function expression(node, env, cx) {
     const c = need(read(node.test), "boolean", node.test);
     const yes = new Map(env), no = new Map(env);
     const a = under(node.consequent, c, yes), b = under(node.alternate, not(c), no);
-    joinEnvironment(env, c, yes, no, node);
+    joinEnvironment(env, c, yes, no, node, cx.unit);
     return data.merge(c, a, b, node);
+  }
+  if (node.type === "AssignmentExpression" && strip(node.left).type === "MemberExpression") {
+    if (!["=", "+=", "-=", "*=", "/="].includes(node.operator)) fail(`Unsupported compound assignment ${node.operator}.`, node);
+    return store(node, strip(node.left), node.operator, node.right, env, cx);
+  }
+  if (node.type === "UpdateExpression" && strip(node.argument).type === "MemberExpression") {
+    return store(node, strip(node.argument), node.operator, null, env, cx, node.prefix);
   }
   if (node.type === "AssignmentExpression") {
     const target = writable(node.left, env, cx);
@@ -453,7 +595,8 @@ function expression(node, env, cx) {
     }
     if (c.property.name === "slice") {
       const owner = read(c.object);
-      return data.slice(owner, node.arguments.map(read), node);
+      const args = node.arguments.map(read);
+      return allocateView(data.slice(focused(owner, env, cx, node), args, node), node, env, cx);
     }
   }
   return fail(`Unsupported ${node.type}. Only pure, explicitly modeled data operations are accepted.`, node);
@@ -502,7 +645,7 @@ function contracts(comments) {
     for (const line of comment.value.split("\n")) {
       if (/^\s*\*?\s*@spec\s*$/.test(line)) spec = true;
       if (/^\s*\*?\s*@?(invariant|decreases)\b/.test(line)) fail("invariant and decreases belong directly above a loop.", comment);
-      const match = /^\s*\*?\s*@?(requires|ensures)\b(.*)$/.exec(line);
+      const match = /^\s*\*?\s*@?(requires|ensures|modifies)\b(.*)$/.exec(line);
       if (match) {
         const text = match[2].trim();
         clauses.push(clause(comment, match[1], text, offset + line.indexOf(text, line.indexOf(match[1]) + match[1].length)));
@@ -600,7 +743,7 @@ function statements(list, states, returns, cx) {
       for (const s of states) {
         const value = expression(node.argument, s.env, at(s));
         if (value.sort === "function") fail("Function-valued returns are unsupported.", node.argument);
-        returns.push({ path: s.path, value });
+        returns.push({ path: s.path, value, heap: s.env.get(HEAP)?.value });
       }
       states = [];
     } else if (node.type === "VariableDeclaration") {
@@ -670,13 +813,14 @@ function writtenNames(nodes) {
 }
 
 // Disjoint incoming paths join exactly into one cutpoint entry.
-function mergeStates(states, node) {
+function mergeStates(states, node, unit) {
   const last = states.at(-1);
   const env = new Map(last.env);
   for (const s of states.slice(0, -1).reverse()) {
     for (const [name, b] of env) {
       const a = s.env.get(name);
       if (a === b || a.value === b.value) continue;
+      if (name === HEAP) { env.set(HEAP, { ...b, value: heap.join(unit, s.path, a.value, b.value) }); continue; }
       if (a.value === null || b.value === null || a.declaration !== b.declaration) fail("Loop entry states disagree on a binding.", node);
       env.set(name, { ...b, value: data.merge(s.path, a.value, b.value, node) });
     }
@@ -695,7 +839,7 @@ function measure(clause, env, cx) {
   return { value, defined: and(...checks) };
 }
 
-const strip = (n) => { while (n.type === "ParenthesizedExpression") n = n.expression; return n; };
+function strip(n) { while (n.type === "ParenthesizedExpression") n = n.expression; return n; }
 const conjuncts = (n) => (n = strip(n)).type === "LogicalExpression" && n.operator === "&&" ? [...conjuncts(n.left), ...conjuncts(n.right)] : [n];
 const named = (n, name) => strip(n).type === "Identifier" && strip(n).name === name;
 const zero = (n) => strip(n).type === "Literal" && strip(n).value === 0;
@@ -711,16 +855,16 @@ const minusOne = (n) => (n = strip(n)).type === "UnaryExpression" && n.operator 
 function u32Names(invariants, { candidates, written }, env, cx, predecessor = false) {
   const cs = invariants.flatMap((c) => conjuncts(c.ast)).map(strip);
   const integer = (name) => cs.some((c) => c.type === "CallExpression" && c.callee.type === "MemberExpression" && !c.callee.computed && !c.optional && builtinOwner(c.callee.object, env, cx) === "Number"
-    && c.callee.property.name === "isInteger" && c.arguments.length === 1 && named(c.arguments[0], name));
+    && ["isInteger", "isSafeInteger"].includes(c.callee.property.name) && c.arguments.length === 1 && named(c.arguments[0], name));
   const lowerBound = predecessor ? minusOne : zero;
-  const lower = (name) => cs.some((c) => c.type === "BinaryExpression" && (c.operator === "<=" && lowerBound(c.left) && named(c.right, name) || c.operator === ">=" && named(c.left, name) && lowerBound(c.right)));
+  const lower = (name) => cs.some((c) => c.type === "BinaryExpression" && (c.operator === "<=" && lowerBound(c.left) && named(c.right, name) || c.operator === ">=" && named(c.left, name) && lowerBound(c.right) || !predecessor && (c.operator === "<" && zero(c.left) && named(c.right, name) || c.operator === ">" && named(c.left, name) && zero(c.right))));
   const bound = (r, ok) => {
     r = strip(r);
     if (r.type === "Literal" && Number.isInteger(r.value) && r.value >= 0 && r.value <= 0xffffffff) return true;
     if (r.type === "Identifier") return !predecessor && ok.has(r.name) || !written.includes(r.name) && env.get(r.name)?.value.present === "true" && !!env.get(r.name).value.u32;
     if (r.type !== "MemberExpression" || r.computed || r.property.name !== "length" || strip(r.object).type !== "Identifier") return false;
     const owner = env.get(strip(r.object).name)?.value;
-    return owner?.sort === "array" && !!owner.length.u32 && !written.includes(strip(r.object).name);
+    return owner?.sort === "array" && !!focused(owner, env, cx, r).length.u32 && !written.includes(strip(r.object).name);
   };
   const upper = (name, ok) => cs.some((c) => c.type === "BinaryExpression" && ((predecessor ? c.operator === "<" : ["<", "<="].includes(c.operator)) && named(c.left, name) && bound(c.right, ok)
     || (predecessor ? c.operator === ">" : [">", ">="].includes(c.operator)) && named(c.right, name) && bound(c.left, ok)));
@@ -739,7 +883,7 @@ function loop(node, states, returns, cx) {
   if (node.type === "ForStatement" && !node.test) fail("for loops need an explicit test.", node);
   walk(node, (x) => { if (x !== node && LOOP_TYPES.has(x.type)) fail("Nested loops are outside this slice.", x);
     if (x.type === "VariableDeclaration" && x.kind === "var") fail("var declarations inside loops are unsupported; use let or const.", x); });
-  const before = mergeStates(states, node);
+  const before = mergeStates(states, node, cx.unit);
   const init = node.type === "ForStatement" && node.init
     ? [node.init.type === "VariableDeclaration" ? node.init : { type: "ExpressionStatement", expression: node.init, start: node.init.start, end: node.init.end }] : [];
   const [entry] = statements(init, [{ path: before.path, env: lexicalBindings(init, before.env, false) }], returns, cx);
@@ -758,9 +902,18 @@ function loop(node, states, returns, cx) {
       functions: new Map(cx.unit.functions), emittedFunctions: new Set(cx.unit.emittedFunctions), pendingAxioms: [] };
     const own = [];
     const checks = [];
+    const reg = cx.unit.heap, marks = reg && [reg.exact.length, reg.asserts.length];
     const r = iterate(node, spec, entry, written, optional, { ...cx, unit, checks }, own);
     const widen = written.filter((n) => !optional.has(n) && r.backs.some((b) => b.env.get(n).value.present !== "true"));
-    if (widen.length) { widen.forEach((n) => optional.add(n)); continue; }
+    if (widen.length) {
+      if (reg) { reg.exact.length = marks[0]; reg.asserts.length = marks[1]; }
+      widen.forEach((n) => optional.add(n)); continue;
+    }
+    // G first slice: loops may read the heap and call footprint-free helpers,
+    // but a back edge or exit with a different heap state is rejected.
+    if (entry.env.has(HEAP) && [...r.backs, ...r.exits].some((b) => !heap.sameState(b.env.get(HEAP).value, entry.env.get(HEAP).value))) {
+      fail("Loops that write, allocate or call heap-modifying helpers are outside the first heap slice.", node);
+    }
     cx.unit.events.push(...unit.events);
     cx.unit.declarations.push(...unit.declarations);
     unit.dependencies.forEach((d) => cx.unit.dependencies.add(d));
@@ -822,7 +975,7 @@ function iterate(node, spec, entry, written, optional, cx, returns) {
   return { backs, exits: [{ path: and(head, not(c)), env: tested }, ...collectors.breaks] };
 }
 
-const CONTRACT_LINE = /^\s*\*?\s*@?(requires|ensures|invariant|decreases)\b(.*)$/;
+const CONTRACT_LINE = /^\s*\*?\s*@?(requires|ensures|modifies|invariant|decreases)\b(.*)$/;
 
 function loopContracts(fn, source, comments) {
   const loops = new Map(), owned = new Set();
@@ -919,8 +1072,18 @@ function header(top, file, source, stripped, comments, tokens) {
     }
     const own = (kind) => info.clauses.filter((c) => c.kind === kind).map((c) => ({ ...c, file }));
     const loops = loopContracts(fn, source, comments);
-    return { id: `${file}#${name}`, file, name, top, fn, params, annotations, spec: info.spec, requires: own("requires"), ensures: own("ensures"), loops };
+    const modifies = own("modifies");
+    if (modifies.length && info.spec) fail("@spec functions are pure; they cannot declare modifies.", modifies[0].span);
+    return { id: `${file}#${name}`, file, name, top, fn, params, annotations, spec: info.spec, requires: own("requires"), ensures: own("ensures"), modifies, loops };
   });
+}
+
+// A footprint owner path as [parameter, field...] for native frame replay.
+function pathOf(n) {
+  n = strip(n);
+  if (n.type === "Identifier") return [n.name];
+  if (n.type === "MemberExpression" && !n.computed) return [...pathOf(n.object), n.property.name];
+  return fail("modifies paths must start at a parameter.", n);
 }
 
 function body(h, scope) {
@@ -932,16 +1095,21 @@ function body(h, scope) {
     const env = new Map();
     if (fn.type === "FunctionExpression" && fn.id) bind(env, fn.id, SELF, "self");
     const declarations = [], lengths = [];
+    heap.registry(unit);
     const params = h.params.map((p, index) => {
-      const value = data.input(p.type, `input_${index}`);
+      const value = heap.isReferenceType(p.type) ? { ...heap.refInput(unit, p.type, `input_${index}`, p.node), lengths: heap.inputLengths(p.type, `input_${index}_ref`) } : data.input(p.type, `input_${index}`);
       bind(env, p.node, value.value, "parameter");
       declarations.push(...value.declarations);
       lengths.push(...value.lengths);
       return { name: p.name, type: p.type, typeAliases: p.typeAliases, model: value.model };
     });
+    const entryHeap = heap.entryState(unit);
+    env.set(HEAP, { declaration: HEAP_DECL, kind: "heap", value: entryHeap });
     const spec = { guard: "true", contract: true, unit, scope, checks: [], entry: new Map(env), phase: "requires" };
+    unit.frame = footprint(h.modifies, env, spec);
+    if (unit.frame.length) heap.registry(unit).writes = true;
     const pre = preconditions(h.requires, env, spec);
-    if (h.loops.size) {
+    {
       // Reparameterize only domains explicitly established by requires. Links
       // are guarded by definedness as well, so malformed preconditions keep
       // all their original counterexamples in the first solver phase.
@@ -965,18 +1133,29 @@ function body(h, scope) {
       varBindings(fn.body, bodyEnv);
       const remaining = scopedStatements(fn.body.body, [{ env: bodyEnv, path: "true" }], returns, cx, true);
       if (remaining.length || !returns.length) fail("Every syntactic path must return a supported value.", fn.body);
-    } else returns.push({ path: "true", value: expression(fn.body, env, cx) });
+    } else {
+      const bodyEnv = new Map(env);
+      const value = expression(fn.body, bodyEnv, cx);
+      returns.push({ path: "true", value, heap: bodyEnv.get(HEAP)?.value });
+    }
     if (returns.some((r) => r.value.sort === "function")) fail("Function-valued returns are unsupported.", fn.body);
+    if (returns.some((r) => r.value.sort === "object" && !heap.isRef(r.value))) fail("Runtime records are returned by reference.", fn.body);
     let result = returns.at(-1).value;
     for (const r of returns.slice(0, -1).reverse()) result = data.merge(r.path, r.value, result, fn.body);
     const callerEvents = unit.events;
     env.set("result", { kind: "contract", value: result });
+    {
+      let final = returns.at(-1).heap;
+      for (const r of returns.slice(0, -1).reverse()) final = heap.join(unit, r.path, r.heap, final);
+      env.set(HEAP, { declaration: HEAP_DECL, kind: "heap", value: final });
+    }
     spec.phase = "ensures";
     const abstract = unit.cutpoints > 0;
     // With cutpoints, each return proves ensures with its own exact value view
     // under its own path; a merged result would lose the per-path shadows.
-    const conclude = (value, guard) => {
+    const conclude = (value, guard, state) => {
       const checks = [], at = new Map(env).set("result", { kind: "contract", value }), scx = { ...spec, checks };
+      at.set(HEAP, { declaration: HEAP_DECL, kind: "heap", value: state });
       const list = h.ensures.map((c) => ({ smt: need(expression(c.ast, at, scx), "boolean", c.span), guard, label: { kind: "ensures", span: c.span, abstract } }));
       return [...checks.map((smt) => ({ smt, guard, label: { kind: "definedness", span: h.ensures[0].span, abstract } })), ...list];
     };
@@ -995,7 +1174,7 @@ function body(h, scope) {
     // Body checks carry their own path guards; result checks need a return.
     const defined = (list, guard) => list.map((smt) => ({ smt, guard, label: { kind: "definedness", span: h.ensures[0].span, abstract } }));
     const conclusions = abstract
-      ? [...defined(cx.checks, allFacts), ...returns.flatMap((r) => conclude(r.value, and(r.path, allFacts)))]
+      ? [...defined(cx.checks, allFacts), ...returns.flatMap((r) => conclude(r.value, and(r.path, allFacts), r.heap))]
       : [...defined(cx.checks, allFacts), ...defined(spec.checks, and(returned, allFacts)),
         ...(abstract ? conclude(result, and(returned, allFacts)) : ensures.map((e) => ({ ...e, guard: and(returned, allFacts) })))];
     const items = [...obligations, ...conclusions.map((c) => ({ smt: implies(c.guard, c.smt), label: c.label }))].filter((c) => c.smt !== "true");
@@ -1009,11 +1188,14 @@ function body(h, scope) {
     while (names.has(library)) library += "_";
     while (names.has(entry)) entry += "_";
     const replay = { library, entry, params: params.map((p) => p.name) };
+    const finished = heap.finish(unit);
     return {
       id: h.id, file: h.file, name, span: { start: top.start, end: top.end }, params, resultType: data.valueType(result),
-      // The accepted frontend has only local scalar writes and immutable references.
-      // G must derive effects from its heap operations before admitting named predicates.
-      effects: { kind: "pure" }, executableStart: fn.start,
+      // Derived, not certified: any direct store, nonempty modifies, or call to
+      // a non-pure callee makes this function "writes". Built callee-first.
+      effects: { kind: unit.heap?.writes ? "writes" : unit.heap?.reads || unit.heap?.allocated ? "heap" : "pure" }, executableStart: fn.start,
+      modifies: h.modifies.map(({ ast, ...c }) => c),
+      footprint: unit.frame.map(({ path, key }) => ({ path, key })),
       requires: h.requires.map(({ ast, ...c }) => c), ensures: h.ensures.map(({ ast, ...c }) => c),
       callees: [...new Set([...callerEvents.filter((e) => e.callee).map((e) => e.callee), ...unit.dependencies])],
       loops: unit.loops, obligations: items.map((c) => c.label),
@@ -1025,7 +1207,8 @@ function body(h, scope) {
         ...(h.spec ? { body: specifications.replayExpression(fn.body, replay) } : {}),
       },
       executable: scope.stripped.slice(fn.start, fn.end),
-      declarations: [...[...unit.functions.values()].map((f) => f.declaration), ...declarations, ...unit.declarations, ...defs].join("\n"),
+      declarations: [...[...unit.functions.values()].map((f) => f.declaration), ...finished.head, ...declarations, ...unit.declarations, ...finished.tail, ...defs].join("\n"),
+      heapModel: finished.model,
       probes: unit.probes,
       smallWitness: and(...lengths.map((len) => `(bvule ${len} (_ bv${data.REPLAY_LIMIT} 32))`)),
       replayGuards: unit.replayGuards,

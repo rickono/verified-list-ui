@@ -39,8 +39,11 @@ try {
       if (o.solverReason) console.log(`  solver detail: ${o.solverReason}`);
       if (o.status === "counterexample") {
         console.log(`  inputs: ${Object.entries(o.inputs).map(([k, v]) => `${k} = ${show(v)}`).join(", ") || "(none)"}`);
+        if (o.aliases?.length) console.log(`  shared references: ${o.aliases.map((group) => group.join(" === ")).join(", ")}`);
         if (o.phase === "requires-definedness") console.log("  requires evaluation is undefined (confirmed by specification replay)");
-        if (o.call?.callback) {
+        if (o.call?.frameWrite || o.call?.frameInclusion || o.call?.storeDomain) {
+          for (const c of o.call.violated) console.log(`  failed ${c.kind}: ${c.text} (observed in JavaScript)`);
+        } else if (o.call?.callback) {
           console.log(`  callback: ${o.call.callback}(${o.call.arguments.map(show).join(", ")}) (replayed in JavaScript)`);
           for (const c of o.call.violated) console.log(`  failed callback check: ${c.kind}`);
         } else if (o.call) {

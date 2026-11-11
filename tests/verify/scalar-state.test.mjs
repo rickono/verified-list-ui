@@ -318,8 +318,6 @@ test("unsupported scalar, scope, contract and heap effects fail closed", async (
     "{ let value = 1; } return value;",
     "let value = [1]; value = [2]; return value;",
     "let value = { x: 1 }; value = { x: 2 }; return value;",
-    "let value = [1]; value[0]++; return value;",
-    "let value = { x: 1 }; value.x = 2; return value;",
     "let value = 1; [value] = [2]; return value;",
     "false && (flag = true); return flag;",
     "let value = 1; while (flag) value++; return value;",
@@ -346,4 +344,12 @@ function rejected(x: number): number { const value: number = x; value += 1; retu
   const o = await one(source);
   assert.equal(o.status, "unsupported");
   assert.equal(source.slice(o.span.start, o.span.end), "value");
+});
+
+
+test("fresh local array and record cells may be written without an input footprint", async () => {
+  for (const [body, contract] of [
+    ["let value = [1]; value[0]++; return value;", "result[0] === 2"],
+    ["let value = { x: 1 }; value.x = 2; return value;", "result.x === 2"],
+  ]) assert.equal((await one(`// ensures ${contract}\nfunction fresh() { ${body} }`)).status, "verified");
 });

@@ -28,12 +28,12 @@ and a conversion back to JavaScript numbers are unsupported.
 adds the exact binary64 operands. `real("0.1") + real("0.2")` adds decimal
 rationals. These three expressions have distinct meanings.
 
-`old(expression)` is supported only in ensures. Its expression sees only the
+`old(expression)` is supported in ensures and loop specifications. Its expression sees only the
 function's entry parameters, without `result`, body locals, or callback locals.
-Replay captures a recursive plain-data snapshot before running each body.
-Absent own keys, explicit undefined, NaN, and signed zero survive. The current
-source subset is immutable; this is entry-value semantics, not a mutable heap,
-alias, or frame model.
+Replay captures a sharing-preserving entry snapshot before each body.
+Absent own keys, explicit undefined, NaN, and signed zero survive. The
+[heap model](heap.md) adds aliases and frames: `old(a.x)` is entry contents,
+while `old(a)` retains its identity and `old(a).x` reads current contents.
 
 An exact `// @spec` marker selects a specification-only, expression-bodied
 function. Parameters use existing JavaScript data types. Its body can use the

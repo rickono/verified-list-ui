@@ -1,10 +1,11 @@
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { REPLAY_LIMIT } from "./data.mjs";
+import { validHeap } from "./heap-witness.mjs";
 import { validPredicateTable } from "./predicate-witness.mjs";
 
 // Conservative theory/model profile required by the current source compiler.
-export const CAPABILITIES = Object.freeze(["smtlib2", "binary64", "bitvectors", "reals", "fp-to-real", "uninterpreted-functions", "quantifiers", "models"]);
+export const CAPABILITIES = Object.freeze(["smtlib2", "binary64", "bitvectors", "reals", "fp-to-real", "uninterpreted-functions", "quantifiers", "models", "integers"]);
 export const Z3 = Object.freeze({ name: "z3", protocol: 1, capabilities: CAPABILITIES, certificates: false });
 
 export class BackendError extends Error {
@@ -28,6 +29,8 @@ function witness(model, value) {
   if (model.kind === "function") {
     return model.params.length === 1 && model.params[0] === "number" && model.result === "boolean" && validPredicateTable(value, REPLAY_LIMIT);
   }
+  if (model.kind === "ref") return typeof value === "string" && /^(0|[1-9][0-9]*)$/.test(value);
+  if (model.kind === "heap") return validHeap(model, value, REPLAY_LIMIT);
   if (model.kind === "array") return Array.isArray(value) && value.length <= REPLAY_LIMIT && value.every((v) => witness({ kind: model.element }, v));
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   return Object.keys(value).every((key) => model.fields.some((f) => f.name === key)) &&
@@ -39,7 +42,14 @@ function answer(value, models) {
   if (!value || !["sat", "unsat", "unknown"].includes(value.status)) invalid();
   if (value.status === "sat") {
     if (value.oversized === true && !Object.hasOwn(value, "witness")) return value;
+    const heapAt = models.findIndex((m) => m.kind === "heap");
+    if (heapAt !== -1 && Array.isArray(value.witness) && !validHeap(models[heapAt], value.witness[heapAt], REPLAY_LIMIT)) throw new BackendError("witness-invalid", "The backend heap witness does not conform to its reference types.");
     if (value.oversized || !Array.isArray(value.witness) || value.witness.length !== models.length || !models.every((m, i) => witness(m, value.witness[i]))) invalid();
+    const graphAt = models.findIndex((m) => m.kind === "heap");
+    if (graphAt !== -1 && !value.oversized) {
+      const roots = models.flatMap((m, i) => m.kind === "ref" ? [value.witness[i]] : []);
+      if (JSON.stringify(roots) !== JSON.stringify(value.witness[graphAt].roots)) throw new BackendError("witness-invalid", "The heap graph roots disagree with parameter identities.");
+    }
   } else if (Object.hasOwn(value, "witness") || Object.hasOwn(value, "oversized") || value.status === "unknown" && typeof value.reason !== "string") invalid();
   return value;
 }

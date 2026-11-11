@@ -6,6 +6,7 @@ import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { pathToFileURL } from "node:url";
 import { Script } from "node:vm";
+import { restoreAliases } from "./aliases.mjs";
 import * as defaultVerifier from "../index.mjs";
 import { BASELINE, DEFAULT_SEED, SAMPLE_PREDICATES, buildCorpus, source } from "./corpus.mjs";
 
@@ -124,7 +125,9 @@ export async function runCorpus({seed = DEFAULT_SEED, verifier = defaultVerifier
         if (outcome?.status !== "counterexample") continue;
         try {
           assert.equal(outcome.confirmed, true);
-          const args = f.params.map(([name, type]) => argument(type, outcome.inputs[name]));
+          const decoded = Object.fromEntries(f.params.map(([name, type]) => [name, argument(type, outcome.inputs[name])]));
+          restoreAliases(decoded, outcome.aliases);
+          const args = f.params.map(([name]) => decoded[name]);
           assert.ok(clauses(f.requires, f, args).every((p) => p === true), "Reported input violates native requires");
           const value = await execute(file, f, args);
           const checks = clauses(f.ensures, f, args, value);

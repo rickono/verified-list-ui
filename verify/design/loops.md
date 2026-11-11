@@ -24,7 +24,7 @@ The [executable example](../examples/loops.ts) also specifies first-match behavi
 
 Search uses native `===`: `NaN` never matches, and the two signs of zero compare equal.
 
-`old(...)` in invariants and measures reads function-entry parameters, as in ensures. It cannot capture a loop-local variable or refer to the state at the previous iteration. Parameters and input collections remain immutable.
+`old(...)` in invariants and measures reads function-entry parameters, as in ensures. It cannot capture a loop-local variable or refer to the state at the previous iteration. Parameter bindings cannot be rebound. Heap contents remain unchanged within a loop; writes before the loop follow the [heap/frame rules](heap.md).
 
 ## Proof rules
 
@@ -52,7 +52,7 @@ The upstream search pilot also represents an integer predecessor as an unsigned 
 
 The range analysis receives both its representation candidates and the complete syntactic write set. An optional scalar is excluded from candidates but remains a write. Its entry value therefore cannot serve as a stable bound for another counter. A regression that changes a bound from `1` to `2^32` while also permitting `undefined` checks this distinction through native counterexample replay.
 
-In functions with loops, unconditional requires can establish an immutable numeric parameter's u32 range. A fresh natural view is linked by FP equality to the original parameter under the original requires and its definedness. The equivalent range predicate is also exposed in the new representation under that guard. These are representation changes over an already-stated domain, not new input assumptions. Original raw parameter models, requires and definedness queries remain intact. `old` retains the same signed entry value. Missing integer/lower/upper conjuncts, disjunctions and circular bounds do not establish a range. The [search fixture](../examples/lodash/README.md) records the motivating implementation.
+Unconditional requires can establish an immutable numeric parameter's u32 range. A fresh natural view is linked by FP equality to the original parameter under the original requires and its definedness. The equivalent range predicate is also exposed in the new representation under that guard. These are representation changes over an already-stated domain, not new input assumptions. Original raw parameter models, requires and definedness queries remain intact. `old` retains the same signed entry value. Missing integer/lower/upper conjuncts, disjunctions and circular bounds do not establish a range. The [search fixture](../examples/lodash/README.md) records the motivating implementation.
 
 ## Outcomes and replay
 

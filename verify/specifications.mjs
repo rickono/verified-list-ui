@@ -161,6 +161,11 @@ export const runtime = Object.freeze({
     if (isReal(value)) return op === "-" ? new Rational(-value.n, value.d) : value;
     return op === "-" ? -value : +value;
   },
+  // Heap: old(X) evaluates X against the entry snapshot; a record
+  // result is the entry identity, so it maps back to the live object.
+  old(entry, value) {
+    return value && typeof value === "object" && entry.live?.get(value) || value;
+  },
   binary(op, a, b) {
     if (isReal(a) || isReal(b)) {
       if (!isReal(a) || !isReal(b)) throw new Error("Mixed mathematical and JavaScript operands.");
@@ -197,6 +202,25 @@ export const runtime = Object.freeze({
   },
 });
 
+// Heap: an entry snapshot that preserves aliasing. `live` maps
+// each copied record back to its live object, and `pairs` lists them for the
+// native frame diff. Without heap mode it equals values.map(snapshot).
+export function snapshotAll(values, heapMode) {
+  if (!heapMode) return values.map(snapshot);
+  const memo = new Map(), live = new WeakMap(), pairs = [];
+  const copy = (v) => {
+    if (!v || typeof v !== "object") return v;
+    if (memo.has(v)) return memo.get(v);
+    const c = Array.isArray(v) ? [] : {};
+    memo.set(v, c); live.set(c, v); pairs.push([v, c]);
+    for (const [k, x] of Object.entries(v)) c[k] = copy(x);
+    return c;
+  };
+  const entry = values.map(copy);
+  Object.defineProperties(entry, { live: { value: live }, pairs: { value: pairs } });
+  return entry;
+}
+
 export function snapshot(value) {
   if (Array.isArray(value)) return value.map(snapshot);
   if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, snapshot(v)]));
@@ -219,7 +243,7 @@ export function replayExpression(node, { library, entry, params }) {
     case "MemberExpression": return node.computed ? `(${read(node.object)})[${read(node.property)}]` : `(${read(node.object)}).${node.property.name}`;
     case "CallExpression": {
       if (node.callee.name === "real") return `${library}.real(${read(node.arguments[0])})`;
-      if (node.callee.name === "old") return `((${params.join(", ")}) => (${read(node.arguments[0])}))(...${entry})`;
+      if (node.callee.name === "old") return `${library}.old(${entry}, ((${params.join(", ")}) => (${read(node.arguments[0])}))(...${entry}))`;
       return `${read(node.callee)}(${node.arguments.map(read).join(", ")})`;
     }
     case "ArrayExpression": return `[${node.elements.map(read).join(", ")}]`;
