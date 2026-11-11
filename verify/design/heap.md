@@ -80,11 +80,13 @@ under the same guards as values and call events.
 
 Array lengths are immutable, so created array references can retain their exact
 length view as a cache. Integer shadows are used only with established range
-provenance. Parameters bounded by explicit integer/nonnegative/array-length
-requires may use the existing guarded u32 reparameterization; this covers every
-input satisfying those requires, including either zero sign. `slice` clamps exact
-natural shadows with bitvectors. It retains floating-point rules for other
-numbers, NaN, infinities and fractional values. These are representation changes,
+provenance. Explicit integer/nonnegative/array-length requires can establish a
+u32 parameter; nonnegative `Number.isSafeInteger` requires establish the entire
+53-bit safe-integer range. Both retain either zero sign and keep their links
+guarded by the original requires and definedness. `slice` clamps exact natural
+shadows with bitvectors. Other numbers retain the floating-point conversion
+rules, with a redundant bitvector clamp exposing the native index range; NaN,
+infinities and fractions keep their JavaScript behavior. These are representation changes,
 not witness limits or additional assumptions.
 
 ## Calls, effects and proof obligations
@@ -118,6 +120,8 @@ not a separate permission system: explicit `modifies` clauses govern writes.
 ## Witness transport and replay
 
 The solver extracts one graph from entry roots, preserving repeated identities.
+`heap.mjs` supplies the worker with one encoding descriptor for function names
+and tags; the extractor does not reconstruct those decisions.
 `heap-witness.mjs` validates payload types at every reachable path, key sets,
 edge targets, root identities and shared-node compatibility before interning
 native objects. Invalid graphs produce `witness-invalid`, not bug verdicts.

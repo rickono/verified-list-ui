@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-11",
-  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) and J (upstream search) are merged. H (pure callback contracts) is validated on a feature branch, awaiting integration. G is next.",
-  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E and J are integrated; H is branch-ready. G, P and T are ready to start. Transitively redundant edges are omitted.",
+  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) and J (upstream search) are merged. H (pure callbacks) and G (heap identities and frames) are validated on stacked feature branches, awaiting integration.",
+  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E and J are integrated; H and G are branch-ready. P and T are ready to start. K remains gated on H and G integration. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -259,7 +259,7 @@
       "deps": [
         "I"
       ],
-      "status": "ready",
+      "status": "branch_ready",
       "area": "Data model / state semantics",
       "detail": "Model object/array identity, shared references and writes. Contracts describe pre-state values and permitted mutation footprints, so helper calls preserve facts outside their effects.",
       "doneWhen": "Proofs distinguish a fresh copy from an alias and remain sound when two arguments share storage.",
@@ -267,7 +267,9 @@
       "capabilityDeps": [
         "A",
         "F"
-      ]
+      ],
+      "deliveryStatus": "finished",
+      "resultSummary": "Shared record/array identities, shallow-copy freshness, entry heaps, primitive stores and per-write mutation frames compose through checked helpers. The full suite passes 249/249 and four heap-specific verifier mutants are detected alongside the twelve existing mutants. Mutating loops, reference stores and stateful callbacks remain unsupported."
     },
     {
       "id": "H",
@@ -612,7 +614,8 @@
   ],
   "progress": {
     "branchReady": [
-      "H"
+      "H",
+      "G"
     ],
     "partial": [],
     "integratedFromBatch": [
@@ -623,7 +626,6 @@
       "F"
     ],
     "next": [
-      "G",
       "P",
       "T"
     ],
@@ -632,7 +634,8 @@
     "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
     "integrationComplete": true,
     "pendingIntegration": [
-      "H"
+      "H",
+      "G"
     ]
   },
   "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs.",
@@ -688,6 +691,27 @@
     "seededBugs": 2,
     "upstreamCommit": "980b3bf7712adb8ad8b5d9b2c6aca525cb3cf143",
     "report": "../verify/reports/callbacks.md",
+    "integrated": false
+  },
+  "heapDelivery": {
+    "branch": "feat/heap-alias-frames",
+    "baseBranch": "feat/pure-callback-contracts",
+    "baseCommit": "37355ccf197b22286cf0c25fddf147f2e3713172",
+    "tests": 249,
+    "fullSuite": {
+      "passed": 249,
+      "failed": 0,
+      "skipped": 0
+    },
+    "heapTests": 24,
+    "heapCorpusTests": 2,
+    "safeIntegerTests": 2,
+    "heapFixtures": 8,
+    "heapNativeComparisons": 20,
+    "heapCounterexamples": 5,
+    "heapMutants": 4,
+    "existingMutants": 12,
+    "report": "../verify/reports/heap.md",
     "integrated": false
   }
 }

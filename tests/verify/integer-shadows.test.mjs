@@ -137,3 +137,32 @@ function changedBound(flag: boolean) {
   assert.equal(report.outcomes[0].confirmed, true);
   assert.equal(report.outcomes[0].result, "4294967296");
 });
+
+
+test("nonnegative safe-integer shadows retain signed zero and the entire safe range", async () => {
+  const zero=await check(`// requires Number.isSafeInteger(n) && n>=0
+// ensures Object.is(result,n)
+function f(n:number){return n+0;}`);
+  outcome(zero,"counterexample");
+  assert.equal(zero.outcomes[0].confirmed,true);
+  assert.equal(zero.outcomes[0].inputs.n,"-0");
+  const largest=await check(`// requires Number.isSafeInteger(n) && n>=0
+// ensures n!==Number.MAX_SAFE_INTEGER
+function f(n:number){return true;}`);
+  outcome(largest,"counterexample");
+  assert.equal(largest.outcomes[0].confirmed,true);
+  assert.equal(Number(largest.outcomes[0].inputs.n),Number.MAX_SAFE_INTEGER);
+  outcome(await check(`// requires Number.isSafeInteger(n) && n>=0 && n===9007199254740992
+// ensures false
+function f(n:number){return true;}`),"vacuous");
+});
+
+test("safe-integer metadata cannot erase earlier requires-definedness failures", async () => {
+  const report=await check(`// requires real(n)>=real("0")
+// requires Number.isSafeInteger(n) && n>=0
+// ensures true
+function f(n:number){return true;}`);
+  outcome(report,"counterexample");
+  assert.equal(report.outcomes[0].phase,"requires-definedness");
+  assert.equal(report.outcomes[0].confirmed,true);
+});

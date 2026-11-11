@@ -47,18 +47,19 @@ export const isFunctionType = (t) => !!t && typeof t === "object" && t.kind === 
 export const sameSignature = (a, b) => a.params.length === b.params.length && a.params.every((p, i) => p === b.params[i]) && a.result === b.result;
 const noFunctions = (v, node, what) => { if (v.sort === "function") fail(`Function values cannot be ${what}; pass them directly as call arguments.`, node); };
 
-// Every numeric value admitted by the proven u32 invariant is represented,
+// Every numeric value admitted by a proven u32 or safe-integer range is represented,
 // including both zero signs. The exact BV shadow is not an input assumption.
-export function natural(prefix, predecessor = false) {
-  const u = `${prefix}_u32`, z = `${prefix}_negative_zero`;
+export function natural(prefix, predecessor = false, width = 32) {
+  const u = `${prefix}_u${width}`, z = `${prefix}_negative_zero`;
   const payload = `((_ to_fp_unsigned 11 53) RNE ${u})`;
+  const declarations = [`(declare-const ${u} (_ BitVec ${width}))`, `(declare-const ${z} Bool)`];
   if (predecessor) return {
-    declarations: [`(declare-const ${u} (_ BitVec 32))`, `(declare-const ${z} Bool)`],
-    value: { ...num(`(ite (and ${z} (= ${u} #x00000001)) (_ -zero 11 53) (fp.sub RNE ${payload} ${literal(1).smt}))`), predecessor: { smt: u, width: 32 } },
+    declarations,
+    value: { ...num(`(ite (and ${z} (= ${u} (_ bv1 ${width}))) (_ -zero 11 53) (fp.sub RNE ${payload} ${literal(1).smt}))`), predecessor: { smt: u, width } },
   };
   return {
-    declarations: [`(declare-const ${u} (_ BitVec 32))`, `(declare-const ${z} Bool)`],
-    value: num(`(ite (and ${z} (= ${u} #x00000000)) (_ -zero 11 53) ((_ to_fp_unsigned 11 53) RNE ${u}))`, "true", u, { smt: u, width: 32 }),
+    declarations,
+    value: num(`(ite (and ${z} (= ${u} (_ bv0 ${width}))) (_ -zero 11 53) ${payload})`, "true", width === 32 ? u : undefined, { smt: u, width }),
   };
 }
 
@@ -79,7 +80,10 @@ export function need(v, sort, node) {
 
 function joinType(a, b, node) {
   if (JSON.stringify(a) === JSON.stringify(b)) return a;
-  const optional = (t) => typeof t === "string" ? t === "undefined" ? t : { kind: "optional", type: t } : t;
+  const optional = (t) => {
+    if (["array", "object"].includes(t?.kind)) fail("Optional reference fields are outside the supported heap slice.", node);
+    return typeof t === "string" ? t === "undefined" ? t : { kind: "optional", type: t } : t;
+  };
   if (a === "undefined") return optional(b);
   if (b === "undefined") return optional(a);
   const base = (t) => t?.kind === "optional" ? t.type : t;
@@ -294,9 +298,10 @@ export function slice(owner, args, node) {
     }
     const x = `(fp.roundToIntegral RTZ ${need(v, "number", node)})`;
     const negative = `(fp.lt ${x} ${literal(0).smt})`;
+    const clamp = (i) => ite(`(bvult ${i} ${owner.length.u32})`, i, owner.length.u32);
     const neg = ite(`(fp.leq ${x} (fp.neg ${owner.length.smt}))`, bv(0),
-      `(bvsub ${owner.length.u32} ((_ fp.to_ubv 32) RTZ (fp.neg ${x})))`);
-    const pos = ite(`(fp.lt ${x} ${owner.length.smt})`, `((_ fp.to_ubv 32) RTZ ${x})`, owner.length.u32);
+      `(bvsub ${owner.length.u32} ${clamp(`((_ fp.to_ubv 32) RTZ (fp.neg ${x}))`)})`);
+    const pos = ite(`(fp.lt ${x} ${owner.length.smt})`, clamp(`((_ fp.to_ubv 32) RTZ ${x})`), owner.length.u32);
     return ite(v.present, ite(`(fp.isNaN ${x})`, bv(0), ite(negative, neg, pos)), fallback);
   };
   const start = normalize(args[0], bv(0)), end = normalize(args[1], owner.length.u32);

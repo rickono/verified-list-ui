@@ -52,7 +52,11 @@ if delivery := data.get("searchDelivery"):
 if delivery := data.get("callbackDelivery"):
     state = "integrated" if delivery["integrated"] else "implemented and awaiting integration"
     lines += ["## Pure callback delivery", "",
-        f"H is {state} on `{delivery['branch']}`. Pure total unary numeric predicates compose with immutable primitive captures and checked named callbacks. The pinned Ramda eager findIndex verifies unchanged; {delivery['seededBugs']} seeded bugs replay, with {delivery['nativeComparisons']} independent native comparisons. The full suite passes {delivery['tests']}/{delivery['tests']} and all {delivery['mutants']} verifier mutants are detected. [Callback validation report]({delivery['report']}). G is next; stateful callbacks remain outside this delivery.", ""]
+        f"H is {state} on `{delivery['branch']}`. Pure total unary numeric predicates compose with immutable primitive captures and checked named callbacks. The pinned Ramda eager findIndex verifies unchanged; {delivery['seededBugs']} seeded bugs replay, with {delivery['nativeComparisons']} independent native comparisons. The full suite passes {delivery['tests']}/{delivery['tests']} and all {delivery['mutants']} verifier mutants are detected. [Callback validation report]({delivery['report']}). Stateful callbacks remain outside this delivery.", ""]
+if delivery := data.get("heapDelivery"):
+    state = "integrated" if delivery["integrated"] else "implemented and awaiting integration"
+    lines += ["## Heap and frame delivery", "",
+        f"G is {state} on `{delivery['branch']}`, stacked on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes {delivery['tests']}/{delivery['tests']}; {delivery['heapMutants']} heap-specific verifier mutants join the {delivery['existingMutants']} existing mutants. [Heap validation report]({delivery['report']}). Mutating loops, reference stores and stateful callbacks remain unsupported. K remains gated on integration; P and T can proceed independently.", ""]
 lines += [
     "## Original branch results", "",
     "These counts describe the original isolated branches. D's original partial result is retained as historical evidence; the combined validation above closes that acceptance gap.", "",

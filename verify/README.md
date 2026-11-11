@@ -368,7 +368,7 @@ optional-field writes and mutating loops remain unsupported.
 See [heap.ts](examples/heap.ts), [deliberate failures](examples/heap-bugs.ts),
 [the design and replay limits](design/heap.md), and
 [validation](reports/heap.md). Run `node verify/conformance/heap.mjs --mutations`
-for independent alias replay and three heap-specific verifier mutants.
+for independent alias replay and four heap-specific verifier mutants.
 
 ## Loops with induction
 
@@ -391,7 +391,7 @@ Native measure arithmetic stays rounded: `n - i` means `real(n - i)`. Use `real(
 
 A weak or wrong invariant can produce `unknown/induction-gap`, with its phase, source location and candidate input. Only replay of the unchanged source can confirm a contract bug. Witness searches prefer arrays and entry measures at most 256; these limits never enter proof queries. A timeout or unavailable small witness remains `unknown`.
 
-The [loop examples](examples/loops.ts) prove first-match search and counting bounds. The [loop design](design/loops.md) describes the proof rules, numeric shadows and limitations. Nested loops, labeled jumps, `do`, `for-in`, `for-of`, `var` declarations inside a loop and heap mutation remain unsupported.
+The [loop examples](examples/loops.ts) prove first-match search and counting bounds. The [loop design](design/loops.md) describes the proof rules, numeric shadows and limitations. Nested loops, labeled jumps, `do`, `for-in`, `for-of`, `var` declarations inside a loop and heap mutation inside loops remain unsupported.
 
 The [gap examples](examples/loop-gaps.ts) contain correct implementations with an incorrect invariant and a constant measure. Both return `unknown/induction-gap`, and the CLI exits 1. Correcting an annotation can close a proof gap without changing the function body.
 

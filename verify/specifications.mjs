@@ -164,7 +164,22 @@ export const runtime = Object.freeze({
   // Heap: old(X) evaluates X against the entry snapshot; a record
   // result is the entry identity, so it maps back to the live object.
   old(entry, value) {
-    return value && typeof value === "object" && entry.live?.get(value) || value;
+    const seen = new WeakSet();
+    const identity = (v) => {
+      if (!v || typeof v !== "object") return v;
+      const live = entry.live?.get(v);
+      if (live) return live;
+      if (seen.has(v)) return v;
+      seen.add(v);
+      // New aggregates inside old keep their own identity but their contained
+      // entry references still denote the live objects, not snapshot copies.
+      for (const [k, before] of Object.entries(v)) {
+        const after = identity(before);
+        if (!Object.is(after, before)) v[k] = after;
+      }
+      return v;
+    };
+    return identity(value);
   },
   binary(op, a, b) {
     if (isReal(a) || isReal(b)) {
@@ -204,9 +219,9 @@ export const runtime = Object.freeze({
 
 // Heap: an entry snapshot that preserves aliasing. `live` maps
 // each copied record back to its live object, and `pairs` lists them for the
-// native frame diff. Without heap mode it equals values.map(snapshot).
-export function snapshotAll(values, heapMode) {
-  if (!heapMode) return values.map(snapshot);
+// native frame diff. Every invocation preserves sharing, including indirect
+// native allocations in callers with no reference inputs.
+export function snapshotAll(values) {
   const memo = new Map(), live = new WeakMap(), pairs = [];
   const copy = (v) => {
     if (!v || typeof v !== "object") return v;

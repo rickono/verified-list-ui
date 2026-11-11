@@ -261,3 +261,53 @@ function middle(x:number){return leaf(x);}
 function f(x:number){return apply(middle,x);}`);
   status(r.outcomes[0],"unsupported");assert.match(r.outcomes[0].message,/effects/);
 });
+
+
+test("required fields cannot erase undefined when joining reference-valued branches", async () => {
+  for (const child of ["{x:1}", "[1]"]) {
+    const report=await check(`// ensures result.child !== undefined
+function f(flag:boolean){return flag?{child:undefined}:{child:${child}};}`);
+    status(report.outcomes[0],"unsupported");
+    assert.match(report.outcomes[0].message,/Optional reference/);
+  }
+});
+
+
+test("indirect fresh results preserve old identity in every helper replay context", async () => {
+  const source=`// ensures result.x===0
+function make(){return {x:0};}
+// ensures old(a)===a
+function id(a:{x:number}){return a;}
+// ensures true
+function f(){return id(make());}`;
+  const targets=compile([parse("heap.ts",source)]).targets;
+  assert.ok(targets.find(t=>t.name==="f").heapModel);
+  allVerified(await check(source));
+});
+
+test("quantified dynamic record conformance keeps exactness checks inside their binder", async () => {
+  allVerified(await check(`// @spec
+// ensures Object.is(result,a.x)
+const get=(a:{x:number,y?:number})=>a.x;
+// requires b.x===1 && c.x===1
+// ensures a.every((v,i)=>get(i===0?b:c)===1)
+function f(a:number[],b:{x:number},c:{x:number},d:{z:number}){return true;}`));
+});
+
+
+test("new aggregates inside old preserve contained entry-reference identities", async () => {
+  for (const type of ["{child:{x:number}}", "{child:number[]}"]) {
+    allVerified(await check(`// ensures old({nested:{leaf:a.child}}).nested.leaf===a.child
+function f(a:${type}){return true;}`));
+  }
+});
+
+
+test("array length footprints fail explicitly while ordinary record length fields remain writable", async () => {
+  status((await check(`// modifies a.length
+// ensures true
+function f(a:number[]){return a;}`)).outcomes[0],"unsupported");
+  allVerified(await check(`// modifies a.length
+// ensures a.length===1
+function f(a:{length:number}){a.length=1;return a;}`));
+});

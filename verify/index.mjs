@@ -116,7 +116,7 @@ function replay(targets, modules, target, witness, phase) {
       }
       stack.push(t.id);
       try {
-        const entry = snapshotAll(args, heapMode);
+        const entry = snapshotAll(args);
         const unmet = precondition(realm, requires, entry, args);
         if (unmet) stop({ ...edge, arguments: actual, violated: [unmet.clause] });
         const inclusion = monitor.inclusion(t, args);
@@ -147,7 +147,7 @@ function replay(targets, modules, target, witness, phase) {
   const inputs = Object.fromEntries(target.params.map((p, i) => [p.name, display(values[i])]));
   const aliases = heapMode ? [...paths(target.params.map((p) => p.name), values).values()].filter((p) => p.length > 1) : [];
   const shown = aliases.length ? { inputs, aliases } : { inputs };
-  const entry = snapshotAll(values, heapMode);
+  const entry = snapshotAll(values);
   const leave = monitor.enter(target, values);
   try {
     const unmet = precondition(root.realm, root.requires, entry, values);

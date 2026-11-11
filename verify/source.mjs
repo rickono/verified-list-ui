@@ -46,6 +46,7 @@ function footprint(clauses, env, cx) {
     if (!heap.isRef(owner)) fail("modifies paths must start at a collection parameter.", p.node);
     if (checks.some((c) => c !== "true")) fail("modifies paths must be total (required fields only).", p.node);
     if (owner.sort === "array" && key === undefined) return { ref: owner.ref, key: "@elements", sort: owner.type.element, path };
+    if (owner.sort === "array") fail("Array modifies paths name the whole array; length and shape changes are unsupported.", p.node);
     if (p.whole) fail("A record modifies path must name a primitive field.", p.node);
     return { ref: owner.ref, key, sort: heap.writableField(owner.type, key, p.node), path };
   });
@@ -396,7 +397,7 @@ function call(node, env, cx) {
     // Call-time frame inclusion: callee footprint within caller footprint or
     // caller-fresh refs. It is a safe part, so no callee ensures can prove it.
     const locs = pre0 ? footprint(callee.modifies, penv, spec) : [];
-    const inclusion = and(...locs.map((l) => or(l.key === "@elements" ? `(= (heap_length ${l.ref}) #x00000000)` : "false", heap.permission(unit.frame ?? [], l.ref, l.key))));
+    const inclusion = and(...locs.map((l) => or(l.key === "@elements" ? heap.elementsEmpty(l.ref) : "false", heap.permission(unit.frame ?? [], l.ref, l.key))));
     let state, facts = "true", fresh;
     if (pre0) {
       const refResult = heap.isReferenceType(target.resultType);
@@ -852,10 +853,13 @@ const minusOne = (n) => (n = strip(n)).type === "UnaryExpression" && n.operator 
 // loses nothing. -0 stays representable (as index 0).
 // Predecessor mode instead proves -1 <= x < b and represents x + 1 as u32.
 // Stable local u32 values can anchor either range; circular bounds cannot.
-function u32Names(invariants, { candidates, written }, env, cx, predecessor = false) {
+// Safe mode instead covers the complete nonnegative safe-integer domain with
+// 53 bits. Its upper bound is supplied by Number.isSafeInteger itself.
+function naturalNames(invariants, { candidates, written }, env, cx, mode = "u32") {
+  const predecessor = mode === "predecessor";
   const cs = invariants.flatMap((c) => conjuncts(c.ast)).map(strip);
   const integer = (name) => cs.some((c) => c.type === "CallExpression" && c.callee.type === "MemberExpression" && !c.callee.computed && !c.optional && builtinOwner(c.callee.object, env, cx) === "Number"
-    && ["isInteger", "isSafeInteger"].includes(c.callee.property.name) && c.arguments.length === 1 && named(c.arguments[0], name));
+    && (mode === "safe" ? c.callee.property.name === "isSafeInteger" : ["isInteger", "isSafeInteger"].includes(c.callee.property.name)) && c.arguments.length === 1 && named(c.arguments[0], name));
   const lowerBound = predecessor ? minusOne : zero;
   const lower = (name) => cs.some((c) => c.type === "BinaryExpression" && (c.operator === "<=" && lowerBound(c.left) && named(c.right, name) || c.operator === ">=" && named(c.left, name) && lowerBound(c.right) || !predecessor && (c.operator === "<" && zero(c.left) && named(c.right, name) || c.operator === ">" && named(c.left, name) && zero(c.right))));
   const bound = (r, ok) => {
@@ -866,7 +870,7 @@ function u32Names(invariants, { candidates, written }, env, cx, predecessor = fa
     const owner = env.get(strip(r.object).name)?.value;
     return owner?.sort === "array" && !!focused(owner, env, cx, r).length.u32 && !written.includes(strip(r.object).name);
   };
-  const upper = (name, ok) => cs.some((c) => c.type === "BinaryExpression" && ((predecessor ? c.operator === "<" : ["<", "<="].includes(c.operator)) && named(c.left, name) && bound(c.right, ok)
+  const upper = (name, ok) => mode === "safe" || cs.some((c) => c.type === "BinaryExpression" && ((predecessor ? c.operator === "<" : ["<", "<="].includes(c.operator)) && named(c.left, name) && bound(c.right, ok)
     || (predecessor ? c.operator === ">" : [">", ">="].includes(c.operator)) && named(c.right, name) && bound(c.left, ok)));
   const ok = new Set();
   for (let grew = true; grew;) {
@@ -944,8 +948,8 @@ function iterate(node, spec, entry, written, optional, cx, returns) {
   unit.replayGuards.push(replayGuard);
   const env = new Map(entry.env);
   const ranges = { candidates: written.filter((n) => !optional.has(n) && entry.env.get(n).value.sort === "number"), written };
-  const narrow = u32Names(spec.invariants, ranges, entry.env, cx);
-  const predecessor = u32Names(spec.invariants, ranges, entry.env, cx, true);
+  const narrow = naturalNames(spec.invariants, ranges, entry.env, cx);
+  const predecessor = naturalNames(spec.invariants, ranges, entry.env, cx, "predecessor");
   for (const name of written) {
     const b = env.get(name);
     if (!optional.has(name) && b.value.sort === "number" && (narrow.has(name) || predecessor.has(name))) {
@@ -1113,14 +1117,17 @@ function body(h, scope) {
       // Reparameterize only domains explicitly established by requires. Links
       // are guarded by definedness as well, so malformed preconditions keep
       // all their original counterexamples in the first solver phase.
-      const bounded = u32Names(h.requires, { candidates: h.params.filter((p) => p.type === "number").map((p) => p.name), written: [] }, env, spec);
+      const bounded = naturalNames(h.requires, { candidates: h.params.filter((p) => p.type === "number").map((p) => p.name), written: [] }, env, spec);
       const legal = and(pre.defined, pre.value);
-      for (const name of bounded) {
-        const old = env.get(name), fresh = data.natural(unit.fresh("parameter"));
+      const safe = naturalNames(h.requires, { candidates: h.params.filter((p) => p.type === "number").map((p) => p.name), written: [] }, env, spec, "safe");
+      const widths = new Map([...bounded].map((name) => [name, 32]));
+      for (const name of safe) if (!widths.has(name)) widths.set(name, 53);
+      for (const [name, width] of widths) {
+        const old = env.get(name), fresh = data.natural(unit.fresh("parameter"), false, width);
         unit.declarations.push(...fresh.declarations, `(assert ${implies(legal, `(= ${old.value.smt} ${fresh.value.smt})`)})`);
         env.set(name, { ...old, value: fresh.value });
       }
-      if (bounded.size) {
+      if (widths.size) {
         const equivalent = preconditions(h.requires, env, { ...spec, checks: [] });
         unit.declarations.push(`(assert ${implies(legal, equivalent.value)})`);
         spec.entry = new Map(env);

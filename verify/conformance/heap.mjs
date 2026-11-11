@@ -8,6 +8,9 @@ import * as originalVerifier from "../index.mjs";
 import { restoreAliases } from "./aliases.mjs";
 const decode = (v) => Array.isArray(v) ? v.map(decode) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k,x])=>[k,decode(x)])) : v === "undefined" ? undefined : v === "true" ? true : v === "false" ? false : Number(v);
 const sources = {
+  optionalRef: `/** @param {boolean} flag */
+// ensures result.child !== undefined
+function f(flag){return flag?{child:undefined}:{child:{x:1}};}`,
   alias: `/** @param {{x:number}} a @param {{x:number}} b */
 // modifies a.x
 // ensures Object.is(result,old(b.x))
@@ -41,8 +44,8 @@ function f(a){return {...a};}`,
 // ensures Object.is(result,old(a[0]))
 function f(a){const b=a.slice();a[0]=7;return b[0];}`,
 };
-const names = (id) => ["alias","optional","array"].includes(id) ? ["a","b"] : ["a"];
-const expected = (id) => ["copy","snapshot"].includes(id) ? "verified" : "counterexample";
+const names = (id) => id === "optionalRef" ? ["flag"] : ["alias","optional","array"].includes(id) ? ["a","b"] : ["a"];
+const expected = (id) => id === "optionalRef" ? "unsupported" : ["copy","snapshot"].includes(id) ? "verified" : "counterexample";
 const native = (id, args) => {
   const before=structuredClone(args), writes=[];
   // Independent native oracle for frame fixtures. Only one input record is
@@ -50,7 +53,7 @@ const native = (id, args) => {
   if(["restored","inclusion"].includes(id)) args[0]=new Proxy(args[0],{set(o,k,v){writes.push(k);return Reflect.set(o,k,v);}});
   const f=new Script(`(()=>{${sources[id]}\nreturn f;})()`).runInNewContext();
   const result=f(...args);
-  const holds=["alias","optional"].includes(id)?Object.is(result,before[1].x):id==="array"?Object.is(result,before[1][0])
+  const holds=id==="optionalRef"?result.child!==undefined:["alias","optional"].includes(id)?Object.is(result,before[1].x):id==="array"?Object.is(result,before[1][0])
     :id==="copy"?result!==args[0]&&result.q===args[0].q:id==="snapshot"?Object.is(result,before[0][0]):writes.length===0;
   return {holds,writes};
 };
@@ -65,7 +68,7 @@ export async function runHeapConformance(verifier=originalVerifier, selected=Obj
       assert.equal(native(id,args).holds,false,`${id}: reported witness did not fail independent native oracle`);
       evidence.reproducedCounterexamples++;
     }
-    const samples=id==="array"?[[[0],[0]],[[-0],[NaN]]]:id==="snapshot"?[[[NaN]],[[-0]],[ [Infinity,1] ]]
+    const samples=id==="optionalRef"?[[true],[false]]:id==="array"?[[[0],[0]],[[-0],[NaN]]]:id==="snapshot"?[[[NaN]],[[-0]],[ [Infinity,1] ]]
       :id==="copy"?[[{x:NaN,q:{v:-0}}],[{x:1,q:{v:Infinity}}]]:names(id).length===2?[[{x:0},{x:0}],[{x:NaN},{x:-0}]]:[[{x:0}],[{x:NaN}]];
     if(names(id).length===2){const shared=id==="array"?[0]:{x:0};samples.push([shared,shared]);}
     for(const args of samples){const result=native(id,args); if(expected(id)==="verified")assert.equal(result.holds,true);evidence.nativeSamples++;}
@@ -74,9 +77,10 @@ export async function runHeapConformance(verifier=originalVerifier, selected=Obj
   return evidence;
 }
 const mutants=[
+  {id:"undefined-reference-join-erased",fixture:"optionalRef",file:"data.mjs",from:'    if (["array", "object"].includes(t?.kind)) fail("Optional reference fields are outside the supported heap slice.", node);',to:''},
   {id:"input-aliases-erased",fixture:"alias",file:"heap.mjs",from:'reg.asserts.push(typing(unit, type, symbol, "heap_next0"));',to:'reg.asserts.push(typing(unit, type, symbol, "heap_next0")); for(const r of reg.roots.slice(0,-1))reg.asserts.push(`(distinct ${r} ${symbol})`);'},
   {id:"store-permission-erased",fixture:"restored",file:"source.mjs",from:'safe: heap.permission(cx.unit.frame ?? [], owner.ref, key)',to:'safe: "true"'},
-  {id:"call-frame-inclusion-erased",fixture:"inclusion",file:"source.mjs",from:'const inclusion = and(...locs.map((l) => or(l.key === "@elements" ? `(= (heap_length ${l.ref}) #x00000000)` : "false", heap.permission(unit.frame ?? [], l.ref, l.key))));',to:'const inclusion = "true";'},
+  {id:"call-frame-inclusion-erased",fixture:"inclusion",file:"source.mjs",from:'const inclusion = and(...locs.map((l) => or(l.key === "@elements" ? heap.elementsEmpty(l.ref) : "false", heap.permission(unit.frame ?? [], l.ref, l.key))));',to:'const inclusion = "true";'},
 ];
 export async function runHeapMutations(){
   const out=[];
@@ -93,7 +97,7 @@ export async function runHeapMutations(){
       const report=await verifier.verify(sources[mutant.fixture],{file:"mutant.js",timeoutMs:30000}),o=report.outcomes.at(-1);
       assert.notEqual(o.status,"counterexample",`Surviving heap mutant ${mutant.id}`);
       assert.ok(o.status==="verified"||o.status==="unknown"&&o.reason==="replay-mismatch",JSON.stringify(o));
-      const shared={x:0};assert.equal(native(mutant.fixture,names(mutant.fixture).length===2?[shared,shared]:[shared]).holds,false);
+      const shared={x:0};assert.equal(native(mutant.fixture,mutant.fixture==="optionalRef"?[true]:names(mutant.fixture).length===2?[shared,shared]:[shared]).holds,false);
       out.push({id:mutant.id,detected:true,status:o.status,reason:o.reason});
     }finally{await rm(root,{recursive:true,force:true});}
   }

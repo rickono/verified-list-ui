@@ -8,9 +8,18 @@ import { fail } from "./error.mjs";
 import { and, or, not, numberView, bool, literal } from "./data.mjs";
 
 export const HEAP = Symbol("heap");
-export const slotKey = (key) => Buffer.from(key).toString("hex");
+const slotKey = (key) => Buffer.from(key).toString("hex");
 const FP = "(_ FloatingPoint 11 53)";
 const TAG = { undefined: 0, number: 1, boolean: 2, object: 3, array: 4 };
+const ENCODING = Object.freeze({ arrayKind: 1, tags: TAG,
+  kind: "heap_kind", length: "heap_length", element: "heap_element",
+  dense: "heap_array_dense", has: "heap_array_has", hasRaw: "heap_array_has_raw",
+  arrayNum: "heap_array_num", arrayBool: "heap_array_bool" });
+const fieldSymbols = (name) => {
+  const key = slotKey(name);
+  return { name, has: `heap_has_${key}`, tag: `heap_sort_${key}`, ref: `heap_ref_${key}`,
+    number: `heap_num_${key}`, numberView: `heap_num0_${key}`, boolean: `heap_bool_${key}` };
+};
 const ite = (c, a, b) => c === "true" || a === b ? a : c === "false" ? b : `(ite ${c} ${a} ${b})`;
 
 export const isRecordType = (t) => !!t && typeof t === "object" && t.kind === "object";
@@ -27,15 +36,15 @@ export function registry(unit) {
     keys: new Set(), exact: [], asserts: [], versions: 0, roots: [], rootTypes: [],
     decls: [
       "(declare-const heap_next0 Int)",
-      "(declare-fun heap_kind (Int) Int)",
-      "(declare-fun heap_length (Int) (_ BitVec 32))",
-      "(declare-fun heap_element (Int) Int)",
-      "(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))",
-      "(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)",
-      "(declare-fun heap_array_dense (Int) Bool)",
-      "(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)",
-      "(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))",
-      `(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) ${FP} ((_ to_fp 11 53) (heap_array_num r i)))`,
+      `(declare-fun ${ENCODING.kind} (Int) Int)`,
+      `(declare-fun ${ENCODING.length} (Int) (_ BitVec 32))`,
+      `(declare-fun ${ENCODING.element} (Int) Int)`,
+      `(declare-fun ${ENCODING.arrayNum} (Int (_ BitVec 32)) (_ BitVec 64))`,
+      `(declare-fun ${ENCODING.arrayBool} (Int (_ BitVec 32)) Bool)`,
+      `(declare-fun ${ENCODING.dense} (Int) Bool)`,
+      `(declare-fun ${ENCODING.hasRaw} (Int (_ BitVec 32)) Bool)`,
+      `(define-fun ${ENCODING.has} ((r Int) (i (_ BitVec 32))) Bool (or (${ENCODING.dense} r) (${ENCODING.hasRaw} r i)))`,
+      `(define-fun ${ENCODING.arrayNum}0 ((r Int) (i (_ BitVec 32))) ${FP} ((_ to_fp 11 53) (${ENCODING.arrayNum} r i)))`,
     ],
   };
   return unit.heap;
@@ -46,9 +55,9 @@ function touch(unit, k) {
   if (reg.keys.has(k)) return;
   reg.keys.add(k);
   reg.decls.push(
-    `(declare-fun heap_has_${slotKey(k)} (Int) Bool)`, `(declare-fun heap_sort_${slotKey(k)} (Int) Int)`, `(declare-fun heap_ref_${slotKey(k)} (Int) Int)`,
-    `(declare-fun heap_num_${slotKey(k)} (Int) (_ BitVec 64))`, `(declare-fun heap_bool_${slotKey(k)} (Int) Bool)`,
-    `(define-fun heap_num0_${slotKey(k)} ((r Int)) ${FP} ((_ to_fp 11 53) (heap_num_${slotKey(k)} r)))`);
+    `(declare-fun ${fieldSymbols(k).has} (Int) Bool)`, `(declare-fun ${fieldSymbols(k).tag} (Int) Int)`, `(declare-fun ${fieldSymbols(k).ref} (Int) Int)`,
+    `(declare-fun ${fieldSymbols(k).number} (Int) (_ BitVec 64))`, `(declare-fun ${fieldSymbols(k).boolean} (Int) Bool)`,
+    `(define-fun ${fieldSymbols(k).numberView} ((r Int)) ${FP} ((_ to_fp 11 53) (${fieldSymbols(k).number} r)))`);
 }
 
 function writableState(state) {
@@ -60,15 +69,15 @@ export function entryState(unit) {
   return { role: "entry", next: "heap_next0", num: new Map(), bool: new Map(), array: {} };
 }
 
-const contentFn = (s, kind, k) => s[kind].get(k) ?? (kind === "num" ? `heap_num0_${slotKey(k)}` : `heap_bool_${slotKey(k)}`);
+const contentFn = (s, kind, k) => s[kind].get(k) ?? (kind === "num" ? fieldSymbols(k).numberView : fieldSymbols(k).boolean);
 const kindOf = (sort) => sort === "number" ? "num" : "bool";
 
 // Deferred exactness: no universe key outside `keys` is an own key of r.
 function exact(unit, r, keys) {
   const reg = registry(unit);
   const name = `heap_exact${reg.exact.length}`;
-  reg.exact.push({ name, r, keys: new Set(keys) });
-  return name;
+  reg.exact.push({ name, keys: new Set(keys) });
+  return `(${name} ${r})`;
 }
 
 // Static typing of a ref against a record type. Version independent: it reads
@@ -78,15 +87,15 @@ function exact(unit, r, keys) {
 // forall; all dense native arrays have this representation. Call conformance
 // can still establish density from optional element values at the current state.
 export function typing(unit, type, r, bound, state) {
-  const parts = [`(>= ${r} 0)`, ...(bound ? [`(< ${r} ${bound})`] : []), `(= (heap_kind ${r}) ${type.kind === "array" ? 1 : 0})`];
+  const parts = [`(>= ${r} 0)`, ...(bound ? [`(< ${r} ${bound})`] : []), `(= (${ENCODING.kind} ${r}) ${type.kind === "array" ? 1 : 0})`];
   if (type.kind === "array") return and(...parts,
-    `(=> (bvugt (heap_length ${r}) #x00000000) (= (heap_element ${r}) ${TAG[type.element]}))`,
-    type.allowUndefined ? "true" : !state ? `(heap_array_dense ${r})` : `(forall ((i (_ BitVec 32))) (=> (bvult i (heap_length ${r})) (${arrayFn(state, "has")} ${r} i)))`);
+    `(=> (bvugt (${ENCODING.length} ${r}) #x00000000) (= (${ENCODING.element} ${r}) ${TAG[type.element]}))`,
+    type.allowUndefined ? "true" : !state ? `(${ENCODING.dense} ${r})` : `(forall ((i (_ BitVec 32))) (=> (bvult i (${ENCODING.length} ${r})) (${arrayFn(state, "has")} ${r} i)))`);
   for (const f of type.fields) {
     touch(unit, f.name);
-    const k = f.name, t = fieldType(f), has = `(heap_has_${slotKey(k)} ${r})`, tag = `(heap_sort_${slotKey(k)} ${r})`;
+    const k = f.name, t = fieldType(f), has = `(${fieldSymbols(k).has} ${r})`, tag = `(${fieldSymbols(k).tag} ${r})`;
     if (isReferenceType(t)) {
-      parts.push(has, `(= ${tag} ${TAG[t.kind]})`, typing(unit, t, `(heap_ref_${slotKey(k)} ${r})`, bound, state));
+      parts.push(has, `(= ${tag} ${TAG[t.kind]})`, typing(unit, t, `(${fieldSymbols(k).ref} ${r})`, bound, state));
     } else {
       const sort = typeof t === "string" ? t : t.type;
       const allowsUndefined = f.optional || t?.kind === "optional" || sort === "undefined";
@@ -108,11 +117,11 @@ export function refInput(unit, type, prefix, node) {
 
 // Focus: an H-style content view of one ref at one heap version. Existing
 // record operations (member, spread) run unchanged on the view.
-const arrayFn = (s, kind) => s.array[kind] ?? `heap_array_${kind}${kind === "num" ? "0" : ""}`;
+const arrayFn = (s, kind) => s.array[kind] ?? (kind === "num" ? `${ENCODING.arrayNum}0` : kind === "bool" ? ENCODING.arrayBool : ENCODING.has);
 export function focus(unit, state, v) {
   if (v.spec) return v;
   if (v.sort === "array") {
-    const r = v.ref, len = `(heap_length ${r})`;
+    const r = v.ref, len = `(${ENCODING.length} ${r})`;
     return { sort: "array", element: v.type.element, allowUndefined: v.type.allowUndefined,
       length: v.length ?? { ...numberView(`((_ to_fp_unsigned 11 53) RNE ${len})`), u32: len },
       at: (i) => v.type.element === "number"
@@ -122,10 +131,10 @@ export function focus(unit, state, v) {
   const fields = new Map();
   for (const f of v.type.fields) {
     touch(unit, f.name);
-    const k = f.name, t = fieldType(f), r = v.ref, tag = `(heap_sort_${slotKey(k)} ${r})`;
-    const hasKey = f.optional ? `(heap_has_${slotKey(k)} ${r})` : "true";
+    const k = f.name, t = fieldType(f), r = v.ref, tag = `(${fieldSymbols(k).tag} ${r})`;
+    const hasKey = f.optional ? `(${fieldSymbols(k).has} ${r})` : "true";
     let value;
-    if (isReferenceType(t)) value = { sort: t.kind, ref: `(heap_ref_${slotKey(k)} ${r})`, type: t };
+    if (isReferenceType(t)) value = { sort: t.kind, ref: `(${fieldSymbols(k).ref} ${r})`, type: t };
     else {
       const sort = typeof t === "string" ? t : t.type;
       const present = f.optional || t?.kind === "optional" ? `(= ${tag} ${TAG[sort]})` : "true";
@@ -183,22 +192,22 @@ export function alloc(unit, state, view, node) {
   writableState(state);
   const reg = registry(unit); reg.used = true;
   if (view.sort === "array") return allocArray(unit, state, view);
-  const n = state.next, facts = [`(>= ${n} 0)`, `(= (heap_kind ${n}) 0)`], fields = [];
+  const n = state.next, facts = [`(>= ${n} 0)`, `(= (${ENCODING.kind} ${n}) 0)`], fields = [];
   let s = state;
   for (const [k, field] of view.fields) {
     touch(unit, k);
     const v = field.value;
-    facts.push(field.hasKey === "true" ? `(heap_has_${slotKey(k)} ${n})` : `(= (heap_has_${slotKey(k)} ${n}) ${field.hasKey})`);
+    facts.push(field.hasKey === "true" ? `(${fieldSymbols(k).has} ${n})` : `(= (${fieldSymbols(k).has} ${n}) ${field.hasKey})`);
     let t;
     if (isRef(v)) {
       if (field.hasKey !== "true") fail("Optional reference fields are unsupported.", node);
-      facts.push(`(= (heap_sort_${slotKey(k)} ${n}) ${TAG[v.sort]})`, `(= (heap_ref_${slotKey(k)} ${n}) ${v.ref})`);
+      facts.push(`(= (${fieldSymbols(k).tag} ${n}) ${TAG[v.sort]})`, `(= (${fieldSymbols(k).ref} ${n}) ${v.ref})`);
       t = v.type;
     } else if (v.sort === "number" || v.sort === "boolean") {
-      facts.push(`(= (heap_sort_${slotKey(k)} ${n}) ${ite(v.present, String(TAG[v.sort]), "0")})`);
+      facts.push(`(= (${fieldSymbols(k).tag} ${n}) ${ite(v.present, String(TAG[v.sort]), "0")})`);
       s = write(unit, s, n, k, v);
       t = v.present === "true" ? v.sort : { kind: "optional", type: v.sort };
-    } else if (v.sort === "undefined") { facts.push(`(= (heap_sort_${slotKey(k)} ${n}) 0)`); t = "undefined"; }
+    } else if (v.sort === "undefined") { facts.push(`(= (${fieldSymbols(k).tag} ${n}) 0)`); t = "undefined"; }
     else fail(`Heap slice: a ${v.sort} cannot be stored in a record.`, node);
     fields.push({ name: k, type: t, optional: field.hasKey !== "true" });
   }
@@ -215,6 +224,7 @@ export function havoc(unit, state, footprint, refResult) {
   writableState(state);
   if (!footprint.length && !refResult) return { state, facts: "true" };
   const reg = registry(unit);
+  if (refResult) reg.used = true;
   const s = copy(state);
   for (const l of footprint.filter((l) => l.key === "@elements")) {
     const q = "i";
@@ -276,11 +286,11 @@ export function permission(locs, ref, key) {
 export function finish(unit) {
   const reg = unit.heap;
   if (!reg) return { head: [], tail: [], model: undefined };
-  const tail = reg.exact.map((e) => `(define-fun ${e.name} () Bool ${and(...[...reg.keys].filter((k) => !e.keys.has(k)).map((k) => not(`(heap_has_${slotKey(k)} ${e.r})`)))})`);
+  const tail = reg.exact.map((e) => `(define-fun ${e.name} ((r Int)) Bool ${and(...[...reg.keys].filter((k) => !e.keys.has(k)).map((k) => not(`(${fieldSymbols(k).has} r)`)))})`);
   tail.push(...reg.asserts.map((a) => `(assert ${a})`));
   // No record touched: no heap witness, so scalar targets keep their witness lists.
   const used = reg.used;
-  return { head: reg.decls, tail, model: used ? { kind: "heap", keys: [...reg.keys], roots: [...reg.roots], types: [...reg.rootTypes] } : undefined };
+  return { head: reg.decls, tail, model: used ? { kind: "heap", keys: [...reg.keys], roots: [...reg.roots], types: [...reg.rootTypes], encoding: { ...ENCODING, fields: [...reg.keys].map(fieldSymbols) } } : undefined };
 }
 
 // A plain array path denotes its elements; a primitive member denotes one field.
@@ -308,8 +318,8 @@ function allocArray(unit, state, view) {
   const next = `heap_next_v${++reg.versions}`;
   unit.declarations.push(`(define-fun ${next} () Int (+ ${n} 1))`);
   return { state: { ...s, next }, value: { sort: "array", ref: n, type: { kind: "array", element: view.element, allowUndefined: !!view.allowUndefined }, empty: !!view.empty, length: view.length },
-    facts: and(`(>= ${n} 0)`, `(= (heap_kind ${n}) 1)`, `(= (heap_length ${n}) ${view.length.u32})`,
-      `(=> (bvugt (heap_length ${n}) #x00000000) (= (heap_element ${n}) ${TAG[view.element]}))`) };
+    facts: and(`(>= ${n} 0)`, `(= (${ENCODING.kind} ${n}) 1)`, `(= (${ENCODING.length} ${n}) ${view.length.u32})`,
+      `(=> (bvugt (${ENCODING.length} ${n}) #x00000000) (= (${ENCODING.element} ${n}) ${TAG[view.element]}))`) };
 }
 
 export function writeIndex(unit, state, ref, index, value) {
@@ -325,7 +335,7 @@ export function reachable(value) {
   if (!isRef(value)) return [];
   const out = [value.ref];
   if (value.type.kind === "object") for (const f of value.type.fields) if (isReferenceType(f.type)) {
-    out.push(...reachable({ sort: f.type.kind, type: f.type, ref: `(heap_ref_${slotKey(f.name)} ${value.ref})` }));
+    out.push(...reachable({ sort: f.type.kind, type: f.type, ref: `(${fieldSymbols(f.name).ref} ${value.ref})` }));
   }
   return out;
 }
@@ -335,6 +345,8 @@ export function resultDomain(value, args, bound) {
 }
 
 export function inputLengths(type, ref) {
-  if (type.kind === "array") return [`(heap_length ${ref})`];
-  return type.kind === "object" ? type.fields.flatMap((f) => isReferenceType(f.type) ? inputLengths(f.type, `(heap_ref_${slotKey(f.name)} ${ref})`) : []) : [];
+  if (type.kind === "array") return [`(${ENCODING.length} ${ref})`];
+  return type.kind === "object" ? type.fields.flatMap((f) => isReferenceType(f.type) ? inputLengths(f.type, `(${fieldSymbols(f.name).ref} ${ref})`) : []) : [];
 }
+
+export const elementsEmpty = (ref) => `(= (${ENCODING.length} ${ref}) #x00000000)`;

@@ -63,7 +63,7 @@ function inputs(solver, models, replayGuards) {
     return fields.some(([, v]) => v === tooLarge) ? tooLarge : Object.fromEntries(fields);
   };
   const graph = (m) => {
-    const slotKey = (key) => Buffer.from(key).toString("hex");
+    const wire = m.encoding;
     const fn = (name, sort) => ctx.Function.declare(name, ctx.Int.sort(), sort);
     const at = (name, sort, id) => model.eval(fn(name, sort).call(ctx.Int.val(BigInt(id))), true);
     const roots = m.roots.map((symbol) => String(model.eval(ctx.Int.const(symbol), true).value()));
@@ -72,22 +72,23 @@ function inputs(solver, models, replayGuards) {
       const id = queue.shift();
       if (Object.hasOwn(nodes, id)) continue;
       if (Object.keys(nodes).length >= REPLAY_LIMIT) return tooLarge;
-      if (String(at("heap_kind", ctx.Int.sort(), id)) === "1") {
-        const length = Number(at("heap_length", ctx.BitVec.sort(32), id).value());
+      if (String(at(wire.kind, ctx.Int.sort(), id)) === String(wire.arrayKind)) {
+        const length = Number(at(wire.length, ctx.BitVec.sort(32), id).value());
         if (length > REPLAY_LIMIT) return tooLarge;
-        const element = String(at("heap_element", ctx.Int.sort(), id)) === "2" ? "boolean" : "number", values = [];
+        const element = String(at(wire.element, ctx.Int.sort(), id)) === String(wire.tags.boolean) ? "boolean" : "number", values = [];
         const cell = (name, sort, i) => model.eval(ctx.Function.declare(name, ctx.Int.sort(), ctx.BitVec.sort(32), sort).call(ctx.Int.val(BigInt(id)), ctx.BitVec.val(i,32)), true);
-        for (let i = 0; i < length; i++) values.push((String(at("heap_array_dense", ctx.Bool.sort(), id)) !== "true" && String(cell("heap_array_has_raw", ctx.Bool.sort(), i)) !== "true") ? ["undef"] : element === "number"
-          ? ["num", cell("heap_array_num", ctx.BitVec.sort(64), i).value().toString(16).padStart(16,"0")] : ["bool", String(cell("heap_array_bool", ctx.Bool.sort(), i))]);
+        for (let i = 0; i < length; i++) values.push((String(at(wire.dense, ctx.Bool.sort(), id)) !== "true" && String(cell(wire.hasRaw, ctx.Bool.sort(), i)) !== "true") ? ["undef"] : element === "number"
+          ? ["num", cell(wire.arrayNum, ctx.BitVec.sort(64), i).value().toString(16).padStart(16,"0")] : ["bool", String(cell(wire.arrayBool, ctx.Bool.sort(), i))]);
         nodes[id] = { kind: "array", element, values };
       } else {
         const fields = {}; nodes[id] = { kind: "object", fields };
-        for (const k of m.keys) {
-          if (String(at(`heap_has_${slotKey(k)}`, ctx.Bool.sort(), id)) !== "true") continue;
-          const tag = Number(at(`heap_sort_${slotKey(k)}`, ctx.Int.sort(), id).value());
-          if (tag === 1) fields[k] = ["num", at(`heap_num_${slotKey(k)}`, ctx.BitVec.sort(64), id).value().toString(16).padStart(16,"0")];
-          else if (tag === 2) fields[k] = ["bool", String(at(`heap_bool_${slotKey(k)}`, ctx.Bool.sort(), id))];
-          else if (tag === 3 || tag === 4) { const r = String(at(`heap_ref_${slotKey(k)}`,ctx.Int.sort(),id).value()); fields[k] = ["ref",r]; queue.push(r); }
+        for (const field of wire.fields) {
+          const k = field.name;
+          if (String(at(field.has, ctx.Bool.sort(), id)) !== "true") continue;
+          const tag = Number(at(field.tag, ctx.Int.sort(), id).value());
+          if (tag === wire.tags.number) fields[k] = ["num", at(field.number, ctx.BitVec.sort(64), id).value().toString(16).padStart(16,"0")];
+          else if (tag === wire.tags.boolean) fields[k] = ["bool", String(at(field.boolean, ctx.Bool.sort(), id))];
+          else if (tag === wire.tags.object || tag === wire.tags.array) { const r = String(at(field.ref,ctx.Int.sort(),id).value()); fields[k] = ["ref",r]; queue.push(r); }
           else fields[k] = ["undef"];
         }
       }
