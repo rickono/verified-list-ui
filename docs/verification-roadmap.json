@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-09",
-  "status": "A, B, C, D and F are integrated and validated for their documented subsets. I is complete. No downstream work has started.",
-  "edgeMeaning": "All prerequisites apply. I combines the five delivered branches and passes combined validation. E, G, H, P and T are ready to start. Transitively redundant edges are omitted.",
+  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) is implemented and validated on a feature branch, awaiting integration.",
+  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E has passed validation on its feature branch; J waits for E to be integrated. G, H, P and T are ready to start. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -241,14 +241,16 @@
       "deps": [
         "I"
       ],
-      "status": "ready",
+      "status": "branch_ready",
       "area": "Compiler / verification conditions",
       "detail": "Check invariant initialization and preservation at loop heads, then derive exit and early-return properties. Check a well-founded decreasing measure when termination is claimed. Use induction rather than bounded unrolling.",
       "doneWhen": "Read-only-array loops verify for every native length; bad invariants and non-decreasing termination measures fail.",
       "integrated": false,
       "capabilityDeps": [
         "A"
-      ]
+      ],
+      "deliveryStatus": "finished",
+      "resultSummary": "Annotated for/while loops use checked initialization, preservation and unit rank decrease, with early returns, break/continue, optional scalars and unchanged-source replay. Nested loops and heap writes remain unsupported."
     },
     {
       "id": "G",
@@ -605,7 +607,9 @@
     }
   ],
   "progress": {
-    "branchReady": [],
+    "branchReady": [
+      "E"
+    ],
     "partial": [],
     "integratedFromBatch": [
       "A",
@@ -615,16 +619,18 @@
       "F"
     ],
     "next": [
-      "E",
       "G",
       "H",
       "P",
       "T"
     ],
     "agentRunFinished": true,
-    "downstreamStarted": false,
+    "downstreamStarted": true,
     "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
-    "integrationComplete": true
+    "integrationComplete": true,
+    "pendingIntegration": [
+      "E"
+    ]
   },
   "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs.",
   "validation": {
@@ -643,5 +649,14 @@
     "nativeBaselineComparison": true,
     "projectBaselineComparison": true,
     "report": "../verify/reports/integration.md"
+  },
+  "loopDelivery": {
+    "branch": "feat/loop-induction",
+    "implementationCommit": "f76a14625340ca5426937d9034fd1c143e5da2d7",
+    "tests": 189,
+    "loopTests": 21,
+    "mutants": 10,
+    "reportUrl": "https://github.com/rickono/verified-list-ui/blob/f76a14625340ca5426937d9034fd1c143e5da2d7/verify/reports/loops.md",
+    "integrated": false
   }
 }

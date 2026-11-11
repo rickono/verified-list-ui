@@ -15,8 +15,9 @@ export function obligation(target, phase, index = 0) {
     declarations: target.declarations,
     assertions: [DEFINED.has(phase) ? `(not ${target.preDefined})` : target.pre,
       ...(POST.has(phase) ? [`(not ${target.postconditions[index]})`] : []),
-      ...(SMALL.has(phase) ? [target.smallWitness] : [])],
+      ...(SMALL.has(phase) ? [target.smallWitness, ...(!DEFINED.has(phase) ? target.replayGuards ?? [] : [])] : [])],
     models: target.params.map((p) => p.model),
+    replayGuards: DEFINED.has(phase) ? [] : target.replayGuards ?? [],
   };
 }
 
@@ -100,5 +101,10 @@ export async function solve(targets, timeoutMs, { connect = createBackend, now =
     } finally { await close(); }
   };
   await Promise.all(Array.from({ length: width }, slot));
-  return states.map((s) => s.outcome ?? diagnostic(s, "request-timeout", "The shared wall-clock verification budget was exhausted.", s.detail));
+  // Source labels let index.mjs tell an unconfirmed loop abstraction from a bug.
+  return states.map((s) => {
+    const o = s.outcome ?? diagnostic(s, "request-timeout", "The shared wall-clock verification budget was exhausted.", s.detail);
+    const label = POST.has(s.phase) ? s.target.obligations?.[s.postcondition] : undefined;
+    return label ? { ...o, label } : o;
+  });
 }

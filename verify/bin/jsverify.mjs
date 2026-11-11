@@ -28,6 +28,10 @@ try {
       console.log(`${where(o.file)}:${o.line}:${o.column} ${o.status} ${o.fn ?? ""}`.trimEnd());
       if (o.reason) console.log(`  reason: ${o.reason}`);
       if (o.message) console.log(`  ${o.message}`);
+      if (o.reason === "induction-gap") {
+        console.log(`  loop check: ${o.phase}`);
+        console.log(`  candidate inputs (not a confirmed bug): ${Object.entries(o.candidate).map(([k, v]) => `${k} = ${show(v)}`).join(", ") || "(none)"}`);
+      }
       if (o.obligation) {
         const part = o.obligation.postcondition ? ` ${o.obligation.postcondition}/${o.obligation.postconditionCount}` : "";
         console.log(`  obligation: ${o.obligation.phase}${part} (${o.obligation.domain}, ${o.obligation.backend}); queries attempted: ${o.attempts}`);

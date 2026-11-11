@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-09: A, B, C, D and F are integrated and validated for their documented subsets. I is complete. No downstream work has started.
+Status as of 2026-11-09: A, B, C, D and F are integrated. I is complete. E (loop induction) is implemented and validated on a feature branch, awaiting integration.
 
-All prerequisites apply. I combines the five delivered branches and passes combined validation. E, G, H, P and T are ready to start. Transitively redundant edges are omitted.
+All prerequisites apply. I combines the five original branches. E has passed validation on its feature branch; J waits for E to be integrated. G, H, P and T are ready to start. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -13,7 +13,7 @@ flowchart TD
   D["D: Expand soundness checks<br/>integrated"]
   F["F: Richer specifications<br/>integrated"]
   I{{"I: Integrate &amp; validate<br/>integrated"}}
-  E["E: Loops with induction<br/>READY"]
+  E["E: Loops with induction<br/>branch-ready"]
   G["G: Heap, aliases &amp; frames<br/>READY"]
   H["H: Higher-order contracts<br/>READY"]
   J["J: Search proof pilot"]
@@ -62,7 +62,11 @@ flowchart TD
 
 ## Combined validation
 
-The combined verifier suite passed 168/168 tests, including the three Remeda checks that timed out on D's isolated branch. The independent corpus still detects all eight seeded verifier mutants. [Integration report](../verify/reports/integration.md).
+Integration checkpoint I passed 168/168 tests, including the three Remeda checks that timed out on D's isolated branch. That run detected all eight original verifier mutants. [Integration report](../verify/reports/integration.md).
+
+## Loop induction delivery
+
+E is implemented on `feat/loop-induction` at `f76a146` and awaits integration. Its combined suite passes 189 tests, including 21 loop tests. The expanded corpus detects 10 verifier mutants. [Loop validation report](https://github.com/rickono/verified-list-ui/blob/f76a14625340ca5426937d9034fd1c143e5da2d7/verify/reports/loops.md). J remains gated on E's integration.
 
 ## Original branch results
 
@@ -78,7 +82,10 @@ These counts describe the original isolated branches. D's original partial resul
 
 ## Data and updates
 
-[The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`. The next ready packages are E, G, H, P and T. No downstream work has started.
+[The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
+
+Ready packages: G, H, P, T.
+Branches awaiting integration: E.
 
 To regenerate this document after editing the data:
 

@@ -3,15 +3,30 @@ import { fail } from "./error.mjs";
 export const REPLAY_LIMIT = 256;
 const MAX_LENGTH = 0xffff_ffff;
 export const and = (...xs) => xs.includes("false") ? "false" : join("and", xs.filter((x) => x !== "true"), "true");
-const or = (...xs) => xs.includes("true") ? "true" : join("or", xs.filter((x) => x !== "false"), "false");
+export const or = (...xs) => xs.includes("true") ? "true" : join("or", xs.filter((x) => x !== "false"), "false");
 const join = (op, xs, empty) => !xs.length ? empty : xs.length === 1 ? xs[0] : `(${op} ${xs.join(" ")})`;
 export const not = (x) => x === "true" ? "false" : x === "false" ? "true" : `(not ${x})`;
 const ite = (c, a, b) => c === "true" || a === b ? a : c === "false" ? b : `(ite ${c} ${a} ${b})`;
 const bv = (n) => `#x${n.toString(16).padStart(8, "0")}`;
-const num = (smt, present = "true", u32) => ({ sort: "number", smt, present, u32 });
+const num = (smt, present = "true", u32, nat) => ({ sort: "number", smt, present, u32, nat });
+// An exact natural shadow: a present number numerically equal to this unsigned
+// bit-vector (either zero sign). Widths stay <= 53, so binary64 sums are exact.
+export const natOf = (v) => v.sort !== "number" || v.present !== "true" ? undefined : v.nat ?? (v.u32 ? { smt: v.u32, width: 32 } : undefined);
+const widen = (n, w) => n.width === w ? n.smt : `((_ zero_extend ${w - n.width}) ${n.smt})`;
+const natPair = (a, b) => { if (!a.nat && !b.nat) return; const x = natOf(a), y = natOf(b); if (!x || !y) return; const w = Math.max(x.width, y.width); return [widen(x, w), widen(y, w), w]; };
 export const bool = (smt, present = "true") => ({ sort: "boolean", smt, present });
 export const undef = () => ({ sort: "undefined", present: "false" });
 const isReference = (v) => v.sort === "array" || v.sort === "object";
+
+// Every numeric value admitted by the proven u32 invariant is represented,
+// including both zero signs. The exact BV shadow is not an input assumption.
+export function natural(prefix) {
+  const u = `${prefix}_u32`, z = `${prefix}_negative_zero`;
+  return {
+    declarations: [`(declare-const ${u} (_ BitVec 32))`, `(declare-const ${z} Bool)`],
+    value: num(`(ite (and ${z} (= ${u} #x00000000)) (_ -zero 11 53) ((_ to_fp_unsigned 11 53) RNE ${u}))`, "true", u, { smt: u, width: 32 }),
+  };
+}
 
 export function literal(value) {
   if (typeof value === "boolean") return bool(String(value));
@@ -51,19 +66,22 @@ export function merge(c, a, b, node) {
       at: (i) => merge(c, a.at(i), b.at(i), node), allowUndefined: a.allowUndefined || b.allowUndefined, empty: a.empty && b.empty };
   }
   return { sort: a.sort, smt: ite(c, a.smt, b.smt), present: ite(c, a.present, b.present),
-    u32: a.u32 && b.u32 ? ite(c, a.u32, b.u32) : undefined };
+    u32: a.u32 && b.u32 ? ite(c, a.u32, b.u32) : undefined,
+    nat: a.sort === "number" && natPair(a, b) ? (([x, y, width]) => ({ smt: ite(c, x, y), width }))(natPair(a, b)) : undefined };
 }
 
 function equal(a, b, sameValue, node) {
   if (isReference(a) || isReference(b)) fail("Array/object reference identity is unsupported. Compare fields or elements instead.", node);
-  const payload = a.sort !== b.sort || a.sort === "undefined" ? "false"
+  const pair = !sameValue && natPair(a, b);
+  const payload = a.sort !== b.sort || a.sort === "undefined" ? "false" : pair ? `(= ${pair[0]} ${pair[1]})`
     : `(${a.sort === "number" && !sameValue ? "fp.eq" : "="} ${a.smt} ${b.smt})`;
   return bool(or(and(not(a.present), not(b.present)), and(a.present, b.present, payload)));
 }
 
 export function unary(op, a, node) {
   if (op === "!") return bool(not(need(a, "boolean", node)));
-  if (op === "+") return num(need(a, "number", node));
+  // ToNumber of a present number is the identity, so exact shadows survive.
+  if (op === "+") return a.sort === "number" && a.present === "true" && a.nat ? a : num(need(a, "number", node));
   if (op === "-") return num(`(fp.neg ${need(a, "number", node)})`);
   return fail(`Unsupported unary operator ${op}.`, node);
 }
@@ -91,6 +109,13 @@ export function binary(op, a, b, node) {
   const ops = { "+": "add", "-": "sub", "*": "mul", "/": "div", "<": "lt", "<=": "leq", ">": "gt", ">=": "geq" };
   if (!(op in ops)) fail(`${op} is unsupported. Numeric operations must retain their JavaScript meaning.`, node);
   const args = `${need(a, "number", node)} ${need(b, "number", node)}`;
+  const pair = natPair(a, b);
+  if (pair && op === "+" && pair[2] < 53) {
+    const w = pair[2] + 1, sum = `(bvadd ((_ zero_extend 1) ${pair[0]}) ((_ zero_extend 1) ${pair[1]}))`;
+    return num(`(fp.add RNE ${args})`, "true", undefined, { smt: sum, width: w });
+  }
+  const bvops = { "<": "bvult", "<=": "bvule", ">": "bvugt", ">=": "bvuge" };
+  if (pair && op in bvops) return bool(`(${bvops[op]} ${pair[0]} ${pair[1]})`);
   return ["+", "-", "*", "/"].includes(op) ? num(`(fp.${ops[op]} RNE ${args})`) : bool(`(fp.${ops[op]} ${args})`);
 }
 
@@ -103,6 +128,7 @@ export function builtin(name, args, node) {
   if (!["Number.isFinite", "Number.isNaN", "Number.isInteger", "Number.isSafeInteger"].includes(name)) fail(`Unsupported builtin call ${name}.`, node);
   if (v.sort !== "number") return bool("false");
   if (name === "Number.isNaN") return bool(and(v.present, `(fp.isNaN ${v.smt})`));
+  if (v.nat && natOf(v) && natOf(v).width <= 53) return bool("true");
   const finite = and(v.present, not(`(or (fp.isNaN ${v.smt}) (fp.isInfinite ${v.smt}))`));
   if (name === "Number.isFinite") return bool(finite);
   const integer = and(finite, `(fp.eq (fp.roundToIntegral RTZ ${v.smt}) ${v.smt})`);
@@ -163,6 +189,11 @@ export function every(owner, bound, callback, node) {
 export function index(owner, value, node) {
   if (owner.sort !== "array") fail("Computed indexing currently requires an array.", node);
   const x = need(value, "number", node);
+  const n = !value.u32 && natOf(value);
+  if (n && owner.length.u32) {
+    const len = widen({ smt: owner.length.u32, width: 32 }, n.width);
+    return merge(`(bvult ${n.smt} ${len})`, owner.at(`((_ extract 31 0) ${n.smt})`), undef(), node);
+  }
   const i = value.u32 ?? `((_ fp.to_ubv 32) RTZ ${x})`;
   const valid = value.u32 ? and(value.present, `(bvult ${i} ${owner.length.u32})`)
     : and(`(fp.geq ${x} ${literal(0).smt})`, `(fp.lt ${x} ${owner.length.smt})`, `(fp.eq (fp.roundToIntegral RTZ ${x}) ${x})`);

@@ -129,6 +129,18 @@ export async function verifyFile(entry, { timeoutMs = 10_000, tsconfig } = {}) {
   return check(load(entry, { tsconfig }), entry, timeoutMs);
 }
 
+const GAP = {
+  "invariant-init": "The loop invariant may not hold on entry, and replay did not confirm a contract failure.",
+  "invariant-preserve": "The loop invariant may not be preserved by one iteration, and replay did not confirm a contract failure. Strengthen or correct it.",
+  rank: "The decreases measure may not stay nonnegative and drop by at least 1, and replay did not confirm nontermination.",
+  call: "A call inside or after a loop may be unsafe under the invariant; replay did not confirm it.",
+  ensures: "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant.",
+  definedness: "A result contract may be undefined under the loop invariant; replay did not confirm it.",
+};
+// A loop abstraction failure is evidence about the invariant, not about JavaScript.
+const gap = (label, candidate) => ({ status: "unknown", reason: "induction-gap", phase: label.kind, span: label.span,
+  ...(label.loop ? { loop: label.loop } : {}), candidate, message: GAP[label.kind] });
+
 async function check({ files, dependencies, records, error }, file, timeoutMs) {
   const text = new Map([...files, ...dependencies].map((f) => [f.file, f.source]));
   const position = (where, offset) => {
@@ -162,9 +174,12 @@ async function check({ files, dependencies, records, error }, file, timeoutMs) {
         ...t.requires,
       ],
     };
-    const put = (o) => own.set(t.id, { ...base, ...o });
+    const put = (o) => own.set(t.id, { ...base, ...o, ...(o.span ? position(t.file, o.span.start) : {}) });
     const r = results[i];
-    if (r.status === "vacuous" || r.status === "unknown" || r.status === "error") { put(r); continue; }
+    if (r.status === "vacuous" || r.status === "unknown" || r.status === "error") {
+      put({ ...r, ...(r.label?.abstract ? { phase: r.label.kind, span: r.label.span, ...(r.label.loop ? { loop: r.label.loop } : {}) } : {}) });
+      continue;
+    }
     try {
       const actual = replay(targets, modules, t, r.witness, r.phase);
       const v = actual.violation;
@@ -181,7 +196,7 @@ async function check({ files, dependencies, records, error }, file, timeoutMs) {
               message: `${t.name} calls ${label(callee)} with arguments outside its parameter types or requires.` }
           : { status: "unknown", reason: "replay-mismatch", message: `The proof says every call is safe, but replay found a bad call to ${label(callee)}.` });
       } else if (r.status === "counterexample" && !actual.failed.length) {
-        put(t.callees.length
+        put(r.label?.abstract ? gap(r.label, actual.inputs) : t.callees.length
           ? { status: "unknown", reason: "contract-gap", message: "The counterexample relies on abstract helper results that the actual helpers did not produce. A helper ensures may be too weak." }
           : { status: "unknown", reason: "replay-mismatch", message: "The solver's counterexample did not fail in JavaScript. This indicates a verifier discrepancy." });
       } else if (r.status === "verified" && actual.failed.length) {
@@ -190,7 +205,7 @@ async function check({ files, dependencies, records, error }, file, timeoutMs) {
       else put({ status: "verified" });
     } catch (e) {
       put(e.code === "ERR_SCRIPT_EXECUTION_TIMEOUT"
-        ? { status: "unknown", reason: "replay-timeout", message: "JavaScript replay exceeded its execution budget." }
+        ? { status: "unknown", reason: "replay-timeout", message: "JavaScript replay exceeded its execution budget.", ...(r.label?.abstract ? { phase: r.label.kind, span: r.label.span, loop: r.label.loop } : {}) }
         : { status: "unknown", reason: "replay-mismatch", message: `JavaScript replay failed: ${e.message}` });
     }
   }

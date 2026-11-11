@@ -15,9 +15,14 @@ import { fail, blame } from "./error.mjs";
 import * as data from "./data.mjs";
 import { frontend, TYPE_BUILTINS } from "./types.mjs";
 import * as specifications from "./specifications.mjs";
-const { and, not, need, implies } = data;
+const { and, or, not, need, implies } = data;
 const SELF = { sort: "function" };
 const oblige = (cx, safe) => cx.checks.push(implies(cx.guard, safe));
+
+// Builtins resolve only when the owner is not a lexical or module binding.
+function builtinOwner(node, env, cx) {
+  return node.type === "Identifier" && BUILTINS.has(node.name) && !env.has(node.name) && !cx.scope.names.has(node.name) ? node.name : undefined;
+}
 
 function identifiers(node, names) {
   if (!node || typeof node !== "object") return;
@@ -99,12 +104,12 @@ function every(node, env, cx) {
 
 function call(node, env, cx) {
   const name = node.callee.name, unit = cx.unit;
-  if (name === "real" || name === "old") {
+  if ((name === "real" || name === "old") && !env.has(name) && !cx.scope.names.has(name)) {
     if (!cx.contract) fail(`${name}(...) is specification-only.`, node);
     if (node.arguments.length !== 1 || node.arguments[0].type === "SpreadElement") fail(`${name}(...) takes exactly one expression.`, node);
     const arg = node.arguments[0];
     if (name === "old") {
-      if (cx.phase !== "ensures") fail("old(...) is supported only in ensures, over entry parameters.", node);
+      if (!["ensures", "invariant", "decreases"].includes(cx.phase)) fail("old(...) is supported only in ensures, invariant and decreases, over entry parameters.", node);
       return expression(arg, cx.entry, { ...cx, phase: "old" });
     }
     if (arg.type === "Literal" && typeof arg.value === "string") return specifications.exact(arg.value, arg);
@@ -148,7 +153,8 @@ function call(node, env, cx) {
     const ensures = clauses(callee.ensures);
     return { requires: and(pre.value, pre.defined), ensures: and(ensures, ...spec.checks), value: fresh.value };
   });
-  unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), requires), assume: ensures, callee: callee.id });
+  unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), requires), assume: ensures, callee: callee.id,
+    label: { kind: "call", span: { start: node.start, end: node.end }, abstract: unit.cutpoints > 0 } });
   return value;
 }
 
@@ -253,7 +259,7 @@ function expression(node, env, cx) {
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "MemberExpression" && !node.callee.computed && !node.callee.optional) {
     const c = node.callee;
     if (c.property.name === "every") return every(node, env, cx);
-    if (c.object.type === "Identifier" && BUILTINS.has(c.object.name)) {
+    if (builtinOwner(c.object, env, cx)) {
       const args = node.arguments.map(read);
       if (args.some((v) => v.sort === "real")) fail("JavaScript builtins do not accept mathematical values.", node);
       return data.builtin(`${c.object.name}.${c.property.name}`, args, node);
@@ -308,6 +314,7 @@ function contracts(comments) {
     let offset = comment.start + 2;
     for (const line of comment.value.split("\n")) {
       if (/^\s*\*?\s*@spec\s*$/.test(line)) spec = true;
+      if (/^\s*\*?\s*@?(invariant|decreases)\b/.test(line)) fail("invariant and decreases belong directly above a loop.", comment);
       const match = /^\s*\*?\s*@?(requires|ensures)\b(.*)$/.exec(line);
       if (match) {
         const text = match[2].trim();
@@ -372,16 +379,26 @@ function lexicalBindings(list, outer, functionBody) {
   return env;
 }
 
+// Scope exit keeps writes to outer declaration identities. Break and continue
+// states collected inside this scope leave it by the same rule.
+function restore(outer, inner) {
+  return new Map([...outer].map(([name, original]) => {
+    const current = inner.get(name);
+    return [name, current.declaration === original.declaration ? current : original];
+  }));
+}
+
 function scopedStatements(list, states, returns, cx, functionBody = false) {
   return states.flatMap((s) => {
     const env = lexicalBindings(list, s.env, functionBody);
-    return statements(list, [{ path: s.path, env }], returns, cx).map((v) => ({
-      path: v.path,
-      env: new Map([...s.env].map(([name, original]) => {
-        const current = v.env.get(name);
-        return [name, current.declaration === original.declaration ? current : original];
-      })),
-    }));
+    const leave = (v) => ({ path: v.path, env: restore(s.env, v.env) });
+    const marks = cx.loop ? [cx.loop.breaks.length, cx.loop.continues.length] : [];
+    const out = statements(list, [{ path: s.path, env }], returns, cx).map(leave);
+    if (cx.loop) {
+      cx.loop.breaks.splice(marks[0], Infinity, ...cx.loop.breaks.slice(marks[0]).map(leave));
+      cx.loop.continues.splice(marks[1], Infinity, ...cx.loop.continues.slice(marks[1]).map(leave));
+    }
+    return out;
   });
 }
 
@@ -423,12 +440,213 @@ function statements(list, states, returns, cx) {
       for (const s of states) expression(node.expression, s.env, at(s));
     } else if (node.type === "EmptyStatement") {
       continue;
+    } else if (node.type === "WhileStatement" || node.type === "ForStatement") {
+      states = loop(node, states, returns, cx);
+    } else if ((node.type === "BreakStatement" || node.type === "ContinueStatement") && !node.label) {
+      if (!cx.loop) fail(`${node.type} outside a supported loop.`, node);
+      (node.type === "BreakStatement" ? cx.loop.breaks : cx.loop.continues).push(...states);
+      states = [];
     } else {
-      fail(`Unsupported ${node.type}. Loops, heap effects, and unmodeled calls are rejected.`, node);
+      fail(`Unsupported ${node.type}. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected.`, node);
     }
     if (states.length + returns.length > 128) fail("This function exceeds the first slice's 128-path limit.", node);
   }
   return states;
+}
+
+
+// ---- Loop cutpoints -------------------------------------------------------
+const LOOP_TYPES = new Set(["WhileStatement", "ForStatement", "DoWhileStatement", "ForInStatement", "ForOfStatement"]);
+
+function walk(node, visit) {
+  if (!node || typeof node !== "object") return;
+  if (node.type) visit(node);
+  for (const [key, v] of Object.entries(node)) if (key !== "start" && key !== "end") {
+    if (Array.isArray(v)) v.forEach((c) => walk(c, visit)); else if (v && typeof v === "object") walk(v, visit);
+  }
+}
+
+// Syntactic over-approximation, including false-guarded and shadowed writes.
+function writtenNames(nodes) {
+  const names = new Set();
+  for (const n of nodes) walk(n, (x) => {
+    let t = x.type === "AssignmentExpression" ? x.left : x.type === "UpdateExpression" ? x.argument : null;
+    while (t?.type === "ParenthesizedExpression") t = t.expression;
+    if (t?.type === "Identifier") names.add(t.name);
+  });
+  return names;
+}
+
+// Disjoint incoming paths join exactly into one cutpoint entry.
+function mergeStates(states, node) {
+  const last = states.at(-1);
+  const env = new Map(last.env);
+  for (const s of states.slice(0, -1).reverse()) {
+    for (const [name, b] of env) {
+      const a = s.env.get(name);
+      if (a === b || a.value === b.value) continue;
+      if (a.value === null || b.value === null || a.declaration !== b.declaration) fail("Loop entry states disagree on a binding.", node);
+      env.set(name, { ...b, value: data.merge(s.path, a.value, b.value, node) });
+    }
+  }
+  return { path: or(...states.map((s) => s.path)), env };
+}
+
+// Normal expression typing keeps native arithmetic rounded; only explicit real
+// arithmetic carries the exact linear form owned by specifications.mjs.
+function measure(clause, env, cx) {
+  const checks = [];
+  const scx = { ...cx, guard: "true", checks, phase: "decreases" };
+  let value = expression(clause.ast, env, scx);
+  if (value.sort === "number") value = specifications.embed(value, clause.span, (safe) => checks.push(safe));
+  if (value.sort !== "real") fail("decreases requires a number or a real-valued specification expression.", clause.span);
+  return { value, defined: and(...checks) };
+}
+
+const strip = (n) => { while (n.type === "ParenthesizedExpression") n = n.expression; return n; };
+const conjuncts = (n) => (n = strip(n)).type === "LogicalExpression" && n.operator === "&&" ? [...conjuncts(n.left), ...conjuncts(n.right)] : [n];
+const named = (n, name) => strip(n).type === "Identifier" && strip(n).name === name;
+const zero = (n) => strip(n).type === "Literal" && strip(n).value === 0;
+
+// Provenance for a u32 havoc: unconditional invariant conjuncts that the init
+// and preservation checks prove: Number.isInteger(x), 0 <= x, and x <(=) b where
+// b is a u32 array length, a u32 literal, or an earlier name with this
+// provenance. Every state the head admits is then a u32, so the narrower havoc
+// loses nothing. -0 stays representable (as index 0).
+function u32Names(invariants, written, env, cx) {
+  const cs = invariants.flatMap((c) => conjuncts(c.ast)).map(strip);
+  const integer = (name) => cs.some((c) => c.type === "CallExpression" && c.callee.type === "MemberExpression" && !c.callee.computed && !c.optional && builtinOwner(c.callee.object, env, cx) === "Number"
+    && c.callee.property.name === "isInteger" && c.arguments.length === 1 && named(c.arguments[0], name));
+  const lower = (name) => cs.some((c) => c.type === "BinaryExpression" && (c.operator === "<=" && zero(c.left) && named(c.right, name) || c.operator === ">=" && named(c.left, name) && zero(c.right)));
+  const bound = (r, ok) => {
+    r = strip(r);
+    if (r.type === "Literal" && Number.isInteger(r.value) && r.value >= 0 && r.value <= 0xffffffff) return true;
+    if (r.type === "Identifier") return ok.has(r.name);
+    if (r.type !== "MemberExpression" || r.computed || r.property.name !== "length" || strip(r.object).type !== "Identifier") return false;
+    const owner = env.get(strip(r.object).name)?.value;
+    return owner?.sort === "array" && !!owner.length.u32 && !written.includes(strip(r.object).name);
+  };
+  const upper = (name, ok) => cs.some((c) => c.type === "BinaryExpression" && (["<", "<="].includes(c.operator) && named(c.left, name) && bound(c.right, ok)
+    || [">", ">="].includes(c.operator) && named(c.right, name) && bound(c.left, ok)));
+  const ok = new Set();
+  for (let grew = true; grew;) {
+    grew = false;
+    for (const name of written) if (!ok.has(name) && integer(name) && lower(name) && upper(name, ok)) { ok.add(name); grew = true; }
+  }
+  return ok;
+}
+
+function loop(node, states, returns, cx) {
+  const spec = cx.loops.get(node);
+  if (cx.loop) fail("Nested loops are outside this slice.", node);
+  if (!spec.decreases) fail("A loop needs one decreases clause directly above it; verified functions must terminate.", node);
+  if (node.type === "ForStatement" && !node.test) fail("for loops need an explicit test.", node);
+  walk(node, (x) => { if (x !== node && LOOP_TYPES.has(x.type)) fail("Nested loops are outside this slice.", x);
+    if (x.type === "VariableDeclaration" && x.kind === "var") fail("var declarations inside loops are unsupported; use let or const.", x); });
+  const before = mergeStates(states, node);
+  const init = node.type === "ForStatement" && node.init
+    ? [node.init.type === "VariableDeclaration" ? node.init : { type: "ExpressionStatement", expression: node.init, start: node.init.start, end: node.init.end }] : [];
+  const [entry] = statements(init, [{ path: before.path, env: lexicalBindings(init, before.env, false) }], returns, cx);
+  const written = [...writtenNames([node.test, node.update, node.body])].filter((name) => entry.env.has(name));
+  for (const name of written) {
+    const b = entry.env.get(name);
+    // Only scalar cells get a fresh cutpoint value; anything else would keep a stale entry value.
+    if (!["let", "var"].includes(b.kind) || !b.value || !["number", "boolean", "undefined"].includes(b.value.sort)) fail(`A loop may write only number or boolean let bindings; ${name} is not one.`, node);
+    if (b.value.sort === "undefined") fail(`${name} starts as undefined; give it a number or boolean type at loop entry.`, node);
+  }
+  const optional = new Set(written.filter((name) => entry.env.get(name).value.present !== "true"));
+  cx.unit.cutpoints++;
+  for (;;) {
+    // A trial shares fresh names but owns its log; nothing to roll back.
+    const unit = { ...cx.unit, events: [], declarations: [], dependencies: new Set(), replayGuards: [] };
+    const own = [];
+    const checks = [];
+    const r = iterate(node, spec, entry, written, optional, { ...cx, unit, checks }, own);
+    const widen = written.filter((n) => !optional.has(n) && r.backs.some((b) => b.env.get(n).value.present !== "true"));
+    if (widen.length) { widen.forEach((n) => optional.add(n)); continue; }
+    cx.unit.events.push(...unit.events);
+    cx.unit.declarations.push(...unit.declarations);
+    unit.dependencies.forEach((d) => cx.unit.dependencies.add(d));
+    cx.checks.push(...checks);
+    cx.unit.replayGuards.push(...unit.replayGuards);
+    returns.push(...own);
+    cx.unit.loops.push({ start: node.start, end: node.end });
+    return r.exits.filter((x) => x.path !== "false").map((x) => ({ path: x.path, env: restore(before.env, x.env) }));
+  }
+}
+
+function iterate(node, spec, entry, written, optional, cx, returns) {
+  const unit = cx.unit;
+  const contract = { ...cx, contract: true, checks: [], phase: "invariant", loop: undefined };
+  const label = (kind, span) => ({ kind, span, loop: { start: node.start, end: node.end }, abstract: true });
+  const invariant = (env) => { const v = preconditions(spec.invariants, env, contract); return and(v.defined, v.value); };
+  unit.events.push({ guard: entry.path, safe: invariant(entry.env), assume: "true", label: label("invariant-init", spec.span) });
+  const entryRank = measure(spec.decreases, entry.env, contract);
+  const replayGuard = unit.fresh("loop_replay");
+  const manageable = implies(and(entry.path, entryRank.defined), specifications.rankAtMost(entryRank.value, data.REPLAY_LIMIT));
+  // A definitional flag is model-readable without asserting that the bound
+  // holds. Only a witness query asserts this flag; full proofs remain unbounded.
+  unit.declarations.push(`(declare-const ${replayGuard} Bool)`, `(assert (= ${replayGuard} ${manageable}))`);
+  unit.replayGuards.push(replayGuard);
+  const env = new Map(entry.env);
+  const narrow = u32Names(spec.invariants, written.filter((n) => !optional.has(n) && entry.env.get(n).value.sort === "number"), entry.env, cx);
+  for (const name of written) {
+    const b = env.get(name);
+    if (!optional.has(name) && b.value.sort === "number" && narrow.has(name)) {
+      const fresh = data.natural(unit.fresh("loop"));
+      unit.declarations.push(...fresh.declarations);
+      env.set(name, { ...b, value: fresh.value });
+      continue;
+    }
+    const fresh = data.input(optional.has(name) ? { kind: "optional", type: b.value.sort } : b.value.sort, unit.fresh("loop"));
+    unit.declarations.push(...fresh.declarations);
+    env.set(name, { ...b, value: fresh.value });
+  }
+  const head = and(entry.path, invariant(env));
+  const rank = measure(spec.decreases, env, contract);
+  const tested = new Map(env);
+  const c = need(expression(node.test, tested, { ...cx, guard: head }), "boolean", node.test);
+  const collectors = { breaks: [], continues: [] };
+  const done = scopedStatements(blockStatements(node.body), [{ path: and(head, c), env: new Map(tested) }], returns, { ...cx, loop: collectors });
+  const backs = [...done, ...collectors.continues];
+  if (node.update) for (const b of backs) expression(node.update, b.env, { ...cx, guard: b.path });
+  for (const b of backs) {
+    unit.events.push({ guard: b.path, safe: invariant(b.env), assume: "true", label: label("invariant-preserve", spec.span) });
+    const next = measure(spec.decreases, b.env, contract);
+    unit.events.push({ guard: b.path, assume: "true", label: label("rank", spec.decreases.span),
+      safe: and(rank.defined, next.defined, specifications.rankDecrease(rank.value, next.value)) });
+  }
+  return { backs, exits: [{ path: and(head, not(c)), env: tested }, ...collectors.breaks] };
+}
+
+const CONTRACT_LINE = /^\s*\*?\s*@?(requires|ensures|invariant|decreases)\b(.*)$/;
+
+function loopContracts(fn, source, comments) {
+  const loops = new Map(), owned = new Set();
+  walk(fn.body, (node) => {
+    if (!LOOP_TYPES.has(node.type)) return;
+    const invariants = [], decreases = [];
+    for (const comment of leadingComments(source, comments, node.start)) {
+      let offset = comment.start + 2;
+      for (const line of comment.value.split("\n")) {
+        const m = CONTRACT_LINE.exec(line);
+        if (m) {
+          if (!["invariant", "decreases"].includes(m[1])) fail(`${m[1]} belongs above a function, not a loop.`, comment);
+          const text = m[2].trim();
+          (m[1] === "invariant" ? invariants : decreases).push(clause(comment, m[1], text, offset + line.indexOf(text, line.indexOf(m[1]) + m[1].length)));
+          owned.add(comment);
+        }
+        offset += line.length + 1;
+      }
+    }
+    if (decreases.length > 1) fail("Use one decreases clause per loop; lexicographic measures are unsupported.", decreases[1].span);
+    const span = invariants.length ? { start: invariants[0].span.start, end: invariants.at(-1).span.end } : { start: node.start, end: node.start };
+    loops.set(node, { invariants, decreases: decreases[0], span });
+  });
+  for (const c of comments) if (c.start >= fn.start && c.end <= fn.end && !owned.has(c) && c.value.split("\n").some((l) => CONTRACT_LINE.test(l))) {
+    fail("Contract comments inside a function must directly precede a while or for loop and use invariant or decreases.", c);
+  }
+  return loops;
 }
 
 // Header: everything a caller needs except the result shape, which comes from
@@ -491,7 +709,8 @@ function header(top, file, source, stripped, comments, tokens) {
       }
     }
     const own = (kind) => info.clauses.filter((c) => c.kind === kind).map((c) => ({ ...c, file }));
-    return { id: `${file}#${name}`, file, name, top, fn, params, annotations, spec: info.spec, requires: own("requires"), ensures: own("ensures") };
+    const loops = loopContracts(fn, source, comments);
+    return { id: `${file}#${name}`, file, name, top, fn, params, annotations, spec: info.spec, requires: own("requires"), ensures: own("ensures"), loops };
   });
 }
 
@@ -499,7 +718,7 @@ function body(h, scope) {
   const { fn, name, top } = h;
   return blame(h.file, name, () => {
     let next = 0;
-    const unit = { declarations: [], events: [], dependencies: new Set(), fresh: (tag) => `${tag}${next++}` };
+    const unit = { declarations: [], events: [], dependencies: new Set(), fresh: (tag) => `${tag}${next++}`, cutpoints: 0, loops: [], replayGuards: [] };
     const env = new Map();
     if (fn.type === "FunctionExpression" && fn.id) bind(env, fn.id, SELF, "self");
     const declarations = [], lengths = [];
@@ -513,7 +732,7 @@ function body(h, scope) {
     const spec = { guard: "true", contract: true, unit, scope, checks: [], entry: new Map(env), phase: "requires" };
     const pre = preconditions(h.requires, env, spec);
     const returns = [];
-    const cx = { ...spec, contract: h.spec, phase: "body", checks: [] };
+    const cx = { ...spec, contract: h.spec, phase: "body", checks: [], loops: h.loops };
     if (fn.body.type === "BlockStatement") {
       const bodyEnv = new Map(env);
       varBindings(fn.body, bodyEnv);
@@ -525,21 +744,36 @@ function body(h, scope) {
     const callerEvents = unit.events;
     env.set("result", { kind: "contract", value: result });
     spec.phase = "ensures";
-    const ensures = h.ensures.map((c) => need(expression(c.ast, env, spec), "boolean", c.span));
-    // Call k is safe under earlier facts only; ensures uses every fact.
+    const abstract = unit.cutpoints > 0;
+    // With cutpoints, each return proves ensures with its own exact value view
+    // under its own path; a merged result would lose the per-path shadows.
+    const conclude = (value, guard) => {
+      const checks = [], at = new Map(env).set("result", { kind: "contract", value }), scx = { ...spec, checks };
+      const list = h.ensures.map((c) => ({ smt: need(expression(c.ast, at, scx), "boolean", c.span), guard, label: { kind: "ensures", span: c.span, abstract } }));
+      return [...checks.map((smt) => ({ smt, guard, label: { kind: "definedness", span: h.ensures[0].span, abstract } })), ...list];
+    };
+    const ensures = abstract ? [] : h.ensures.map((c) => ({ smt: need(expression(c.ast, env, spec), "boolean", c.span), label: { kind: "ensures", span: c.span, abstract } }));
+    // Call k and loop check k hold under earlier facts only; ensures uses every fact.
     const facts = [], defs = [];
     const obligations = callerEvents.map((e, k) => {
       const safe = implies(and(e.guard, ...facts), e.safe);
       const fact = implies(e.guard, e.assume);
       if (fact !== "true") { defs.push(`(define-fun call_fact${k} () Bool ${fact})`); facts.push(`call_fact${k}`); }
-      return safe;
+      return { smt: safe, label: e.label };
     });
     const allFacts = and(...facts);
-    const conclusions = [...cx.checks, ...spec.checks, ...ensures];
-    const post = and(...obligations, implies(allFacts, and(...conclusions)));
-    // Splitting the conjunction keeps every call guard and callee fact while
-    // letting the backend prove each ensures without unrelated disjuncts.
-    const postconditions = [...obligations, ...conclusions.map((c) => implies(allFacts, c))].filter((c) => c !== "true");
+    // Abstract loop iterations do not return; result is meaningful only on a return path.
+    const returned = abstract ? or(...returns.map((r) => r.path)) : "true";
+    // Body checks carry their own path guards; result checks need a return.
+    const defined = (list, guard) => list.map((smt) => ({ smt, guard, label: { kind: "definedness", span: h.ensures[0].span, abstract } }));
+    const conclusions = abstract
+      ? [...defined(cx.checks, allFacts), ...returns.flatMap((r) => conclude(r.value, and(r.path, allFacts)))]
+      : [...defined(cx.checks, allFacts), ...defined(spec.checks, and(returned, allFacts)),
+        ...(abstract ? conclude(result, and(returned, allFacts)) : ensures.map((e) => ({ ...e, guard: and(returned, allFacts) })))];
+    const items = [...obligations, ...conclusions.map((c) => ({ smt: implies(c.guard, c.smt), label: c.label }))].filter((c) => c.smt !== "true");
+    const post = abstract ? and(...items.map((c) => c.smt))
+      : and(...obligations.map((o) => o.smt), implies(allFacts, and(...cx.checks, ...spec.checks, ...ensures.map((e) => e.smt))));
+    const postconditions = items.map((c) => c.smt);
     const names = new Set(scope.names.keys());
     identifiers(fn, names);
     for (const c of [...h.requires, ...h.ensures]) identifiers(c.ast, names);
@@ -550,7 +784,8 @@ function body(h, scope) {
     return {
       id: h.id, file: h.file, name, span: { start: top.start, end: top.end }, params, resultType: data.valueType(result),
       requires: h.requires.map(({ ast, ...c }) => c), ensures: h.ensures.map(({ ast, ...c }) => c),
-      callees: [...new Set([...callerEvents.map((e) => e.callee), ...unit.dependencies])],
+      callees: [...new Set([...callerEvents.filter((e) => e.callee).map((e) => e.callee), ...unit.dependencies])],
+      loops: unit.loops, obligations: items.map((c) => c.label),
       spec: h.spec,
       predicates: {
         ...replay,
@@ -561,6 +796,7 @@ function body(h, scope) {
       executable: scope.stripped.slice(fn.start, fn.end),
       declarations: [...declarations, ...unit.declarations, ...defs].join("\n"),
       smallWitness: and(...lengths.map((len) => `(bvule ${len} (_ bv${data.REPLAY_LIMIT} 32))`)),
+      replayGuards: unit.replayGuards,
       pre: pre.value, preDefined: pre.defined, post, postconditions: postconditions.length ? postconditions : ["true"],
     };
   });
