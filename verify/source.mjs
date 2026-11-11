@@ -507,31 +507,35 @@ const strip = (n) => { while (n.type === "ParenthesizedExpression") n = n.expres
 const conjuncts = (n) => (n = strip(n)).type === "LogicalExpression" && n.operator === "&&" ? [...conjuncts(n.left), ...conjuncts(n.right)] : [n];
 const named = (n, name) => strip(n).type === "Identifier" && strip(n).name === name;
 const zero = (n) => strip(n).type === "Literal" && strip(n).value === 0;
+const minusOne = (n) => (n = strip(n)).type === "UnaryExpression" && n.operator === "-" && strip(n.argument).type === "Literal" && strip(n.argument).value === 1;
 
 // Provenance for a u32 havoc: unconditional invariant conjuncts that the init
 // and preservation checks prove: Number.isInteger(x), 0 <= x, and x <(=) b where
 // b is a u32 array length, a u32 literal, or an earlier name with this
 // provenance. Every state the head admits is then a u32, so the narrower havoc
 // loses nothing. -0 stays representable (as index 0).
-function u32Names(invariants, written, env, cx) {
+// Predecessor mode instead proves -1 <= x < b and represents x + 1 as u32.
+// Stable local u32 values can anchor either range; circular bounds cannot.
+function u32Names(invariants, { candidates, written }, env, cx, predecessor = false) {
   const cs = invariants.flatMap((c) => conjuncts(c.ast)).map(strip);
   const integer = (name) => cs.some((c) => c.type === "CallExpression" && c.callee.type === "MemberExpression" && !c.callee.computed && !c.optional && builtinOwner(c.callee.object, env, cx) === "Number"
     && c.callee.property.name === "isInteger" && c.arguments.length === 1 && named(c.arguments[0], name));
-  const lower = (name) => cs.some((c) => c.type === "BinaryExpression" && (c.operator === "<=" && zero(c.left) && named(c.right, name) || c.operator === ">=" && named(c.left, name) && zero(c.right)));
+  const lowerBound = predecessor ? minusOne : zero;
+  const lower = (name) => cs.some((c) => c.type === "BinaryExpression" && (c.operator === "<=" && lowerBound(c.left) && named(c.right, name) || c.operator === ">=" && named(c.left, name) && lowerBound(c.right)));
   const bound = (r, ok) => {
     r = strip(r);
     if (r.type === "Literal" && Number.isInteger(r.value) && r.value >= 0 && r.value <= 0xffffffff) return true;
-    if (r.type === "Identifier") return ok.has(r.name);
+    if (r.type === "Identifier") return !predecessor && ok.has(r.name) || !written.includes(r.name) && env.get(r.name)?.value.present === "true" && !!env.get(r.name).value.u32;
     if (r.type !== "MemberExpression" || r.computed || r.property.name !== "length" || strip(r.object).type !== "Identifier") return false;
     const owner = env.get(strip(r.object).name)?.value;
     return owner?.sort === "array" && !!owner.length.u32 && !written.includes(strip(r.object).name);
   };
-  const upper = (name, ok) => cs.some((c) => c.type === "BinaryExpression" && (["<", "<="].includes(c.operator) && named(c.left, name) && bound(c.right, ok)
-    || [">", ">="].includes(c.operator) && named(c.right, name) && bound(c.left, ok)));
+  const upper = (name, ok) => cs.some((c) => c.type === "BinaryExpression" && ((predecessor ? c.operator === "<" : ["<", "<="].includes(c.operator)) && named(c.left, name) && bound(c.right, ok)
+    || (predecessor ? c.operator === ">" : [">", ">="].includes(c.operator)) && named(c.right, name) && bound(c.left, ok)));
   const ok = new Set();
   for (let grew = true; grew;) {
     grew = false;
-    for (const name of written) if (!ok.has(name) && integer(name) && lower(name) && upper(name, ok)) { ok.add(name); grew = true; }
+    for (const name of candidates) if (!ok.has(name) && integer(name) && lower(name) && upper(name, ok)) { ok.add(name); grew = true; }
   }
   return ok;
 }
@@ -589,11 +593,13 @@ function iterate(node, spec, entry, written, optional, cx, returns) {
   unit.declarations.push(`(declare-const ${replayGuard} Bool)`, `(assert (= ${replayGuard} ${manageable}))`);
   unit.replayGuards.push(replayGuard);
   const env = new Map(entry.env);
-  const narrow = u32Names(spec.invariants, written.filter((n) => !optional.has(n) && entry.env.get(n).value.sort === "number"), entry.env, cx);
+  const ranges = { candidates: written.filter((n) => !optional.has(n) && entry.env.get(n).value.sort === "number"), written };
+  const narrow = u32Names(spec.invariants, ranges, entry.env, cx);
+  const predecessor = u32Names(spec.invariants, ranges, entry.env, cx, true);
   for (const name of written) {
     const b = env.get(name);
-    if (!optional.has(name) && b.value.sort === "number" && narrow.has(name)) {
-      const fresh = data.natural(unit.fresh("loop"));
+    if (!optional.has(name) && b.value.sort === "number" && (narrow.has(name) || predecessor.has(name))) {
+      const fresh = data.natural(unit.fresh("loop"), !narrow.has(name));
       unit.declarations.push(...fresh.declarations);
       env.set(name, { ...b, value: fresh.value });
       continue;
@@ -731,6 +737,23 @@ function body(h, scope) {
     });
     const spec = { guard: "true", contract: true, unit, scope, checks: [], entry: new Map(env), phase: "requires" };
     const pre = preconditions(h.requires, env, spec);
+    if (h.loops.size) {
+      // Reparameterize only domains explicitly established by requires. Links
+      // are guarded by definedness as well, so malformed preconditions keep
+      // all their original counterexamples in the first solver phase.
+      const bounded = u32Names(h.requires, { candidates: h.params.filter((p) => p.type === "number").map((p) => p.name), written: [] }, env, spec);
+      const legal = and(pre.defined, pre.value);
+      for (const name of bounded) {
+        const old = env.get(name), fresh = data.natural(unit.fresh("parameter"));
+        unit.declarations.push(...fresh.declarations, `(assert ${implies(legal, `(= ${old.value.smt} ${fresh.value.smt})`)})`);
+        env.set(name, { ...old, value: fresh.value });
+      }
+      if (bounded.size) {
+        const equivalent = preconditions(h.requires, env, { ...spec, checks: [] });
+        unit.declarations.push(`(assert ${implies(legal, equivalent.value)})`);
+        spec.entry = new Map(env);
+      }
+    }
     const returns = [];
     const cx = { ...spec, contract: h.spec, phase: "body", checks: [], loops: h.loops };
     if (fn.body.type === "BlockStatement") {

@@ -46,7 +46,13 @@ A number-valued measure `e` means the exact embedding of the already-rounded Jav
 
 An invariant can establish that a written number is an integer between zero and a u32 bound. The compiler then represents every admitted value with an exact unsigned bitvector and both possible zero signs. This representation requires unconditional integer, lower-bound and upper-bound conjuncts, all checked at initialization and preservation. Bounds can be stable array lengths, u32 literals or previously established bounded locals. Builtin matching uses lexical/module resolution.
 
-Exact shadows propagate through nonnegative integer additions only while the sum fits 53 bits. Comparisons can use their bitvectors. `Object.is` keeps native signed-zero behavior, optional values cannot use stale shadows, and non-loop expressions retain their existing encoding. A counter that stalls at 2^53 cannot satisfy the rank obligation.
+Exact shadows propagate through nonnegative integer additions only while the sum fits 53 bits. Comparisons can use their bitvectors. `Object.is` keeps native signed-zero behavior, optional values cannot use stale shadows, and loop-free functions retain their existing encoding. A counter that stalls at 2^53 cannot satisfy the rank obligation.
+
+The upstream search pilot also represents an integer predecessor as an unsigned shadow minus one. A head narrowed this way requires unconditional `Number.isInteger(i)`, `-1 <= i` and `i < b`, where `b` is a stable u32 bound. The strict upper bound ensures every admitted predecessor plus one fits u32. Havoc includes both zero signs and the `-1` sentinel; it never treats a negative value itself as an unsigned array index. Subtracting one from an exact natural produces a predecessor, and adding one recovers its exact natural shadow. Comparisons normalize both offsets in a widened bitvector, preventing modular wrap. `specifications.mjs` uses the successor shortcut for unit rank drops only when that exact shadow survives.
+
+The range analysis receives both its representation candidates and the complete syntactic write set. An optional scalar is excluded from candidates but remains a write. Its entry value therefore cannot serve as a stable bound for another counter. A regression that changes a bound from `1` to `2^32` while also permitting `undefined` checks this distinction through native counterexample replay.
+
+In functions with loops, unconditional requires can establish an immutable numeric parameter's u32 range. A fresh natural view is linked by FP equality to the original parameter under the original requires and its definedness. The equivalent range predicate is also exposed in the new representation under that guard. These are representation changes over an already-stated domain, not new input assumptions. Original raw parameter models, requires and definedness queries remain intact. `old` retains the same signed entry value. Missing integer/lower/upper conjuncts, disjunctions and circular bounds do not establish a range. The [search fixture](../examples/lodash/README.md) records the motivating implementation.
 
 ## Outcomes and replay
 
@@ -58,7 +64,7 @@ Full-domain queries do not assume a small starting rank. A model-readable flag d
 
 The cutpoint design became the base because it keeps helper ordering and statement semantics in the existing compiler. Its prototype ran through `verify()` and replay. The alternative loop-summary design had solver-level probes but no end-to-end implementation and duplicated obligation ordering.
 
-The implementation takes the alternative's witness-only starting-rank preference. It fixes the prototype's interpretation of bare arithmetic, moves rank lowering into the specification module, removes ablation switches, resolves builtin identities and isolates trial checks. Numeric shadow shortcuts are enabled only for values derived from loop cutpoints, which preserves the baseline encodings of loop-free programs.
+The implementation takes the alternative's witness-only starting-rank preference. It fixes the prototype's interpretation of bare arithmetic, moves rank lowering into the specification module, removes ablation switches, resolves builtin identities and isolates trial checks. Numeric shadow shortcuts are enabled for values derived from loop cutpoints and explicitly bounded parameters in loop functions, which preserves the baseline encodings of loop-free programs.
 
 ## Supported scope and validation
 

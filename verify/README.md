@@ -21,6 +21,7 @@ node verify/examples/remeda/check.mjs
 node verify/examples/remeda/check-calls.mjs
 node verify/examples/remeda/check-imports.mjs
 node verify/examples/project/check-project.mjs
+node verify/examples/lodash/check.mjs
 pnpm verify --timeout 60000 verify/examples/remeda/composed.js
 make test-verify
 ```
@@ -318,6 +319,8 @@ The [loop examples](examples/loops.ts) prove first-match search and counting bou
 
 The [gap examples](examples/loop-gaps.ts) contain correct implementations with an incorrect invariant and a constant measure. Both return `unknown/induction-gap`, and the CLI exits 1. Correcting an annotation can close a proof gap without changing the function body.
 
+The [pinned Lodash search fixture](examples/lodash/README.md) proves an unchanged upstream `strictIndexOf` body: integer result, bounds, first match, absence and termination. It covers dense numeric arrays of every native length and valid integer starting indices. Both an off-by-one return and a skipped first match produce replay-confirmed counterexamples. Run `node verify/examples/lodash/check.mjs` for the offline proof, provenance checks and native comparisons.
+
 ## Supported source
 
 Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
@@ -330,7 +333,7 @@ The builtin allowlist is `Math.abs`, `Number.isFinite`, `Number.isNaN`, `Number.
 
 Runtime top-level statements are supported function declarations, `const` function expressions, named imports, and local named exports. TypeScript uses Node's experimental `stripTypeScriptTypes` in offset-preserving mode, followed by Acorn; Node may emit an experimental-feature warning. A small type grammar reads runtime parameter annotations from the original source, including nested field separators that stripping erased.
 
-The pinned Remeda checks verify an extracted eager declaration after type stripping, with numeric-array JSDoc assumptions and contracts. Higher-order helpers such as `purry`, runtime generic specialization, and loops need further work before an entire Remeda module can be verified. The offline project fixture combines the unchanged eager declaration with a complete pinned D3 identity module, adding only specification comments to D3. It checks concrete aliases, barrels, runtime aliases, package exports, and config paths. See [project frontend policy](design/project-frontend.md).
+The pinned Remeda checks verify an extracted eager declaration after type stripping, with numeric-array JSDoc assumptions and contracts. Higher-order helpers such as `purry` and runtime generic specialization need further work before an entire Remeda module can be verified. The offline project fixture combines the unchanged eager declaration with a complete pinned D3 identity module, adding only specification comments to D3. It checks concrete aliases, barrels, runtime aliases, package exports, and config paths. See [project frontend policy](design/project-frontend.md).
 
 ## Architecture and trust
 
