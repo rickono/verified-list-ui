@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/lodash/lodash",
+  "commit": "c6e281b878b315c7a10d90f9c2af4cdb112d9625",
+  "release": "4.17.21-npm",
+  "path": "_strictIndexOf.js",
+  "sha256": "394592bfc902ec6451478cee5e466052e8358d0ffbee50d31419d26d8d14ff00",
+  "declaration": "strictIndexOf",
+  "declarationSha256": "eb0aadeebe42d2a724d78735996ebe7edf3e02c4f0136e12f5cb4930e530d872",
+  "license": "MIT",
+  "licensePath": "LICENSE",
+  "licenseSha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc"
+}

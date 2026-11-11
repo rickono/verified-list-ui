@@ -12,16 +12,40 @@ const num = (smt, present = "true", u32, nat) => ({ sort: "number", smt, present
 // An exact natural shadow: a present number numerically equal to this unsigned
 // bit-vector (either zero sign). Widths stay <= 53, so binary64 sums are exact.
 export const natOf = (v) => v.sort !== "number" || v.present !== "true" ? undefined : v.nat ?? (v.u32 ? { smt: v.u32, width: 32 } : undefined);
+// Numeric value = unsigned shadow - 1, including either zero sign. The
+// predecessor itself has no u32 cache; only its exact successor can index fast.
+export const predecessorOf = (v) => v.sort === "number" && v.present === "true" ? v.predecessor : undefined;
+const literalIs = (v, value) => v.sort === "number" && v.present === "true" && v.literal === value;
+const integerOf = (v) => {
+  const n = natOf(v), p = predecessorOf(v);
+  return n ? { ...n, offset: 0 } : p ? { ...p, offset: -1 }
+    : v.sort === "number" && v.present === "true" && v.literal === -1 ? { smt: bv(0), width: 32, offset: -1 } : undefined;
+};
 const widen = (n, w) => n.width === w ? n.smt : `((_ zero_extend ${w - n.width}) ${n.smt})`;
 const natPair = (a, b) => { if (!a.nat && !b.nat) return; const x = natOf(a), y = natOf(b); if (!x || !y) return; const w = Math.max(x.width, y.width); return [widen(x, w), widen(y, w), w]; };
+// Shift both exact integers above zero, with one extra bit to prevent wrap.
+// This keeps a predecessor (-1 included) comparable with ordinary u32 indices.
+const integerPair = (a, b) => {
+  if (!a.nat && !b.nat && !a.predecessor && !b.predecessor) return;
+  const x = integerOf(a), y = integerOf(b);
+  if (!x || !y) return;
+  const offset = Math.min(x.offset, y.offset), width = Math.max(x.width, y.width) + Number(x.offset !== y.offset);
+  const shift = (n) => n.offset === offset ? widen(n, width) : `(bvadd ${widen(n, width)} (_ bv1 ${width}))`;
+  return [shift(x), shift(y)];
+};
 export const bool = (smt, present = "true") => ({ sort: "boolean", smt, present });
 export const undef = () => ({ sort: "undefined", present: "false" });
 const isReference = (v) => v.sort === "array" || v.sort === "object";
 
 // Every numeric value admitted by the proven u32 invariant is represented,
 // including both zero signs. The exact BV shadow is not an input assumption.
-export function natural(prefix) {
+export function natural(prefix, predecessor = false) {
   const u = `${prefix}_u32`, z = `${prefix}_negative_zero`;
+  const payload = `((_ to_fp_unsigned 11 53) RNE ${u})`;
+  if (predecessor) return {
+    declarations: [`(declare-const ${u} (_ BitVec 32))`, `(declare-const ${z} Bool)`],
+    value: { ...num(`(ite (and ${z} (= ${u} #x00000001)) (_ -zero 11 53) (fp.sub RNE ${payload} ${literal(1).smt}))`), predecessor: { smt: u, width: 32 } },
+  };
   return {
     declarations: [`(declare-const ${u} (_ BitVec 32))`, `(declare-const ${z} Bool)`],
     value: num(`(ite (and ${z} (= ${u} #x00000000)) (_ -zero 11 53) ((_ to_fp_unsigned 11 53) RNE ${u}))`, "true", u, { smt: u, width: 32 }),
@@ -32,8 +56,8 @@ export function literal(value) {
   if (typeof value === "boolean") return bool(String(value));
   const bytes = Buffer.alloc(8);
   bytes.writeDoubleBE(value);
-  return num(`((_ to_fp 11 53) #x${bytes.toString("hex")})`, "true",
-    Number.isInteger(value) && value >= 0 && value <= MAX_LENGTH ? bv(value) : undefined);
+  return { ...num(`((_ to_fp 11 53) #x${bytes.toString("hex")})`, "true",
+    Number.isInteger(value) && value >= 0 && value <= MAX_LENGTH ? bv(value) : undefined), literal: value };
 }
 
 export function need(v, sort, node) {
@@ -72,7 +96,7 @@ export function merge(c, a, b, node) {
 
 function equal(a, b, sameValue, node) {
   if (isReference(a) || isReference(b)) fail("Array/object reference identity is unsupported. Compare fields or elements instead.", node);
-  const pair = !sameValue && natPair(a, b);
+  const pair = !sameValue && integerPair(a, b);
   const payload = a.sort !== b.sort || a.sort === "undefined" ? "false" : pair ? `(= ${pair[0]} ${pair[1]})`
     : `(${a.sort === "number" && !sameValue ? "fp.eq" : "="} ${a.smt} ${b.smt})`;
   return bool(or(and(not(a.present), not(b.present)), and(a.present, b.present, payload)));
@@ -81,8 +105,8 @@ function equal(a, b, sameValue, node) {
 export function unary(op, a, node) {
   if (op === "!") return bool(not(need(a, "boolean", node)));
   // ToNumber of a present number is the identity, so exact shadows survive.
-  if (op === "+") return a.sort === "number" && a.present === "true" && a.nat ? a : num(need(a, "number", node));
-  if (op === "-") return num(`(fp.neg ${need(a, "number", node)})`);
+  if (op === "+") return a.sort === "number" && a.present === "true" && (a.nat || a.predecessor) ? a : num(need(a, "number", node));
+  if (op === "-") return { ...num(`(fp.neg ${need(a, "number", node)})`), ...(a.sort === "number" && a.present === "true" && a.literal !== undefined ? { literal: -a.literal } : {}) };
   return fail(`Unsupported unary operator ${op}.`, node);
 }
 
@@ -109,13 +133,19 @@ export function binary(op, a, b, node) {
   const ops = { "+": "add", "-": "sub", "*": "mul", "/": "div", "<": "lt", "<=": "leq", ">": "gt", ">=": "geq" };
   if (!(op in ops)) fail(`${op} is unsupported. Numeric operations must retain their JavaScript meaning.`, node);
   const args = `${need(a, "number", node)} ${need(b, "number", node)}`;
+  if (op === "-" && literalIs(b, 1) && a.nat && natOf(a)) return { ...num(`(fp.sub RNE ${args})`), predecessor: natOf(a) };
+  if (op === "+") {
+    const p = literalIs(b, 1) ? predecessorOf(a) : literalIs(a, 1) ? predecessorOf(b) : undefined;
+    if (p) return num(`(fp.add RNE ${args})`, "true", p.width === 32 ? p.smt : undefined, p);
+  }
   const pair = natPair(a, b);
   if (pair && op === "+" && pair[2] < 53) {
     const w = pair[2] + 1, sum = `(bvadd ((_ zero_extend 1) ${pair[0]}) ((_ zero_extend 1) ${pair[1]}))`;
     return num(`(fp.add RNE ${args})`, "true", undefined, { smt: sum, width: w });
   }
   const bvops = { "<": "bvult", "<=": "bvule", ">": "bvugt", ">=": "bvuge" };
-  if (pair && op in bvops) return bool(`(${bvops[op]} ${pair[0]} ${pair[1]})`);
+  const comparison = integerPair(a, b);
+  if (comparison && op in bvops) return bool(`(${bvops[op]} ${comparison[0]} ${comparison[1]})`);
   return ["+", "-", "*", "/"].includes(op) ? num(`(fp.${ops[op]} RNE ${args})`) : bool(`(fp.${ops[op]} ${args})`);
 }
 
@@ -128,7 +158,7 @@ export function builtin(name, args, node) {
   if (!["Number.isFinite", "Number.isNaN", "Number.isInteger", "Number.isSafeInteger"].includes(name)) fail(`Unsupported builtin call ${name}.`, node);
   if (v.sort !== "number") return bool("false");
   if (name === "Number.isNaN") return bool(and(v.present, `(fp.isNaN ${v.smt})`));
-  if (v.nat && natOf(v) && natOf(v).width <= 53) return bool("true");
+  if ((v.nat && natOf(v)?.width <= 53) || predecessorOf(v)?.width <= 53) return bool("true");
   const finite = and(v.present, not(`(or (fp.isNaN ${v.smt}) (fp.isInfinite ${v.smt}))`));
   if (name === "Number.isFinite") return bool(finite);
   const integer = and(finite, `(fp.eq (fp.roundToIntegral RTZ ${v.smt}) ${v.smt})`);

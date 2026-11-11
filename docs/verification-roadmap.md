@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-09: A, B, C, D and F are integrated. I is complete. E (loop induction) is implemented and validated on a feature branch, awaiting integration.
+Status as of 2026-11-10: A, B, C, D and F are integrated. I is complete. E (loop induction) is merged through PR #3. J proves the pinned unchanged Lodash search helper and is validated on a feature branch, awaiting integration.
 
-All prerequisites apply. I combines the five original branches. E has passed validation on its feature branch; J waits for E to be integrated. G, H, P and T are ready to start. Transitively redundant edges are omitted.
+All prerequisites apply. I combines the five original branches. E is integrated; J builds on it. G, H, P and T are ready to start. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -13,10 +13,10 @@ flowchart TD
   D["D: Expand soundness checks<br/>integrated"]
   F["F: Richer specifications<br/>integrated"]
   I{{"I: Integrate &amp; validate<br/>integrated"}}
-  E["E: Loops with induction<br/>branch-ready"]
+  E["E: Loops with induction<br/>integrated"]
   G["G: Heap, aliases &amp; frames<br/>READY"]
   H["H: Higher-order contracts<br/>READY"]
-  J["J: Search proof pilot"]
+  J["J: Search proof pilot<br/>branch-ready"]
   K["K: Broader library proofs"]
   P["P: Project proof workflow<br/>READY"]
   Q["Q: Pure JS/TS proofs &amp; bugs"]
@@ -66,7 +66,11 @@ Integration checkpoint I passed 168/168 tests, including the three Remeda checks
 
 ## Loop induction delivery
 
-E is implemented on `feat/loop-induction` at `f76a146` and awaits integration. Its combined suite passes 189 tests, including 21 loop tests. The expanded corpus detects 10 verifier mutants. [Loop validation report](https://github.com/rickono/verified-list-ui/blob/f76a14625340ca5426937d9034fd1c143e5da2d7/verify/reports/loops.md). J remains gated on E's integration.
+E was merged at `80ed2fd`. Its delivery suite passes 189 tests, including 21 loop tests. The expanded corpus detects 10 verifier mutants. [Loop validation report](https://github.com/rickono/verified-list-ui/blob/f76a14625340ca5426937d9034fd1c143e5da2d7/verify/reports/loops.md). J builds on this integrated capability.
+
+## Upstream search delivery
+
+J is implemented and awaiting integration on `feat/upstream-search-proof`. The pinned Lodash strictIndexOf function verifies unchanged, and 2 seeded bugs produce replay-confirmed counterexamples. The combined run passed 199/199 tests. The raw export passes 261 native comparisons. [Search validation report](../verify/reports/upstream-search.md).
 
 ## Original branch results
 
@@ -85,7 +89,7 @@ These counts describe the original isolated branches. D's original partial resul
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
 Ready packages: G, H, P, T.
-Branches awaiting integration: E.
+Branches awaiting integration: J.
 
 To regenerate this document after editing the data:
 

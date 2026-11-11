@@ -1,5 +1,5 @@
 import { fail } from "./error.mjs";
-import { and, bool, builtin, not, need, natOf, literal, binary as nativeBinary } from "./data.mjs";
+import { and, bool, builtin, not, need, natOf, predecessorOf, literal, binary as nativeBinary } from "./data.mjs";
 
 const real = (smt) => ({ sort: "real", smt, present: "true" });
 const integer = (n) => n < 0n ? `(- ${-n})` : String(n);
@@ -81,7 +81,7 @@ function rankAtLeast(value, k) {
       const a = need(x.view, "number"), b = need(y.view, "number");
       if (x.coeff === 1n && y.coeff === -1n) {
         if (k === 0n) return nativeBinary(">=", x.view, y.view).smt;
-        if (k > 0n && k <= 0xffffffffn && natOf(x.view) && natOf(y.view)) {
+        if (k > 0n && k <= 0xffffffffn && natOf(x.view) && (natOf(y.view) || predecessorOf(y.view))) {
           const sum = nativeBinary("+", y.view, lit(k));
           if (natOf(sum)) return nativeBinary(">=", x.view, sum).smt;
         }

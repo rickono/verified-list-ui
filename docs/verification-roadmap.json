@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
-  "asOf": "2026-11-09",
-  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) is implemented and validated on a feature branch, awaiting integration.",
-  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E has passed validation on its feature branch; J waits for E to be integrated. G, H, P and T are ready to start. Transitively redundant edges are omitted.",
+  "asOf": "2026-11-10",
+  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) is merged through PR #3. J proves the pinned unchanged Lodash search helper and is validated on a feature branch, awaiting integration.",
+  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E is integrated; J builds on it. G, H, P and T are ready to start. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -241,11 +241,11 @@
       "deps": [
         "I"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Compiler / verification conditions",
       "detail": "Check invariant initialization and preservation at loop heads, then derive exit and early-return properties. Check a well-founded decreasing measure when termination is claimed. Use induction rather than bounded unrolling.",
       "doneWhen": "Read-only-array loops verify for every native length; bad invariants and non-decreasing termination measures fail.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "A"
       ],
@@ -293,15 +293,17 @@
       "deps": [
         "E"
       ],
-      "status": "planned",
+      "status": "branch_ready",
       "area": "Real-code proof fixture",
-      "detail": "Pin a small numeric-array search helper such as Lodash strictIndexOf. State valid starting-index assumptions and prove bounds, first match, absence and termination. Replay off-by-one mutants.",
+      "detail": "Pin Lodash strictIndexOf at c6e281b. Prove bounds, first match, absence and termination for dense numeric arrays and valid integer starts. Replay off-by-one and skipped-first-match mutants.",
       "doneWhen": "The unchanged helper verifies and a seeded implementation bug gives a replay-confirmed counterexample.",
       "integrated": false,
       "capabilityDeps": [
         "E",
         "D"
-      ]
+      ],
+      "deliveryStatus": "finished",
+      "resultSummary": "The unchanged Lodash strictIndexOf declaration verifies integer result, bounds, first match, absence and termination. Both seeded bugs produce replay-confirmed counterexamples. The final suite passes 199/199 tests; the raw export passes 261 native comparisons."
     },
     {
       "id": "K",
@@ -608,7 +610,7 @@
   ],
   "progress": {
     "branchReady": [
-      "E"
+      "J"
     ],
     "partial": [],
     "integratedFromBatch": [
@@ -629,7 +631,7 @@
     "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
     "integrationComplete": true,
     "pendingIntegration": [
-      "E"
+      "J"
     ]
   },
   "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs.",
@@ -657,6 +659,22 @@
     "loopTests": 21,
     "mutants": 10,
     "reportUrl": "https://github.com/rickono/verified-list-ui/blob/f76a14625340ca5426937d9034fd1c143e5da2d7/verify/reports/loops.md",
+    "integrated": true,
+    "mergeCommit": "80ed2fd53b054206a108639c97116ae6f59e8099"
+  },
+  "searchDelivery": {
+    "branch": "feat/upstream-search-proof",
+    "upstreamCommit": "c6e281b878b315c7a10d90f9c2af4cdb112d9625",
+    "tests": 199,
+    "fullSuite": {
+      "passed": 199,
+      "failed": 0,
+      "skipped": 0
+    },
+    "integerTests": 7,
+    "nativeComparisons": 261,
+    "seededBugs": 2,
+    "report": "../verify/reports/upstream-search.md",
     "integrated": false
   }
 }

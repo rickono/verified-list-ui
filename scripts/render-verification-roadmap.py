@@ -35,8 +35,19 @@ lines += [
     f"Integration checkpoint I passed {data['validation']['fullSuite']['passed']}/{data['validation']['fullSuite']['passed']} tests, including the three Remeda checks that timed out on D's isolated branch. That run detected all eight original verifier mutants. [Integration report](../verify/reports/integration.md).", "",
 ]
 if delivery := data.get("loopDelivery"):
+    state = (f"E was merged at `{delivery['mergeCommit'][:7]}`."
+        if delivery["integrated"] else f"E is implemented on `{delivery['branch']}` at `{delivery['implementationCommit'][:7]}` and awaits integration.")
+    next_step = "J builds on this integrated capability." if delivery["integrated"] else "J remains gated on E's integration."
     lines += ["## Loop induction delivery", "",
-        f"E is implemented on `{delivery['branch']}` at `{delivery['implementationCommit'][:7]}` and awaits integration. Its combined suite passes {delivery['tests']} tests, including {delivery['loopTests']} loop tests. The expanded corpus detects {delivery['mutants']} verifier mutants. [Loop validation report]({delivery['reportUrl']}). J remains gated on E's integration.", ""]
+        f"{state} Its delivery suite passes {delivery['tests']} tests, including {delivery['loopTests']} loop tests. The expanded corpus detects {delivery['mutants']} verifier mutants. [Loop validation report]({delivery['reportUrl']}). {next_step}", ""]
+if delivery := data.get("searchDelivery"):
+    state = "integrated" if delivery["integrated"] else "implemented and awaiting integration"
+    suite = delivery["fullSuite"]
+    validation = f"The combined run passed {suite['passed']}/{delivery['tests']} tests."
+    if suite["failed"]:
+        validation += f" {suite['failed']} existing tests hit resource limits; see the report for isolated rechecks."
+    lines += ["## Upstream search delivery", "",
+        f"J is {state} on `{delivery['branch']}`. The pinned Lodash strictIndexOf function verifies unchanged, and {delivery['seededBugs']} seeded bugs produce replay-confirmed counterexamples. {validation} The raw export passes {delivery['nativeComparisons']} native comparisons. [Search validation report]({delivery['report']}).", ""]
 lines += [
     "## Original branch results", "",
     "These counts describe the original isolated branches. D's original partial result is retained as historical evidence; the combined validation above closes that acceptance gap.", "",

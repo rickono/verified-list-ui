@@ -18,7 +18,9 @@ const solveBaseline = process.argv.includes("--solve-baseline");
 const baseline = process.argv.slice(2).find((arg) => arg !== "--solve-baseline") ?? "ff2518cd7494300084f2ab54da71f4d79185e586";
 const temporary = await mkdtemp(join(here, ".native-baseline-"));
 try {
-  for (const file of ["error.mjs", "data.mjs", "source.mjs", "modules.mjs", ...(solveBaseline ? ["index.mjs", "solver.mjs"] : [])]) {
+  const files = execFileSync("git", ["ls-tree", "-r", "--name-only", baseline, "verify"], { cwd: root, encoding: "utf8" })
+    .trim().split("\n").filter((file) => /^verify\/[^/]+\.mjs$/.test(file)).map((file) => file.slice("verify/".length));
+  for (const file of files) {
     await writeFile(join(temporary, file), execFileSync("git", ["show", `${baseline}:verify/${file}`], { cwd: root }));
   }
   const original = await import(pathToFileURL(join(temporary, "source.mjs")));
@@ -56,7 +58,12 @@ const shifted = (array) => takeImplementation(array.slice(1), 2);` });
     assert.ok(current.every((t) => t.preDefined === "true" && !t.spec), `${c.name}: unexpected specification query`);
     const queries = current.map(projection);
     assert.deepEqual(queries, old.map(projection), `${c.name}: native solver obligations changed`);
-    evidence.push({ name: c.name, targets: current.length, sha256: createHash("sha256").update(JSON.stringify(queries)).digest("hex") });
+    const splitQueriesCompared = old.every((t) => Array.isArray(t.postconditions));
+    if (splitQueriesCompared) {
+      const phases = ({ preDefined, postconditions, replayGuards }) => ({ preDefined, postconditions, replayGuards });
+      assert.deepEqual(current.map(phases), old.map(phases), `${c.name}: split or witness queries changed`);
+    }
+    evidence.push({ name: c.name, targets: current.length, splitQueriesCompared, sha256: createHash("sha256").update(JSON.stringify(queries)).digest("hex") });
   }
   const baselineOutcomes = [];
   if (solveBaseline) {
