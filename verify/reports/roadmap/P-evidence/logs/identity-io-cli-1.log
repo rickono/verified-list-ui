@@ -1,0 +1,122 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:50195) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: independent OS writers and readers never observe torn receipt bytes or lose other keys
+ok 1 - independent OS writers and readers never observe torn receipt bytes or lose other keys
+  ---
+  duration_ms: 165.068458
+  type: 'test'
+  ...
+# Subtest: mid-write SIGKILL leaves absent/complete entries; dead stale temps sweep while active, foreign and unrelated files remain
+not ok 2 - mid-write SIGKILL leaves absent/complete entries; dead stale temps sweep while active, foreign and unrelated files remain
+  ---
+  duration_ms: 269.879416
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/tests/verify/cache-io.test.mjs:40:1'
+  failureType: 'testCodeFailure'
+  error: 'the test must actually interrupt a writer before atomic rename'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/tests/verify/cache-io.test.mjs:60:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: size caps, symlinks, schema and invalid writes fail closed and leave no temporary files
+ok 3 - size caps, symlinks, schema and invalid writes fail closed and leave no temporary files
+  ---
+  duration_ms: 9.587167
+  type: 'test'
+  ...
+# (node:50209) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AST closure follows static, side-effect, re-export, literal dynamic/template imports and worker URLs
+ok 4 - AST closure follows static, side-effect, re-export, literal dynamic/template imports and worker URLs
+  ---
+  duration_ms: 3278.328417
+  type: 'test'
+  ...
+# Subtest: computed imports, loader APIs, computed worker URLs and transitive unresolved dynamic code disable reuse
+ok 5 - computed imports, loader APIs, computed worker URLs and transitive unresolved dynamic code disable reuse
+  ---
+  duration_ms: 103.049292
+  type: 'test'
+  ...
+# Subtest: whole solver package JS, wasm and transitive dependencies, runtime and protocol bind receipt identity
+ok 6 - whole solver package JS, wasm and transitive dependencies, runtime and protocol bind receipt identity
+  ---
+  duration_ms: 238.892042
+  type: 'test'
+  ...
+# Subtest: editing a loaded semantic module disables the running API rather than naming new disk bytes
+not ok 7 - editing a loaded semantic module disables the running API rather than naming new disk bytes
+  ---
+  duration_ms: 28.653
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/tests/verify/manifest.test.mjs:91:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Command failed: /Users/rick/.hermes/node/bin/node --input-type=module -e 
+    import {verifyFile} from "file:///var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/jsverify-manifest-2R5DGc/verify/index.mjs";
+    import {appendFileSync} from 'node:fs';
+    appendFileSync("/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/jsverify-manifest-2R5DGc/verify/cache.mjs",'
+    // changed after load');
+    const r=await verifyFile("/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/jsverify-manifest-2R5DGc/entry.ts",{cache:{dir:"/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/jsverify-manifest-2R5DGc/cache"},plan:true});
+    console.log(JSON.stringify(r.cache));
+    file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/[eval1]:4
+    appendFileSync("/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/jsverify-manifest-2R5DGc/verify/cache.mjs",'
+                                                                                                                ^
+    
+    SyntaxError: Invalid or unexpected token
+        at compileSourceTextModule (node:internal/modules/esm/utils:346:16)
+        at ModuleLoader.createModuleWrap (node:internal/modules/esm/loader:266:12)
+        at ModuleLoader.eval (node:internal/modules/esm/loader:306:23)
+        at node:internal/process/execution:73:24
+        at asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:11)
+        at Object.runEntryPointWithESMLoader (node:internal/modules/run_main:139:19)
+        at evalModuleEntryPoint (node:internal/process/execution:72:47)
+        at node:internal/main/eval_string:38:3
+    
+    Node.js v22.23.1
+    
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    compileSourceTextModule (node:internal/modules/esm/utils:346:16)
+    ModuleLoader.createModuleWrap (node:internal/modules/esm/loader:266:12)
+    ModuleLoader.eval (node:internal/modules/esm/loader:306:23)
+    node:internal/process/execution:73:24
+    asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:11)
+    Object.runEntryPointWithESMLoader (node:internal/modules/run_main:139:19)
+    evalModuleEntryPoint (node:internal/process/execution:72:47)
+    node:internal/main/eval_string:38:3
+    genericNodeError (node:internal/errors:983:15)
+    wrappedFn (node:internal/errors:537:14)
+    checkExecSyncError (node:child_process:916:11)
+    execFileSync (node:child_process:952:15)
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/tests/verify/manifest.test.mjs:94:16)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+  ...
+# Subtest: CLI cold/warm/audit, plan/selection and native evidence reproduction use real source
+ok 8 - CLI cold/warm/audit, plan/selection and native evidence reproduction use real source
+  ---
+  duration_ms: 2694.440416
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 6
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6973.990083

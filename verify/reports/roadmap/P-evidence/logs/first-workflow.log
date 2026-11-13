@@ -1,0 +1,135 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+{
+  schema: 1,
+  files: [
+    [
+      'backend.mjs',
+      'c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb'
+    ],
+    [
+      'cache.mjs',
+      'aa440587450ddc91581be7c6666f16c635303f5c34a341776a438ed8ebc4e46d'
+    ],
+    [
+      'data.mjs',
+      '6c53f2fc830558b353ebe9e38147ee7b4dbbb12cbfa2bd15b56f36fa567c17f4'
+    ],
+    [
+      'error.mjs',
+      '15f9572637f32a545a037c671ccbf20b394b030f68d840c76068d7ee5a456e62'
+    ],
+    [
+      'evidence.mjs',
+      'f70f4aa94295477e8a0bc3a91712722a254c8a52205ee2f2eef8a9dc550ed62e'
+    ],
+    [
+      'heap-witness.mjs',
+      'c8a60bbf7961bad2926a1fc5006c610d80d95997c73a6632f07a9f55fe58edb3'
+    ],
+    [
+      'heap.mjs',
+      '3a833de64dca47275accc84371a451f84ba5905fea618ffe2935149269e50f9a'
+    ],
+    [
+      'index.mjs',
+      '08d00dad946280a04fdaedf1c5c78c1373a976077c65b5920748ba19679612c9'
+    ],
+    [
+      'manifest.mjs',
+      '406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f'
+    ],
+    [
+      'modules.mjs',
+      '55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68'
+    ],
+    [
+      'predicate-witness.mjs',
+      '5f460cecd470fe62418c9ebb5358e97854ad65a642cebf68827daf1d6ae39085'
+    ],
+    [
+      'proofs.mjs',
+      'ec7afd05f9c6984296b5466399f1b713a3c736b4c0065445d6e8cb0e1c8add8c'
+    ],
+    [
+      'solver.mjs',
+      'fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2'
+    ],
+    [
+      'source.mjs',
+      '38bbea4deee14933640511a90336142d1d1bde67793c4ae0f752ced597c52e2e'
+    ],
+    [
+      'specifications.mjs',
+      '869d1385d30dd4747c2db0467bdd2086ae26d0e452694bd49b471260f2240c6f'
+    ],
+    [
+      'types.mjs',
+      '9ea60c9f2bf3983a75bd7f23d6c02d1cbeaed75ab6d2e2bfed6b9754c8a5993f'
+    ]
+  ],
+  packages: [
+    {
+      name: 'acorn',
+      version: '8.19.0',
+      sha256: '1ed5ad01258647b3552b030521979142e2a13a508054670cf4e8fc96a064ae2d',
+      dependencies: []
+    },
+    {
+      name: 'async-mutex',
+      version: '0.3.2',
+      sha256: 'b83a6fe5087099757e98d7c1cb68e08401a73e616880babbe71a759470e36884',
+      dependencies: [Array]
+    },
+    {
+      name: 'tslib',
+      version: '2.9.1',
+      sha256: '2753f4182709f59b1e9d2517424a8fa0fad0d68de2103624bac567aff5aa1dd8',
+      dependencies: []
+    },
+    {
+      name: 'z3-solver',
+      version: '5.3.3',
+      sha256: '86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685',
+      dependencies: [Array]
+    }
+  ],
+  builtins: [
+    'node:child_process',
+    'node:crypto',
+    'node:fs',
+    'node:module',
+    'node:os',
+    'node:path',
+    'node:perf_hooks',
+    'node:url',
+    'node:vm'
+  ],
+  runtime: { node: 'v22.23.1', platform: 'darwin', arch: 'arm64' },
+  protocol: 'jsverify-receipt-1/query-1',
+  sha256: 'd3855a83aa4894839fd7a9262f03e3048d34a659768b17dcfa84c64c615ce095',
+  backend: {
+    package: 'z3-solver@5.3.3',
+    sha256: '86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685',
+    files: [
+      [Array], [Array], [Array],
+      [Array], [Array], [Array],
+      [Array], [Array], [Array],
+      [Array], [Array], [Array],
+      [Array], [Array], [Array],
+      [Array], [Array], [Array],
+      [Array], [Array], [Array],
+      [Array], [Array], [Array],
+      [Array]
+    ],
+    node: 'v22.23.1',
+    platform: 'darwin',
+    arch: 'arm64'
+  }
+}
+(node:47915) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"r":{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","trusted":["Acorn parser","Node TypeScript type stripping","project type and module resolution and source snapshots","source-to-SMT translation","exact rational specification replay","Z3 and its WASM bindings","unmodified standard Number/Math/Object/Array builtins and prototypes","JavaScript runtime"],"modules":[{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","imports":[]}],"dependencies":[],"graphSha256":"983c8b79a4b4589e24e7b894fc1bafe9fd9482dc1bc9713c6ddff4afa1d5e3a4","outcomes":[{"fn":"f","file":"input.ts","span":{"start":32,"end":59},"line":2,"column":1,"assumptions":[{"kind":"param-type","name":"x","type":"number"}],"status":"verified"}]}}
+{"mode":"readwrite","r":{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","trusted":["Acorn parser","Node TypeScript type stripping","project type and module resolution and source snapshots","source-to-SMT translation","exact rational specification replay","Z3 and its WASM bindings","unmodified standard Number/Math/Object/Array builtins and prototypes","JavaScript runtime"],"modules":[{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","imports":[]}],"dependencies":[],"graphSha256":"983c8b79a4b4589e24e7b894fc1bafe9fd9482dc1bc9713c6ddff4afa1d5e3a4","outcomes":[{"fn":"f","file":"input.ts","span":{"start":32,"end":59},"line":2,"column":1,"assumptions":[{"kind":"param-type","name":"x","type":"number"}],"status":"verified"}],"cache":{"mode":"readwrite","identity":"d3855a83aa4894839fd7a9262f03e3048d34a659768b17dcfa84c64c615ce095","protocol":"jsverify-receipt-1/query-1","backend":{"package":"z3-solver@5.3.3","sha256":"86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685","files":[["LICENSE.txt","e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"],["README.md","c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f"],["build/browser.d.ts","65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507"],["build/browser.js","ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df"],["build/high-level/high-level.d.ts","7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9"],["build/high-level/high-level.js","b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986"],["build/high-level/index.d.ts","5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb"],["build/high-level/index.js","a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e"],["build/high-level/types.d.ts","a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f"],["build/high-level/types.js","6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616"],["build/high-level/utils.d.ts","b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4"],["build/high-level/utils.js","3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7"],["build/kill-threads.d.ts","dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85"],["build/kill-threads.js","2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238"],["build/low-level/index.d.ts","592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390"],["build/low-level/index.js","862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c"],["build/low-level/types.__GENERATED__.d.ts","11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3"],["build/low-level/types.__GENERATED__.js","d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e"],["build/low-level/wrapper.__GENERATED__.d.ts","27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10"],["build/low-level/wrapper.__GENERATED__.js","cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a"],["build/node.d.ts","17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873"],["build/node.js","28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98"],["build/z3-built.js","5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6"],["build/z3-built.wasm","591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"],["package.json","3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"]],"node":"v22.23.1","platform":"darwin","arch":"arm64"},"trust":"Receipt integrity and trusted writers are required; no proof certificates. Readonly does not authenticate. Audit re-solves independently of receipts.","keys":{"input.ts#f":"bfdd74d81474a467a293468ac9f6b9dcababe963bc3a7ed79118f13a0b063128"},"hits":[],"misses":["input.ts#f"],"solved":["input.ts#f"],"written":["input.ts#f"],"rejected":[],"errors":[],"dependencies":[{"target":"input.ts#f","blockedBy":[]}]}}}
+{"mode":"readonly","r":{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","trusted":["Acorn parser","Node TypeScript type stripping","project type and module resolution and source snapshots","source-to-SMT translation","exact rational specification replay","Z3 and its WASM bindings","unmodified standard Number/Math/Object/Array builtins and prototypes","JavaScript runtime","integrity of proof cache receipts and their writers (no certificates); readonly is not authenticity; audit re-solves"],"modules":[{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","imports":[]}],"dependencies":[],"graphSha256":"983c8b79a4b4589e24e7b894fc1bafe9fd9482dc1bc9713c6ddff4afa1d5e3a4","outcomes":[{"fn":"f","file":"input.ts","span":{"start":32,"end":59},"line":2,"column":1,"assumptions":[{"kind":"param-type","name":"x","type":"number"}],"status":"verified"}],"cache":{"mode":"readonly","identity":"d3855a83aa4894839fd7a9262f03e3048d34a659768b17dcfa84c64c615ce095","protocol":"jsverify-receipt-1/query-1","backend":{"package":"z3-solver@5.3.3","sha256":"86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685","files":[["LICENSE.txt","e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"],["README.md","c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f"],["build/browser.d.ts","65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507"],["build/browser.js","ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df"],["build/high-level/high-level.d.ts","7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9"],["build/high-level/high-level.js","b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986"],["build/high-level/index.d.ts","5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb"],["build/high-level/index.js","a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e"],["build/high-level/types.d.ts","a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f"],["build/high-level/types.js","6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616"],["build/high-level/utils.d.ts","b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4"],["build/high-level/utils.js","3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7"],["build/kill-threads.d.ts","dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85"],["build/kill-threads.js","2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238"],["build/low-level/index.d.ts","592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390"],["build/low-level/index.js","862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c"],["build/low-level/types.__GENERATED__.d.ts","11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3"],["build/low-level/types.__GENERATED__.js","d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e"],["build/low-level/wrapper.__GENERATED__.d.ts","27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10"],["build/low-level/wrapper.__GENERATED__.js","cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a"],["build/node.d.ts","17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873"],["build/node.js","28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98"],["build/z3-built.js","5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6"],["build/z3-built.wasm","591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"],["package.json","3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"]],"node":"v22.23.1","platform":"darwin","arch":"arm64"},"trust":"Receipt integrity and trusted writers are required; no proof certificates. Readonly does not authenticate. Audit re-solves independently of receipts.","keys":{"input.ts#f":"bfdd74d81474a467a293468ac9f6b9dcababe963bc3a7ed79118f13a0b063128"},"hits":["input.ts#f"],"misses":[],"solved":[],"written":[],"rejected":[],"errors":[],"dependencies":[{"target":"input.ts#f","blockedBy":[]}]}}}
+{"mode":"audit","r":{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","trusted":["Acorn parser","Node TypeScript type stripping","project type and module resolution and source snapshots","source-to-SMT translation","exact rational specification replay","Z3 and its WASM bindings","unmodified standard Number/Math/Object/Array builtins and prototypes","JavaScript runtime"],"modules":[{"file":"input.ts","sha256":"a96fdcc24726e4784903e1f93951571520d6df9bfb6cedc9ec62568d4cf872a7","imports":[]}],"dependencies":[],"graphSha256":"983c8b79a4b4589e24e7b894fc1bafe9fd9482dc1bc9713c6ddff4afa1d5e3a4","outcomes":[{"fn":"f","file":"input.ts","span":{"start":32,"end":59},"line":2,"column":1,"assumptions":[{"kind":"param-type","name":"x","type":"number"}],"status":"verified"}],"cache":{"mode":"audit","identity":"d3855a83aa4894839fd7a9262f03e3048d34a659768b17dcfa84c64c615ce095","protocol":"jsverify-receipt-1/query-1","backend":{"package":"z3-solver@5.3.3","sha256":"86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685","files":[["LICENSE.txt","e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"],["README.md","c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f"],["build/browser.d.ts","65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507"],["build/browser.js","ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df"],["build/high-level/high-level.d.ts","7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9"],["build/high-level/high-level.js","b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986"],["build/high-level/index.d.ts","5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb"],["build/high-level/index.js","a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e"],["build/high-level/types.d.ts","a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f"],["build/high-level/types.js","6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616"],["build/high-level/utils.d.ts","b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4"],["build/high-level/utils.js","3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7"],["build/kill-threads.d.ts","dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85"],["build/kill-threads.js","2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238"],["build/low-level/index.d.ts","592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390"],["build/low-level/index.js","862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c"],["build/low-level/types.__GENERATED__.d.ts","11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3"],["build/low-level/types.__GENERATED__.js","d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e"],["build/low-level/wrapper.__GENERATED__.d.ts","27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10"],["build/low-level/wrapper.__GENERATED__.js","cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a"],["build/node.d.ts","17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873"],["build/node.js","28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98"],["build/z3-built.js","5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6"],["build/z3-built.wasm","591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"],["package.json","3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"]],"node":"v22.23.1","platform":"darwin","arch":"arm64"},"trust":"Receipt integrity and trusted writers are required; no proof certificates. Readonly does not authenticate. Audit re-solves independently of receipts.","keys":{"input.ts#f":"bfdd74d81474a467a293468ac9f6b9dcababe963bc3a7ed79118f13a0b063128"},"hits":["input.ts#f"],"misses":[],"solved":["input.ts#f"],"written":[],"rejected":[],"errors":[],"disagreements":[],"dependencies":[{"target":"input.ts#f","blockedBy":[]}]}}}
