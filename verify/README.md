@@ -18,6 +18,8 @@ pnpm verify --timeout 60000 verify/examples/loops.ts
 pnpm verify --timeout 60000 verify/examples/loop-gaps.ts
 pnpm verify --timeout 60000 verify/examples/callbacks.ts
 pnpm verify --timeout 60000 verify/examples/callback-bugs.ts
+pnpm verify --timeout 60000 verify/examples/heap.ts
+pnpm verify --timeout 60000 verify/examples/heap-bugs.ts
 node verify/bin/jsverify.mjs --json verify/examples/bugs.ts
 node verify/examples/remeda/check.mjs
 node verify/examples/remeda/check-calls.mjs
@@ -248,19 +250,19 @@ Resource and backend diagnostics include an `obligation` object with `target`, `
 ## Interpret the outcomes
 
 - `verified`: the preconditions are satisfiable, and Z3 finds the negated postcondition unsatisfiable under the source encoding.
-- `counterexample`: Z3 finds inputs, and replay confirms a postcondition failure, an unmet call requirement, or an undefined specification operation. Native bodies run in a fresh Node VM; exact contracts use rational replay. The report contains inputs and failed clauses, with a return value or failed call when execution reaches one.
+- `counterexample`: Z3 finds inputs, and replay confirms a postcondition failure, an unmet call requirement, an undefined specification operation, or an observed frame/store violation. Native bodies run in a fresh Node VM; exact contracts use rational replay. The report contains inputs and failed clauses, with a return value or failed call when execution reaches one.
 - `vacuous`: the preconditions contradict each other. This is not reported as verified.
 - `unknown`: a resource limit, solver uncertainty, or disagreement between the encoding and JavaScript replay prevents a verdict.
 - `unsupported`: the source or contract uses a construct the verifier cannot faithfully interpret.
 - `error`: invalid syntax, a missing postcondition, or a solver failure prevents checking.
 
-`unknown` reasons include `request-timeout`, `solver-unknown`, `witness-too-large`, `contract-gap`, `dependency`, `dependency-violation`, `replay-timeout`, and `replay-mismatch`. The CLI prints the reason and explains a call violation separately from a returned-value counterexample.
+`unknown` reasons include `request-timeout`, `solver-unknown`, `witness-too-large`, `contract-gap`, `dependency`, `dependency-violation`, `replay-timeout`, `replay-mismatch`, `witness-invalid`, `frame-write`, `frame-inclusion`, and `store-domain`. The CLI prints the reason and explains a call violation separately from a returned-value counterexample.
 
 ## JavaScript number semantics
 
 Ordinary source and contract arithmetic use IEEE-754 binary64 with round-to-nearest, ties-to-even. Explicit `real(...)` expressions select exact specification arithmetic.
 
-Numeric `==` and `===` use `fp.eq`: `NaN` is unequal to itself and positive zero equals negative zero. Primitive `Object.is` equates NaNs and distinguishes zero signs. Strict equality preserves type differences. Loose equality requires compatible primitive types, with explicit undefined handling.
+Numeric `==` and `===` use `fp.eq`: `NaN` is unequal to itself and positive zero equals negative zero. Numeric `Object.is` equates NaNs and distinguishes zero signs; reference comparisons use identity. Strict equality preserves type differences. Loose equality requires compatible primitive types, with explicit undefined handling.
 
 Undefined values retain their own tag. For example, an empty `values[0]` is undefined and `Number.isNaN(values[0])` is false, but `values[0] + 1` produces NaN. Nullish coalescing (`??`) can supply a fallback. Optional booleans preserve undefined through `&&`, `||`, and conditionals. Other implicit coercions remain unsupported.
 
@@ -304,7 +306,7 @@ element, independently of Boolean polarity.
 `old(expression)` in ensures, loop invariants and decreases evaluates over function-entry parameters. It cannot read
 `result`, body locals, or callback locals. Each invocation captures a recursive
 snapshot of supported plain data, preserving absent keys, explicit undefined,
-NaN, and signed zero. Mutation and heap identity remain unsupported.
+NaN, and signed zero. The [heap rules](design/heap.md) extend this to shared identity and selected primitive writes.
 
 An exact `// @spec` marker selects a specification-only expression-bodied
 function. It accepts existing JavaScript data types and can return a native
@@ -336,6 +338,38 @@ interpreter is an added trusted component; successful checks are not Rocq
 certificates. The [specification design](design/specifications.md) records the
 proof rules and limits.
 
+## Shared references and mutation frames
+
+Objects and arrays have identity. Input references may alias across parameters
+and nested fields; literals, spreads and slices create fresh shallow copies.
+Write permissions are explicit:
+
+```ts
+// modifies left.value
+// ensures Object.is(result, left === right ? 1 : old(right.value))
+function setAndRead(left: { value: number }, right: { value: number }) {
+  left.value = 1;
+  return right.value;
+}
+```
+
+A record path grants permission for one required primitive field. An array path,
+such as `modifies values` or `modifies box.values`, grants permission for its
+existing elements. No clause means an empty input footprint. Fresh local storage
+is writable. Permission applies to attempted writes, including no-ops and writes
+later restored; helper footprints must fit the caller's permission.
+
+`old(a.x)` reads entry contents; `old(a)` retains its identity, so `old(a).x`
+reads the current field. Reports add `aliases` groups, and replay reconstructs
+shared storage. A write monitor confirms input-graph frame violations. Unobserved
+abstract frame violations stay unknown. Length/shape changes, reference stores,
+optional-field writes and mutating loops remain unsupported.
+
+See [heap.ts](examples/heap.ts), [deliberate failures](examples/heap-bugs.ts),
+[the design and replay limits](design/heap.md), and
+[validation](reports/heap.md). Run `node verify/conformance/heap.mjs --mutations`
+for independent alias replay and four heap-specific verifier mutants.
+
 ## Loops with induction
 
 Use `invariant` and `decreases` comments immediately above a `while` or C-style `for` loop:
@@ -357,7 +391,7 @@ Native measure arithmetic stays rounded: `n - i` means `real(n - i)`. Use `real(
 
 A weak or wrong invariant can produce `unknown/induction-gap`, with its phase, source location and candidate input. Only replay of the unchanged source can confirm a contract bug. Witness searches prefer arrays and entry measures at most 256; these limits never enter proof queries. A timeout or unavailable small witness remains `unknown`.
 
-The [loop examples](examples/loops.ts) prove first-match search and counting bounds. The [loop design](design/loops.md) describes the proof rules, numeric shadows and limitations. Nested loops, labeled jumps, `do`, `for-in`, `for-of`, `var` declarations inside a loop and heap mutation remain unsupported.
+The [loop examples](examples/loops.ts) prove first-match search and counting bounds. The [loop design](design/loops.md) describes the proof rules, numeric shadows and limitations. Nested loops, labeled jumps, `do`, `for-in`, `for-of`, `var` declarations inside a loop and heap mutation inside loops remain unsupported.
 
 The [gap examples](examples/loop-gaps.ts) contain correct implementations with an incorrect invariant and a constant measure. Both return `unknown/induction-gap`, and the CLI exits 1. Correcting an annotation can close a proof gap without changing the function body.
 
@@ -367,11 +401,11 @@ The [pinned Lodash search fixture](examples/lodash/README.md) proves an unchange
 
 Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
 
-Local scalar bindings support `=`, numeric `+=`, `-=`, `*=`, `/=`, and numeric prefix/postfix `++` and `--`. Operands and arguments evaluate left to right. Short circuits suppress both writes and calls. Branch joins retain writes, and leaving a block restores shadowed names while preserving writes to outer bindings. Local `let` and `const` bindings have block scope; `var` bindings have function scope. Parameters cannot be written, so contracts always describe entry arguments. Arrays and records retain immutable views, including when held in `let` or `var` bindings.
+Local scalar bindings support `=`, numeric `+=`, `-=`, `*=`, `/=`, and numeric prefix/postfix `++` and `--`. Operands and arguments evaluate left to right. Short circuits suppress both writes and calls. Branch joins retain writes, and leaving a block restores shadowed names while preserving writes to outer bindings. Local `let` and `const` bindings have block scope; `var` bindings have function scope. Parameters cannot be written, so contracts always describe entry arguments. Reference bindings retain their identity; selected primitive cells may be written under the explicit heap/frame rules.
 
 Assignments preserve a binding's primitive scalar type. Number and boolean bindings can receive undefined and later regain a value of their original type. A binding initialized with only undefined cannot change to another type. Uninitialized declarations, reads or writes before declaration, repeated `var` declarations, and `var` redeclarations of parameters are rejected explicitly. A later declaration still masks an outer name, so a read before a local declaration cannot accidentally resolve a module function. Assignments and updates are unsupported in contracts. The [scalar-state design](design/scalar-state.md) records the scope and evaluation rules.
 
-The builtin allowlist is `Math.abs`, `Number.isFinite`, `Number.isNaN`, `Number.isInteger`, `Number.isSafeInteger`, primitive `Object.is`, `Array.isArray`, and the standard numeric constants. Direct calls to supported top-level functions and named imports use their contracts. Conditions accept booleans or undefined; numeric/object truthiness is unsupported. Unknown calls, heap writes, reference assignments, logical/bitwise compound assignments, async functions, generators, and optional/default/rest/destructured parameters are unsupported. Sparse arrays, nested array elements, array concatenation/spread appends, methods/getters and optional reference fields are unsupported. Runtime generic functions/calls, recursive aliases, interfaces, ambient declarations, namespaces, type assertions, non-null assertions, local type declarations, conditional/mapped types, and unresolved types are rejected explicitly. `%` is rejected because IEEE remainder would not implement JavaScript remainder correctly. An analysis has a limit of 128 source paths.
+The builtin allowlist is `Math.abs`, `Number.isFinite`, `Number.isNaN`, `Number.isInteger`, `Number.isSafeInteger`, `Object.is` on admitted data, `Array.isArray`, and the standard numeric constants. Direct calls to supported top-level functions and named imports use their contracts. Conditions accept booleans or undefined; numeric/object truthiness is unsupported. Unknown calls, shape-changing heap operations, reference assignments, logical/bitwise compound assignments, async functions, generators, and optional/default/rest/destructured parameters are unsupported. Sparse arrays, nested array elements, array concatenation/spread appends, methods/getters and optional reference fields are unsupported. Runtime generic functions/calls, recursive aliases, interfaces, ambient declarations, namespaces, type assertions, non-null assertions, local type declarations, conditional/mapped types, and unresolved types are rejected explicitly. `%` is rejected because IEEE remainder would not implement JavaScript remainder correctly. An analysis has a limit of 128 source paths.
 
 Runtime top-level statements are supported function declarations, `const` function expressions, named imports, and local named exports. TypeScript uses Node's experimental `stripTypeScriptTypes` in offset-preserving mode, followed by Acorn; Node may emit an experimental-feature warning. A small type grammar reads runtime parameter annotations from the original source, including nested field separators that stripping erased.
 
@@ -379,17 +413,17 @@ The pinned Remeda checks verify an extracted eager declaration after type stripp
 
 ## Architecture and trust
 
-`modules.mjs` owns file resolution and source snapshots. `types.mjs` reads erased type declarations and module bindings. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and replay data conversion. `specifications.mjs` owns exact real operations, rational replay, entry snapshots, and contract replay generation. `proofs.mjs` owns obligations, proof evidence, and scheduling. `backend.mjs` owns the worker protocol, capability checks, response validation, and hard deadlines. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `predicate-witness.mjs` owns predicate table validation, bit-level keys and SameValue lookup. `index.mjs` owns replay outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
+`modules.mjs` owns file resolution and source snapshots. `types.mjs` reads erased type declarations and module bindings. `source.mjs` owns syntax, contract parsing, lexical scope, linking, control flow, function headers, dependency checks, and call obligations. `heap.mjs` owns reference identity, shapes and persistent heap versions; `heap-witness.mjs` owns graph validation, shared materialization and native write observation. `data.mjs` owns data types, value views, JavaScript operation semantics, joins, parameter-domain checks, symbolic declarations, and primitive replay data conversion. `specifications.mjs` owns exact real operations, rational replay, entry snapshots, and contract replay generation. `proofs.mjs` owns obligations, proof evidence, and scheduling. `backend.mjs` owns the worker protocol, capability checks, response validation, and hard deadlines. `solver.mjs` owns Z3 execution and witness extraction in a subprocess. `predicate-witness.mjs` owns predicate table validation, bit-level keys and SameValue lookup. `index.mjs` owns replay outcome policy, monitored source replay, diagnostic positions, and final dependency gating. The CLI handles presentation. The [call-contract design](design/calls.md) records the proof-composition rule and its limits.
 
 Number inputs are raw 64-bit bitvectors reinterpreted as binary64. This covers all JavaScript numbers and preserves signed zero without decoding the unspecified IEEE-bit conversion of a solver NaN. NaN payloads cannot be observed by this subset. Every arithmetic operation has explicit floating-point semantics, and numeric equality uses `fp.eq` rather than SMT structural equality.
 
-Arrays are compiler views: a 32-bit length and an indexed primitive-value function. Literals, slices, and conditionals build these views directly, without SMT array or datatype theories. An `every` contract adds a universal quantifier guarded by the array length. Callback indices are present unsigned integers that binary64 represents exactly, so indexed reads reuse the exact unsigned view. Optional values carry presence separately from payloads; records additionally carry own-key presence. These flags must guard every fast path, including array indices with cached integer payloads.
+Array references use identity-indexed functions with a 32-bit immutable length and versioned primitive contents. Focused compiler views expose a length and indexed value function. Literals, slices, and conditionals build these views directly, without SMT array or datatype theories; copies also receive fresh identities. An `every` contract adds a universal quantifier guarded by the array length. Callback indices are present unsigned integers that binary64 represents exactly, so indexed reads reuse the exact unsigned view. Optional values carry presence separately from payloads; records additionally carry own-key presence. These flags must guard every fast path, including array indices with cached integer payloads.
 
 The model describes these operations with adequate runtime resources; allocation failures and out-of-memory behavior are outside its guarantees.
 
 Each verification request owns its solver subprocesses, so concurrent API calls do not share Z3 state. Each distinct obligation has its own solver, and all targets and workers in one request share a deadline. The parent kills a process that exceeds its turn budget. Initialization errors and killed workers cannot produce new verified verdicts. Completed evidence remains available. A satisfiable precondition also gets a JavaScript witness check; a counterexample requires an actual failing source execution.
 
-Trusted components are Acorn, Node's type stripping, local module resolution and snapshots, our source translation, exact rational specification replay, Z3 and its WASM bindings, standard unmodified `Number`/`Math`/`Object`/`Array` builtins and prototypes, and the JavaScript runtime. Tests check this connection but do not formally prove the translation correct. Successful verification is not an independently checkable Rocq certificate.
+Trusted components are Acorn, Node's type stripping, local module resolution and snapshots, our source translation, exact rational specification replay, Z3 and its WASM bindings, standard unmodified `Number`/`Math`/`Object`/`Array` builtins and prototypes, the heap witness/write monitor, and the JavaScript runtime. Tests check this connection but do not formally prove the translation correct. Successful verification is not an independently checkable Rocq certificate.
 
 Two design candidates and an independent cross-judge selected this split over a single verifier module using the TypeScript compiler API. The installed native TypeScript 7 package has no stable `createSourceFile` API. The synthesis retains explicit missing-contract and vacuity outcomes, JSON-safe witnesses, and per-file solver isolation. The initial slice deferred mathematical specification arithmetic.
 
@@ -397,7 +431,7 @@ The exact specification layer adds explicit bridges and definedness checks to
 that initial design. It keeps runtime arithmetic unchanged and expands checked
 pure definitions rather than trusting user-supplied axioms.
 
-The collections design selected structural views over bounded tuples or SMT aggregate datatypes. It retains native undefined behavior instead of adding out-of-bounds obligations. The independent design review identified key presence during spread and inherited optional names as necessary distinctions. The [prefix-contract design](design/prefix.md) adds native `every` contracts over those views. An object identity and heap model remains deferred.
+The collections design selected structural views over bounded tuples or SMT aggregate datatypes. It retains native undefined behavior instead of adding out-of-bounds obligations. The independent design review identified key presence during spread and inherited optional names as necessary distinctions. The [prefix-contract design](design/prefix.md) adds native `every` contracts over those views. The [heap model](design/heap.md) adds shared identity and persistent content versions; focused value views retain the collection operation semantics.
 
 `tests/verify/source.test.mjs` exercises the public API and CLI. It compares source verification with V8 on numerical edge cases for each supported binary operator and numeric builtin, checks branch behavior, confirms failing executions, and exercises rejection, vacuity, original-source spans, and resource exhaustion.
 

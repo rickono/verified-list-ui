@@ -48,10 +48,9 @@ into symbols would collide for names such as `a-b.ts` and `a_b.ts`.
 
 Expression closures preserve the defining bindings. Captures must be immutable
 parameters or `const` values of number, Boolean or undefined type. The compiler
-records a checked capture certificate. Named callbacks require the current
-pure-subset effect certificate and become proof dependencies. The heap extension
-must derive that certificate from writes and callees before admitting mutation;
-it cannot keep marking all supported targets pure.
+records a checked capture certificate. Named callbacks require the derived heap-free effect certificate and become
+proof dependencies. The [heap extension](heap.md) derives effects from direct
+writes, reads, allocations and callees before admitting a named predicate.
 
 ## Ordered admission and closed applications
 

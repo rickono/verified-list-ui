@@ -39,6 +39,7 @@ const integerPair = (a, b) => {
 export const bool = (smt, present = "true") => ({ sort: "boolean", smt, present });
 export const undef = () => ({ sort: "undefined", present: "false" });
 const isReference = (v) => v.sort === "array" || v.sort === "object";
+const isRef = (v) => ["object", "array"].includes(v?.sort) && typeof v.ref === "string";
 const FP = "(_ FloatingPoint 11 53)";
 // Function values: {sort:"function", kind:"symbol"|"closure"|"named", type?}.
 // They are immutable, never stored, merged, compared or returned.
@@ -46,18 +47,19 @@ export const isFunctionType = (t) => !!t && typeof t === "object" && t.kind === 
 export const sameSignature = (a, b) => a.params.length === b.params.length && a.params.every((p, i) => p === b.params[i]) && a.result === b.result;
 const noFunctions = (v, node, what) => { if (v.sort === "function") fail(`Function values cannot be ${what}; pass them directly as call arguments.`, node); };
 
-// Every numeric value admitted by the proven u32 invariant is represented,
+// Every numeric value admitted by a proven u32 or safe-integer range is represented,
 // including both zero signs. The exact BV shadow is not an input assumption.
-export function natural(prefix, predecessor = false) {
-  const u = `${prefix}_u32`, z = `${prefix}_negative_zero`;
+export function natural(prefix, predecessor = false, width = 32) {
+  const u = `${prefix}_u${width}`, z = `${prefix}_negative_zero`;
   const payload = `((_ to_fp_unsigned 11 53) RNE ${u})`;
+  const declarations = [`(declare-const ${u} (_ BitVec ${width}))`, `(declare-const ${z} Bool)`];
   if (predecessor) return {
-    declarations: [`(declare-const ${u} (_ BitVec 32))`, `(declare-const ${z} Bool)`],
-    value: { ...num(`(ite (and ${z} (= ${u} #x00000001)) (_ -zero 11 53) (fp.sub RNE ${payload} ${literal(1).smt}))`), predecessor: { smt: u, width: 32 } },
+    declarations,
+    value: { ...num(`(ite (and ${z} (= ${u} (_ bv1 ${width}))) (_ -zero 11 53) (fp.sub RNE ${payload} ${literal(1).smt}))`), predecessor: { smt: u, width } },
   };
   return {
-    declarations: [`(declare-const ${u} (_ BitVec 32))`, `(declare-const ${z} Bool)`],
-    value: num(`(ite (and ${z} (= ${u} #x00000000)) (_ -zero 11 53) ((_ to_fp_unsigned 11 53) RNE ${u}))`, "true", u, { smt: u, width: 32 }),
+    declarations,
+    value: num(`(ite (and ${z} (= ${u} (_ bv0 ${width}))) (_ -zero 11 53) ${payload})`, "true", width === 32 ? u : undefined, { smt: u, width }),
   };
 }
 
@@ -76,6 +78,30 @@ export function need(v, sort, node) {
   return sort === "boolean" ? and(v.present, v.smt) : ite(v.present, v.smt, literal(NaN).smt);
 }
 
+function joinType(a, b, node) {
+  if (JSON.stringify(a) === JSON.stringify(b)) return a;
+  const optional = (t) => {
+    if (["array", "object"].includes(t?.kind)) fail("Optional reference fields are outside the supported heap slice.", node);
+    return typeof t === "string" ? t === "undefined" ? t : { kind: "optional", type: t } : t;
+  };
+  if (a === "undefined") return optional(b);
+  if (b === "undefined") return optional(a);
+  const base = (t) => t?.kind === "optional" ? t.type : t;
+  if (base(a) === base(b)) return optional(base(a));
+  if (a.kind === "array" && b.kind === "array" && a.element === b.element) return { kind: "array", element: a.element, allowUndefined: a.allowUndefined || b.allowUndefined };
+  if (a.kind === "object" && b.kind === "object") {
+    const names = new Set([...a.fields, ...b.fields].map((f) => f.name));
+    return { kind: "object", fields: [...names].map((name) => {
+      const x = a.fields.find((f) => f.name === name), y = b.fields.find((f) => f.name === name);
+      const type = joinType(x?.type ?? "undefined", y?.type ?? "undefined", node);
+      const optional = !x || !y || x.optional || y.optional;
+      if (optional && ["array", "object"].includes(type?.kind)) fail("Optional reference fields are outside the supported heap slice.", node);
+      return { name, type, optional };
+    }) };
+  }
+  fail("These reference branches have incompatible field or element types.", node);
+}
+
 export function merge(c, a, b, node) {
   if (c === "true") return a;
   if (c === "false") return b;
@@ -84,6 +110,20 @@ export function merge(c, a, b, node) {
   if (b.sort === "undefined" && ["number", "boolean"].includes(a.sort)) b = { ...a, present: "false" };
   if (a.sort !== b.sort) fail("These branches return incompatible types. Optional references are unsupported.", node);
   if (a.sort === "undefined") return undef();
+  if (isRef(a) || isRef(b)) {
+    if (!isRef(a) || !isRef(b)) fail("Reference and value branches cannot be joined.", node);
+    if (a.sort === "array" && (a.empty || b.empty)) {
+      if (a.empty) a = { ...a, type: { ...a.type, element: b.type.element } };
+      if (b.empty) b = { ...b, type: { ...b.type, element: a.type.element } };
+    }
+    const type = joinType(a.type, b.type, node), ref = ite(c, a.ref, b.ref);
+    if (a.spec && b.spec) {
+      const { ref: ar, type: at, spec: as, ...av } = a, { ref: br, type: bt, spec: bs, ...bv } = b;
+      return { ...merge(c, av, bv, node), ref, type, spec: true };
+    }
+    return { sort: a.sort, ref, type, empty: a.empty && b.empty,
+      ...(a.sort === "array" && a.length && b.length ? { length: merge(c, a.length, b.length, node) } : {}) };
+  }
   if (a.sort === "object") {
     const keys = new Set([...a.fields.keys(), ...b.fields.keys()]);
     return record([...keys].map((k) => {
@@ -106,6 +146,9 @@ export function merge(c, a, b, node) {
 
 function equal(a, b, sameValue, node) {
   if (a.sort === "function" || b.sort === "function") fail("Function identity is not modeled; compare results instead.", node);
+  // G heap slice: record identity is ref equality; a record is never a primitive.
+  if (isRef(a) && isRef(b)) return bool(`(= ${a.ref} ${b.ref})`);
+  if (isRef(a) && !isReference(b) || isRef(b) && !isReference(a)) return bool("false");
   if (isReference(a) || isReference(b)) fail("Array/object reference identity is unsupported. Compare fields or elements instead.", node);
   const pair = !sameValue && integerPair(a, b);
   const payload = a.sort !== b.sort || a.sort === "undefined" ? "false" : pair ? `(= ${pair[0]} ${pair[1]})`
@@ -247,11 +290,18 @@ export function slice(owner, args, node) {
   if (owner.sort !== "array" || args.length > 2) fail("slice supports an ordinary array and zero to two numeric arguments.", node);
   const normalize = (v, fallback) => {
     if (!v || v.sort === "undefined") return fallback;
+    const natural = natOf(v);
+    if (natural) {
+      const width = Math.max(32, natural.width), n = widen(natural, width), len = widen({ smt: owner.length.u32, width: 32 }, width);
+      const low = natural.width === 32 ? natural.smt : natural.width < 32 ? widen(natural, 32) : `((_ extract 31 0) ${natural.smt})`;
+      return ite(`(bvult ${n} ${len})`, low, owner.length.u32);
+    }
     const x = `(fp.roundToIntegral RTZ ${need(v, "number", node)})`;
     const negative = `(fp.lt ${x} ${literal(0).smt})`;
+    const clamp = (i) => ite(`(bvult ${i} ${owner.length.u32})`, i, owner.length.u32);
     const neg = ite(`(fp.leq ${x} (fp.neg ${owner.length.smt}))`, bv(0),
-      `(bvsub ${owner.length.u32} ((_ fp.to_ubv 32) RTZ (fp.neg ${x})))`);
-    const pos = ite(`(fp.lt ${x} ${owner.length.smt})`, `((_ fp.to_ubv 32) RTZ ${x})`, owner.length.u32);
+      `(bvsub ${owner.length.u32} ${clamp(`((_ fp.to_ubv 32) RTZ (fp.neg ${x}))`)})`);
+    const pos = ite(`(fp.lt ${x} ${owner.length.smt})`, clamp(`((_ fp.to_ubv 32) RTZ ${x})`), owner.length.u32);
     return ite(v.present, ite(`(fp.isNaN ${x})`, bv(0), ite(negative, neg, pos)), fallback);
   };
   const start = normalize(args[0], bv(0)), end = normalize(args[1], owner.length.u32);
@@ -383,6 +433,7 @@ export function input(type, prefix) {
 }
 
 export function valueType(v) {
+  if (isRef(v)) return v.type;
   if (v.sort === "function") return v.type;
   if (v.sort === "array") return { kind: "array", element: v.element, allowUndefined: v.allowUndefined };
   if (v.sort === "object") return { kind: "object", fields: [...v.fields].map(([name, field]) => ({ name, type: valueType(field.value), optional: field.hasKey !== "true" })) };
@@ -422,8 +473,8 @@ export function display(v) {
 export function domain(type) {
   if (typeof type === "string" || type.kind === "optional") return undefined;
   if (type.kind === "function") return PREDICATE_DOMAIN;
-  return type.kind === "array" ? "Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included."
-    : "Plain records with declared own enumerable data fields; no extra properties, accessors, proxies, or custom prototypes. Collection fields obey the same domain recursively.";
+  return type.kind === "array" ? "Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields."
+    : "Plain records with declared own enumerable data fields; no extra properties, accessors, proxies, or custom prototypes. Collection fields obey the same domain recursively. References may be shared across parameters and fields.";
 }
 
 const placeholder = (sort) => sort === "number" ? num(literal(0).smt, "false") : bool("false", "false");

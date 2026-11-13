@@ -33,7 +33,7 @@ The [backend scheduler](proof-backends.md) proves these call-safety conjuncts an
 
 `data.mjs` owns both the value and execution guard for short-circuit operators, plus argument-domain checks and symbolic values. Ordinary reads accept one argument; guarded reads use a separate helper, so array mapping cannot accidentally pass an index as a guard. Method receivers are evaluated before arguments.
 
-This fold relies on the statement compiler's disjoint branch paths. Local scalar updates preserve captured value views; conditional expressions and short circuits merge writes under the same guards as their call events. The [scalar-state design](scalar-state.md) records that extension. [Loop induction](loops.md) adds guarded cutpoint obligations; [pure callbacks](callbacks.md) add ordered admission and closed quantified applications. Heap mutation, overlapping execution paths and recursion require a new argument before they can extend the fold.
+This fold relies on the statement compiler's disjoint branch paths. Local scalar updates preserve captured value views; conditional expressions and short circuits merge writes under the same guards as their call events. The [scalar-state design](scalar-state.md) records that extension. [Loop induction](loops.md) adds guarded cutpoint obligations; [pure callbacks](callbacks.md) add ordered admission and closed quantified applications. The [heap extension](heap.md) ties facts to persistent content versions and checks write permissions and callee footprint inclusion in order. Overlapping execution paths and recursion remain unsupported.
 
 ## Replay and status policy
 

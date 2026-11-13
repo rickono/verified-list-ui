@@ -172,12 +172,9 @@ const falseValue = (xs: boolean[]) => xs[0] && xs[1];`;
   assert.deepEqual(report.outcomes.map((o) => o.status), ["verified", "verified"]);
 });
 
-test("reference identity, mutation, sparse arrays, and exotic data remain unsupported", async () => {
+test("shape-changing methods, sparse arrays, and exotic data remain unsupported", async () => {
   const cases = [
-    "// ensures result === xs\nconst f = (xs: number[]) => xs;",
-    "// ensures Object.is(result, box)\nconst f = (box: { x: number }) => box;",
     "// ensures true\nconst f = (xs: number[]) => xs.push(1);",
-    "// ensures true\nconst f = (xs: number[]) => xs[0] = 1;",
     "// ensures true\nconst f = () => [1,,3];",
     "// ensures true\nconst f = () => ({ get x() { return 1; } });",
     "// ensures true\nconst f = () => ({ __proto__: {} });",
@@ -185,4 +182,15 @@ test("reference identity, mutation, sparse arrays, and exotic data remain unsupp
     "// ensures true\nconst f = (xs: number[][]) => xs;",
   ];
   for (const source of cases) assert.equal((await one(source)).status, "unsupported", source);
+});
+
+
+test("reference identity verifies and unpermitted array stores produce confirmed violations", async () => {
+  for (const source of [
+    "// ensures result === xs\nconst f = (xs: number[]) => xs;",
+    "// ensures Object.is(result, box)\nconst f = (box: { x: number }) => box;",
+  ]) assert.equal((await one(source)).status, "verified");
+  const o = await one("// ensures true\nconst f = (xs: number[]) => xs[0] = 1;");
+  assert.equal(o.status, "counterexample");
+  assert.equal(o.confirmed, true);
 });
