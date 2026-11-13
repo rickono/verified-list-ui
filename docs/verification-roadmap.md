@@ -1,6 +1,6 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H and G are integrated. P and the stateful foundation are in independent design review. K remains in design comparison; one prototype was rejected after native false-verification reproducers. No remaining roadmap node is claimed complete.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H and G are integrated. P is in implementation; the stateful foundation has a selected design with mandatory corrections. K is in independent design and numeric review. The local-result upstream pilot passed implementation checks and is in independent review. No remaining roadmap node is claimed complete.
 
 All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.
 
