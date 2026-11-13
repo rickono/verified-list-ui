@@ -117,7 +117,7 @@ export async function solve(targets, timeoutMs, { connect = createBackend, now =
   // Source labels let index.mjs tell an unconfirmed loop abstraction from a bug.
   return states.map((s) => {
     const o = s.outcome ?? diagnostic(s, "request-timeout", "The shared wall-clock verification budget was exhausted.", s.detail);
-    const label = POST.has(s.phase) ? s.target.obligations?.[s.postcondition] : undefined;
+    const label = o.status !== "verified" && POST.has(s.phase) ? s.target.obligations?.[s.postcondition] : undefined;
     return label ? { ...o, label } : o;
   });
 }
