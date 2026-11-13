@@ -1,7 +1,7 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-13",
-  "status": "A, B, C, D, F, E, J, H and G are integrated. P and the source-linked stateful foundation are in implementation; K is in independent design and numeric review. The local-result frontend unit and pinned es-toolkit empty-array proofs are merged in PR #8. No remaining roadmap node is claimed complete.",
+  "status": "A, B, C, D, F, E, J, H and G are integrated. PR #8 merged the local-result frontend unit and pinned es-toolkit empty-array proofs. P, K review, upstream validation and the stateful foundation hit the Claude usage limit; partial work is preserved and routing approval is pending. No remaining roadmap node is claimed complete.",
   "edgeMeaning": "All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
