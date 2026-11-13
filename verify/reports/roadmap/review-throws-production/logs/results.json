@@ -1,0 +1,283 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "name": "admission emits one guarded false event and drops the path",
+      "ok": true,
+      "ms": 3,
+      "detail": {
+        "postconditions": 1,
+        "first": "(=> input_0 false)"
+      }
+    },
+    {
+      "name": "guarded throw verifies; reachable native exception stays unconfirmed",
+      "ok": true,
+      "ms": 464,
+      "detail": {
+        "proved": "verified",
+        "reachable": {
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "phase": null,
+          "confirmed": null,
+          "message": "JavaScript replay failed: boom",
+          "result": null,
+          "inputs": null,
+          "span": {
+            "start": 45,
+            "end": 113
+          },
+          "loop": null
+        }
+      }
+    },
+    {
+      "name": "false requires stay vacuous and definedness precedes the throw",
+      "ok": true,
+      "ms": 280,
+      "detail": {
+        "vacuous": "vacuous",
+        "definedness": {
+          "status": "counterexample",
+          "reason": null,
+          "phase": "requires-definedness",
+          "confirmed": true,
+          "message": null,
+          "result": null,
+          "inputs": {
+            "x": "NaN"
+          },
+          "span": {
+            "start": 82,
+            "end": 154
+          },
+          "loop": null
+        }
+      }
+    },
+    {
+      "name": "earlier facts can be used and later facts or caller ensures cannot discharge a throw",
+      "ok": true,
+      "ms": 489,
+      "detail": {
+        "earlier": {
+          "status": "unknown",
+          "reason": "dependency-violation",
+          "phase": null,
+          "confirmed": null,
+          "message": "impossible violated its contract during replay.",
+          "result": null,
+          "inputs": {
+            "flag": "false"
+          },
+          "span": {
+            "start": 98,
+            "end": 185
+          },
+          "loop": null
+        },
+        "later": {
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "phase": null,
+          "confirmed": null,
+          "message": "JavaScript replay failed: later",
+          "result": null,
+          "inputs": null,
+          "span": {
+            "start": 98,
+            "end": 180
+          },
+          "loop": null
+        },
+        "ensuresSeparate": {
+          "status": "counterexample",
+          "reason": null,
+          "phase": null,
+          "confirmed": true,
+          "message": null,
+          "result": "0",
+          "inputs": {
+            "flag": "false"
+          },
+          "span": {
+            "start": 64,
+            "end": 132
+          },
+          "loop": null
+        }
+      }
+    },
+    {
+      "name": "throws inside and after loops are abstract gaps",
+      "ok": true,
+      "ms": 339,
+      "detail": [
+        {
+          "inside": true,
+          "abstract": true,
+          "loop": true
+        },
+        {
+          "inside": false,
+          "abstract": true,
+          "loop": false
+        }
+      ]
+    },
+    {
+      "name": "widening retry commits one throw and no second replay bound",
+      "ok": true,
+      "ms": 169,
+      "detail": {
+        "replayGuards": 1,
+        "status": "verified"
+      }
+    },
+    {
+      "name": "other throw forms and Error bindings reject at the throw span",
+      "ok": true,
+      "ms": 2,
+      "detail": {
+        "rejected": 16,
+        "paren": "unsupported"
+      }
+    },
+    {
+      "name": "in-loop false helper fact does not verify the caller",
+      "ok": true,
+      "ms": 180,
+      "detail": {
+        "status": "unknown",
+        "reason": "dependency-violation",
+        "phase": null,
+        "confirmed": null,
+        "message": "bad violated its contract during replay.",
+        "result": null,
+        "inputs": {
+          "flag": "false"
+        },
+        "span": {
+          "start": 109,
+          "end": 329
+        },
+        "loop": null
+      }
+    },
+    {
+      "name": "private safe-true mutant false-verifies and native execution detects it",
+      "ok": true,
+      "ms": 453,
+      "detail": {
+        "mutant": "verified",
+        "witness": [
+          "false"
+        ],
+        "nativeTrue": "throws"
+      }
+    },
+    {
+      "name": "old source reports and queries match; semantic identity changes",
+      "ok": true,
+      "ms": 1293,
+      "detail": {
+        "oldIdentity": "ec47724f52d33b0a4ee841d7bf3dea5d4fcbd4663a917a5e1399927ba0eb391c",
+        "newIdentity": "86f9e10064d037421d83775d3a2d35d8ddaffa18c9c81d590a175a9332007826",
+        "refused": "invalid-evidence",
+        "numeric": "verified",
+        "planNeedsSolve": true
+      }
+    },
+    {
+      "name": "harmonic pin, license, strip, tokens, and shared singleton domain",
+      "ok": true,
+      "ms": 4,
+      "detail": {
+        "witnessBits": "0000001000008041",
+        "weakCandidateReturnsItself": true,
+        "ulpAt49": 1
+      }
+    },
+    {
+      "name": "public verifyFile, P evidence, and CLI show normal-return +0 and refuse changed source or model",
+      "ok": true,
+      "ms": 39161,
+      "detail": {
+        "total": "verified",
+        "warmHits": 1,
+        "positive": {
+          "status": "counterexample",
+          "reason": null,
+          "phase": null,
+          "confirmed": true,
+          "message": null,
+          "result": "0",
+          "inputs": {
+            "x": [
+              "3.3951948877e-313"
+            ]
+          },
+          "span": {
+            "start": 848,
+            "end": 1682
+          },
+          "loop": null
+        },
+        "witnessBits": "0000001000008041",
+        "cli": "reproduced",
+        "stale": "stale",
+        "wrongModel": "invalid-evidence",
+        "weak": {
+          "status": "unknown",
+          "reason": "induction-gap",
+          "phase": "ensures",
+          "confirmed": null,
+          "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant.",
+          "result": null,
+          "inputs": null,
+          "span": {
+            "start": 837,
+            "end": 847
+          },
+          "loop": null
+        }
+      }
+    },
+    {
+      "name": "imported Error and a type-asserted argument stay unsupported",
+      "ok": true,
+      "ms": 23,
+      "detail": {
+        "imported": {
+          "status": "unsupported",
+          "reason": null,
+          "phase": null,
+          "confirmed": null,
+          "message": "Throw admission requires unshadowed throw new Error(\"literal\").",
+          "result": null,
+          "inputs": null,
+          "span": {
+            "start": 140,
+            "end": 164
+          },
+          "loop": null
+        },
+        "asserted": {
+          "status": "unsupported",
+          "reason": null,
+          "phase": null,
+          "confirmed": null,
+          "message": "Runtime generic arguments, type assertions, non-null assertions and unmodeled erased runtime syntax are unsupported.",
+          "result": null,
+          "inputs": null,
+          "span": {
+            "start": 135,
+            "end": 137
+          },
+          "loop": null
+        }
+      }
+    }
+  ]
+}
