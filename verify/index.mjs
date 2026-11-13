@@ -1,3 +1,4 @@
+import { dirname, relative, resolve, sep } from "node:path";
 import { Script, createContext } from "node:vm";
 import { compile } from "./source.mjs";
 import { SourceError } from "./error.mjs";
@@ -10,6 +11,8 @@ import { openCache, proofKey, MODES } from "./cache.mjs";
 import { runningIdentity } from "./manifest.mjs";
 import { EVIDENCE_FORMAT, signature, shrink, validateEvidence } from "./evidence.mjs";
 
+// Stable source-relative evidence ids let a reviewer relocate the same graph.
+const evidenceId = (target, entry) => `${relative(dirname(entry), target.file).split(sep).join("/")}#${target.name}`;
 const TRUSTED = ["Acorn parser", "Node TypeScript type stripping", "project type and module resolution and source snapshots", "source-to-SMT translation", "exact rational specification replay", "Z3 and its WASM bindings", "unmodified standard Number/Math/Object/Array builtins and prototypes", "JavaScript runtime"];
 
 // Replays one root against the whole linked graph. Each module gets its own
@@ -375,7 +378,7 @@ async function check({ files, dependencies, records, error }, file, { timeoutMs,
     own.set(t.id, { ...base, ...outcome, ...(outcome.span ? position(t.file, outcome.span.start) : {}) });
     if (evidence && !identity.disabled && outcome.status === "counterexample" && outcome.confirmed) {
       const oracle = (r) => judge(targets, modules, byId, label, t, r).outcome;
-      witnesses[t.id] = { key: keys.get(t.id), witness: result.witness, ...(result.phase ? { phase: result.phase } : {}),
+      witnesses[evidenceId(t, files[0].file)] = { key: keys.get(t.id), witness: result.witness, ...(result.phase ? { phase: result.phase } : {}),
         signature: signature(outcome), shrunk: shrink(t, result, oracle) };
     }
   }
@@ -408,7 +411,7 @@ async function check({ files, dependencies, records, error }, file, { timeoutMs,
     if (hits.size && mode !== "audit") report.trusted.push("integrity of proof cache receipts and their writers (no certificates); readonly is not authenticity; audit re-solves");
   }
   if (evidence) report.evidence = identity.disabled ? { disabled: identity.disabled } : {
-    format: EVIDENCE_FORMAT, kind: "jsverify-bugs", entry: files[0].file, ...(tsconfig ? { tsconfig } : {}),
+    format: EVIDENCE_FORMAT, kind: "jsverify-bugs", entry: files[0].file, ...(tsconfig ? { tsconfig: relative(dirname(files[0].file), dependencies.find((d) => d.kind === "tsconfig").file).split(sep).join("/") } : {}),
     identity: identity.sha256, graphSha256: report.graphSha256,
     modules: report.modules, dependencies: report.dependencies, witnesses,
   };
@@ -419,7 +422,7 @@ async function check({ files, dependencies, records, error }, file, { timeoutMs,
 /** Replay confirmed bugs against an exact current graph, without a solver.
  * Proof reproduction is a fresh verification/audit; receipts are not certificates.
  */
-export function reproduce(entry, evidence, { tsconfig = evidence?.tsconfig, target, shrunk = true } = {}) {
+export function reproduce(entry, evidence, { tsconfig = typeof evidence?.tsconfig === "string" ? resolve(dirname(entry), evidence.tsconfig) : undefined, target, shrunk = true } = {}) {
   if (typeof entry !== "string" || tsconfig !== undefined && typeof tsconfig !== "string" || target !== undefined && typeof target !== "string" || typeof shrunk !== "boolean") throw new TypeError("Invalid reproduce options.");
   const { files, dependencies, records, error } = load(entry, { tsconfig });
   if (error) return { status: "incompatible", message: error.message };
@@ -431,17 +434,18 @@ export function reproduce(entry, evidence, { tsconfig = evidence?.tsconfig, targ
   try { ({ targets, modules } = compile(records)); }
   catch (e) { if (!(e instanceof SourceError)) throw e; return { status: "incompatible", message: e.message }; }
   const byId = new Map(targets.map((t) => [t.id, t]));
-  const invalid = validateEvidence(evidence, byId, identity);
+  const portable = new Map(targets.map((t) => [evidenceId(t, files[0].file), t]));
+  const invalid = validateEvidence(evidence, portable, identity);
   if (invalid) return { status: "invalid-evidence", message: invalid };
-  for (const [id, item] of Object.entries(evidence.witnesses)) if (item.key !== proofKey(byId.get(id), identity.sha256)) return { status: "invalid-evidence", message: `Proof key mismatch for ${id}.` };
-  const ids = target ? Object.keys(evidence.witnesses).filter((id) => id === target || byId.get(id).name === target && byId.get(id).file === files[0].file) : Object.keys(evidence.witnesses);
+  for (const [id, item] of Object.entries(evidence.witnesses)) if (item.key !== proofKey(portable.get(id), identity.sha256)) return { status: "invalid-evidence", message: `Proof key mismatch for ${id}.` };
+  const ids = target ? Object.keys(evidence.witnesses).filter((id) => id === target || portable.get(id).id === target || portable.get(id).name === target && portable.get(id).file === files[0].file) : Object.keys(evidence.witnesses);
   if (target && ids.length !== 1) return { status: "invalid-evidence", message: `Unknown evidence target ${target}.` };
   const label = (t) => t.file === files[0].file ? t.name : `${t.name} (${t.file})`;
   const outcomes = ids.map((id) => {
     const item = evidence.witnesses[id];
     const witness = shrunk && item.shrunk?.witness ? item.shrunk.witness : item.witness;
-    const { outcome } = judge(targets, modules, byId, label, byId.get(id), { status: "counterexample", witness, phase: item.phase });
-    return { target: id, ...outcome, reproduced: outcome.confirmed === true && signature(outcome) === item.signature };
+    const { outcome } = judge(targets, modules, byId, label, portable.get(id), { status: "counterexample", witness, phase: item.phase });
+    return { target: portable.get(id).id, ...outcome, reproduced: outcome.confirmed === true && signature(outcome) === item.signature };
   });
   return { status: outcomes.length && outcomes.every((o) => o.reproduced) ? "reproduced" : "not-reproduced", graphSha256, outcomes };
 }

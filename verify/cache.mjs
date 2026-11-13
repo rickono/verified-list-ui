@@ -96,6 +96,7 @@ export function openCache(dir, { mode = "readwrite" } = {}) {
   dir = resolve(dir);
   const shard = (key) => join(dir, key.slice(0, 2));
   const path = (key) => join(shard(key), `${key}.json`);
+  if (mode === "readwrite") sweep(dir, Date.now());
 
   return {
     mode, dir, path,
@@ -122,7 +123,6 @@ export function openCache(dir, { mode = "readwrite" } = {}) {
       if (invalid) return { error: { op: "write", code: "witness-shape", message: invalid.message } };
       const text = JSON.stringify({ format: FORMAT, identity, key, target: target.id, witness });
       if (Buffer.byteLength(text) > MAX_ENTRY_BYTES) return { error: { op: "write", code: "oversized", message: "The receipt exceeds the cache entry size limit." } };
-      sweep(dir, Date.now());
       const temp = `${path(key)}.${HOST}.${process.pid}.${randomBytes(16).toString("hex")}.tmp`;
       let fd, created = false;
       try {

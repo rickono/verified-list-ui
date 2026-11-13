@@ -1,0 +1,27 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:52272) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"check":"default-report-and-all-query-phases","name":"identity","identical":true,"sourceSha256":"c78327894bbd861027c71944fac0eed8f8c94ded06e3b66402d72908154808d7","outcomes":[{"fn":"f","file":"baseline.ts","span":{"start":31,"end":53},"line":2,"column":1,"assumptions":[{"kind":"param-type","name":"x","type":"number"}],"status":"verified"}]}
+file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/error.mjs:10
+  throw new SourceError(message, node, status);
+        ^
+
+SourceError: Real operations require two real operands; embed JavaScript numbers explicitly.
+    at fail (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/error.mjs:10:9)
+    at Module.binary (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/specifications.mjs:41:47)
+    at expression (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/source.mjs:551:24)
+    at preconditions (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/source.mjs:89:24)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/source.mjs:1123:17
+    at blame (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/error.mjs:16:16)
+    at body (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/source.mjs:1103:10)
+    at Object.build (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/source.mjs:1351:70)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/source.mjs:1362:85
+    at Array.map (<anonymous>) {
+  span: { start: 12, end: 21 },
+  status: 'unsupported',
+  file: 'baseline.ts',
+  fn: 'f'
+}
+
+Node.js v22.23.1

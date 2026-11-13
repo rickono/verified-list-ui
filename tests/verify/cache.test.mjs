@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync, readdirSync } from "node:fs";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { createHash } from "node:crypto";
@@ -108,6 +108,23 @@ test("tsconfig redirects preserve equal queries and invalidate changed contracts
   redirect("b.ts"); const same = await p.check({ tsconfig }); assert.equal(same.cache.solved.length, 0); assert.notEqual(same.graphSha256, cold.graphSha256);
   redirect("c.ts"); const changed = await p.check({ tsconfig });
   assert.deepEqual(names(changed.cache.solved), ["caller", "positive"]); assert.equal(out(changed, "caller").status, "counterexample");
+});
+
+test("naive own-source identities miss helper shape and type changes that real plans detect", async (t) => {
+  const p = setup(t), cold = await p.check();
+  const before = new Map(compile(load(p.entry).records).targets.map((t) => [t.name, t]));
+  const naive = (t) => createHash("sha256").update(JSON.stringify([t.executable, t.requires, t.ensures])).digest("hex");
+  for (const [file, from, to, name] of [
+    ["helper.ts", "export const echo = (x: number) => x;", "export const echo = (x: number) => x > 0;", "useEcho"],
+    ["types.ts", "{ x: number }", "{ x: number, y: number }", "getX"],
+  ]) {
+    p.write({ ...BASE, [file]: BASE[file].replace(from, to) });
+    const current = compile(load(p.entry).records).targets.find((t) => t.name === name);
+    assert.equal(naive(before.get(name)), naive(current));
+    assert.notEqual(proofKey(before.get(name), cold.cache.identity), proofKey(current, cold.cache.identity));
+    const plan = await affected(p.entry, { cache: { dir: p.dir }, targets: [name] });
+    assert.equal(plan.plan.targets.find((t) => t.target.endsWith(`#${name}`)).needsSolve, true);
+  }
 });
 
 test("a current broken callee gates an otherwise reusable caller, including target selection", async (t) => {
@@ -221,12 +238,30 @@ test("bug evidence keeps original witness, greedily shrinks and natively reprodu
   const reproduced = reproduce(p.entry, artifact); assert.equal(reproduced.status, "reproduced");
   assert.equal(reproduced.outcomes[0].inputs.n, "50");
   assert.equal(reproduce(p.entry, artifact, { shrunk: false }).status, "reproduced");
+  const relocated = setup(t, { "entry.ts": source });
+  assert.equal(reproduce(relocated.entry, artifact).status, "reproduced");
+  const poisonShrink = structuredClone(artifact); Object.values(poisonShrink.witnesses)[0].shrunk.witness = ["bad"];
+  assert.equal(reproduce(p.entry, poisonShrink).status, "invalid-evidence");
   const invalid = structuredClone(artifact); Object.values(invalid.witnesses)[0].witness = [];
   assert.equal(reproduce(p.entry, invalid).status, "invalid-evidence");
   const key = structuredClone(artifact); Object.values(key.witnesses)[0].key = "0".repeat(64);
   assert.equal(reproduce(p.entry, key).status, "invalid-evidence");
   const identity = { ...artifact, identity: "0".repeat(64) }; assert.equal(reproduce(p.entry, identity).status, "invalid-evidence");
   p.write({ "entry.ts": source + "\n// changed source" }); assert.equal(reproduce(p.entry, artifact).status, "stale");
+});
+
+test("evidence binds project config and survives relocation of the identical source/config graph", async (t) => {
+  const files = {
+    "entry.ts": "import {id} from '@lib/id';\n// ensures result<100\nexport const bug=(n:number)=>id(n*2);",
+    "lib.ts": "// ensures Object.is(result,x)\nexport const id=(x:number)=>x;",
+    "tsconfig.json": JSON.stringify({ compilerOptions: { baseUrl: ".", paths: { "@lib/id": ["lib.ts"] } } }),
+  };
+  const p = setup(t, files), tsconfig = join(p.root, "tsconfig.json");
+  const report = await p.check({ tsconfig, evidence: true }); assert.equal(out(report, "bug").status, "counterexample");
+  assert.equal(report.evidence.tsconfig, "tsconfig.json");
+  const moved = setup(t, files); assert.equal(reproduce(moved.entry, report.evidence).status, "reproduced");
+  moved.write({ "tsconfig.json": files["tsconfig.json"] + "\n" });
+  assert.equal(reproduce(moved.entry, report.evidence).status, "stale");
 });
 
 test("heap and predicate counterexamples reproduce and explicitly skip unsupported shrinking", async (t) => {

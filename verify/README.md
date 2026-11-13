@@ -43,6 +43,92 @@ The imports check uses separate helper and caller files. It verifies the compose
 
 The command exits 0 only when every loaded function is verified. Other verification outcomes exit 1. Invalid invocation and entry-file I/O errors exit 2. Missing dependencies are `error` outcomes at the import. `--timeout MS` sets one wall-clock solver-process budget per entry and its dependencies, including solver initialization and any worker restarts. The default is 10000 ms. Compilation and JavaScript replay retain their separate limits. `--json` includes source and dependency SHA-256 hashes, input assumptions, and trusted components. Witnesses are arrays/records with string leaves, including `NaN`, `Infinity`, `-Infinity`, `-0`, and `undefined`, so JSON preserves those values. Missing record keys remain missing.
 
+## Select targets, reuse proofs, and reproduce failures
+
+`verify` and `verifyFile` check every loaded function by default. Optional
+`targets` select entry-module names or exact compiler IDs, plus all transitive
+callees. Compilation still checks every loaded source module. Unsupported source
+remains unsupported even when its function is outside the selection.
+
+```js
+import { verifyFile, affected, reproduce } from "./verify/index.mjs";
+const options = {
+	targets: ["checkout"],
+	cache: { dir: ".jsverify", mode: "readwrite" },
+	evidence: true,
+};
+const report = await verifyFile("src/cart.ts", options);
+const plan = await affected("src/cart.ts", options);
+const replayed = reproduce("src/cart.ts", report.evidence);
+```
+
+`affected` and `{plan: true}` run no solver and execute no source. Their
+`plan.targets` contain exact keys, provisional receipt hits, `needsSolve`, and
+pending callee IDs in `waitingOn`. A provisional hit still needs current-source
+replay and current callee verification. Plans create no cache files or directories.
+
+A receipt holds a feasibility witness for a previously proved exact query set.
+It has no final verdict. Only freshly solved, replay-confirmed, final `verified`
+functions produce receipts. Counterexamples, vacuity, uncertainty, errors, and
+unsupported source never do. Every hit replays the current original source and
+waits for every callee's current post-replay status. A rejected or replay-failed
+hit enters one fresh solve and is repaired after a successful readwrite run.
+
+Receipt keys include every solver-input field in the authoritative query state
+graph. This covers expanded types, inlined specifications, contracts, helper
+result shapes, and resolved imports. Source paths and spans remain diagnostic.
+Equivalent query sets can share a receipt across targets or relocated projects.
+A byte change anywhere in the trusted semantic closure invalidates all receipts.
+The Acorn manifest includes the index, cache policy, static and side-effect
+imports, literal dynamic imports, re-exports, and worker URLs. Unresolved dynamic
+dependencies disable caching with a reason. Identity also includes the whole
+installed Z3 package, its declared dependencies, Node version, platform,
+architecture, and protocol. Configuration and source hashes remain in the report.
+A configuration edit that produces identical queries can reuse a receipt.
+
+Cache modes are `readwrite`, `readonly`, and `audit`. Readonly and audit create no
+cache files or directories. Audit re-solves every selected target, uses fresh
+results, and reports validation, replay, and logical disagreements. CLI audit
+exits 1 for any disagreement. Readwrite uses unique process-owned temporary files
+and atomic rename. It removes only recognized local-host stale temporary files
+whose writer process has ended. Active, foreign-host, and unrelated files remain.
+
+Receipt integrity and trustworthy writers are explicit assumptions. A forged
+receipt with a valid benign witness can bypass the solver for buggy source.
+Readonly does not authenticate receipts. One native witness is not a proof.
+Audit re-establishes results by solving again. Z3 supplies no independent proof
+certificates here. The report names the cache trust assumption whenever a hit
+contributes to a result.
+
+`evidence: true` records confirmed bugs with their original witnesses, exact
+source graph and model identities, query keys, and failure signatures. Supported
+plain witnesses undergo greedy shrinking with at most 300 candidate replays.
+Only a smaller witness that confirms the same failure is kept. This is a replay
+work limit and no minimality claim. Heap, predicate-table, and callback-probe
+witnesses retain their originals and explicitly skip shrinking. Every persisted
+witness passes the production whole-witness validator before reproduction.
+
+`reproduce(entry, evidence, {target?, tsconfig?, shrunk?})` runs native replay with
+no solver. Its status is `reproduced`, `not-reproduced`, `stale`, `incompatible`, or
+`invalid-evidence`. It refuses a changed graph, model, or key. An identical graph
+can move to another directory. It validates all witnesses in the artifact before
+replaying any selected target. To reproduce a proof, rerun verification without
+cache or use audit. Bug evidence is not a proof certificate or an offline source
+snapshot.
+
+```sh
+node verify/bin/jsverify.mjs --target checkout --cache .jsverify src/cart.ts
+node verify/bin/jsverify.mjs --plan --cache .jsverify src/cart.ts
+node verify/bin/jsverify.mjs --cache .jsverify --cache-mode audit src/cart.ts
+node verify/bin/jsverify.mjs --evidence bugs.json src/cart.ts
+node verify/bin/jsverify.mjs reproduce --json bugs.json src/cart.ts
+```
+
+`--target` is repeatable. `--evidence PATH` accepts one source entry and writes one
+bug artifact. `replay` is an alias for `reproduce`. JSON reports expose cache hits,
+misses, actual solver work, writes, rejection reasons, blocked callees, and audit
+disagreements. The default report shape and uncached outcome policy are unchanged.
+
 ## Write a contract
 
 Put one expression per contract line directly above a function declaration or a `const` function expression:
