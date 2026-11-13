@@ -1,0 +1,281 @@
+[
+  {
+    "name": "scheduler-verified",
+    "version": "parent",
+    "phases": [
+      "requires-definedness",
+      "feasibility",
+      "postcondition",
+      "postcondition"
+    ],
+    "status": "verified",
+    "label": null,
+    "witness": [
+      "0000000000000000"
+    ]
+  },
+  {
+    "name": "scheduler-second-post-counterexample",
+    "version": "parent",
+    "phase": "postcondition",
+    "postcondition": 2,
+    "label": {
+      "kind": "ensures",
+      "text": "last",
+      "abstract": true,
+      "span": {
+        "start": 1,
+        "end": 2
+      }
+    },
+    "status": "counterexample"
+  },
+  {
+    "name": "scheduler-verified",
+    "version": "ed10",
+    "phases": [
+      "requires-definedness",
+      "feasibility",
+      "postcondition",
+      "postcondition"
+    ],
+    "status": "verified",
+    "label": {
+      "kind": "ensures",
+      "text": "last",
+      "abstract": true,
+      "span": {
+        "start": 1,
+        "end": 2
+      }
+    },
+    "witness": [
+      "0000000000000000"
+    ]
+  },
+  {
+    "name": "scheduler-second-post-counterexample",
+    "version": "ed10",
+    "phase": "postcondition",
+    "postcondition": 2,
+    "label": {
+      "kind": "ensures",
+      "text": "last",
+      "abstract": true,
+      "span": {
+        "start": 1,
+        "end": 2
+      }
+    },
+    "status": "counterexample"
+  },
+  {
+    "name": "scheduler-verified",
+    "version": "c9",
+    "phases": [
+      "requires-definedness",
+      "feasibility",
+      "postcondition",
+      "postcondition"
+    ],
+    "status": "verified",
+    "label": null,
+    "witness": [
+      "0000000000000000"
+    ]
+  },
+  {
+    "name": "scheduler-second-post-counterexample",
+    "version": "c9",
+    "phase": "postcondition",
+    "postcondition": 2,
+    "label": {
+      "kind": "ensures",
+      "text": "last",
+      "abstract": true,
+      "span": {
+        "start": 1,
+        "end": 2
+      }
+    },
+    "status": "counterexample"
+  },
+  {
+    "name": "terminal-label",
+    "parent": null,
+    "ed10": {
+      "kind": "ensures",
+      "text": "last",
+      "abstract": true,
+      "span": {
+        "start": 1,
+        "end": 2
+      }
+    },
+    "c9": null
+  },
+  {
+    "name": "solver-input-fields",
+    "fields": [
+      "assertions",
+      "declarations",
+      "models",
+      "replayGuards"
+    ],
+    "definedPhases": [
+      [
+        "requires-definedness",
+        0
+      ],
+      [
+        "requires-definedness-witness",
+        0
+      ],
+      [
+        "feasibility",
+        0
+      ],
+      [
+        "feasibility-witness",
+        0
+      ],
+      [
+        "postcondition",
+        0
+      ],
+      [
+        "counterexample-witness",
+        0
+      ]
+    ],
+    "plainPhases": [
+      [
+        "feasibility",
+        0
+      ],
+      [
+        "feasibility-witness",
+        0
+      ],
+      [
+        "postcondition",
+        0
+      ],
+      [
+        "counterexample-witness",
+        0
+      ]
+    ]
+  },
+  {
+    "name": "query-identity",
+    "commentAndFilenameShare": true,
+    "definednessChangesKey": true,
+    "bodyChangesKey": true
+  },
+  {
+    "name": "witness-boundary",
+    "replayLimit": 256,
+    "reasons": {
+      "empty": "invalid-response",
+      "bad-number": "invalid-response",
+      "array-257": "invalid-response",
+      "predicate-garbage": "invalid-response",
+      "predicate-object": "invalid-response",
+      "predicate-over-cap": "invalid-response",
+      "heap-values-200000": "witness-invalid",
+      "nondecimal-ref": "witness-invalid",
+      "ref-array": "witness-invalid",
+      "root-mismatch": "witness-invalid"
+    }
+  },
+  {
+    "name": "manifest-closure",
+    "files": [
+      "backend.mjs",
+      "cache.mjs",
+      "data.mjs",
+      "error.mjs",
+      "evidence.mjs",
+      "heap-witness.mjs",
+      "heap.mjs",
+      "index.mjs",
+      "manifest.mjs",
+      "modules.mjs",
+      "predicate-witness.mjs",
+      "proofs.mjs",
+      "solver.mjs",
+      "source.mjs",
+      "specifications.mjs",
+      "types.mjs"
+    ],
+    "packages": [
+      "acorn@8.19.0",
+      "async-mutex@0.3.2",
+      "tslib@2.9.1",
+      "z3-solver@5.3.3"
+    ],
+    "z3Files": 25,
+    "z3Sha": "86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685",
+    "wasm": [
+      "build/z3-built.wasm",
+      "591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"
+    ],
+    "runtime": {
+      "node": "v22.23.1",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "protocol": "jsverify-receipt-1/query-1"
+  },
+  {
+    "name": "manifest-mutations",
+    "solverEditChangesIdentity": true,
+    "before": "ffa6dc01465e53e123f77aef439e80c04c93eee8445861facbe15e24961c393c",
+    "afterSolver": "a0826f27182ca67a9012fc333e4d9ec66b6ba8ab674e3987e53fbc57380665be",
+    "unimportedTextIgnored": true,
+    "bareRequireCallNotFollowed": true,
+    "requireFormDisabled": null,
+    "closureParses": true
+  },
+  {
+    "name": "loaded-worker-drift",
+    "beforeDisabled": null,
+    "afterDisabled": "The verifier module solver.mjs changed on disk after this process loaded it; restart to use the proof cache.",
+    "same": false
+  },
+  {
+    "name": "dependency-forms",
+    "followed": [
+      {
+        "specifier": "./worker.mjs",
+        "form": "url"
+      },
+      {
+        "specifier": "./tmpl.mjs",
+        "form": "import"
+      },
+      {
+        "specifier": "./dyn.mjs",
+        "form": "import"
+      },
+      {
+        "specifier": "./star.mjs",
+        "form": "import"
+      },
+      {
+        "specifier": "./re.mjs",
+        "form": "import"
+      },
+      {
+        "specifier": "./named.mjs",
+        "form": "import"
+      },
+      {
+        "specifier": "./side.mjs",
+        "form": "import"
+      }
+    ],
+    "computedDisables": true
+  }
+]
