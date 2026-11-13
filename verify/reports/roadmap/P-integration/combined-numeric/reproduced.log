@@ -1,0 +1,73 @@
+{
+  "status": "reproduced",
+  "graphSha256": "b1deab21313b9ebaaeb7dd45fe2edb7b501c39a131170eefe569e097e09f715d",
+  "outcomes": [
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts#equalityAlone",
+      "status": "counterexample",
+      "inputs": {
+        "x": "NaN"
+      },
+      "result": "NaN",
+      "failed": [
+        {
+          "kind": "ensures",
+          "text": "x * 2 == result",
+          "span": {
+            "start": 11,
+            "end": 26
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts"
+        }
+      ],
+      "confirmed": true,
+      "reproduced": true
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts#finiteDouble",
+      "status": "counterexample",
+      "inputs": {
+        "x": "9.483648050675831e+307"
+      },
+      "result": "Infinity",
+      "failed": [
+        {
+          "kind": "ensures",
+          "text": "Number.isFinite(result)",
+          "span": {
+            "start": 129,
+            "end": 152
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts"
+        }
+      ],
+      "confirmed": true,
+      "reproduced": true
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts#brokenClamp",
+      "status": "counterexample",
+      "inputs": {
+        "x": "2.6894154990152146e-25",
+        "lo": "0",
+        "hi": "0"
+      },
+      "result": "2.6894154990152146e-25",
+      "failed": [
+        {
+          "kind": "ensures",
+          "text": "lo <= result && result <= hi",
+          "span": {
+            "start": 321,
+            "end": 349
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts"
+        }
+      ],
+      "confirmed": true,
+      "reproduced": true
+    }
+  ]
+}
+(node:13482) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

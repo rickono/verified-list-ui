@@ -1,0 +1,18 @@
+{
+  "codeHead": "dedde91b9f6e1fec3a30f5e39cae65f5381b6b26",
+  "fullSuite": {
+    "passed": 322,
+    "failed": 0,
+    "skipped": 0
+  },
+  "freshArtifact": "reproduced",
+  "freshOutcomes": 3,
+  "historicalArtifact": {
+    "status": "invalid-evidence",
+    "message": "The verification model/backend identity changed."
+  },
+  "firstHarnessAssertion": "Expected stale; actual documented model identity rejection is invalid-evidence. Product behaved correctly. Full suite and workflows were already complete.",
+  "coreHashesUnchanged": true,
+  "finalTreeClean": true,
+  "fullSuiteRepeated": false
+}

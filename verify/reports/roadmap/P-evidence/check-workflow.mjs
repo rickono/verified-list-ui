@@ -13,7 +13,7 @@ import { single } from "../../../modules.mjs";
 import { phases, obligation } from "../../../proofs.mjs";
 import { annotatedSources } from "../../../examples/es-toolkit/check.mjs";
 const ROOT = fileURLToPath(new URL("../../../../", import.meta.url));
-const BASE = "0d7c39cac22f27daaf6e19c98714a57109bb8831";
+const BASE = "e435c8abce3107f3afce5be2b10ae23102d269d2";
 const sha = (text) => createHash("sha256").update(text).digest("hex");
 const scratch = mkdtempSync(join(tmpdir(), "jsverify-p-review-"));
 const log = (o) => console.log(JSON.stringify(o));
