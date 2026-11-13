@@ -5,6 +5,10 @@ H is implemented on `feat/pure-callback-contracts`, based on merged main
 heap effects, stateful callbacks and general higher-order JavaScript remain
 outside this delivery. See [the design](../design/callbacks.md).
 
+H was merged in [PR #5](https://github.com/rickono/verified-list-ui/pull/5) at
+`eb135b5145cceda1e225f5a42e595a4a59a7199b` after an independent
+[landing review](roadmap/landing-H.md). Counts below describe the H delivery.
+
 ## Final validation
 
 All solver-heavy commands used the shared serial test lane. The final full run

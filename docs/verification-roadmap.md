@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J and H are integrated. G is implemented and independently under review in PR #6, now based on main. P, K and the stateful foundation are in design/prototype comparison; no remaining node is claimed complete.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H and G are integrated. P and the stateful foundation are in independent design review. K remains in design comparison; one prototype was rejected after native false-verification reproducers. No remaining roadmap node is claimed complete.
 
-All prerequisites apply. H is merged; G awaits its landing review. P and T can proceed independently. K, R and S still depend on G integration. Transitively redundant edges are omitted.
+All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -14,10 +14,10 @@ flowchart TD
   F["F: Richer specifications<br/>integrated"]
   I{{"I: Integrate &amp; validate<br/>integrated"}}
   E["E: Loops with induction<br/>integrated"]
-  G["G: Heap, aliases &amp; frames<br/>branch-ready"]
+  G["G: Heap, aliases &amp; frames<br/>integrated"]
   H["H: Higher-order contracts<br/>integrated"]
   J["J: Search proof pilot<br/>integrated"]
-  K["K: Broader library proofs"]
+  K["K: Broader library proofs<br/>READY"]
   P["P: Project proof workflow<br/>READY"]
   Q["Q: Pure JS/TS proofs &amp; bugs"]
   R["R: Event &amp; lifecycle semantics"]
@@ -78,7 +78,7 @@ H is integrated on `feat/pure-callback-contracts`. Pure total unary numeric pred
 
 ## Heap and frame delivery
 
-G is implemented and awaiting integration on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K remains gated on integration; P and T can proceed independently.
+G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K remains gated on integration; P and T can proceed independently.
 
 ## Original branch results
 
@@ -96,8 +96,8 @@ These counts describe the original isolated branches. D's original partial resul
 
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
-Ready packages: P, T.
-Branches awaiting integration: G.
+Ready packages: K, P, T.
+Branches awaiting integration: none.
 
 To regenerate this document after editing the data:
 
