@@ -1,0 +1,2155 @@
+{
+  "seat": "A",
+  "started": 1794609103665,
+  "finished": "2026-11-13T22:32:17.504Z",
+  "ms": 33839,
+  "node": "v22.23.1",
+  "root": "/tmp/judgment-throws-exec.t2Sb6T",
+  "coreBefore": {
+    "source": "38bbea4deee14933640511a90336142d1d1bde67793c4ae0f752ced597c52e2e",
+    "index": "f8a4f8c173a2185c01f1dc4626fbd5e9a2f4cc566639a4e5e75a90c7f0f3a75c",
+    "proofs": "8b0cc8361db5cf42882f8145ccd53940ced483c71af1dd081391ae301dd3ba9c"
+  },
+  "coreAfter": {
+    "source": "38bbea4deee14933640511a90336142d1d1bde67793c4ae0f752ced597c52e2e",
+    "index": "f8a4f8c173a2185c01f1dc4626fbd5e9a2f4cc566639a4e5e75a90c7f0f3a75c",
+    "proofs": "8b0cc8361db5cf42882f8145ccd53940ced483c71af1dd081391ae301dd3ba9c"
+  },
+  "coreUnchanged": true,
+  "cases": [
+    {
+      "name": "guarded-ok",
+      "note": null,
+      "file": "guarded-ok.js",
+      "timeoutMs": 15000,
+      "ms": 210,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "guarded",
+            "pre": "(ite (not (or (fp.isNaN ((_ to_fp 11 53) input_0)) (fp.isInfinite ((_ to_fp 11 53) input_0)))) (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000)) (not (or (fp.isNaN ((_ to_fp 11 53) input_0)) (fp.isInfinite ((_ to_fp 11 53) input_0)))))",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 127,
+                  "end": 149
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 127,
+                  "end": 149
+                },
+                "abstract": false
+              },
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 76,
+                  "end": 88
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (not (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000))) false)",
+              "(fp.eq ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "guarded",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "reachable-throw",
+      "note": "native throw must stay unknown, not a confirmed counterexample",
+      "file": "reachable-throw.js",
+      "timeoutMs": 15000,
+      "ms": 159,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "gate",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 88,
+                  "end": 112
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 88,
+                  "end": 112
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (= input_0 true) false)"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "gate",
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "message": "JavaScript replay failed: boom",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "always-throw",
+      "note": null,
+      "file": "always-throw.js",
+      "timeoutMs": 15000,
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Every syntactic path must return a supported value."
+      },
+      "outcomes": [
+        {
+          "fn": "alwaysThrow",
+          "status": "unsupported",
+          "message": "Every syntactic path must return a supported value.",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "vacuous",
+      "note": null,
+      "file": "vacuous.js",
+      "timeoutMs": 15000,
+      "ms": 136,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "vacuous",
+            "pre": "false",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 100,
+                  "end": 122
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 100,
+                  "end": 122
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> input_0 false)"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "vacuous",
+          "status": "vacuous",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "malformed-requires",
+      "note": null,
+      "file": "malformed-requires.js",
+      "timeoutMs": 15000,
+      "ms": 139,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "malformed",
+            "pre": "(ite (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000)) false (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000)))",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 120,
+                  "end": 146
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 120,
+                  "end": 146
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (fp.leq ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000)) false)"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "malformed",
+          "status": "counterexample",
+          "phase": "requires-definedness",
+          "confirmed": true,
+          "inputs": {
+            "x": "NaN"
+          },
+          "failed": [
+            {
+              "kind": "requires",
+              "text": "real(x) > real(\"0\") && false",
+              "span": {
+                "start": 37,
+                "end": 65
+              },
+              "file": "malformed-requires.js"
+            }
+          ],
+          "keys": [
+            "assumptions",
+            "column",
+            "confirmed",
+            "failed",
+            "file",
+            "fn",
+            "inputs",
+            "line",
+            "phase",
+            "result",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": true
+    },
+    {
+      "name": "impossible-ensures-hides-throw",
+      "note": "reachable throw must not become a confirmed normal-return ensures counterexample",
+      "file": "impossible-ensures-hides-throw.js",
+      "timeoutMs": 15000,
+      "ms": 151,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "gate",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 89,
+                  "end": 113
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 89,
+                  "end": 113
+                },
+                "abstract": false
+              },
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 40,
+                  "end": 45
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (= input_0 true) false)",
+              "false"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "gate",
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "message": "JavaScript replay failed: boom",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "dead-throw-impossible-ensures",
+      "note": null,
+      "file": "dead-throw-impossible-ensures.js",
+      "timeoutMs": 15000,
+      "ms": 147,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "dead",
+            "pre": "(not input_0)",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 107,
+                  "end": 129
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 107,
+                  "end": 129
+                },
+                "abstract": false
+              },
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 58,
+                  "end": 63
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (= input_0 true) false)",
+              "false"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "dead",
+          "status": "counterexample",
+          "confirmed": true,
+          "inputs": {
+            "flag": "false"
+          },
+          "result": "1",
+          "failed": [
+            {
+              "kind": "ensures",
+              "text": "false",
+              "span": {
+                "start": 58,
+                "end": 63
+              },
+              "file": "dead-throw-impossible-ensures.js"
+            }
+          ],
+          "keys": [
+            "assumptions",
+            "column",
+            "confirmed",
+            "failed",
+            "file",
+            "fn",
+            "inputs",
+            "line",
+            "result",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": true
+    },
+    {
+      "name": "after-loop-ensures-true",
+      "note": null,
+      "file": "after-loop-ensures-true.js",
+      "timeoutMs": 30000,
+      "ms": 170,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "afterLoop",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 198,
+                  "end": 237
+                },
+                "abstract": true
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "invariant-init",
+                "span": {
+                  "start": 67,
+                  "end": 106
+                },
+                "loop": {
+                  "start": 144,
+                  "end": 182
+                },
+                "abstract": true
+              },
+              {
+                "kind": "invariant-preserve",
+                "span": {
+                  "start": 67,
+                  "end": 106
+                },
+                "loop": {
+                  "start": 144,
+                  "end": 182
+                },
+                "abstract": true
+              },
+              {
+                "kind": "rank",
+                "span": {
+                  "start": 122,
+                  "end": 141
+                },
+                "loop": {
+                  "start": 144,
+                  "end": 182
+                },
+                "abstract": true
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 198,
+                  "end": 237
+                },
+                "abstract": true
+              }
+            ],
+            "postconditions": [
+              "(ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))))",
+              "(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))",
+              "(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (and (bvule loop1_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))",
+              "(=> (and (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (not (bvult loop1_u32 #x00000001))) (not (fp.eq ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)))) false)"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "afterLoop",
+          "status": "unknown",
+          "reason": "induction-gap",
+          "phase": "throw-unreachable",
+          "message": "The throw path may be reachable under the loop invariant; unchanged-source replay did not confirm a failure.",
+          "keys": [
+            "assumptions",
+            "candidate",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "phase",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "after-loop-true-property",
+      "note": "true concrete property under a weak post-loop invariant",
+      "file": "after-loop-true-property.js",
+      "timeoutMs": 30000,
+      "ms": 171,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "afterLoop",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 206,
+                  "end": 245
+                },
+                "abstract": true
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "invariant-init",
+                "span": {
+                  "start": 75,
+                  "end": 114
+                },
+                "loop": {
+                  "start": 152,
+                  "end": 190
+                },
+                "abstract": true
+              },
+              {
+                "kind": "invariant-preserve",
+                "span": {
+                  "start": 75,
+                  "end": 114
+                },
+                "loop": {
+                  "start": 152,
+                  "end": 190
+                },
+                "abstract": true
+              },
+              {
+                "kind": "rank",
+                "span": {
+                  "start": 130,
+                  "end": 149
+                },
+                "loop": {
+                  "start": 152,
+                  "end": 190
+                },
+                "abstract": true
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 206,
+                  "end": 245
+                },
+                "abstract": true
+              },
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 11,
+                  "end": 23
+                },
+                "abstract": true
+              }
+            ],
+            "postconditions": [
+              "(ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))))",
+              "(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))",
+              "(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (and (bvule loop1_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))",
+              "(=> (and (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (not (bvult loop1_u32 #x00000001))) (not (fp.eq ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)))) false)",
+              "(=> (and (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (not (bvult loop1_u32 #x00000001))) (not (not (fp.eq ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000))))) (fp.eq ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "afterLoop",
+          "status": "unknown",
+          "reason": "induction-gap",
+          "phase": "throw-unreachable",
+          "message": "The throw path may be reachable under the loop invariant; unchanged-source replay did not confirm a failure.",
+          "keys": [
+            "assumptions",
+            "candidate",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "phase",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "in-loop-weak",
+      "note": null,
+      "file": "in-loop-weak.js",
+      "timeoutMs": 30000,
+      "ms": 159,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "inLoopWeak",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 192,
+                  "end": 224
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 145,
+                  "end": 239
+                }
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "invariant-init",
+                "span": {
+                  "start": 68,
+                  "end": 107
+                },
+                "loop": {
+                  "start": 145,
+                  "end": 239
+                },
+                "abstract": true
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 192,
+                  "end": 224
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 145,
+                  "end": 239
+                }
+              },
+              {
+                "kind": "invariant-preserve",
+                "span": {
+                  "start": 68,
+                  "end": 107
+                },
+                "loop": {
+                  "start": 145,
+                  "end": 239
+                },
+                "abstract": true
+              },
+              {
+                "kind": "rank",
+                "span": {
+                  "start": 123,
+                  "end": 142
+                },
+                "loop": {
+                  "start": 145,
+                  "end": 239
+                },
+                "abstract": true
+              }
+            ],
+            "postconditions": [
+              "(ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))))",
+              "(=> (and (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (not (fp.eq ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)))) false)",
+              "(=> (and (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (not (not (fp.eq ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000))))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))",
+              "(=> (and (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (not (not (fp.eq ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000))))) (and (bvule loop1_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "inLoopWeak",
+          "status": "unknown",
+          "reason": "induction-gap",
+          "phase": "throw-unreachable",
+          "message": "The throw path may be reachable under the loop invariant; unchanged-source replay did not confirm a failure.",
+          "keys": [
+            "assumptions",
+            "candidate",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "loop",
+            "message",
+            "phase",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "widening-one-event",
+      "note": null,
+      "file": "widening-one-event.js",
+      "timeoutMs": 30000,
+      "ms": 166,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "widen",
+            "pre": "(not input_0)",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 231,
+                  "end": 255
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 191,
+                  "end": 272
+                }
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "invariant-init",
+                "span": {
+                  "start": 114,
+                  "end": 153
+                },
+                "loop": {
+                  "start": 191,
+                  "end": 272
+                },
+                "abstract": true
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 231,
+                  "end": 255
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 191,
+                  "end": 272
+                }
+              },
+              {
+                "kind": "invariant-preserve",
+                "span": {
+                  "start": 114,
+                  "end": 153
+                },
+                "loop": {
+                  "start": 191,
+                  "end": 272
+                },
+                "abstract": true
+              },
+              {
+                "kind": "rank",
+                "span": {
+                  "start": 169,
+                  "end": 188
+                },
+                "loop": {
+                  "start": 191,
+                  "end": 272
+                },
+                "abstract": true
+              }
+            ],
+            "postconditions": [
+              "(ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))))",
+              "(=> (and (and (ite (bvule #x00000000 loop4_u32) (bvule loop4_u32 #x00000001) (bvule #x00000000 loop4_u32)) (bvult loop4_u32 #x00000001)) input_0) false)",
+              "(=> (and (and (ite (bvule #x00000000 loop4_u32) (bvule loop4_u32 #x00000001) (bvule #x00000000 loop4_u32)) (bvult loop4_u32 #x00000001)) (not input_0)) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop4_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop4_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop4_u32) ((_ zero_extend 1) #x00000001)))))",
+              "(=> (and (and (ite (bvule #x00000000 loop4_u32) (bvule loop4_u32 #x00000001) (bvule #x00000000 loop4_u32)) (bvult loop4_u32 #x00000001)) (not input_0)) (and (bvule loop4_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop4_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop4_u32) ((_ zero_extend 1) #x00000001)))))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "widen",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "earlier-helper-fact",
+      "note": null,
+      "file": "earlier-helper-fact.js",
+      "timeoutMs": 20000,
+      "ms": 180,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "no",
+            "pre": "true",
+            "throwEvents": [],
+            "obligations": [
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 40,
+                  "end": 56
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(= false false)"
+            ]
+          },
+          {
+            "name": "afterEarlier",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 190,
+                  "end": 217
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 190,
+                  "end": 217
+                },
+                "abstract": false
+              },
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 133,
+                  "end": 145
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (and call0 call_fact0) false)",
+              "(=> call_fact0 (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "no",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        },
+        {
+          "fn": "afterEarlier",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "later-impossible-post",
+      "note": null,
+      "file": "later-impossible-post.js",
+      "timeoutMs": 20000,
+      "ms": 173,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "impossible",
+            "pre": "true",
+            "throwEvents": [],
+            "obligations": [
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 11,
+                  "end": 16
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "false"
+            ]
+          },
+          {
+            "name": "beforeLater",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 137,
+                  "end": 174
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 137,
+                  "end": 174
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> input_0 false)"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "impossible",
+          "status": "counterexample",
+          "confirmed": true,
+          "inputs": {},
+          "result": "0",
+          "failed": [
+            {
+              "kind": "ensures",
+              "text": "false",
+              "span": {
+                "start": 11,
+                "end": 16
+              },
+              "file": "later-impossible-post.js"
+            }
+          ],
+          "keys": [
+            "assumptions",
+            "column",
+            "confirmed",
+            "failed",
+            "file",
+            "fn",
+            "inputs",
+            "line",
+            "result",
+            "span",
+            "status"
+          ]
+        },
+        {
+          "fn": "beforeLater",
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "message": "JavaScript replay failed: before later fact",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": true
+    },
+    {
+      "name": "earlier-impossible-post",
+      "note": "an impossible earlier post must not verify the caller",
+      "file": "earlier-impossible-post.js",
+      "timeoutMs": 20000,
+      "ms": 161,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "impossible",
+            "pre": "true",
+            "throwEvents": [],
+            "obligations": [
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 11,
+                  "end": 16
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "false"
+            ]
+          },
+          {
+            "name": "afterImpossible",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 159,
+                  "end": 200
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 159,
+                  "end": 200
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (and input_0 call_fact0) false)"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "impossible",
+          "status": "counterexample",
+          "confirmed": true,
+          "inputs": {},
+          "result": "0",
+          "failed": [
+            {
+              "kind": "ensures",
+              "text": "false",
+              "span": {
+                "start": 11,
+                "end": 16
+              },
+              "file": "earlier-impossible-post.js"
+            }
+          ],
+          "keys": [
+            "assumptions",
+            "column",
+            "confirmed",
+            "failed",
+            "file",
+            "fn",
+            "inputs",
+            "line",
+            "result",
+            "span",
+            "status"
+          ]
+        },
+        {
+          "fn": "afterImpossible",
+          "status": "unknown",
+          "reason": "dependency-violation",
+          "message": "impossible violated its contract during replay.",
+          "inputs": {
+            "flag": "false"
+          },
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "inputs",
+            "line",
+            "message",
+            "reason",
+            "span",
+            "status",
+            "violation"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": true
+    },
+    {
+      "name": "helper-requires-cannot-discharge",
+      "note": null,
+      "file": "helper-requires-cannot-discharge.js",
+      "timeoutMs": 20000,
+      "ms": 195,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "helper",
+            "pre": "(fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000))",
+            "throwEvents": [],
+            "obligations": [
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 54,
+                  "end": 66
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(fp.eq ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))"
+            ]
+          },
+          {
+            "name": "caller",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 186,
+                  "end": 208
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 186,
+                  "end": 208
+                },
+                "abstract": false
+              },
+              {
+                "kind": "call",
+                "span": {
+                  "start": 218,
+                  "end": 227
+                },
+                "abstract": false
+              },
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 136,
+                  "end": 148
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> (not (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000))) false)",
+              "(=> (not (not (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000)))) (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000)))",
+              "(=> call_fact1 (fp.eq ((_ to_fp 11 53) call0) ((_ to_fp 11 53) input_0)))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "helper",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        },
+        {
+          "fn": "caller",
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "message": "JavaScript replay failed: no",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "callee-gating",
+      "note": null,
+      "file": "callee-gating.js",
+      "timeoutMs": 20000,
+      "ms": 186,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "helper",
+            "pre": "true",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 79,
+                  "end": 105
+                },
+                "abstract": false
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 79,
+                  "end": 105
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(=> input_0 false)"
+            ]
+          },
+          {
+            "name": "caller",
+            "pre": "true",
+            "throwEvents": [],
+            "obligations": [],
+            "postconditions": [
+              "true"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "helper",
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "message": "JavaScript replay failed: helper",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "reason",
+            "span",
+            "status"
+          ]
+        },
+        {
+          "fn": "caller",
+          "status": "unknown",
+          "reason": "dependency",
+          "message": "Relies on helper, whose final status is unknown.",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "reason",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "drop-throw-check",
+      "note": "private mutant omits or trivializes the throw obligation",
+      "file": "drop-throw-check.js",
+      "timeoutMs": 15000,
+      "ms": 196,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "gate",
+            "pre": "true",
+            "throwEvents": [],
+            "obligations": [],
+            "postconditions": [
+              "true"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "gate",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "drop-throw-native",
+      "native": {
+        "false": {
+          "threw": false,
+          "result": 1
+        },
+        "true": {
+          "threw": true,
+          "message": "boom"
+        },
+        "reportedWitness": null
+      },
+      "witness": null
+    },
+    {
+      "name": "shadow-local-dead",
+      "note": null,
+      "file": "shadow-local-dead.js",
+      "timeoutMs": 15000,
+      "ms": 0,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Unsupported FunctionExpression. Only pure, explicitly modeled data operations are accepted."
+      },
+      "outcomes": [
+        {
+          "fn": "shadowLocal",
+          "status": "unsupported",
+          "message": "Unsupported FunctionExpression. Only pure, explicitly modeled data operations are accepted.",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "shadow-module-dead",
+      "note": null,
+      "file": "shadow-module-dead.js",
+      "timeoutMs": 15000,
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Unresolved type string; use a declared alias or explicit type import."
+      },
+      "outcomes": [
+        {
+          "fn": "Error",
+          "status": "unsupported",
+          "message": "Unresolved type string; use a declared alias or explicit type import.",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "opaque-dead-computed",
+      "note": null,
+      "file": "opaque-dead-computed.js",
+      "timeoutMs": 15000,
+      "ms": 0,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+      },
+      "outcomes": [
+        {
+          "fn": "opaqueDead",
+          "status": "unsupported",
+          "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\").",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "opaque-live-computed",
+      "note": null,
+      "file": "opaque-live-computed.js",
+      "timeoutMs": 15000,
+      "ms": 0,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+      },
+      "outcomes": [
+        {
+          "fn": "opaqueLive",
+          "status": "unsupported",
+          "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\").",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "erased-in-argument",
+      "note": null,
+      "file": "erased.ts",
+      "timeoutMs": 15000,
+      "ms": 0,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Runtime generic arguments, type assertions, non-null assertions and unmodeled erased runtime syntax are unsupported."
+      },
+      "outcomes": [
+        {
+          "fn": "erased",
+          "status": "unsupported",
+          "message": "Runtime generic arguments, type assertions, non-null assertions and unmodeled erased runtime syntax are unsupported.",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "loop-write-in-argument",
+      "note": null,
+      "file": "loop-write-in-argument.js",
+      "timeoutMs": 30000,
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+      },
+      "outcomes": [
+        {
+          "fn": "written",
+          "status": "unsupported",
+          "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\").",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "try-catch",
+      "note": null,
+      "file": "try-catch.js",
+      "timeoutMs": 15000,
+      "ms": 0,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Give x a supported data annotation or a JSDoc @param type. Types are input assumptions."
+      },
+      "outcomes": [
+        {
+          "fn": "caught",
+          "status": "unsupported",
+          "message": "Give x a supported data annotation or a JSDoc @param type. Types are input assumptions.",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    },
+    {
+      "name": "old-program",
+      "note": null,
+      "file": "old-program.js",
+      "timeoutMs": 15000,
+      "ms": 142,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "identity",
+            "pre": "true",
+            "throwEvents": [],
+            "obligations": [
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 36,
+                  "end": 56
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(= ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "identity",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "old-program-baseline",
+      "note": null,
+      "file": "old-program.js",
+      "timeoutMs": 15000,
+      "ms": 146,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "identity",
+            "pre": "true",
+            "throwEvents": [],
+            "obligations": [
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 36,
+                  "end": 56
+                },
+                "abstract": false
+              }
+            ],
+            "postconditions": [
+              "(= ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "identity",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "harmonic-annotation-audit",
+      "annotationAudit": {
+        "originalSha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+        "totalStripsToOriginal": true,
+        "positiveStripsToOriginal": true,
+        "weakStripsToOriginal": false,
+        "totalSha256": "8d22d077cec2448eb235f896b647975a6ff1855a3aa98b15d8fcbe0f29774391",
+        "positiveSha256": "d4a067ec6747c27c836ae46f46350e5ac9334bc2c32df3cc36e6a64948725189",
+        "weakSha256": "01f5cf6cfbc98cbdcc0e451e8cc0756ff14d824801245e90a28ff00e337c615c",
+        "weakDerivedByJudge": true,
+        "sameRequiresAndInvariants": true
+      }
+    },
+    {
+      "name": "harmonic-ensures-true",
+      "note": null,
+      "file": "harmonic_mean.js",
+      "timeoutMs": 60000,
+      "ms": 8418,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "harmonicMean",
+            "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 903,
+                  "end": 968
+                },
+                "abstract": false
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 1444,
+                  "end": 1546
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 1306,
+                  "end": 1598
+                }
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 903,
+                  "end": 968
+                },
+                "abstract": false
+              },
+              {
+                "kind": "invariant-init",
+                "span": {
+                  "start": 1021,
+                  "end": 1259
+                },
+                "loop": {
+                  "start": 1306,
+                  "end": 1598
+                },
+                "abstract": true
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 1444,
+                  "end": 1546
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 1306,
+                  "end": 1598
+                }
+              },
+              {
+                "kind": "invariant-preserve",
+                "span": {
+                  "start": 1021,
+                  "end": 1259
+                },
+                "loop": {
+                  "start": 1306,
+                  "end": 1598
+                },
+                "abstract": true
+              },
+              {
+                "kind": "rank",
+                "span": {
+                  "start": 1277,
+                  "end": 1301
+                },
+                "loop": {
+                  "start": 1306,
+                  "end": 1598
+                },
+                "abstract": true
+              }
+            ],
+            "postconditions": [
+              "(=> (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000)) false)",
+              "(=> (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (ite (not (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000))))))",
+              "(=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000))) false)",
+              "(=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_0_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))) (ite (not (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000))))))",
+              "(=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (and (bvuge (heap_length input_0_ref) loop1_u32) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))))))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "harmonicMean",
+          "status": "verified",
+          "keys": [
+            "assumptions",
+            "column",
+            "file",
+            "fn",
+            "line",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": true,
+      "anyConfirmed": false
+    },
+    {
+      "name": "harmonic-result-positive",
+      "note": null,
+      "file": "harmonic_mean.js",
+      "timeoutMs": 60000,
+      "ms": 22319,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "harmonicMean",
+            "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 909,
+                  "end": 974
+                },
+                "abstract": false
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 1450,
+                  "end": 1552
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 1312,
+                  "end": 1604
+                }
+              }
+            ],
+            "obligations": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 909,
+                  "end": 974
+                },
+                "abstract": false
+              },
+              {
+                "kind": "invariant-init",
+                "span": {
+                  "start": 1027,
+                  "end": 1265
+                },
+                "loop": {
+                  "start": 1312,
+                  "end": 1604
+                },
+                "abstract": true
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 1450,
+                  "end": 1552
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 1312,
+                  "end": 1604
+                }
+              },
+              {
+                "kind": "invariant-preserve",
+                "span": {
+                  "start": 1027,
+                  "end": 1265
+                },
+                "loop": {
+                  "start": 1312,
+                  "end": 1604
+                },
+                "abstract": true
+              },
+              {
+                "kind": "rank",
+                "span": {
+                  "start": 1283,
+                  "end": 1307
+                },
+                "loop": {
+                  "start": 1312,
+                  "end": 1604
+                },
+                "abstract": true
+              },
+              {
+                "kind": "ensures",
+                "span": {
+                  "start": 837,
+                  "end": 847
+                },
+                "abstract": true
+              }
+            ],
+            "postconditions": [
+              "(=> (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000)) false)",
+              "(=> (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (ite (not (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000))))))",
+              "(=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000))) false)",
+              "(=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_0_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))) (ite (not (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000))))))",
+              "(=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (and (bvuge (heap_length input_0_ref) loop1_u32) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))))))",
+              "(=> (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (not (bvult loop1_u32 (heap_length input_0_ref)))) (fp.gt (fp.div RNE ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) loop2)) ((_ to_fp 11 53) #x0000000000000000)))"
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "harmonicMean",
+          "status": "counterexample",
+          "confirmed": true,
+          "inputs": {
+            "x": [
+              "3.3951948877e-313"
+            ]
+          },
+          "result": "0",
+          "failed": [
+            {
+              "kind": "ensures",
+              "text": "result > 0",
+              "span": {
+                "start": 837,
+                "end": 847
+              },
+              "file": "harmonic_mean.js"
+            }
+          ],
+          "keys": [
+            "assumptions",
+            "column",
+            "confirmed",
+            "failed",
+            "file",
+            "fn",
+            "inputs",
+            "line",
+            "result",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": true
+    },
+    {
+      "name": "harmonic-native",
+      "positiveNative": {
+        "sample": [
+          "3.3951948877e-313"
+        ],
+        "result": 0,
+        "positiveZero": true,
+        "threw": false
+      },
+      "nativeRows": [
+        {
+          "x": 5e-324,
+          "xBits": "0000000000000001",
+          "result": 0,
+          "resultBits": "0000000000000000",
+          "positiveZero": true,
+          "objectIs": false
+        },
+        {
+          "x": 5.562684646268003e-309,
+          "xBits": "0004000000000000",
+          "result": 0,
+          "resultBits": "0000000000000000",
+          "positiveZero": true,
+          "objectIs": false
+        },
+        {
+          "x": 1,
+          "xBits": "3ff0000000000000",
+          "result": 1,
+          "resultBits": "3ff0000000000000",
+          "positiveZero": false,
+          "objectIs": true
+        },
+        {
+          "x": 49,
+          "xBits": "4048800000000000",
+          "result": 49.00000000000001,
+          "resultBits": "4048800000000001",
+          "positiveZero": false,
+          "objectIs": false
+        }
+      ],
+      "throws": {
+        "[]": "harmonicMean requires at least one data point",
+        "[-1]": "harmonicMean requires only positive numbers as input",
+        "[0]": "harmonicMean requires only positive numbers as input"
+      }
+    },
+    {
+      "name": "harmonic-weak",
+      "note": "judge-derived by deleting the reciprocalSum invariant from A's positive annotation",
+      "file": "harmonic_mean.js",
+      "timeoutMs": 45000,
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Every syntactic path must return a supported value."
+      },
+      "outcomes": [
+        {
+          "fn": "harmonicMean",
+          "status": "unsupported",
+          "message": "Every syntactic path must return a supported value.",
+          "keys": [
+            "column",
+            "file",
+            "fn",
+            "line",
+            "message",
+            "span",
+            "status"
+          ]
+        }
+      ],
+      "verified": false,
+      "anyConfirmed": false
+    }
+  ]
+}

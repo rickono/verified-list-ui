@@ -1,0 +1,8 @@
+repo=/Users/rick/.t3/worktrees/verified-list-ui/t3-2206e15c
+head=5e501991dcf124ebc06f149e3d603adf00caa737
+tmp=/tmp/judgment-throws-exec.t2Sb6T
+38bbea4deee14933640511a90336142d1d1bde67793c4ae0f752ced597c52e2e  /tmp/judgment-throws-exec.t2Sb6T/verify/source.mjs
+f8a4f8c173a2185c01f1dc4626fbd5e9a2f4cc566639a4e5e75a90c7f0f3a75c  /tmp/judgment-throws-exec.t2Sb6T/verify/index.mjs
+8b0cc8361db5cf42882f8145ccd53940ced483c71af1dd081391ae301dd3ba9c  /tmp/judgment-throws-exec.t2Sb6T/verify/proofs.mjs
+c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d  /tmp/judgment-throws-exec.t2Sb6T/verify/reports/roadmap/candidate-throws-codex/upstream/harmonic_mean.js
+c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d  /tmp/judgment-throws-exec.t2Sb6T/verify/reports/roadmap/candidate-throws-grok/sources/harmonic_mean.js
