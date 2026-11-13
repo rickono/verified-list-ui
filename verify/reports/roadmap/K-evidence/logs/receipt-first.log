@@ -1,0 +1,4 @@
+Post-run receipt preparation expected the earlier run's 27 confirmed / 14 unknown counts.
+Actual final TAP: 26 confirmed / 15 unknown, because H39 became an induction gap.
+The distribution assertion failed before cleanup or report publication.
+Read the actual final outcomes; keep both runs. No code or test change followed.

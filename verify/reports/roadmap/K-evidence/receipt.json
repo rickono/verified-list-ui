@@ -1,0 +1,1140 @@
+{
+  "codeSha": "00e5fc4244f6f756b045e2ea4b6af9ddaaf1715b",
+  "receiptParent": "00e5fc4244f6f756b045e2ea4b6af9ddaaf1715b",
+  "branch": "t3/implement-gate3-mutating-loops",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad",
+  "baseline": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+  "preparedParent": "dedde91b9f6e1fec3a30f5e39cae65f5381b6b26",
+  "runtime": "v22.23.1",
+  "platform": "darwin",
+  "arch": "arm64",
+  "generatedAt": "2026-11-13T23:53:32.828Z",
+  "unchanged": [
+    "verify/data.mjs",
+    "verify/index.mjs",
+    "verify/proofs.mjs",
+    "verify/cache.mjs",
+    "verify/manifest.mjs",
+    "verify/evidence.mjs",
+    "verify/design/mutating-loops.md",
+    "docs/verification-roadmap.json",
+    ".audit"
+  ],
+  "tap": [
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-final.tap",
+      "tests": 26,
+      "pass": 26,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-first.tap",
+      "tests": 16,
+      "pass": 15,
+      "fail": 1,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-second.tap",
+      "tests": 132,
+      "pass": 132,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-third.tap",
+      "tests": 19,
+      "pass": 18,
+      "fail": 1,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/full-before-oracle-update.tap",
+      "tests": 418,
+      "pass": 417,
+      "fail": 1,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/full-final.tap",
+      "tests": 418,
+      "pass": 418,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/index-boundary-focused.tap",
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/numeric-oracle-focused.tap",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/transactions-first.tap",
+      "tests": 3,
+      "pass": 0,
+      "fail": 3,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/transactions-second.tap",
+      "tests": 3,
+      "pass": 2,
+      "fail": 1,
+      "skipped": 0
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/transactions-third.tap",
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "skipped": 0
+    }
+  ],
+  "publicCases": [
+    {
+      "id": "H01-fresh-array",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H02-fresh-record",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H03-fresh-array-boolean",
+      "expect": "reject",
+      "native": [
+        true,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H04-fresh-array-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H05-fresh-record-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H06-alias-local",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H07-alias-param",
+      "expect": "reject",
+      "native": [
+        false,
+        true,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H08-alias-param-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H09-seq-copy",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H10-seq-first-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H11-seq-frame-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H12-nested",
+      "expect": "unsupported",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unsupported",
+      "message": "Nested loops are outside this slice."
+    },
+    {
+      "id": "H13-branch-flag",
+      "expect": "reject",
+      "native": [
+        false,
+        true,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H14-false-guard",
+      "expect": "no-false-verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H15-short-circuit",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H16-ternary-write",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H17-break-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H18-continue-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H19-return-prev-iteration",
+      "expect": "reject",
+      "native": [
+        true,
+        true,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H20-return-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H21-for-update-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H22-test-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H23-call-writer-fresh",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H24-call-writer-param",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H25-call-in-test",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H26-call-in-update",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H27-frame-write-unlisted",
+      "expect": "reject",
+      "native": [
+        false
+      ],
+      "status": "counterexample",
+      "reason": "frame-write",
+      "confirmed": true,
+      "message": "f writes a[0] outside its modifies frame"
+    },
+    {
+      "id": "H28-frame-alias-permission",
+      "expect": "reject",
+      "native": [
+        false
+      ],
+      "status": "counterexample",
+      "reason": "frame-write",
+      "confirmed": true,
+      "message": "f writes b.x outside its modifies frame"
+    },
+    {
+      "id": "H29-frame-mixed-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H30-loop-chosen-target",
+      "expect": "unsupported",
+      "native": [
+        true
+      ],
+      "status": "unsupported",
+      "message": "A loop writes through a reference chosen inside the loop; write targets must be fixed at loop entry."
+    },
+    {
+      "id": "H31-preloop-ternary-target",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H32-loop-alloc",
+      "expect": "unsupported",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "unsupported",
+      "message": "Loops that allocate collections are outside the K slice; only existing primitive contents may change."
+    },
+    {
+      "id": "H33-invariant-init",
+      "expect": "reject",
+      "native": [
+        false,
+        true,
+        true
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H34-invariant-preserve",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H35-frame-precision-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H36-index-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H37-index-write-growth",
+      "expect": "reject",
+      "native": [
+        true,
+        true,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H38-index-every-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H39-old-in-loop",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H40-nested-field-param",
+      "expect": "reject",
+      "native": [
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H41-do-while",
+      "expect": "unsupported",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "unsupported",
+      "message": "Unsupported DoWhileStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected."
+    },
+    {
+      "id": "H42-compound-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H43-increment-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "old-slice-swap",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "old-slice-swap-wrong",
+      "expect": "counterexample",
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "old-callback-local",
+      "expect": "unsupported",
+      "status": "unsupported",
+      "message": "Unknown value k. Calls and ambient values need explicit support."
+    },
+    {
+      "id": "fill",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "fill-weak-invariant",
+      "expect": "unknown/induction-gap",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "fill-negated-mutant",
+      "expect": "counterexample (confirmed)",
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "fill-unpermitted-write",
+      "expect": "counterexample frame-write",
+      "status": "counterexample",
+      "reason": "frame-write",
+      "confirmed": true,
+      "message": "clearBoth writes other[0] outside its modifies frame"
+    },
+    {
+      "id": "alias-inc-into",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "alias-inc-into-no-suffix",
+      "expect": "unknown/induction-gap",
+      "status": "unknown",
+      "reason": "request-timeout",
+      "phase": "invariant-preserve",
+      "message": "The shared wall-clock verification budget was exhausted."
+    },
+    {
+      "id": "alias-reverse-copy",
+      "expect": "counterexample with aliases (or induction-gap if the model picks equal elements)",
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "replace-first-return",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "clamp-break-continue",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "record-flag",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "pre-loop-write-entry-old",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "pre-loop-write-forgotten",
+      "expect": "unknown/induction-gap",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "loop-calls-writer",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "loop-call-outside-frame",
+      "expect": "counterexample frame-inclusion",
+      "status": "counterexample",
+      "reason": "frame-inclusion",
+      "confirmed": true,
+      "message": "clearAt's modifies frame exceeds clearOther's frame"
+    },
+    {
+      "id": "write-wrong-rank",
+      "expect": "unknown/induction-gap rank",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "rank",
+      "message": "The decreases measure may not stay nonnegative and drop by at least 1, and replay did not confirm nontermination."
+    },
+    {
+      "id": "excluded-alloc-in-loop",
+      "expect": "unsupported (allocation)",
+      "status": "unsupported",
+      "message": "Loops that allocate collections are outside the K slice; only existing primitive contents may change."
+    },
+    {
+      "id": "excluded-loop-chosen-target",
+      "expect": "unsupported (loop-chosen write target)",
+      "status": "unsupported",
+      "message": "A loop writes through a reference chosen inside the loop; write targets must be fixed at loop entry."
+    },
+    {
+      "id": "excluded-length-change",
+      "expect": "unsupported (length change)",
+      "status": "unsupported",
+      "message": "Loop length/shape changes are outside the K slice."
+    }
+  ],
+  "inputs": [
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 37143,
+      "sha256": "8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21"
+    },
+    {
+      "path": "tests/verify/fixtures/mutating-loop-cases.mjs",
+      "bytes": 15389,
+      "sha256": "961cafd579858a06e4edd53f64889f567da7ecc22cdeff5fd448f41639304afb"
+    },
+    {
+      "path": "tests/verify/fixtures/mutating-loop-pilot-cases.mjs",
+      "bytes": 13069,
+      "sha256": "86847c209384a5e740647600c30a83ed9c151fb97dddd28aa1de477154dff352"
+    },
+    {
+      "path": "tests/verify/heap.test.mjs",
+      "bytes": 14281,
+      "sha256": "ec9631569567eabcd6e97c2894eee5316ec4399d6b88d8c999210e2058257c3f"
+    },
+    {
+      "path": "tests/verify/loop-trials.test.mjs",
+      "bytes": 7929,
+      "sha256": "9dbfc74fc0d9e471a1df8402013f9c9794985f8d425870cbc86e53d84a238edc"
+    },
+    {
+      "path": "tests/verify/mutating-loop-audit.test.mjs",
+      "bytes": 2921,
+      "sha256": "66f8fb14da1406ada46a1ad2dd8f39e90f097258e13b0d57eea934db39eaf75b"
+    },
+    {
+      "path": "tests/verify/mutating-loop-edges.test.mjs",
+      "bytes": 4122,
+      "sha256": "6a7384c847802fc7aeb6a859c28336a8409b8a0f28abb64fe11520ba7eff0ec6"
+    },
+    {
+      "path": "tests/verify/mutating-loop-pin.test.mjs",
+      "bytes": 1448,
+      "sha256": "06416cd229f0b837ee7c5afe2b07e6c6aa6fbb5d5afab5ba3b19709b23376db6"
+    },
+    {
+      "path": "tests/verify/mutating-loops.test.mjs",
+      "bytes": 6020,
+      "sha256": "07aecfe2bd58dc38506b04572af3b1bbefcdd22db72e238dd2994030d6cb785b"
+    },
+    {
+      "path": "tests/verify/numeric-metadata.test.mjs",
+      "bytes": 8463,
+      "sha256": "6839166020e927b2d937b3d27f4c0024502ac3e8cdaab2b20f957aaed3062726"
+    },
+    {
+      "path": "verify/README.md",
+      "bytes": 54735,
+      "sha256": "71f3650cad8079e6137b3d60888161214838ec8ea3455b960da54eabb410e3ab"
+    },
+    {
+      "path": "verify/data.mjs",
+      "bytes": 36065,
+      "sha256": "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6"
+    },
+    {
+      "path": "verify/heap.mjs",
+      "bytes": 29105,
+      "sha256": "194600ef6ff1a2d87d5b43f1a2d7b1e0313976290af0ab33b2ba6b1600bacb73"
+    },
+    {
+      "path": "verify/index.mjs",
+      "bytes": 31901,
+      "sha256": "bcb92bc429c375505863ff97d881b960fa3422cda35886803d1832820a03d7e9"
+    },
+    {
+      "path": "verify/proofs.mjs",
+      "bytes": 7028,
+      "sha256": "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/acceptance.json",
+      "bytes": 14878,
+      "sha256": "051cad43caecc0994a5a233b2f071af26743f0dcb0712326b4e0d7c02368d73f"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/baseline.json",
+      "bytes": 166,
+      "sha256": "9600facc43b66d833b7d5caceb279bf6d1cec11fee96340194ff2bc741e987e5"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/cleanup.json",
+      "bytes": 313,
+      "sha256": "2081627e5502497112095b69b3bb0fdc4fb384142c554b305c6e43df4c699e49"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/commands.json",
+      "bytes": 7908,
+      "sha256": "d67600ad004147cbfdb57c316a285b015e5cf4a531bc82acdea5a60e248dae9b"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/final-inputs.json",
+      "bytes": 6963,
+      "sha256": "c6088b849ad7358c7869705b7339940091c4c9ae4e9ca7ce1c42fdb0ef51b268"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/inputs-before-oracle-update.json",
+      "bytes": 6963,
+      "sha256": "3ddadbaeacda11f8237e8044d4fee724678cb515d1e036dc4fc2ddb1d9d358e6"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/iteration-before-diagnostic-fix.json",
+      "bytes": 860,
+      "sha256": "03ae1c23ed4bce62791c5563a9e903e1405e7f0166de8fb0ead76ebb1a0be824"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/iterations/pre-diagnostic-core.patch",
+      "bytes": 12717,
+      "sha256": "27342a4180279ce6c7508410faa3b151191dc581374690467510a541f60e2bf4"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-final.tap",
+      "bytes": 6649,
+      "sha256": "f9a465640e77672e4597f89a881c4c30d7955461d9eef89f45e5e65ab3df49f1"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-first.tap",
+      "bytes": 3991,
+      "sha256": "f2095e97e8493ef0bb7f08622054322c3cf0d44d1058d33b30e472009c74a01f"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-second.tap",
+      "bytes": 35563,
+      "sha256": "93938b6a63863ac74f95b40e73a7749c7b00d744859db0e583915d6b8dbf0cfb"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/focused-third.tap",
+      "bytes": 6502,
+      "sha256": "fe50aeb1f20fc8d61104f0b8c1852b6f2726f36f4389684897ad6af84735b9e5"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/full-before-oracle-update.tap",
+      "bytes": 111293,
+      "sha256": "21ff9b1c815fe33a78a8332abb332677cd4092efd506ab9ba00dcd1f58a457c9"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/full-final.tap",
+      "bytes": 110698,
+      "sha256": "8ce6aeccd3da552d9cd8960e96890c44b9dcd52e1b8451f763c72ef73ea6f3c3"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/index-boundary-focused.tap",
+      "bytes": 2705,
+      "sha256": "be399d8c24d7418e65e6fcdf803496ae9715f07b9cad557bfff464a0b8ac578e"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/numeric-oracle-focused.tap",
+      "bytes": 635,
+      "sha256": "b45955481e24d66c42e1f92994596e27408d16c6b5370b3485cc5f4c458052bf"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/pilot-production-final.log",
+      "bytes": 5979,
+      "sha256": "903275146196e4dcf6e0015d701a9c3270e19f1a537a5d0e8afd32c42fea7596"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/pilot-production.log",
+      "bytes": 41,
+      "sha256": "54c1dcefee9bbeb12d2cbb279b332ddded4dd30461ee3c3826170db0bc7add2d"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/pilot-query-dump-fixed.log",
+      "bytes": 2634,
+      "sha256": "89c7d0f59d7a548d654649a51f101892624404e9e5787b15a7f7cb8de70ecdeb"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/pilot-query-dump.log",
+      "bytes": 1240,
+      "sha256": "af98bb5e539a66beb4057e942ff7412abeb6954ccd1efcedf4b5e610c56feeeb"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/receipt-first.log",
+      "bytes": 325,
+      "sha256": "978964a624395ce7ef852ec97bed2fde0fdbe589c13401c09cf5e13fb0dc6c89"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/transactions-first.tap",
+      "bytes": 7446,
+      "sha256": "31778579a54853d9cd3c01b41d9eff7ccb324a24c0a7de8d318024371dcab2f3"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/transactions-second.tap",
+      "bytes": 42149,
+      "sha256": "c419ce40a87f599f733c52b4e45acbfd54b98993f7ca61c97022b7a68a61adf4"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/logs/transactions-third.tap",
+      "bytes": 1737,
+      "sha256": "e2498eb856f457a8b69430e9b4c8680384d940787ff19764e8b102bfd4145e2f"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/pilot-results.json",
+      "bytes": 12603,
+      "sha256": "4fbeba8a785264aa0649091ba993fef8476b4d5c01ac43d2921bd84ce6a5b07d"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/pilot/LICENSE",
+      "bytes": 35141,
+      "sha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/pilot/README.md",
+      "bytes": 1451,
+      "sha256": "050814a7512a52c9bc88575ed0524f78ba2fa13c1023077e8ac07e9b743bdd88"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/pilot/Reverse.upstream.js",
+      "bytes": 539,
+      "sha256": "8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/pilot/check.mjs",
+      "bytes": 8555,
+      "sha256": "c6d3c782dab72bca05eba40ff1f9dd6e159995df321b0ef68bd068412cc9358f"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/pilot/provenance.json",
+      "bytes": 1085,
+      "sha256": "e0c9e5581d9011edbb87eadac2cc9f6f53ff27ed459a24923c747ce6c1a1f690"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/receipt.mjs",
+      "bytes": 3275,
+      "sha256": "cf1f77b05fcd74e61890e4bb309833802e82b6652268984ab3778106a703eca4"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p1.invariant-init.smt2",
+      "bytes": 7818,
+      "sha256": "3f63619c4327c52b9bd7c93e5d6492b5482b4fc22fc1eeb6c7ee9225029eddee"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p2.store-domain.smt2",
+      "bytes": 5468,
+      "sha256": "849683ee1496e3225b1f06d139bc5cc080d21c024a553344e77405e99e7e28a3"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p3.frame-write.smt2",
+      "bytes": 5229,
+      "sha256": "1c19af81b7ec1bf2739f794c62d49530d1f6640c7c38093aa16829c93c05149e"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p4.store-domain.smt2",
+      "bytes": 5432,
+      "sha256": "a2e51cd286d22c67d488a2cd850ed854d0036a8195ac6d22c9e77c9960b3698a"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p5.frame-write.smt2",
+      "bytes": 5229,
+      "sha256": "1c19af81b7ec1bf2739f794c62d49530d1f6640c7c38093aa16829c93c05149e"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p6.invariant-preserve.smt2",
+      "bytes": 9446,
+      "sha256": "bf764a86c4cf010f74c23fa23f59cf89d2720adf1c54bf698e07110f4b4b9646"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p7.rank.smt2",
+      "bytes": 5674,
+      "sha256": "a7072a4978dd97a3b711d59fdf706f30b5ccbd2d3a9165108fdfd3df32a09dbe"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p8.ensures.smt2",
+      "bytes": 5202,
+      "sha256": "1439264a989e7feeb0aac336448a1f1a40ec4f3c4494638a0eaa401453e68e0b"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/lost-temp-mutant.p9.ensures.smt2",
+      "bytes": 6142,
+      "sha256": "92e653017ed20e70c362d3824e8f1278b03a537c211f38e8ab99d717d4bd06cc"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p1.invariant-init.smt2",
+      "bytes": 7818,
+      "sha256": "8ac268c88bacd3c781c680979d9158d52f646bd3a4a292e1483844f9f880c1c9"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p2.store-domain.smt2",
+      "bytes": 5468,
+      "sha256": "ff07d452c23adeecea32d26539b2341e597a0c054baeb6a5aec69d0356d8de77"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p3.frame-write.smt2",
+      "bytes": 5229,
+      "sha256": "f771cc31c96593493813825147711732951dbfa5ab12f859c3868b79e638e530"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p4.store-domain.smt2",
+      "bytes": 5432,
+      "sha256": "d6df5c7a926e698395ff2cec5cdbe503f96bc0cde5eb3299eb144fc75828bd80"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p5.frame-write.smt2",
+      "bytes": 5229,
+      "sha256": "f771cc31c96593493813825147711732951dbfa5ab12f859c3868b79e638e530"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p6.invariant-preserve.smt2",
+      "bytes": 9446,
+      "sha256": "d9b819ab5a45ce59e1cabb0139b4d13f0c1fa97ff5d39067f3a61f052adb802a"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p7.rank.smt2",
+      "bytes": 5674,
+      "sha256": "1c4643a4bfb58d0d61a43908b7bc465d530737b9daeb13a28903312f021e7c79"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p8.ensures.smt2",
+      "bytes": 5202,
+      "sha256": "7daae0141d6b358d97b83a0f1a67489fee40b967684c20f45f5ce525343ddf73"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/over-swap-mutant.p9.ensures.smt2",
+      "bytes": 6142,
+      "sha256": "70c2f4bdfde682d469036f2b4039dd041c73a21412fce87ab3902a674a31cdef"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p1.invariant-init.smt2",
+      "bytes": 7818,
+      "sha256": "8ac268c88bacd3c781c680979d9158d52f646bd3a4a292e1483844f9f880c1c9"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p2.store-domain.smt2",
+      "bytes": 5664,
+      "sha256": "7699a00c928406773ed92cf89914937d44413762efe2af46dcf41a90693f23d8"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p3.frame-write.smt2",
+      "bytes": 5425,
+      "sha256": "a5a741ddbc5b635a11dd44800fe7ef50ef679f19a65d0ae1bb1a388e6a6be647"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p4.store-domain.smt2",
+      "bytes": 5628,
+      "sha256": "44d73470e5be71315d131bc96c077c1957efeec1b7fce023294cbddf5fd87e6c"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p5.frame-write.smt2",
+      "bytes": 5425,
+      "sha256": "a5a741ddbc5b635a11dd44800fe7ef50ef679f19a65d0ae1bb1a388e6a6be647"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p6.invariant-preserve.smt2",
+      "bytes": 9642,
+      "sha256": "c92811327006a7d260631fd88f6e11d8ac8dfe527d0bedb5b2629eb06c2d7321"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p7.rank.smt2",
+      "bytes": 5870,
+      "sha256": "58f1895fb20fee070daeed6c7202c5fe5b3ae17d106d10abed64827678a00bf0"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p8.ensures.smt2",
+      "bytes": 5398,
+      "sha256": "f6408978ed738f32d00a843b6ed40ac9a9743c336fdb8c26335d90a068579b44"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/short-bound-mutant.p9.ensures.smt2",
+      "bytes": 6338,
+      "sha256": "c3f79e7dd7a1909b0c41223fe2320463be5b2fa6bf4d29b94ac2f7dd60d84b6c"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p1.invariant-init.smt2",
+      "bytes": 7818,
+      "sha256": "8ac268c88bacd3c781c680979d9158d52f646bd3a4a292e1483844f9f880c1c9"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p2.store-domain.smt2",
+      "bytes": 5468,
+      "sha256": "7f97380215bd9636763ea6d4e89a4a9bf2da7c2b7f049117314e978b03be8420"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p3.frame-write.smt2",
+      "bytes": 5229,
+      "sha256": "03e43430ef6ff7e1d0f7a70578e027834105e8ee4cc588f4fa79e404927c027c"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p4.store-domain.smt2",
+      "bytes": 5432,
+      "sha256": "73f09b0b0ccb8f922e089ef111538e3b445f533bbf2aba8dd57adeff64cc8e37"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p5.frame-write.smt2",
+      "bytes": 5229,
+      "sha256": "03e43430ef6ff7e1d0f7a70578e027834105e8ee4cc588f4fa79e404927c027c"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p6.invariant-preserve.smt2",
+      "bytes": 9446,
+      "sha256": "660db59d135fda21cb06a5c38fc557a78536d23d28782f70f089bcaa36bfe60a"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p7.rank.smt2",
+      "bytes": 5674,
+      "sha256": "495e9bbdd850ba6a859379f6cb1d959aebb20722226a3a682107122312f57f20"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p8.ensures.smt2",
+      "bytes": 5202,
+      "sha256": "d29860d1831a0bf40059d3dda6fe4ddd4dcefb89fb2e9bb2505ad80ae1802b7d"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/smt/upstream.p9.ensures.smt2",
+      "bytes": 6142,
+      "sha256": "6ea3a62698a7ce375c6163f567889423d47727edb5e71304a1865bcb90f6c3e8"
+    },
+    {
+      "path": "verify/reports/roadmap/K-evidence/test-only-correction.json",
+      "bytes": 400,
+      "sha256": "e2f29a0de54f630a16de73ffdd96bec9fe64a301e7971ef94a29631d73303ed5"
+    },
+    {
+      "path": "verify/reports/roadmap/K-implementation.md",
+      "bytes": 13561,
+      "sha256": "828b13455588ee94d4674d8b9c551fddcaf2f9f7cb681bace2eab271ab22a1c9"
+    },
+    {
+      "path": "verify/source.mjs",
+      "bytes": 85380,
+      "sha256": "c6979a60bca2a9fcfdd8ebe0e231b0ee87f7306c4a6a67199a22db6b21ae80e7"
+    }
+  ]
+}

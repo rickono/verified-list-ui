@@ -1,0 +1,13 @@
+{
+  "parent": "dedde91b9f6e1fec3a30f5e39cae65f5381b6b26",
+  "coreUncommitted": true,
+  "files": {
+    "verify/source.mjs": "e43c8fe716dda7bb4b7c644a87f6179357ed7cab698331d327ea3ca6f2a6ab9c",
+    "verify/heap.mjs": "766606e02dba0f2db617381e3e2c7b25909ed5c551834249ebbc1206a6bdaca8",
+    "verify/data.mjs": "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6",
+    "tests/verify/mutating-loops.test.mjs": "130468d8e999c92d798abfca297c4241a9d3d5d01e90bd4a0ccdc60a4f5eebdf",
+    "tests/verify/loop-trials.test.mjs": "9bce815a0d0c54d4e2d95cd3fb623718196abe2e6716544433d33ba172c030b2",
+    "tests/verify/heap.test.mjs": "ec9631569567eabcd6e97c2894eee5316ec4399d6b88d8c999210e2058257c3f"
+  },
+  "note": "Core hashes apply to focused-first and focused-second. Test harness fixes occurred between the retained first, second and third transaction logs."
+}

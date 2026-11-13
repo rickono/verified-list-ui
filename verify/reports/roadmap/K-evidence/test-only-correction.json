@@ -1,0 +1,8 @@
+{
+  "previousTree": "bc9fec06ff535da4fa87012904775ec6eece2804",
+  "changedInputs": [
+    "tests/verify/numeric-metadata.test.mjs"
+  ],
+  "coreChanged": false,
+  "reason": "The full run found a second obsolete blanket loop-writing rejection oracle. Preserve straight-line domain checks, admit unchanged dead primitive stores, check a real loop wrap-domain failure, and retain allocation exclusion."
+}

@@ -1,0 +1,625 @@
+{
+  "rows": 64,
+  "counts": {
+    "counterexample": 26,
+    "verified": 15,
+    "unknown": 15,
+    "unsupported": 8
+  },
+  "unknownReasons": {
+    "induction-gap": 14,
+    "request-timeout": 1
+  },
+  "cases": [
+    {
+      "id": "H01-fresh-array",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H02-fresh-record",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H03-fresh-array-boolean",
+      "expect": "reject",
+      "native": [
+        true,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H04-fresh-array-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H05-fresh-record-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H06-alias-local",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H07-alias-param",
+      "expect": "reject",
+      "native": [
+        false,
+        true,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H08-alias-param-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H09-seq-copy",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H10-seq-first-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H11-seq-frame-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H12-nested",
+      "expect": "unsupported",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unsupported",
+      "message": "Nested loops are outside this slice."
+    },
+    {
+      "id": "H13-branch-flag",
+      "expect": "reject",
+      "native": [
+        false,
+        true,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H14-false-guard",
+      "expect": "no-false-verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H15-short-circuit",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H16-ternary-write",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H17-break-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H18-continue-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H19-return-prev-iteration",
+      "expect": "reject",
+      "native": [
+        true,
+        true,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H20-return-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H21-for-update-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H22-test-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H23-call-writer-fresh",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H24-call-writer-param",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H25-call-in-test",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H26-call-in-update",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H27-frame-write-unlisted",
+      "expect": "reject",
+      "native": [
+        false
+      ],
+      "status": "counterexample",
+      "reason": "frame-write",
+      "confirmed": true,
+      "message": "f writes a[0] outside its modifies frame"
+    },
+    {
+      "id": "H28-frame-alias-permission",
+      "expect": "reject",
+      "native": [
+        false
+      ],
+      "status": "counterexample",
+      "reason": "frame-write",
+      "confirmed": true,
+      "message": "f writes b.x outside its modifies frame"
+    },
+    {
+      "id": "H29-frame-mixed-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H30-loop-chosen-target",
+      "expect": "unsupported",
+      "native": [
+        true
+      ],
+      "status": "unsupported",
+      "message": "A loop writes through a reference chosen inside the loop; write targets must be fixed at loop entry."
+    },
+    {
+      "id": "H31-preloop-ternary-target",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H32-loop-alloc",
+      "expect": "unsupported",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "unsupported",
+      "message": "Loops that allocate collections are outside the K slice; only existing primitive contents may change."
+    },
+    {
+      "id": "H33-invariant-init",
+      "expect": "reject",
+      "native": [
+        false,
+        true,
+        true
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H34-invariant-preserve",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H35-frame-precision-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H36-index-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H37-index-write-growth",
+      "expect": "reject",
+      "native": [
+        true,
+        true,
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H38-index-every-pos",
+      "expect": "verify",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "H39-old-in-loop",
+      "expect": "reject",
+      "native": [
+        false,
+        true
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H40-nested-field-param",
+      "expect": "reject",
+      "native": [
+        false
+      ],
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "H41-do-while",
+      "expect": "unsupported",
+      "native": [
+        true,
+        true,
+        true
+      ],
+      "status": "unsupported",
+      "message": "Unsupported DoWhileStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected."
+    },
+    {
+      "id": "H42-compound-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "H43-increment-write",
+      "expect": "reject",
+      "native": [
+        true,
+        false,
+        false
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "old-slice-swap",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "old-slice-swap-wrong",
+      "expect": "counterexample",
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "old-callback-local",
+      "expect": "unsupported",
+      "status": "unsupported",
+      "message": "Unknown value k. Calls and ambient values need explicit support."
+    },
+    {
+      "id": "fill",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "fill-weak-invariant",
+      "expect": "unknown/induction-gap",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "fill-negated-mutant",
+      "expect": "counterexample (confirmed)",
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "fill-unpermitted-write",
+      "expect": "counterexample frame-write",
+      "status": "counterexample",
+      "reason": "frame-write",
+      "confirmed": true,
+      "message": "clearBoth writes other[0] outside its modifies frame"
+    },
+    {
+      "id": "alias-inc-into",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "alias-inc-into-no-suffix",
+      "expect": "unknown/induction-gap",
+      "status": "unknown",
+      "reason": "request-timeout",
+      "phase": "invariant-preserve",
+      "message": "The shared wall-clock verification budget was exhausted."
+    },
+    {
+      "id": "alias-reverse-copy",
+      "expect": "counterexample with aliases (or induction-gap if the model picks equal elements)",
+      "status": "counterexample",
+      "confirmed": true
+    },
+    {
+      "id": "replace-first-return",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "clamp-break-continue",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "record-flag",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "pre-loop-write-entry-old",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "pre-loop-write-forgotten",
+      "expect": "unknown/induction-gap",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    },
+    {
+      "id": "loop-calls-writer",
+      "expect": "verified",
+      "status": "verified"
+    },
+    {
+      "id": "loop-call-outside-frame",
+      "expect": "counterexample frame-inclusion",
+      "status": "counterexample",
+      "reason": "frame-inclusion",
+      "confirmed": true,
+      "message": "clearAt's modifies frame exceeds clearOther's frame"
+    },
+    {
+      "id": "write-wrong-rank",
+      "expect": "unknown/induction-gap rank",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "rank",
+      "message": "The decreases measure may not stay nonnegative and drop by at least 1, and replay did not confirm nontermination."
+    },
+    {
+      "id": "excluded-alloc-in-loop",
+      "expect": "unsupported (allocation)",
+      "status": "unsupported",
+      "message": "Loops that allocate collections are outside the K slice; only existing primitive contents may change."
+    },
+    {
+      "id": "excluded-loop-chosen-target",
+      "expect": "unsupported (loop-chosen write target)",
+      "status": "unsupported",
+      "message": "A loop writes through a reference chosen inside the loop; write targets must be fixed at loop entry."
+    },
+    {
+      "id": "excluded-length-change",
+      "expect": "unsupported (length change)",
+      "status": "unsupported",
+      "message": "Loop length/shape changes are outside the K slice."
+    }
+  ],
+  "note": "H39 was confirmed in the earlier full run and an ensures induction gap in the final run. Neither result verifies the false contract."
+}
