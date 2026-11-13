@@ -1,0 +1,26 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+{"id":"signed-add-w32","width":32,"status":"unknown","reason":"timeout"}
+{"id":"signed-order-w32","width":32,"status":"unsat"}
+{"id":"signed-equality-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"half-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"half-plus-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"half-order-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"half-equality-w32","width":32,"status":"unsat"}
+{"id":"half-merge-negation-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"index-range-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"index-bits-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"signed-add-w50","width":50,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"signed-order-w50","width":50,"status":"unsat"}
+{"id":"signed-equality-w50","width":50,"status":"unknown","reason":"timeout"}
+{"id":"half-w50","width":50,"status":"unknown","reason":"timeout"}
+{"id":"half-plus-w50","width":50,"status":"unknown","reason":"timeout"}
+{"id":"half-order-w50","width":50,"status":"unknown","reason":"timeout"}
+{"id":"half-equality-w50","width":50,"status":"unsat"}
+{"id":"half-merge-negation-w50","width":50,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"index-range-w50","width":50,"status":"unknown","reason":"timeout"}
+{"id":"index-bits-w50","width":50,"status":"unknown","reason":"timeout"}
+{"id":"signed-add-w51","width":51,"status":"unknown","reason":"timeout"}
+{"id":"half-w51","width":51,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"half-plus-w51","width":51,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"half-merge-negation-w51","width":51,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}

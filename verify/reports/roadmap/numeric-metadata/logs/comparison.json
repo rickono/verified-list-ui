@@ -1,0 +1,113 @@
+{
+  "cases": 48,
+  "nativeEqual": true,
+  "changedObligations": [
+    {
+      "id": "N05-u32-halves-eq-pos",
+      "before": "1ce2ef45301009d547435158b40c39acdaec0fe8ce885d0e0b1ac70a9f558fd8",
+      "after": "ae647201a51f28af9161f73a312f55c4963039e0f739b4252e4f77a24afea1d3"
+    },
+    {
+      "id": "N06-u32-halves-cmp-pos",
+      "before": "c3f039ae130272f7b949d68f689e6dae8e4cf288f6558701ac6c377c7897be3e",
+      "after": "f18ba265733fb80f5c0436d28b20d1ed0cc36095d16aaec1b7d2e55ec000396f"
+    },
+    {
+      "id": "N07-int-halves-merge-pos",
+      "before": "6e5b3340712b3ecb8c6eb69d5243dc8b7186ea778634bf6b27ea44f2f1233941",
+      "after": "daa2f33fe4d5e44907310313571fc832264f28d28db8444cb19a1f06b7deac11"
+    },
+    {
+      "id": "N08-half-signed-zero",
+      "before": "f1eb8fd6341e3f25c6242f3f0700baf8f11d8c842960ae0352a6dac04826001f",
+      "after": "f2348ae551f1ead8ba0623202270c33abfa53d0395393b949306f2f0aac335d4"
+    },
+    {
+      "id": "N12-mixed-width-eq",
+      "before": "5940e3f6cf859b66f319bd7a9cdff3455f95ca3adecdb251d98985052b390ee9",
+      "after": "9f35ab0a68a4b2ed5aa28b5e22a4f1e031c44072457ac59b63db9ca5237128a2"
+    },
+    {
+      "id": "N14-int-safe-pos",
+      "before": "f0340f1829c0847c26c3cad1b7e402dd7843d34572d8e1e38bbef6f283abf536",
+      "after": "d7b1be412e1f2cb615442629eb69240174fbae20692e473c13902e4ea9c6f477"
+    },
+    {
+      "id": "N17-index-wrap-pos-2p32",
+      "before": "edde4e31102e6836ee379f614b0912017ccc712977f7f99b063cf5ff249c1a0b",
+      "after": "001153bd41f169ff5125278447abbf707136836affe40b3e114ed25b13868a3e"
+    },
+    {
+      "id": "N18-index-wrap-neg-2p32",
+      "before": "947f7197e7d44e661526502aca0d203c58268d77fd9598ab2ce07240603262d8",
+      "after": "97dfe273fef805309565690ee621b2ebcf43710ff5c8e5b33c7f0dd34dfde1ca"
+    },
+    {
+      "id": "N19-store-wrap-2p32",
+      "before": "34159a93f9f1647b5dc188f8db3088e6f823df2493d2207622f745116b66dc82",
+      "after": "ba0ba4edbae612a0f0eb55056ab6f6bd37327ae32a7cf0b261324de9c6e0a01b"
+    },
+    {
+      "id": "N20-index-predecessor",
+      "before": "b72a71c8f2e6dc7242b46c8e0b9c33222b811c8187eab73a963b083785627fca",
+      "after": "b8c86b2cda1ea37b49c2affc7d2f3170e3089890ebdb86d33b7d78088e0363f5"
+    },
+    {
+      "id": "N21-index-int-pos",
+      "before": "03f162697bfa3c736fe64d5ad8783a50d52a95ff7b44984402d7a8ff96efceb8",
+      "after": "71ca6beabcbb28706857f210ba38ce7eede057f50226a825061040aed457872f"
+    },
+    {
+      "id": "N35-int-roundtrip-eq-pos",
+      "before": "87d34b2831e79ada00209b7f48bced598f8bb059ffa8e2e923256e36c2a9f979",
+      "after": "b5ec90ae725c6488cf150a985dd169c43a32cedfbbda6f32adf6ee858a3a19ad"
+    },
+    {
+      "id": "N21b-index-int-pos",
+      "before": "622b352693b694d58bef0901b68ff74520f776692c4d1566dca26d1d9cde56bc",
+      "after": "eddc88749f063cc016c7c04ecad2012be9307333f7a3c4f99e6647bfdf0e243a"
+    }
+  ],
+  "changedOutcomes": [
+    {
+      "id": "N12-mixed-width-eq",
+      "before": {
+        "status": "counterexample"
+      },
+      "after": {
+        "status": "unknown",
+        "reason": "request-timeout"
+      }
+    },
+    {
+      "id": "N21-index-int-pos",
+      "before": {
+        "status": "unknown",
+        "reason": "request-timeout"
+      },
+      "after": {
+        "status": "counterexample"
+      }
+    },
+    {
+      "id": "N35-int-roundtrip-eq-pos",
+      "before": {
+        "status": "unknown",
+        "reason": "request-timeout"
+      },
+      "after": {
+        "status": "verified"
+      }
+    },
+    {
+      "id": "N21b-index-int-pos",
+      "before": {
+        "status": "unknown",
+        "reason": "request-timeout"
+      },
+      "after": {
+        "status": "verified"
+      }
+    }
+  ]
+}

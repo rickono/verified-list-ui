@@ -1,0 +1,5 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+{"check":"hit-callee-gate","ok":true,"detail":{"included":["caller","positive"],"caller":"dependency","positive":"counterexample","hits":["caller"],"solved":["positive"],"written":[],"otherIncludes":["other"]}}
+{"check":"benign-forgery-trust-control","ok":true,"detail":{"readonly":"verified","audit":"counterexample","kinds":["logical"],"trust":"Receipt integrity and trusted writers are required; no proof certificates. Readonly does not authenticate. Audit re-solves independently of receipts."}}
+{"check":"repair","ok":false,"detail":{"rejected":[{"target":"/private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/p-review-solver2-1Yne6j/mix/entry.ts#fine","reason":"unparseable"}],"written":["fine"],"solved":["bug","fine"],"warm":{"hits":["fine"],"solved":["/private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/p-review-solver2-1Yne6j/mix/entry.ts#bug"]}}}

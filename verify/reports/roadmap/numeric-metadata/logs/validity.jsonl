@@ -1,0 +1,38 @@
+{"id":"signed-sub-w2","width":2,"status":"unsat"}
+{"id":"signed-add-w2","width":2,"status":"unsat"}
+{"id":"signed-order-w2","width":2,"status":"unsat"}
+{"id":"signed-equality-w2","width":2,"status":"unsat"}
+{"id":"half-w2","width":2,"status":"unsat"}
+{"id":"half-plus-w2","width":2,"status":"unsat"}
+{"id":"half-order-w2","width":2,"status":"unsat"}
+{"id":"half-equality-w2","width":2,"status":"unsat"}
+{"id":"half-merge-negation-w2","width":2,"status":"unsat"}
+{"id":"index-range-w2","width":2,"status":"unsat"}
+{"id":"index-bits-w2","width":2,"status":"unsat"}
+{"id":"signed-sub-w32","width":32,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"signed-add-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"signed-order-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"signed-equality-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-plus-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-order-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-equality-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-merge-negation-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"index-range-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"index-bits-w32","width":32,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"signed-sub-w50","width":50,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"signed-add-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"signed-order-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"signed-equality-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-plus-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-order-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-equality-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-merge-negation-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"index-range-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"index-bits-w50","width":50,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"signed-sub-w51","width":51,"status":"unknown","reason":"worker-timeout","message":"The backend worker exceeded its wall-clock query budget."}
+{"id":"signed-add-w51","width":51,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-w51","width":51,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-plus-w51","width":51,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}
+{"id":"half-merge-negation-w51","width":51,"status":"not-run","reason":"earlier worker wall-clock timeout in this group"}

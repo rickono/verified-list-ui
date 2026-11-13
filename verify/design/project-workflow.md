@@ -1,7 +1,8 @@
 # Project proof workflow synthesis
 
-This is the selected design for P, not a delivered capability. The existing
-roadmap acceptance remains unchanged. Candidate A is Claude `9e1e945`; B is
+This records the selected design for P. The implementation and independent
+acceptance evidence are in [the landing receipt](../reports/roadmap/P-landing.md).
+The existing roadmap acceptance remains unchanged. Candidate A is Claude `9e1e945`; B is
 Grok `8e9ce80`. The independent judgment is `2bc3b46` (12/15 versus 8/15).
 The coordinator agrees with A as the base because it exercises real solver
 misses, native replay on hits and dependency re-gating within the existing

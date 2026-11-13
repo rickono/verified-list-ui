@@ -1,0 +1,12 @@
+{"check":"default-report-and-phases","name":"identity","status":[["f","verified",null,null]]}
+{"check":"default-report-and-phases","name":"requires-definedness","status":[["f","counterexample","requires-definedness",null]]}
+{"check":"default-report-and-phases","name":"vacuous","status":[["f","vacuous",null,null]]}
+{"check":"default-report-and-phases","name":"heap","status":[["f","verified",null,null]]}
+{"check":"default-report-and-phases","name":"caller","status":[["id","verified",null,null],["f","verified",null,null]]}
+{"check":"transitive-hit-gate","outcomes":[["broken","counterexample",null],["middle","unknown","dependency-violation"],["outer","unknown","dependency-violation"]],"hits":[],"solved":["broken","middle","outer"],"rejected":[["middle","replay"],["outer","replay"]]}
+{"check":"replay-failed-repair-once","rejected":"replay","solved":1,"warmHits":2}
+{"check":"readonly-audit-plan-create-nothing"}
+{"check":"definedness-and-vacuous-not-cached","undef":"counterexample","vacuous":"vacuous","written":1}
+{"check":"benign-forgery-trust-control","readonly":"verified","audit":"counterexample","disagreements":["logical"],"auditWritten":0}
+{"check":"bugs-reproduced","names":[["equalityAlone",{"x":"NaN"}],["finiteDouble",{"x":"-1.6859818756757034e+308"}],["brokenClamp",{"x":"2.6894154990152146e-25","lo":"1.520791640377962e-28","hi":"1.6832144692481658e-28"}]]}
+{"ok":true}
