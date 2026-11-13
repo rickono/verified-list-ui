@@ -60,7 +60,7 @@ limits affect failure search only. There is no proof event-count bound.
 
 Replay uses unchanged type-stripped source in a strict realm, timed action and
 microtask draining, and a contained process. Traces bind source, executable and
-assumptions and reject illegal settlements or changed inputs. The frontend,
+assumptions and reject illegal settlements or invalid input shapes. The frontend,
 binding rewrites, shared compiler, induction rule, standard runtime and Z3
 remain trusted. Proof certificates and general JavaScript coverage are absent.
 
