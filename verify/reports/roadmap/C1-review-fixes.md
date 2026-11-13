@@ -26,5 +26,28 @@ The implementation's full **304/304** run remains evidence for its earlier
 code head. The full suite was not repeated for this narrow error-path change;
 the targeted run and exact legacy query comparison verify the correction.
 The native review's earlier 5-test replay log is superseded by its 6-test rerun
-and by this focused run. The broader proof review is still pending; C1 is not
-yet published or integrated, and no R/S/T/U doneWhen is claimed.
+and by this focused run. At that checkpoint the broader proof review was still pending. C1 was not
+yet published or integrated, and no R/S/T/U doneWhen was claimed.
+
+## Later proof review and keyword admission
+
+The independent proof review `bd790ea` reproduced the same diagnostic crash
+and found that an ASCII-prefix check could silently treat a Unicode-edited
+contract keyword as prose beside an admitted `state true` clause. No admitted
+property was falsely verified, but omitting the intended clause is an admission
+defect. The review report and its executed cases are preserved under
+[review-stateful-C1/proof/](review-stateful-C1/proof/report.md).
+
+Correction `67ad05b` inspects the whole token, uses codepoint edit distance, and
+normalizes lookalikes and ignored formatting characters for recognition only.
+Admission still requires the exact grammar keyword; no Unicode spelling becomes
+a new accepted clause. The added regression rejects Cyrillic, fullwidth,
+mathematical, invisible and astral edits while retaining ordinary prose.
+
+The regression fails on the earlier archived parser
+([red log](stateful-C1-evidence/review-unicode-before.log)). All five frontend
+tests pass both in the corrected archive and in the integrated production
+checkout ([production log](stateful-C1-evidence/review-unicode-production.log)).
+These are frontend checks, not additional solver proofs. Final combined C1
+verification on top of main's P, numeric and heap gates is recorded separately
+when it completes. No R/S/T/U completion follows from the correction.
