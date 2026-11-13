@@ -65,7 +65,7 @@ export function identity(x) {
 }
 ```
 
-Every target needs an `ensures`. `result` names the returned value. A contract can mention parameters, but not function-local variables. Parameter types and `requires` must hold at entry. The verifier checks calls within the analyzed source; external callers must meet those assumptions. A TypeScript annotation does not validate untyped runtime callers.
+Every target needs an `ensures`. In `ensures`, `result` names the returned value, even when the body declares its own local `result`. `requires` and `ensures` can mention parameters, but not function-local variables. Parameter types and `requires` must hold at entry. The verifier checks calls within the analyzed source; external callers must meet those assumptions. A TypeScript annotation does not validate untyped runtime callers.
 
 ## Arrays and records
 
@@ -304,7 +304,7 @@ the explicit requires. Quantified callbacks require definedness for every
 element, independently of Boolean polarity.
 
 `old(expression)` in ensures, loop invariants and decreases evaluates over function-entry parameters. It cannot read
-`result`, body locals, or callback locals. Each invocation captures a recursive
+`result`, body locals (including one named `result`), or callback locals. Each invocation captures a recursive
 snapshot of supported plain data, preserving absent keys, explicit undefined,
 NaN, and signed zero. The [heap rules](design/heap.md) extend this to shared identity and selected primitive writes.
 
@@ -385,7 +385,7 @@ function scan(values: readonly number[]) {
 }
 ```
 
-The verifier checks initialization, preservation and each back-edge's rank. The measure must be defined, nonnegative and drop by at least one exact unit. Normal exits and early returns must establish ensures. Proofs cover all native array lengths without unrolling. `break` and `continue` preserve JavaScript scope and update order. Loop contracts may use checked specifications; `old` reads function-entry parameters.
+The verifier checks initialization, preservation and each back-edge's rank. The measure must be defined, nonnegative and drop by at least one exact unit. Normal exits and early returns must establish ensures. Proofs cover all native array lengths without unrolling. `break` and `continue` preserve JavaScript scope and update order. Loop contracts may use checked specifications and the locals visible at the loop head; `old` reads function-entry parameters. A body local named `result` is such a local: an invariant reads its live value, while `result` in `ensures` still means the returned value.
 
 Native measure arithmetic stays rounded: `n - i` means `real(n - i)`. Use `real(n) - real(i)` to request an exact difference. A stalled binary64 increment cannot establish termination.
 
@@ -397,11 +397,15 @@ The [gap examples](examples/loop-gaps.ts) contain correct implementations with a
 
 The [pinned Lodash search fixture](examples/lodash/README.md) proves an unchanged upstream `strictIndexOf` body: integer result, bounds, first match, absence and termination. It covers dense numeric arrays of every native length and valid integer starting indices. Both an off-by-one return and a skipped first match produce replay-confirmed counterexamples. Run `node verify/examples/lodash/check.mjs` for the offline proof, provenance checks and native comparisons.
 
+The [pinned es-toolkit fixture](examples/es-toolkit/README.md) proves only the documented empty-array results of unchanged `sum` and `mean`: `+0` and NaN. `mean` composes through its original `./sum.ts` import. Wrong signed-zero and NaN claims and a seeded return bug produce native-confirmed counterexamples. No nonempty or real-number property is claimed. Run `node verify/examples/es-toolkit/check.mjs`.
+
 ## Supported source
 
-Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
+Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings with simple names outside the builtin and verifier set, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
 
 Local scalar bindings support `=`, numeric `+=`, `-=`, `*=`, `/=`, and numeric prefix/postfix `++` and `--`. Operands and arguments evaluate left to right. Short circuits suppress both writes and calls. Branch joins retain writes, and leaving a block restores shadowed names while preserving writes to outer bindings. Local `let` and `const` bindings have block scope; `var` bindings have function scope. Parameters cannot be written, so contracts always describe entry arguments. Reference bindings retain their identity; selected primitive cells may be written under the explicit heap/frame rules.
+
+An ordinary body-local `let`, `const` or `var`, including a block or `for` initializer declaration, may be named `result`. Parameters, callback and `every` parameters, function names, imports, module bindings and type aliases still reject `result`, as every local still rejects the other reserved names.
 
 Assignments preserve a binding's primitive scalar type. Number and boolean bindings can receive undefined and later regain a value of their original type. A binding initialized with only undefined cannot change to another type. Uninitialized declarations, reads or writes before declaration, repeated `var` declarations, and `var` redeclarations of parameters are rejected explicitly. A later declaration still masks an outer name, so a read before a local declaration cannot accidentally resolve a module function. Assignments and updates are unsupported in contracts. The [scalar-state design](design/scalar-state.md) records the scope and evaluation rules.
 
@@ -450,6 +454,8 @@ The collections design selected structural views over bounded tuples or SMT aggr
 `tests/verify/proof-backends.test.mjs` uses a controlled clock and backend to check scheduling in both target orders, retained evidence, one shared budget, and fail-closed witness policy. `backend-process.test.mjs` checks actual process interruption, worker/protocol failures, capability rejection, real Z3 assertion isolation, and independent concurrent source requests. Deadline tests trigger the timer directly instead of asserting machine speed.
 
 `tests/verify/project-frontend.test.mjs` checks concrete aliases, type provenance, barrels, default bindings, package/config policy, metadata invalidation, read-once snapshots, unsupported erased syntax, and the pinned offline project.
+
+`tests/verify/local-result.test.mjs` covers body-local `result` declarations: return-value meaning in ensures, live loop invariants, closure and `every` namespaces, TDZ, scope exit, native-confirmed wrong claims and the binders that still reject the name. `tests/verify/es-toolkit-sum-mean.test.mjs` checks the pinned es-toolkit empty-array proof.
 
 `tests/verify/specifications.test.mjs` covers exact rational replay, finite
 bridges and ordered requires, fractional and rounded operands, overflow,
