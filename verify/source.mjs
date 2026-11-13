@@ -16,7 +16,7 @@ import * as data from "./data.mjs";
 import { frontend, TYPE_BUILTINS } from "./types.mjs";
 import * as specifications from "./specifications.mjs";
 const { and, or, not, need, implies } = data;
-const SELF = { sort: "function" };
+const SELF = Symbol("named-function-self");
 const oblige = (cx, safe) => cx.checks.push(implies(cx.guard, safe));
 
 // Builtins resolve only when the owner is not a lexical or module binding.
@@ -102,6 +102,174 @@ function every(node, env, cx) {
   return value;
 }
 
+// Pure numeric predicate values.
+// A function value is never stored, merged, compared or returned. Applications
+// produce terms plus closed checks; under binders they never become events.
+const FP_SORT = "(_ FloatingPoint 11 53)";
+const { isFunctionType } = data;
+
+function freeNames(node, bound, out) {
+  if (!node || typeof node !== "object") return out;
+  if (node.type === "Identifier") { if (!bound.has(node.name)) out.add(node.name); return out; }
+  if (node.type === "MemberExpression") { freeNames(node.object, bound, out); if (node.computed) freeNames(node.property, bound, out); return out; }
+  if (node.type === "Property") { if (node.computed) freeNames(node.key, bound, out); freeNames(node.value, bound, out); return out; }
+  if (["ArrowFunctionExpression", "FunctionExpression"].includes(node.type)) fail("Nested callback values are unsupported in this slice.", node);
+  if (node.type === "ThisExpression") fail("Callbacks cannot read this.", node);
+  for (const v of Object.values(node)) if (Array.isArray(v)) v.forEach((c) => freeNames(c, bound, out)); else if (v && typeof v === "object" && v.type) freeNames(v, bound, out);
+  return out;
+}
+
+// Arrow -> closure value: defining scope, captured declarations, annotations.
+function closure(node, env, cx) {
+  if (cx.contract) fail("Callback values are unsupported inside contracts; use every for quantified predicates.", node);
+  if (node.async || node.generator) fail("Callbacks must be synchronous, non-generator arrows.", node);
+  if (node.body.type === "BlockStatement") fail("Callbacks are expression-bodied arrows in this slice.", node.body);
+  if (node.params.length !== 1) fail("Numeric predicates take one parameter in this slice.", node);
+  const params = new Set();
+  const captures = [];
+  for (const p of node.params) {
+    if (p.type !== "Identifier" || RESERVED.has(p.name)) fail("Callback parameters need simple, nonreserved names.", p);
+    if (params.has(p.name) || env.has(p.name)) fail("Callback parameters cannot shadow other bindings.", p);
+    params.add(p.name);
+  }
+  for (const name of freeNames(node.body, params, new Set())) {
+    if (!env.has(name)) continue;
+    const b = binding(env, { type: "Identifier", name, start: node.start, end: node.end });
+    if (b.value === SELF) fail("Recursive callbacks are unsupported.", node);
+    if (!["const", "parameter"].includes(b.kind)) fail(`Callback captures ${b.kind} binding ${name}; only immutable const/parameter captures are supported.`, node);
+    if (!["number", "boolean", "undefined"].includes(b.value.sort)) fail(`Callback captures ${name}, a ${b.value.sort} reference or function; only number/boolean/undefined captures are supported.`, node);
+    captures.push({ declaration: b.declaration, kind: b.kind, value: b.value });
+  }
+  const { source, tokens } = cx.scope;
+  const arrow = tokens.find((t) => t.start >= (node.params.at(-1)?.end ?? node.start) && t.type.label === "=>");
+  const ann = (text, at) => { const a = readAnnotation(text, at); return a === undefined ? undefined : cx.scope.validateType(a, at); };
+  const annotations = {
+    params: node.params.map((p) => ann(source.slice(p.end, tokens.find((t) => t.start >= p.end).start), p)),
+    result: (() => {
+      const close = [...tokens].reverse().find((t) => t.end <= arrow.start && t.start >= node.start && t.type.label === ")");
+      return close && close.end > (node.params.at(-1)?.end ?? node.start) ? ann(source.slice(close.end, arrow.start), close) : undefined;
+    })(),
+  };
+  const complete = annotations.params.every((t) => t !== undefined) && annotations.result !== undefined;
+  if (annotations.params.some((t) => t !== undefined && t !== "number") || annotations.result !== undefined && annotations.result !== "boolean") fail("Numeric predicates take one number and return a present boolean.", node);
+  return { sort: "function", kind: "closure", node, env: new Map(env), scope: cx.scope, owner: cx.unit.owner, annotations,
+    purity: { kind: "checked", origin: "closure", captures },
+    type: complete ? { kind: "function", params: annotations.params, result: annotations.result } : undefined };
+}
+
+// Named top-level/imported function used as a value. Identity is the header id.
+function namedValue(h, node, cx) {
+  if (h.spec) fail("@spec functions cannot be passed as callbacks.", node);
+  const target = cx.scope.program.build(h, node);
+  if (h.params.length !== 1 || h.params[0].type !== "number" || target.resultType !== "boolean") fail(`Named predicate ${h.name} must take one number and return a present boolean.`, node);
+  if (target.effects?.kind !== "pure") fail(`Named predicate ${h.name} has no checked purity certificate.`, node);
+  cx.unit.dependencies.add(h.id);
+  return { sort: "function", kind: "named", callee: h, purity: { kind: "checked", origin: "named", target: h.id }, type: { kind: "function", params: ["number"], result: "boolean" } };
+}
+
+function callbackRequires(h, args, cx) {
+  return blame(h.file, h.name, () => {
+    const penv = new Map();
+    h.params.forEach((p, i) => bind(penv, p.node, args[i]));
+    const spec = { guard: "true", contract: true, checks: [], unit: cx.unit,
+      scope: cx.scope.program.scopes.get(h.file), phase: "requires", entry: new Map(penv) };
+    return preconditions(h.requires, penv, spec);
+  });
+}
+
+// Named-function summary, one UF per callee id per unit, emitted as an ordered
+// guarded fact after admission, so it never affects requires
+// definedness or feasibility. It is a consistent theory when the callee is
+// verified; final status is gated on that.
+function namedSymbol(h, cx) {
+  const unit = cx.unit;
+  if (!unit.functions.has(h.id)) {
+    const symbol = unit.fresh("predicate");
+    const sort = (t) => t === "number" ? FP_SORT : "Bool";
+    const vars = h.params.map((p, i) => `${symbol}_x${i}`);
+    const penv = new Map();
+    h.params.forEach((p, i) => bind(penv, p.node, p.type === "number" ? data.numberView(vars[i]) : data.bool(vars[i])));
+    const before = [unit.events.length, unit.declarations.length];
+    const axiom = blame(h.file, h.name, () => {
+      const spec = { guard: "true", contract: true, checks: [], unit, scope: cx.scope.program.scopes.get(h.file), phase: "requires", entry: new Map(penv) };
+      const pre = preconditions(h.requires, penv, spec);
+      const target = cx.scope.program.build(h, h.top);
+      const app = `(${symbol} ${vars.join(" ")})`;
+      penv.set("result", { kind: "contract", value: target.resultType === "number" ? data.numberView(app) : data.bool(app) });
+      spec.phase = "ensures";
+      const ens = and(...h.ensures.map((c) => need(expression(c.ast, penv, spec), "boolean", c.span)));
+      return { pre: pre.value, defined: pre.defined, post: and(ens, ...spec.checks) };
+    });
+    if (unit.events.length !== before[0] || unit.declarations.length !== before[1]) fail(`The contract of ${h.name} is not closed-form; it cannot summarize a callback.`, h.top);
+    const binders = vars.map((v, i) => `(${v} ${sort(h.params[i].type)})`).join(" ");
+    const flag = `${symbol}_contract`;
+    unit.functions.set(h.id, { symbol, declaration: `(declare-fun ${symbol} (${h.params.map((p) => sort(p.type)).join(" ")}) Bool)\n(define-fun ${flag} () Bool (forall (${binders}) ${implies(and(axiom.defined, axiom.pre), axiom.post)}))`, fact: flag });
+  }
+  const entry = unit.functions.get(h.id);
+  const guard = cx.callbackGuard ?? "true", key = JSON.stringify([h.id, guard]);
+  if (guard !== "false" && !unit.emittedFunctions.has(key)) {
+    unit.emittedFunctions.add(key);
+    unit.pendingAxioms.push({ guard, safe: "true", assume: entry.fact, label: { kind: "callback-fact", span: { start: h.top.start, end: h.top.start } } });
+  }
+  return entry.symbol;
+}
+
+function flushAxioms(unit) { if (unit.pendingAxioms?.length) unit.events.push(...unit.pendingAxioms.splice(0)); }
+
+// Value of applying a function value to argument views (already checked
+// against the parameter types). Returns {value, checks}; checks are closed.
+function applyValue(f, args, node, cx) {
+  if (!f.purity) fail("A predicate needs checked source purity or an explicit input-domain assumption.", node);
+  const view = (t, smt) => t === "number" ? data.numberView(smt) : data.bool(smt);
+  if (f.kind === "symbol") return { value: view(f.type.result, `(${f.symbol} ${args.map((a) => a.smt).join(" ")})`), checks: [] };
+  if (f.kind === "named") {
+    const symbol = namedSymbol(f.callee, cx);
+    const pre = callbackRequires(f.callee, args, cx);
+    return { value: data.bool(`(${symbol} ${args[0].smt})`), checks: [pre.defined, pre.value] };
+  }
+  // Closure: inline the unchanged body in its defining scope and blame owner.
+  return blame(f.scope.file, f.owner, () => {
+    const inner = new Map(f.env);
+    f.node.params.forEach((p, i) => bind(inner, p, args[i], "parameter"));
+    const checks = [];
+    const value = expression(f.node.body, inner, { ...cx, scope: f.scope, guard: "true", checks, contract: false, pure: true, phase: "body", loop: undefined });
+    const want = f.type.result;
+    if (value.sort === "undefined") fail("This callback can return undefined; callbacks must return a present value.", f.node.body);
+    if (value.sort !== want) fail(`This callback returns ${value.sort}, not ${want}.`, f.node.body);
+    if (value.present !== "true") fail("This predicate may return undefined; a present boolean is required.", f.node.body);
+    return { value: view(want, value.smt), checks: [...checks, value.present] };
+  });
+}
+
+// Application f(args) at a call expression whose callee is a function value.
+function apply(f, node, env, cx) {
+  if (!f.type) fail("Annotate this callback's parameter and result types before calling it directly.", node);
+  if (node.arguments.some((a) => a.type === "SpreadElement") || node.arguments.length !== f.type.params.length) fail("Callbacks take exactly their declared arguments; spread, missing and extra arguments are unsupported.", node);
+  const args = node.arguments.map((a) => expression(a, env, cx));
+  if (args.some((a) => a.sort === "real")) fail("Callbacks do not accept mathematical values.", node);
+  const bound = f.type.params.map((p, i) => data.argument(p, args[i], node.arguments[i], cx.unit.fresh));
+  if (f.kind === "closure" && !cx.contract && !cx.pure && bound.some((b) => b.safe !== "true")) fail("A direct local predicate call may receive undefined; this slice requires a present number.", node);
+  const { value, checks } = applyValue(f, bound.map((b) => b.value), node, cx);
+  const safe = and(...bound.map((b) => b.safe), ...checks);
+  if (cx.contract || cx.pure) oblige(cx, safe);
+  else { cx.unit.events.push({ guard: cx.guard, safe, assume: "true", ...(f.kind === "named" ? { callee: f.callee.id } : {}),
+    label: { kind: "callback", span: { start: node.start, end: node.end }, abstract: cx.unit.cutpoints > 0 } }); flushAxioms(cx.unit); }
+  return value;
+}
+
+// Passing-site totality: the concrete callback must return a present result
+// for EVERY argument of its parameter types. The fresh probe is universal by
+// negation; its model is replayed directly against the native callback.
+function totality(f, type, callee, index, argNode, callNode, cx) {
+  if (f.kind === "symbol") return "true";
+  const unit = cx.unit;
+  const probes = type.params.map((t) => data.input(t, unit.fresh("probe")));
+  probes.forEach((p) => unit.declarations.push(...p.declarations));
+  unit.probes.push({ callee: callee.id, param: index, site: { start: callNode.start, end: callNode.end }, span: { start: argNode.start, end: argNode.end }, models: probes.map((p) => p.model), types: type.params });
+  const { checks } = applyValue(f, probes.map((p) => p.value), argNode, { ...cx, guard: "true", callbackGuard: cx.guard });
+  return and(...checks);
+}
+
 function call(node, env, cx) {
   const name = node.callee.name, unit = cx.unit;
   if ((name === "real" || name === "old") && !env.has(name) && !cx.scope.names.has(name)) {
@@ -115,7 +283,11 @@ function call(node, env, cx) {
     if (arg.type === "Literal" && typeof arg.value === "string") return specifications.exact(arg.value, arg);
     return specifications.embed(expression(arg, env, cx), node, (safe) => oblige(cx, safe));
   }
-  if (env.has(name)) fail(binding(env, node.callee).value === SELF ? "Recursive calls are unsupported." : `${name} is a local data value, not a top-level function.`, node.callee);
+  if (env.has(name)) {
+    const local = binding(env, node.callee).value;
+    if (local.sort === "function" && local !== SELF) return apply(local, node, env, cx);
+    fail(local === SELF ? "Recursive calls are unsupported." : `${name} is a local data value, not a top-level function.`, node.callee);
+  }
   const callee = cx.scope.names.get(name);
   if (!callee) fail(`Unknown function ${name}. Only top-level functions and named imports can be called.`, node.callee);
   if (cx.contract && !callee.spec) fail("Contracts can call only marked @spec functions.", node);
@@ -123,9 +295,15 @@ function call(node, env, cx) {
   if (node.arguments.some((a) => a.type === "SpreadElement") || node.arguments.length !== callee.params.length) {
     fail(`${name} takes exactly ${callee.params.length} argument(s); spread, missing and extra arguments are unsupported.`, node);
   }
+  if (cx.pure && !callee.spec) {
+    // Helper call inside a callback body: closed axiom route, no event.
+    if (callee.params.some((p) => isFunctionType(p.type))) fail("Higher-order calls inside callbacks are unsupported in this slice.", node);
+    return apply(namedValue(callee, node.callee, cx), node, env, cx);
+  }
   const args = node.arguments.map((a) => expression(a, env, cx));
   const target = cx.scope.program.build(callee, node);
   const bound = callee.params.map((p, i) => data.argument(p.type, args[i], node.arguments[i], unit.fresh));
+  if (callee.spec && bound.some((b) => b.value.sort === "function")) fail("Function values cannot be passed to @spec functions in this slice.", node);
   if (callee.spec) {
     unit.dependencies.add(callee.id);
     return blame(callee.file, callee.name, () => {
@@ -138,9 +316,13 @@ function call(node, env, cx) {
       return expression(callee.fn.body, penv, spec);
     });
   }
+  // Admission precedes the callback's own facts, including when its contract is inconsistent.
+  const total = callee.params.map((p, i) => isFunctionType(p.type) ? totality(bound[i].value, p.type, callee, i, node.arguments[i], node, cx) : "true");
+  if (total.some((t) => t !== "true")) unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), ...total), assume: "true", callee: callee.id,
+    label: { kind: "call", span: { start: node.start, end: node.end }, abstract: unit.cutpoints > 0 } });
   // Callee clauses: caller's SMT unit, callee's lexical scope and blame.
   const { requires, ensures, value } = blame(callee.file, callee.name, () => {
-    const spec = { guard: "true", contract: true, checks: [], unit, scope: cx.scope.program.scopes.get(callee.file), phase: "requires" };
+    const spec = { guard: "true", contract: true, checks: [], unit, scope: cx.scope.program.scopes.get(callee.file), phase: "requires", callbackGuard: cx.guard };
     const penv = new Map();
     callee.params.forEach((p, i) => bind(penv, p.node, bound[i].value));
     spec.entry = new Map(penv);
@@ -153,6 +335,7 @@ function call(node, env, cx) {
     const ensures = clauses(callee.ensures);
     return { requires: and(pre.value, pre.defined), ensures: and(ensures, ...spec.checks), value: fresh.value };
   });
+  flushAxioms(unit);
   unit.events.push({ guard: cx.guard, safe: and(...bound.map((b) => b.safe), requires), assume: ensures, callee: callee.id,
     label: { kind: "call", span: { start: node.start, end: node.end }, abstract: unit.cutpoints > 0 } });
   return value;
@@ -169,10 +352,13 @@ function expression(node, env, cx) {
   if (node.type === "Identifier") {
     if (env.has(node.name)) {
       const value = binding(env, node).value;
-      if (value === SELF) fail("Function values are unsupported; call a top-level function directly.", node);
+      if (value === SELF) fail("A named function expression cannot reference itself (recursion is unsupported).", node);
       return value;
     }
-    if (cx.scope.names.has(node.name)) fail("Function values are unsupported; call a top-level function directly.", node);
+    if (cx.scope.names.has(node.name)) {
+      if (cx.contract) fail("Named function values are unsupported inside contracts.", node);
+      return namedValue(cx.scope.names.get(node.name), node, cx);
+    }
     if (node.name === "undefined") return data.undef();
     if (CONSTANTS.has(node.name)) return data.literal(CONSTANTS.get(node.name));
     return fail(`Unknown value ${node.name}. Calls and ambient values need explicit support.`, node);
@@ -255,6 +441,7 @@ function expression(node, env, cx) {
     for (const child of node.expressions) value = read(child);
     return value;
   }
+  if (node.type === "ArrowFunctionExpression") return closure(node, env, cx);
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "Identifier") return call(node, env, cx);
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "MemberExpression" && !node.callee.computed && !node.callee.optional) {
     const c = node.callee;
@@ -410,7 +597,11 @@ function statements(list, states, returns, cx) {
     if (!states.length) fail("Unreachable statements are outside the supported source subset.", node);
     if (node.type === "ReturnStatement") {
       if (!node.argument) fail("Every path must return a supported value.", node);
-      for (const s of states) returns.push({ path: s.path, value: expression(node.argument, s.env, at(s)) });
+      for (const s of states) {
+        const value = expression(node.argument, s.env, at(s));
+        if (value.sort === "function") fail("Function-valued returns are unsupported.", node.argument);
+        returns.push({ path: s.path, value });
+      }
       states = [];
     } else if (node.type === "VariableDeclaration") {
       for (const d of node.declarations) {
@@ -420,6 +611,7 @@ function statements(list, states, returns, cx) {
         if (annotation !== undefined) cx.scope.validateType(annotation, d.id);
         for (const s of states) {
           const value = expression(d.init, s.env, at(s));
+          if (value.sort === "function" && node.kind !== "const") fail("Function values can be bound only with const.", d);
           s.env.set(d.id.name, { declaration: d.id, kind: node.kind, value });
         }
       }
@@ -437,7 +629,7 @@ function statements(list, states, returns, cx) {
     } else if (node.type === "BlockStatement") {
       states = scopedStatements(node.body, states, returns, cx);
     } else if (node.type === "ExpressionStatement") {
-      for (const s of states) expression(node.expression, s.env, at(s));
+      for (const s of states) if (expression(node.expression, s.env, at(s)).sort === "function") fail("Unused function values are unsupported.", node);
     } else if (node.type === "EmptyStatement") {
       continue;
     } else if (node.type === "WhileStatement" || node.type === "ForStatement") {
@@ -562,7 +754,8 @@ function loop(node, states, returns, cx) {
   cx.unit.cutpoints++;
   for (;;) {
     // A trial shares fresh names but owns its log; nothing to roll back.
-    const unit = { ...cx.unit, events: [], declarations: [], dependencies: new Set(), replayGuards: [] };
+    const unit = { ...cx.unit, events: [], declarations: [], dependencies: new Set(), replayGuards: [], probes: [],
+      functions: new Map(cx.unit.functions), emittedFunctions: new Set(cx.unit.emittedFunctions), pendingAxioms: [] };
     const own = [];
     const checks = [];
     const r = iterate(node, spec, entry, written, optional, { ...cx, unit, checks }, own);
@@ -573,6 +766,10 @@ function loop(node, states, returns, cx) {
     unit.dependencies.forEach((d) => cx.unit.dependencies.add(d));
     cx.checks.push(...checks);
     cx.unit.replayGuards.push(...unit.replayGuards);
+    cx.unit.probes.push(...unit.probes);
+    unit.functions.forEach((value, id) => cx.unit.functions.set(id, value));
+    unit.emittedFunctions.forEach((id) => cx.unit.emittedFunctions.add(id));
+    cx.unit.pendingAxioms.push(...unit.pendingAxioms);
     returns.push(...own);
     cx.unit.loops.push({ start: node.start, end: node.end });
     return r.exits.filter((x) => x.path !== "false").map((x) => ({ path: x.path, env: restore(before.env, x.env) }));
@@ -703,6 +900,12 @@ function header(top, file, source, stripped, comments, tokens) {
         const eq = tokens.find((t) => t.start >= n.id.end && t.start < n.init.start && t.value === "=");
         if (eq) ranges.push({ start: n.id.end, end: eq.start });
       }
+      if (n.type === "ArrowFunctionExpression") {
+        for (const p of n.params) ranges.push({ start: p.end, end: tokens.find((t) => t.start >= p.end).start });
+        const arrow = tokens.find((t) => t.start >= (n.params.at(-1)?.end ?? n.start) && t.type.label === "=>");
+        const close = [...tokens].reverse().find((t) => t.end <= arrow.start && t.start >= n.start && t.type.label === ")");
+        if (close) ranges.push({ start: close.end, end: arrow.start });
+      }
       for (const v of Object.values(n)) if (Array.isArray(v)) v.forEach(locals); else if (v && typeof v === "object") locals(v);
     };
     locals(fn.body);
@@ -724,7 +927,8 @@ function body(h, scope) {
   const { fn, name, top } = h;
   return blame(h.file, name, () => {
     let next = 0;
-    const unit = { declarations: [], events: [], dependencies: new Set(), fresh: (tag) => `${tag}${next++}`, cutpoints: 0, loops: [], replayGuards: [] };
+    const unit = { declarations: [], events: [], dependencies: new Set(), fresh: (tag) => `${tag}${next++}`, cutpoints: 0, loops: [], replayGuards: [],
+      probes: [], functions: new Map(), emittedFunctions: new Set(), pendingAxioms: [], owner: name };
     const env = new Map();
     if (fn.type === "FunctionExpression" && fn.id) bind(env, fn.id, SELF, "self");
     const declarations = [], lengths = [];
@@ -762,6 +966,7 @@ function body(h, scope) {
       const remaining = scopedStatements(fn.body.body, [{ env: bodyEnv, path: "true" }], returns, cx, true);
       if (remaining.length || !returns.length) fail("Every syntactic path must return a supported value.", fn.body);
     } else returns.push({ path: "true", value: expression(fn.body, env, cx) });
+    if (returns.some((r) => r.value.sort === "function")) fail("Function-valued returns are unsupported.", fn.body);
     let result = returns.at(-1).value;
     for (const r of returns.slice(0, -1).reverse()) result = data.merge(r.path, r.value, result, fn.body);
     const callerEvents = unit.events;
@@ -806,6 +1011,9 @@ function body(h, scope) {
     const replay = { library, entry, params: params.map((p) => p.name) };
     return {
       id: h.id, file: h.file, name, span: { start: top.start, end: top.end }, params, resultType: data.valueType(result),
+      // The accepted frontend has only local scalar writes and immutable references.
+      // G must derive effects from its heap operations before admitting named predicates.
+      effects: { kind: "pure" }, executableStart: fn.start,
       requires: h.requires.map(({ ast, ...c }) => c), ensures: h.ensures.map(({ ast, ...c }) => c),
       callees: [...new Set([...callerEvents.filter((e) => e.callee).map((e) => e.callee), ...unit.dependencies])],
       loops: unit.loops, obligations: items.map((c) => c.label),
@@ -817,7 +1025,8 @@ function body(h, scope) {
         ...(h.spec ? { body: specifications.replayExpression(fn.body, replay) } : {}),
       },
       executable: scope.stripped.slice(fn.start, fn.end),
-      declarations: [...declarations, ...unit.declarations, ...defs].join("\n"),
+      declarations: [...[...unit.functions.values()].map((f) => f.declaration), ...declarations, ...unit.declarations, ...defs].join("\n"),
+      probes: unit.probes,
       smallWitness: and(...lengths.map((len) => `(bvule ${len} (_ bv${data.REPLAY_LIMIT} 32))`)),
       replayGuards: unit.replayGuards,
       pre: pre.value, preDefined: pre.defined, post, postconditions: postconditions.length ? postconditions : ["true"],

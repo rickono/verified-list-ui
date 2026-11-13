@@ -33,7 +33,7 @@ The [backend scheduler](proof-backends.md) proves these call-safety conjuncts an
 
 `data.mjs` owns both the value and execution guard for short-circuit operators, plus argument-domain checks and symbolic values. Ordinary reads accept one argument; guarded reads use a separate helper, so array mapping cannot accidentally pass an index as a guard. Method receivers are evaluated before arguments.
 
-This fold relies on the statement compiler's disjoint branch paths. Local scalar updates preserve captured value views; conditional expressions and short circuits merge writes under the same guards as their call events. The [scalar-state design](scalar-state.md) records that extension. Heap mutation, overlapping execution paths, loops, and recursion require a new argument before they can extend the fold.
+This fold relies on the statement compiler's disjoint branch paths. Local scalar updates preserve captured value views; conditional expressions and short circuits merge writes under the same guards as their call events. The [scalar-state design](scalar-state.md) records that extension. [Loop induction](loops.md) adds guarded cutpoint obligations; [pure callbacks](callbacks.md) add ordered admission and closed quantified applications. Heap mutation, overlapping execution paths and recursion require a new argument before they can extend the fold.
 
 ## Replay and status policy
 
@@ -51,7 +51,7 @@ Two candidates chose ordered, guarded events in one postcondition. The independe
 
 Separate call queries can be sound, but require another result-combination policy and more solver queries. A weakest-precondition continuation would move sequencing into a different evaluator. Uninterpreted helper symbols would require a different representation for closure-built array arguments. Body inlining defeats opaque contracts.
 
-Fresh results lose information omitted from ensures, including relationships between repeated calls to a pure helper. Return shapes are conservative. Calls in contracts, imports, aliases, currying, higher-order values, and recursion remain unsupported. Quantified summaries share the module's solver budget and can return `unknown`.
+Fresh results lose information omitted from ensures, including relationships between repeated calls to a pure helper. Return shapes are conservative. [Imports and aliases](imports.md) and [pure unary predicates](callbacks.md) now compose through checked contracts. General calls in contracts, currying, general higher-order values and recursion remain unsupported. Quantified summaries share the module's solver budget and can return `unknown`.
 
 ## Verification
 

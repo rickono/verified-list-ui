@@ -16,7 +16,7 @@ export function obligation(target, phase, index = 0) {
     assertions: [DEFINED.has(phase) ? `(not ${target.preDefined})` : target.pre,
       ...(POST.has(phase) ? [`(not ${target.postconditions[index]})`] : []),
       ...(SMALL.has(phase) ? [target.smallWitness, ...(!DEFINED.has(phase) ? target.replayGuards ?? [] : [])] : [])],
-    models: target.params.map((p) => p.model),
+    models: [...target.params.map((p) => p.model), ...(target.probes ?? []).flatMap((p) => p.models)],
     replayGuards: DEFINED.has(phase) ? [] : target.replayGuards ?? [],
   };
 }

@@ -1,5 +1,6 @@
 // Controlled IPC peer. It never invokes a solver or supplies real proof evidence.
 import { Z3 } from "../../../verify/backend.mjs";
+import { REPLAY_LIMIT } from "../../../verify/data.mjs";
 process.send({ type: "ready", backend: Z3 });
 process.on("message", ({ id, query }) => {
   const mode = query.assertions[0];
@@ -8,6 +9,8 @@ process.on("message", ({ id, query }) => {
   if (mode === "signal") { process.kill(process.pid, "SIGKILL"); return; }
   if (mode === "error") { process.send({ type: "error", id, message: "controlled adapter error" }); return; }
   const answer = mode === "verdict" ? { status: "verified" }
+    : mode === "predicate-too-many" ? { status: "sat", witness: [{ entries: Array.from({ length: REPLAY_LIMIT + 1 }, () => [["0000000000000000"], "true"]), else: "false" }] }
+    : mode === "predicate-conflict" ? { status: "sat", witness: [{ entries: [[["7ff8000000000000"], "true"], [["7ff0000000000001"], "false"]], else: "false" }] }
     : mode === "bad-witness" ? { status: "sat", witness: ["not-a-number"] }
     : mode === "missing-witness" ? { status: "sat" }
     : mode === "unknown" ? { status: "unknown", reason: "incomplete" }

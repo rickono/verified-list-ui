@@ -40,7 +40,11 @@ try {
       if (o.status === "counterexample") {
         console.log(`  inputs: ${Object.entries(o.inputs).map(([k, v]) => `${k} = ${show(v)}`).join(", ") || "(none)"}`);
         if (o.phase === "requires-definedness") console.log("  requires evaluation is undefined (confirmed by specification replay)");
-        if (o.call) {
+        if (o.call?.callback) {
+          console.log(`  callback: ${o.call.callback}(${o.call.arguments.map(show).join(", ")}) (replayed in JavaScript)`);
+          for (const c of o.call.violated) console.log(`  failed callback check: ${c.kind}`);
+        } else if (o.call) {
+          if (o.call.admission) console.log(`  callback admission: ${o.call.admission.parameter} passed to ${o.call.admission.callee} (probe replay)`);
           const actual = Object.entries(o.call.arguments).map(([k, v]) => `${k} = ${show(v)}`).join(", ");
           console.log(`  call: ${o.call.callee}(${actual})${o.call.calleeFile === o.file ? "" : ` in ${where(o.call.calleeFile)}`} (replayed in JavaScript)`);
           for (const c of o.call.violated) console.log(c.text ? `  failed call requires: ${c.text}${c.file && c.file !== o.file ? ` (${where(c.file)})` : ""}` : `  failed parameter domain: ${c.name}`);

@@ -2,7 +2,7 @@ import { Script, createContext } from "node:vm";
 import { compile } from "./source.mjs";
 import { SourceError } from "./error.mjs";
 import { single, load, graphDigest } from "./modules.mjs";
-import { materialize, conforms, display, domain } from "./data.mjs";
+import { materialize, conforms, display, domain, TABLE } from "./data.mjs";
 import { runtime, snapshot, isReal, isUndefinedSpec } from "./specifications.mjs";
 import { solve } from "./proofs.mjs";
 
@@ -19,7 +19,7 @@ function replay(targets, modules, target, witness, phase) {
   const realms = new Map();
   for (const m of modules) {
     const context = createContext(Object.create(null));
-    const run = (text) => new Script(text).runInContext(context, { timeout: 100 });
+    const run = (text, filename) => new Script(text, { filename }).runInContext(context, { timeout: 100 });
     const locals = new Set(m.bindings.map(([local]) => local));
     let key = "__verification_invoke";
     while (locals.has(key)) key += "_";
@@ -45,23 +45,69 @@ function replay(targets, modules, target, witness, phase) {
   const shape = (t, value) => t.resultType === "real" ? isReal(value) : conforms(t.resultType, value);
   const show = (value) => isReal(value) ? String(value) : display(value);
   const byId = new Map(targets.map((t) => [t.id, t]));
+  const locations = new Map(targets.map((t, i) => {
+    const text = `(${t.executable})`;
+    return [t.id, { filename: `jsverify_${i}`, starts: [0, ...[...text.matchAll(/\n/g)].map((m) => m.index + 1)] }];
+  }));
+  const callOffset = (t) => {
+    const location = locations.get(t.id);
+    const at = new RegExp(`${location.filename}:(\\d+):(\\d+)`).exec(new Error().stack);
+    if (!at) return undefined;
+    return t.executableStart + location.starts[Number(at[1]) - 1] + Number(at[2]) - 2;
+  };
   const stack = [];
-  let violation;
-  const stop = (v) => { violation = v; throw STOP; };
+  let violation, admission;
+  const stop = (v) => { violation = { ...v, ...(admission ? { admission } : {}) }; throw STOP; };
+  // Callback guard: the applier must pass arguments of the callback's parameter
+  // types; the passer (whose closure/named value this is) must return a present
+  // result without throwing. Helper calls inside the callback are the passer's.
+  const guard = (f, type, applier, passer, name) => {
+    const wrapped = (...cargs) => {
+      if (cargs.length !== type.params.length || type.params.some((p, i) => !conforms(p, cargs[i]))) {
+        stop({ caller: applier.name, callerFile: applier.file, callback: name, arguments: cargs.map(display), violated: [{ kind: "callback-domain", name, type }] });
+      }
+      if (passer) stack.push(passer.id);
+      let r;
+      try { r = f(...cargs); }
+      catch (e) {
+        if (e === STOP || !passer) throw e;
+        stop({ caller: passer.name, callerFile: passer.file, callback: name, arguments: cargs.map(display), violated: [{ kind: "callback-throws", name, message: String(e?.message ?? e) }] });
+      } finally { if (passer) stack.pop(); }
+      if (!conforms(type.result, r)) stop({ caller: (passer ?? applier).name, callerFile: (passer ?? applier).file, callback: name, arguments: cargs.map(display), violated: [{ kind: "callback-result", name, result: display(r) }] });
+      return r;
+    };
+    if (f[TABLE]) Object.defineProperty(wrapped, TABLE, { value: f[TABLE] });
+    return wrapped;
+  };
+  const probeValues = target.probes ? (() => {
+    let at = target.params.length;
+    return target.probes.map((p) => ({ ...p, values: p.models.map((m) => materialize(m, witness[at++])) }));
+  })() : [];
   const fns = new Map();
   for (const t of targets) {
     const realm = realms.get(t.file);
     const requires = t.requires.map((c, i) => [c, predicate(realm, t, t.predicates.requires[i])]);
     const ensures = t.ensures.map((c, i) => [c, predicate(realm, t, t.predicates.ensures[i], true)]);
-    const original = t.spec ? predicate(realm, t, t.predicates.body) : realm.run(`(${t.executable})`);
+    const original = t.spec ? predicate(realm, t, t.predicates.body) : realm.run(`(${t.executable})`, locations.get(t.id).filename);
     const invoke = (entry, args) => realm.invoke(original, t.spec ? [runtime, entry, ...args] : args);
     const self = { caller: t.name, callerFile: t.file, broken: t.name };
-    const wrapper = (...args) => {
+    const wrapper = (...raw) => {
       const c = byId.get(stack.at(-1) ?? target.id);
       const edge = { caller: c.name, callerFile: c.file, callee: t.name, calleeFile: t.file };
-      const actual = Object.fromEntries(t.params.map((p, i) => [p.name, display(args[i])]));
-      const domain = t.params.filter((p, i) => !conforms(p.type, args[i]));
-      if (args.length !== t.params.length || domain.length) stop({ ...edge, arguments: actual, violated: domain.map((p) => ({ kind: "param-type", name: p.name, type: p.type })) });
+      const actual = Object.fromEntries(t.params.map((p, i) => [p.name, display(raw[i])]));
+      const domain = t.params.filter((p, i) => !conforms(p.type, raw[i]));
+      if (raw.length !== t.params.length || domain.length) stop({ ...edge, arguments: actual, violated: domain.map((p) => ({ kind: "param-type", name: p.name, type: p.type })) });
+      const args = raw.map((a, i) => t.params[i].type?.kind === "function" ? guard(a, t.params[i].type, t, c, t.params[i].name) : a);
+      // Direct probe replay: the root's universally checked callback arguments
+      // run against the native callback before the callee sees it.
+      if (c.id === target.id && probeValues.some((p) => p.callee === t.id)) {
+        const offset = callOffset(c);
+        if (offset === undefined) return stop({ ...edge, callbackLocation: true });
+        for (const p of probeValues) if (p.callee === t.id && p.site.start === offset) {
+          admission = { caller: c.name, callerFile: c.file, callee: t.name, calleeFile: t.file, site: p.site, argument: p.span, parameter: t.params[p.param].name };
+          try { args[p.param](...p.values); } finally { admission = undefined; }
+        }
+      }
       stack.push(t.id);
       try {
         const entry = args.map(snapshot);
@@ -83,7 +129,10 @@ function replay(targets, modules, target, witness, phase) {
   }
   for (const m of modules) for (const [local, id] of m.bindings) realms.get(m.file).context[local] = fns.get(id).wrapper;
   const root = fns.get(target.id);
-  const values = witness.map((raw, index) => materialize(target.params[index].model, raw));
+  const values = target.params.map((p, index) => {
+    const v = materialize(p.model, witness[index]);
+    return p.type?.kind === "function" ? guard(v, p.type, target, null, p.name) : v;
+  });
   const inputs = Object.fromEntries(target.params.map((p, i) => [p.name, display(values[i])]));
   const entry = values.map(snapshot);
   try {
@@ -136,6 +185,7 @@ const GAP = {
   call: "A call inside or after a loop may be unsafe under the invariant; replay did not confirm it.",
   ensures: "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant.",
   definedness: "A result contract may be undefined under the loop invariant; replay did not confirm it.",
+  callback: "A predicate application may be unsafe under the invariant; native replay did not confirm it.",
 };
 // A loop abstraction failure is evidence about the invariant, not about JavaScript.
 const gap = (label, candidate) => ({ status: "unknown", reason: "induction-gap", phase: label.kind, span: label.span,
@@ -161,6 +211,7 @@ async function check({ files, dependencies, records, error }, file, timeoutMs) {
     report.outcomes.push({ fn: e.fn ?? null, file: where, status: e.status, span: e.span, ...position(where, e.span.start), message: e.message });
     return report;
   }
+  if (targets.some((t) => t.params.some((p) => p.model.kind === "function"))) report.trusted.push("solver-model predicate tables replayed as pure total JavaScript functions using Object.is");
   const byId = new Map(targets.map((t) => [t.id, t]));
   const label = (t) => t.file === files[0].file ? t.name : `${t.name} (${t.file})`;
   const results = await solve(targets, timeoutMs);
@@ -185,15 +236,24 @@ async function check({ files, dependencies, records, error }, file, timeoutMs) {
       const v = actual.violation;
       const culprit = v && byId.get(`${v.callerFile}#${v.caller}`);
       if (actual.mismatch) put({ status: "unknown", reason: "replay-mismatch", message: actual.mismatch });
-      else if (v?.broken || (v && culprit !== t)) {
+      else if (v?.callbackLocation) {
+        put({ status: "unknown", reason: "callback-probe-location", message: "The callback admission witness could not be matched to its native source call site." });
+      } else if (v?.broken || (v && culprit !== t)) {
         // The failure is inside a helper: its contract, not this root, is wrong.
         broken.set(culprit.id, v);
         put({ status: "unknown", reason: "dependency-violation", message: `${label(culprit)} violated its contract during replay.`, inputs: actual.inputs, violation: v });
+      } else if (v?.callback) {
+        put(r.status === "counterexample"
+          ? { status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), confirmed: true, inputs: actual.inputs, call: v,
+              message: v.violated[0].kind === "callback-domain" ? `${t.name} applies callback ${v.callback} outside its parameter types.`
+                : `${t.name} passes a callback that is not a pure total function of its type (${v.violated[0].kind}).` }
+          : { status: "unknown", reason: "replay-mismatch", message: `The proof says callback ${v.callback} is used safely, but replay found a violation.` });
       } else if (v) {
         const callee = byId.get(`${v.calleeFile}#${v.callee}`);
         put(r.status === "counterexample"
           ? { status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), confirmed: true, inputs: actual.inputs, failed: v.violated.filter((c) => c.text), call: v,
-              message: `${t.name} calls ${label(callee)} with arguments outside its parameter types or requires.` }
+              message: v.admission ? `${t.name} passes a predicate to ${v.admission.callee} that fails its domain at a replayed probe input.`
+                : `${t.name} calls ${label(callee)} with arguments outside its parameter types or requires.` }
           : { status: "unknown", reason: "replay-mismatch", message: `The proof says every call is safe, but replay found a bad call to ${label(callee)}.` });
       } else if (r.status === "counterexample" && !actual.failed.length) {
         put(r.label?.abstract ? gap(r.label, actual.inputs) : t.callees.length
