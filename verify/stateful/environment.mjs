@@ -1,7 +1,7 @@
 import { fail } from "../error.mjs";
 import { sha256, references } from "./ast.mjs";
 
-export const globals = new Set(["Number", "Math", "NaN", "Infinity", "undefined"]);
+export const globals = new Set(["Number", "Math", "Object", "Array", "NaN", "Infinity", "undefined"]);
 export const primitives = new Set(["number", "boolean"]);
 export function environmentOf(declarations, clauses, source) {
   const environment = new Map(), used = new Set();
@@ -39,7 +39,7 @@ export function assumptionsOf(machine) {
     initial: Object.fromEntries([...machine.cells].map(([name, c]) => [name, machine.source.slice(c.init.start, c.init.end)])),
     environment: [...machine.environment.values()].map((op) => ({ op: op.name, params: op.params.map(({ name, type }) => ({ name, type })), result: op.result,
       resolves: op.resolves.map((c) => c.text), rejects: op.rejects ? "may-reject" : "never-rejects", settles: op.settles,
-      settlementOrder: "any", settlementCount: "at most once per request", settlesUse: "declared-unused for safety" })),
+      settlementOrder: "any", settlementCount: "at most once per request", settlesUse: op.settles === "eventually" ? "declared-unused for safety" : "not declared; no progress guarantee" })),
     entries: machine.entries.map((e) => ({ entry: e.name, params: e.params.map(({ name, type }) => ({ name, type })) })),
     fairness: "none used by safety; settles eventually is recorded only",
     unsupported: ["references", "imports", "handlers", "cancellation", "ordering/abort contracts", "entry contracts", "liveness", "pairwise/uniqueness/count induction", "nested awaits", "entry-to-entry calls", "unverified helpers"],

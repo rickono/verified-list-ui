@@ -23,7 +23,10 @@ export function parseClauses(comments) {
   return comments.map((comment) => {
     const lines = comment.value.split("\n").map((s) => s.replace(/^\s*\*?\s*/, ""));
     const looks = lines.some((line) => {
-      const word = line.split(/\s/)[0].replace(/:$/, "").toLowerCase();
+      const token = line.split(/\s/)[0];
+      // Hyphenated prose (the inherited "Stale-response" pilot) remains a
+      // word; punctuation such as state(false) cannot hide a clause.
+      const word = (/^(@?[A-Za-z]+)(?=$|[^A-Za-z_-])/.exec(token)?.[1] ?? token).toLowerCase();
       return word && [...grammar.keys()].some((reserved) => near(word, reserved));
     });
     if (!looks) return { comment };

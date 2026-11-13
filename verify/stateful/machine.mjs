@@ -174,7 +174,9 @@ function entryOf(machine, fn, types, clauses, used, moduleNames) {
     const w = awaits[k];
     if (!w) continue;
     for (const [i, arg] of w.call.arguments.entries()) {
-      const type = arg.type === "Identifier" ? machine.cells.get(arg.name)?.type ?? visible.get(arg.name)?.type : arg.type === "Literal" ? typeof arg.value : undefined;
+      const type = arg.type === "Identifier" ? machine.cells.get(arg.name)?.type ?? visible.get(arg.name)?.type
+        : arg.type === "Literal" ? typeof arg.value
+        : arg.type === "UnaryExpression" && ["+", "-"].includes(arg.operator) && arg.argument.type === "Literal" && typeof arg.argument.value === "number" ? "number" : undefined;
       if (type !== w.op.params[i].type) fail("Request arguments require scalar literals or visible bindings of the declared type.", arg);
     }
     for (const c of w.pending) for (const name of references(c.ast))
@@ -187,6 +189,7 @@ function entryOf(machine, fn, types, clauses, used, moduleNames) {
     const captures = [...visible.values()].filter((b) => later.has(b.name));
     for (const b of captures) if (!primitives.has(b.type) || !["const", "parameter"].includes(b.kind)) fail(`Captured ${b.name} requires an immutable annotated scalar binding.`, w.statement);
     live.push(captures);
+    w.captures = [...captures, ...w.op.params.map((p, i) => ({ name: `$request_${i}`, type: p.type, node: w.call.arguments[i], argument: true }))];
     if (w.binding) visible.set(w.binding, bindings.get(w.binding));
   }
   return { name: fn.id.name, fn, params, segments, awaits, live, bindings, ...span(fn) };

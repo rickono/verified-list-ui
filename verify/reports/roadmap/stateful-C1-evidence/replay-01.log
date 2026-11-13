@@ -1,0 +1,44 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:50165) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: strict native source replay is repeatable, hash-bound, and may remain pending
+ok 1 - strict native source replay is repeatable, hash-bound, and may remain pending
+  ---
+  duration_ms: 366.674708
+  type: 'test'
+  ...
+# Subtest: illegal action types, identities, args/results and outcomes are refused
+ok 2 - illegal action types, identities, args/results and outcomes are refused
+  ---
+  duration_ms: 682.846666
+  type: 'test'
+  ...
+# Subtest: wire scalars preserve binary64 exceptional values
+ok 3 - wire scalars preserve binary64 exceptional values
+  ---
+  duration_ms: 58.358958
+  type: 'test'
+  ...
+# Subtest: continuation loop is contained below one second with real native promises
+ok 4 - continuation loop is contained below one second with real native promises
+  ---
+  duration_ms: 156.346417
+  type: 'test'
+  ...
+# Subtest: unchanged executable runs in strict realm and rejects unbound this
+ok 5 - unchanged executable runs in strict realm and rejects unbound this
+  ---
+  duration_ms: 55.211333
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1386.506708

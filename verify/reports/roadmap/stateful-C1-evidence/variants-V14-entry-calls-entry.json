@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V14-entry-calls-entry.ts",
+  "sourceSha256": "ef6b4f980c1350804157b4068fd6870d276e49df8fbe84f03c8707e8541dac54",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "Entries cannot call entries; environment operations must be awaited.",
+  "span": {
+    "start": 657,
+    "end": 666
+  },
+  "line": 27,
+  "column": 3
+}

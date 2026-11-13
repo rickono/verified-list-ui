@@ -15,7 +15,7 @@ test("all recovered pilots/variants are audited by the production frontend", () 
   assert.throws(() => machineOf("unsupported.ts", read("pilots/search-unsupported.ts")), (e) => e.status === "unsupported" && read("pilots/search-unsupported.ts").slice(0, e.span.start).split("\n").length === 20);
 });
 test("closed grammar rejects case, colon, edit distance, block and unknown environment lines", () => {
-  for (const keyword of ["State", "state:", "stat", "staet", "stxte", "invariant", "safety:", "liveness", "fairness", "requires", "ensures"]) {
+  for (const keyword of ["State", "state:", "state:false", "state(false)", "state//false", "stat", "staet", "stxte", "invariant", "safety:", "liveness", "fairness", "requires", "ensures"]) {
     assert.throws(() => machineOf("bad.ts", source.replace("// state 0", `// ${keyword} 0`)), /clause|expression/);
   }
   for (const line of ["nonsense", "resolve Number.isFinite(result)", "rejects sometimes", "order fifo", "abort advisory", "settles soon"]) {
@@ -37,7 +37,7 @@ test("assumptions expose defaults, declared-unused settling and canonical identi
   for (const line of ["rejects", "settles eventually"]) {
     const changed = machineOf("search.ts", source.replace("// @environment", `// @environment\n// ${line}`));
     assert.notEqual(changed.assumptions.sha256, base.assumptions.sha256);
-    assert.equal(changed.assumptions.environment[0].settlesUse, "declared-unused for safety");
+    assert.equal(changed.assumptions.environment[0].settlesUse, line === "settles eventually" ? "declared-unused for safety" : "not declared; no progress guarantee");
   }
   assert.throws(() => machineOf("x.ts", {}), TypeError);
 });

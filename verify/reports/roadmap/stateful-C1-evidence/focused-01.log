@@ -1,0 +1,340 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:51895) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: original compiler rejects a false capture annotation before it can become a resumption assumption
+ok 1 - original compiler rejects a false capture annotation before it can become a resumption assumption
+  ---
+  duration_ms: 36.112
+  type: 'test'
+  ...
+# Subtest: request parameter assumptions use the captured request value across interference
+ok 2 - request parameter assumptions use the captured request value across interference
+  ---
+  duration_ms: 119.819792
+  type: 'test'
+  ...
+# Subtest: always-only properties use pre-step old, including rejection stutter
+ok 3 - always-only properties use pre-step old, including rejection stutter
+  ---
+  duration_ms: 575.457542
+  type: 'test'
+  ...
+# Subtest: unsupported clauses and source constructs retain exact original spans
+ok 4 - unsupported clauses and source constructs retain exact original spans
+  ---
+  duration_ms: 2.369959
+  type: 'test'
+  ...
+# (node:51904) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all recovered pilots/variants are audited by the production frontend
+ok 5 - all recovered pilots/variants are audited by the production frontend
+  ---
+  duration_ms: 38.711625
+  type: 'test'
+  ...
+# Subtest: closed grammar rejects case, colon, edit distance, block and unknown environment lines
+ok 6 - closed grammar rejects case, colon, edit distance, block and unknown environment lines
+  ---
+  duration_ms: 4.534708
+  type: 'test'
+  ...
+# Subtest: assumptions expose defaults, declared-unused settling and canonical identity
+not ok 7 - assumptions expose defaults, declared-unused settling and canonical identity
+  ---
+  duration_ms: 1.8675
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-327babb7/tests/verify/stateful-frontend.test.mjs:30:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'not declared; no progress guarantee'
+    - 'declared-unused for safety'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'declared-unused for safety'
+  actual: 'not declared; no progress guarantee'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-327babb7/tests/verify/stateful-frontend.test.mjs:40:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: module state, ambient signatures, binding identities and nested awaits fail closed
+ok 8 - module state, ambient signatures, binding identities and nested awaits fail closed
+  ---
+  duration_ms: 1.740833
+  type: 'test'
+  ...
+# (node:51905) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: six pilots and all corrected judge variants run through production
+    # Subtest: pilots/search.ts
+    ok 1 - pilots/search.ts
+      ---
+      duration_ms: 1496.950209
+      type: 'test'
+      ...
+    # Subtest: pilots/search-stale.ts
+    ok 2 - pilots/search-stale.ts
+      ---
+      duration_ms: 2248.508958
+      type: 'test'
+      ...
+    # Subtest: pilots/search-gap.ts
+    ok 3 - pilots/search-gap.ts
+      ---
+      duration_ms: 3783.349166
+      type: 'test'
+      ...
+    # Subtest: pilots/search-env.ts
+    ok 4 - pilots/search-env.ts
+      ---
+      duration_ms: 1760.513458
+      type: 'test'
+      ...
+    # Subtest: pilots/search-overclaim.ts
+    ok 5 - pilots/search-overclaim.ts
+      ---
+      duration_ms: 1959.896
+      type: 'test'
+      ...
+    # Subtest: pilots/search-unsupported.ts
+    ok 6 - pilots/search-unsupported.ts
+      ---
+      duration_ms: 1.124333
+      type: 'test'
+      ...
+    # Subtest: variants/V1-leads-no-settles.ts
+    ok 7 - variants/V1-leads-no-settles.ts
+      ---
+      duration_ms: 0.578375
+      type: 'test'
+      ...
+    # Subtest: variants/V1b-leads-settles.ts
+    ok 8 - variants/V1b-leads-settles.ts
+      ---
+      duration_ms: 0.567375
+      type: 'test'
+      ...
+    # Subtest: variants/V2-entry-ensures-false.ts
+    ok 9 - variants/V2-entry-ensures-false.ts
+      ---
+      duration_ms: 0.627333
+      type: 'test'
+      ...
+    # Subtest: variants/V3-state-colon-typo.ts
+    ok 10 - variants/V3-state-colon-typo.ts
+      ---
+      duration_ms: 0.466084
+      type: 'test'
+      ...
+    # Subtest: variants/V4-block-comment-state.ts
+    ok 11 - variants/V4-block-comment-state.ts
+      ---
+      duration_ms: 0.456208
+      type: 'test'
+      ...
+    # Subtest: variants/V5-no-properties.ts
+    ok 12 - variants/V5-no-properties.ts
+      ---
+      duration_ms: 0.379792
+      type: 'test'
+      ...
+    # Subtest: variants/V5b-no-properties-no-pending.ts
+    ok 13 - variants/V5b-no-properties-no-pending.ts
+      ---
+      duration_ms: 0.387166
+      type: 'test'
+      ...
+    # Subtest: variants/V9-resolves-typo.ts
+    ok 14 - variants/V9-resolves-typo.ts
+      ---
+      duration_ms: 0.371834
+      type: 'test'
+      ...
+    # Subtest: variants/V10-rejects-sometimes.ts
+    ok 15 - variants/V10-rejects-sometimes.ts
+      ---
+      duration_ms: 0.385959
+      type: 'test'
+      ...
+    # Subtest: variants/V14-entry-calls-entry.ts
+    ok 16 - variants/V14-entry-calls-entry.ts
+      ---
+      duration_ms: 0.678042
+      type: 'test'
+      ...
+    # Subtest: variants/V15-old-in-state.ts
+    ok 17 - variants/V15-old-in-state.ts
+      ---
+      duration_ms: 0.389583
+      type: 'test'
+      ...
+    # Subtest: variants/V16-undeclared-write.ts
+    ok 18 - variants/V16-undeclared-write.ts
+      ---
+      duration_ms: 0.548833
+      type: 'test'
+      ...
+    # Subtest: variants/V6-inflight-count.ts
+    ok 19 - variants/V6-inflight-count.ts
+      ---
+      duration_ms: 2640.450958
+      type: 'test'
+      ...
+    # Subtest: variants/V18-two-awaits.ts
+    ok 20 - variants/V18-two-awaits.ts
+      ---
+      duration_ms: 7703.101667
+      type: 'test'
+      ...
+    # Subtest: variants/V7-latest-2p53.ts
+    ok 21 - variants/V7-latest-2p53.ts
+      ---
+      duration_ms: 1673.729167
+      type: 'test'
+      ...
+    # Subtest: variants/V8-second-entry-clear.ts
+    ok 22 - variants/V8-second-entry-clear.ts
+      ---
+      duration_ms: 3314.140416
+      type: 'test'
+      ...
+    # Subtest: variants/V11-rejects.ts
+    ok 23 - variants/V11-rejects.ts
+      ---
+      duration_ms: 1660.568666
+      type: 'test'
+      ...
+    # Subtest: variants/V18b-two-awaits-annotated.ts
+    ok 24 - variants/V18b-two-awaits-annotated.ts
+      ---
+      duration_ms: 2573.168375
+      type: 'test'
+      ...
+    # Subtest: variants/V8b-second-entry-reset.ts
+    ok 25 - variants/V8b-second-entry-reset.ts
+      ---
+      duration_ms: 1900.197375
+      type: 'test'
+      ...
+    1..25
+ok 9 - six pilots and all corrected judge variants run through production
+  ---
+  duration_ms: 32723.3225
+  type: 'test'
+  ...
+# Subtest: binary64 request IDs really collide at 2^53 without violating the stated properties
+ok 10 - binary64 request IDs really collide at 2^53 without violating the stated properties
+  ---
+  duration_ms: 59.083917
+  type: 'test'
+  ...
+# Subtest: real solver budget exhaustion remains unknown/solver and attributes the request budget
+ok 11 - real solver budget exhaustion remains unknown/solver and attributes the request budget
+  ---
+  duration_ms: 2.221417
+  type: 'test'
+  ...
+# Subtest: witness depth cannot authorize a proof
+ok 12 - witness depth cannot authorize a proof
+  ---
+  duration_ms: 1704.006042
+  type: 'test'
+  ...
+# (node:51990) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: default examples keep exact compiled obligations, graph hashes and outcome reports
+not ok 13 - default examples keep exact compiled obligations, graph hashes and outcome reports
+  ---
+  duration_ms: 690.654959
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-327babb7/tests/verify/stateful-regression.test.mjs:14:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'file')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Module.compile (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-327babb7/verify/.stateful-baseline-SYMU2v/source.mjs:1363:44)
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-327babb7/tests/verify/stateful-regression.test.mjs:25:31)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# (node:52206) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: strict native source replay is repeatable, hash-bound, and may remain pending
+ok 14 - strict native source replay is repeatable, hash-bound, and may remain pending
+  ---
+  duration_ms: 346.751042
+  type: 'test'
+  ...
+# Subtest: illegal action types, identities, args/results and outcomes are refused
+ok 15 - illegal action types, identities, args/results and outcomes are refused
+  ---
+  duration_ms: 807.041208
+  type: 'test'
+  ...
+# Subtest: wire scalars preserve binary64 exceptional values
+ok 16 - wire scalars preserve binary64 exceptional values
+  ---
+  duration_ms: 57.877541
+  type: 'test'
+  ...
+# Subtest: continuation loop is contained below one second with real native promises
+ok 17 - continuation loop is contained below one second with real native promises
+  ---
+  duration_ms: 160.4745
+  type: 'test'
+  ...
+# Subtest: unchanged executable runs in strict realm and rejects unbound this
+ok 18 - unchanged executable runs in strict realm and rejects unbound this
+  ---
+  duration_ms: 56.009166
+  type: 'test'
+  ...
+# Subtest: an initially false property cannot mask an illegal action suffix
+ok 19 - an initially false property cannot mask an illegal action suffix
+  ---
+  duration_ms: 56.656458
+  type: 'test'
+  ...
+# (node:52237) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: original AST segments prove guarded search and both annotated awaits
+ok 20 - original AST segments prove guarded search and both annotated awaits
+  ---
+  duration_ms: 6229.231292
+  type: 'test'
+  ...
+# Subtest: keeps refutes overclaim; private deletion reproduces the unsound ablation
+ok 21 - keeps refutes overclaim; private deletion reproduces the unsound ablation
+  ---
+  duration_ms: 2642.808417
+  type: 'test'
+  ...
+# Subtest: AST seam preserves original statements/spans and has no witness bound
+ok 22 - AST seam preserves original statements/spans and has no witness bound
+  ---
+  duration_ms: 2.49375
+  type: 'test'
+  ...
+1..22
+# tests 47
+# suites 0
+# pass 45
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46596.42975

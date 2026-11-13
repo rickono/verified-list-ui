@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V5b-no-properties-no-pending.ts",
+  "sourceSha256": "da81526b187b55b9c8f4cc179bf085e57329cf59f8c84e1d3caed5f59069151c",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "No state or always property; pending clauses alone cannot establish safety.",
+  "span": {
+    "start": 0,
+    "end": 479
+  },
+  "line": 1,
+  "column": 1
+}

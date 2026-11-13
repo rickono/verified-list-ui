@@ -1,4 +1,5 @@
 import { compileAstUnit } from "../source.mjs";
+import { fail } from "../error.mjs";
 import { id, member, reference, transform, span, walk, sha256 } from "./ast.mjs";
 
 const clause = (c, ast) => ({ ...c, ast });
@@ -8,8 +9,7 @@ const record = (fields, at) => ({ type: "ObjectExpression", properties: fields.m
   kind: "init", method: false, shorthand: false, computed: false, ...span(at) })), ...span(at) });
 const onCells = (machine, owner) => (n, p, k) => reference(n, p, k) && machine.cells.has(n.name) ? member(owner, n.name, n) : undefined;
 const rename = (names) => (n, p, k) => reference(n, p, k) && names.has(n.name) ? id(names.get(n.name), n) : undefined;
-const requestCaptures = (w) => w.op.params.map((p, i) => ({ name: `$request_${i}`, type: p.type, node: w.call.arguments[i], argument: true }));
-const captures = (entry, k) => [...entry.live[k], ...requestCaptures(entry.awaits[k])];
+const captures = (entry, k) => entry.awaits[k].captures;
 
 /** Construct init / arbitrary step / arbitrary other-representative keeps.
  * There are no concrete activation slots or trace bounds in these units.
@@ -25,9 +25,15 @@ export function transitionsOf(machine) {
     const fn = { type: "FunctionDeclaration", id: id(u.name, u.span), params: u.params.map((p) => p.node), body, async: false, generator: false, ...u.span };
     const header = { name: u.name, top: fn, fn, params: u.params, requires: u.requires, ensures: u.ensures, modifies: u.modifies };
     const target = compileAstUnit(machine, header);
+    for (const binding of u.outputCaptures ?? []) {
+      const field = target.resultType.fields?.find((f) => f.name === binding.name);
+      if (field?.type !== binding.type || field.optional) fail(`Captured ${binding.name} does not have its declared scalar type.`, binding.node);
+    }
     units.push({ ...u, target });
   };
-  emit({ name: "$init", kind: "init", span: at, params: [], requires: [], modifies: [], ensures: state("result"),
+  const initial = state("result");
+  if (!initial.length) initial.push({ kind: "ensures", text: "true", span: at, ast: { type: "Literal", value: true, raw: "true", ...at } });
+  emit({ name: "$init", kind: "init", span: at, params: [], requires: [], modifies: [], ensures: initial,
     body: [returning(record(cells.map((c) => [c.name, c.init]), at), at)] });
   const steps = [];
   for (const entry of machine.entries) entry.segments.forEach((segment, k) => {
@@ -65,7 +71,7 @@ export function transitionsOf(machine) {
     });
     const modifies = [...writes].map(([name, node]) => ({ kind: "modifies", text: name, span: span(node), ast: member("$s", name, node) }));
     steps.push({ name: `${entry.name}$${k}`, kind: k === 0 ? "entry" : "resume", entry: entry.name, segment: k, span: at,
-      params, requires, ensures, modifies, body });
+      params, requires, ensures, modifies, body, outputCaptures: after ? captures(entry, k) : [] });
   });
   // An unhandled rejection discards the resumed activation and changes no
   // cells. It must still establish always and keep every other representative.

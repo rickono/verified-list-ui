@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V15-old-in-state.ts",
+  "sourceSha256": "c5ee36921383be5edcf8aa4919e764c65940f6e7d9f71fc4c23e7a9f428aad7e",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "old is unsupported in state.",
+  "span": {
+    "start": 359,
+    "end": 393
+  },
+  "line": 14,
+  "column": 1
+}

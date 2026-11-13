@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V3-state-colon-typo.ts",
+  "sourceSha256": "2a605602add676a1b596b840263cd18b813af235a28c95a52feca0a007006906",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "Unsupported or misspelled contract clause state:.",
+  "span": {
+    "start": 359,
+    "end": 383
+  },
+  "line": 14,
+  "column": 1
+}
