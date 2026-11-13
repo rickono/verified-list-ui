@@ -92,7 +92,7 @@ function optionalElement() { const xs = [undefined, 5]; return xs[(1 - 0) - 1]; 
   assert.deepEqual(report.outcomes.map((o) => o.status), ["verified", "verified"], JSON.stringify(report.outcomes));
 });
 
-test("straight-line stores keep their domain obligation and writing loops stay unsupported", async () => {
+test("straight-line and loop stores keep their domain obligation; loop allocation stays unsupported", async () => {
   const source = `// requires xs.length > 0
 // requires Number.isInteger(n) && 0 <= n && n <= 4294967295
 // requires Number.isInteger(m) && 0 <= m && m <= 4294967295
@@ -112,8 +112,23 @@ function f(xs: number[]) {
   while (false) { xs[0] = 1; }
   return 0;
 }`);
-  assert.equal(loop.outcomes[0].status, "unsupported");
-  assert.match(loop.outcomes[0].message, /loop.*write|write.*loop/i);
+  assert.equal(loop.outcomes[0].status, "verified", JSON.stringify(loop.outcomes));
+  const writing = await verify(source.replace("xs[(n + m) - 0] = 1; return 0;", `let i = 0;
+  // invariant Number.isInteger(i) && 0 <= i && i <= 1
+  // decreases real(1)-real(i)
+  while(i<1){xs[(n + m) - 0] = 1;i++;}return 0;`), { timeoutMs: 30_000 });
+  assert.equal(writing.outcomes[0].status, "counterexample", JSON.stringify(writing.outcomes));
+  assert.equal(writing.outcomes[0].confirmed, true);
+  assert.ok(writing.outcomes[0].failed.some((f) => f.kind === "store-domain"));
+  const allocating = await verify(`// ensures true
+function f() {
+  // invariant true
+  // decreases 1
+  while (false) { const xs = [1]; }
+  return 0;
+}`);
+  assert.equal(allocating.outcomes[0].status, "unsupported", JSON.stringify(allocating.outcomes));
+  assert.match(allocating.outcomes[0].message, /allocate/);
 });
 
 test("width and index guard mutants are killed by native-refuted public proofs", async (t) => {
