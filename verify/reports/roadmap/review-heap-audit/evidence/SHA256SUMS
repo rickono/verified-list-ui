@@ -1,0 +1,5 @@
+c8f7229d779802f61c07deb1f6c28a3bed831239457bcb1c31e177394b5bc327  verify/reports/roadmap/review-heap-audit/report.md
+4da435168d7728d278d3aadc56712e807b7190fda0fc52e5769cabcfad8b3205  verify/reports/roadmap/review-heap-audit/evidence/adversaries.mjs
+cd494c71e654b85bd4beb22472eb77983be1ee1ad8f8b320ad7bb96b82717693  verify/reports/roadmap/review-heap-audit/evidence/adversary.jsonl
+3037a5d23746b01aa20563c6ff849b7bb0b0f1712a5f49fa8daba962092482db  verify/reports/roadmap/review-heap-audit/evidence/boundary.tap
+8c8f1fe63cc095324e23650522b475d91b07baaa9dc054cd9e35e90a7114db21  verify/reports/roadmap/review-heap-audit/evidence/commands.md
