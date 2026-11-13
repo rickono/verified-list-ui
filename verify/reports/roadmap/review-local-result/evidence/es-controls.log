@@ -1,0 +1,16 @@
+head=44809983ca516600292b42a8f2b7db8b4ecc1b78 tree=git-archive start=2026-11-13T15:21:11Z
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:35133) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+C0 baseline: pinned annotation | 2257ms | sum=verified; mean=verified | graph 00e8f6508f3e645d3d918f19cf309f9c319a8fa2406886152c47e86eb46d435b
+C1 strong enough: sum result === 0 (either zero) | 3106ms | sum=verified; mean=verified | graph a972a7875b7ee7454511a2e6a31a6c8c5d65d6d0d53a6492c42e0a2e817a8143
+C2 weak: sum ensures true | 1820ms | sum=verified; mean=unknown/contract-gap; mean.ts bytes unchanged and graph hash differs: true | graph e473fb32fb9445b144b4406098034149e056997ec8996923bf8d3c5929b0a179
+C3 weak: sum only finite | 2885ms | sum=verified; mean=unknown/contract-gap; mean.ts bytes unchanged and graph hash differs: true | graph c188411d407b9cd9f19f4fe46ecaa6a490d2b5bf63f325f55dbba27c5612c548
+C4 false callee contract cannot support the caller | 1711ms | sum cex [] reported 0 native 0 reproduced=true; sum=counterexample; mean=unknown/dependency | graph 64bc271ae2ef3601c1fc2940f45a2c66f7efa5072c048a9411456c4a0cb1295f
+C5 mean body mutant: / (nums.length + 1) | 2277ms | sum=verified; mean cex [] reported 0 native 0 reproduced=true; mean=counterexample | graph 9963dab0d41262d9dfe1d6c01b1f0233424633853f692a7ad6eeacddba078ece
+C6 no nonempty overclaim: mean NaN without the length guard | 9127ms | sum=verified; mean cex ["0","0"] reported 0 native 0 reproduced=true; mean=counterexample | graph dc28b5c2f70e85359a690197000d4947903868eff14e14d7489f7d7de736ad30
+C7 no singleton law: sum([x]) is x (false at [-0]) | 2458ms | sum=unknown/induction-gap; mean=unknown/contract-gap | graph a8039f23bcc518678ae2cc148b544de9e2450f1daa68428fe01b59d5b8c08233
+C8 live-local invariant is load-bearing: drop it | 2063ms | sum=unknown/induction-gap; mean=unknown/dependency | graph 70f55b63f0652fde493f9458be4c24d0aa23b982b605a96fd079071e40a50e95
+controls=9 unexpected=0 falseProofs=0
+exit=0 end=2026-11-13T15:21:39Z

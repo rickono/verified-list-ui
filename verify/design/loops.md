@@ -4,7 +4,7 @@ Annotated `while` and C-style `for` loops use induction over local scalar state.
 
 ## Usage
 
-Each loop has zero or more `invariant` lines and exactly one `decreases` line immediately above it. Missing invariants mean `true`, which is usually too weak. Contracts can use the supported specification expressions, local bindings visible at the loop head, and checked `@spec` definitions.
+Each loop has zero or more `invariant` lines and exactly one `decreases` line immediately above it. Missing invariants mean `true`, which is usually too weak. Contracts can use the supported specification expressions, local bindings visible at the loop head, and checked `@spec` definitions. A local named `result` is one of those bindings; `result` in ensures remains the return value.
 
 ```ts
 // ensures result === -1 || (0 <= result && result < values.length && values[result] === target)
