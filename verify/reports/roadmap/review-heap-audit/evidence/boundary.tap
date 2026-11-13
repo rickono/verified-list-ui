@@ -1,0 +1,102 @@
+TAP version 13
+# (node:99701) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: record, boolean, indexed and summary writers have checked location ownership
+ok 1 - record, boolean, indexed and summary writers have checked location ownership
+  ---
+  duration_ms: 1.942375
+  type: 'test'
+  ...
+# Subtest: both symbolic join arms retain record and array ownership; concrete joins select one arm
+ok 2 - both symbolic join arms retain record and array ownership; concrete joins select one arm
+  ---
+  duration_ms: 0.493708
+  type: 'test'
+  ...
+# Subtest: intervals distinguish repeated locations, no-op attempts and restored values from prior writes
+ok 3 - intervals distinguish repeated locations, no-op attempts and restored values from prior writes
+  ---
+  duration_ms: 0.373791
+  type: 'test'
+  ...
+# Subtest: exit writes are audited without flowing into the back-edge frame
+ok 4 - exit writes are audited without flowing into the back-edge frame
+  ---
+  duration_ms: 0.147375
+  type: 'test'
+  ...
+# Subtest: existing fresh allocations are writable while allocation and content changes stay distinct
+ok 5 - existing fresh allocations are writable while allocation and content changes stay distinct
+  ---
+  duration_ms: 0.545583
+  type: 'test'
+  ...
+# Subtest: cutpoints preserve allocator, roles, shape, presence, identity and prior views
+ok 6 - cutpoints preserve allocator, roles, shape, presence, identity and prior views
+  ---
+  duration_ms: 0.495541
+  type: 'test'
+  ...
+# Subtest: unknown versions, owners, missing tracking and heaps outside the interval fail internally
+ok 7 - unknown versions, owners, missing tracking and heaps outside the interval fail internally
+  ---
+  duration_ms: 0.333375
+  type: 'test'
+  ...
+# Subtest: a record named @elements cannot be confused with whole-array contents at a cutpoint
+ok 8 - a record named @elements cannot be confused with whole-array contents at a cutpoint
+  ---
+  duration_ms: 0.144708
+  type: 'test'
+  ...
+# Subtest: private record writer-log omission is detected even for an already-written location
+ok 9 - private record writer-log omission is detected even for an already-written location
+  ---
+  duration_ms: 6.970125
+  type: 'test'
+  ...
+# {"sha256":"13f63babef92972251b50243b47673022949c04790d8e9fc50d3b4012b9ad11f","control":"passed","detected":true}
+# Subtest: private summary writer-log omission is detected at the same audit boundary
+ok 10 - private summary writer-log omission is detected at the same audit boundary
+  ---
+  duration_ms: 2.737833
+  type: 'test'
+  ...
+# {"sha256":"78aeaf72c25c5b3fdb9a8176f96afa7319e9953ed3536e077eb776128f7e3a41","control":"passed","detected":true}
+# Subtest: private indexed writer-log omission fails for an existing fresh array
+ok 11 - private indexed writer-log omission fails for an existing fresh array
+  ---
+  duration_ms: 3.180666
+  type: 'test'
+  ...
+# {"sha256":"71c12d040c16393a14a0cb54b2d8001bb7aba0bb6d3b18312543dbdd6d10724b","control":"passed","detected":true}
+# Subtest: private join-log omission of arm a fails for its concrete target
+ok 12 - private join-log omission of arm a fails for its concrete target
+  ---
+  duration_ms: 4.4745
+  type: 'test'
+  ...
+# {"sha256":"1cc51352bfe9a52522131e54f8c939dccb8006ef15c378f4747cc7cc8ce08264","control":"passed","detected":true}
+# Subtest: private join-log omission of arm b fails for its concrete target
+ok 13 - private join-log omission of arm b fails for its concrete target
+  ---
+  duration_ms: 6.825042
+  type: 'test'
+  ...
+# {"sha256":"890d3db42ef01ab9ed6825c0d0836c90f6c53bc45b83a8ec2aed2c81f8a8815b","control":"passed","detected":true}
+# Subtest: private missing location data cannot construct a new content version
+ok 14 - private missing location data cannot construct a new content version
+  ---
+  duration_ms: 4.525208
+  type: 'test'
+  ...
+# {"sha256":"5e5940b0b9ce438f62410f7e8252ed34e37a5bfc56732b58cf138ab4a1fe82da","control":"passed","detected":true}
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 84.458416
