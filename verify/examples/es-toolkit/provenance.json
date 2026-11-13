@@ -1,0 +1,40 @@
+{
+  "repository": "https://github.com/toss/es-toolkit",
+  "release": "v1.53.2",
+  "commit": "1913a7627a2995b095249d6b0b6453b900cdd4bc",
+  "sameBytesOnMain": "4d5963eb2df129021efdba0de5a3a16bbb3c7bec",
+  "reconPackage": "3510de7470a2924e6bc04e630a71160e815a4f31",
+  "license": "MIT",
+  "licensePath": "LICENSE",
+  "licenseSha256": "51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7",
+  "files": {
+    "sum": {
+      "path": "src/math/sum.ts",
+      "local": "sum.upstream.ts",
+      "bytes": 531,
+      "sha256": "932fb45fe749f343a198e093a9c4fc1628aa8c21204957cf481e038903347507",
+      "declaration": "sum",
+      "declarationSha256": "83afe762cfc5c2a1528e62211ead64ae2fceec2155d4aff6fdb9721be2e3065d"
+    },
+    "mean": {
+      "path": "src/math/mean.ts",
+      "local": "mean.upstream.ts",
+      "bytes": 471,
+      "sha256": "b0445d7e281b1e8b646c9729efa1d3d4806217c93dc9954cc434261690573ca7",
+      "declaration": "mean",
+      "declarationSha256": "2445e7ed82046dd1c50f9914f8adc183a4520bbc5ccbe7964fbf6a5f4afbf48c"
+    },
+    "sumSpec": {
+      "path": "src/math/sum.spec.ts",
+      "local": "sum.spec.upstream.ts",
+      "bytes": 728,
+      "sha256": "2be85eec5f5a6eedf9fe2295146e04fd18f13cb30caa3f8b6bad11f517be8a62"
+    },
+    "meanSpec": {
+      "path": "src/math/mean.spec.ts",
+      "local": "mean.spec.upstream.ts",
+      "bytes": 299,
+      "sha256": "27c1b2e5a4afd77e10c5f54549939d22a9abda2929b1543ec3f4dac324e69182"
+    }
+  }
+}
