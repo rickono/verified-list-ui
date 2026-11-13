@@ -9,18 +9,26 @@ const attribution = (target, phase, index) => ({
   ...(POST.has(phase) ? { postcondition: index + 1, postconditionCount: target.postconditions.length } : {}),
 });
 
-// Every (phase, postcondition index) query solve() can send for a target, in
-// state-machine order. Proof keys hash exactly this list, so a phase solve()
-// can reach is never outside a key.
-export function phases(target) {
-  const n = target.postconditions.length;
-  return [
-    ...(target.preDefined && target.preDefined !== "true" ? [["requires-definedness", 0], ["requires-definedness-witness", 0]] : []),
-    ["feasibility", 0], ["feasibility-witness", 0],
-    ...Array.from({ length: n }, (_, i) => ["postcondition", i]),
-    ...Array.from({ length: n }, (_, i) => ["counterexample-witness", i]),
-  ];
+// The scheduler and proof identity use the same finite state graph. Terminals
+// are outcomes, not queries. Small-witness queries never restrict a proof.
+function plan(target) {
+  const nodes = [];
+  const add = (phase, index, unsat, sat, oversized) => nodes.push({ phase, index, unsat, sat, oversized });
+  const ce = { status: "counterexample" }, tooLarge = { status: "witness-too-large" };
+  if (target.preDefined && target.preDefined !== "true") {
+    const defined = { ...ce, phase: "requires-definedness" };
+    add("requires-definedness", 0, "feasibility:0", defined, "requires-definedness-witness:0");
+    add("requires-definedness-witness", 0, tooLarge, defined, tooLarge);
+  }
+  add("feasibility", 0, { status: "vacuous" }, "postcondition:0", "feasibility-witness:0");
+  add("feasibility-witness", 0, tooLarge, "postcondition:0", tooLarge);
+  for (let i = 0; i < target.postconditions.length; i++) {
+    add("postcondition", i, i + 1 === target.postconditions.length ? { status: "verified" } : `postcondition:${i + 1}`, ce, `counterexample-witness:${i}`);
+    add("counterexample-witness", i, tooLarge, ce, tooLarge);
+  }
+  return nodes;
 }
+export const phases = (target) => plan(target).map(({ phase, index }) => [phase, index]);
 
 export function obligation(target, phase, index = 0) {
   return {
@@ -38,7 +46,10 @@ export function obligation(target, phase, index = 0) {
 // resolve final dependencies. The injectable connection/clock are internal.
 export async function solve(targets, timeoutMs, { connect = createBackend, now = () => performance.now() } = {}) {
   const deadline = now() + timeoutMs;
-  const states = targets.map((target) => ({ target, phase: phases(target)[0][0], postcondition: 0, attempts: 0 }));
+  const states = targets.map((target) => {
+    const nodes = plan(target);
+    return { target, nodes, phase: nodes[0].phase, postcondition: nodes[0].index, attempts: 0 };
+  });
   const queue = [...states];
   const width = Math.min(2, targets.length), active = new Set();
   const remaining = () => Math.max(0, Math.floor(deadline - now()));
@@ -82,28 +93,20 @@ export async function solve(targets, timeoutMs, { connect = createBackend, now =
             s.detail = result.reason;
             if (/^(timeout|canceled)$/.test(result.reason)) break;
             s.outcome = diagnostic(s, "solver-unknown", "The solver could not decide this obligation.", result.reason);
-          } else if (s.phase === "requires-definedness") {
-            if (result.status === "unsat") s.phase = "feasibility";
-            else if (result.oversized) s.phase = "requires-definedness-witness";
-            else s.outcome = { status: "counterexample", phase: "requires-definedness", witness: result.witness };
-          } else if (s.phase === "requires-definedness-witness") {
-            s.outcome = result.status === "unsat" || result.oversized
-              ? diagnostic(s, "witness-too-large", "No replayable definedness witness was found; the proof domain was not bounded.")
-              : { status: "counterexample", phase: "requires-definedness", witness: result.witness };
-          } else if (s.phase === "feasibility") {
-            if (result.status === "unsat") s.outcome = { status: "vacuous" };
-            else if (result.oversized) s.phase = "feasibility-witness";
-            else { s.witness = result.witness; s.phase = "postcondition"; }
-          } else if (s.phase === "postcondition") {
-            if (result.status === "unsat") {
-              if (++s.postcondition === s.target.postconditions.length) s.outcome = { status: "verified", witness: s.witness };
-            } else if (result.oversized) s.phase = "counterexample-witness";
-            else s.outcome = { status: "counterexample", witness: result.witness };
-          } else if (result.status === "unsat" || result.oversized) {
-            s.outcome = diagnostic(s, "witness-too-large", "No replayable witness was found; the proof domain was not bounded.");
-          } else if (s.phase === "feasibility-witness") {
-            s.witness = result.witness; s.phase = "postcondition";
-          } else s.outcome = { status: "counterexample", witness: result.witness };
+          } else {
+            const node = s.nodes.find((n) => n.phase === s.phase && n.index === s.postcondition);
+            const edge = result.status === "unsat" ? node.unsat : result.oversized ? node.oversized : node.sat;
+            if (typeof edge === "string") {
+              if (result.status === "sat" && !result.oversized && s.phase.startsWith("feasibility")) s.witness = result.witness;
+              const next = s.nodes.find((n) => `${n.phase}:${n.index}` === edge);
+              s.phase = next.phase; s.postcondition = next.index;
+            } else if (edge.status === "witness-too-large") {
+              s.outcome = diagnostic(s, "witness-too-large", s.phase === "requires-definedness-witness"
+                ? "No replayable definedness witness was found; the proof domain was not bounded."
+                : "No replayable witness was found; the proof domain was not bounded.");
+            } else s.outcome = { ...edge, ...(edge.status === "verified" ? { witness: s.witness }
+              : edge.status === "counterexample" ? { witness: result.witness } : {}) };
+          }
         }
         active.delete(s);
         if (!s.outcome) queue.push(s);
