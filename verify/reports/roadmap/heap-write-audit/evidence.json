@@ -1,0 +1,165 @@
+{
+  "status": "PASS",
+  "scope": "K enabling gate 2 only; mutating loops remain unsupported",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-33e43afa",
+  "parent": "eaf23c0ca4a2e61e9d844a84a876755872eb16e7",
+  "implementation": "b5a1b103c59f4d1a074ed025dc101e2f0a13eb56",
+  "controls": "ca0d28d46d809a2f6c7425d78bd5a434b3cc5398",
+  "sourceHashes": {
+    "verify/heap.mjs": "25bccf21abbb3e5a4c94fd88ceae26124436385daebd0c08b0ed8fc8f00d7311",
+    "verify/data.mjs": "6c53f2fc830558b353ebe9e38147ee7b4dbbb12cbfa2bd15b56f36fa567c17f4",
+    "verify/source.mjs": "38bbea4deee14933640511a90336142d1d1bde67793c4ae0f752ced597c52e2e",
+    "verify/index.mjs": "f8a4f8c173a2185c01f1dc4626fbd5e9a2f4cc566639a4e5e75a90c7f0f3a75c",
+    "verify/proofs.mjs": "8b0cc8361db5cf42882f8145ccd53940ced483c71af1dd081391ae301dd3ba9c",
+    "pnpm-lock.yaml": "8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21",
+    "tests/verify/heap-write-audit.test.mjs": "16a3edd5d315da888b4b1a64c1497874a5caf8c8c95fb50a14cd2f69f0d700aa",
+    "tests/verify/fixtures/heap-write-cases.mjs": "ad4caa338c46d051b29138833e09e28867f9d1b660af865c027bc929f3f3ad21",
+    "verify/design/heap-write-audit.md": "d6f0f10aae7af088c6b53b8fd261f0fb0449c5e8478eb1e69f2cae7eca0bb112",
+    "verify/reports/roadmap/heap-write-audit/snapshot.mjs": "f874101465e2e95824f6bd28f7ef8ce3b51c60d03dd52d40d38e51b1a150e3ac",
+    "verify/reports/roadmap/heap-write-audit/compare.mjs": "2ac893b439e59556d8cc87fe037257fd7b23698ffb3c8eec688dd10b9d7591e5",
+    "verify/reports/roadmap/heap-write-audit/run-focused.sh": "e73301340f36baae3b0137f615e192da3d0bd6ab2ab081cd336aa2d57bfc49e7",
+    "verify/reports/roadmap/heap-write-audit/run-validation.sh": "a0848b24230b094b9b222311d1ff85324ff663b665430a46988f3b1a2c83f636"
+  },
+  "command": [
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "sh",
+    "verify/reports/roadmap/heap-write-audit/run-validation.sh",
+    "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit"
+  ],
+  "exitCode": 0,
+  "focusedTests": {
+    "tests": 90,
+    "pass": 90,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "privateMutations": [
+    {
+      "sha256": "13f63babef92972251b50243b47673022949c04790d8e9fc50d3b4012b9ad11f",
+      "control": "passed",
+      "detected": true
+    },
+    {
+      "sha256": "78aeaf72c25c5b3fdb9a8176f96afa7319e9953ed3536e077eb776128f7e3a41",
+      "control": "passed",
+      "detected": true
+    },
+    {
+      "sha256": "71c12d040c16393a14a0cb54b2d8001bb7aba0bb6d3b18312543dbdd6d10724b",
+      "control": "passed",
+      "detected": true
+    },
+    {
+      "sha256": "1cc51352bfe9a52522131e54f8c939dccb8006ef15c378f4747cc7cc8ce08264",
+      "control": "passed",
+      "detected": true
+    },
+    {
+      "sha256": "890d3db42ef01ab9ed6825c0d0836c90f6c53bc45b83a8ec2aed2c81f8a8815b",
+      "control": "passed",
+      "detected": true
+    },
+    {
+      "sha256": "5e5940b0b9ce438f62410f7e8252ed34e37a5bfc56732b58cf138ab4a1fe82da",
+      "control": "passed",
+      "detected": true
+    }
+  ],
+  "comparison": {
+    "constructedProofWitnessQueries": 616,
+    "unsupportedCompileCases": 13,
+    "sourceCaptures": 44,
+    "defaultPublicReports": 14,
+    "nativeSamples": 40,
+    "byteEquality": [
+      {
+        "name": "queries",
+        "identical": true,
+        "sha256": "96d0c0e32e5461e9c3ef2f9cc546437dcebd893f4f169f06b9a8a2090a05146b",
+        "bytes": 2009998
+      },
+      {
+        "name": "smt",
+        "identical": true,
+        "sha256": "27c49c444205d6c4f7cb35746cf7a57bda08a0b080f41c71bc454e6af22fb942",
+        "bytes": 1570478
+      },
+      {
+        "name": "runtime",
+        "identical": true,
+        "sha256": "e9fb04b13ebe2e6e701b976140bc0459cd4ec5e49932acb073ae4445bb8277a5",
+        "bytes": 20335
+      },
+      {
+        "name": "native",
+        "identical": true,
+        "sha256": "48fe93f548b7204472bef384ec7a85bcd26846415f635ecb70efa8af67960cc1",
+        "bytes": 3558
+      },
+      {
+        "name": "sources",
+        "identical": true,
+        "sha256": "90009f81e13ae41a8e4c4d7f2d4c70cee0a5f457471b63b97a0a0defdab8003a",
+        "bytes": 8014
+      }
+    ]
+  },
+  "rawLogs": {
+    "validation-final.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/validation-final.log",
+      "sha256": "36e5d5848f3da045bbb5c1314bf1443977c5771d57d9d31bcefae211f53bc7e0"
+    },
+    "focused-final.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/focused-final.log",
+      "sha256": "dd34a83f9868720eec83e16f63a523c1ef6723ed7446077cdb2ecd265ca03407"
+    },
+    "comparison-accepted.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/comparison-accepted.log",
+      "sha256": "bac3bfe8bb3a8c17e2003e470f258e9b444381c1d68d6151a4b2f168fe981f6d"
+    },
+    "comparison-accepted/tree-hashes.json": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/comparison-accepted/tree-hashes.json",
+      "sha256": "a6fdd3ba1b7f188f29edb80b7503363fbeb13b659a1379b4cf9b76c6a6c1bc2d"
+    },
+    "parent-snapshot.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/parent-snapshot.log",
+      "sha256": "54c1dcefee9bbeb12d2cbb279b332ddded4dd30461ee3c3826170db0bc7add2d"
+    },
+    "focused-audit-1.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/focused-audit-1.log",
+      "sha256": "3354e6462e5d2f55c558dd87a0b3ed259bb8a8ef6fd4c1d97ed5f95c05ab0024"
+    },
+    "focused-audit-2.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/focused-audit-2.log",
+      "sha256": "dcc5c8d15dd1afb366e611e4dfef1604daee6fabdc6e7b7ff594c2c33c2ae1ef"
+    },
+    "focused-regression.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/focused-regression.log",
+      "sha256": "66034ebd7807bfeab2a81fec7238a1c3f655be730aa39ceda6cf89886ae0ef39"
+    },
+    "comparison.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/comparison.log",
+      "sha256": "fc259044607dcef000904597688d7d7821feb4131f717fc674bff2c44e3d68ae"
+    },
+    "comparison-final.log": {
+      "path": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/heap-write-audit/comparison-final.log",
+      "sha256": "54c1dcefee9bbeb12d2cbb279b332ddded4dd30461ee3c3826170db0bc7add2d"
+    }
+  },
+  "inherited": {
+    "candidateA": "d9c22c63c5ae15d8f38d6f6873a9f3b779c53a31",
+    "candidateBRejected": "ab2ba9cd3c327dd0f104351503834ab7c5077f49",
+    "judgment": "e581b4134b845b98387ad9f0f92f98d2e9093064"
+  },
+  "fullVerifierSuiteRun": false,
+  "cleanup": {
+    "dependencyLinkRemoved": true,
+    "parentArchivesRemoved": true,
+    "privateCopiesRemoved": true,
+    "processSessionsClosed": true,
+    "activeSolverOrTestProcesses": 0
+  }
+}

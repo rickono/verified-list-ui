@@ -22,6 +22,71 @@ const fieldSymbols = (name) => {
 };
 const ite = (c, a, b) => c === "true" || a === b ? a : c === "false" ? b : `(ite ${c} ${a} ${b})`;
 
+// Content provenance belongs to the registry, independently of each state's
+// ownership history. The private symbol survives source.mjs's role-only spreads.
+const OWNERSHIP = Symbol("heap write ownership"), owners = new WeakMap();
+const auditError = (message) => { throw new Error(`Heap write audit: ${message}`); };
+function ownerFor(unit) {
+  const reg = registry(unit);
+  if (!owners.has(reg)) owners.set(reg, { versions: new Map() });
+  return owners.get(reg);
+}
+function ownership(state) {
+  const owned = state[OWNERSHIP];
+  if (!owned) auditError("missing state ownership");
+  return owned;
+}
+const isElements = (l) => l.kind === undefined ? l.key === "@elements" : l.kind === "elements";
+const locationKey = (l) => JSON.stringify([l.ref, l.key, l.sort, l.kind]);
+const sameSlot = (a, b) => a.kind === b.kind && a.key === b.key;
+const baseFn = ({kind, key}) => key === undefined
+  ? kind === "num" ? `${ENCODING.arrayNum}0` : kind === "bool" ? ENCODING.arrayBool : ENCODING.has
+  : kind === "num" ? fieldSymbols(key).numberView : fieldSymbols(key).boolean;
+function provenance(owner, slot, name) {
+  if (name === baseFn(slot)) return;
+  const p = owner.versions.get(name);
+  if (!p) auditError(`unknown content version ${name}`);
+  if (!sameSlot(slot, p.slot)) auditError(`wrong content slot for ${name}`);
+  return p;
+}
+
+// The only constructor for content functions. Every writer supplies its exact
+// locations and predecessor; joins supply both predecessors. No SMT assumption
+// is introduced, and names/declarations retain the previous encoding.
+function contentVersion(unit, slot, body, change) {
+  const owner = ownerFor(unit), {kind, key} = slot;
+  if (!change || !["write", "havoc", "allocation", "join"].includes(change.kind)) auditError("missing content provenance");
+  if (!Array.isArray(change.parents) || change.parents.length !== (change.kind === "join" ? 2 : 1)) auditError("missing content predecessors");
+  change.parents.forEach((p) => provenance(owner, slot, p));
+  const locations = change.kind === "join" ? [] : change.locations;
+  if (!Array.isArray(locations) || (change.kind !== "join" && !locations.length)) auditError("missing write location");
+  for (const l of locations) {
+    if (!l || typeof l.ref !== "string" || !l.ref.trim() || typeof l.key !== "string" || !["number", "boolean"].includes(l.sort)
+      || l.key !== (key ?? "@elements") || (kind !== "has" && kindOf(l.sort) !== kind)
+      || (l.kind !== undefined && l.kind !== (key === undefined ? "elements" : "field"))) auditError("invalid write location for content slot");
+  }
+  const name = `heap_${key === undefined ? `array_${kind}` : `${kind}_${slotKey(key)}`}_v${++registry(unit).versions}`;
+  unit.declarations.push(`(define-fun ${name} ((r Int)${key === undefined ? " (i (_ BitVec 32))" : ""}) ${kind === "num" ? FP : "Bool"} ${body})`);
+  owner.versions.set(name, { slot: {...slot}, kind: change.kind, parents: [...change.parents],
+    locations: locations.map((l) => Object.freeze({ref: l.ref, key: l.key, sort: l.sort, kind: key === undefined ? "elements" : "field"})) });
+  return name;
+}
+
+function logged(state, names) {
+  const {owner, writes} = ownership(state), next = new Map(writes);
+  for (const name of names) {
+    const p = owner.versions.get(name);
+    if (!p || !p.locations.length) auditError(`missing writer provenance for ${name}`);
+    next.set(name, p.locations.map((l) => ({...l})));
+  }
+  return {...state, [OWNERSHIP]: {owner, writes: next}};
+}
+function mergeOwnership(left, right) {
+  const a = ownership(left), b = ownership(right);
+  if (a.owner !== b.owner) auditError("cannot join different heap owners");
+  return {owner: a.owner, writes: new Map([...a.writes, ...b.writes])};
+}
+
 export const isRecordType = (t) => !!t && typeof t === "object" && t.kind === "object";
 export const isReferenceType = (t) => !!t && ["object", "array"].includes(t.kind);
 export const isRef = (v) => ["object", "array"].includes(v?.sort) && typeof v.ref === "string";
@@ -66,7 +131,8 @@ function writableState(state) {
 
 export function entryState(unit) {
   registry(unit);
-  return { role: "entry", next: "heap_next0", num: new Map(), bool: new Map(), array: {} };
+  return { role: "entry", next: "heap_next0", num: new Map(), bool: new Map(), array: {},
+    [OWNERSHIP]: {owner: ownerFor(unit), writes: new Map()} };
 }
 
 const contentFn = (s, kind, k) => s[kind].get(k) ?? (kind === "num" ? fieldSymbols(k).numberView : fieldSymbols(k).boolean);
@@ -146,24 +212,27 @@ export function focus(unit, state, v) {
   return { sort: "object", fields };
 }
 
-function version(unit, kind, k, body) {
-  const reg = registry(unit);
-  const name = `heap_${kind}_${slotKey(k)}_v${++reg.versions}`;
-  unit.declarations.push(`(define-fun ${name} ((r Int)) ${kind === "num" ? FP : "Bool"} ${body})`);
-  return name;
+function copy(s, unit) {
+  const owned = ownership(s);
+  if (owned.owner !== ownerFor(unit)) auditError("content update uses a different heap owner");
+  return { role: "current", next: s.next, num: new Map(s.num), bool: new Map(s.bool), array: { ...s.array }, [OWNERSHIP]: owned };
 }
-
-const copy = (s) => ({ role: "current", next: s.next, num: new Map(s.num), bool: new Map(s.bool), array: { ...s.array } });
 
 // One primitive store; a new content version for one key.
 export function write(unit, state, ref, key, value) {
+  return recordStore(unit, state, ref, key, value, "write");
+}
+
+function recordStore(unit, state, ref, key, value, purpose) {
   writableState(state);
   touch(unit, key);
   const kind = kindOf(value.sort);
-  const name = version(unit, kind, key, `(ite (= r ${ref}) ${value.smt} (${contentFn(state, kind, key)} r))`);
-  const next = copy(state);
+  const parent = contentFn(state, kind, key);
+  const name = contentVersion(unit, {kind, key}, `(ite (= r ${ref}) ${value.smt} (${parent} r))`,
+    {kind: purpose, parents: [parent], locations: [{ ref, key, sort: value.sort }]});
+  const next = copy(state, unit);
   next[kind].set(key, name);
-  return next;
+  return logged(next, [name]);
 }
 
 // Static shape preservation: `key` is a declared, required, present primitive
@@ -205,7 +274,7 @@ export function alloc(unit, state, view, node) {
       t = v.type;
     } else if (v.sort === "number" || v.sort === "boolean") {
       facts.push(`(= (${fieldSymbols(k).tag} ${n}) ${ite(v.present, String(TAG[v.sort]), "0")})`);
-      s = write(unit, s, n, k, v);
+      s = recordStore(unit, s, n, k, v, "allocation");
       t = v.present === "true" ? v.sort : { kind: "optional", type: v.sort };
     } else if (v.sort === "undefined") { facts.push(`(= (${fieldSymbols(k).tag} ${n}) 0)`); t = "undefined"; }
     else fail(`Heap slice: a ${v.sort} cannot be stored in a record.`, node);
@@ -225,18 +294,22 @@ export function havoc(unit, state, footprint, refResult) {
   if (!footprint.length && !refResult) return { state, facts: "true" };
   const reg = registry(unit);
   if (refResult) reg.used = true;
-  const s = copy(state);
-  for (const l of footprint.filter((l) => l.key === "@elements")) {
+  let s = copy(state, unit);
+  for (const l of footprint.filter(isElements)) {
     const q = "i";
     for (const kind of [kindOf(l.sort), "has"]) {
       const fn = `heap_array_havoc${++reg.versions}`;
       unit.declarations.push(`(declare-fun ${fn} ((_ BitVec 32)) ${kind === "num" ? FP : "Bool"})`);
-      s.array[kind] = arrayVersion(unit, kind, `(ite (= r ${l.ref}) ${kind === "has" ? `(or (${arrayFn(s, kind)} r ${q}) (${fn} ${q}))` : `(${fn} ${q})`} (${arrayFn(s, kind)} r ${q}))`);
+      const parent = arrayFn(s, kind);
+      const name = contentVersion(unit, {kind}, `(ite (= r ${l.ref}) ${kind === "has" ? `(or (${parent} r ${q}) (${fn} ${q}))` : `(${fn} ${q})`} (${parent} r ${q}))`,
+        {kind: "havoc", parents: [parent], locations: [l]});
+      s.array[kind] = name;
+      s = logged(s, [name]);
     }
   }
   for (const kind of ["num", "bool"]) {
     const byKey = new Map();
-    for (const l of footprint.filter((l) => l.key !== "@elements" && kindOf(l.sort) === kind)) byKey.set(l.key, [...(byKey.get(l.key) ?? []), l]);
+    for (const l of footprint.filter((l) => !isElements(l) && kindOf(l.sort) === kind)) byKey.set(l.key, [...(byKey.get(l.key) ?? []), l]);
     for (const [k, locs] of byKey) {
       touch(unit, k);
       let body = `(${contentFn(s, kind, k)} r)`;
@@ -245,7 +318,10 @@ export function havoc(unit, state, footprint, refResult) {
         unit.declarations.push(`(declare-const ${fresh} ${kind === "num" ? FP : "Bool"})`);
         body = `(ite (= r ${l.ref}) ${fresh} ${body})`;
       }
-      s[kind].set(k, version(unit, kind, k, body));
+      const name = contentVersion(unit, {kind, key: k}, body,
+        {kind: "havoc", parents: [contentFn(s, kind, k)], locations: locs});
+      s[kind].set(k, name);
+      s = logged(s, [name]);
     }
   }
   if (!refResult) return { state: { ...s, role: "summary" }, facts: "true" };
@@ -257,15 +333,16 @@ export function havoc(unit, state, footprint, refResult) {
 export function join(unit, c, a, b) {
   if (a === b || c === "true") return a;
   if (c === "false") return b;
-  const out = { role: "current", next: ite(c, a.next, b.next), num: new Map(), bool: new Map(), array: {} };
+  const out = { role: "current", next: ite(c, a.next, b.next), num: new Map(), bool: new Map(), array: {}, [OWNERSHIP]: mergeOwnership(a, b) };
+  if (ownership(out).owner !== ownerFor(unit)) auditError("join uses a different heap owner");
   for (const kind of ["num", "bool", "has"]) {
     const fa = arrayFn(a, kind), fb = arrayFn(b, kind);
-    out.array[kind] = fa === fb ? fa : arrayVersion(unit, kind, `(ite ${c} (${fa} r i) (${fb} r i))`);
+    out.array[kind] = fa === fb ? fa : contentVersion(unit, {kind}, `(ite ${c} (${fa} r i) (${fb} r i))`, {kind: "join", parents: [fa, fb]});
   }
   for (const kind of ["num", "bool"]) {
     for (const k of new Set([...a[kind].keys(), ...b[kind].keys()])) {
       const fa = contentFn(a, kind, k), fb = contentFn(b, kind, k);
-      out[kind].set(k, fa === fb ? fa : version(unit, kind, k, `(ite ${c} (${fa} r) (${fb} r))`));
+      out[kind].set(k, fa === fb ? fa : contentVersion(unit, {kind, key: k}, `(ite ${c} (${fa} r) (${fb} r))`, {kind: "join", parents: [fa, fb]}));
     }
   }
   return out;
@@ -305,29 +382,33 @@ export function footprintPaths(clause) {
   });
 }
 
-function arrayVersion(unit, kind, body) {
-  const name = `heap_array_${kind}_v${++registry(unit).versions}`;
-  unit.declarations.push(`(define-fun ${name} ((r Int) (i (_ BitVec 32))) ${kind === "num" ? FP : "Bool"} ${body})`);
-  return name;
-}
-
 function allocArray(unit, state, view) {
-  const reg = registry(unit), n = state.next, s = copy(state), at = view.at("i");
-  s.array[kindOf(view.element)] = arrayVersion(unit, kindOf(view.element), `(ite (= r ${n}) ${at.smt ?? literal(0).smt} (${arrayFn(state, kindOf(view.element))} r i))`);
-  s.array.has = arrayVersion(unit, "has", `(ite (= r ${n}) ${at.present} (${arrayFn(state, "has")} r i))`);
+  const reg = registry(unit), n = state.next, s = copy(state, unit), at = view.at("i"), kind = kindOf(view.element);
+  const locations = [{ref: n, key: "@elements", sort: view.element}];
+  const valueName = contentVersion(unit, {kind}, `(ite (= r ${n}) ${at.smt ?? literal(0).smt} (${arrayFn(state, kind)} r i))`,
+    {kind: "allocation", parents: [arrayFn(state, kind)], locations});
+  const hasName = contentVersion(unit, {kind: "has"}, `(ite (= r ${n}) ${at.present} (${arrayFn(state, "has")} r i))`,
+    {kind: "allocation", parents: [arrayFn(state, "has")], locations});
+  s.array[kind] = valueName;
+  s.array.has = hasName;
   const next = `heap_next_v${++reg.versions}`;
   unit.declarations.push(`(define-fun ${next} () Int (+ ${n} 1))`);
-  return { state: { ...s, next }, value: { sort: "array", ref: n, type: { kind: "array", element: view.element, allowUndefined: !!view.allowUndefined }, empty: !!view.empty, length: view.length },
+  return { state: { ...logged(s, [valueName, hasName]), next }, value: { sort: "array", ref: n, type: { kind: "array", element: view.element, allowUndefined: !!view.allowUndefined }, empty: !!view.empty, length: view.length },
     facts: and(`(>= ${n} 0)`, `(= (${ENCODING.kind} ${n}) 1)`, `(= (${ENCODING.length} ${n}) ${view.length.u32})`,
       `(=> (bvugt (${ENCODING.length} ${n}) #x00000000) (= (${ENCODING.element} ${n}) ${TAG[view.element]}))`) };
 }
 
 export function writeIndex(unit, state, ref, index, value) {
   writableState(state);
-  const s = copy(state), kind = kindOf(value.sort), condition = `(and (= r ${ref}) (= i ${index}))`;
-  s.array[kind] = arrayVersion(unit, kind, `(ite ${condition} ${value.smt} (${arrayFn(state, kind)} r i))`);
-  s.array.has = arrayVersion(unit, "has", `(ite ${condition} true (${arrayFn(state, "has")} r i))`);
-  return s;
+  const s = copy(state, unit), kind = kindOf(value.sort), condition = `(and (= r ${ref}) (= i ${index}))`;
+  const locations = [{ref, key: "@elements", sort: value.sort}];
+  const valueName = contentVersion(unit, {kind}, `(ite ${condition} ${value.smt} (${arrayFn(state, kind)} r i))`,
+    {kind: "write", parents: [arrayFn(state, kind)], locations});
+  const hasName = contentVersion(unit, {kind: "has"}, `(ite ${condition} true (${arrayFn(state, "has")} r i))`,
+    {kind: "write", parents: [arrayFn(state, "has")], locations});
+  s.array[kind] = valueName;
+  s.array.has = hasName;
+  return logged(s, [valueName, hasName]);
 }
 
 // Result references may come from arguments (recursively) or new allocation.
@@ -350,3 +431,73 @@ export function inputLengths(type, ref) {
 }
 
 export const elementsEmpty = (ref) => `(= (${ENCODING.length} ${ref}) #x00000000)`;
+
+function slots(state) {
+  if (!(state.num instanceof Map) || !(state.bool instanceof Map) || !state.array
+    || Object.entries(state.array).some(([k,v]) => !["num", "bool", "has"].includes(k) || typeof v !== "string")
+    || [state.num, state.bool].some((map) => [...map].some(([k,v]) => typeof k !== "string" || typeof v !== "string"))) auditError("invalid content maps");
+  return [ ...["num", "bool", "has"].map((kind) => ({kind})),
+    ...["num", "bool"].flatMap((kind) => [...state[kind].keys()].map((key) => ({kind, key}))) ];
+}
+const atSlot = (state, {kind, key}) => key === undefined ? arrayFn(state, kind) : contentFn(state, kind, key);
+
+// Inspect actual content roots and all their predecessors, independently of the
+// ownership log. A missing log or an unknown function is never an empty frame.
+function auditState(state) {
+  const {owner, writes} = ownership(state), events = new Set(), seen = new Set();
+  function visit(slot, name) {
+    const p = provenance(owner, slot, name);
+    if (!p || seen.has(name)) return;
+    seen.add(name);
+    p.parents.forEach((parent) => visit(slot, parent));
+    if (p.kind !== "join") {
+      const actual = writes.get(name);
+      if (!actual || actual.length !== p.locations.length || actual.some((l,i) => locationKey(l) !== locationKey(p.locations[i]))) auditError(`missing ownership for ${name}`);
+      events.add(name);
+    }
+  }
+  slots(state).forEach((slot) => visit(slot, atSlot(state, slot)));
+  for (const name of writes.keys()) if (!events.has(name)) auditError(`ownership detached from content version ${name}`);
+  return {owner, events};
+}
+
+// The cutpoint uses A's location-derived havoc. Retain the entire provenance:
+// the explicit head argument to loopWrites starts a new interval without
+// erasing earlier evidence or confusing a prior store with a new one.
+export function loopHead(unit, state, locations) {
+  writableState(state);
+  auditState(state);
+  const {state: next} = havoc(unit, state, locations, false);
+  const head = {...next, role: "current"};
+  auditState(head);
+  return head;
+}
+
+// Only checked back-edge writes form the frame; exits (including return heaps)
+// are audited too. Shape is immutable; allocations/opaque allocator changes
+// are reported separately and must be rejected by the future K consumer.
+export function loopWrites(head, backs, exits = []) {
+  const baseline = auditState(head), locations = new Map();
+  let allocated = false;
+  for (const [edges, isBack] of [[backs, true], [exits, false]]) for (const state of edges) {
+    const checked = auditState(state);
+    if (checked.owner !== baseline.owner) auditError("interval uses a different heap owner");
+    const memo = new Map();
+    function extendsHead(slot, name) {
+      if (name === atSlot(head, slot)) return true;
+      if (memo.has(name)) return memo.get(name);
+      const p = provenance(checked.owner, slot, name);
+      const ok = !!p && p.parents.every((parent) => extendsHead(slot, parent));
+      memo.set(name, ok);
+      return ok;
+    }
+    for (const slot of [...slots(head), ...slots(state)]) if (!extendsHead(slot, atSlot(state, slot))) auditError("content does not descend from loop head");
+    allocated ||= state.next !== head.next;
+    for (const [name, locs] of ownership(state).writes) if (!baseline.events.has(name)) {
+      const p = checked.owner.versions.get(name);
+      if (p.kind === "allocation") allocated = true;
+      else if (isBack) for (const l of locs) locations.set(locationKey(l), {...l});
+    }
+  }
+  return {locations: [...locations.values()], allocated};
+}

@@ -1,0 +1,10 @@
+25bccf21abbb3e5a4c94fd88ceae26124436385daebd0c08b0ed8fc8f00d7311  verify/heap.mjs
+16a3edd5d315da888b4b1a64c1497874a5caf8c8c95fb50a14cd2f69f0d700aa  tests/verify/heap-write-audit.test.mjs
+ad4caa338c46d051b29138833e09e28867f9d1b660af865c027bc929f3f3ad21  tests/verify/fixtures/heap-write-cases.mjs
+d6f0f10aae7af088c6b53b8fd261f0fb0449c5e8478eb1e69f2cae7eca0bb112  verify/design/heap-write-audit.md
+d37ef8a995eaef325e434b180d78279d80f325246e91fd1662b2bf08ab1ae663  verify/reports/roadmap/heap-write-audit.md
+5cae8cd25b729827a4fdbf5a58176cc31b3fae34264a1d163eb7aaec9190f142  verify/reports/roadmap/heap-write-audit/evidence.json
+f874101465e2e95824f6bd28f7ef8ce3b51c60d03dd52d40d38e51b1a150e3ac  verify/reports/roadmap/heap-write-audit/snapshot.mjs
+2ac893b439e59556d8cc87fe037257fd7b23698ffb3c8eec688dd10b9d7591e5  verify/reports/roadmap/heap-write-audit/compare.mjs
+e73301340f36baae3b0137f615e192da3d0bd6ab2ab081cd336aa2d57bfc49e7  verify/reports/roadmap/heap-write-audit/run-focused.sh
+a0848b24230b094b9b222311d1ff85324ff663b665430a46988f3b1a2c83f636  verify/reports/roadmap/heap-write-audit/run-validation.sh
