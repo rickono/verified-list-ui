@@ -1,0 +1,38 @@
+{"check":"running-identity","ok":true,"detail":{"sha256":"ffa6dc01465e53e123f77aef439e80c04c93eee8445861facbe15e24961c393c","claimed":"ffa6dc01465e53e123f77aef439e80c04c93eee8445861facbe15e24961c393c","match":true,"node":{"node":"v22.23.1","platform":"darwin","arch":"arm64"},"backend":"z3-solver@5.3.3","wasmFiles":25}}
+{"check":"script-hook-and-hand-witness","ok":true,"detail":{"scripts":6,"signature":"[\"counterexample\",null,null,[\"result<100\"],null]","input":{"n":"50"},"status":"not-reproduced"}}
+{"check":"real-hand-reproduce","ok":true,"detail":{"status":"reproduced","scripts":6,"input":{"n":"50"}}}
+{"check":"validate-all-before-replay","ok":true,"detail":{"status":"invalid-evidence","scripts":0,"message":"entry.ts#other: The backend returned an invalid query result or witness."}}
+{"check":"keys-before-replay","ok":true,"detail":{"status":"invalid-evidence","scripts":0,"message":"Proof key mismatch for entry.ts#side."}}
+{"check":"stale-graph-before-replay","ok":true,"detail":{"status":"stale","scripts":0}}
+{"check":"empty-witnesses","ok":true,"detail":{"status":"not-reproduced","scripts":0}}
+{"check":"forged-status-field","ok":true,"detail":{"status":"not-reproduced","scripts":0}}
+{"check":"adversarial-shape","ok":true,"detail":{"value":null,"status":"stale","scripts":0}}
+{"check":"adversarial-shape","ok":true,"detail":{"value":"array","status":"stale","scripts":0}}
+{"check":"adversarial-shape","ok":true,"detail":{"value":"reproduced","status":"stale","scripts":0}}
+{"check":"adversarial-shape","ok":true,"detail":{"value":1,"status":"stale","scripts":0}}
+{"check":"adversarial-shape","ok":true,"detail":{"value":["status"],"status":"stale","scripts":0}}
+{"check":"signature-forgery","ok":true,"detail":{"status":"not-reproduced","scripts":6,"reproduced":false}}
+{"check":"poison-shrink-does-not-claim","ok":true,"detail":{"poisoned":"not-reproduced","original":"reproduced","originalInput":{"n":"50"}}}
+{"check":"relocate-identical-and-stale-edit","ok":true,"detail":{"moved":"reproduced","edited":"stale","graphsEqualBeforeEdit":true}}
+{"check":"saved-bugs-artifact","ok":true,"detail":{"status":"reproduced","outcomes":[{"target":"equalityAlone","reproduced":true,"status":"counterexample"},{"target":"finiteDouble","reproduced":true,"status":"counterexample"},{"target":"brokenClamp","reproduced":true,"status":"counterexample"}]}}
+{"check":"shrink-skip-heap","ok":true,"detail":{"name":"bug","heap":true,"probes":0,"models":["ref","heap"],"skipped":"heap, callback-probe or predicate-table witness","calls":0}}
+{"check":"shrink-skip-predicate","ok":true,"detail":{"name":"bug","heap":false,"probes":0,"models":["function"],"skipped":"heap, callback-probe or predicate-table witness","calls":0}}
+{"check":"shrink-skip-callback-probe","ok":true,"detail":{"name":"caller","heap":false,"probes":1,"models":["number"],"skipped":"heap, callback-probe or predicate-table witness","calls":0}}
+{"check":"greedy-number","ok":true,"detail":{"replays":146,"limit":300,"value":50,"greedy":true,"changed":true}}
+{"check":"array-heap-skips-shrink","ok":true,"detail":{"calls":0,"models":["ref","heap"],"skipped":"heap, callback-probe or predicate-table witness"}}
+{"check":"greedy-cap-not-minimal","ok":true,"detail":{"replays":300,"limit":300,"values":[100,2147483648,1e+300,1e+300],"greedy":true,"changed":true,"smallerCosts":[true,true,false,false]}}
+{"check":"readonly-audit-plan-create-nothing","ok":true,"detail":{"noSolver":true,"outcomes":0,"needsSolve":[true],"writes":[],"spawns":[]}}
+{"check":"default-verify-isolation","ok":true,"detail":{"status":["unsupported"],"message":"verify(source) never reads files; use verifyFile(entry) to import ./secret.ts.","secretReads":0,"spawns":[]}}
+{"check":"cli-usage","ok":true,"detail":{"args":["--nope"],"status":2,"stdout":"","stderr":"Unknown option --nope"}}
+{"check":"cli-usage","ok":true,"detail":{"args":["reproduce"],"status":2,"stdout":"","stderr":"Provide at least one JS/TS source file. Use --help for usage."}}
+{"check":"cli-usage","ok":true,"detail":{"args":["reproduce","--json"],"status":2,"stdout":"","stderr":"Provide at least one JS/TS source file. Use --help for usage."}}
+{"check":"cli-usage","ok":true,"detail":{"args":["--cache-mode","audit","/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/p-review-ns-igx7Kc/bug/entry.ts"],"status":2,"stdout":"","stderr":"Invalid option combination: cache mode needs --cache; evidence needs one entry and no --plan; reproduce accepts one evidence file, optional entry and one target."}}
+{"check":"cli-usage","ok":true,"detail":{"args":["reproduce","--target","a","--target","b","/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/p-review-ns-igx7Kc/bug/entry.ts"],"status":2,"stdout":"","stderr":"Invalid option combination: cache mode needs --cache; evidence needs one entry and no --plan; reproduce accepts one evidence file, optional entry and one target."}}
+{"check":"cli-forged-json","ok":true,"detail":{"status":1,"body":"stale","stderr":"(node:1101) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time"}}
+{"check":"cli-real-json","ok":true,"detail":{"status":0,"input":{"n":"50"},"reproduced":true}}
+{"check":"cli-text-replay","ok":true,"detail":{"status":0,"stdout":"reproduced"}}
+{"check":"cli-entry-from-artifact","ok":true,"detail":{"status":0,"body":"reproduced"}}
+{"check":"cli-oversize","ok":true,"detail":{"status":2,"stderr":"Invalid or oversized evidence file.","stdout":""}}
+{"check":"cli-directory","ok":true,"detail":{"status":2,"stderr":"Invalid or oversized evidence file.","stdout":""}}
+{"check":"no-solver-spawns","ok":true,"detail":{"spawns":0,"scripts":60}}
+{"check":"nonsolver-done","ok":true,"passed":37}

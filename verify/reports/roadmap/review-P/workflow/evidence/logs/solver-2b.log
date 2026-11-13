@@ -1,0 +1,9 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+{"check":"skipped-already-executed","ok":true,"detail":["hit-callee-gate","benign-forgery-trust-control"]}
+{"check":"write-policy-and-repair","ok":true,"detail":{"coldWritten":["fine"],"rejected":["unparseable"],"repaired":["fine"],"witness":1,"warmHits":["fine"],"warmSolved":["bug"]}}
+{"check":"readonly-and-plan-create-nothing","ok":true,"detail":{"readonlyWritten":[],"planTargets":2,"noSolver":true}}
+{"check":"special-heap","ok":true,"detail":{"status":"counterexample","skipped":"heap, callback-probe or predicate-table witness","reproduced":"reproduced"}}
+{"check":"special-predicate","ok":true,"detail":{"status":"counterexample","skipped":"heap, callback-probe or predicate-table witness","reproduced":"reproduced"}}
+{"check":"special-callback","ok":true,"detail":{"status":"counterexample","skipped":"heap, callback-probe or predicate-table witness","reproduced":"reproduced"}}
+{"check":"config-relocation","ok":true,"detail":{"tsconfig":"tsconfig.json","moved":"reproduced","editedConfig":"stale"}}
