@@ -16,7 +16,7 @@ The coordinator combined P with main's heap audit and the separately accepted
 numeric gate at `dedde91`. That exact stack passed **322/322**, with zero failed
 or skipped tests. [The combined receipt](P-integration/combined-numeric/receipt.json)
 and full log name that tree; this is not a claim that 322 tests ran on P alone.
-No runtime module changed during or after that run.
+The tested numeric stack runtime bytes remain unchanged.
 
 On P plus the landed heap audit, the coordinator separately ran the maintained
 workflow comparison against published pre-P main `0d7c39c`. Six default reports
