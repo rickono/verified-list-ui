@@ -1,0 +1,74 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:92069) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"id":"negzero-init","properties":["Object.is(x, 0)"],"statuses":[["$init","counterexample"],["f$0","verified"]],"allPass":false}
+{"id":"negzero-write","properties":["Object.is(x, 0)"],"statuses":[["$init","verified"],["f$0","counterexample"]],"allPass":false}
+{"id":"y-postfix","properties":["y === 1"],"statuses":[["$init","counterexample"],["f$0","counterexample"]],"allPass":false}
+{"id":"chain-cells","properties":["x === 0 || y === 0"],"statuses":[["$init","verified"],["f$0","counterexample"]],"allPass":false}
+{"id":"comma-write","properties":["x === 0"],"statuses":[["$init","verified"],["f$0","counterexample"]],"allPass":false}
+{"id":"cond-expr","properties":["x === 0"],"error":"SourceError","message":"Expected boolean; this JavaScript coercion is unsupported.","status":"unsupported"}
+{"id":"homo-true","properties":["true"],"statuses":[["$init","verified"],["f$0","verified"]],"allPass":true,"native":{"status":"ok","violation":null,"state":{"x":0}},"falseProof":false}
+{"id":"homo-only-check","error":"SourceError","message":"No state or always property; pending clauses alone cannot establish safety.","status":"unsupported"}
+{"id":"load-then-add","properties":["Number.isFinite(x)"],"statuses":[["$init","verified"],["load$0","counterexample"],["step$0","counterexample"]],"allPass":false}
+{"id":"checkStateful-homo","status":"verified","properties":[{"kind":"state","text":"true","span":{"start":28,"end":41}}],"units":[["$init","verified"],["f$0","verified"]]}
+(node:92110) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:92112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:92112) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: original compiler rejects a false capture annotation before it can become a resumption assumption
+ok 1 - original compiler rejects a false capture annotation before it can become a resumption assumption
+  ---
+  duration_ms: 28.842292
+  type: 'test'
+  ...
+# Subtest: request parameter assumptions use the captured request value across interference
+ok 2 - request parameter assumptions use the captured request value across interference
+  ---
+  duration_ms: 121.907542
+  type: 'test'
+  ...
+# Subtest: always-only properties use pre-step old, including rejection stutter
+ok 3 - always-only properties use pre-step old, including rejection stutter
+  ---
+  duration_ms: 515.608417
+  type: 'test'
+  ...
+# Subtest: unsupported clauses and source constructs retain exact original spans
+ok 4 - unsupported clauses and source constructs retain exact original spans
+  ---
+  duration_ms: 2.380084
+  type: 'test'
+  ...
+# (node:92122) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:92122) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: original AST segments prove guarded search and both annotated awaits
+ok 5 - original AST segments prove guarded search and both annotated awaits
+  ---
+  duration_ms: 6264.363917
+  type: 'test'
+  ...
+# Subtest: keeps refutes overclaim; private deletion reproduces the unsound ablation
+ok 6 - keeps refutes overclaim; private deletion reproduces the unsound ablation
+  ---
+  duration_ms: 2665.808416
+  type: 'test'
+  ...
+# Subtest: AST seam preserves original statements/spans and has no witness bound
+ok 7 - AST seam preserves original statements/spans and has no witness bound
+  ---
+  duration_ms: 2.544708
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9680.937584
