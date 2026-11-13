@@ -10,24 +10,26 @@ const grammar = new Map([
   ...["order", "abort", "leads", "ensures", "requires", "invariant", "safety", "live", "liveness", "fairness", "decreases", "modifies", "environment"].map((w) => [w, "unsupported"]),
 ]);
 function near(a, b) {
-  if (Math.abs(a.length - b.length) > 1) return false;
-  if (a.length === b.length) for (let i = 0; i + 1 < a.length; i++)
-    if (a.slice(0, i) + a[i + 1] + a[i] + a.slice(i + 2) === b) return true;
-  const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
-  for (let j = 0; j <= b.length; j++) d[0][j] = j;
-  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
-    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + Number(a[i - 1] !== b[j - 1]));
-  return d[a.length][b.length] <= 1;
+  const left = [...a], right = [...b];
+  if (Math.abs(left.length - right.length) > 1) return false;
+  const d = Array.from({ length: left.length + 1 }, (_, i) => [i]);
+  for (let j = 0; j <= right.length; j++) d[0][j] = j;
+  for (let i = 1; i <= left.length; i++) for (let j = 1; j <= right.length; j++) {
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + Number(left[i - 1] !== right[j - 1]));
+    if (i > 1 && j > 1 && left[i - 1] === right[j - 2] && left[i - 2] === right[j - 1])
+      d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[left.length][right.length] <= 1;
 }
 export function parseClauses(comments) {
   return comments.map((comment) => {
     const lines = comment.value.split("\n").map((s) => s.replace(/^\s*\*?\s*/, ""));
     const looks = lines.some((line) => {
-      const token = line.split(/\s/)[0];
-      // Hyphenated prose (the inherited "Stale-response" pilot) remains a
-      // word; punctuation such as state(false) cannot hide a clause.
-      const word = (/^(@?[A-Za-z]+)(?=$|[^A-Za-z_-])/.exec(token)?.[1] ?? token).toLowerCase();
-      return word && [...grammar.keys()].some((reserved) => near(word, reserved));
+      const token = line.split(/\s/)[0].normalize("NFKC").toLowerCase().replace(/\p{Default_Ignorable_Code_Point}/gu, "");
+      // Inspect the entire token before extracting punctuation. Recognition
+      // normalizes lookalikes; admission below still requires the exact keyword.
+      const word = /^(@?[\p{L}\p{M}]+)(?=$|[^\p{L}\p{M}_-])/u.exec(token)?.[1] ?? token;
+      return [token, word].some((candidate) => candidate && [...grammar.keys()].some((reserved) => near(candidate, reserved)));
     });
     if (!looks) return { comment };
     if (comment.type !== "Line") fail("Contract-looking block comments are unsupported; use one line per clause.", comment);

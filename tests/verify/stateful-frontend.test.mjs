@@ -49,3 +49,13 @@ test("module state, ambient signatures, binding identities and nested awaits fai
     ["const id: number = latest + 1", "let id: number = latest + 1"],
   ]) assert.throws(() => machineOf("bad.ts", source.replace(before, after)), (e) => e.status === "unsupported");
 });
+
+test("Unicode edits in clause keywords cannot silently discard properties", () => {
+  const words = ["st\u0430te", "st\u200bate", "st\uff41te", "st\u{1d41a}te", "st\u{1f9ea}ate", "st\u200b\u200bate", "st\u0430te(false)", "\uff53\uff54\uff41\uff54\uff45"];
+  for (const word of words) {
+    const input = `let x = 0;\n// ${word} x === 1\n// state true\nexport function entry() {}`;
+    assert.throws(() => machineOf("unicode.ts", input), (error) => error.status === "unsupported" && error.span.start === input.indexOf("//") && /clause|expression/.test(error.message), word);
+  }
+  const prose = "let x = 0;\n// Stale-response documentation\n// Пример обычного комментария\n// state true\nexport function entry() {}";
+  assert.deepEqual(machineOf("prose.ts", prose).state.map((clause) => clause.text), ["true"]);
+});
