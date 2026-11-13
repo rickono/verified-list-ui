@@ -1,0 +1,42 @@
+TAP version 13
+# (node:18449) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all recovered pilots/variants are audited by the production frontend
+ok 1 - all recovered pilots/variants are audited by the production frontend
+  ---
+  duration_ms: 43.057083
+  type: 'test'
+  ...
+# Subtest: closed grammar rejects case, colon, edit distance, block and unknown environment lines
+ok 2 - closed grammar rejects case, colon, edit distance, block and unknown environment lines
+  ---
+  duration_ms: 5.160083
+  type: 'test'
+  ...
+# Subtest: assumptions expose defaults, declared-unused settling and canonical identity
+ok 3 - assumptions expose defaults, declared-unused settling and canonical identity
+  ---
+  duration_ms: 1.933792
+  type: 'test'
+  ...
+# Subtest: module state, ambient signatures, binding identities and nested awaits fail closed
+ok 4 - module state, ambient signatures, binding identities and nested awaits fail closed
+  ---
+  duration_ms: 1.972
+  type: 'test'
+  ...
+# Subtest: Unicode edits in clause keywords cannot silently discard properties
+ok 5 - Unicode edits in clause keywords cannot silently discard properties
+  ---
+  duration_ms: 1.321292
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 96.9365

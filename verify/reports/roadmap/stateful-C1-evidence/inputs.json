@@ -1,0 +1,186 @@
+{
+  "codeHead": "5d8415aa8279cab2f4a662b049616ce9d94a98a3",
+  "parent": "e435c8abce3107f3afce5be2b10ae23102d269d2",
+  "inputs": [
+    {
+      "path": "tests/verify/fixtures/stateful/pilots/search-env.ts",
+      "sha256": "f7f5c94d315c15ea8bb7dd0fcb179e804a3b35404d401f43694c49d91c0e23bd"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/pilots/search-gap.ts",
+      "sha256": "4e8afd57619eeedbd2f59669a16f487a8abd190a84c615b0045c2ab68dce232f"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/pilots/search-overclaim.ts",
+      "sha256": "aef7948cf705c530c6b1844de83f3404d21f350baeb5797e5dd8f76d40ba9004"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/pilots/search-stale.ts",
+      "sha256": "ee0ce5440aad45acd72e58d6678cee3fac3eaa3fa2e92ad54171903ab7bf63b1"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/pilots/search-unsupported.ts",
+      "sha256": "3cd34a591efe4614344459eb2f89108348e9a27a84c80166db886f8870b54876"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/pilots/search.ts",
+      "sha256": "240391c0b3f0b50c791e1393abca5ea881ad2db81c90e73b8dba7585211aaeb9"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V1-leads-no-settles.ts",
+      "sha256": "6f0acc1772265e3a821bbaf66ec5a52dc548e13819512bb3bad68a1abdf1d3b6"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V10-rejects-sometimes.ts",
+      "sha256": "df6d42ecd275e7d4d4a93b881d7706c7ff9b50e5486d629073635c521c1f7430"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V11-rejects.ts",
+      "sha256": "33ef92574541756ed9603a065ec891ebc12fd41fe4f1691953cbc08c99128b38"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V14-entry-calls-entry.ts",
+      "sha256": "ef6b4f980c1350804157b4068fd6870d276e49df8fbe84f03c8707e8541dac54"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V15-old-in-state.ts",
+      "sha256": "c5ee36921383be5edcf8aa4919e764c65940f6e7d9f71fc4c23e7a9f428aad7e"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V16-undeclared-write.ts",
+      "sha256": "efafe9fff05146dc8f8e8584903ab627ace77e35358dad01aac3ef921b159f98"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V18-two-awaits.ts",
+      "sha256": "2649614b15e7127a5e384724afabcd2dad9f100b137b9e0b96b1ae6ea5fa950d"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V18b-two-awaits-annotated.ts",
+      "sha256": "b7670d2008679938c4f04ae77c8cb02b2a8ea015b11d32db4be02d9a3370fd70"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V1b-leads-settles.ts",
+      "sha256": "3c3a56e68dd2871261b514c0f3267171af106a7437cb1db363a998841e45c3ec"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V2-entry-ensures-false.ts",
+      "sha256": "14f3e84462e3070208574108d498e8400319d18c90ce41fe3d08efb502dd46ba"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V3-state-colon-typo.ts",
+      "sha256": "2a605602add676a1b596b840263cd18b813af235a28c95a52feca0a007006906"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V4-block-comment-state.ts",
+      "sha256": "d049d99ffd6786f1dabdce589d7a7aa0a5c321ab4b2cdc890b5962944d8dc6f5"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V5-no-properties.ts",
+      "sha256": "97bce0a5e840d55ffc56b19a677fe5035b43a2fa378083c5160049a21cb0559c"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V5b-no-properties-no-pending.ts",
+      "sha256": "da81526b187b55b9c8f4cc179bf085e57329cf59f8c84e1d3caed5f59069151c"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V6-inflight-count.ts",
+      "sha256": "586bbae13db57f0d5ee1327448c551654f49a7aedb52d8a1fb0a9f0a23e10b04"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V7-latest-2p53.ts",
+      "sha256": "dd363489b4ff802655e3d5e98439acd53064ffd5438b80383d02aed2e5e91b87"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V8-second-entry-clear.ts",
+      "sha256": "6176a743050292ca3a5afcde283c759cb9d73b1ac842f0efca74e5ddb6cb522f"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V8b-second-entry-reset.ts",
+      "sha256": "bd27ac6ef67656d7c2639be1be7b09f7d2c164bc00ff2ba397ce6b29f3e0e494"
+    },
+    {
+      "path": "tests/verify/fixtures/stateful/variants/V9-resolves-typo.ts",
+      "sha256": "363b595a4687878038160c82b53a74a65d1cba7dca1c9a6af0bacbb873add81e"
+    },
+    {
+      "path": "tests/verify/stateful-boundaries.test.mjs",
+      "sha256": "21ddff61633125239e34fe85c04e6dba9233561b27ed29a31d16e8b47fafedbb"
+    },
+    {
+      "path": "tests/verify/stateful-frontend.test.mjs",
+      "sha256": "e70528cd05e82bff5e28440ff488a1a652a444a66b221382e3f16484e74ead64"
+    },
+    {
+      "path": "tests/verify/stateful-outcomes.test.mjs",
+      "sha256": "21615f92c5942a41900b32ae077925f915047b1bbabc4016970ffd0e9398f8c5"
+    },
+    {
+      "path": "tests/verify/stateful-regression.test.mjs",
+      "sha256": "b1eda9dbd86ecbe0a691f44cbcd04a2e961d6f00e0f05e98a6dd4db6b836c736"
+    },
+    {
+      "path": "tests/verify/stateful-replay.test.mjs",
+      "sha256": "366d1cca9327d237cefbbdaa6a0d2b052dc650cd1909b7ecdbc294ea481f0491"
+    },
+    {
+      "path": "tests/verify/stateful-transitions.test.mjs",
+      "sha256": "41a48ac5c8554006d146397a8034958590e9a9f2dd5c35d3414a047b6d8a8eea"
+    },
+    {
+      "path": "verify/source.mjs",
+      "sha256": "bf990306d64d6c06d12c2c6a06e9bc3ae9b5caca3cfb242bb2434b5e5f2e68bb"
+    },
+    {
+      "path": "verify/stateful/ast.mjs",
+      "sha256": "b9be90a61c8f6bc9ecbd535917df1993046de61db6115ec2dd381c350c5bbd91"
+    },
+    {
+      "path": "verify/stateful/clauses.mjs",
+      "sha256": "37702dc2efabf10db933df4590d66e130a9dc275a29e918b93f3be16117ef409"
+    },
+    {
+      "path": "verify/stateful/environment.mjs",
+      "sha256": "780cb8d4da5b625e1da70ffab22d016ec2d8e59aab26a39f80db691692bd5756"
+    },
+    {
+      "path": "verify/stateful/index.mjs",
+      "sha256": "9070313a60c7429ee8039e11701ab5ab03c481d077ee3acbf897b08fab9fc669"
+    },
+    {
+      "path": "verify/stateful/machine.mjs",
+      "sha256": "c34cd405d0212e7f27a6118162ef5c24c98d3f45d4ff54a4905a44138dd327d7"
+    },
+    {
+      "path": "verify/stateful/native.mjs",
+      "sha256": "26d093c916821cf4405e3f8176c69133d6d464e4aad246b7685571cfb3ae7800"
+    },
+    {
+      "path": "verify/stateful/replay-worker.mjs",
+      "sha256": "e581ba7a53039480fd8680d93e66bc3d7e486ef55e2c00f4d690deb92238d563"
+    },
+    {
+      "path": "verify/stateful/traces.mjs",
+      "sha256": "821647ee9058214a25ef2d5bf66e56fe68911f2de89c0a36304e9b77001c4147"
+    },
+    {
+      "path": "verify/stateful/transitions.mjs",
+      "sha256": "7f63987bf9d34ec81a8b215671cad5e1f16cb6ee074aba87c94ada5e2a98e636"
+    },
+    {
+      "path": "verify/stateful/values.mjs",
+      "sha256": "5f496b9ae0403b3b8a9f8ac1dc4c574f770df5824c89eeb7a67a0cc0568e78ca"
+    }
+  ],
+  "unchangedProductionModules": {
+    "verify/index.mjs": "f8a4f8c173a2185c01f1dc4626fbd5e9a2f4cc566639a4e5e75a90c7f0f3a75c",
+    "verify/proofs.mjs": "8b0cc8361db5cf42882f8145ccd53940ced483c71af1dd081391ae301dd3ba9c",
+    "verify/solver.mjs": "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2",
+    "verify/backend.mjs": "02f3ae639753b9974c55e19d990db0266ea2b22efeb02a9ee698bcd2bf6fe95c",
+    "verify/data.mjs": "6c53f2fc830558b353ebe9e38147ee7b4dbbb12cbfa2bd15b56f36fa567c17f4",
+    "verify/heap.mjs": "3a833de64dca47275accc84371a451f84ba5905fea618ffe2935149269e50f9a",
+    "verify/modules.mjs": "55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68",
+    "verify/types.mjs": "9ea60c9f2bf3983a75bd7f23d6c02d1cbeaed75ab6d2e2bfed6b9754c8a5993f",
+    "verify/specifications.mjs": "869d1385d30dd4747c2db0467bdd2086ae26d0e452694bd49b471260f2240c6f"
+  },
+  "lockfileSha256": "8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21"
+}

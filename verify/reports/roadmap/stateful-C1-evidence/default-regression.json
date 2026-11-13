@@ -1,0 +1,260 @@
+{
+  "parent": "e435c8abce3107f3afce5be2b10ae23102d269d2",
+  "summary": [
+    {
+      "file": "bugs.ts",
+      "sourceSha256": "97405cd1d3fdd6a92121f28ddb6d1f8bcc18d89bf5268f08ec59a15038c161a9",
+      "compiledSha256": "744e809c5bc84e3d4c43ce7c1aea929a46dab325688dc62d23914cde0687213b",
+      "graphSha256": "b1deab21313b9ebaaeb7dd45fe2edb7b501c39a131170eefe569e097e09f715d",
+      "outcomes": [
+        {
+          "fn": "equalityAlone",
+          "status": "counterexample"
+        },
+        {
+          "fn": "finiteDouble",
+          "status": "counterexample"
+        },
+        {
+          "fn": "brokenClamp",
+          "status": "counterexample"
+        }
+      ]
+    },
+    {
+      "file": "callback-bugs.ts",
+      "sourceSha256": "909131f424054348dc4f412159133cc3596b308db97aaa2a4144983d031557db",
+      "compiledSha256": "23dcfafb32ad0a45ebe0bf5bccabe1424c79c35019904f26a55dae58be98ce4f",
+      "graphSha256": "8b2444a0b01a3692afbc65835c0ca8b47c609615eb19f5121635db29dc10d03f",
+      "outcomes": [
+        {
+          "fn": "findIndex",
+          "status": "verified"
+        },
+        {
+          "fn": "positiveOnly",
+          "status": "verified"
+        },
+        {
+          "fn": "narrowPredicate",
+          "status": "counterexample"
+        }
+      ]
+    },
+    {
+      "file": "callbacks.ts",
+      "sourceSha256": "7aa05961f7157760962d61a54acfe29998e4e25bd3d36aa5938f33e53570b8b8",
+      "compiledSha256": "5574107575ee490e9f4511f340c8c9ceb7cf98b5fc19cb8464866a921ab6c8ef",
+      "graphSha256": "a9227cc9e0d8e37887f04e38cc06428d4c207655243ecd88361b2bf5ec4dd8f4",
+      "outcomes": [
+        {
+          "fn": "findIndex",
+          "status": "verified"
+        },
+        {
+          "fn": "firstAbove",
+          "status": "verified"
+        },
+        {
+          "fn": "firstNaN",
+          "status": "verified"
+        },
+        {
+          "fn": "isNegativeZero",
+          "status": "verified"
+        },
+        {
+          "fn": "firstNegativeZero",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "file": "calls-bugs.ts",
+      "sourceSha256": "d06c3329a59a2070a253e56c214f91844df7b6fd5e1438b4f697ea198cdcbe15",
+      "compiledSha256": "d6b392aa5f8f09518b97a51d64278bdf119f336664f7073cadb906d78d730070",
+      "graphSha256": "000cc80ed2c22541101b9fef0d96a3518688f904325272343cff019e8ff2651e",
+      "outcomes": [
+        {
+          "fn": "positive",
+          "status": "verified"
+        },
+        {
+          "fn": "unsafe",
+          "status": "counterexample"
+        },
+        {
+          "fn": "weakIdentity",
+          "status": "verified"
+        },
+        {
+          "fn": "contractGap",
+          "status": "unknown",
+          "reason": "contract-gap"
+        }
+      ]
+    },
+    {
+      "file": "calls.ts",
+      "sourceSha256": "9c3dcde1489b698ebb482bfd9533d135566c0a5cfa0f3c83a35050d73386f65f",
+      "compiledSha256": "0369e2fba9e21997e0677900c9063f7538f45c101259d2c25c9c6cf69aff0555",
+      "graphSha256": "0ad6b3c47f17778f664d245d938614feda3fea9d22720d3f778572cfc5979abd",
+      "outcomes": [
+        {
+          "fn": "clamp01",
+          "status": "verified"
+        },
+        {
+          "fn": "clamp",
+          "status": "verified"
+        },
+        {
+          "fn": "first",
+          "status": "verified"
+        },
+        {
+          "fn": "wrappedFirst",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "file": "collections.ts",
+      "sourceSha256": "88befe257e46628f0b90b4b6cf5d776010387a49295d3bc94643c015891ecd5c",
+      "compiledSha256": "8f908366950692eda74314f9a90db30baf8d2e21149843b8a1f6c0d182116cf8",
+      "graphSha256": "74cce8b9ae743d6ec8b1dedac78d197cffd6612f9024cde6cdbff7cc081fd450",
+      "outcomes": [
+        {
+          "fn": "first",
+          "status": "verified"
+        },
+        {
+          "fn": "swapPair",
+          "status": "verified"
+        },
+        {
+          "fn": "take",
+          "status": "verified"
+        },
+        {
+          "fn": "clamp",
+          "status": "verified"
+        },
+        {
+          "fn": "copyPoint",
+          "status": "verified"
+        },
+        {
+          "fn": "lowerBound",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "file": "heap-bugs.ts",
+      "sourceSha256": "d4359358d543678c1026ca7d51bb6360db107e334f2ce5bd887a3847ced48177",
+      "compiledSha256": "71dc3b7519d5a26b47a544f5485d84de498d1f6f94041e5d462082cd898cd18e",
+      "graphSha256": "2d8e99136fbeecf20b2c79400300e00fd310e69037018cfd936f0768dfd98832",
+      "outcomes": [
+        {
+          "fn": "forgottenAlias",
+          "status": "counterexample"
+        },
+        {
+          "fn": "restoredOutsideFrame",
+          "status": "counterexample",
+          "reason": "frame-write"
+        },
+        {
+          "fn": "growsOutsideDomain",
+          "status": "counterexample",
+          "reason": "store-domain"
+        }
+      ]
+    },
+    {
+      "file": "heap.ts",
+      "sourceSha256": "0dfe23776b089cc1ca15724892d8acb4581dfe6a8815baaf4f75251efbd00270",
+      "compiledSha256": "c6e72ab494b0653d36f4d3f9474c1a23c7a25a6137945622b486234e9f779a83",
+      "graphSha256": "bd9e6fb3238d0af35ba070e58422108b4065eb2312ab7d4d789b47af770d1d04",
+      "outcomes": [
+        {
+          "fn": "setValue",
+          "status": "verified"
+        },
+        {
+          "fn": "sharedArguments",
+          "status": "verified"
+        },
+        {
+          "fn": "preserveOtherField",
+          "status": "verified"
+        },
+        {
+          "fn": "shallowCopy",
+          "status": "verified"
+        },
+        {
+          "fn": "swapFirstTwo",
+          "status": "verified"
+        },
+        {
+          "fn": "copyBeforeWrite",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "file": "loop-gaps.ts",
+      "sourceSha256": "93e03bc3c4af378807d2e9041d3fded87db4fe86a8cf08c8734949d98c515cae",
+      "compiledSha256": "8e2985786733981e4ed4760b00827c2b4ce75e290aa43bb33b743638cb17f6e5",
+      "graphSha256": "1d6d1e63837adbe9a576e5b58d48beffb74076da45e1ab852bbe8a3304199ff5",
+      "outcomes": [
+        {
+          "fn": "wrongInvariant",
+          "status": "unknown",
+          "reason": "induction-gap"
+        },
+        {
+          "fn": "constantMeasure",
+          "status": "unknown",
+          "reason": "induction-gap"
+        }
+      ]
+    },
+    {
+      "file": "loops.ts",
+      "sourceSha256": "5cdcf93c330926d9d289bef6f1fb9cd4327605e6967c7248e8b214b7f4e2b217",
+      "compiledSha256": "b678089d1ab15f6956139a57bfd2cf91c9dbd9abf5675eed60b6bfa9e6a2a7f5",
+      "graphSha256": "8594d795194fb0529106f9d9f44416899f7caf9eee7f6d82d394a8a41ddb4a61",
+      "outcomes": [
+        {
+          "fn": "indexOf",
+          "status": "verified"
+        },
+        {
+          "fn": "countPositive",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "file": "valid.ts",
+      "sourceSha256": "f901cd04af1a8d23bc5da5409d2df917a9e4f6cb731d0417533181027471ab74",
+      "compiledSha256": "9b7630e59fdcb7e7f54a1ce0ec18089cc4cc5da5c7498cf0cfe2dc8395e2f0f5",
+      "graphSha256": "aa68e02a2ef639421d659c8ebd734481e1c5a0acf20f4d50ab74201727353e3d",
+      "outcomes": [
+        {
+          "fn": "double",
+          "status": "verified"
+        },
+        {
+          "fn": "clamp",
+          "status": "verified"
+        }
+      ]
+    }
+  ],
+  "verifyFile": "equal",
+  "cli": "equal"
+}

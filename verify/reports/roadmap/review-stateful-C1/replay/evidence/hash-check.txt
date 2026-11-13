@@ -1,0 +1,41 @@
+receipt log sha256
+  frontend-01.log MATCH e3504d48cf32cde2b7045d215a8c7115146707ab74d20d61e5b3aa0c417e7da0
+  frontend-02.log MATCH fc5e96287d54bbf814fad422b8d60b8f459fbd82bf45a9f0e4a4935361e9d75c
+  frontend-03.log MATCH f628ff7c993c0a50765d3c3f01d0b513ab146dc99759c967d887e476efdd2be8
+  transitions-01.log MATCH f1119cb642a343779a6d4180014f0e5040555b5742befbbc683cfef1f03f14bc
+  transitions-02.log MATCH 28fe329f3ebae848bdec70a55e2bc37528331fda1202f6f5898040e5ceebfbc3
+  replay-01.log MATCH f7c3f851a87e2b819de3e3be4d43d19f567e884a05a8270c93965204faf2ecf5
+  outcomes-01.log MATCH 1e07f61f6c1a3bf20931c79318df3f4023a115c05c82354f6e1bdd3fd4f4b048
+  focused-01.log MATCH 7c3d8e74a84cd8c44660d828c6710742c3b257fc139978223b1f7ef57b61680c
+  focused-02.log MATCH c0a0e6f10e1aeb716a771352614b46bdb1cdf014ebcd12c6457f500a4baef5b3
+  full-final.log MATCH ec6e1ba694f3779aa6b85b1e87cdfb720223f6f217ba35b7621fb5b629c19b0f
+inputs.json vs git show 5d8415a mismatches 0 of 42
+unchanged production modules parent e435c8a vs code head 5d8415a
+  SAME claimed MATCH verify/index.mjs f8a4f8c173a2185c01f1dc4626fbd5e9a2f4cc566639a4e5e75a90c7f0f3a75c
+  SAME claimed MATCH verify/proofs.mjs 8b0cc8361db5cf42882f8145ccd53940ced483c71af1dd081391ae301dd3ba9c
+  SAME claimed MATCH verify/solver.mjs fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2
+  SAME claimed MATCH verify/backend.mjs 02f3ae639753b9974c55e19d990db0266ea2b22efeb02a9ee698bcd2bf6fe95c
+  SAME claimed MATCH verify/data.mjs 6c53f2fc830558b353ebe9e38147ee7b4dbbb12cbfa2bd15b56f36fa567c17f4
+  SAME claimed MATCH verify/heap.mjs 3a833de64dca47275accc84371a451f84ba5905fea618ffe2935149269e50f9a
+  SAME claimed MATCH verify/modules.mjs 55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68
+  SAME claimed MATCH verify/types.mjs 9ea60c9f2bf3983a75bd7f23d6c02d1cbeaed75ab6d2e2bfed6b9754c8a5993f
+  SAME claimed MATCH verify/specifications.mjs 869d1385d30dd4747c2db0467bdd2086ae26d0e452694bd49b471260f2240c6f
+lock e435c8abce3107f3afce5be2b10ae23102d269d2 8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21
+lock 5d8415aa8279cab2f4a662b049616ce9d94a98a3 8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21
+worker file e581ba7a53039480fd8680d93e66bc3d7e486ef55e2c00f4d690deb92238d563
+source numstat e435c8a..5d8415a verify/source.mjs
+13	0	verify/source.mjs
+full-final tests line # tests 304
+full-final pass line # pass 304
+full-final fail line # fail 0
+full-final cancelled # cancelled 0
+full-final skipped # skipped 0
+full-final not-ok count 0
+full-final ok-line count 304
+focused-02 # tests 47 # pass 47 # fail 0
+focused-02 sixth # Subtest: an initially false property cannot mask an illegal action suffix
+replay-01 # tests 5 # pass 5
+replay-01 sixth present False
+5d8415aa8279cab2f4a662b049616ce9d94a98a3 test-calls 6
+ae60681cd6e84ad19ba62a24d60591138cb2719f test-calls 6
+node v22.23.1

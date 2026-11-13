@@ -1,0 +1,365 @@
+{
+  "expected": "unknown",
+  "file": "pilots/search-gap.ts",
+  "sourceSha256": "4e8afd57619eeedbd2f59669a16f487a8abd190a84c615b0045c2ab68dce232f",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "executableSha256": "4f3f6fc30f00cd133b7f5950f7b87171299f3fab46eff4f93c6dc318fdb80817",
+  "assumptions": {
+    "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+    "eventBound": null,
+    "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+    "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+    "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+    "initial": {
+      "latest": "0",
+      "shownFor": "0",
+      "shown": "0"
+    },
+    "environment": [
+      {
+        "op": "lookup",
+        "params": [
+          {
+            "name": "query",
+            "type": "number"
+          }
+        ],
+        "result": "number",
+        "resolves": [
+          "Number.isFinite(result)"
+        ],
+        "rejects": "never-rejects",
+        "settles": "may-never-settle",
+        "settlementOrder": "any",
+        "settlementCount": "at most once per request",
+        "settlesUse": "not declared; no progress guarantee"
+      }
+    ],
+    "entries": [
+      {
+        "entry": "search",
+        "params": [
+          {
+            "name": "query",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "fairness": "none used by safety; settles eventually is recorded only",
+    "unsupported": [
+      "references",
+      "imports",
+      "handlers",
+      "cancellation",
+      "ordering/abort contracts",
+      "entry contracts",
+      "liveness",
+      "pairwise/uniqueness/count induction",
+      "nested awaits",
+      "entry-to-entry calls",
+      "unverified helpers"
+    ],
+    "sha256": "82e914b6fe02f2246982d749a67514e50457ec550d993129df654af4e0ba31db"
+  },
+  "unitsSha256": "8d34da8f0de3110f5d8e4fd480cbd399c89a818f2bece2a292833cfbf933f62c",
+  "properties": [
+    {
+      "kind": "state",
+      "text": "0 <= shownFor",
+      "span": {
+        "start": 282,
+        "end": 304
+      }
+    },
+    {
+      "kind": "state",
+      "text": "Number.isFinite(shown)",
+      "span": {
+        "start": 305,
+        "end": 336
+      }
+    },
+    {
+      "kind": "always",
+      "text": "shownFor >= old(shownFor)",
+      "span": {
+        "start": 337,
+        "end": 372
+      }
+    }
+  ],
+  "units": [
+    {
+      "unit": "$init",
+      "kind": "init",
+      "span": {
+        "start": 282,
+        "end": 304
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        {
+          "roots": [],
+          "nodes": {}
+        }
+      ]
+    },
+    {
+      "unit": "search$0",
+      "kind": "entry",
+      "span": {
+        "start": 422,
+        "end": 467
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "counterexample",
+      "witness": [
+        "0",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "bf40000000001402"
+                ],
+                "shownFor": [
+                  "num",
+                  "2000000000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "label": {
+        "kind": "ensures",
+        "span": {
+          "start": 470,
+          "end": 504
+        },
+        "abstract": false
+      }
+    },
+    {
+      "unit": "search$1",
+      "kind": "resume",
+      "span": {
+        "start": 544,
+        "end": 604
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "counterexample",
+      "witness": [
+        "0",
+        "4000000040000000",
+        "0000000000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4000000040000000"
+                ],
+                "shownFor": [
+                  "num",
+                  "4010000000000001"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "label": {
+        "kind": "ensures",
+        "span": {
+          "start": 337,
+          "end": 372
+        },
+        "abstract": false
+      }
+    },
+    {
+      "unit": "search$0$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 422,
+        "end": 467
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 507,
+          "end": 541
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "4005a00308000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4012e00208000001"
+                ],
+                "shownFor": [
+                  "num",
+                  "0080040000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000800000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 544,
+        "end": 604
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 507,
+          "end": 541
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "3ff0000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "4800000040000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4800000040000000"
+                ],
+                "shownFor": [
+                  "num",
+                  "2000000000040000"
+                ],
+                "shown": [
+                  "num",
+                  "0008000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "searched": {
+    "maxDepth": 4,
+    "numbers": [
+      {
+        "type": "number",
+        "bits": "0000000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "3ff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "7ff8000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "7ff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "fff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "8000000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "bf40000000001402"
+      },
+      {
+        "type": "number",
+        "bits": "2000000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "4000000040000000"
+      },
+      {
+        "type": "number",
+        "bits": "4010000000000001"
+      }
+    ],
+    "entryArguments": [
+      0,
+      1
+    ],
+    "maxExecutions": 5000,
+    "executions": 1407
+  },
+  "status": "unknown",
+  "reason": "induction-gap",
+  "abstract": [
+    "search$0",
+    "search$1"
+  ],
+  "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof."
+}

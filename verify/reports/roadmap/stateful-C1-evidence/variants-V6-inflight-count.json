@@ -1,0 +1,315 @@
+{
+  "expected": "unknown",
+  "file": "variants/V6-inflight-count.ts",
+  "sourceSha256": "586bbae13db57f0d5ee1327448c551654f49a7aedb52d8a1fb0a9f0a23e10b04",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "executableSha256": "2eda6b0219e3659a98bc27499a61c5fc33afafb3acd8542381c130b26b93f867",
+  "assumptions": {
+    "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+    "eventBound": null,
+    "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+    "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+    "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+    "initial": {
+      "inflight": "0",
+      "shown": "0"
+    },
+    "environment": [
+      {
+        "op": "fetchResult",
+        "params": [
+          {
+            "name": "q",
+            "type": "number"
+          }
+        ],
+        "result": "number",
+        "resolves": [
+          "Number.isFinite(result)"
+        ],
+        "rejects": "never-rejects",
+        "settles": "may-never-settle",
+        "settlementOrder": "any",
+        "settlementCount": "at most once per request",
+        "settlesUse": "not declared; no progress guarantee"
+      }
+    ],
+    "entries": [
+      {
+        "entry": "search",
+        "params": [
+          {
+            "name": "q",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "fairness": "none used by safety; settles eventually is recorded only",
+    "unsupported": [
+      "references",
+      "imports",
+      "handlers",
+      "cancellation",
+      "ordering/abort contracts",
+      "entry contracts",
+      "liveness",
+      "pairwise/uniqueness/count induction",
+      "nested awaits",
+      "entry-to-entry calls",
+      "unverified helpers"
+    ],
+    "sha256": "c8a8c23ef53eb9882ca410b31efe29d2241813f835036c20a3396247fa270d64"
+  },
+  "unitsSha256": "0baf46b387f50cef1d65ec88cf2728df3be6e90d1fe76aabccbf32ffaaa7a7f1",
+  "properties": [
+    {
+      "kind": "state",
+      "text": "0 <= inflight",
+      "span": {
+        "start": 216,
+        "end": 238
+      }
+    }
+  ],
+  "units": [
+    {
+      "unit": "$init",
+      "kind": "init",
+      "span": {
+        "start": 216,
+        "end": 238
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        {
+          "roots": [],
+          "nodes": {}
+        }
+      ]
+    },
+    {
+      "unit": "search$0",
+      "kind": "entry",
+      "span": {
+        "start": 283,
+        "end": 307
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "inflight": [
+                  "num",
+                  "0000000000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1",
+      "kind": "resume",
+      "span": {
+        "start": 371,
+        "end": 408
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "inflight": [
+                  "num",
+                  "3ff0000000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$0$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 283,
+        "end": 307
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 337,
+          "end": 368
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "inflight": [
+                  "num",
+                  "4000008000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 371,
+        "end": 408
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 337,
+          "end": 368
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "counterexample",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "0000002000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "inflight": [
+                  "num",
+                  "3ff4000000100010"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "label": {
+        "kind": "ensures",
+        "span": {
+          "start": 310,
+          "end": 334
+        },
+        "abstract": false
+      }
+    }
+  ],
+  "searched": {
+    "maxDepth": 4,
+    "numbers": [
+      {
+        "type": "number",
+        "bits": "0000000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "3ff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "7ff8000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "7ff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "fff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "8000000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "4000008000000000"
+      },
+      {
+        "type": "number",
+        "bits": "0000002000000000"
+      },
+      {
+        "type": "number",
+        "bits": "3ff4000000100010"
+      }
+    ],
+    "entryArguments": [
+      0,
+      1
+    ],
+    "maxExecutions": 5000,
+    "executions": 1153
+  },
+  "status": "unknown",
+  "reason": "induction-gap",
+  "abstract": [
+    "search$1$keeps$search$1"
+  ],
+  "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof."
+}

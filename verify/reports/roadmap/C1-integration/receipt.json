@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "testedHead": "0345a9adb631f0785ff79ccb7cb9dc842393080a",
+  "productionCorrectionHead": "67ad05ba223eab053950a989b94402d3a2ae5c24",
+  "mainBaseline": "8fa17d652d3b6e5b7ebbccc42b2d81e90ead701e",
+  "focused": {
+    "passed": 49,
+    "failed": 0,
+    "skipped": 0
+  },
+  "full": {
+    "passed": 371,
+    "failed": 0,
+    "skipped": 0,
+    "executions": 1
+  },
+  "runtimeHashesUnchanged": true,
+  "initialAndFinalStatusClean": true,
+  "independentReviews": [
+    "d812b7a3117927497c348af8ce6d1321a3f08ed1",
+    "bd790ea69cc3376703b7ec0ab77621badca2fbcb"
+  ],
+  "reviewCorrections": [
+    "9721f8cfa5b302e21e78de125ac9a6b07ea60da8",
+    "67ad05ba223eab053950a989b94402d3a2ae5c24"
+  ],
+  "integrationTestCorrection": "0345a9adb631f0785ff79ccb7cb9dc842393080a",
+  "firstAttempt": "48/49 focused against pre-P/numeric baseline. Full did not start. Generated historical JSONs preserved then original bytes restored. Baseline now public main with all equality assertions; tests no longer write receipts.",
+  "scope": "Stateful C1 safety foundation only; no R/S/T/U doneWhen claimed."
+}

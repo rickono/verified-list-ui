@@ -891,6 +891,7 @@ function naturalNames(invariants, { candidates, written }, env, cx, mode = "u32"
 function loop(node, states, returns, cx) {
   const spec = cx.loops.get(node);
   if (cx.loop) fail("Nested loops are outside this slice.", node);
+  if (!spec) fail("This compiler entry does not support loops without parsed contracts.", node);
   if (!spec.decreases) fail("A loop needs one decreases clause directly above it; verified functions must terminate.", node);
   if (node.type === "ForStatement" && !node.test) fail("for loops need an explicit test.", node);
   walk(node, (x) => { if (x !== node && LOOP_TYPES.has(x.type)) fail("Nested loops are outside this slice.", x);
@@ -1230,6 +1231,19 @@ function body(h, scope) {
       pre: pre.value, preDefined: pre.defined, post, postconditions: postconditions.length ? postconditions : ["true"],
     };
   });
+}
+
+/** Internal compiler boundary for original AST fragments in generated wrappers.
+ * Bindings/types are resolved by the frontend; scalar, heap and expression
+ * semantics remain those of body(). This boundary has no scheduling policy.
+ * Such targets have no standalone executable: their owner replays source.
+ */
+export function compileAstUnit({ file, source, stripped, tokens }, header) {
+  const h = { annotations: [], spec: false, loops: new Map(), ...header, file, id: `${file}#${header.name}` };
+  const scope = { file, source, stripped, tokens, names: new Map(),
+    validateType: (text, at) => data.parseType(text, at),
+  };
+  return { ...body(h, scope), executable: undefined };
 }
 
 /** Parse captured source without executing it or reading dependencies directly. */

@@ -1,0 +1,29 @@
+TAP version 13
+# (node:11756) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Unicode edits in clause keywords cannot silently discard properties
+not ok 1 - Unicode edits in clause keywords cannot silently discard properties
+  ---
+  duration_ms: 26.876459
+  type: 'test'
+  location: '/private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c1-unicode-root-pbrglerk/tests/verify/stateful-frontend.test.mjs:53:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception: stаte'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    TestContext.<anonymous> (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c1-unicode-root-pbrglerk/tests/verify/stateful-frontend.test.mjs:57:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 68.407291

@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "codeHead": "5d8415aa8279cab2f4a662b049616ce9d94a98a3",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-327babb7",
+  "completedAt": "2026-11-13T21:40:23.629838+00:00",
+  "focused": {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 tests/verify/stateful-*.test.mjs",
+    "log": "focused-02.log",
+    "passed": 47,
+    "failed": 0
+  },
+  "full": {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- make test-verify",
+    "log": "full-final.log",
+    "passed": 304,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "executions": 1
+  },
+  "logs": {
+    "frontend-01.log": "e3504d48cf32cde2b7045d215a8c7115146707ab74d20d61e5b3aa0c417e7da0",
+    "frontend-02.log": "fc5e96287d54bbf814fad422b8d60b8f459fbd82bf45a9f0e4a4935361e9d75c",
+    "frontend-03.log": "f628ff7c993c0a50765d3c3f01d0b513ab146dc99759c967d887e476efdd2be8",
+    "transitions-01.log": "f1119cb642a343779a6d4180014f0e5040555b5742befbbc683cfef1f03f14bc",
+    "transitions-02.log": "28fe329f3ebae848bdec70a55e2bc37528331fda1202f6f5898040e5ceebfbc3",
+    "replay-01.log": "f7c3f851a87e2b819de3e3be4d43d19f567e884a05a8270c93965204faf2ecf5",
+    "outcomes-01.log": "1e07f61f6c1a3bf20931c79318df3f4023a115c05c82354f6e1bdd3fd4f4b048",
+    "focused-01.log": "7c3d8e74a84cd8c44660d828c6710742c3b257fc139978223b1f7ef57b61680c",
+    "focused-02.log": "c0a0e6f10e1aeb716a771352614b46bdb1cdf014ebcd12c6457f500a4baef5b3",
+    "full-final.log": "ec6e1ba694f3779aa6b85b1e87cdfb720223f6f217ba35b7621fb5b629c19b0f"
+  },
+  "ownedNodeProcessesRemaining": [],
+  "temporaryDependencyLinkRemoved": true,
+  "formerDependencyTarget": "/Users/rick/verification-vibes/verified-list-ui/node_modules",
+  "coreInputsUnchangedSinceFocusedAndFull": true,
+  "roadmapNodesCompleted": []
+}

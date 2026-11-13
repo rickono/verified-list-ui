@@ -1,0 +1,539 @@
+{
+  "expected": "verified",
+  "file": "variants/V18b-two-awaits-annotated.ts",
+  "sourceSha256": "b7670d2008679938c4f04ae77c8cb02b2a8ea015b11d32db4be02d9a3370fd70",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "executableSha256": "4a4cc0fe535a82c2cb8f3118594ac0ea352b4b338fdd4a7592915cf5ad3e5d9f",
+  "assumptions": {
+    "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+    "eventBound": null,
+    "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+    "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+    "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+    "initial": {
+      "latest": "0",
+      "shownFor": "0",
+      "shown": "0"
+    },
+    "environment": [
+      {
+        "op": "lookup",
+        "params": [
+          {
+            "name": "query",
+            "type": "number"
+          }
+        ],
+        "result": "number",
+        "resolves": [
+          "Number.isFinite(result)"
+        ],
+        "rejects": "never-rejects",
+        "settles": "may-never-settle",
+        "settlementOrder": "any",
+        "settlementCount": "at most once per request",
+        "settlesUse": "not declared; no progress guarantee"
+      }
+    ],
+    "entries": [
+      {
+        "entry": "search",
+        "params": [
+          {
+            "name": "query",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "fairness": "none used by safety; settles eventually is recorded only",
+    "unsupported": [
+      "references",
+      "imports",
+      "handlers",
+      "cancellation",
+      "ordering/abort contracts",
+      "entry contracts",
+      "liveness",
+      "pairwise/uniqueness/count induction",
+      "nested awaits",
+      "entry-to-entry calls",
+      "unverified helpers"
+    ],
+    "sha256": "82e914b6fe02f2246982d749a67514e50457ec550d993129df654af4e0ba31db"
+  },
+  "unitsSha256": "3945b056dd091c298b8d31c3c71667faaa512945c0aa797d535b15c12f4ad339",
+  "properties": [
+    {
+      "kind": "state",
+      "text": "0 <= shownFor && shownFor <= latest",
+      "span": {
+        "start": 282,
+        "end": 326
+      }
+    },
+    {
+      "kind": "state",
+      "text": "Number.isFinite(shown)",
+      "span": {
+        "start": 327,
+        "end": 358
+      }
+    },
+    {
+      "kind": "always",
+      "text": "shownFor >= old(shownFor)",
+      "span": {
+        "start": 359,
+        "end": 394
+      }
+    }
+  ],
+  "units": [
+    {
+      "unit": "$init",
+      "kind": "init",
+      "span": {
+        "start": 282,
+        "end": 326
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        {
+          "roots": [],
+          "nodes": {}
+        }
+      ]
+    },
+    {
+      "unit": "search$0",
+      "kind": "entry",
+      "span": {
+        "start": 444,
+        "end": 489
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "0010000000000010"
+                ],
+                "shownFor": [
+                  "num",
+                  "8000000000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000002000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1",
+      "kind": "resume",
+      "span": {
+        "start": 629,
+        "end": 663
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "4e90012200000000",
+        "0000000000000000",
+        "0000000000000004",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "6d20012200000001"
+                ],
+                "shownFor": [
+                  "num",
+                  "2651000000000002"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000004"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$2",
+      "kind": "resume",
+      "span": {
+        "start": 666,
+        "end": 726
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "50a0800000000841",
+        "0000000000000000",
+        "0000000000000000",
+        "0000000008000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "6252000000001084"
+                ],
+                "shownFor": [
+                  "num",
+                  "3203000000000088"
+                ],
+                "shown": [
+                  "num",
+                  "0000000004000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$0$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 444,
+        "end": 489
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 529,
+          "end": 563
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "0000000000000000",
+        "4400200100000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4414200100000001"
+                ],
+                "shownFor": [
+                  "num",
+                  "4206080000000020"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000008"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$0$keeps$search$2",
+      "kind": "interference",
+      "span": {
+        "start": 444,
+        "end": 489
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 629,
+          "end": 663
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "3ff0000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "3ff0000000000000"
+                ],
+                "shownFor": [
+                  "num",
+                  "8000000000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000002000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 629,
+        "end": 663
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 529,
+          "end": 563
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "3ff0000000000000",
+        "0000000000000000",
+        "0000010000000000",
+        "0000000000000000",
+        "422002a500000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4850094a00000001"
+                ],
+                "shownFor": [
+                  "num",
+                  "0060090a00000008"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000004"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1$keeps$search$2",
+      "kind": "interference",
+      "span": {
+        "start": 629,
+        "end": 663
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 629,
+          "end": 663
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "3ff0000000000000",
+        "0000000000000000",
+        "0000008000000000",
+        "4082422800000000",
+        "0000000000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4112431000000001"
+                ],
+                "shownFor": [
+                  "num",
+                  "4022414000000004"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000008000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$2$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 666,
+        "end": 726
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 529,
+          "end": 563
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "4001000000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000080000000000",
+        "0000000000000000",
+        "4401210000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4801210000000001"
+                ],
+                "shownFor": [
+                  "num",
+                  "0811011000000004"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$2$keeps$search$2",
+      "kind": "interference",
+      "span": {
+        "start": 666,
+        "end": 726
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 629,
+          "end": 663
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "3ff0c02010800000",
+        "0000000000000000",
+        "0000000000000000",
+        "0000040000000000",
+        "4000c12cb0840948",
+        "0000000000000000",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "4000c12cb0840948"
+                ],
+                "shownFor": [
+                  "num",
+                  "0011400cb0840162"
+                ],
+                "shown": [
+                  "num",
+                  "0000000100000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "status": "verified",
+  "scope": "safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions"
+}

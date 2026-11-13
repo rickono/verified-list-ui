@@ -1,0 +1,74 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:91694) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "ms": 59,
+  "replay": {
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "faults": null,
+    "violation": "x === 0",
+    "x": 1
+  },
+  "check": {
+    "status": "unsupported",
+    "reason": null,
+    "message": "Unsupported ThrowStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected.",
+    "line": 3
+  }
+}
+(node:91696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:91697) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:91697) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: strict native source replay is repeatable, hash-bound, and may remain pending
+ok 1 - strict native source replay is repeatable, hash-bound, and may remain pending
+  ---
+  duration_ms: 370.940792
+  type: 'test'
+  ...
+# Subtest: illegal action types, identities, args/results and outcomes are refused
+ok 2 - illegal action types, identities, args/results and outcomes are refused
+  ---
+  duration_ms: 796.914417
+  type: 'test'
+  ...
+# Subtest: wire scalars preserve binary64 exceptional values
+ok 3 - wire scalars preserve binary64 exceptional values
+  ---
+  duration_ms: 58.223917
+  type: 'test'
+  ...
+# Subtest: continuation loop is contained below one second with real native promises
+ok 4 - continuation loop is contained below one second with real native promises
+  ---
+  duration_ms: 157.135875
+  type: 'test'
+  ...
+# Subtest: unchanged executable runs in strict realm and rejects unbound this
+ok 5 - unchanged executable runs in strict realm and rejects unbound this
+  ---
+  duration_ms: 53.684417
+  type: 'test'
+  ...
+# Subtest: an initially false property cannot mask an illegal action suffix
+ok 6 - an initially false property cannot mask an illegal action suffix
+  ---
+  duration_ms: 53.113584
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1556.160458
+EXIT 0
+no leftover

@@ -1,0 +1,54 @@
+{
+  "baseline": "8fa17d652d3b6e5b7ebbccc42b2d81e90ead701e",
+  "identical": true,
+  "cases": [
+    {
+      "name": "nested-callbacks",
+      "targets": 2,
+      "splitQueriesCompared": true,
+      "sha256": "3231fd33c003b4b8c21bcdd748fd5abde40bb0e6f114e0699729a4f8a64a17e7"
+    },
+    {
+      "name": "prefix",
+      "targets": 1,
+      "splitQueriesCompared": true,
+      "sha256": "830bef5c2aea58ab7ac3e5af26bfc680c36c2807c6ebcf5daf34eea5d0e9e821"
+    },
+    {
+      "name": "exact-length-and-prefix",
+      "targets": 1,
+      "splitQueriesCompared": true,
+      "sha256": "b6fb5b99b6b6ceff39637b1abb52b2e3fb91205ea512d16215033286ed3c1a15"
+    },
+    {
+      "name": "shifted-prefix-mutant",
+      "targets": 1,
+      "splitQueriesCompared": true,
+      "sha256": "d7f58fd83c57828aadc13e82720e66bf1972cb5dd3daf81cf20a4d3ac88c41ad"
+    },
+    {
+      "name": "composed-calls",
+      "targets": 2,
+      "splitQueriesCompared": true,
+      "sha256": "6d1ffd03738e7fd8b8fde27738a09afa40a5472a1f7e3e3f3e3b847893e160a8"
+    },
+    {
+      "name": "shifted-calls",
+      "targets": 2,
+      "splitQueriesCompared": true,
+      "sha256": "9204a5c0a8a820aa5c65c56e08856de317576ff2e1520e1ba35489dc36bb1917"
+    },
+    {
+      "name": "import-composed.js",
+      "targets": 2,
+      "splitQueriesCompared": true,
+      "sha256": "2ffd0ebcbf472889530570b255466ad895324496df6b0df7f7c8085c1974e5b8"
+    },
+    {
+      "name": "import-shifted.js",
+      "targets": 2,
+      "splitQueriesCompared": true,
+      "sha256": "2c381a441eb500482d55b5434061fc9644201d269728730a0fff26a59be6b5c4"
+    }
+  ]
+}
