@@ -78,7 +78,7 @@ H is integrated on `feat/pure-callback-contracts`. Pure total unary numeric pred
 
 ## Heap and frame delivery
 
-G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K remains gated on integration; P and T can proceed independently.
+G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K can now build on the integrated prerequisites. P and T can proceed independently.
 
 ## Original branch results
 

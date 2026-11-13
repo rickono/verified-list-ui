@@ -20,7 +20,12 @@ fairness for liveness. W requires both Q and V, with trust and scope visible.
 
 ## Scope and order
 
-H and G are implemented in PRs #5 and #6. Nine nodes remain: K, P, Q, R, S, T,
+Step 1 is complete. H and G landed on main after independent exact-patch
+reviews. [The landing receipt](landing-summary.md) records the merges and
+checks. The numbered list below preserves the execution order chosen at the
+start; the remaining steps are still in progress.
+
+H and G were implemented in PRs #5 and #6 at the start of this run. Nine nodes remain: K, P, Q, R, S, T,
 U, V, W. Baseline source is `32bd5b260aa116ca88642a1479bed8d3fc447f4b`,
 which passed 249/249 tests and JSON/text CLI checks. The final baseline log is
 `artifacts/heap-design/full-final.log` outside the repository.
