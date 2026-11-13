@@ -1,0 +1,13 @@
+{
+  "time": "2026-11-13T23:12:22.382683+00:00",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52",
+  "branch": "t3/guarded-throws-harmonic-mean",
+  "codeSha": "b16d07b9fa7514b60084377959e2d155385d49ce",
+  "allFinalCommandsExitedZero": true,
+  "coreUnchangedInEveryFinalRun": true,
+  "dependencyLinkRemoved": true,
+  "removedLinkTarget": "/Users/rick/verification-vibes/verified-list-ui/node_modules",
+  "ownedProcessesRemaining": [],
+  "codeChangesAfterTesting": [],
+  "noSubagentsPushesPRsMergesCommentsWatchesOrRoadmapAuditChanges": true
+}

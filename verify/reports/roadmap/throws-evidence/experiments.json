@@ -1,0 +1,34 @@
+{
+  "preCommitRuns": [
+    {
+      "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 tests/verify/guarded-throws.test.mjs",
+      "log": "focused-throws-v1.log",
+      "exitCode": 0,
+      "result": "8 passed, including private mutant, exact P queries/reports and actual parent-model evidence/receipt invalidation"
+    },
+    {
+      "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/examples/simple-statistics/check-harmonic.mjs verify/reports/roadmap/throws-evidence/campaign-v1",
+      "log": "campaign-v1.log",
+      "exitCode": 1,
+      "failure": "Checker looked for fp.div in declarations alone; the expression is in postconditions.",
+      "correction": "Inspect declarations plus postconditions, as candidate A did. No production change."
+    },
+    {
+      "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/examples/simple-statistics/check-harmonic.mjs verify/reports/roadmap/throws-evidence/campaign-v2",
+      "log": "campaign-v2.log",
+      "exitCode": 1,
+      "failure": "Relocation control copied the source but omitted package-scope metadata, so graph identity correctly returned stale.",
+      "correction": "Retain the source-relative package scope and original package.json bytes. No production change.",
+      "successfulPartialResults": "Total verified, warm proof receipt hit, positive numeric bug confirmed and reproduced locally."
+    },
+    {
+      "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 tests/verify/harmonic-mean.test.mjs",
+      "log": "focused-harmonic.log",
+      "metadata": "focused-harmonic.run.json",
+      "exitCode": 0,
+      "result": "1 passed; weak invariant was an induction gap."
+    }
+  ],
+  "codeState": "These runs began with HEAD dedde91 and uncommitted implementation bytes. The logged semantic identity is 86f9e10064d037421d83775d3a2d35d8ddaffa18c9c81d590a175a9332007826. Final campaign and full-suite captures name the committed code SHA separately.",
+  "historicalArtifacts": "No candidate, judgment, prior P or upstream-validation artifact was changed."
+}

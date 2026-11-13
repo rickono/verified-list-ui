@@ -1,0 +1,11 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'stale'
+- 'reproduced'
+
+    at checkHarmonic (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/check-harmonic.mjs:112:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/check-harmonic.mjs:133:36

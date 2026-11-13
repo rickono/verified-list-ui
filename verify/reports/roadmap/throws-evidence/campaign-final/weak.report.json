@@ -1,0 +1,80 @@
+{
+  "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/harmonic-weak.js",
+  "sha256": "fdd63831d5724a6fdf87820ee12631e6ce462e7fdba1d3da4fe42b9639f051d1",
+  "trusted": [
+    "Acorn parser",
+    "Node TypeScript type stripping",
+    "project type and module resolution and source snapshots",
+    "source-to-SMT translation",
+    "exact rational specification replay",
+    "Z3 and its WASM bindings",
+    "unmodified standard Number/Math/Object/Array builtins and prototypes",
+    "JavaScript runtime",
+    "solver-model heap graphs replayed with shared identities and a write-monitoring Proxy membrane"
+  ],
+  "modules": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/harmonic-weak.js",
+      "sha256": "fdd63831d5724a6fdf87820ee12631e6ce462e7fdba1d3da4fe42b9639f051d1",
+      "imports": []
+    }
+  ],
+  "dependencies": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/package.json",
+      "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+      "kind": "package"
+    }
+  ],
+  "graphSha256": "c473269bf55fd763b9505a4d1b221c71a3dcae55c9c3d1fb5a1f1c9d48355239",
+  "outcomes": [
+    {
+      "fn": "harmonicMean",
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/harmonic-weak.js",
+      "span": {
+        "start": 837,
+        "end": 847
+      },
+      "line": 21,
+      "column": 12,
+      "assumptions": [
+        {
+          "kind": "param-type",
+          "name": "x",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          },
+          "domain": "Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields."
+        },
+        {
+          "kind": "requires",
+          "text": "x.length === 1",
+          "span": {
+            "start": 765,
+            "end": 779
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/harmonic-weak.js"
+        },
+        {
+          "kind": "requires",
+          "text": "Number.isFinite(x[0]) && x[0] > 0",
+          "span": {
+            "start": 792,
+            "end": 825
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/harmonic-weak.js"
+        }
+      ],
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures",
+      "candidate": {
+        "x": [
+          "5.006416181641203e-308"
+        ]
+      },
+      "message": "The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."
+    }
+  ]
+}

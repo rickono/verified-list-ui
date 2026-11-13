@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "codeSha": "b16d07b9fa7514b60084377959e2d155385d49ce",
+  "identity": "86f9e10064d037421d83775d3a2d35d8ddaffa18c9c81d590a175a9332007826",
+  "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+  "total": "verified",
+  "positive": "counterexample",
+  "confirmed": true,
+  "nativeWitness": {
+    "input": 3.3951948877e-313,
+    "inputBits": "0000001000008041",
+    "reciprocal": "Infinity",
+    "result": "+0",
+    "resultBits": "0000000000000000"
+  },
+  "warmReceiptHits": 1,
+  "reproduce": "reproduced",
+  "originalReproduce": "reproduced",
+  "staleSource": "stale",
+  "staleModel": "invalid-evidence",
+  "weak": {
+    "status": "unknown",
+    "reason": "induction-gap"
+  },
+  "sourceSha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+  "scope": "all dense finite positive singletons",
+  "qComplete": false
+}

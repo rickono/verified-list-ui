@@ -1,0 +1,22 @@
+{
+  "codeSha": "b16d07b9fa7514b60084377959e2d155385d49ce",
+  "changedSemanticFiles": [
+    "verify/index.mjs",
+    "verify/source.mjs"
+  ],
+  "indexChangesOnlyOneGapMessage": true,
+  "preservedBytes": {
+    "verify/proofs.mjs": "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba",
+    "verify/cache.mjs": "7100b30c6fc411a355084a85d2b6f45f1ea110367ecfb3f0775e47aff371ebc0",
+    "verify/manifest.mjs": "406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f",
+    "verify/evidence.mjs": "f70f4aa94295477e8a0bc3a91712722a254c8a52205ee2f2eef8a9dc550ed62e",
+    "verify/heap.mjs": "25bccf21abbb3e5a4c94fd88ceae26124436385daebd0c08b0ed8fc8f00d7311",
+    "verify/heap-witness.mjs": "c8a60bbf7961bad2926a1fc5006c610d80d95997c73a6632f07a9f55fe58edb3",
+    "verify/data.mjs": "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6",
+    "verify/solver.mjs": "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2",
+    "verify/backend.mjs": "c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb"
+  },
+  "baseline32bd5b2Ancestor": true,
+  "verifyExists": true,
+  "initialStaticCheckCorrection": "The unfiltered git pathspec verify/*.mjs also matched the nested campaign checker. Limit the ownership comparison to direct children of verify/."
+}

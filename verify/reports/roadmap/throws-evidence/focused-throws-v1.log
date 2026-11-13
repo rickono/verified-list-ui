@@ -1,0 +1,62 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# Subtest: guarded throws require unreachability; native exceptions stay unconfirmed
+ok 1 - guarded throws require unreachability; native exceptions stay unconfirmed
+  ---
+  duration_ms: 953.531291
+  type: 'test'
+  ...
+# Subtest: requires-only feasibility and definedness run before throw obligations
+ok 2 - requires-only feasibility and definedness run before throw obligations
+  ---
+  duration_ms: 290.26925
+  type: 'test'
+  ...
+# Subtest: throw checks use preceding helper facts only and wait for final dependencies
+ok 3 - throw checks use preceding helper facts only and wait for final dependencies
+  ---
+  duration_ms: 910.799
+  type: 'test'
+  ...
+# Subtest: throws inside and after a loop retain abstract attribution and gap messages
+ok 4 - throws inside and after a loop retain abstract attribution and gap messages
+  ---
+  duration_ms: 351.694416
+  type: 'test'
+  ...
+# Subtest: optional-widening retries commit exactly one throw check
+ok 5 - optional-widening retries commit exactly one throw check
+  ---
+  duration_ms: 175.410708
+  type: 'test'
+  ...
+# Subtest: unsupported throw values and shadowed Error reject at the original throw span, even when dead
+ok 6 - unsupported throw values and shadowed Error reject at the original throw span, even when dead
+  ---
+  duration_ms: 3.308584
+  type: 'test'
+  ...
+# Subtest: a private dropped-event mutant false-verifies and the native check detects it
+ok 7 - a private dropped-event mutant false-verifies and the native check detects it
+  ---
+  duration_ms: 517.06375
+  type: 'test'
+  ...
+# {"mutant":"verified","witness":["false"],"nativeFalse":0,"nativeTrue":"throws boom","detected":true}
+# Subtest: old reports and exact queries match P; its old evidence and receipts become stale
+ok 8 - old reports and exact queries match P; its old evidence and receipts become stale
+  ---
+  duration_ms: 1172.559667
+  type: 'test'
+  ...
+# {"oldIdentity":"ec47724f52d33b0a4ee841d7bf3dea5d4fcbd4663a917a5e1399927ba0eb391c","newIdentity":"86f9e10064d037421d83775d3a2d35d8ddaffa18c9c81d590a175a9332007826","oldEvidence":"invalid-evidence","oldReceiptHits":0}
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4476.761834

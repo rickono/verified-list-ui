@@ -1,0 +1,29 @@
+{
+  "status": "reproduced",
+  "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+  "outcomes": [
+    {
+      "target": "/private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/jsverify-harmonic-ZCgen2/verify/examples/simple-statistics/harmonic-positive.js#harmonicMean",
+      "status": "counterexample",
+      "inputs": {
+        "x": [
+          "3.3951948877e-313"
+        ]
+      },
+      "result": "0",
+      "failed": [
+        {
+          "kind": "ensures",
+          "text": "result > 0",
+          "span": {
+            "start": 837,
+            "end": 847
+          },
+          "file": "/private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/jsverify-harmonic-ZCgen2/verify/examples/simple-statistics/harmonic-positive.js"
+        }
+      ],
+      "confirmed": true,
+      "reproduced": true
+    }
+  ]
+}
