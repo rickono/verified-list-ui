@@ -1,0 +1,2130 @@
+{
+  "cases": [
+    {
+      "name": "scalar-bits",
+      "bits": [
+        {
+          "value": null,
+          "encoded": {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          "same": true
+        },
+        {
+          "value": "-0",
+          "encoded": {
+            "type": "number",
+            "bits": "8000000000000000"
+          },
+          "same": true
+        },
+        {
+          "value": 0,
+          "encoded": {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          "same": true
+        },
+        {
+          "value": null,
+          "encoded": {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          "same": true
+        },
+        {
+          "value": null,
+          "encoded": {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          "same": true
+        },
+        {
+          "value": 9007199254740992,
+          "encoded": {
+            "type": "number",
+            "bits": "4340000000000000"
+          },
+          "same": true
+        },
+        {
+          "value": 1,
+          "encoded": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          "same": true
+        },
+        {
+          "value": true,
+          "encoded": {
+            "type": "boolean",
+            "value": true
+          },
+          "same": true
+        },
+        {
+          "value": false,
+          "encoded": {
+            "type": "boolean",
+            "value": false
+          },
+          "same": true
+        }
+      ],
+      "nanPayloadIn": "7ff8000000000001",
+      "nanPayloadOut": "7ff8000000000001",
+      "payloadIsNaN": true
+    },
+    {
+      "name": "replay-cell-bits",
+      "observed": {
+        "0": {
+          "status": "ok",
+          "bits": {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          "same": true
+        },
+        "NaN": {
+          "status": "ok",
+          "bits": {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          "same": true
+        },
+        "-0": {
+          "status": "ok",
+          "bits": {
+            "type": "number",
+            "bits": "8000000000000000"
+          },
+          "same": true
+        },
+        "Infinity": {
+          "status": "ok",
+          "bits": {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          "same": true
+        },
+        "-Infinity": {
+          "status": "ok",
+          "bits": {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          "same": true
+        }
+      }
+    },
+    {
+      "name": "assumptions",
+      "stable": true,
+      "sourceSha": "2d8c7ea9770d6bd96151bcc41760d84c5736d3ac2d9c0a79aaedfc238dcc37f8",
+      "executableSha": "3ad14d707ac618f781c9df24cb181e9c77a5500a5aa849b30360708d6db0d6de",
+      "assumptionsSha": "43c69644835ee99ef059614b4a71f3eff136d732ece396964723dacb53c099a7",
+      "executableDiffersFromSource": true,
+      "default": {
+        "op": "op",
+        "params": [
+          {
+            "name": "q",
+            "type": "number"
+          }
+        ],
+        "result": "number",
+        "resolves": [
+          "Number.isFinite(result)"
+        ],
+        "rejects": "never-rejects",
+        "settles": "may-never-settle",
+        "settlementOrder": "any",
+        "settlementCount": "at most once per request",
+        "settlesUse": "not declared; no progress guarantee"
+      },
+      "settles": {
+        "op": "op",
+        "params": [
+          {
+            "name": "q",
+            "type": "number"
+          }
+        ],
+        "result": "number",
+        "resolves": [
+          "Number.isFinite(result)"
+        ],
+        "rejects": "never-rejects",
+        "settles": "eventually",
+        "settlementOrder": "any",
+        "settlementCount": "at most once per request",
+        "settlesUse": "declared-unused for safety"
+      },
+      "rejects": {
+        "op": "op",
+        "params": [
+          {
+            "name": "q",
+            "type": "number"
+          }
+        ],
+        "result": "number",
+        "resolves": [
+          "Number.isFinite(result)"
+        ],
+        "rejects": "may-reject",
+        "settles": "may-never-settle",
+        "settlementOrder": "any",
+        "settlementCount": "at most once per request",
+        "settlesUse": "not declared; no progress guarantee"
+      },
+      "eventBound": null,
+      "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+      "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+      "fairness": "none used by safety; settles eventually is recorded only",
+      "smtIdenticalDespiteSettles": false,
+      "rejectAddsUnit": true,
+      "settlesDoesNotAddUnit": true
+    },
+    {
+      "name": "trace-trust",
+      "violated": {
+        "status": "ok",
+        "violation": {
+          "kind": "state",
+          "text": "x === 0",
+          "span": {
+            "start": 11,
+            "end": 27
+          }
+        },
+        "requests": [],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 1
+            }
+          }
+        ]
+      },
+      "repairedStillViolation": {
+        "status": "ok",
+        "violation": {
+          "kind": "state",
+          "text": "x === 0",
+          "span": {
+            "start": 11,
+            "end": 27
+          }
+        },
+        "requests": [],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 1
+            }
+          },
+          {
+            "step": 2,
+            "kind": "call",
+            "state": {
+              "x": 0
+            }
+          }
+        ]
+      },
+      "illegalAfterViolation": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Unknown action type.",
+        "violation": null
+      },
+      "extraFieldOnCall": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Invalid call action shape.",
+        "violation": null
+      },
+      "tamperedObservation": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Trace observations differ from unchanged-source replay.",
+        "violation": null
+      },
+      "envelopeFakeStatus": {
+        "status": "ok",
+        "violation": true,
+        "traceStatus": "verified"
+      },
+      "wrongHash": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Trace sourceSha256 mismatch.",
+        "violation": null
+      },
+      "uppercaseBits": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Invalid argument encoding.",
+        "violation": null
+      },
+      "shortBits": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Invalid argument encoding.",
+        "violation": null
+      },
+      "extraActionField": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Invalid call action shape.",
+        "violation": null
+      }
+    },
+    {
+      "name": "identity",
+      "pending": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": false,
+            "args": [
+              3
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          }
+        ]
+      },
+      "afterFirst": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": [
+              3
+            ]
+          },
+          {
+            "seq": 2,
+            "op": "op",
+            "settled": false,
+            "args": [
+              4
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "shown": 0
+            }
+          }
+        ]
+      },
+      "secondMatchesFirstResult": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": [
+              3
+            ]
+          },
+          {
+            "seq": 2,
+            "op": "op",
+            "settled": true,
+            "args": [
+              4
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 3,
+            "kind": "resolve",
+            "state": {
+              "shown": 4
+            }
+          }
+        ]
+      },
+      "secondUsesOriginalQ": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": [
+              3
+            ]
+          },
+          {
+            "seq": 2,
+            "op": "op",
+            "settled": true,
+            "args": [
+              4
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 3,
+            "kind": "resolve",
+            "state": {
+              "shown": 3
+            }
+          }
+        ]
+      },
+      "secondUsesAssignedQ": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": [
+              3
+            ]
+          },
+          {
+            "seq": 2,
+            "op": "op",
+            "settled": true,
+            "args": [
+              4
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 3,
+            "kind": "resolve",
+            "state": {
+              "shown": 9
+            }
+          }
+        ]
+      },
+      "resolveBeforeCall": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Request identity is not pending or its operation differs.",
+        "violation": null
+      },
+      "doubleResolve": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Request identity is not pending or its operation differs.",
+        "violation": null
+      },
+      "rejectWithoutPermission": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Environment never-rejects assumption forbids rejection.",
+        "violation": null
+      },
+      "crossActivationWrongValue": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": [
+              1
+            ]
+          },
+          {
+            "seq": 2,
+            "op": "op",
+            "settled": false,
+            "args": [
+              7
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 3,
+            "kind": "resolve",
+            "state": {
+              "shown": 7
+            }
+          }
+        ]
+      },
+      "crossActivationRightValues": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": [
+              1
+            ]
+          },
+          {
+            "seq": 2,
+            "op": "op",
+            "settled": true,
+            "args": [
+              7
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 3,
+            "kind": "resolve",
+            "state": {
+              "shown": 1
+            }
+          },
+          {
+            "step": 4,
+            "kind": "resolve",
+            "state": {
+              "shown": 7
+            }
+          }
+        ]
+      },
+      "boolMismatch": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Resolution violates the declared resolves assumption.",
+        "violation": null
+      },
+      "boolMatch": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": [
+              false
+            ]
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": false
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": false
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "shown": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject-stutter",
+      "afterCall": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": false,
+            "args": []
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 1
+            }
+          }
+        ]
+      },
+      "afterReject": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": []
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 1
+            }
+          },
+          {
+            "step": 2,
+            "kind": "reject",
+            "state": {
+              "x": 1
+            }
+          }
+        ]
+      },
+      "afterResolve": {
+        "status": "ok",
+        "violation": {
+          "kind": "always",
+          "text": "x >= old(x)",
+          "span": {
+            "start": 114,
+            "end": 135
+          }
+        },
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": []
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 1
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "x": -1
+            }
+          }
+        ]
+      },
+      "doubleReject": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Request identity is not pending or its operation differs.",
+        "violation": null
+      },
+      "rejectThenResolve": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Request identity is not pending or its operation differs.",
+        "violation": null
+      }
+    },
+    {
+      "name": "fail-closed",
+      "syntax": {
+        "order-fifo": {
+          "status": "unsupported",
+          "message": "Unsupported or misspelled contract clause order.",
+          "line": 2,
+          "column": 1,
+          "violation": null
+        },
+        "abort": {
+          "status": "unsupported",
+          "message": "Unsupported or misspelled contract clause abort.",
+          "line": 2,
+          "column": 1,
+          "violation": null
+        },
+        "settles-bare": {
+          "status": "unsupported",
+          "message": "Invalid settles clause.",
+          "line": 2,
+          "column": 1,
+          "violation": null
+        },
+        "settles-case": {
+          "status": "unsupported",
+          "message": "Unsupported or misspelled contract clause Settles.",
+          "line": 2,
+          "column": 1,
+          "violation": null
+        },
+        "state-case": {
+          "status": "unsupported",
+          "message": "Unsupported or misspelled contract clause STATE.",
+          "line": 5,
+          "column": 1,
+          "violation": null
+        },
+        "state-colon": {
+          "status": "unsupported",
+          "message": "Unsupported or misspelled contract clause state:.",
+          "line": 5,
+          "column": 1,
+          "violation": null
+        },
+        "block-state": {
+          "status": "unsupported",
+          "message": "Contract-looking block comments are unsupported; use one line per clause.",
+          "line": 5,
+          "column": 1,
+          "violation": null
+        },
+        "direct-recursion": {
+          "status": "unsupported",
+          "message": "Entries cannot call entries; environment operations must be awaited.",
+          "line": 6,
+          "column": 27,
+          "violation": null
+        },
+        "global-recursion": {
+          "status": "unsupported",
+          "message": "Unsupported CallExpression. Only pure, explicitly modeled data operations are accepted.",
+          "line": 6,
+          "column": 27,
+          "violation": null
+        },
+        "queue-microtask": {
+          "status": "unsupported",
+          "message": "Unknown function queueMicrotask. Only top-level functions and named imports can be called.",
+          "line": 4,
+          "column": 27,
+          "violation": null
+        }
+      }
+    },
+    {
+      "name": "loop",
+      "ms": 158,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-timeout",
+        "message": "Script execution timed out after 100ms",
+        "violation": null
+      }
+    },
+    {
+      "name": "chain",
+      "ms": 53,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "violation": null,
+        "faults": [
+          "queueMicrotask is not defined"
+        ],
+        "requests": [],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "throwm",
+      "ms": 54,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "violation": null,
+        "faults": [
+          "queueMicrotask is not defined"
+        ],
+        "requests": [],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cthrow",
+      "ms": 56,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "violation": null,
+        "faults": [
+          "x"
+        ],
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": true,
+            "args": []
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "x": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "pending",
+      "ms": 55,
+      "value": {
+        "status": "ok",
+        "violation": null,
+        "requests": [
+          {
+            "seq": 1,
+            "op": "op",
+            "settled": false,
+            "args": []
+          }
+        ],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "both",
+      "ms": 55,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "violation": null,
+        "faults": [
+          "boom"
+        ],
+        "requests": [],
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "worker-missing",
+      "ms": 20,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "message": "Replay worker exited."
+      }
+    },
+    {
+      "name": "worker-hang",
+      "ms": 307,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-timeout",
+        "message": "Native replay containment deadline exceeded."
+      }
+    },
+    {
+      "name": "worker-exit",
+      "ms": 41,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "message": "Replay worker exited."
+      }
+    },
+    {
+      "name": "worker-wrong-id",
+      "ms": 27,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "message": "Replay worker returned a different request identity."
+      }
+    },
+    {
+      "name": "worker-throw",
+      "ms": 24,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "message": "Replay worker exited."
+      }
+    },
+    {
+      "name": "worker-disconnect",
+      "ms": 24,
+      "value": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "message": "Replay worker exited."
+      }
+    }
+  ],
+  "solver": [
+    {
+      "name": "pending-safety",
+      "ms": 280,
+      "report": {
+        "status": "counterexample",
+        "violation": {
+          "kind": "state",
+          "text": "pending === 0",
+          "span": {
+            "start": 109,
+            "end": 131
+          }
+        },
+        "searched": {
+          "maxDepth": 3,
+          "executions": 2,
+          "depth": 1
+        },
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "pending": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "pending": 1
+            }
+          }
+        ],
+        "assumptionsSha": "1a32c5d1a1f20e2e30fbd8580cbd861269fac30fc5794473f2db2b6a8f743a54",
+        "settles": [
+          {
+            "op": "op",
+            "rejects": "never-rejects",
+            "settles": "may-never-settle",
+            "settlesUse": "not declared; no progress guarantee",
+            "settlementCount": "at most once per request",
+            "settlementOrder": "any"
+          }
+        ],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$0",
+            "status": "counterexample"
+          },
+          {
+            "unit": "entry$1",
+            "status": "verified"
+          }
+        ]
+      },
+      "rawStatus": "counterexample",
+      "searched": {
+        "maxDepth": 3,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "depth": 1,
+        "executions": 2
+      }
+    },
+    {
+      "name": "pending-safety-settles",
+      "ms": 264,
+      "report": {
+        "status": "counterexample",
+        "violation": {
+          "kind": "state",
+          "text": "pending === 0",
+          "span": {
+            "start": 131,
+            "end": 153
+          }
+        },
+        "searched": {
+          "maxDepth": 3,
+          "executions": 2,
+          "depth": 1
+        },
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "pending": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "pending": 1
+            }
+          }
+        ],
+        "assumptionsSha": "5cd1cabb41f82fc4cda547d292c2c506be6bdc9d97199fccda5c50239b2cbd16",
+        "settles": [
+          {
+            "op": "op",
+            "rejects": "never-rejects",
+            "settles": "eventually",
+            "settlesUse": "declared-unused for safety",
+            "settlementCount": "at most once per request",
+            "settlementOrder": "any"
+          }
+        ],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$0",
+            "status": "counterexample"
+          },
+          {
+            "unit": "entry$1",
+            "status": "verified"
+          }
+        ]
+      },
+      "rawStatus": "counterexample",
+      "searched": {
+        "maxDepth": 3,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "depth": 1,
+        "executions": 2
+      }
+    },
+    {
+      "name": "resume-violates",
+      "ms": 274,
+      "report": {
+        "status": "counterexample",
+        "violation": {
+          "kind": "state",
+          "text": "x === 0",
+          "span": {
+            "start": 103,
+            "end": 119
+          }
+        },
+        "searched": {
+          "maxDepth": 3,
+          "executions": 4,
+          "depth": 2
+        },
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "x": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "x": 1
+            }
+          }
+        ],
+        "assumptionsSha": "4c1187afd78240cf8119f51178d1564a9d71b16963e2ed62695d6fd47580377c",
+        "settles": [
+          {
+            "op": "op",
+            "rejects": "never-rejects",
+            "settles": "may-never-settle",
+            "settlesUse": "not declared; no progress guarantee",
+            "settlementCount": "at most once per request",
+            "settlementOrder": "any"
+          }
+        ],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$0",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$1",
+            "status": "counterexample"
+          }
+        ]
+      },
+      "rawStatus": "counterexample",
+      "searched": {
+        "maxDepth": 3,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "depth": 2,
+        "executions": 4
+      }
+    },
+    {
+      "name": "forced-five",
+      "ms": 1,
+      "report": {
+        "status": "unsupported",
+        "message": "Cannot write parameter binding q; parameter contracts describe entry arguments.",
+        "line": 7,
+        "column": 3,
+        "violation": null
+      },
+      "rawStatus": "unsupported",
+      "message": "Cannot write parameter binding q; parameter contracts describe entry arguments.",
+      "searched": null
+    },
+    {
+      "name": "entry-arg-two",
+      "ms": 261,
+      "report": {
+        "status": "unknown",
+        "reason": "induction-gap",
+        "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof.",
+        "violation": null,
+        "searched": {
+          "maxDepth": 3,
+          "executions": 15
+        },
+        "assumptionsSha": "1d264bdc15cd4e214132bda2aff3e22c63247559e71581d91540711e4a1df4ff",
+        "settles": [],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$0",
+            "status": "counterexample"
+          }
+        ]
+      },
+      "rawStatus": "unknown",
+      "rawReason": "induction-gap",
+      "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof.",
+      "searched": {
+        "maxDepth": 3,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "4000000000000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "executions": 15
+      }
+    },
+    {
+      "name": "negative-zero-div",
+      "ms": 8417,
+      "report": {
+        "status": "counterexample",
+        "violation": {
+          "kind": "state",
+          "text": "1 / shown === Infinity",
+          "span": {
+            "start": 107,
+            "end": 138
+          }
+        },
+        "searched": {
+          "maxDepth": 3,
+          "executions": 5,
+          "depth": 2
+        },
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "shown": 1
+            }
+          }
+        ],
+        "assumptionsSha": "7975fb606e248f98e2f2f4c96094a8fe92aaa6001462391e0fcd810b6a123306",
+        "settles": [
+          {
+            "op": "op",
+            "rejects": "never-rejects",
+            "settles": "may-never-settle",
+            "settlesUse": "not declared; no progress guarantee",
+            "settlementCount": "at most once per request",
+            "settlementOrder": "any"
+          }
+        ],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$0",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$1",
+            "status": "counterexample"
+          }
+        ]
+      },
+      "rawStatus": "counterexample",
+      "searched": {
+        "maxDepth": 3,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "dfe0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "000010a220000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "depth": 2,
+        "executions": 5
+      }
+    },
+    {
+      "name": "object-is-zero",
+      "ms": 272,
+      "report": {
+        "status": "counterexample",
+        "violation": {
+          "kind": "state",
+          "text": "Object.is(shown, 0)",
+          "span": {
+            "start": 107,
+            "end": 135
+          }
+        },
+        "searched": {
+          "maxDepth": 3,
+          "executions": 5,
+          "depth": 2
+        },
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 1,
+            "kind": "call",
+            "state": {
+              "shown": 0
+            }
+          },
+          {
+            "step": 2,
+            "kind": "resolve",
+            "state": {
+              "shown": 1
+            }
+          }
+        ],
+        "assumptionsSha": "7975fb606e248f98e2f2f4c96094a8fe92aaa6001462391e0fcd810b6a123306",
+        "settles": [
+          {
+            "op": "op",
+            "rejects": "never-rejects",
+            "settles": "may-never-settle",
+            "settlesUse": "not declared; no progress guarantee",
+            "settlementCount": "at most once per request",
+            "settlementOrder": "any"
+          }
+        ],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$0",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$1",
+            "status": "counterexample"
+          }
+        ]
+      },
+      "rawStatus": "counterexample",
+      "searched": {
+        "maxDepth": 3,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "0000000000000001"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "depth": 2,
+        "executions": 5
+      }
+    },
+    {
+      "name": "inconsistent",
+      "ms": 235,
+      "report": {
+        "status": "counterexample",
+        "violation": {
+          "kind": "state",
+          "text": "x === 1",
+          "span": {
+            "start": 28,
+            "end": 44
+          }
+        },
+        "searched": {
+          "maxDepth": 3,
+          "executions": 1
+        },
+        "steps": [
+          {
+            "step": 0,
+            "kind": "init",
+            "state": {
+              "x": 0
+            }
+          }
+        ],
+        "assumptionsSha": "aec4a32d9003541b5a6ab5240057153a5a026b03859ab2dff17b1e531ee6b570",
+        "settles": [],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "counterexample"
+          },
+          {
+            "unit": "entry$0",
+            "status": "vacuous"
+          }
+        ]
+      },
+      "rawStatus": "counterexample",
+      "searched": {
+        "maxDepth": 3,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "executions": 1
+      }
+    },
+    {
+      "name": "depth-zero",
+      "ms": 269,
+      "report": {
+        "status": "unknown",
+        "reason": "induction-gap",
+        "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof.",
+        "violation": null,
+        "searched": {
+          "maxDepth": 0,
+          "executions": 1
+        },
+        "assumptionsSha": "aec4a32d9003541b5a6ab5240057153a5a026b03859ab2dff17b1e531ee6b570",
+        "settles": [],
+        "units": [
+          {
+            "unit": "$init",
+            "status": "verified"
+          },
+          {
+            "unit": "entry$0",
+            "status": "counterexample"
+          }
+        ]
+      },
+      "rawStatus": "unknown",
+      "rawReason": "induction-gap",
+      "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof.",
+      "searched": {
+        "maxDepth": 0,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "executions": 1
+      }
+    },
+    {
+      "name": "known-loop",
+      "ms": 1,
+      "error": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'decreases')",
+      "sourceError": false
+    },
+    {
+      "name": "for-ever-check",
+      "ms": 0,
+      "error": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'decreases')",
+      "sourceError": false
+    }
+  ],
+  "attacks": {
+    "forcedFive": {
+      "status": "ok",
+      "violation": {
+        "kind": "state",
+        "text": "shown !== 5",
+        "span": {
+          "start": 105,
+          "end": 125
+        }
+      },
+      "requests": [
+        {
+          "seq": 1,
+          "op": "op",
+          "settled": true,
+          "args": [
+            5
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "kind": "init",
+          "state": {
+            "shown": 0
+          }
+        },
+        {
+          "step": 1,
+          "kind": "call",
+          "state": {
+            "shown": 0
+          }
+        },
+        {
+          "step": 2,
+          "kind": "resolve",
+          "state": {
+            "shown": 5
+          }
+        }
+      ]
+    },
+    "argTwo": {
+      "status": "ok",
+      "violation": {
+        "kind": "state",
+        "text": "x === 0",
+        "span": {
+          "start": 11,
+          "end": 27
+        }
+      },
+      "requests": [],
+      "steps": [
+        {
+          "step": 0,
+          "kind": "init",
+          "state": {
+            "x": 0
+          }
+        },
+        {
+          "step": 1,
+          "kind": "call",
+          "state": {
+            "x": 1
+          }
+        }
+      ]
+    },
+    "negZero": {
+      "status": "ok",
+      "violation": {
+        "kind": "state",
+        "text": "1 / shown === Infinity",
+        "span": {
+          "start": 107,
+          "end": 138
+        }
+      },
+      "requests": [
+        {
+          "seq": 1,
+          "op": "op",
+          "settled": true,
+          "args": []
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "kind": "init",
+          "state": {
+            "shown": 0
+          }
+        },
+        {
+          "step": 1,
+          "kind": "call",
+          "state": {
+            "shown": 0
+          }
+        },
+        {
+          "step": 2,
+          "kind": "resolve",
+          "state": {
+            "shown": 0
+          }
+        }
+      ]
+    },
+    "objectIs": {
+      "status": "ok",
+      "violation": {
+        "kind": "state",
+        "text": "Object.is(shown, 0)",
+        "span": {
+          "start": 107,
+          "end": 135
+        }
+      },
+      "requests": [
+        {
+          "seq": 1,
+          "op": "op",
+          "settled": true,
+          "args": []
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "kind": "init",
+          "state": {
+            "shown": 0
+          }
+        },
+        {
+          "step": 1,
+          "kind": "call",
+          "state": {
+            "shown": 0
+          }
+        },
+        {
+          "step": 2,
+          "kind": "resolve",
+          "state": {
+            "shown": 0
+          }
+        }
+      ]
+    }
+  },
+  "published": {
+    "pilots-search-stale.json": {
+      "saved": "counterexample",
+      "replay": "ok",
+      "violation": "shownFor >= old(shownFor)",
+      "savedViolation": "shownFor >= old(shownFor)",
+      "match": true,
+      "illegal": null
+    },
+    "pilots-search-env.json": {
+      "saved": "counterexample",
+      "replay": "ok",
+      "violation": "Number.isFinite(shown)",
+      "savedViolation": "Number.isFinite(shown)",
+      "match": true,
+      "illegal": null
+    },
+    "pilots-search-overclaim.json": {
+      "saved": "counterexample",
+      "replay": "ok",
+      "violation": "shownFor >= old(shownFor)",
+      "savedViolation": "shownFor >= old(shownFor)",
+      "match": true,
+      "illegal": null
+    },
+    "variants-V8b-second-entry-reset.json": {
+      "saved": "counterexample",
+      "replay": "ok",
+      "violation": "0 <= shownFor && shownFor <= latest",
+      "savedViolation": "0 <= shownFor && shownFor <= latest",
+      "match": true,
+      "illegal": null
+    },
+    "pilots-search.json": {
+      "status": "verified"
+    }
+  },
+  "compiled": [
+    {
+      "entry": "/verify/examples/valid.ts",
+      "equal": true
+    },
+    {
+      "entry": "/verify/examples/bugs.ts",
+      "equal": true
+    },
+    {
+      "entry": "/verify/examples/loops.ts",
+      "equal": true
+    },
+    {
+      "entry": "/verify/examples/calls.ts",
+      "equal": true
+    },
+    {
+      "entry": "/verify/examples/collections.ts",
+      "equal": true
+    },
+    {
+      "entry": "/verify/examples/heap.ts",
+      "equal": true
+    },
+    {
+      "entry": "/verify/examples/callbacks.ts",
+      "equal": true
+    }
+  ],
+  "processes": [
+    "89332 89331 S    /Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node /tmp/c1-replay-review/probe.mjs",
+    "89333 89332 S    node /tmp/c1-replay-review/probe.mjs"
+  ],
+  "findings": [],
+  "notes": []
+}

@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V2-entry-ensures-false.ts",
+  "sourceSha256": "14f3e84462e3070208574108d498e8400319d18c90ce41fe3d08efb502dd46ba",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "Unsupported or misspelled contract clause ensures.",
+  "span": {
+    "start": 396,
+    "end": 412
+  },
+  "line": 16,
+  "column": 1
+}

@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V4-block-comment-state.ts",
+  "sourceSha256": "d049d99ffd6786f1dabdce589d7a7aa0a5c321ab4b2cdc890b5962944d8dc6f5",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "Contract-looking block comments are unsupported; use one line per clause.",
+  "span": {
+    "start": 359,
+    "end": 385
+  },
+  "line": 14,
+  "column": 1
+}

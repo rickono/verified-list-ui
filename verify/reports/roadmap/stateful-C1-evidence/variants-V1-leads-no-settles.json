@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V1-leads-no-settles.ts",
+  "sourceSha256": "6f0acc1772265e3a821bbaf66ec5a52dc548e13819512bb3bad68a1abdf1d3b6",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "Unsupported or misspelled contract clause leads.",
+  "span": {
+    "start": 395,
+    "end": 433
+  },
+  "line": 15,
+  "column": 1
+}

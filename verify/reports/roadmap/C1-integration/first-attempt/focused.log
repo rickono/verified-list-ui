@@ -1,0 +1,1244 @@
+TAP version 13
+# (node:25415) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: unsupported stateful loops return original source diagnostics instead of throwing
+ok 1 - unsupported stateful loops return original source diagnostics instead of throwing
+  ---
+  duration_ms: 31.148375
+  type: 'test'
+  ...
+# Subtest: original compiler rejects a false capture annotation before it can become a resumption assumption
+ok 2 - original compiler rejects a false capture annotation before it can become a resumption assumption
+  ---
+  duration_ms: 2.173959
+  type: 'test'
+  ...
+# Subtest: request parameter assumptions use the captured request value across interference
+ok 3 - request parameter assumptions use the captured request value across interference
+  ---
+  duration_ms: 126.558125
+  type: 'test'
+  ...
+# Subtest: always-only properties use pre-step old, including rejection stutter
+ok 4 - always-only properties use pre-step old, including rejection stutter
+  ---
+  duration_ms: 540.5485
+  type: 'test'
+  ...
+# Subtest: unsupported clauses and source constructs retain exact original spans
+ok 5 - unsupported clauses and source constructs retain exact original spans
+  ---
+  duration_ms: 2.497583
+  type: 'test'
+  ...
+# (node:25424) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all recovered pilots/variants are audited by the production frontend
+ok 6 - all recovered pilots/variants are audited by the production frontend
+  ---
+  duration_ms: 40.605708
+  type: 'test'
+  ...
+# Subtest: closed grammar rejects case, colon, edit distance, block and unknown environment lines
+ok 7 - closed grammar rejects case, colon, edit distance, block and unknown environment lines
+  ---
+  duration_ms: 4.924833
+  type: 'test'
+  ...
+# Subtest: assumptions expose defaults, declared-unused settling and canonical identity
+ok 8 - assumptions expose defaults, declared-unused settling and canonical identity
+  ---
+  duration_ms: 1.7575
+  type: 'test'
+  ...
+# Subtest: module state, ambient signatures, binding identities and nested awaits fail closed
+ok 9 - module state, ambient signatures, binding identities and nested awaits fail closed
+  ---
+  duration_ms: 1.85325
+  type: 'test'
+  ...
+# Subtest: Unicode edits in clause keywords cannot silently discard properties
+ok 10 - Unicode edits in clause keywords cannot silently discard properties
+  ---
+  duration_ms: 1.3465
+  type: 'test'
+  ...
+# (node:25425) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: six pilots and all corrected judge variants run through production
+    # Subtest: pilots/search.ts
+    ok 1 - pilots/search.ts
+      ---
+      duration_ms: 1597.646542
+      type: 'test'
+      ...
+    # Subtest: pilots/search-stale.ts
+    ok 2 - pilots/search-stale.ts
+      ---
+      duration_ms: 2077.553209
+      type: 'test'
+      ...
+    # Subtest: pilots/search-gap.ts
+    ok 3 - pilots/search-gap.ts
+      ---
+      duration_ms: 3811.539666
+      type: 'test'
+      ...
+    # Subtest: pilots/search-env.ts
+    ok 4 - pilots/search-env.ts
+      ---
+      duration_ms: 1785.335083
+      type: 'test'
+      ...
+    # Subtest: pilots/search-overclaim.ts
+    ok 5 - pilots/search-overclaim.ts
+      ---
+      duration_ms: 1976.610708
+      type: 'test'
+      ...
+    # Subtest: pilots/search-unsupported.ts
+    ok 6 - pilots/search-unsupported.ts
+      ---
+      duration_ms: 1.087417
+      type: 'test'
+      ...
+    # Subtest: variants/V1-leads-no-settles.ts
+    ok 7 - variants/V1-leads-no-settles.ts
+      ---
+      duration_ms: 0.851958
+      type: 'test'
+      ...
+    # Subtest: variants/V1b-leads-settles.ts
+    ok 8 - variants/V1b-leads-settles.ts
+      ---
+      duration_ms: 0.673084
+      type: 'test'
+      ...
+    # Subtest: variants/V2-entry-ensures-false.ts
+    ok 9 - variants/V2-entry-ensures-false.ts
+      ---
+      duration_ms: 0.754291
+      type: 'test'
+      ...
+    # Subtest: variants/V3-state-colon-typo.ts
+    ok 10 - variants/V3-state-colon-typo.ts
+      ---
+      duration_ms: 0.549333
+      type: 'test'
+      ...
+    # Subtest: variants/V4-block-comment-state.ts
+    ok 11 - variants/V4-block-comment-state.ts
+      ---
+      duration_ms: 0.539834
+      type: 'test'
+      ...
+    # Subtest: variants/V5-no-properties.ts
+    ok 12 - variants/V5-no-properties.ts
+      ---
+      duration_ms: 0.488166
+      type: 'test'
+      ...
+    # Subtest: variants/V5b-no-properties-no-pending.ts
+    ok 13 - variants/V5b-no-properties-no-pending.ts
+      ---
+      duration_ms: 0.451792
+      type: 'test'
+      ...
+    # Subtest: variants/V9-resolves-typo.ts
+    ok 14 - variants/V9-resolves-typo.ts
+      ---
+      duration_ms: 0.37475
+      type: 'test'
+      ...
+    # Subtest: variants/V10-rejects-sometimes.ts
+    ok 15 - variants/V10-rejects-sometimes.ts
+      ---
+      duration_ms: 1.191667
+      type: 'test'
+      ...
+    # Subtest: variants/V14-entry-calls-entry.ts
+    ok 16 - variants/V14-entry-calls-entry.ts
+      ---
+      duration_ms: 0.682375
+      type: 'test'
+      ...
+    # Subtest: variants/V15-old-in-state.ts
+    ok 17 - variants/V15-old-in-state.ts
+      ---
+      duration_ms: 0.577834
+      type: 'test'
+      ...
+    # Subtest: variants/V16-undeclared-write.ts
+    ok 18 - variants/V16-undeclared-write.ts
+      ---
+      duration_ms: 0.780583
+      type: 'test'
+      ...
+    # Subtest: variants/V6-inflight-count.ts
+    ok 19 - variants/V6-inflight-count.ts
+      ---
+      duration_ms: 2563.230875
+      type: 'test'
+      ...
+    # Subtest: variants/V18-two-awaits.ts
+    ok 20 - variants/V18-two-awaits.ts
+      ---
+      duration_ms: 7864.253041
+      type: 'test'
+      ...
+    # Subtest: variants/V7-latest-2p53.ts
+    ok 21 - variants/V7-latest-2p53.ts
+      ---
+      duration_ms: 1709.518
+      type: 'test'
+      ...
+    # Subtest: variants/V8-second-entry-clear.ts
+    ok 22 - variants/V8-second-entry-clear.ts
+      ---
+      duration_ms: 3270.206291
+      type: 'test'
+      ...
+    # Subtest: variants/V11-rejects.ts
+    ok 23 - variants/V11-rejects.ts
+      ---
+      duration_ms: 1641.44925
+      type: 'test'
+      ...
+    # Subtest: variants/V18b-two-awaits-annotated.ts
+    ok 24 - variants/V18b-two-awaits-annotated.ts
+      ---
+      duration_ms: 2429.758125
+      type: 'test'
+      ...
+    # Subtest: variants/V8b-second-entry-reset.ts
+    ok 25 - variants/V8b-second-entry-reset.ts
+      ---
+      duration_ms: 1906.106375
+      type: 'test'
+      ...
+    1..25
+ok 11 - six pilots and all corrected judge variants run through production
+  ---
+  duration_ms: 32644.163625
+  type: 'test'
+  ...
+# Subtest: binary64 request IDs really collide at 2^53 without violating the stated properties
+ok 12 - binary64 request IDs really collide at 2^53 without violating the stated properties
+  ---
+  duration_ms: 64.23
+  type: 'test'
+  ...
+# Subtest: real solver budget exhaustion remains unknown/solver and attributes the request budget
+ok 13 - real solver budget exhaustion remains unknown/solver and attributes the request budget
+  ---
+  duration_ms: 2.313583
+  type: 'test'
+  ...
+# Subtest: witness depth cannot authorize a proof
+ok 14 - witness depth cannot authorize a proof
+  ---
+  duration_ms: 1779.075834
+  type: 'test'
+  ...
+# (node:25761) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: default examples keep exact compiled obligations, graph hashes and outcome reports
+not ok 15 - default examples keep exact compiled obligations, graph hashes and outcome reports
+  ---
+  duration_ms: 718.354292
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/tests/verify/stateful-regression.test.mjs:14:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    callback-bugs.ts: complete compiled artifact
+    + actual - expected
+    ... Skipped lines
+    
+      {
+        modules: [
+          {
+            bindings: [
+              [
+    ...
+            ],
+    +       post: '(and (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0)))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))) (bvult loop2_u32 (heap_length input_1_ref)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (input_0 (heap_array_num0 input_1_ref loop2_u32)) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (ite (and (bvule ((_ zero_extend 1) #x00000001) ((_ zero_extend 1) (_ bv0 32))) (bvult (bvsub ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref)))) true false))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_ex'... 2471 more characters,
+    -       post: '(and (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0)))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))) (bvult loop2_u32 (heap_length input_1_ref)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (input_0 (heap_array_num0 input_1_ref loop2_u32)) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (ite (and (fp.geq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) true false))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000'... 2663 more characters,
+            postconditions: [
+              '(and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))))))',
+              '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false))',
+              '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4)))))))',
+              '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))))',
+    ...
+              '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))))))',
+    +         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (ite (and (bvule ((_ zero_extend 1) #x00000001) ((_ zero_extend 1) (_ bv0 32))) (bvult (bvsub ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref)))) true false)))',
+    +         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))',
+    +         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))))) (input_0 (heap_array_num0 input_1_ref (bvneg #x00000001))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))',
+    +         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (forall ((every_q6 (_ BitVec 32))) (=> (bvult every_q6 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))) (not (input_0 (heap_array_num0 input_1_ref every_q6))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))))))'
+    -         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (ite (and (fp.geq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) true false)))',
+    -         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))))',
+    -         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (input_0 (heap_array_num0 input_1_ref ((_ fp.to_ubv 32) RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))',
+    -         '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (forall ((every_q6 (_ BitVec 32))) (=> (bvult every_q6 (heap_length input_1_ref)) (ite (not (ite (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE every_q6)) (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))) (not (input_0 (heap_array_num0 input_1_ref every_q6))) (ite (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE every_q6)) (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))))))'
+            ],
+            pre: 'true',
+            preDefined: 'true',
+            predicates: {
+              ensures: [
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    targets:
+      0:
+        id: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+        name: 'findIndex'
+        span:
+          start: 310
+          end: 655
+        params:
+          0:
+            name: 'fn'
+            type:
+              kind: 'function'
+              params:
+                0: 'number'
+              result: 'boolean'
+            typeAliases:
+            model:
+              kind: 'function'
+              symbol: 'input_0'
+              params: <Circular>
+              result: 'boolean'
+          1:
+            name: 'list'
+            type:
+              kind: 'array'
+              element: 'number'
+            typeAliases:
+            model:
+              kind: 'ref'
+              symbol: 'input_1_ref'
+              type: <Circular>
+        resultType: 'number'
+        effects:
+          kind: 'heap'
+        executableStart: 317
+        modifies:
+        footprint:
+        requires:
+        ensures:
+          0:
+            kind: 'ensures'
+            text: 'Number.isInteger(result) && -1 <= result && result < list.length'
+            span:
+              start: 79
+              end: 143
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+          1:
+            kind: 'ensures'
+            text: 'result === -1 || (0 <= result && result < list.length && fn(list[result]))'
+            span:
+              start: 155
+              end: 229
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+          2:
+            kind: 'ensures'
+            text: 'list.every((value, i) => result !== -1 && result <= i || !fn(value))'
+            span:
+              start: 241
+              end: 309
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+        callees:
+        loops:
+          0:
+            start: 554
+            end: 640
+        obligations:
+          0:
+            kind: 'invariant-init'
+            span:
+              start: 403
+              end: 514
+            loop:
+              start: 554
+              end: 640
+            abstract: true
+          1:
+            kind: 'callback'
+            span:
+              start: 582
+              end: 595
+            abstract: true
+          2:
+            kind: 'invariant-preserve'
+            span: <Circular>
+            loop:
+              start: 554
+              end: 640
+            abstract: true
+          3:
+            kind: 'rank'
+            span:
+              start: 530
+              end: 551
+            loop:
+              start: 554
+              end: 640
+            abstract: true
+          4:
+            kind: 'definedness'
+            span: <Circular>
+            abstract: true
+          5:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          6:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          7:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          8:
+            kind: 'definedness'
+            span: <Circular>
+            abstract: true
+          9:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          10:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          11:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+        spec: false
+        predicates:
+          library: '__specification'
+          entry: '__entry_values'
+          params:
+            0: 'fn'
+            1: 'list'
+          requires:
+          ensures:
+            0: '(((Number).isInteger(result) && __specification.binary("<=", __specification.unary("-", 1), result)) && __specification.binary("<", result, (list).length))'
+            1: '(__specification.binary("===", result, __specification.unary("-", 1)) || (((__specification.binary("<=", 0, result) && __specification.binary("<", result, (list).length)) && fn((list)[result]))))'
+            2: '(list).every(((value, i) => (((__specification.binary("!==", result, __specification.unary("-", 1)) && __specification.binary("<=", result, i)) || (!fn(value))))))'
+        executable: |-
+          function findIndex(fn, list) {
+            var idx = 0;
+            var len = list.length;
+            // invariant Number.isInteger(idx) && 0 <= idx && idx <= len
+            // invariant list.every((value, i) => idx <= i || !fn(value))
+            // decreases real(len) - real(idx)
+            while (idx < len) {
+              if (fn(list[idx])) {
+                return idx;
+              }
+              idx += 1;
+            }
+            return -1;
+          }
+        declarations: |-
+          (declare-const heap_next0 Int)
+          (declare-fun heap_kind (Int) Int)
+          (declare-fun heap_length (Int) (_ BitVec 32))
+          (declare-fun heap_element (Int) Int)
+          (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+          (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+          (declare-fun heap_array_dense (Int) Bool)
+          (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+          (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+          (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+          (declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)
+          (declare-const input_1_ref Int)
+          (declare-const loop_replay1 Bool)
+          (assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))
+          (declare-const loop2_u32 (_ BitVec 32))
+          (declare-const loop2_negative_zero Bool)
+          (assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))
+        heapModel:
+          kind: 'heap'
+          keys:
+          roots:
+            0: 'input_1_ref'
+          types:
+            0: <Circular>
+          encoding:
+            arrayKind: 1
+            tags:
+              undefined: 0
+              number: 1
+              boolean: 2
+              object: 3
+              array: 4
+            kind: 'heap_kind'
+            length: 'heap_length'
+            element: 'heap_element'
+            dense: 'heap_array_dense'
+            has: 'heap_array_has'
+            hasRaw: 'heap_array_has_raw'
+            arrayNum: 'heap_array_num'
+            arrayBool: 'heap_array_bool'
+            fields:
+        probes:
+        smallWitness: '(bvule (heap_length input_1_ref) (_ bv256 32))'
+        replayGuards:
+          0: 'loop_replay1'
+        pre: 'true'
+        preDefined: 'true'
+        post: '(and (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0)))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))) (bvult loop2_u32 (heap_length input_1_ref)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (input_0 (heap_array_num0 input_1_ref loop2_u32)) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (ite (and (fp.geq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) true false))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000'... 2663 more characters
+        postconditions:
+          0: '(and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))))))'
+          1: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false))'
+          2: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4)))))))'
+          3: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))))'
+          4: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)))'
+          5: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))) (bvult loop2_u32 (heap_length input_1_ref)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)))))'
+          6: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (input_0 (heap_array_num0 input_1_ref loop2_u32)) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))'
+          7: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))))))'
+          8: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (ite (and (fp.geq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) true false)))'
+          9: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (and (not (or (fp.isNaN (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.isInfinite (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.roundToIntegral RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))))'
+          10: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (input_0 (heap_array_num0 input_1_ref ((_ fp.to_ubv 32) RTZ (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))) (fp.lt (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))) (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))'
+          11: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (forall ((every_q6 (_ BitVec 32))) (=> (bvult every_q6 (heap_length input_1_ref)) (ite (not (ite (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE every_q6)) (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))) (not (input_0 (heap_array_num0 input_1_ref every_q6))) (ite (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp_unsigned 11 53) RNE every_q6)) (not (fp.eq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))))))'
+      1:
+        id: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#positiveOnly'
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        name: 'positiveOnly'
+        span:
+          start: 104
+          end: 164
+        params:
+          0:
+            name: 'value'
+            type: 'number'
+            typeAliases:
+            model:
+              kind: 'number'
+              symbol: 'input_0'
+        resultType: 'boolean'
+        effects:
+          kind: 'pure'
+        executableStart: 104
+        modifies:
+        footprint:
+        requires:
+          0:
+            kind: 'requires'
+            text: 'value > 0'
+            span:
+              start: 60
+              end: 69
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        ensures:
+          0:
+            kind: 'ensures'
+            text: 'result === (value > 1)'
+            span:
+              start: 81
+              end: 103
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        callees:
+        loops:
+        obligations:
+          0:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: false
+        spec: false
+        predicates:
+          library: '__specification'
+          entry: '__entry_values'
+          params:
+            0: 'value'
+          requires:
+            0: '__specification.binary(">", value, 0)'
+          ensures:
+            0: '__specification.binary("===", result, (__specification.binary(">", value, 1)))'
+        executable: |-
+          function positiveOnly(value        ) {
+            return value > 1;
+          }
+        declarations: |-
+          (declare-const heap_next0 Int)
+          (declare-fun heap_kind (Int) Int)
+          (declare-fun heap_length (Int) (_ BitVec 32))
+          (declare-fun heap_element (Int) Int)
+          (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+          (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+          (declare-fun heap_array_dense (Int) Bool)
+          (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+          (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+          (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+          (declare-const input_0 (_ BitVec 64))
+        probes:
+        smallWitness: 'true'
+        replayGuards:
+        pre: '(fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000))'
+        preDefined: 'true'
+        post: '(= (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)) (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)))'
+        postconditions:
+          0: '(= (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)) (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)))'
+      2:
+        id: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#narrowPredicate'
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        name: 'narrowPredicate'
+        span:
+          start: 202
+          end: 452
+        params:
+          0:
+            name: 'values'
+            type:
+              kind: 'array'
+              element: 'number'
+            typeAliases:
+            model:
+              kind: 'ref'
+              symbol: 'input_0_ref'
+              type: <Circular>
+        resultType: 'number'
+        effects:
+          kind: 'heap'
+        executableStart: 209
+        modifies:
+        footprint:
+        requires:
+        ensures:
+          0:
+            kind: 'ensures'
+            text: 'Number.isInteger(result)'
+            span:
+              start: 177
+              end: 201
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        callees:
+          0: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+          1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#positiveOnly'
+        loops:
+        obligations:
+          0:
+            kind: 'call'
+            span:
+              start: 418
+              end: 449
+            abstract: false
+          1:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: false
+        spec: false
+        predicates:
+          library: '__specification'
+          entry: '__entry_values'
+          params:
+            0: 'values'
+          requires:
+          ensures:
+            0: '(Number).isInteger(result)'
+        executable: |-
+          function narrowPredicate(values                   ) {
+            // The generic requires a predicate for every number. This callback's
+            // contract excludes zero, negative numbers, NaN and negative infinity.
+            return findIndex(positiveOnly, values);
+          }
+        declarations: |-
+          (declare-fun predicate1 ((_ FloatingPoint 11 53)) Bool)
+          (define-fun predicate1_contract () Bool (forall ((predicate1_x0 (_ FloatingPoint 11 53))) (=> (fp.gt predicate1_x0 ((_ to_fp 11 53) #x0000000000000000)) (= (predicate1 predicate1_x0) (fp.gt predicate1_x0 ((_ to_fp 11 53) #x3ff0000000000000))))))
+          (declare-const heap_next0 Int)
+          (declare-fun heap_kind (Int) Int)
+          (declare-fun heap_length (Int) (_ BitVec 32))
+          (declare-fun heap_element (Int) Int)
+          (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+          (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+          (declare-fun heap_array_dense (Int) Bool)
+          (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+          (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+          (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+          (declare-const input_0_ref Int)
+          (declare-const probe0 (_ BitVec 64))
+          (declare-const call2 (_ BitVec 64))
+          (assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))
+          (define-fun call_fact1 () Bool predicate1_contract)
+          (define-fun call_fact2 () Bool (and (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) call2)) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2)))) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) call2)) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))))) (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2))) (predicate1 (heap_array_num0 input_0_ref ((_ fp.to_ubv 32) RTZ ((_ to_fp 11 53) call2)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)))) (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_0_ref)) (ite (not (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE every_q3)) (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))) (not (predicate1 (heap_array_num0 input_0_ref every_q3))) (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE every_q3)) (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))))))) (=> (and (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)))) (and (ite (and (fp.geq ((_ to_fp 11 53) call2) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) true false) (fp.gt (ite (ite (and (fp.geq ((_ to_fp 11 53) call2) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) true false) (heap_array_num0 input_0_ref ((_ fp.to_ubv 32) RTZ ((_ to_fp 11 53) call2))) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_0_ref)) (=> (not (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE every_q3)) (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))) (fp.gt (heap_array_num0 input_0_ref every_q3) ((_ to_fp 11 53) #x0000000000000000)))))))
+        heapModel:
+          kind: 'heap'
+          keys:
+          roots:
+            0: 'input_0_ref'
+          types:
+            0: <Circular>
+          encoding:
+            arrayKind: 1
+            tags: <Circular>
+            kind: 'heap_kind'
+            length: 'heap_length'
+            element: 'heap_element'
+            dense: 'heap_array_dense'
+            has: 'heap_array_has'
+            hasRaw: 'heap_array_has_raw'
+            arrayNum: 'heap_array_num'
+            arrayBool: 'heap_array_bool'
+            fields:
+        probes:
+          0:
+            callee: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+            param: 0
+            site:
+              start: 418
+              end: 449
+            span:
+              start: 428
+              end: 440
+            models:
+              0:
+                kind: 'number'
+                symbol: 'probe0'
+            types: <Circular>
+        smallWitness: '(bvule (heap_length input_0_ref) (_ bv256 32))'
+        replayGuards:
+        pre: 'true'
+        preDefined: 'true'
+        post: '(and (fp.gt ((_ to_fp 11 53) probe0) ((_ to_fp 11 53) #x0000000000000000)) (=> (and call_fact1 call_fact2) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2)))))'
+        postconditions:
+          0: '(fp.gt ((_ to_fp 11 53) probe0) ((_ to_fp 11 53) #x0000000000000000))'
+          1: '(=> (and call_fact1 call_fact2) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))))'
+    modules:
+      0:
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+        bindings:
+          0:
+            0: 'findIndex'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+      1:
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        bindings:
+          0:
+            0: 'positiveOnly'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#positiveOnly'
+          1:
+            0: 'narrowPredicate'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#narrowPredicate'
+          2:
+            0: 'findIndex'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+  actual:
+    targets:
+      0:
+        id: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+        name: 'findIndex'
+        span:
+          start: 310
+          end: 655
+        params:
+          0:
+            name: 'fn'
+            type:
+              kind: 'function'
+              params:
+                0: 'number'
+              result: 'boolean'
+            typeAliases:
+            model:
+              kind: 'function'
+              symbol: 'input_0'
+              params: <Circular>
+              result: 'boolean'
+          1:
+            name: 'list'
+            type:
+              kind: 'array'
+              element: 'number'
+            typeAliases:
+            model:
+              kind: 'ref'
+              symbol: 'input_1_ref'
+              type: <Circular>
+        resultType: 'number'
+        effects:
+          kind: 'heap'
+        executableStart: 317
+        modifies:
+        footprint:
+        requires:
+        ensures:
+          0:
+            kind: 'ensures'
+            text: 'Number.isInteger(result) && -1 <= result && result < list.length'
+            span:
+              start: 79
+              end: 143
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+          1:
+            kind: 'ensures'
+            text: 'result === -1 || (0 <= result && result < list.length && fn(list[result]))'
+            span:
+              start: 155
+              end: 229
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+          2:
+            kind: 'ensures'
+            text: 'list.every((value, i) => result !== -1 && result <= i || !fn(value))'
+            span:
+              start: 241
+              end: 309
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+        callees:
+        loops:
+          0:
+            start: 554
+            end: 640
+        obligations:
+          0:
+            kind: 'invariant-init'
+            span:
+              start: 403
+              end: 514
+            loop:
+              start: 554
+              end: 640
+            abstract: true
+          1:
+            kind: 'callback'
+            span:
+              start: 582
+              end: 595
+            abstract: true
+          2:
+            kind: 'invariant-preserve'
+            span: <Circular>
+            loop:
+              start: 554
+              end: 640
+            abstract: true
+          3:
+            kind: 'rank'
+            span:
+              start: 530
+              end: 551
+            loop:
+              start: 554
+              end: 640
+            abstract: true
+          4:
+            kind: 'definedness'
+            span: <Circular>
+            abstract: true
+          5:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          6:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          7:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          8:
+            kind: 'definedness'
+            span: <Circular>
+            abstract: true
+          9:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          10:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+          11:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: true
+        spec: false
+        predicates:
+          library: '__specification'
+          entry: '__entry_values'
+          params:
+            0: 'fn'
+            1: 'list'
+          requires:
+          ensures:
+            0: '(((Number).isInteger(result) && __specification.binary("<=", __specification.unary("-", 1), result)) && __specification.binary("<", result, (list).length))'
+            1: '(__specification.binary("===", result, __specification.unary("-", 1)) || (((__specification.binary("<=", 0, result) && __specification.binary("<", result, (list).length)) && fn((list)[result]))))'
+            2: '(list).every(((value, i) => (((__specification.binary("!==", result, __specification.unary("-", 1)) && __specification.binary("<=", result, i)) || (!fn(value))))))'
+        executable: |-
+          function findIndex(fn, list) {
+            var idx = 0;
+            var len = list.length;
+            // invariant Number.isInteger(idx) && 0 <= idx && idx <= len
+            // invariant list.every((value, i) => idx <= i || !fn(value))
+            // decreases real(len) - real(idx)
+            while (idx < len) {
+              if (fn(list[idx])) {
+                return idx;
+              }
+              idx += 1;
+            }
+            return -1;
+          }
+        declarations: |-
+          (declare-const heap_next0 Int)
+          (declare-fun heap_kind (Int) Int)
+          (declare-fun heap_length (Int) (_ BitVec 32))
+          (declare-fun heap_element (Int) Int)
+          (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+          (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+          (declare-fun heap_array_dense (Int) Bool)
+          (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+          (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+          (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+          (declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)
+          (declare-const input_1_ref Int)
+          (declare-const loop_replay1 Bool)
+          (assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))
+          (declare-const loop2_u32 (_ BitVec 32))
+          (declare-const loop2_negative_zero Bool)
+          (assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))
+        heapModel:
+          kind: 'heap'
+          keys:
+          roots:
+            0: 'input_1_ref'
+          types:
+            0: <Circular>
+          encoding:
+            arrayKind: 1
+            tags:
+              undefined: 0
+              number: 1
+              boolean: 2
+              object: 3
+              array: 4
+            kind: 'heap_kind'
+            length: 'heap_length'
+            element: 'heap_element'
+            dense: 'heap_array_dense'
+            has: 'heap_array_has'
+            hasRaw: 'heap_array_has_raw'
+            arrayNum: 'heap_array_num'
+            arrayBool: 'heap_array_bool'
+            fields:
+        probes:
+        smallWitness: '(bvule (heap_length input_1_ref) (_ bv256 32))'
+        replayGuards:
+          0: 'loop_replay1'
+        pre: 'true'
+        preDefined: 'true'
+        post: '(and (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0)))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))) (bvult loop2_u32 (heap_length input_1_ref)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (input_0 (heap_array_num0 input_1_ref loop2_u32)) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))) (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000)))))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (ite (and (bvule ((_ zero_extend 1) #x00000001) ((_ zero_extend 1) (_ bv0 32))) (bvult (bvsub ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref)))) true false))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))) (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_ex'... 2471 more characters
+        postconditions:
+          0: '(and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))))))'
+          1: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false))'
+          2: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4)))))))'
+          3: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))))'
+          4: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)))'
+          5: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33))) (bvult loop2_u32 (heap_length input_1_ref)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)))))'
+          6: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (ite (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (input_0 (heap_array_num0 input_1_ref loop2_u32)) (ite (bvule #x00000000 loop2_u32) (bvult loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32))) (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))'
+          7: '(=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))) (bvule loop2_u32 every_q5) (not (= (bvadd ((_ zero_extend 1) loop2_u32) (_ bv1 33)) ((_ zero_extend 1) #x00000000))))))))'
+          8: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (ite (and (bvule ((_ zero_extend 1) #x00000001) ((_ zero_extend 1) (_ bv0 32))) (bvult (bvsub ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref)))) true false)))'
+          9: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))'
+          10: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))))) (input_0 (heap_array_num0 input_1_ref (bvneg #x00000001))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))'
+          11: '(=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (forall ((every_q6 (_ BitVec 32))) (=> (bvult every_q6 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))) (not (input_0 (heap_array_num0 input_1_ref every_q6))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))))))'
+      1:
+        id: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#positiveOnly'
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        name: 'positiveOnly'
+        span:
+          start: 104
+          end: 164
+        params:
+          0:
+            name: 'value'
+            type: 'number'
+            typeAliases:
+            model:
+              kind: 'number'
+              symbol: 'input_0'
+        resultType: 'boolean'
+        effects:
+          kind: 'pure'
+        executableStart: 104
+        modifies:
+        footprint:
+        requires:
+          0:
+            kind: 'requires'
+            text: 'value > 0'
+            span:
+              start: 60
+              end: 69
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        ensures:
+          0:
+            kind: 'ensures'
+            text: 'result === (value > 1)'
+            span:
+              start: 81
+              end: 103
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        callees:
+        loops:
+        obligations:
+          0:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: false
+        spec: false
+        predicates:
+          library: '__specification'
+          entry: '__entry_values'
+          params:
+            0: 'value'
+          requires:
+            0: '__specification.binary(">", value, 0)'
+          ensures:
+            0: '__specification.binary("===", result, (__specification.binary(">", value, 1)))'
+        executable: |-
+          function positiveOnly(value        ) {
+            return value > 1;
+          }
+        declarations: |-
+          (declare-const heap_next0 Int)
+          (declare-fun heap_kind (Int) Int)
+          (declare-fun heap_length (Int) (_ BitVec 32))
+          (declare-fun heap_element (Int) Int)
+          (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+          (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+          (declare-fun heap_array_dense (Int) Bool)
+          (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+          (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+          (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+          (declare-const input_0 (_ BitVec 64))
+        probes:
+        smallWitness: 'true'
+        replayGuards:
+        pre: '(fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x0000000000000000))'
+        preDefined: 'true'
+        post: '(= (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)) (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)))'
+        postconditions:
+          0: '(= (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)) (fp.gt ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) #x3ff0000000000000)))'
+      2:
+        id: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#narrowPredicate'
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        name: 'narrowPredicate'
+        span:
+          start: 202
+          end: 452
+        params:
+          0:
+            name: 'values'
+            type:
+              kind: 'array'
+              element: 'number'
+            typeAliases:
+            model:
+              kind: 'ref'
+              symbol: 'input_0_ref'
+              type: <Circular>
+        resultType: 'number'
+        effects:
+          kind: 'heap'
+        executableStart: 209
+        modifies:
+        footprint:
+        requires:
+        ensures:
+          0:
+            kind: 'ensures'
+            text: 'Number.isInteger(result)'
+            span:
+              start: 177
+              end: 201
+            file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        callees:
+          0: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+          1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#positiveOnly'
+        loops:
+        obligations:
+          0:
+            kind: 'call'
+            span:
+              start: 418
+              end: 449
+            abstract: false
+          1:
+            kind: 'ensures'
+            span: <Circular>
+            abstract: false
+        spec: false
+        predicates:
+          library: '__specification'
+          entry: '__entry_values'
+          params:
+            0: 'values'
+          requires:
+          ensures:
+            0: '(Number).isInteger(result)'
+        executable: |-
+          function narrowPredicate(values                   ) {
+            // The generic requires a predicate for every number. This callback's
+            // contract excludes zero, negative numbers, NaN and negative infinity.
+            return findIndex(positiveOnly, values);
+          }
+        declarations: |-
+          (declare-fun predicate1 ((_ FloatingPoint 11 53)) Bool)
+          (define-fun predicate1_contract () Bool (forall ((predicate1_x0 (_ FloatingPoint 11 53))) (=> (fp.gt predicate1_x0 ((_ to_fp 11 53) #x0000000000000000)) (= (predicate1 predicate1_x0) (fp.gt predicate1_x0 ((_ to_fp 11 53) #x3ff0000000000000))))))
+          (declare-const heap_next0 Int)
+          (declare-fun heap_kind (Int) Int)
+          (declare-fun heap_length (Int) (_ BitVec 32))
+          (declare-fun heap_element (Int) Int)
+          (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+          (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+          (declare-fun heap_array_dense (Int) Bool)
+          (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+          (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+          (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+          (declare-const input_0_ref Int)
+          (declare-const probe0 (_ BitVec 64))
+          (declare-const call2 (_ BitVec 64))
+          (assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))
+          (define-fun call_fact1 () Bool predicate1_contract)
+          (define-fun call_fact2 () Bool (and (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) call2)) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2)))) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) (fp.leq (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)) ((_ to_fp 11 53) call2)) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))))) (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2))) (predicate1 (heap_array_num0 input_0_ref ((_ fp.to_ubv 32) RTZ ((_ to_fp 11 53) call2)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)))) (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_0_ref)) (ite (not (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE every_q3)) (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))) (not (predicate1 (heap_array_num0 input_0_ref every_q3))) (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE every_q3)) (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000))))))))) (=> (and (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (ite (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) call2)))) (and (ite (and (fp.geq ((_ to_fp 11 53) call2) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) true false) (fp.gt (ite (ite (and (fp.geq ((_ to_fp 11 53) call2) ((_ to_fp 11 53) #x0000000000000000)) (fp.lt ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))) true false) (heap_array_num0 input_0_ref ((_ fp.to_ubv 32) RTZ ((_ to_fp 11 53) call2))) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_0_ref)) (=> (not (ite (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))) (fp.leq ((_ to_fp 11 53) call2) ((_ to_fp_unsigned 11 53) RNE every_q3)) (not (fp.eq ((_ to_fp 11 53) call2) (fp.neg ((_ to_fp 11 53) #x3ff0000000000000)))))) (fp.gt (heap_array_num0 input_0_ref every_q3) ((_ to_fp 11 53) #x0000000000000000)))))))
+        heapModel:
+          kind: 'heap'
+          keys:
+          roots:
+            0: 'input_0_ref'
+          types:
+            0: <Circular>
+          encoding:
+            arrayKind: 1
+            tags: <Circular>
+            kind: 'heap_kind'
+            length: 'heap_length'
+            element: 'heap_element'
+            dense: 'heap_array_dense'
+            has: 'heap_array_has'
+            hasRaw: 'heap_array_has_raw'
+            arrayNum: 'heap_array_num'
+            arrayBool: 'heap_array_bool'
+            fields:
+        probes:
+          0:
+            callee: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+            param: 0
+            site:
+              start: 418
+              end: 449
+            span:
+              start: 428
+              end: 440
+            models:
+              0:
+                kind: 'number'
+                symbol: 'probe0'
+            types: <Circular>
+        smallWitness: '(bvule (heap_length input_0_ref) (_ bv256 32))'
+        replayGuards:
+        pre: 'true'
+        preDefined: 'true'
+        post: '(and (fp.gt ((_ to_fp 11 53) probe0) ((_ to_fp 11 53) #x0000000000000000)) (=> (and call_fact1 call_fact2) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2)))))'
+        postconditions:
+          0: '(fp.gt ((_ to_fp 11 53) probe0) ((_ to_fp 11 53) #x0000000000000000))'
+          1: '(=> (and call_fact1 call_fact2) (and (not (or (fp.isNaN ((_ to_fp 11 53) call2)) (fp.isInfinite ((_ to_fp 11 53) call2)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) call2)) ((_ to_fp 11 53) call2))))'
+    modules:
+      0:
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js'
+        bindings:
+          0:
+            0: 'findIndex'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+      1:
+        file: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts'
+        bindings:
+          0:
+            0: 'positiveOnly'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#positiveOnly'
+          1:
+            0: 'narrowPredicate'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/callback-bugs.ts#narrowPredicate'
+          2:
+            0: 'findIndex'
+            1: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/ramda/search.js#findIndex'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/tests/verify/stateful-regression.test.mjs:27:14)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# (node:25976) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: strict native source replay is repeatable, hash-bound, and may remain pending
+ok 16 - strict native source replay is repeatable, hash-bound, and may remain pending
+  ---
+  duration_ms: 373.322417
+  type: 'test'
+  ...
+# Subtest: illegal action types, identities, args/results and outcomes are refused
+ok 17 - illegal action types, identities, args/results and outcomes are refused
+  ---
+  duration_ms: 868.931791
+  type: 'test'
+  ...
+# Subtest: wire scalars preserve binary64 exceptional values
+ok 18 - wire scalars preserve binary64 exceptional values
+  ---
+  duration_ms: 62.762042
+  type: 'test'
+  ...
+# Subtest: continuation loop is contained below one second with real native promises
+ok 19 - continuation loop is contained below one second with real native promises
+  ---
+  duration_ms: 163.105958
+  type: 'test'
+  ...
+# Subtest: unchanged executable runs in strict realm and rejects unbound this
+ok 20 - unchanged executable runs in strict realm and rejects unbound this
+  ---
+  duration_ms: 60.344166
+  type: 'test'
+  ...
+# Subtest: an initially false property cannot mask an illegal action suffix
+ok 21 - an initially false property cannot mask an illegal action suffix
+  ---
+  duration_ms: 57.918625
+  type: 'test'
+  ...
+# (node:26001) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: original AST segments prove guarded search and both annotated awaits
+ok 22 - original AST segments prove guarded search and both annotated awaits
+  ---
+  duration_ms: 6102.124
+  type: 'test'
+  ...
+# Subtest: keeps refutes overclaim; private deletion reproduces the unsound ablation
+ok 23 - keeps refutes overclaim; private deletion reproduces the unsound ablation
+  ---
+  duration_ms: 2701.577708
+  type: 'test'
+  ...
+# Subtest: AST seam preserves original statements/spans and has no witness bound
+ok 24 - AST seam preserves original statements/spans and has no witness bound
+  ---
+  duration_ms: 2.773417
+  type: 'test'
+  ...
+1..24
+# tests 49
+# suites 0
+# pass 48
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46676.733959

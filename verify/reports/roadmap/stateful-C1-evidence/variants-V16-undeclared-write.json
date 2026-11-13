@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V16-undeclared-write.ts",
+  "sourceSha256": "efafe9fff05146dc8f8e8584903ab627ace77e35358dad01aac3ef921b159f98",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "Only declared scalar bindings may be written.",
+  "span": {
+    "start": 629,
+    "end": 635
+  },
+  "line": 24,
+  "column": 3
+}

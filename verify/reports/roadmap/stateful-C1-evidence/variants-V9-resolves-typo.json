@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "variants/V9-resolves-typo.ts",
+  "sourceSha256": "363b595a4687878038160c82b53a74a65d1cba7dca1c9a6af0bacbb873add81e",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "Unsupported or misspelled contract clause resolve.",
+  "span": {
+    "start": 138,
+    "end": 172
+  },
+  "line": 5,
+  "column": 1
+}

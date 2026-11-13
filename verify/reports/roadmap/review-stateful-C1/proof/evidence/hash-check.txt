@@ -1,0 +1,25 @@
+Recomputed 2026-11-13 against git objects in
+/Users/rick/.t3/worktrees/verified-list-ui/t3-b4b48f4d.
+
+inputs.json at ae60681cd6e84ad19ba62a24d60591138cb2719f
+compared with git show 5d8415aa8279cab2f4a662b049616ce9d94a98a3:PATH
+input mismatches 0 of 42
+
+receipt.json logs compared with
+git show ae60681cd6e84ad19ba62a24d60591138cb2719f:verify/reports/roadmap/stateful-C1-evidence/NAME
+log mismatches 0 of 10
+
+pnpm-lock.yaml at 5d8415aa SHA-256
+8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21
+
+Receipt log tails (not re-executed):
+focused-02.log  c0a0e6f10e1aeb716a771352614b46bdb1cdf014ebcd12c6457f500a4baef5b3
+  # tests 47  # pass 47  # fail 0  # duration_ms 82628.307125
+full-final.log  ec6e1ba694f3779aa6b85b1e87cdfb720223f6f217ba35b7621fb5b629c19b0f
+  # tests 304  # pass 304  # fail 0  # duration_ms 440128.222667
+outcomes-01.log  1e07f61f6c1a3bf20931c79318df3f4023a115c05c82354f6e1bdd3fd4f4b048
+  # tests 29  # pass 29  # fail 0  # duration_ms 34754.691042
+
+Ancestor check:
+git merge-base --is-ancestor 32bd5b260aa116ca88642a1479bed8d3fc447f4b HEAD
+exit 0 (prepared HEAD ef21a30958eeb8977d38096f356103599f5bbad2).

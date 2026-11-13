@@ -1,0 +1,11 @@
+nbsp-after-keyword ADMITTED [ [32m'x === 1'[39m, [32m'true'[39m ] []
+zwsp-inside ADMITTED [ [32m'true'[39m ] []
+zwsp-after unsupported Unsupported or misspelled contract clause state​.
+fullwidth-a ADMITTED [ [32m'true'[39m ] []
+cyrillic-only ADMITTED [ [32m'true'[39m ] []
+tab ADMITTED [ [32m'x === 1'[39m, [32m'true'[39m ] []
+state-underscore unsupported Unsupported or misspelled contract clause state_.
+double-space-typo ADMITTED [ [32m'true'[39m ] []
+(node:92241) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:92241) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.

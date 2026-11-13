@@ -1,0 +1,464 @@
+{
+  "expected": "counterexample",
+  "file": "pilots/search-env.ts",
+  "sourceSha256": "f7f5c94d315c15ea8bb7dd0fcb179e804a3b35404d401f43694c49d91c0e23bd",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "executableSha256": "1c502d617941b8ff3fe9ba37a5cd4c5861e43044207bd994f01a9afe91ba5989",
+  "assumptions": {
+    "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+    "eventBound": null,
+    "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+    "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+    "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+    "initial": {
+      "latest": "0",
+      "shownFor": "0",
+      "shown": "0"
+    },
+    "environment": [
+      {
+        "op": "lookup",
+        "params": [
+          {
+            "name": "query",
+            "type": "number"
+          }
+        ],
+        "result": "number",
+        "resolves": [],
+        "rejects": "never-rejects",
+        "settles": "may-never-settle",
+        "settlementOrder": "any",
+        "settlementCount": "at most once per request",
+        "settlesUse": "not declared; no progress guarantee"
+      }
+    ],
+    "entries": [
+      {
+        "entry": "search",
+        "params": [
+          {
+            "name": "query",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "fairness": "none used by safety; settles eventually is recorded only",
+    "unsupported": [
+      "references",
+      "imports",
+      "handlers",
+      "cancellation",
+      "ordering/abort contracts",
+      "entry contracts",
+      "liveness",
+      "pairwise/uniqueness/count induction",
+      "nested awaits",
+      "entry-to-entry calls",
+      "unverified helpers"
+    ],
+    "sha256": "0cff46ec10940766c166478b53093f46dc076912bd34038571ef865ec8569178"
+  },
+  "unitsSha256": "145a04738ee57b72b454cebe5cbf6e54a66db1989f35bac71171a0e69edd5aac",
+  "properties": [
+    {
+      "kind": "state",
+      "text": "0 <= shownFor && shownFor <= latest",
+      "span": {
+        "start": 246,
+        "end": 290
+      }
+    },
+    {
+      "kind": "state",
+      "text": "Number.isFinite(shown)",
+      "span": {
+        "start": 291,
+        "end": 322
+      }
+    },
+    {
+      "kind": "always",
+      "text": "shownFor >= old(shownFor)",
+      "span": {
+        "start": 323,
+        "end": 358
+      }
+    }
+  ],
+  "units": [
+    {
+      "unit": "$init",
+      "kind": "init",
+      "span": {
+        "start": 246,
+        "end": 290
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        {
+          "roots": [],
+          "nodes": {}
+        }
+      ]
+    },
+    {
+      "unit": "search$0",
+      "kind": "entry",
+      "span": {
+        "start": 408,
+        "end": 453
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "0010000000000010"
+                ],
+                "shownFor": [
+                  "num",
+                  "8000000000000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000004"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1",
+      "kind": "resume",
+      "span": {
+        "start": 530,
+        "end": 590
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "counterexample",
+      "witness": [
+        "0",
+        "5b82e08440000000",
+        "0000000000000000",
+        "7ff0000010000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "5b82e08440000000"
+                ],
+                "shownFor": [
+                  "num",
+                  "5b82e08440000000"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000040"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "label": {
+        "kind": "ensures",
+        "span": {
+          "start": 291,
+          "end": 322
+        },
+        "abstract": false
+      }
+    },
+    {
+      "unit": "search$0$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 408,
+        "end": 453
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 493,
+          "end": 527
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "0000000000000000",
+        "401bfe0004b31e00",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "401bfe0004b31e00"
+                ],
+                "shownFor": [
+                  "num",
+                  "002bfe0004b31c01"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000000000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "unit": "search$1$keeps$search$1",
+      "kind": "interference",
+      "span": {
+        "start": 530,
+        "end": 590
+      },
+      "keeps": {
+        "entry": "search",
+        "span": {
+          "start": 493,
+          "end": 527
+        }
+      },
+      "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+      "status": "verified",
+      "witness": [
+        "0",
+        "4000200000000000",
+        "0000000000000000",
+        "0000000000000000",
+        "4410200000000001",
+        "0000000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "object",
+              "fields": {
+                "latest": [
+                  "num",
+                  "5020200000000004"
+                ],
+                "shownFor": [
+                  "num",
+                  "0010000000000005"
+                ],
+                "shown": [
+                  "num",
+                  "0000000000200000"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "status": "counterexample",
+  "confirmed": "strict native replay of the unchanged executable source",
+  "violated": {
+    "kind": "state",
+    "text": "Number.isFinite(shown)",
+    "span": {
+      "start": 291,
+      "end": 322
+    }
+  },
+  "trace": {
+    "version": 1,
+    "sourceSha256": "f7f5c94d315c15ea8bb7dd0fcb179e804a3b35404d401f43694c49d91c0e23bd",
+    "executableSha256": "1c502d617941b8ff3fe9ba37a5cd4c5861e43044207bd994f01a9afe91ba5989",
+    "assumptionsSha256": "0cff46ec10940766c166478b53093f46dc076912bd34038571ef865ec8569178",
+    "actions": [
+      {
+        "kind": "call",
+        "entry": "search",
+        "args": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          }
+        ]
+      },
+      {
+        "kind": "resolve",
+        "request": 1,
+        "op": "lookup",
+        "value": {
+          "type": "number",
+          "bits": "7ff8000000000000"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "step": 0,
+        "action": {
+          "kind": "init"
+        },
+        "state": {
+          "latest": {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          "shownFor": {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          "shown": {
+            "type": "number",
+            "bits": "0000000000000000"
+          }
+        }
+      },
+      {
+        "step": 1,
+        "action": {
+          "kind": "call",
+          "entry": "search",
+          "args": [
+            {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          ]
+        },
+        "state": {
+          "latest": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          "shownFor": {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          "shown": {
+            "type": "number",
+            "bits": "0000000000000000"
+          }
+        }
+      },
+      {
+        "step": 2,
+        "action": {
+          "kind": "resolve",
+          "request": 1,
+          "op": "lookup",
+          "value": {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          }
+        },
+        "state": {
+          "latest": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          "shownFor": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          "shown": {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          }
+        }
+      }
+    ]
+  },
+  "searched": {
+    "maxDepth": 4,
+    "numbers": [
+      {
+        "type": "number",
+        "bits": "0000000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "3ff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "7ff8000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "7ff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "fff0000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "8000000000000000"
+      },
+      {
+        "type": "number",
+        "bits": "0010000000000010"
+      },
+      {
+        "type": "number",
+        "bits": "0000000000000004"
+      },
+      {
+        "type": "number",
+        "bits": "5b82e08440000000"
+      },
+      {
+        "type": "number",
+        "bits": "0000000000000040"
+      }
+    ],
+    "entryArguments": [
+      0,
+      1
+    ],
+    "maxExecutions": 5000,
+    "depth": 2,
+    "executions": 8
+  },
+  "abstract": [
+    "search$1"
+  ]
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "fixture": "tests/verify/fixtures/stateful/pilots/search-env.ts",
+    "sha256": "f7f5c94d315c15ea8bb7dd0fcb179e804a3b35404d401f43694c49d91c0e23bd",
+    "original": "6d2cdfcae3b027b8a17dc606983c3083860e4bd3:verify/reports/roadmap/candidate-stateful-claude/prototype/pilots/search-env.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/pilots/search-gap.ts",
+    "sha256": "4e8afd57619eeedbd2f59669a16f487a8abd190a84c615b0045c2ab68dce232f",
+    "original": "6d2cdfcae3b027b8a17dc606983c3083860e4bd3:verify/reports/roadmap/candidate-stateful-claude/prototype/pilots/search-gap.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/pilots/search-overclaim.ts",
+    "sha256": "aef7948cf705c530c6b1844de83f3404d21f350baeb5797e5dd8f76d40ba9004",
+    "original": "6d2cdfcae3b027b8a17dc606983c3083860e4bd3:verify/reports/roadmap/candidate-stateful-claude/prototype/pilots/search-overclaim.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/pilots/search-stale.ts",
+    "sha256": "ee0ce5440aad45acd72e58d6678cee3fac3eaa3fa2e92ad54171903ab7bf63b1",
+    "original": "6d2cdfcae3b027b8a17dc606983c3083860e4bd3:verify/reports/roadmap/candidate-stateful-claude/prototype/pilots/search-stale.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/pilots/search-unsupported.ts",
+    "sha256": "3cd34a591efe4614344459eb2f89108348e9a27a84c80166db886f8870b54876",
+    "original": "6d2cdfcae3b027b8a17dc606983c3083860e4bd3:verify/reports/roadmap/candidate-stateful-claude/prototype/pilots/search-unsupported.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/pilots/search.ts",
+    "sha256": "240391c0b3f0b50c791e1393abca5ea881ad2db81c90e73b8dba7585211aaeb9",
+    "original": "6d2cdfcae3b027b8a17dc606983c3083860e4bd3:verify/reports/roadmap/candidate-stateful-claude/prototype/pilots/search.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V1-leads-no-settles.ts",
+    "sha256": "6f0acc1772265e3a821bbaf66ec5a52dc548e13819512bb3bad68a1abdf1d3b6",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V1-leads-no-settles.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V10-rejects-sometimes.ts",
+    "sha256": "df6d42ecd275e7d4d4a93b881d7706c7ff9b50e5486d629073635c521c1f7430",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V10-rejects-sometimes.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V11-rejects.ts",
+    "sha256": "33ef92574541756ed9603a065ec891ebc12fd41fe4f1691953cbc08c99128b38",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V11-rejects.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V14-entry-calls-entry.ts",
+    "sha256": "ef6b4f980c1350804157b4068fd6870d276e49df8fbe84f03c8707e8541dac54",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V14-entry-calls-entry.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V15-old-in-state.ts",
+    "sha256": "c5ee36921383be5edcf8aa4919e764c65940f6e7d9f71fc4c23e7a9f428aad7e",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V15-old-in-state.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V16-undeclared-write.ts",
+    "sha256": "efafe9fff05146dc8f8e8584903ab627ace77e35358dad01aac3ef921b159f98",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V16-undeclared-write.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V18-two-awaits.ts",
+    "sha256": "2649614b15e7127a5e384724afabcd2dad9f100b137b9e0b96b1ae6ea5fa950d",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V18-two-awaits.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V18b-two-awaits-annotated.ts",
+    "sha256": "b7670d2008679938c4f04ae77c8cb02b2a8ea015b11d32db4be02d9a3370fd70",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V18b-two-awaits-annotated.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V1b-leads-settles.ts",
+    "sha256": "3c3a56e68dd2871261b514c0f3267171af106a7437cb1db363a998841e45c3ec",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V1b-leads-settles.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V2-entry-ensures-false.ts",
+    "sha256": "14f3e84462e3070208574108d498e8400319d18c90ce41fe3d08efb502dd46ba",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V2-entry-ensures-false.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V3-state-colon-typo.ts",
+    "sha256": "2a605602add676a1b596b840263cd18b813af235a28c95a52feca0a007006906",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V3-state-colon-typo.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V4-block-comment-state.ts",
+    "sha256": "d049d99ffd6786f1dabdce589d7a7aa0a5c321ab4b2cdc890b5962944d8dc6f5",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V4-block-comment-state.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V5-no-properties.ts",
+    "sha256": "97bce0a5e840d55ffc56b19a677fe5035b43a2fa378083c5160049a21cb0559c",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V5-no-properties.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V5b-no-properties-no-pending.ts",
+    "sha256": "da81526b187b55b9c8f4cc179bf085e57329cf59f8c84e1d3caed5f59069151c",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V5b-no-properties-no-pending.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V6-inflight-count.ts",
+    "sha256": "586bbae13db57f0d5ee1327448c551654f49a7aedb52d8a1fb0a9f0a23e10b04",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V6-inflight-count.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V7-latest-2p53.ts",
+    "sha256": "dd363489b4ff802655e3d5e98439acd53064ffd5438b80383d02aed2e5e91b87",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V7-latest-2p53.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V8-second-entry-clear.ts",
+    "sha256": "6176a743050292ca3a5afcde283c759cb9d73b1ac842f0efca74e5ddb6cb522f",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V8-second-entry-clear.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V8b-second-entry-reset.ts",
+    "sha256": "bd27ac6ef67656d7c2639be1be7b09f7d2c164bc00ff2ba397ce6b29f3e0e494",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V8b-second-entry-reset.ts",
+    "recoverySha256Checked": true
+  },
+  {
+    "fixture": "tests/verify/fixtures/stateful/variants/V9-resolves-typo.ts",
+    "sha256": "363b595a4687878038160c82b53a74a65d1cba7dca1c9a6af0bacbb873add81e",
+    "original": "dd657b7bcac613f11c270dd747a957c387921986:verify/reports/roadmap/judgment-stateful/probes/a-variants/V9-resolves-typo.ts",
+    "recoverySha256Checked": true
+  }
+]

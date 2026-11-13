@@ -1,0 +1,21 @@
+{
+  "expected": "unsupported",
+  "file": "pilots/search-unsupported.ts",
+  "sourceSha256": "3cd34a591efe4614344459eb2f89108348e9a27a84c80166db886f8870b54876",
+  "trusted": [
+    "Acorn and Node type stripping",
+    "closed stateful frontend and AST binding rewrites",
+    "existing source body/expression/heap compiler",
+    "representative init/step/keeps induction",
+    "existing proof scheduler and Z3 binary64 backend",
+    "strict native JavaScript replay and timed process containment"
+  ],
+  "status": "unsupported",
+  "message": "await must be a top-level const binding or expression statement.",
+  "span": {
+    "start": 527,
+    "end": 546
+  },
+  "line": 20,
+  "column": 19
+}

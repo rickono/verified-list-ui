@@ -1,0 +1,990 @@
+{
+  "grammar": [
+    {
+      "id": "homoglyph-state",
+      "phase": "compiled",
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false
+    },
+    {
+      "id": "only-homoglyph",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "No state or always property; pending clauses alone cannot establish safety.",
+      "status": "unsupported"
+    },
+    {
+      "id": "block-state",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "Contract-looking block comments are unsupported; use one line per clause.",
+      "status": "unsupported"
+    },
+    {
+      "id": "ensures-false",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "Unsupported or misspelled contract clause ensures.",
+      "status": "unsupported"
+    },
+    {
+      "id": "no-properties",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "No state or always property; pending clauses alone cannot establish safety.",
+      "status": "unsupported"
+    },
+    {
+      "id": "typo-staet",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "Unsupported or misspelled contract clause staet.",
+      "status": "unsupported"
+    },
+    {
+      "id": "env-unknown",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "Unknown line in environment block.",
+      "status": "unsupported"
+    },
+    {
+      "id": "do-while",
+      "phase": "transitions",
+      "error": "SourceError",
+      "message": "Unsupported DoWhileStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected.",
+      "status": "unsupported",
+      "line": "at fail (file:///private/tmp/c1-review-stateful/verify/error.mjs:10:9)"
+    },
+    {
+      "id": "for-of",
+      "phase": "transitions",
+      "error": "SourceError",
+      "message": "Unsupported ForOfStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected.",
+      "status": "unsupported",
+      "line": "at fail (file:///private/tmp/c1-review-stateful/verify/error.mjs:10:9)"
+    },
+    {
+      "id": "switch",
+      "phase": "transitions",
+      "error": "SourceError",
+      "message": "Unsupported SwitchStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected.",
+      "status": "unsupported",
+      "line": "at fail (file:///private/tmp/c1-review-stateful/verify/error.mjs:10:9)"
+    },
+    {
+      "id": "void-assign",
+      "phase": "transitions",
+      "error": "SourceError",
+      "message": "Unsupported unary operator void.",
+      "status": "unsupported",
+      "line": "at fail (file:///private/tmp/c1-review-stateful/verify/error.mjs:10:9)"
+    },
+    {
+      "id": "delete-cell",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "Deleting local variable in strict mode (3:31)",
+      "status": "unsupported"
+    },
+    {
+      "id": "shadow-branch",
+      "phase": "machine",
+      "error": "SourceError",
+      "message": "Duplicate, shadowed or reserved binding t.",
+      "status": "unsupported"
+    },
+    {
+      "id": "while-false",
+      "phase": "transitions",
+      "error": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'decreases')",
+      "line": "at loop (file:///private/tmp/c1-review-stateful/verify/source.mjs:894:13)"
+    },
+    {
+      "id": "for-false",
+      "phase": "transitions",
+      "error": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'decreases')",
+      "line": "at loop (file:///private/tmp/c1-review-stateful/verify/source.mjs:894:13)"
+    },
+    {
+      "id": "while-true-inc",
+      "phase": "transitions",
+      "error": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'decreases')",
+      "line": "at loop (file:///private/tmp/c1-review-stateful/verify/source.mjs:894:13)"
+    }
+  ],
+  "cases": [
+    {
+      "id": "old-decrease",
+      "note": "reachable decrease; old must be pre-step",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "old-increment-inductive",
+      "note": "positive control if inductive",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        }
+      ],
+      "allPass": true,
+      "executableCleared": true,
+      "native": {
+        "status": "ok",
+        "violation": null,
+        "state": {
+          "x": 2
+        }
+      },
+      "falseProof": false
+    },
+    {
+      "id": "identity-after-write",
+      "note": "post-state old would prove this",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "plus-one-relation",
+      "note": "holds on reachable +1; may be non-inductive at the top of binary64",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        }
+      ],
+      "allPass": true,
+      "executableCleared": true,
+      "native": {
+        "status": "ok",
+        "violation": null,
+        "state": {
+          "x": 1
+        }
+      },
+      "falseProof": false
+    },
+    {
+      "id": "signed-zero-neg",
+      "note": "negating zero yields -0",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "mul-zero-sign",
+      "note": "(-1)*0 is -0",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "postfix-assign",
+      "note": "x = x++ keeps x",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "postfix-stays",
+      "note": "must not treat postfix as increment",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "prefix-increments",
+      "note": "second call leaves 3",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "dead-else-live",
+      "note": "dead write must not be required",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        }
+      ],
+      "allPass": true,
+      "executableCleared": true,
+      "native": {
+        "status": "ok",
+        "violation": null,
+        "state": {
+          "x": 0
+        }
+      },
+      "falseProof": false
+    },
+    {
+      "id": "dead-write-as-live",
+      "note": "dead write must not happen",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "and-assign",
+      "note": "assignment in && must run",
+      "error": "SourceError",
+      "message": "Expected boolean; this JavaScript coercion is unsupported.",
+      "status": "unsupported",
+      "stack": [
+        "Error: Expected boolean; this JavaScript coercion is unsupported.",
+        "    at fail (file:///private/tmp/c1-review-stateful/verify/error.mjs:10:9)",
+        "    at need (file:///private/tmp/c1-review-stateful/verify/data.mjs:77:24)",
+        "    at Module.logical (file:///private/tmp/c1-review-stateful/verify/data.mjs:174:20)"
+      ]
+    },
+    {
+      "id": "or-assign",
+      "note": "assignment in || must run when false",
+      "error": "SourceError",
+      "message": "Expected boolean; this JavaScript coercion is unsupported.",
+      "status": "unsupported",
+      "stack": [
+        "Error: Expected boolean; this JavaScript coercion is unsupported.",
+        "    at fail (file:///private/tmp/c1-review-stateful/verify/error.mjs:10:9)",
+        "    at need (file:///private/tmp/c1-review-stateful/verify/data.mjs:77:24)",
+        "    at Module.logical (file:///private/tmp/c1-review-stateful/verify/data.mjs:174:20)"
+      ]
+    },
+    {
+      "id": "cond-assign",
+      "note": "assignment in condition",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "overflow-sum",
+      "note": "MAX_VALUE+MAX_VALUE is Infinity",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "nan-sub",
+      "note": "Infinity-Infinity is NaN",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "entry-nan",
+      "note": "parameter can be NaN",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "capture-after-write",
+      "note": "request must see x after the write",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0",
+        "f$1"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        },
+        {
+          "unit": "f$1",
+          "kind": "resume",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "second-await-stale",
+      "note": "second request must see x === 2",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0",
+        "f$1",
+        "f$2"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        },
+        {
+          "unit": "f$1",
+          "kind": "resume",
+          "status": "verified"
+        },
+        {
+          "unit": "f$2",
+          "kind": "resume",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "snap-not-cell",
+      "note": "literal correlation uses the const snap, not the updated cell",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0",
+        "f$1"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        },
+        {
+          "unit": "f$1",
+          "kind": "resume",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "two-ops",
+      "note": "await a must not inherit b's resolves",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0",
+        "f$1"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        },
+        {
+          "unit": "f$1",
+          "kind": "resume",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "unsat-resolves-hide-write",
+      "note": "creation write must not be discharged by later contradictory resolves",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0",
+        "f$1"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$1",
+          "kind": "resume",
+          "status": "vacuous"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "reject-strict",
+      "note": "rejection stutter must not satisfy a strict increase",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0",
+        "f$1",
+        "$reject"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$1",
+          "kind": "resume",
+          "status": "counterexample"
+        },
+        {
+          "unit": "$reject",
+          "kind": "stutter",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "conditional-reset",
+      "note": "conditional clear must preserve shownFor <= latest",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "search$0",
+        "search$1",
+        "reset$0",
+        "search$0$keeps$search$1",
+        "search$1$keeps$search$1",
+        "reset$0$keeps$search$1"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "search$0",
+          "kind": "entry",
+          "status": "verified"
+        },
+        {
+          "unit": "search$1",
+          "kind": "resume",
+          "status": "verified"
+        },
+        {
+          "unit": "reset$0",
+          "kind": "entry",
+          "status": "counterexample"
+        },
+        {
+          "unit": "search$0$keeps$search$1",
+          "kind": "interference",
+          "status": "verified"
+        },
+        {
+          "unit": "search$1$keeps$search$1",
+          "kind": "interference",
+          "status": "verified"
+        },
+        {
+          "unit": "reset$0$keeps$search$1",
+          "kind": "interference",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "assign-in-test",
+      "note": "assignment in a condition must update the cell",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "search$0",
+        "search$1",
+        "reset$0",
+        "search$0$keeps$search$1",
+        "search$1$keeps$search$1",
+        "reset$0$keeps$search$1"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "search$0",
+          "kind": "entry",
+          "status": "verified"
+        },
+        {
+          "unit": "search$1",
+          "kind": "resume",
+          "status": "verified"
+        },
+        {
+          "unit": "reset$0",
+          "kind": "entry",
+          "status": "counterexample"
+        },
+        {
+          "unit": "search$0$keeps$search$1",
+          "kind": "interference",
+          "status": "verified"
+        },
+        {
+          "unit": "search$1$keeps$search$1",
+          "kind": "interference",
+          "status": "verified"
+        },
+        {
+          "unit": "reset$0$keeps$search$1",
+          "kind": "interference",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "inverted-guard",
+      "note": "inverted latest-wins guard displays the stale id",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "search$0",
+        "search$1",
+        "search$0$keeps$search$1",
+        "search$1$keeps$search$1"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "search$0",
+          "kind": "entry",
+          "status": "verified"
+        },
+        {
+          "unit": "search$1",
+          "kind": "resume",
+          "status": "counterexample"
+        },
+        {
+          "unit": "search$0$keeps$search$1",
+          "kind": "interference",
+          "status": "verified"
+        },
+        {
+          "unit": "search$1$keeps$search$1",
+          "kind": "interference",
+          "status": "verified"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "chain-assign",
+      "note": "outer assignment stores 2, not the intermediate sum 5",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "always-false",
+      "note": "always false is a real obligation",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "state-false",
+      "note": "init must defeat an unsatisfiable invariant",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "vacuous"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "init-mismatch",
+      "note": "initial cells are observed before any call",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "counterexample"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "verified"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    },
+    {
+      "id": "both-branches-decrement",
+      "note": "both branches decrease",
+      "eventBound": null,
+      "units": [
+        "$init",
+        "f$0"
+      ],
+      "statuses": [
+        {
+          "unit": "$init",
+          "kind": "init",
+          "status": "verified"
+        },
+        {
+          "unit": "f$0",
+          "kind": "entry",
+          "status": "counterexample"
+        }
+      ],
+      "allPass": false,
+      "executableCleared": true
+    }
+  ],
+  "api": [
+    {
+      "id": "checkStateful-while",
+      "name": "TypeError",
+      "message": "Cannot read properties of undefined (reading 'decreases')",
+      "top": "at loop (file:///private/tmp/c1-review-stateful/verify/source.mjs:894:13)"
+    },
+    {
+      "id": "machine-nonsource",
+      "name": "TypeError",
+      "message": "checkStateful accepts a file name and source text, never a transition relation."
+    }
+  ]
+}

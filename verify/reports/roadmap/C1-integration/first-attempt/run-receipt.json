@@ -1,0 +1,19 @@
+{
+  "head": "74c3747afd1c60d334b8c0713be5786dc715111a",
+  "focusedPassed": 48,
+  "focusedFailed": 1,
+  "fullStarted": false,
+  "failure": "Comparison used pre-P/numeric e435c8a baseline instead of landed main; callback-bugs.ts complete compiled artifact differed.",
+  "historicalOutputsWrittenByTest": [
+    "verify/reports/roadmap/stateful-C1-evidence/pilots-search-gap.json",
+    "verify/reports/roadmap/stateful-C1-evidence/pilots-search-overclaim.json",
+    "verify/reports/roadmap/stateful-C1-evidence/pilots-search-stale.json",
+    "verify/reports/roadmap/stateful-C1-evidence/variants-V11-rejects.json",
+    "verify/reports/roadmap/stateful-C1-evidence/variants-V18-two-awaits.json",
+    "verify/reports/roadmap/stateful-C1-evidence/variants-V18b-two-awaits-annotated.json",
+    "verify/reports/roadmap/stateful-C1-evidence/variants-V7-latest-2p53.json",
+    "verify/reports/roadmap/stateful-C1-evidence/variants-V8-second-entry-clear.json",
+    "verify/reports/roadmap/stateful-C1-evidence/variants-V8b-second-entry-reset.json"
+  ],
+  "generatedOutputsPreserved": true
+}

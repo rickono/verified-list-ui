@@ -129,6 +129,30 @@ bug artifact. `replay` is an alias for `reproduce`. JSON reports expose cache hi
 misses, actual solver work, writes, rejection reasons, blocked callees, and audit
 disagreements. The default report shape and uncached outcome policy are unchanged.
 
+## Stateful safety foundation
+
+`checkStateful` checks scalar module state across external entry calls and
+top-level awaits under explicit environment contracts:
+
+```js
+import {readFileSync} from 'node:fs';
+import {checkStateful} from './verify/stateful/index.mjs';
+
+const file = 'tests/verify/fixtures/stateful/pilots/search.ts';
+console.log(await checkStateful(file, readFileSync(file, 'utf8')));
+```
+
+The proof checks initialization, arbitrary steps and interference with every
+other pending activation. Native trace replay confirms property failures.
+Witness-search depth never bounds a proof. Number/boolean state, immutable
+primitive captures and declared operation outcomes are supported. The scheduler
+drains microtasks between external actions. Cancellation, listeners, reference
+state and liveness remain future work; settling assumptions are unused by
+safety. This API has its own source subset and does not use P caching.
+
+See [the safety foundation receipt](reports/roadmap/C1-landing.md) for scope,
+assumptions, independent reviews and the final 371-test combined run.
+
 ## Write a contract
 
 Put one expression per contract line directly above a function declaration or a `const` function expression:
@@ -486,6 +510,9 @@ The [pinned Lodash search fixture](examples/lodash/README.md) proves an unchange
 The [pinned es-toolkit fixture](examples/es-toolkit/README.md) proves only the documented empty-array results of unchanged `sum` and `mean`: `+0` and NaN. `mean` composes through its original `./sum.ts` import. Wrong signed-zero and NaN claims and a seeded return bug produce native-confirmed counterexamples. No nonempty or real-number property is claimed. Run `node verify/examples/es-toolkit/check.mjs`.
 
 ## Supported source
+
+This section describes `verify`, `verifyFile` and the CLI. The
+[stateful safety API](#stateful-safety-foundation) has its own source subset.
 
 Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings with simple names outside the builtin and verifier set, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
 
