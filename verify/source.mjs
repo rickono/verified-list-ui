@@ -679,8 +679,16 @@ function readAnnotation(text, node) {
   return text.slice(first.end).trim();
 }
 
+// An ordinary body-local let, const or var may be named result. It lives only
+// in the body scope chain: requires, ensures, old(...) entries and callee
+// summaries are built from separate maps, and ensures binds the contract
+// result after the body is compiled. Loop invariants and decreases read the
+// live local. Parameters, callbacks, functions, module bindings and type
+// aliases keep the full RESERVED set through bind, closure, header and parse.
+const LOCAL_RESERVED = new Set([...RESERVED].filter((name) => name !== "result"));
+
 function localName(id) {
-  if (id.type !== "Identifier" || RESERVED.has(id.name)) fail("Local declarations need simple, nonreserved names.", id);
+  if (id.type !== "Identifier" || LOCAL_RESERVED.has(id.name)) fail("Local declarations need simple, nonreserved names.", id);
 }
 
 function varBindings(node, env) {
