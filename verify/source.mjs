@@ -1232,6 +1232,19 @@ function body(h, scope) {
   });
 }
 
+/** Internal compiler boundary for original AST fragments in generated wrappers.
+ * Bindings/types are resolved by the frontend; scalar, heap and expression
+ * semantics remain those of body(). This boundary has no scheduling policy.
+ * Such targets have no standalone executable: their owner replays source.
+ */
+export function compileAstUnit({ file, source, stripped, tokens }, header) {
+  const h = { annotations: [], spec: false, loops: new Map(), ...header, file, id: `${file}#${header.name}` };
+  const scope = { file, source, stripped, tokens, names: new Map(),
+    validateType: (text, at) => data.parseType(text, at),
+  };
+  return { ...body(h, scope), executable: undefined };
+}
+
 /** Parse captured source without executing it or reading dependencies directly. */
 export function parse(file, source, resolve) {
   return blame(file, undefined, () => {
