@@ -1,0 +1,414 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:65126) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: array and object examples verify against ordinary source
+ok 1 - array and object examples verify against ordinary source
+  ---
+  duration_ms: 2087.774292
+  type: 'test'
+  ...
+# Subtest: an empty array is a concrete undefined counterexample
+ok 2 - an empty array is a concrete undefined counterexample
+  ---
+  duration_ms: 160.785583
+  type: 'test'
+  ...
+# Subtest: undefined remains distinct from NaN, including after arithmetic
+ok 3 - undefined remains distinct from NaN, including after arithmetic
+  ---
+  duration_ms: 1832.215791
+  type: 'test'
+  ...
+# Subtest: out-of-range, fractional, infinite and NaN indices give undefined
+ok 4 - out-of-range, fractional, infinite and NaN indices give undefined
+  ---
+  duration_ms: 2953.446167
+  type: 'test'
+  ...
+# Subtest: array element witnesses preserve NaN and signed zero
+ok 5 - array element witnesses preserve NaN and signed zero
+  ---
+  duration_ms: 1049.190459
+  type: 'test'
+  ...
+# Subtest: an undefined index with a cached integer payload cannot read an array element
+ok 6 - an undefined index with a cached integer payload cannot read an array element
+  ---
+  duration_ms: 183.7425
+  type: 'test'
+  ...
+# Subtest: slice normalization agrees with V8 for numeric edge cases
+ok 7 - slice normalization agrees with V8 for numeric edge cases
+  ---
+  duration_ms: 470.361416
+  type: 'test'
+  ...
+# Subtest: array length proofs include the full native length range
+ok 8 - array length proofs include the full native length range
+  ---
+  duration_ms: 1350.421333
+  type: 'test'
+  ...
+# Subtest: the solver shrinks large models only for witness replay
+ok 9 - the solver shrinks large models only for witness replay
+  ---
+  duration_ms: 689.191833
+  type: 'test'
+  ...
+# Subtest: optional record values survive fallback and conditional joins
+ok 10 - optional record values survive fallback and conditional joins
+  ---
+  duration_ms: 186.787542
+  type: 'test'
+  ...
+# Subtest: spread distinguishes absent keys from own undefined properties
+ok 11 - spread distinguishes absent keys from own undefined properties
+  ---
+  duration_ms: 214.930875
+  type: 'test'
+  ...
+# Subtest: a record-bound bug has a structured, source-confirmed witness
+ok 12 - a record-bound bug has a structured, source-confirmed witness
+  ---
+  duration_ms: 200.844333
+  type: 'test'
+  ...
+# Subtest: nested records/array fields and balanced-brace JSDoc work
+ok 13 - nested records/array fields and balanced-brace JSDoc work
+  ---
+  duration_ms: 1242.493542
+  type: 'test'
+  ...
+# Subtest: record field names cannot collide with witness metadata
+ok 14 - record field names cannot collide with witness metadata
+  ---
+  duration_ms: 152.702916
+  type: 'test'
+  ...
+# Subtest: boolean arrays retain false and undefined through logical operators
+ok 15 - boolean arrays retain false and undefined through logical operators
+  ---
+  duration_ms: 1605.245708
+  type: 'test'
+  ...
+# Subtest: shape-changing methods, sparse arrays, and exotic data remain unsupported
+ok 16 - shape-changing methods, sparse arrays, and exotic data remain unsupported
+  ---
+  duration_ms: 1.583
+  type: 'test'
+  ...
+# Subtest: reference identity verifies and unpermitted array stores produce confirmed violations
+ok 17 - reference identity verifies and unpermitted array stores produce confirmed violations
+  ---
+  duration_ms: 985.23
+  type: 'test'
+  ...
+# Subtest: the seeded corpus compares accepted semantics and reported witnesses with independent native execution
+ok 18 - the seeded corpus compares accepted semantics and reported witnesses with independent native execution
+  ---
+  duration_ms: 29267.151875
+  type: 'test'
+  ...
+# {"seed":1592643597,"fixtures":58,"functions":574,"nativeSamples":667,"counterexamples":20}
+# Subtest: semantic and verdict-policy mutants are detected in isolated verifier copies after passing controls
+ok 19 - semantic and verdict-policy mutants are detected in isolated verifier copies after passing controls
+  ---
+  duration_ms: 0.081375
+  type: 'test'
+  ...
+# [{"id":"addition-is-subtraction","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"samevalue-is-numeric-equality","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"slice-default-skips-first","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"spread-ignores-own-undefined","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"call-obligations-erased","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"unconfirmed-bug-accepted","observed":{"status":"counterexample"}},{"id":"final-dependency-gate-erased","observed":{"status":"verified"}},{"id":"replay-limit-becomes-proof-bound","observed":{"status":"verified"}},{"id":"loop-preservation-erased","observed":{"status":"verified"}},{"id":"loop-termination-erased","observed":{"status":"verified"}},{"id":"predicate-zeros-collapsed","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"predicate-number-keys-collapsed","observed":{"status":"unknown","reason":"replay-mismatch"}}]
+# Subtest: the seed reproduces corpus sources and changes sampled numeric inputs
+ok 20 - the seed reproduces corpus sources and changes sampled numeric inputs
+  ---
+  duration_ms: 9.352833
+  type: 'test'
+  ...
+# Subtest: exact predecessor views agree with native arithmetic, comparisons, ranks and signed zeros at the u32 edges
+ok 21 - exact predecessor views agree with native arithmetic, comparisons, ranks and signed zeros at the u32 edges
+  ---
+  duration_ms: 200.186834
+  type: 'test'
+  ...
+# (node:65547) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: absence disables integer shadows and constant-one arithmetic shortcuts
+ok 22 - absence disables integer shadows and constant-one arithmetic shortcuts
+  ---
+  duration_ms: 141.133292
+  type: 'test'
+  ...
+# Subtest: bounded loop parameters preserve negative zero and old values
+ok 23 - bounded loop parameters preserve negative zero and old values
+  ---
+  duration_ms: 409.581875
+  type: 'test'
+  ...
+# Subtest: fractional or disjunctive parameter domains never acquire integer assumptions
+ok 24 - fractional or disjunctive parameter domains never acquire integer assumptions
+  ---
+  duration_ms: 403.161542
+  type: 'test'
+  ...
+# Subtest: bounded parameter links cannot hide an undefined precondition
+ok 25 - bounded parameter links cannot hide an undefined precondition
+  ---
+  duration_ms: 189.30325
+  type: 'test'
+  ...
+# Subtest: a u32 predecessor initialization retains its -1 sentinel and both zero signs
+ok 26 - a u32 predecessor initialization retains its -1 sentinel and both zero signs
+  ---
+  duration_ms: 726.868042
+  type: 'test'
+  ...
+# Subtest: a changing optional bound cannot narrow another loop variable to its entry range
+ok 27 - a changing optional bound cannot narrow another loop variable to its entry range
+  ---
+  duration_ms: 274.24125
+  type: 'test'
+  ...
+# Subtest: nonnegative safe-integer shadows retain signed zero and the entire safe range
+ok 28 - nonnegative safe-integer shadows retain signed zero and the entire safe range
+  ---
+  duration_ms: 669.1035
+  type: 'test'
+  ...
+# Subtest: safe-integer metadata cannot erase earlier requires-definedness failures
+ok 29 - safe-integer metadata cannot erase earlier requires-definedness failures
+  ---
+  duration_ms: 262.044917
+  type: 'test'
+  ...
+# (node:65641) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: array search proves bounds, absence and first match; counting supports continue
+ok 30 - array search proves bounds, absence and first match; counting supports continue
+  ---
+  duration_ms: 4528.661042
+  type: 'test'
+  ...
+# Subtest: an off-by-one return is a replay-confirmed source bug
+ok 31 - an off-by-one return is a replay-confirmed source bug
+  ---
+  duration_ms: 4800.823542
+  type: 'test'
+  ...
+# Subtest: verified loop helpers compose across module boundaries
+ok 32 - verified loop helpers compose across module boundaries
+  ---
+  duration_ms: 4096.001916
+  type: 'test'
+  ...
+# Subtest: the CLI distinguishes located induction gaps from confirmed bugs
+ok 33 - the CLI distinguishes located induction gaps from confirmed bugs
+  ---
+  duration_ms: 399.8425
+  type: 'test'
+  ...
+# Subtest: wrong initialization, preservation and constant ranks give located induction gaps
+ok 34 - wrong initialization, preservation and constant ranks give located induction gaps
+  ---
+  duration_ms: 869.472583
+  type: 'test'
+  ...
+# Subtest: native rank arithmetic stays rounded; explicit real arithmetic is exact
+ok 35 - native rank arithmetic stays rounded; explicit real arithmetic is exact
+  ---
+  duration_ms: 2623.4855
+  type: 'test'
+  ...
+# Subtest: rank drops larger than one are accepted; positive fractional drops are insufficient
+ok 36 - rank drops larger than one are accepted; positive fractional drops are insufficient
+  ---
+  duration_ms: 1012.213958
+  type: 'test'
+  ...
+# Subtest: old in loop contracts refers only to function-entry parameters
+ok 37 - old in loop contracts refers only to function-entry parameters
+  ---
+  duration_ms: 1445.573084
+  type: 'test'
+  ...
+# Subtest: a binary64 increment that stalls at 2^53 cannot verify termination
+ok 38 - a binary64 increment that stalls at 2^53 cannot verify termination
+  ---
+  duration_ms: 979.515292
+  type: 'test'
+  ...
+# Subtest: loop-head havoc preserves optional values and both signs of zero
+ok 39 - loop-head havoc preserves optional values and both signs of zero
+  ---
+  duration_ms: 2609.458958
+  type: 'test'
+  ...
+# Subtest: a scalar that becomes undefined is widened before checking loop exits
+ok 40 - a scalar that becomes undefined is widened before checking loop exits
+  ---
+  duration_ms: 2433.497583
+  type: 'test'
+  ...
+# Subtest: break restores shadowed locals and does not run a for update
+ok 41 - break restores shadowed locals and does not run a for update
+  ---
+  duration_ms: 763.676958
+  type: 'test'
+  ...
+# Subtest: continue exits block scope before running the outer for update
+ok 42 - continue exits block scope before running the outer for update
+  ---
+  duration_ms: 177.404334
+  type: 'test'
+  ...
+# Subtest: writes under false guards do not freeze loop-carried state
+ok 43 - writes under false guards do not freeze loop-carried state
+  ---
+  duration_ms: 176.568625
+  type: 'test'
+  ...
+# Subtest: calls inside loop iterations still require replay-confirmed domain safety
+ok 44 - calls inside loop iterations still require replay-confirmed domain safety
+  ---
+  duration_ms: 190.0145
+  type: 'test'
+  ...
+# Subtest: loop initialization cannot use a later helper's postcondition
+ok 45 - loop initialization cannot use a later helper's postcondition
+  ---
+  duration_ms: 267.721625
+  type: 'test'
+  ...
+# Subtest: partial real invariants and rank expressions must be defined
+ok 46 - partial real invariants and rank expressions must be defined
+  ---
+  duration_ms: 568.56925
+  type: 'test'
+  ...
+# Subtest: loop witness preferences never become proof bounds
+ok 47 - loop witness preferences never become proof bounds
+  ---
+  duration_ms: 157.756542
+  type: 'test'
+  ...
+# Subtest: precondition definedness replay does not inherit an unexecuted loop's rank preference
+ok 48 - precondition definedness replay does not inherit an unexecuted loop's rank preference
+  ---
+  duration_ms: 150.54425
+  type: 'test'
+  ...
+# Subtest: rank thresholds agree with exact integer arithmetic at the 53-bit shadow limit
+ok 49 - rank thresholds agree with exact integer arithmetic at the 53-bit shadow limit
+  ---
+  duration_ms: 155.34025
+  type: 'test'
+  ...
+# Subtest: unsupported loop shapes, writes and misplaced contracts fail closed
+ok 50 - unsupported loop shapes, writes and misplaced contracts fail closed
+  ---
+  duration_ms: 3.272625
+  type: 'test'
+  ...
+# (node:65732) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: numeric gate N01-challenge-safe-eq: public proof and unchanged native source
+ok 51 - numeric gate N01-challenge-safe-eq: public proof and unchanged native source
+  ---
+  duration_ms: 675.679042
+  type: 'test'
+  ...
+# Subtest: numeric gate N08-half-signed-zero: public proof and unchanged native source
+ok 52 - numeric gate N08-half-signed-zero: public proof and unchanged native source
+  ---
+  duration_ms: 200.815375
+  type: 'test'
+  ...
+# Subtest: numeric gate N17-index-wrap-pos-2p32: public proof and unchanged native source
+ok 53 - numeric gate N17-index-wrap-pos-2p32: public proof and unchanged native source
+  ---
+  duration_ms: 4416.122625
+  type: 'test'
+  ...
+# Subtest: numeric gate N21-index-int-pos: public proof and unchanged native source
+ok 54 - numeric gate N21-index-int-pos: public proof and unchanged native source
+  ---
+  duration_ms: 14139.975125
+  type: 'test'
+  ...
+# Subtest: numeric gate N23-index-fp-nan: public proof and unchanged native source
+ok 55 - numeric gate N23-index-fp-nan: public proof and unchanged native source
+  ---
+  duration_ms: 1104.849708
+  type: 'test'
+  ...
+# Subtest: numeric gate N24-index-negzero-pos: public proof and unchanged native source
+ok 56 - numeric gate N24-index-negzero-pos: public proof and unchanged native source
+  ---
+  duration_ms: 621.338541
+  type: 'test'
+  ...
+# Subtest: numeric gate N41-optional-field: public proof and unchanged native source
+ok 57 - numeric gate N41-optional-field: public proof and unchanged native source
+  ---
+  duration_ms: 344.061458
+  type: 'test'
+  ...
+# Subtest: numeric gate N21b-index-int-pos: public proof and unchanged native source
+ok 58 - numeric gate N21b-index-int-pos: public proof and unchanged native source
+  ---
+  duration_ms: 9174.893125
+  type: 'test'
+  ...
+# Subtest: nested signed and half-integer merges retain exact numerical cancellation
+ok 59 - nested signed and half-integer merges retain exact numerical cancellation
+  ---
+  duration_ms: 784.174792
+  type: 'test'
+  ...
+# Subtest: uncertain arithmetic, unary, builtin and index consumers preserve absence and special numbers
+ok 60 - uncertain arithmetic, unary, builtin and index consumers preserve absence and special numbers
+  ---
+  duration_ms: 653.233041
+  type: 'test'
+  ...
+# Subtest: mixed present and absent nested merges never acquire finite integer facts
+ok 61 - mixed present and absent nested merges never acquire finite integer facts
+  ---
+  duration_ms: 365.045083
+  type: 'test'
+  ...
+# Subtest: straight-line stores keep their domain obligation and writing loops stay unsupported
+ok 62 - straight-line stores keep their domain obligation and writing loops stay unsupported
+  ---
+  duration_ms: 666.199292
+  type: 'test'
+  ...
+# Subtest: width and index guard mutants are killed by native-refuted public proofs
+ok 63 - width and index guard mutants are killed by native-refuted public proofs
+  ---
+  duration_ms: 7953.849792
+  type: 'test'
+  ...
+# [{"id":"cap64","case":"N02-challenge-safe-cmp","patch":{"from":"const INT_WIDTH = 53;","to":"const INT_WIDTH = 64;"},"sourceSha256":"63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6","mutantSha256":"e62e06ac83ecae82e8b4a299de7aa0331f6b6f2b1955932f77a07e901a97b879","control":{"status":"counterexample","confirmed":true},"observed":{"status":"verified"},"detection":"false-verification","detected":true},{"id":"index-guard","case":"N17-index-wrap-pos-2p32","patch":{"from":"return merge(valid, owner.at(z.low), undef(), node);","to":"return merge(`(bvult ${z.low} ${owner.length.u32})`, owner.at(z.low), undef(), node);"},"sourceSha256":"63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6","mutantSha256":"a66ee0fd8e525f4b0f958a3612dbba92bbc62c0c0bef026af5861a6e89944055","control":{"status":"counterexample","confirmed":true},"observed":{"status":"verified"},"detection":"false-verification","detected":true}]
+# Subtest: symbolic small-width shadow shortcuts agree with their original FP terms
+ok 64 - symbolic small-width shadow shortcuts agree with their original FP terms
+  ---
+  duration_ms: 3721.77
+  type: 'test'
+  ...
+# [{"id":"signed-sub-w2","width":2,"status":"unsat"},{"id":"signed-add-w2","width":2,"status":"unsat"},{"id":"signed-order-w2","width":2,"status":"unsat"},{"id":"signed-equality-w2","width":2,"status":"unsat"},{"id":"half-w2","width":2,"status":"unsat"},{"id":"half-plus-w2","width":2,"status":"unsat"},{"id":"half-order-w2","width":2,"status":"unsat"},{"id":"half-equality-w2","width":2,"status":"unsat"},{"id":"half-merge-negation-w2","width":2,"status":"unsat"}]
+# Subtest: metadata selection and uncertainty obey the component width invariant
+ok 65 - metadata selection and uncertainty obey the component width invariant
+  ---
+  duration_ms: 0.2355
+  type: 'test'
+  ...
+1..65
+# tests 65
+# suites 0
+# pass 65
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 121351.527791

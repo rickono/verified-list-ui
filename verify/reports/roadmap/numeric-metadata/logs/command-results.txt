@@ -1,0 +1,41 @@
+Working directory: /Users/rick/.t3/worktrees/verified-list-ui/t3-a3d2a99a
+Prepared parent: eaf23c0ca4a2e61e9d844a84a876755872eb16e7
+Implementation: 4c40e079bd82b23f90ff8eb2e9cadadf39cd2526
+Production data SHA-256 throughout all solver runs: 63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6
+
+Initial queued run, exit 143 after explicit TERM before lane acquisition:
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/numeric-metadata/scripts/corpus.mjs verify/reports/roadmap/numeric-metadata/logs/baseline > verify/reports/roadmap/numeric-metadata/logs/baseline.log 2>&1
+Log renamed to logs/baseline-queued-canceled.log. No solver result from that invocation is counted.
+
+Focused tests, exit 0, 65 pass / 0 fail / 0 skip:
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 tests/verify/numeric-metadata.test.mjs tests/verify/integer-shadows.test.mjs tests/verify/collections.test.mjs tests/verify/loops.test.mjs tests/verify/conformance.test.mjs > verify/reports/roadmap/numeric-metadata/logs/focused.log 2>&1
+
+Baseline/final corpus, comparison, first validity pass, native baseline comparison; exit 0:
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- sh verify/reports/roadmap/numeric-metadata/scripts/run-evidence.sh > verify/reports/roadmap/numeric-metadata/logs/evidence-run.log 2>&1
+Script records outputs separately in baseline.log, final-corpus.log, comparison.json, validity.jsonl, native-baseline.json and baseline/final corpus.jsonl and complete query files.
+48 sources / 106 native executions per tree; exact native equality; zero tested false verification.
+Baseline: 33 confirmed counterexamples, 12 verified, 3 unknown.
+Final: 33 confirmed counterexamples, 14 verified, 1 unknown (N12 request-timeout).
+Existing native baseline: identical true, 8 cases, comparison projections unchanged.
+
+Independent previously unrun validity obligations, exit 0:
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/numeric-metadata/scripts/remaining-validity.mjs verify/reports/roadmap/numeric-metadata/logs > verify/reports/roadmap/numeric-metadata/logs/remaining-validity.log 2>&1
+Combined with first validity pass: 38 distinct attempted queries, 15 unsat, 23 unknown/timeouts, zero sat/errors. No timed-out query retried.
+
+Final full suite, exit 0, 273 pass / 0 fail / 0 skip / 0 cancel; only full-suite run:
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- make test-verify > verify/reports/roadmap/numeric-metadata/logs/full-suite.log 2>&1
+
+Baseline extraction helper validation, exit 0, 14 modules / 0 mismatches:
+node verify/reports/roadmap/numeric-metadata/scripts/prepare-baseline.mjs > verify/reports/roadmap/numeric-metadata/logs/baseline-extraction.json
+The helper checks the manually extracted baseline used above against the parent blobs. That temporary runtime is removed before delivery.
+
+Lossless query compression storage check, exit 0:
+node verify/reports/roadmap/numeric-metadata/scripts/compare.mjs verify/reports/roadmap/numeric-metadata/logs/baseline verify/reports/roadmap/numeric-metadata/logs/final > verify/reports/roadmap/numeric-metadata/logs/comparison-compressed.json
+cmp verify/reports/roadmap/numeric-metadata/logs/comparison.json verify/reports/roadmap/numeric-metadata/logs/comparison-compressed.json
+The original JSON bytes are retained losslessly in gzip; uncompressed-queries.sha256 records every original hash.
+
+Source receipt checks and whitespace check, exit 0:
+shasum -a 256 -c verify/reports/roadmap/numeric-metadata/logs/final-sources.sha256
+git diff --check
+
+Cleanup: see cleanup.txt. No own processes or temporary dependency links remain.
