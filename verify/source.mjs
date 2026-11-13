@@ -58,7 +58,7 @@ function allocateView(view, node, env, cx) {
     return { ...view, ref, type: data.valueType(view), spec: true };
   }
   if (cx.pure) fail("Pure callbacks cannot allocate collections.", node);
-  if (cx.loop) fail("Loops that allocate collections are outside the first heap slice.", node);
+  if (cx.loop) fail("Loops that allocate collections are outside the K slice; only existing primitive contents may change.", node);
   const made = heap.alloc(cx.unit, getHeap(env, node), view, node);
   cx.unit.events.push({ guard: cx.guard, safe: "true", assume: made.facts, label: { kind: "alloc", span: { start: node.start, end: node.end } } });
   heap.registry(cx.unit).allocated = true;
@@ -364,7 +364,8 @@ function call(node, env, cx) {
   }
   const args = node.arguments.map((a) => expression(a, env, cx));
   const target = cx.scope.program.build(callee, node);
-  if (cx.loop && (target.effects?.kind === "writes" || heap.isReferenceType(target.resultType))) fail("Loops cannot call heap-writing or reference-returning helpers in this slice.", node);
+  if (cx.loop && target.allocates) fail("Loops cannot call runtime-allocating helpers in the K slice.", node);
+  if (cx.loop && heap.isReferenceType(target.resultType)) fail("Loops cannot call reference-returning helpers in the K slice.", node);
   const bound = callee.params.map((p, i) => heap.isReferenceType(p.type) ? refArgument(p.type, args[i], node.arguments[i], env, cx) : data.argument(p.type, args[i], node.arguments[i], unit.fresh));
   if (callee.spec && bound.some((b) => b.value.sort === "function")) fail("Function values cannot be passed to @spec functions in this slice.", node);
   if (callee.spec) {
@@ -397,6 +398,7 @@ function call(node, env, cx) {
     // Call-time frame inclusion: callee footprint within caller footprint or
     // caller-fresh refs. It is a safe part, so no callee ensures can prove it.
     const locs = pre0 ? footprint(callee.modifies, penv, spec) : [];
+    for (const l of locs) fixedLoopTarget(l.ref, node, cx);
     const inclusion = and(...locs.map((l) => or(l.key === "@elements" ? heap.elementsEmpty(l.ref) : "false", heap.permission(unit.frame ?? [], l.ref, l.key))));
     let state, facts = "true", fresh;
     if (pre0) {
@@ -410,6 +412,7 @@ function call(node, env, cx) {
         facts = and(facts, heap.typing(unit, target.resultType, symbol, state.next, state), heap.resultDomain({ sort: target.resultType.kind, ref: symbol, type: target.resultType }, args, pre0.next));
         fresh = { value: { sort: target.resultType.kind, ref: symbol, type: target.resultType } };
       }
+      if (target.allocates) heap.registry(unit).allocated = true;
       if (target.effects?.kind === "writes") heap.registry(unit).writes = true;
       else if (target.effects?.kind === "heap") heap.registry(unit).reads = true;
     }
@@ -428,15 +431,25 @@ function call(node, env, cx) {
   return value;
 }
 
+// Trial declarations are the changing scalar/call symbols (and head contents).
+// Immutable ref paths may use pre-loop symbols, including fresh allocation IDs,
+// but cannot depend on a value chosen afresh at the cutpoint.
+function fixedLoopTarget(ref, node, cx) {
+  if (!cx.loop) return;
+  const local = new Set(cx.unit.declarations.flatMap((d) => /^\((?:declare-const|declare-fun|define-fun) (\S+)/.exec(d)?.[1] ?? []));
+  if (ref.split(/[\s()]+/).some((t) => local.has(t))) blame(cx.scope.file, cx.unit.owner, () =>
+    fail("A loop writes through a reference chosen inside the loop; write targets must be fixed at loop entry.", node));
+}
+
 // One primitive heap store. JS order: owner reference, then (compound) the
 // current value, then the right side, then the store at the post-RHS state.
 function store(node, left, operator, rhs, env, cx, prefix) {
   if (cx.contract) fail("Assignments and updates are unsupported in contracts.", node);
   if (cx.pure) fail("Pure callbacks cannot write the heap.", node);
-  if (cx.loop) fail("Loops that write the heap are outside the first heap slice.", node);
   if (left.optional) fail("Optional heap writes are unsupported.", left);
   const owner = expression(left.object, env, cx);
   if (!heap.isRef(owner)) fail("Heap writes need a collection reference.", left);
+  fixedLoopTarget(owner.ref, left, cx);
   let key, index, valid = "true", current;
   if (owner.sort === "array") {
     if (!left.computed) fail("Array writes must use an in-bounds numeric index; length changes are unsupported.", left);
@@ -444,7 +457,7 @@ function store(node, left, operator, rhs, env, cx, prefix) {
     if (at.sort !== "number") fail("Array writes require a numeric index.", left);
     if (at.literal !== undefined && (!Number.isInteger(at.literal) || at.literal < 0 || at.literal >= 4294967295)) fail("Named/out-of-range array properties are unsupported.", left);
     valid = and(at.present, data.builtin("Number.isInteger", [at], left).smt, data.binary(">=", at, data.literal(0), left).smt, data.binary("<", at, view.length, left).smt);
-    index = at.u32 ?? `((_ fp.to_ubv 32) RTZ ${at.smt})`; key = "@elements";
+    index = at.u32 ?? data.indexBits(at) ?? `((_ fp.to_ubv 32) RTZ ${at.smt})`; key = "@elements";
     current = operator === "=" ? undefined : data.index(view, at, left);
   } else {
     if (left.computed && left.property.type !== "Literal") fail("Record writes need a fixed field name.", left);
@@ -461,6 +474,7 @@ function store(node, left, operator, rhs, env, cx, prefix) {
     const before = data.unary("+", current, node);
     value = data.binary(operator === "++" ? "+" : "-", before, data.literal(1), node); out = prefix ? value : before;
   }
+  if (heap.isRef(value)) fail("Reference stores are outside the K slice; only primitive contents may change.", node);
   if (owner.sort === "array") {
     if (value.sort !== owner.type.element) fail("Array stores must preserve the primitive element type.", node);
   } else heap.checkStore(owner.type, key, value, node);
@@ -588,6 +602,7 @@ function expression(node, env, cx) {
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "Identifier") return call(node, env, cx);
   if (node.type === "CallExpression" && !node.optional && node.callee.type === "MemberExpression" && !node.callee.computed && !node.callee.optional) {
     const c = node.callee;
+    if (cx.loop && ["push", "pop", "shift", "unshift", "splice"].includes(c.property.name)) fail("Loop length/shape changes are outside the K slice.", node);
     if (c.property.name === "every") return every(node, env, cx);
     if (builtinOwner(c.object, env, cx)) {
       const args = node.arguments.map(read);
@@ -921,24 +936,33 @@ function loop(node, states, returns, cx) {
   }
   const optional = new Set(written.filter((name) => entry.env.get(name).value.present !== "true"));
   cx.unit.cutpoints++;
+  // Derived from audited back edges, separate from the permission frame.
+  // The finite set grows alongside scalar optionality; targets cannot contain
+  // trial-local symbols, so every location denotes pre-loop storage.
+  const frame = [];
   for (;;) {
-    // A trial shares fresh names but owns its log; nothing to roll back.
-    const unit = { ...cx.unit, events: [], declarations: [], dependencies: new Set(), replayGuards: [], probes: [],
+    const unit = { ...cx.unit, events: [], declarations: [], dependencies: new Set(), replayGuards: [], probes: [], loops: [],
       functions: new Map(cx.unit.functions), emittedFunctions: new Set(cx.unit.emittedFunctions), pendingAxioms: [] };
-    const own = [];
-    const checks = [];
-    const reg = cx.unit.heap, marks = reg && [reg.exact.length, reg.asserts.length];
-    const r = iterate(node, spec, entry, written, optional, { ...cx, unit, checks }, own);
-    const widen = written.filter((n) => !optional.has(n) && r.backs.some((b) => b.env.get(n).value.present !== "true"));
-    if (widen.length) {
-      if (reg) { reg.exact.length = marks[0]; reg.asserts.length = marks[1]; }
-      widen.forEach((n) => optional.add(n)); continue;
+    const own = [], checks = [];
+    const transaction = heap.trial(unit);
+    let r, widen, grow;
+    try {
+      r = iterate(node, spec, entry, written, optional, { ...cx, unit, checks }, own, frame);
+      widen = written.filter((n) => !optional.has(n) && r.backs.some((b) => b.env.get(n).value.present !== "true"));
+      const audit = heap.loopWrites(r.head, r.backs.map((b) => getHeap(b.env, node)),
+        [...r.exits.map((b) => getHeap(b.env, node)), ...own.map((b) => b.heap)]);
+      if (audit.allocated) fail("Loops that allocate are outside the K slice.", node);
+      const known = new Set(frame.map((l) => JSON.stringify(l)));
+      grow = audit.locations.filter((l) => !known.has(JSON.stringify(l)));
+    } catch (error) {
+      transaction.rollback();
+      throw error;
     }
-    // G first slice: loops may read the heap and call footprint-free helpers,
-    // but a back edge or exit with a different heap state is rejected.
-    if (entry.env.has(HEAP) && [...r.backs, ...r.exits].some((b) => !heap.sameState(b.env.get(HEAP).value, entry.env.get(HEAP).value))) {
-      fail("Loops that write, allocate or call heap-modifying helpers are outside the first heap slice.", node);
+    if (widen.length || grow.length) {
+      transaction.rollback();
+      widen.forEach((n) => optional.add(n)); frame.push(...grow); continue;
     }
+    transaction.commit();
     cx.unit.events.push(...unit.events);
     cx.unit.declarations.push(...unit.declarations);
     unit.dependencies.forEach((d) => cx.unit.dependencies.add(d));
@@ -948,13 +972,14 @@ function loop(node, states, returns, cx) {
     unit.functions.forEach((value, id) => cx.unit.functions.set(id, value));
     unit.emittedFunctions.forEach((id) => cx.unit.emittedFunctions.add(id));
     cx.unit.pendingAxioms.push(...unit.pendingAxioms);
+    cx.unit.specRefs = unit.specRefs;
     returns.push(...own);
     cx.unit.loops.push({ start: node.start, end: node.end });
     return r.exits.filter((x) => x.path !== "false").map((x) => ({ path: x.path, env: restore(before.env, x.env) }));
   }
 }
 
-function iterate(node, spec, entry, written, optional, cx, returns) {
+function iterate(node, spec, entry, written, optional, cx, returns, frame) {
   const unit = cx.unit;
   const contract = { ...cx, contract: true, checks: [], phase: "invariant", loop: undefined };
   const label = (kind, span) => ({ kind, span, loop: { start: node.start, end: node.end }, abstract: true });
@@ -983,21 +1008,24 @@ function iterate(node, spec, entry, written, optional, cx, returns) {
     unit.declarations.push(...fresh.declarations);
     env.set(name, { ...b, value: fresh.value });
   }
+  setHeap(env, heap.loopHead(unit, getHeap(env, node), frame));
+  const headHeap = getHeap(env, node);
   const head = and(entry.path, invariant(env));
   const rank = measure(spec.decreases, env, contract);
   const tested = new Map(env);
-  const c = need(expression(node.test, tested, { ...cx, guard: head }), "boolean", node.test);
   const collectors = { breaks: [], continues: [], span: { start: node.start, end: node.end } };
-  const done = scopedStatements(blockStatements(node.body), [{ path: and(head, c), env: new Map(tested) }], returns, { ...cx, loop: collectors });
+  const iteration = { ...cx, loop: collectors };
+  const c = need(expression(node.test, tested, { ...iteration, guard: head }), "boolean", node.test);
+  const done = scopedStatements(blockStatements(node.body), [{ path: and(head, c), env: new Map(tested) }], returns, iteration);
   const backs = [...done, ...collectors.continues];
-  if (node.update) for (const b of backs) expression(node.update, b.env, { ...cx, guard: b.path });
+  if (node.update) for (const b of backs) expression(node.update, b.env, { ...iteration, guard: b.path });
   for (const b of backs) {
     unit.events.push({ guard: b.path, safe: invariant(b.env), assume: "true", label: label("invariant-preserve", spec.span) });
     const next = measure(spec.decreases, b.env, contract);
     unit.events.push({ guard: b.path, assume: "true", label: label("rank", spec.decreases.span),
       safe: and(rank.defined, next.defined, specifications.rankDecrease(rank.value, next.value)) });
   }
-  return { backs, exits: [{ path: and(head, not(c)), env: tested }, ...collectors.breaks] };
+  return { backs, exits: [{ path: and(head, not(c)), env: tested }, ...collectors.breaks], head: headHeap };
 }
 
 const CONTRACT_LINE = /^\s*\*?\s*@?(requires|ensures|modifies|invariant|decreases)\b(.*)$/;
@@ -1221,6 +1249,7 @@ function body(h, scope) {
       id: h.id, file: h.file, name, span: { start: top.start, end: top.end }, params, resultType: data.valueType(result),
       // Derived, not certified: any direct store, nonempty modifies, or call to
       // a non-pure callee makes this function "writes". Built callee-first.
+      allocates: !!unit.heap?.allocated,
       effects: { kind: unit.heap?.writes ? "writes" : unit.heap?.reads || unit.heap?.allocated ? "heap" : "pure" }, executableStart: fn.start,
       modifies: h.modifies.map(({ ast, ...c }) => c),
       footprint: unit.frame.map(({ path, key }) => ({ path, key })),
