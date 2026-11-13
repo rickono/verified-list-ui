@@ -755,6 +755,18 @@ function statements(list, states, returns, cx) {
         returns.push({ path: s.path, value, heap: s.env.get(HEAP)?.value });
       }
       states = [];
+    } else if (node.type === "ThrowStatement") {
+      // Syntax admission only: the constructor is never modeled or evaluated.
+      const arg = node.argument;
+      if (arg?.type !== "NewExpression" || arg.callee.type !== "Identifier" || arg.callee.name !== "Error" ||
+          arg.arguments.length !== 1 || arg.arguments[0].type !== "Literal" || typeof arg.arguments[0].value !== "string" ||
+          cx.scope.names.has("Error") || states.some((s) => s.env.has("Error"))) {
+        fail('Throw admission requires unshadowed throw new Error("literal").', node);
+      }
+      for (const s of states) cx.unit.events.push({ guard: s.path, safe: "false", assume: "true",
+        label: { kind: "throw-unreachable", span: { start: node.start, end: node.end }, abstract: cx.unit.cutpoints > 0,
+          ...(cx.loop ? { loop: cx.loop.span } : {}) } });
+      states = [];
     } else if (node.type === "VariableDeclaration") {
       for (const d of node.declarations) {
         if (!d.init) fail("Uninitialized local declarations are unsupported; provide an initializer.", d);
@@ -975,7 +987,7 @@ function iterate(node, spec, entry, written, optional, cx, returns) {
   const rank = measure(spec.decreases, env, contract);
   const tested = new Map(env);
   const c = need(expression(node.test, tested, { ...cx, guard: head }), "boolean", node.test);
-  const collectors = { breaks: [], continues: [] };
+  const collectors = { breaks: [], continues: [], span: { start: node.start, end: node.end } };
   const done = scopedStatements(blockStatements(node.body), [{ path: and(head, c), env: new Map(tested) }], returns, { ...cx, loop: collectors });
   const backs = [...done, ...collectors.continues];
   if (node.update) for (const b of backs) expression(node.update, b.env, { ...cx, guard: b.path });

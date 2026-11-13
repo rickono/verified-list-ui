@@ -224,6 +224,7 @@ function select(targets, entry, wanted) {
 export const affected = (entry, opts = {}) => verifyFile(entry, { ...opts, plan: true });
 
 const GAP = {
+  "throw-unreachable": "The throw path may be reachable under the loop invariant; unchanged-source replay did not confirm a failure.",
   "invariant-init": "The loop invariant may not hold on entry, and replay did not confirm a contract failure.",
   "invariant-preserve": "The loop invariant may not be preserved by one iteration, and replay did not confirm a contract failure. Strengthen or correct it.",
   rank: "The decreases measure may not stay nonnegative and drop by at least 1, and replay did not confirm nontermination.",
