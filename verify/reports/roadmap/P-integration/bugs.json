@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "kind": "jsverify-bugs",
+  "entry": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts",
+  "identity": "33272dc99f55132477abdf19e8a5e4974d51d2c94dd6edaf3f35e18deec22f54",
+  "graphSha256": "b1deab21313b9ebaaeb7dd45fe2edb7b501c39a131170eefe569e097e09f715d",
+  "modules": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/examples/bugs.ts",
+      "sha256": "97405cd1d3fdd6a92121f28ddb6d1f8bcc18d89bf5268f08ec59a15038c161a9",
+      "imports": []
+    }
+  ],
+  "dependencies": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/package.json",
+      "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+      "kind": "package"
+    }
+  ],
+  "witnesses": {
+    "bugs.ts#equalityAlone": {
+      "key": "a35ca846233610b0033ca68899851d490e2c43381cf838fb197b4e7841d100fd",
+      "witness": [
+        "7ff4000000108bd4"
+      ],
+      "signature": "[\"counterexample\",null,null,[\"x * 2 == result\"],null]",
+      "shrunk": {
+        "witness": [
+          "7ff4000000108bd4"
+        ],
+        "replays": 5,
+        "limit": 300,
+        "changed": false,
+        "greedy": true
+      }
+    },
+    "bugs.ts#finiteDouble": {
+      "key": "8c36f652d8faa38abb17ac6f315651df8cf6531eae6e4cea09e0ae96a2359353",
+      "witness": [
+        "ffee02efeeba4836"
+      ],
+      "signature": "[\"counterexample\",null,null,[\"Number.isFinite(result)\"],null]",
+      "shrunk": {
+        "witness": [
+          "7fe0e1a6f648c89e"
+        ],
+        "replays": 29,
+        "limit": 300,
+        "changed": true,
+        "greedy": true
+      }
+    },
+    "bugs.ts#brokenClamp": {
+      "key": "bd6c6a477c6812881ee7ead5b8d8567adb2123fbc7101b0869dc6506356b3984",
+      "witness": [
+        "3ad4ceefab2bb8da",
+        "3a28191054d44725",
+        "3a2aabedd7164475"
+      ],
+      "signature": "[\"counterexample\",null,null,[\"lo <= result && result <= hi\"],null]",
+      "shrunk": {
+        "witness": [
+          "3ad4ceefab2bb8da",
+          "0000000000000000",
+          "0000000000000000"
+        ],
+        "replays": 14,
+        "limit": 300,
+        "changed": true,
+        "greedy": true
+      }
+    }
+  }
+}
