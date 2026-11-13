@@ -891,6 +891,7 @@ function naturalNames(invariants, { candidates, written }, env, cx, mode = "u32"
 function loop(node, states, returns, cx) {
   const spec = cx.loops.get(node);
   if (cx.loop) fail("Nested loops are outside this slice.", node);
+  if (!spec) fail("This compiler entry does not support loops without parsed contracts.", node);
   if (!spec.decreases) fail("A loop needs one decreases clause directly above it; verified functions must terminate.", node);
   if (node.type === "ForStatement" && !node.test) fail("for loops need an explicit test.", node);
   walk(node, (x) => { if (x !== node && LOOP_TYPES.has(x.type)) fail("Nested loops are outside this slice.", x);

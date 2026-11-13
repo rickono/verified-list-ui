@@ -5,6 +5,23 @@ import { transitionsOf } from "../../verify/stateful/transitions.mjs";
 import { checkStateful } from "../../verify/stateful/index.mjs";
 import { replayTrace, traceOf } from "../../verify/stateful/traces.mjs";
 
+test("unsupported stateful loops return original source diagnostics instead of throwing", async () => {
+  const cases = [
+    ["let x = 0;\n// state x >= 0\nexport function entry() { while (false) { x = 1; } }", "while"],
+    ["// @environment\ndeclare function op(): Promise<number>;\nlet x = 0;\n// state x === 0\nexport async function entry() { await op(); for (;;) {} }", "for"],
+  ];
+  for (const [source, keyword] of cases) {
+    const report = await checkStateful("unsupported-loop.ts", source);
+    assert.equal(report.status, "unsupported");
+    assert.match(report.message, /loops without parsed contracts/);
+    assert.equal(report.span.start, source.indexOf(`${keyword} (`));
+    assert.ok(report.span.end > report.span.start);
+    const prefix = source.slice(0, report.span.start).split("\n");
+    assert.equal(report.line, prefix.length);
+    assert.equal(report.column, prefix.at(-1).length + 1);
+  }
+});
+
 test("original compiler rejects a false capture annotation before it can become a resumption assumption", async () => {
   const source = `// @environment\ndeclare function op(q: number): Promise<number>;
 let x = 0;
