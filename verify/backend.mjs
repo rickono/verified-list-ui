@@ -37,19 +37,34 @@ function witness(model, value) {
     model.fields.every((f) => Object.hasOwn(value, f.name) ? witness(f.model, value[f.name]) : !!f.keyFlag);
 }
 
+const INVALID = "The backend returned an invalid query result or witness.";
+const HEAP_TYPES = Object.freeze({ reason: "witness-invalid", message: "The backend heap witness does not conform to its reference types." });
+const SHAPE = Object.freeze({ reason: "invalid-response", message: INVALID });
+const ROOTS = Object.freeze({ reason: "witness-invalid", message: "The heap graph roots disagree with parameter identities." });
+
+// The whole replay-witness contract for one query's models: value shapes,
+// replay caps, predicate tables, heap reference types, and root identities.
+// Returns undefined for a conforming witness, otherwise the failure it is.
+// Live backend answers and persisted cache witnesses share this one check.
+export function validWitness(models, value) {
+  const heapAt = models.findIndex((m) => m.kind === "heap");
+  if (heapAt !== -1 && Array.isArray(value) && !validHeap(models[heapAt], value[heapAt], REPLAY_LIMIT)) return HEAP_TYPES;
+  if (!Array.isArray(value) || value.length !== models.length || !models.every((m, i) => witness(m, value[i]))) return SHAPE;
+  if (heapAt !== -1) {
+    const roots = models.flatMap((m, i) => m.kind === "ref" ? [value[i]] : []);
+    if (JSON.stringify(roots) !== JSON.stringify(value[heapAt].roots)) return ROOTS;
+  }
+}
+
 function answer(value, models) {
-  const invalid = () => { throw new BackendError("invalid-response", "The backend returned an invalid query result or witness."); };
+  const invalid = () => { throw new BackendError("invalid-response", INVALID); };
   if (!value || !["sat", "unsat", "unknown"].includes(value.status)) invalid();
   if (value.status === "sat") {
     if (value.oversized === true && !Object.hasOwn(value, "witness")) return value;
-    const heapAt = models.findIndex((m) => m.kind === "heap");
-    if (heapAt !== -1 && Array.isArray(value.witness) && !validHeap(models[heapAt], value.witness[heapAt], REPLAY_LIMIT)) throw new BackendError("witness-invalid", "The backend heap witness does not conform to its reference types.");
-    if (value.oversized || !Array.isArray(value.witness) || value.witness.length !== models.length || !models.every((m, i) => witness(m, value.witness[i]))) invalid();
-    const graphAt = models.findIndex((m) => m.kind === "heap");
-    if (graphAt !== -1 && !value.oversized) {
-      const roots = models.flatMap((m, i) => m.kind === "ref" ? [value.witness[i]] : []);
-      if (JSON.stringify(roots) !== JSON.stringify(value.witness[graphAt].roots)) throw new BackendError("witness-invalid", "The heap graph roots disagree with parameter identities.");
-    }
+    const failure = validWitness(models, value.witness);
+    if (failure === HEAP_TYPES) throw new BackendError(failure.reason, failure.message);
+    if (value.oversized || failure === SHAPE) invalid();
+    if (failure) throw new BackendError(failure.reason, failure.message);
   } else if (Object.hasOwn(value, "witness") || Object.hasOwn(value, "oversized") || value.status === "unknown" && typeof value.reason !== "string") invalid();
   return value;
 }

@@ -9,6 +9,19 @@ const attribution = (target, phase, index) => ({
   ...(POST.has(phase) ? { postcondition: index + 1, postconditionCount: target.postconditions.length } : {}),
 });
 
+// Every (phase, postcondition index) query solve() can send for a target, in
+// state-machine order. Proof keys hash exactly this list, so a phase solve()
+// can reach is never outside a key.
+export function phases(target) {
+  const n = target.postconditions.length;
+  return [
+    ...(target.preDefined && target.preDefined !== "true" ? [["requires-definedness", 0], ["requires-definedness-witness", 0]] : []),
+    ["feasibility", 0], ["feasibility-witness", 0],
+    ...Array.from({ length: n }, (_, i) => ["postcondition", i]),
+    ...Array.from({ length: n }, (_, i) => ["counterexample-witness", i]),
+  ];
+}
+
 export function obligation(target, phase, index = 0) {
   return {
     ...attribution(target, phase, index),
@@ -25,10 +38,7 @@ export function obligation(target, phase, index = 0) {
 // resolve final dependencies. The injectable connection/clock are internal.
 export async function solve(targets, timeoutMs, { connect = createBackend, now = () => performance.now() } = {}) {
   const deadline = now() + timeoutMs;
-  const states = targets.map((target) => ({ target,
-    phase: target.preDefined && target.preDefined !== "true" ? "requires-definedness" : "feasibility",
-    postcondition: 0, attempts: 0,
-  }));
+  const states = targets.map((target) => ({ target, phase: phases(target)[0][0], postcondition: 0, attempts: 0 }));
   const queue = [...states];
   const width = Math.min(2, targets.length), active = new Set();
   const remaining = () => Math.max(0, Math.floor(deadline - now()));

@@ -207,6 +207,64 @@ const GAP = {
 const gap = (label, candidate) => ({ status: "unknown", reason: "induction-gap", phase: label.kind, span: label.span,
   ...(label.loop ? { loop: label.loop } : {}), candidate, message: GAP[label.kind] });
 
+// Confirms one provisional solver outcome by unchanged-source replay against
+// the whole linked graph. Returns the root's own outcome; when replay blames a
+// helper, also that helper's id and violation for the final dependency pass.
+function judge(targets, modules, byId, label, t, r) {
+  let outcome, broken;
+  const put = (o) => { outcome = o; };
+  if (r.status === "vacuous" || r.status === "unknown" || r.status === "error") {
+    put({ ...r, ...(r.label?.abstract ? { phase: r.label.kind, span: r.label.span, ...(r.label.loop ? { loop: r.label.loop } : {}) } : {}) });
+    return { outcome };
+  }
+  try {
+    const actual = replay(targets, modules, t, r.witness, r.phase);
+    const v = actual.violation;
+    const culprit = v && byId.get(`${v.callerFile}#${v.caller}`);
+    if (actual.mismatch) put({ status: "unknown", reason: "replay-mismatch", message: actual.mismatch });
+    else if (v?.callbackLocation) {
+      put({ status: "unknown", reason: "callback-probe-location", message: "The callback admission witness could not be matched to its native source call site." });
+    } else if (v?.broken || (v && culprit !== t)) {
+      // The failure is inside a helper: its contract, not this root, is wrong.
+      broken = [culprit.id, v];
+      put({ status: "unknown", reason: "dependency-violation", message: `${label(culprit)} violated its contract during replay.`, inputs: actual.inputs, violation: v });
+    } else if (v?.frameWrite || v?.frameInclusion || v?.storeDomain) {
+      const reason = v.frameInclusion ? "frame-inclusion" : v.frameWrite ? "frame-write" : "store-domain";
+      put(r.status === "counterexample" ? { status: "counterexample", reason, confirmed: true, inputs: actual.inputs, ...(actual.aliases?.length ? { aliases: actual.aliases } : {}), failed: v.violated, call: v, message: v.violated[0].text }
+        : { status: "unknown", reason: "replay-mismatch", message: `The source violated ${reason} during replay of a proved obligation.` });
+    } else if (v?.callback) {
+      put(r.status === "counterexample"
+        ? { status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), confirmed: true, inputs: actual.inputs, call: v,
+            message: v.violated[0].kind === "callback-domain" ? `${t.name} applies callback ${v.callback} outside its parameter types.`
+              : `${t.name} passes a callback that is not a pure total function of its type (${v.violated[0].kind}).` }
+        : { status: "unknown", reason: "replay-mismatch", message: `The proof says callback ${v.callback} is used safely, but replay found a violation.` });
+    } else if (v) {
+      const callee = byId.get(`${v.calleeFile}#${v.callee}`);
+      put(r.status === "counterexample"
+        ? { status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), confirmed: true, inputs: actual.inputs, failed: v.violated.filter((c) => c.text), call: v,
+            message: v.admission ? `${t.name} passes a predicate to ${v.admission.callee} that fails its domain at a replayed probe input.`
+              : `${t.name} calls ${label(callee)} with arguments outside its parameter types or requires.` }
+        : { status: "unknown", reason: "replay-mismatch", message: `The proof says every call is safe, but replay found a bad call to ${label(callee)}.` });
+    } else if (r.status === "counterexample" && !actual.failed.length) {
+      if (["frame-write", "frame-inclusion", "store-domain"].includes(r.label?.kind)) {
+        put({ status: "unknown", reason: r.label.kind, message: "The abstract heap obligation failed, but unchanged-source replay did not observe that violation.", inputs: actual.inputs });
+        return { outcome };
+      }
+      put(r.label?.abstract ? gap(r.label, actual.inputs) : t.callees.length
+        ? { status: "unknown", reason: "contract-gap", message: "The counterexample relies on abstract helper results that the actual helpers did not produce. A helper ensures may be too weak." }
+        : { status: "unknown", reason: "replay-mismatch", message: "The solver's counterexample did not fail in JavaScript. This indicates a verifier discrepancy." });
+    } else if (r.status === "verified" && actual.failed.length) {
+      put({ status: "unknown", reason: "replay-mismatch", message: "The solver's counterexample did not fail in JavaScript. This indicates a verifier discrepancy." });
+    } else if (r.status === "counterexample") put({ status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), inputs: actual.inputs, ...(actual.aliases ? { aliases: actual.aliases } : {}), result: actual.result, failed: actual.failed, confirmed: true });
+    else put({ status: "verified" });
+  } catch (e) {
+    put(e.code === "ERR_SCRIPT_EXECUTION_TIMEOUT"
+      ? { status: "unknown", reason: "replay-timeout", message: "JavaScript replay exceeded its execution budget.", ...(r.label?.abstract ? { phase: r.label.kind, span: r.label.span, loop: r.label.loop } : {}) }
+      : { status: "unknown", reason: "replay-mismatch", message: `JavaScript replay failed: ${e.message}` });
+  }
+  return broken ? { outcome, broken } : { outcome };
+}
+
 async function check({ files, dependencies, records, error }, file, timeoutMs) {
   const text = new Map([...files, ...dependencies].map((f) => [f.file, f.source]));
   const position = (where, offset) => {
@@ -242,56 +300,9 @@ async function check({ files, dependencies, records, error }, file, timeoutMs) {
         ...t.requires,
       ],
     };
-    const put = (o) => own.set(t.id, { ...base, ...o, ...(o.span ? position(t.file, o.span.start) : {}) });
-    const r = results[i];
-    if (r.status === "vacuous" || r.status === "unknown" || r.status === "error") {
-      put({ ...r, ...(r.label?.abstract ? { phase: r.label.kind, span: r.label.span, ...(r.label.loop ? { loop: r.label.loop } : {}) } : {}) });
-      continue;
-    }
-    try {
-      const actual = replay(targets, modules, t, r.witness, r.phase);
-      const v = actual.violation;
-      const culprit = v && byId.get(`${v.callerFile}#${v.caller}`);
-      if (actual.mismatch) put({ status: "unknown", reason: "replay-mismatch", message: actual.mismatch });
-      else if (v?.callbackLocation) {
-        put({ status: "unknown", reason: "callback-probe-location", message: "The callback admission witness could not be matched to its native source call site." });
-      } else if (v?.broken || (v && culprit !== t)) {
-        // The failure is inside a helper: its contract, not this root, is wrong.
-        broken.set(culprit.id, v);
-        put({ status: "unknown", reason: "dependency-violation", message: `${label(culprit)} violated its contract during replay.`, inputs: actual.inputs, violation: v });
-      } else if (v?.frameWrite || v?.frameInclusion || v?.storeDomain) {
-        const reason = v.frameInclusion ? "frame-inclusion" : v.frameWrite ? "frame-write" : "store-domain";
-        put(r.status === "counterexample" ? { status: "counterexample", reason, confirmed: true, inputs: actual.inputs, ...(actual.aliases?.length ? { aliases: actual.aliases } : {}), failed: v.violated, call: v, message: v.violated[0].text }
-          : { status: "unknown", reason: "replay-mismatch", message: `The source violated ${reason} during replay of a proved obligation.` });
-      } else if (v?.callback) {
-        put(r.status === "counterexample"
-          ? { status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), confirmed: true, inputs: actual.inputs, call: v,
-              message: v.violated[0].kind === "callback-domain" ? `${t.name} applies callback ${v.callback} outside its parameter types.`
-                : `${t.name} passes a callback that is not a pure total function of its type (${v.violated[0].kind}).` }
-          : { status: "unknown", reason: "replay-mismatch", message: `The proof says callback ${v.callback} is used safely, but replay found a violation.` });
-      } else if (v) {
-        const callee = byId.get(`${v.calleeFile}#${v.callee}`);
-        put(r.status === "counterexample"
-          ? { status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), confirmed: true, inputs: actual.inputs, failed: v.violated.filter((c) => c.text), call: v,
-              message: v.admission ? `${t.name} passes a predicate to ${v.admission.callee} that fails its domain at a replayed probe input.`
-                : `${t.name} calls ${label(callee)} with arguments outside its parameter types or requires.` }
-          : { status: "unknown", reason: "replay-mismatch", message: `The proof says every call is safe, but replay found a bad call to ${label(callee)}.` });
-      } else if (r.status === "counterexample" && !actual.failed.length) {
-        if (["frame-write", "frame-inclusion", "store-domain"].includes(r.label?.kind)) {
-          put({ status: "unknown", reason: r.label.kind, message: "The abstract heap obligation failed, but unchanged-source replay did not observe that violation.", inputs: actual.inputs }); continue;
-        }
-        put(r.label?.abstract ? gap(r.label, actual.inputs) : t.callees.length
-          ? { status: "unknown", reason: "contract-gap", message: "The counterexample relies on abstract helper results that the actual helpers did not produce. A helper ensures may be too weak." }
-          : { status: "unknown", reason: "replay-mismatch", message: "The solver's counterexample did not fail in JavaScript. This indicates a verifier discrepancy." });
-      } else if (r.status === "verified" && actual.failed.length) {
-        put({ status: "unknown", reason: "replay-mismatch", message: "The solver's counterexample did not fail in JavaScript. This indicates a verifier discrepancy." });
-      } else if (r.status === "counterexample") put({ status: "counterexample", ...(r.phase ? { phase: r.phase } : {}), inputs: actual.inputs, ...(actual.aliases ? { aliases: actual.aliases } : {}), result: actual.result, failed: actual.failed, confirmed: true });
-      else put({ status: "verified" });
-    } catch (e) {
-      put(e.code === "ERR_SCRIPT_EXECUTION_TIMEOUT"
-        ? { status: "unknown", reason: "replay-timeout", message: "JavaScript replay exceeded its execution budget.", ...(r.label?.abstract ? { phase: r.label.kind, span: r.label.span, loop: r.label.loop } : {}) }
-        : { status: "unknown", reason: "replay-mismatch", message: `JavaScript replay failed: ${e.message}` });
-    }
+    const { outcome, broken: blamed } = judge(targets, modules, byId, label, t, results[i]);
+    if (blamed) broken.set(...blamed);
+    own.set(t.id, { ...base, ...outcome, ...(outcome.span ? position(t.file, outcome.span.start) : {}) });
   }
   // Final status, callees first. Only a verified callee can support a proof.
   const done = new Map();
