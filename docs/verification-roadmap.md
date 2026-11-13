@@ -1,6 +1,6 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H and G are integrated. PR #8 merged the local-result frontend unit and pinned es-toolkit empty-array proofs. The user approved Codex/Grok recovery of P, K review, upstream validation and the stateful foundation after the shared Claude limit. No remaining roadmap node is claimed complete.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H and G are integrated. PR #8 merged the local-result unit and pinned es-toolkit empty-array proofs. P and the stateful foundation are implementing on approved Codex/Grok recovery seats. K selected the derived-write-frame design with separate numeric and heap-audit gates. Upstream validation continues. No remaining roadmap node is claimed complete.
 
 All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.
 
