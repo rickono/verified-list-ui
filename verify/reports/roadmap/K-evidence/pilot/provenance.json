@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/TheAlgorithms/JavaScript",
+  "commit": "636017ca51dad05339cde3b5c66cbe1d71957f7e",
+  "commitDate": "2022-10-20T11:38:56Z",
+  "commitTitle": "algorithm: reverse (#1197)",
+  "path": "Data-Structures/Array/Reverse.js",
+  "fetchedFrom": "https://raw.githubusercontent.com/TheAlgorithms/JavaScript/636017ca51dad05339cde3b5c66cbe1d71957f7e/Data-Structures/Array/Reverse.js",
+  "sha256": "8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46",
+  "declaration": "Reverse",
+  "declarationSha256": "a601e235f96a6eb3c572203b73a690bc7e49914b4540561139e7dc91489c70ad",
+  "license": "GPL-3.0",
+  "licensePath": "LICENSE",
+  "licenseFetchedFrom": "https://raw.githubusercontent.com/TheAlgorithms/JavaScript/636017ca51dad05339cde3b5c66cbe1d71957f7e/LICENSE",
+  "licenseSha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
+  "laterHistory": "6fe21d21e92d4f07b476d56fbcad838633e74550 (2024-04-13) rewrote the body to a destructuring swap, which the verifier grammar does not admit; this pin is the last temp-variable version."
+}
