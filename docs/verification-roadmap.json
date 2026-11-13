@@ -348,19 +348,7 @@
       ],
       "deliveryStatus": "finished",
       "resultSummary": "Target selection, exact-query receipts, no-solver planning, current-source replay and dependency gating, and source/model-bound native bug evidence are merged in PR #10. Both independent reviews passed. The P/heap/numeric stack passed 322/322; source/model edits invalidate honestly. Receipt integrity remains an explicit trust assumption.",
-      "result": {
-        "implementationCommit": "c9c45110b8669f99f83c4330d6efe1b6202ff1be",
-        "mergeCommit": "b908127edf34202233912b98e43715ee42ba2233",
-        "pullRequest": "https://github.com/rickono/verified-list-ui/pull/10",
-        "independentReviews": [
-          "b0b1f70ee939308b8c2610dacd3c97fb23d471d6",
-          "92aa7402e519e855973461a22294d6c6f624f18f"
-        ],
-        "implementationSuite": 278,
-        "combinedStackSuite": 322,
-        "nativeBugReproductions": 3,
-        "report": "../verify/reports/roadmap/P-landing.md"
-      }
+      "integrationAcceptance": "Original doneWhen met by source/model invalidation, fresh solves and native evidence reproduction; see P-landing.md."
     },
     {
       "id": "Q",
@@ -735,5 +723,18 @@
       "N12 unpinned 20-second query timeout, known failures remain satisfiable",
       "15 validity queries unsat and 23 unknown; generic width reasoning stays within trusted translation"
     ]
+  },
+  "workflowDelivery": {
+    "implementationCommit": "c9c45110b8669f99f83c4330d6efe1b6202ff1be",
+    "mergeCommit": "b908127edf34202233912b98e43715ee42ba2233",
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/10",
+    "independentReviews": [
+      "b0b1f70ee939308b8c2610dacd3c97fb23d471d6",
+      "92aa7402e519e855973461a22294d6c6f624f18f"
+    ],
+    "implementationSuite": 278,
+    "combinedStackSuite": 322,
+    "nativeBugReproductions": 3,
+    "report": "../verify/reports/roadmap/P-landing.md"
   }
 }

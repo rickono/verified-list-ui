@@ -1,6 +1,6 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H and G are integrated. PR #8 merged the local-result/es-toolkit pilot; PR #9 merged K's heap write-audit enabling gate. P, numeric metadata and stateful C1 are in independent review. Guarded-throw designs both found the unchanged harmonicMean numeric failure and await comparison. No remaining roadmap node is claimed complete.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. PR #11 merged exact numeric metadata, another enabling gate for K; K loop cutpoints and guarded throws are in production implementation. C1 has independent reviews and two local admission corrections awaiting final combined checks. No other remaining node is claimed complete.
 
 All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.
 
@@ -18,7 +18,7 @@ flowchart TD
   H["H: Higher-order contracts<br/>integrated"]
   J["J: Search proof pilot<br/>integrated"]
   K["K: Broader library proofs<br/>READY"]
-  P["P: Project proof workflow<br/>READY"]
+  P["P: Project proof workflow<br/>integrated"]
   Q["Q: Pure JS/TS proofs &amp; bugs"]
   R["R: Event &amp; lifecycle semantics"]
   S["S: Async ordering model"]
@@ -96,7 +96,7 @@ These counts describe the original isolated branches. D's original partial resul
 
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
-Ready packages: K, P, T.
+Ready packages: K, T.
 Branches awaiting integration: none.
 
 To regenerate this document after editing the data:
