@@ -1,0 +1,14 @@
+head=44809983ca516600292b42a8f2b7db8b4ecc1b78 tree=git-archive start=2026-11-13T15:14:29Z
+PASS bytes sum.upstream.ts: 531 B sha256 932fb45fe749f343a198e093a9c4fc1628aa8c21204957cf481e038903347507 == upstream@1913a76 == upstream@4d5963e
+PASS bytes mean.upstream.ts: 471 B sha256 b0445d7e281b1e8b646c9729efa1d3d4806217c93dc9954cc434261690573ca7 == upstream@1913a76 == upstream@4d5963e
+PASS bytes sum.spec.upstream.ts: 728 B sha256 2be85eec5f5a6eedf9fe2295146e04fd18f13cb30caa3f8b6bad11f517be8a62 == upstream@1913a76 == upstream@4d5963e
+PASS bytes mean.spec.upstream.ts: 299 B sha256 27c1b2e5a4afd77e10c5f54549939d22a9abda2929b1543ec3f4dac324e69182 == upstream@1913a76 == upstream@4d5963e
+PASS bytes LICENSE: 1077 B sha256 51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7 == upstream@1913a76 == upstream@4d5963e
+PASS provenance.json: bytes, sha256, declaration sha256 and license hash recomputed
+PASS annotation: checker output == independent line insertion; sum 1533bbc2c48962471467f1e9f20f892f71b201983a656d050f19ada968c6de71 739 B, mean aa4bf214a3b04c95172c5b8d220086ea9d34942ed41aedcde8f1f80e4ddae5b9 524 B
+PASS line diff: only the 4 (sum) and 1 (mean) inserted comment lines differ
+PASS AST: type-stripped ESTree identical; extra comments are only the inserted Line comments
+PASS native: import './sum.ts' and 'let result = 0;' kept; original and annotated agree on 9 arrays; sum([]) is +0, mean([]) is NaN
+(node:31648) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+exit=0

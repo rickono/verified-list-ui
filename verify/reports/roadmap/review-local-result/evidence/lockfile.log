@@ -1,0 +1,7 @@
+recorded=2026-11-13T15:29:40Z direct recomputation (repo-checks.log first hashed a nonexistent package-lock.json)
+8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21  /private/tmp/claude-501/-Users-rick--t3-worktrees-verified-list-ui-t3-4e767245/536b9b3d-94bd-40ef-b83b-d2f76d484e4f/scratchpad/head/pnpm-lock.yaml
+8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21  /Users/rick/verification-vibes/verified-list-ui/pnpm-lock.yaml
+git show 4480998:pnpm-lock.yaml  8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21
+git show fa2b439:pnpm-lock.yaml  8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21
+pnpm-lock.yaml and package.json unchanged in fa2b439..4480998
+node v22.23.1

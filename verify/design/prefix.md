@@ -22,7 +22,7 @@ export const first = (values: number[]) => values[0];
 
 ## Shape
 
-`source.mjs` owns the expression-bodied arrow subset and lexical binding. A per-target contract context supplies fresh quantifier names. A shared binding rule rejects shadowing and reserved names for parameters, local constants, and callbacks. The builtin dispatch and reserved names derive from one set.
+`source.mjs` owns the expression-bodied arrow subset and lexical binding. A per-target contract context supplies fresh quantifier names. A shared binding rule rejects shadowing and reserved names for parameters and callbacks. Body-local declarations reject the same set except `result`; the contract return value is bound separately, after the body. The builtin dispatch and reserved names derive from one set.
 
 `data.mjs` owns the meaning. For an array view with length `L`, `every` produces `forall q: BV32. q < L implies predicate(element(q), Number(q))`. Every callback index is present and exactly representable as binary64, so its cached unsigned view agrees with JavaScript indexing. The array length guards access to its indexed element function. An empty array makes the implication true for every index.
 

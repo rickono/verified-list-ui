@@ -1,0 +1,66 @@
+head=44809983ca516600292b42a8f2b7db8b4ecc1b78 tree=git-archive start=2026-11-13T15:05:05Z
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:29656) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: pinned unchanged es-toolkit sum and mean prove the documented empty-array results and catch wrong claims
+ok 1 - pinned unchanged es-toolkit sum and mean prove the documented empty-array results and catch wrong claims
+  ---
+  duration_ms: 10899.656041
+  type: 'test'
+  ...
+# (node:29759) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ordinary const, let, var, block and for-init locals named result verify against the actual return
+ok 2 - ordinary const, let, var, block and for-init locals named result verify against the actual return
+  ---
+  duration_ms: 3591.531708
+  type: 'test'
+  ...
+# Subtest: incorrect return claims that a namespace leak would prove are native counterexamples
+ok 3 - incorrect return claims that a namespace leak would prove are native counterexamples
+  ---
+  duration_ms: 5558.012458
+  type: 'test'
+  ...
+# Subtest: closures capture the live const result lexically and never see a contract result
+ok 4 - closures capture the live const result lexically and never see a contract result
+  ---
+  duration_ms: 527.33575
+  type: 'test'
+  ...
+# Subtest: every callbacks read the live local in invariants and the return in ensures
+ok 5 - every callbacks read the live local in invariants and the return in ensures
+  ---
+  duration_ms: 17528.933583
+  type: 'test'
+  ...
+# Subtest: TDZ, hoisting and scope exit still bound a local result
+ok 6 - TDZ, hoisting and scope exit still bound a local result
+  ---
+  duration_ms: 2.944334
+  type: 'test'
+  ...
+# Subtest: a wrong invariant about the local result is an induction gap, not a proof
+ok 7 - a wrong invariant about the local result is an induction gap, not a proof
+  ---
+  duration_ms: 617.235083
+  type: 'test'
+  ...
+# Subtest: parameter, entry, function, module, type and other reserved-name gates are unchanged
+ok 8 - parameter, entry, function, module, type and other reserved-name gates are unchanged
+  ---
+  duration_ms: 8.08525
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 38823.017584
+exit=0 end=2026-11-13T15:11:59Z

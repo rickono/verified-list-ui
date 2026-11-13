@@ -59,6 +59,8 @@ feasibility, and fresh helper results remain opaque.
 - Initialized simple `let`, `var`, and `const` declarators, including multiple
   declarators and nested block scopes. Lexical bindings can shadow outer data
   bindings and module functions. Contract callback binding rules stay unchanged.
+  Local names exclude the verifier's reserved set, except that an ordinary
+  body-local declaration may be named `result`.
 - Local scalar `=`, numeric `+=`, `-=`, `*=`, `/=`, and numeric prefix and postfix
   `++` and `--`. Sequence expressions preserve left-to-right effects.
 - Expression statements, blocks, `if`/`else`, and explicit value returns.

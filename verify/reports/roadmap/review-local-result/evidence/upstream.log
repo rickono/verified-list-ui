@@ -1,0 +1,18 @@
+recorded=2026-11-13T15:25:47Z (untrusted downloads: read and hashed only, never executed or copied)
+download: curl -sS -L --fail -o <dir>/<path with / as _> https://raw.githubusercontent.com/toss/es-toolkit/<commit>/<path>
+  commits 1913a7627a2995b095249d6b0b6453b900cdd4bc (at-1913a76), 4d5963eb2df129021efdba0de5a3a16bbb3c7bec (at-main-4d5963e)
+  paths src/math/sum.ts src/math/mean.ts src/math/sum.spec.ts src/math/mean.spec.ts LICENSE
+git ls-remote https://github.com/toss/es-toolkit refs/tags/v1.53.2 refs/heads/main:
+4d5963eb2df129021efdba0de5a3a16bbb3c7bec	refs/heads/main
+1913a7627a2995b095249d6b0b6453b900cdd4bc	refs/tags/v1.53.2
+sha256 and bytes of downloads:
+51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7 1077 at-1913a76/LICENSE
+27c1b2e5a4afd77e10c5f54549939d22a9abda2929b1543ec3f4dac324e69182 299 at-1913a76/src_math_mean.spec.ts
+b0445d7e281b1e8b646c9729efa1d3d4806217c93dc9954cc434261690573ca7 471 at-1913a76/src_math_mean.ts
+2be85eec5f5a6eedf9fe2295146e04fd18f13cb30caa3f8b6bad11f517be8a62 728 at-1913a76/src_math_sum.spec.ts
+932fb45fe749f343a198e093a9c4fc1628aa8c21204957cf481e038903347507 531 at-1913a76/src_math_sum.ts
+51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7 1077 at-main-4d5963e/LICENSE
+27c1b2e5a4afd77e10c5f54549939d22a9abda2929b1543ec3f4dac324e69182 299 at-main-4d5963e/src_math_mean.spec.ts
+b0445d7e281b1e8b646c9729efa1d3d4806217c93dc9954cc434261690573ca7 471 at-main-4d5963e/src_math_mean.ts
+2be85eec5f5a6eedf9fe2295146e04fd18f13cb30caa3f8b6bad11f517be8a62 728 at-main-4d5963e/src_math_sum.spec.ts
+932fb45fe749f343a198e093a9c4fc1628aa8c21204957cf481e038903347507 531 at-main-4d5963e/src_math_sum.ts
