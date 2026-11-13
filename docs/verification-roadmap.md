@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-11: A, B, C, D and F are integrated. I is complete. E (loop induction) and J (upstream search) are merged. H (pure callbacks) and G (heap identities and frames) are validated on stacked feature branches, awaiting integration.
+Status as of 2026-11-13: A, B, C, D, F, E, J and H are integrated. G is implemented and independently under review in PR #6, now based on main. P, K and the stateful foundation are in design/prototype comparison; no remaining node is claimed complete.
 
-All prerequisites apply. I combines the five original branches. E and J are integrated; H and G are branch-ready. P and T are ready to start. K remains gated on H and G integration. Transitively redundant edges are omitted.
+All prerequisites apply. H is merged; G awaits its landing review. P and T can proceed independently. K, R and S still depend on G integration. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -15,7 +15,7 @@ flowchart TD
   I{{"I: Integrate &amp; validate<br/>integrated"}}
   E["E: Loops with induction<br/>integrated"]
   G["G: Heap, aliases &amp; frames<br/>branch-ready"]
-  H["H: Higher-order contracts<br/>branch-ready"]
+  H["H: Higher-order contracts<br/>integrated"]
   J["J: Search proof pilot<br/>integrated"]
   K["K: Broader library proofs"]
   P["P: Project proof workflow<br/>READY"]
@@ -74,11 +74,11 @@ J was merged at `91c2806`. The pinned Lodash strictIndexOf function verifies unc
 
 ## Pure callback delivery
 
-H is implemented and awaiting integration on `feat/pure-callback-contracts`. Pure total unary numeric predicates compose with immutable primitive captures and checked named callbacks. The pinned Ramda eager findIndex verifies unchanged; 2 seeded bugs replay, with 42 independent native comparisons. The full suite passes 219/219 and all 12 verifier mutants are detected. [Callback validation report](../verify/reports/callbacks.md). Stateful callbacks remain outside this delivery.
+H is integrated on `feat/pure-callback-contracts`. Pure total unary numeric predicates compose with immutable primitive captures and checked named callbacks. The pinned Ramda eager findIndex verifies unchanged; 2 seeded bugs replay, with 42 independent native comparisons. The full suite passes 219/219 and all 12 verifier mutants are detected. [Callback validation report](../verify/reports/callbacks.md). Stateful callbacks remain outside this delivery.
 
 ## Heap and frame delivery
 
-G is implemented and awaiting integration on `feat/heap-alias-frames`, stacked on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K remains gated on integration; P and T can proceed independently.
+G is implemented and awaiting integration on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K remains gated on integration; P and T can proceed independently.
 
 ## Original branch results
 
@@ -97,7 +97,7 @@ These counts describe the original isolated branches. D's original partial resul
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
 Ready packages: P, T.
-Branches awaiting integration: G, H.
+Branches awaiting integration: G.
 
 To regenerate this document after editing the data:
 

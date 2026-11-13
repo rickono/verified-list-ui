@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
-  "asOf": "2026-11-11",
-  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) and J (upstream search) are merged. H (pure callbacks) and G (heap identities and frames) are validated on stacked feature branches, awaiting integration.",
-  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E and J are integrated; H and G are branch-ready. P and T are ready to start. K remains gated on H and G integration. Transitively redundant edges are omitted.",
+  "asOf": "2026-11-13",
+  "status": "A, B, C, D, F, E, J and H are integrated. G is implemented and independently under review in PR #6, now based on main. P, K and the stateful foundation are in design/prototype comparison; no remaining node is claimed complete.",
+  "edgeMeaning": "All prerequisites apply. H is merged; G awaits its landing review. P and T can proceed independently. K, R and S still depend on G integration. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -278,17 +278,17 @@
       "deps": [
         "I"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Function types / call verification",
       "detail": "Give callbacks and closures checked parameter/result contracts, with explicit captured-value and effect assumptions. Begin with pure callbacks; stateful callbacks also require the heap model when used.",
       "doneWhen": "Selected generic/callback helpers compose through checked function contracts without treating arbitrary callbacks as trusted.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "C",
         "F"
       ],
       "deliveryStatus": "finished",
-      "resultSummary": "Pure total unary numeric predicates compose through checked callback admission, immutable primitive captures and named contracts. The unchanged Ramda eager findIndex verifies; two seeded bugs replay. Final suite passes 219/219 and all 12 verifier mutants are detected. Stateful callbacks remain unsupported."
+      "resultSummary": "Pure total unary numeric predicates compose through checked callback admission, immutable primitive captures and named contracts. The unchanged Ramda eager findIndex verifies; two seeded bugs replay. Final suite passes 219/219 and all 12 verifier mutants are detected. Stateful callbacks remain unsupported. Independent landing review passed 219/219 and 29 adversarial probes; merged in PR #5."
     },
     {
       "id": "J",
@@ -614,7 +614,6 @@
   ],
   "progress": {
     "branchReady": [
-      "H",
       "G"
     ],
     "partial": [],
@@ -634,7 +633,6 @@
     "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
     "integrationComplete": true,
     "pendingIntegration": [
-      "H",
       "G"
     ]
   },
@@ -691,11 +689,12 @@
     "seededBugs": 2,
     "upstreamCommit": "980b3bf7712adb8ad8b5d9b2c6aca525cb3cf143",
     "report": "../verify/reports/callbacks.md",
-    "integrated": false
+    "integrated": true,
+    "mergeCommit": "eb135b5145cceda1e225f5a42e595a4a59a7199b"
   },
   "heapDelivery": {
     "branch": "feat/heap-alias-frames",
-    "baseBranch": "feat/pure-callback-contracts",
+    "baseBranch": "main",
     "baseCommit": "37355ccf197b22286cf0c25fddf147f2e3713172",
     "tests": 249,
     "fullSuite": {
