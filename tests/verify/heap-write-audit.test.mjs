@@ -144,6 +144,7 @@ test("a record named @elements cannot be confused with whole-array contents at a
 async function mutant(from,to,run,t) {
   const dir=await mkdtemp(join(tmpdir(),"heap-write-audit-"));
   try {
+    await run(heap,(operation)=>assert.doesNotThrow(operation));
     let source=await readFile(new URL("../../verify/heap.mjs",import.meta.url),"utf8");
     assert.equal(source.split(from).length,2,`Mutation drift: ${from}`);
     source=source.replace(from,to);
@@ -151,50 +152,50 @@ async function mutant(from,to,run,t) {
     source=source.replaceAll('"./error.mjs"',JSON.stringify(new URL("../../verify/error.mjs",import.meta.url).href))
       .replaceAll('"./data.mjs"',JSON.stringify(new URL("../../verify/data.mjs",import.meta.url).href));
     const path=join(dir,"heap.mjs"); await writeFile(path,source);
-    const h=await import(pathToFileURL(path).href); await run(h);
-    t.diagnostic(JSON.stringify({sha256,detected:true}));
+    const h=await import(pathToFileURL(path).href); await run(h,(operation,pattern)=>assert.throws(operation,pattern));
+    t.diagnostic(JSON.stringify({sha256,control:"passed",detected:true}));
   } finally { await rm(dir,{recursive:true,force:true}); }
 }
 
 test("private record writer-log omission is detected even for an already-written location", async (t) => {
-  await mutant("return logged(next, [name]);","return next;",(h) => {
+  await mutant("return logged(next, [name]);","return next;",(h,expect) => {
     const {unit,entry}=fresh(h), head=h.loopHead(unit,entry,[loc("a")]);
     const changed=h.write(unit,head,"a","x",data.literal(1));
-    assert.throws(()=>h.loopWrites(head,[changed]),/Heap write audit: missing ownership for/);
+    expect(()=>h.loopWrites(head,[changed]),/Heap write audit: missing ownership for/);
     // It also cannot be laundered into a trusted baseline at the next cutpoint.
-    assert.throws(()=>h.loopHead(unit,changed,[]),/Heap write audit: missing ownership for/);
+    expect(()=>h.loopHead(unit,changed,[]),/Heap write audit: missing ownership for/);
   },t);
 });
 
 test("private summary writer-log omission is detected at the same audit boundary", async (t) => {
-  await mutant('s[kind].set(k, name);\n      s = logged(s, [name]);','s[kind].set(k, name);',(h) => {
+  await mutant('s[kind].set(k, name);\n      s = logged(s, [name]);','s[kind].set(k, name);',(h,expect) => {
     const {unit,entry}=fresh(h), changed=h.havoc(unit,entry,[loc("a")],false).state;
-    assert.throws(()=>h.loopWrites(entry,[changed]),/Heap write audit: missing ownership for/);
+    expect(()=>h.loopWrites(entry,[changed]),/Heap write audit: missing ownership for/);
   },t);
 });
 
 test("private indexed writer-log omission fails for an existing fresh array", async (t) => {
-  await mutant("return logged(s, [valueName, hasName]);","return s;",(h) => {
+  await mutant("return logged(s, [valueName, hasName]);","return s;",(h,expect) => {
     const {unit,entry}=fresh(h), made=h.alloc(unit,entry,data.array([data.literal(0)]));
     const head=h.loopHead(unit,made.state,[]), changed=h.writeIndex(unit,head,made.value.ref,"#x00000000",data.literal(1));
-    assert.throws(()=>h.loopWrites(head,[changed]),/Heap write audit: missing ownership for/);
+    expect(()=>h.loopWrites(head,[changed]),/Heap write audit: missing ownership for/);
   },t);
 });
 
 for(const arm of ["a","b"]) test(`private join-log omission of arm ${arm} fails for its concrete target`, async (t) => {
-  await mutant("mergeOwnership(a, b)",`mergeOwnership(${arm === "a" ? "b, b" : "a, a"})`,(h) => {
+  await mutant("mergeOwnership(a, b)",`mergeOwnership(${arm === "a" ? "b, b" : "a, a"})`,(h,expect) => {
     const {unit,entry:head}=fresh(h);
     const a=h.write(unit,head,"a","x",data.literal(1)), b=h.writeIndex(unit,head,"xs","#x00000000",data.literal(2));
     const joined=h.join(unit,"flag",a,b);
-    assert.throws(()=>h.loopWrites(head,[joined]),/Heap write audit: missing ownership for/);
-    assert.throws(()=>h.loopWrites(head,[],[joined]),/Heap write audit: missing ownership for/);
+    expect(()=>h.loopWrites(head,[joined]),/Heap write audit: missing ownership for/);
+    expect(()=>h.loopWrites(head,[],[joined]),/Heap write audit: missing ownership for/);
   },t);
 });
 
 test("private missing location data cannot construct a new content version", async (t) => {
-  await mutant("locations: [{ ref, key, sort: value.sort }]","locations: []",(h) => {
+  await mutant("locations: [{ ref, key, sort: value.sort }]","locations: []",(h,expect) => {
     const {unit,entry}=fresh(h);
-    assert.throws(()=>h.write(unit,entry,"a","x",data.literal(1)),/Heap write audit: .*location/);
+    expect(()=>h.write(unit,entry,"a","x",data.literal(1)),/Heap write audit: .*location/);
   },t);
 });
 
