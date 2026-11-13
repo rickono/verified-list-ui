@@ -1,2 +1,3 @@
 ts	phase	decision	why	evidence	result
 2026-11-13T13:09:31Z	frame	Start the remaining roadmap under the operator autonomy grant	Keep completion tied to runnable acceptance evidence rather than roadmap labels	verify/reports/roadmap/plan.md; user instruction 2026-11-13; baseline 32bd5b2	open
+2026-11-13T13:11:37Z	orchestration	Partition the first wave into independent landing reviews and three design comparisons	Resolve shared semantic boundaries before agents implement incompatible modules	artifacts/roadmap-20261113/{P,K,stateful}-task.md	open
