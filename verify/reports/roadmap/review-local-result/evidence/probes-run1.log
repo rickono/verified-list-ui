@@ -1,0 +1,38 @@
+head=44809983ca516600292b42a8f2b7db8b4ecc1b78 tree=git-archive start=2026-11-13T15:18:40Z
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:33549) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS                 early-return-block-shadow                  holds  verified          337ms native samples hold (13)
+PASS                 early-return-block-shadow-wrong            wrong  counterexample    219ms inputs {"x":"1.0000019073486328"} reported 2.000001907348633 native 2.000001907348633 confirmed=true
+PASS                 loop-body-block-shadow                     holds  verified         1751ms native samples hold (8)
+PASS                 loop-body-block-shadow-wrong               wrong  counterexample   1794ms inputs {"n":"15"} reported 15 native 15 confirmed=true
+PASS                 caller-local-helper-call                   holds  verified          168ms [id:verified] native samples hold (13)
+PASS                 caller-local-helper-call-wrong             wrong  counterexample    174ms [id:verified] inputs {"x":"NaN"} reported NaN native NaN confirmed=true
+PASS                 helper-local-summary-chain                 holds  verified         7554ms [inc:verified] native samples hold (13)
+PASS                 helper-local-summary-chain-wrong           wrong  counterexample    257ms [inc:verified] inputs {"x":"-1.8333404655019144e-7"} reported 1.9999998166659534 native 1.9999998166659534 confirmed=true
+PASS                 var-in-block-read-after                    holds  verified          146ms native samples hold (13)
+PASS                 var-in-block-read-after-wrong              wrong  counterexample    163ms inputs {"x":"NaN"} reported 3 native 3 confirmed=true
+PASS                 typed-local                                holds  verified          145ms native samples hold (13)
+PASS                 typed-local-wrong                          wrong  counterexample    154ms inputs {"x":"1e-323"} reported 1e-323 native 1e-323 confirmed=true
+PASS                 old-with-local                             holds  verified          144ms native samples hold (13)
+PASS                 old-with-local-wrong                       wrong  counterexample    181ms inputs {"x":"8e-323"} reported 0 native 0 confirmed=true
+PASS                 loop-early-return-inner-shadow             holds  verified          368ms native samples hold (8)
+PASS                 loop-early-return-inner-shadow-wrong       wrong  counterexample    354ms inputs {"n":"86"} reported 86 native 86 confirmed=true
+PASS                 multi-declarator                           holds  verified          145ms native samples hold (13)
+PASS                 multi-declarator-wrong                     wrong  counterexample    201ms inputs {"x":"8589934591.98228"} reported 8589934591.98228 native 8589934591.98228 confirmed=true
+PASS                 block-arrow-export                         holds  verified          144ms native samples hold (13)
+PASS                 block-arrow-export-wrong                   wrong  counterexample    155ms inputs {"x":"1e-323"} reported 1e-323 native 1e-323 confirmed=true
+PASS                 function-expression-var                    holds  verified          142ms native samples hold (13)
+PASS                 function-expression-var-wrong              wrong  counterexample    154ms inputs {"x":"1e-323"} reported 1e-323 native 1e-323 confirmed=true
+PASS                 closure-value-named-result                 holds  verified          168ms [apply:verified] native samples hold (13)
+PASS                 closure-value-named-result-wrong           wrong  counterexample    178ms [apply:verified] inputs {"x":"0"} reported true native true confirmed=true
+PASS                 branch-return-other-expression             holds  verified          160ms native samples hold (13)
+PASS                 branch-return-other-expression-wrong       wrong  counterexample    162ms inputs {"x":"6.935202936623212e-162"} reported 6.935202936623212e-162 native 6.935202936623212e-162 confirmed=true
+PASS                 other-local-in-ensures                     reject unsupported         1ms Unknown value y. Calls and ambient values need explicit support.
+PASS                 other-local-in-ensures-loop-path           reject unsupported         1ms Unknown value y. Calls and ambient values need explicit support.
+PASS                 other-local-in-requires                    reject unsupported         0ms Unknown value y. Calls and ambient values need explicit support.
+PASS                 hoisted-var-read-before-declaration        reject unsupported         0ms Reading or writing result before its declaration is unsupported (TDZ or var hoisting).
+PASS                 tdz-read-from-nested-block                 reject unsupported         0ms Reading or writing result before its declaration is unsupported (TDZ or var hoisting).
+probes=31 {"PASS":31} falseProofs=0
+exit=0 end=2026-11-13T15:18:56Z

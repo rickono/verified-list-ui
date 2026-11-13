@@ -1,0 +1,61 @@
+recorded=2026-11-13T15:26:05Z repo=/Users/rick/.t3/worktrees/verified-list-ui/t3-4e767245 branch=t3/review-local-result
+## archive == 4480998 tree (blob ids of every tracked file, node_modules link excluded)
+MATCH 241 files
+## lockfile (pnpm-lock.yaml; node_modules reused through a temporary symlink head/node_modules)
+8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21  archive head/pnpm-lock.yaml
+8a0e19b686e00939f10a597f1a9c3b8ae2c25c1dae10d340cba0a365830afa21  /Users/rick/verification-vibes/verified-list-ui/pnpm-lock.yaml (node_modules owner)
+## git diff --stat 13df4da 4480998
+ verify/reports/roadmap/local-result.md | 393 +++++++++++++++++++++++++++++++++
+ 1 file changed, 393 insertions(+)
+## git diff --stat fa2b439 4480998 -- verify/source.mjs
+ verify/source.mjs | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+## localName / RESERVED call sites at 4480998:verify/source.mjs
+96:  if (id.type !== "Identifier" || RESERVED.has(id.name) || env.has(id.name) && env.get(id.name).value !== SELF) {
+182:    if (p.type !== "Identifier" || RESERVED.has(p.name)) fail("Callback parameters need simple, nonreserved names.", p);
+688:const LOCAL_RESERVED = new Set([...RESERVED].filter((name) => name !== "result"));
+690:function localName(id) {
+691:  if (id.type !== "Identifier" || LOCAL_RESERVED.has(id.name)) fail("Local declarations need simple, nonreserved names.", id);
+697:      localName(d.id);
+712:      localName(d.id);
+1034:  if (RESERVED.has(name) || (fn.id && RESERVED.has(fn.id.name))) fail("A function cannot shadow a verifier builtin.", top);
+1254:      if (RESERVED.has(name) || locals.has(name)) fail(`Duplicate or reserved module binding ${name}.`, node);
+1257:    for (const name of syntax.aliases.keys()) if (RESERVED.has(name)) fail(`Reserved type binding ${name}.`, syntax.aliases.get(name).node);
+## durable evidence checksums
+full-suite.log: OK
+focused.log: OK
+before-state.log: OK
+after-state-initial.log: OK
+control-base.log: OK
+control-altA.log: OK
+probe/state.mjs: OK
+probe2/closure-named-result.log: OK
+probe2/closure-named-result.mjs: OK
+## full-suite.log recount
+head=13df4dae5205ec1173b36742a0689ba9ef004c34 start=2026-11-13T14:52:19Z
+ok 257, not ok 0
+# tests 257
+# pass 257
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+exit=0 end=2026-11-13T14:58:03Z
+## test counts: static top-level test(...) in tests/verify/*.test.mjs, plus 4 loop-generated deadline tests
+fa2b439 245
+13df4da 253
+4480998 253
+log names not matched statically: 4; static names missing from log: 0
+hard deadline preserves a cheap target in order cheap, costly
+hard deadline preserves a cheap target in order costly, cheap
+solver deadline preserves a cheap target in order cheap, costly
+solver deadline preserves a cheap target in order costly, cheap
+## the 8 new tests in full-suite.log
+pinned unchanged es-toolkit sum and mean prove the documented empty-array results and catch wrong claims ok-lines=1
+ordinary const, let, var, block and for-init locals named result verify against the actual return ok-lines=1
+incorrect return claims that a namespace leak would prove are native counterexamples ok-lines=1
+closures capture the live const result lexically and never see a contract result ok-lines=1
+every callbacks read the live local in invariants and the return in ensures ok-lines=1
+TDZ, hoisting and scope exit still bound a local result ok-lines=1
+a wrong invariant about the local result is an induction gap, not a proof ok-lines=1
+parameter, entry, function, module, type and other reserved-name gates are unchanged ok-lines=1

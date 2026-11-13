@@ -1,0 +1,46 @@
+head=44809983ca516600292b42a8f2b7db8b4ecc1b78 tree=git-archive start=2026-11-13T15:25:01Z
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:37382) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS                 early-return-block-shadow                  holds  verified          351ms native samples hold (13)
+PASS                 early-return-block-shadow-wrong            wrong  counterexample    197ms inputs {"x":"1.0000019073486328"} reported 2.000001907348633 native 2.000001907348633 confirmed=true
+PASS                 loop-body-block-shadow                     holds  verified         1746ms native samples hold (8)
+PASS                 loop-body-block-shadow-wrong               wrong  counterexample   1753ms inputs {"n":"15"} reported 15 native 15 confirmed=true
+PASS                 caller-local-helper-call                   holds  verified          164ms [id:verified] native samples hold (13)
+PASS                 caller-local-helper-call-wrong             wrong  counterexample    175ms [id:verified] inputs {"x":"NaN"} reported NaN native NaN confirmed=true
+PASS                 helper-local-summary-chain                 holds  verified         7505ms [inc:verified] native samples hold (13)
+PASS                 helper-local-summary-chain-wrong           wrong  counterexample    258ms [inc:verified] inputs {"x":"-1.8333404655019144e-7"} reported 1.9999998166659534 native 1.9999998166659534 confirmed=true
+PASS                 var-in-block-read-after                    holds  verified          145ms native samples hold (13)
+PASS                 var-in-block-read-after-wrong              wrong  counterexample    158ms inputs {"x":"NaN"} reported 3 native 3 confirmed=true
+PASS                 typed-local                                holds  verified          144ms native samples hold (13)
+PASS                 typed-local-wrong                          wrong  counterexample    154ms inputs {"x":"1e-323"} reported 1e-323 native 1e-323 confirmed=true
+PASS                 old-with-local                             holds  verified          144ms native samples hold (13)
+PASS                 old-with-local-wrong                       wrong  counterexample    154ms inputs {"x":"8e-323"} reported 0 native 0 confirmed=true
+PASS                 loop-early-return-inner-shadow             holds  verified          361ms native samples hold (8)
+PASS                 loop-early-return-inner-shadow-wrong       wrong  counterexample    351ms inputs {"n":"2"} reported 2 native 2 confirmed=true
+PASS                 multi-declarator                           holds  verified          143ms native samples hold (13)
+PASS                 multi-declarator-wrong                     wrong  counterexample    204ms inputs {"x":"8589934591.98228"} reported 8589934591.98228 native 8589934591.98228 confirmed=true
+PASS                 block-arrow-export                         holds  verified          145ms native samples hold (13)
+PASS                 block-arrow-export-wrong                   wrong  counterexample    156ms inputs {"x":"1e-323"} reported 1e-323 native 1e-323 confirmed=true
+PASS                 function-expression-var                    holds  verified          144ms native samples hold (13)
+PASS                 function-expression-var-wrong              wrong  counterexample    154ms inputs {"x":"1e-323"} reported 1e-323 native 1e-323 confirmed=true
+PASS                 closure-value-named-result                 holds  verified          162ms [apply:verified] native samples hold (13)
+PASS                 closure-value-named-result-wrong           wrong  counterexample    174ms [apply:verified] inputs {"x":"0"} reported true native true confirmed=true
+PASS                 branch-return-other-expression             holds  verified          175ms native samples hold (13)
+PASS                 branch-return-other-expression-wrong       wrong  counterexample    165ms inputs {"x":"6.935202936623212e-162"} reported 6.935202936623212e-162 native 6.935202936623212e-162 confirmed=true
+NON-PROOF            dead-var-after-return                      holds  unsupported         0ms Unreachable statements are outside the supported source subset.
+NON-PROOF            dead-var-after-return-wrong                wrong  unsupported         1ms Unreachable statements are outside the supported source subset.
+PASS                 other-local-in-ensures                     reject unsupported         0ms Unknown value y. Calls and ambient values need explicit support.
+PASS                 other-local-in-ensures-loop-path           reject unsupported         1ms Unknown value y. Calls and ambient values need explicit support.
+PASS                 other-local-in-requires                    reject unsupported         0ms Unknown value y. Calls and ambient values need explicit support.
+PASS                 hoisted-var-read-before-declaration        reject unsupported         0ms Reading or writing result before its declaration is unsupported (TDZ or var hoisting).
+PASS                 tdz-read-from-nested-block                 reject unsupported         0ms Reading or writing result before its declaration is unsupported (TDZ or var hoisting).
+PASS                 loop-body-local-unavailable-to-invariant   reject unsupported         0ms Unknown value result. Calls and ambient values need explicit support.
+PASS                 callback-param-named-result                reject unsupported         0ms Callback parameters need simple, nonreserved names.
+PASS                 every-param-named-result-in-ensures        reject unsupported         0ms Use distinct, nonreserved simple names; shadowing is unsupported.
+PASS                 every-param-named-result-in-invariant      reject unsupported         1ms Use distinct, nonreserved simple names; shadowing is unsupported.
+PASS                 destructured-local-named-result            reject unsupported         0ms Local declarations need simple, nonreserved names.
+PASS                 import-binding-named-result                reject unsupported         4ms Duplicate or reserved module binding result.
+probes=39 {"PASS":37,"NON-PROOF":2} falseProofs=0
+exit=0 end=2026-11-13T15:25:17Z
