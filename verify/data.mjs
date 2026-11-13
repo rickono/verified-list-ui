@@ -36,6 +36,45 @@ const integerPair = (a, b) => {
   const shift = (n) => n.offset === offset ? widen(n, width) : `(bvadd ${widen(n, width)} (_ bv1 ${width}))`;
   return [shift(x), shift(y)];
 };
+// Derived signed/half-integer views, ported from candidate A (d9c22c6).
+// Exact bounds and every consumer's contract: design/numeric-metadata.md.
+// The FP term keeps its native rounding and zero sign. No new assertions.
+const INT_WIDTH = 53;
+const low32 = (n) => n.width === 32 ? n.smt : n.width > 32 ? `((_ extract 31 0) ${n.smt})` : widen(n, 32);
+const intOf = (v) => {
+  if (v.sort !== "number" || v.present !== "true") return;
+  if (v.int) return v.int.width <= INT_WIDTH ? v.int : undefined;
+  const n = integerOf(v);
+  if (!n || n.width > INT_WIDTH) return;
+  const bits = low32(n);
+  return { pos: n.smt, neg: `(_ bv${-n.offset} ${n.width})`, width: n.width,
+    low: n.offset ? `(bvsub ${bits} #x00000001)` : bits };
+};
+// Selection needs no carry bit; sums and cross-comparisons need one.
+const signedPair = (x, y, carry) => {
+  if (!x || !y) return;
+  const w = Math.max(x.width, y.width) + carry;
+  if (w > INT_WIDTH) return;
+  const up = (v) => ({ ...v, pos: widen({ smt: v.pos, width: v.width }, w), neg: widen({ smt: v.neg, width: v.width }, w) });
+  return { x: up(x), y: up(y), w };
+};
+const intPair = (a, b, anyShadow = false, carry = 1) => {
+  if (!anyShadow && !a.int && !b.int) return;
+  return signedPair(intOf(a), intOf(b), carry);
+};
+const halvesOf = (v) => {
+  if (v.sort !== "number" || v.present !== "true") return;
+  if (v.halves) return v.halves.width <= INT_WIDTH ? v.halves : undefined;
+  const z = intOf(v);
+  if (!z || z.width + 1 > INT_WIDTH) return;
+  const w = z.width + 1, twice = (s) => `(bvshl ((_ zero_extend 1) ${s}) (_ bv1 ${w}))`;
+  return { pos: twice(z.pos), neg: twice(z.neg), width: w };
+};
+const halvesPair = (a, b, carry = 1) => {
+  if (!a.halves && !b.halves) return;
+  return signedPair(halvesOf(a), halvesOf(b), carry);
+};
+const cross = ({ x, y }) => [`(bvadd ${x.pos} ${y.neg})`, `(bvadd ${y.pos} ${x.neg})`];
 export const bool = (smt, present = "true") => ({ sort: "boolean", smt, present });
 export const undef = () => ({ sort: "undefined", present: "false" });
 const isReference = (v) => v.sort === "array" || v.sort === "object";
@@ -139,9 +178,15 @@ export function merge(c, a, b, node) {
     return { sort: "array", element: a.element, length: merge(c, a.length, b.length, node),
       at: (i) => merge(c, a.at(i), b.at(i), node), allowUndefined: a.allowUndefined || b.allowUndefined, empty: a.empty && b.empty };
   }
-  return { sort: a.sort, smt: ite(c, a.smt, b.smt), present: ite(c, a.present, b.present),
+  const result = { sort: a.sort, smt: ite(c, a.smt, b.smt), present: ite(c, a.present, b.present) };
+  // Even a cached u32 is dropped when the selected value may be absent.
+  if (a.sort !== "number" || result.present !== "true") return result;
+  const np = natPair(a, b), ip = intPair(a, b, false, 0), hp = halvesPair(a, b, 0);
+  return { ...result,
     u32: a.u32 && b.u32 ? ite(c, a.u32, b.u32) : undefined,
-    nat: a.sort === "number" && natPair(a, b) ? (([x, y, width]) => ({ smt: ite(c, x, y), width }))(natPair(a, b)) : undefined };
+    nat: np ? { smt: ite(c, np[0], np[1]), width: np[2] } : undefined,
+    int: ip ? { pos: ite(c, ip.x.pos, ip.y.pos), neg: ite(c, ip.x.neg, ip.y.neg), width: ip.w, low: ite(c, ip.x.low, ip.y.low) } : undefined,
+    halves: hp ? { pos: ite(c, hp.x.pos, hp.y.pos), neg: ite(c, hp.x.neg, hp.y.neg), width: hp.w } : undefined };
 }
 
 function equal(a, b, sameValue, node) {
@@ -151,7 +196,9 @@ function equal(a, b, sameValue, node) {
   if (isRef(a) && !isReference(b) || isRef(b) && !isReference(a)) return bool("false");
   if (isReference(a) || isReference(b)) fail("Array/object reference identity is unsupported. Compare fields or elements instead.", node);
   const pair = !sameValue && integerPair(a, b);
+  const signed = !sameValue && !pair && (intPair(a, b) ?? halvesPair(a, b));
   const payload = a.sort !== b.sort || a.sort === "undefined" ? "false" : pair ? `(= ${pair[0]} ${pair[1]})`
+    : signed ? `(= ${cross(signed).join(" ")})`
     : `(${a.sort === "number" && !sameValue ? "fp.eq" : "="} ${a.smt} ${b.smt})`;
   return bool(or(and(not(a.present), not(b.present)), and(a.present, b.present, payload)));
 }
@@ -159,8 +206,14 @@ function equal(a, b, sameValue, node) {
 export function unary(op, a, node) {
   if (op === "!") return bool(not(need(a, "boolean", node)));
   // ToNumber of a present number is the identity, so exact shadows survive.
-  if (op === "+") return a.sort === "number" && a.present === "true" && (a.nat || a.predecessor) ? a : num(need(a, "number", node));
-  if (op === "-") return { ...num(`(fp.neg ${need(a, "number", node)})`), ...(a.sort === "number" && a.present === "true" && a.literal !== undefined ? { literal: -a.literal } : {}) };
+  if (op === "+") return a.sort === "number" && a.present === "true" ? a : num(need(a, "number", node));
+  if (op === "-") {
+    const z = intOf(a), h = a.halves && halvesOf(a);
+    return { ...num(`(fp.neg ${need(a, "number", node)})`),
+      ...(a.sort === "number" && a.present === "true" && a.literal !== undefined ? { literal: -a.literal } : {}),
+      ...(z ? { int: { ...z, pos: z.neg, neg: z.pos, low: `(bvneg ${z.low})` } }
+        : h ? { halves: { pos: h.neg, neg: h.pos, width: h.width } } : {}) };
+  }
   return fail(`Unsupported unary operator ${op}.`, node);
 }
 
@@ -200,6 +253,23 @@ export function binary(op, a, b, node) {
   const bvops = { "<": "bvult", "<=": "bvule", ">": "bvugt", ">=": "bvuge" };
   const comparison = integerPair(a, b);
   if (comparison && op in bvops) return bool(`(${bvops[op]} ${comparison[0]} ${comparison[1]})`);
+  const ip = intPair(a, b, op === "-");
+  if (ip && op in bvops) return bool(`(${bvops[op]} ${cross(ip).join(" ")})`);
+  if (ip && ["+", "-"].includes(op)) {
+    const { x, y, w } = ip;
+    return { ...num(`(fp.${ops[op]} RNE ${args})`), int: {
+      pos: `(bvadd ${x.pos} ${op === "+" ? y.pos : y.neg})`, neg: `(bvadd ${x.neg} ${op === "+" ? y.neg : y.pos})`,
+      width: w, low: `(${op === "+" ? "bvadd" : "bvsub"} ${x.low} ${y.low})` } };
+  }
+  const hp = halvesPair(a, b);
+  if (hp && op in bvops) return bool(`(${bvops[op]} ${cross(hp).join(" ")})`);
+  if (hp && ["+", "-"].includes(op)) {
+    const { x, y, w } = hp;
+    return { ...num(`(fp.${ops[op]} RNE ${args})`), halves: {
+      pos: `(bvadd ${x.pos} ${op === "+" ? y.pos : y.neg})`, neg: `(bvadd ${x.neg} ${op === "+" ? y.neg : y.pos})`, width: w } };
+  }
+  const z = op === "/" && literalIs(b, 2) && intOf(a);
+  if (z && z.width < INT_WIDTH) return { ...num(`(fp.div RNE ${args})`), halves: { pos: z.pos, neg: z.neg, width: z.width } };
   return ["+", "-", "*", "/"].includes(op) ? num(`(fp.${ops[op]} RNE ${args})`) : bool(`(fp.${ops[op]} ${args})`);
 }
 
@@ -212,7 +282,7 @@ export function builtin(name, args, node) {
   if (!["Number.isFinite", "Number.isNaN", "Number.isInteger", "Number.isSafeInteger"].includes(name)) fail(`Unsupported builtin call ${name}.`, node);
   if (v.sort !== "number") return bool("false");
   if (name === "Number.isNaN") return bool(and(v.present, `(fp.isNaN ${v.smt})`));
-  if ((v.nat && natOf(v)?.width <= 53) || predecessorOf(v)?.width <= 53) return bool("true");
+  if ((v.nat && natOf(v)?.width <= 53) || predecessorOf(v)?.width <= 53 || (v.int && intOf(v))) return bool("true");
   const finite = and(v.present, not(`(or (fp.isNaN ${v.smt}) (fp.isInfinite ${v.smt}))`));
   if (name === "Number.isFinite") return bool(finite);
   const integer = and(finite, `(fp.eq (fp.roundToIntegral RTZ ${v.smt}) ${v.smt})`);
@@ -277,8 +347,16 @@ export function index(owner, value, node) {
   const x = need(value, "number", node);
   const n = !value.u32 && natOf(value);
   if (n && owner.length.u32) {
-    const len = widen({ smt: owner.length.u32, width: 32 }, n.width);
-    return merge(`(bvult ${n.smt} ${len})`, owner.at(`((_ extract 31 0) ${n.smt})`), undef(), node);
+    const w = Math.max(32, n.width), len = widen({ smt: owner.length.u32, width: 32 }, w);
+    return merge(`(bvult ${widen(n, w)} ${len})`, owner.at(low32(n)), undef(), node);
+  }
+  const z = !value.u32 && !n && intOf(value);
+  if (z && owner.length.u32) {
+    // z.low is modulo 2^32, never an unconditional u32/index cache.
+    const w = Math.max(z.width, 33), up = (s) => widen({ smt: s, width: z.width }, w);
+    const d = `(bvsub ${up(z.pos)} ${up(z.neg)})`;
+    const valid = and(`(bvule ${up(z.neg)} ${up(z.pos)})`, `(bvult ${d} ${widen({ smt: owner.length.u32, width: 32 }, w)})`);
+    return merge(valid, owner.at(z.low), undef(), node);
   }
   const i = value.u32 ?? `((_ fp.to_ubv 32) RTZ ${x})`;
   const valid = value.u32 ? and(value.present, `(bvult ${i} ${owner.length.u32})`)

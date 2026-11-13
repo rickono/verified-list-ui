@@ -1,0 +1,1699 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+node --test --test-concurrency=1 tests/verify/*.test.mjs
+TAP version 13
+# Subtest: worker errors, signal exits, invalid verdicts, ids, and witnesses fail closed
+ok 1 - worker errors, signal exits, invalid verdicts, ids, and witnesses fail closed
+  ---
+  duration_ms: 170.027625
+  type: 'test'
+  ...
+# Subtest: a controlled hard deadline interrupts and reaps an unresponsive worker
+ok 2 - a controlled hard deadline interrupts and reaps an unresponsive worker
+  ---
+  duration_ms: 24.061333
+  type: 'test'
+  ...
+# (node:80179) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: missing capabilities and invalid startup messages cannot support proofs
+ok 3 - missing capabilities and invalid startup messages cannot support proofs
+  ---
+  duration_ms: 48.541666
+  type: 'test'
+  ...
+# Subtest: independent concurrent requests keep proofs, vacuity, and replay witnesses isolated
+ok 4 - independent concurrent requests keep proofs, vacuity, and replay witnesses isolated
+  ---
+  duration_ms: 263.640084
+  type: 'test'
+  ...
+# Subtest: real Z3 queries isolate assertions even when target symbols have the same names
+ok 5 - real Z3 queries isolate assertions even when target symbols have the same names
+  ---
+  duration_ms: 157.203292
+  type: 'test'
+  ...
+# Subtest: an unreplayable callee blocks callers transitively while an independent target verifies
+ok 6 - an unreplayable callee blocks callers transitively while an independent target verifies
+  ---
+  duration_ms: 1783.455875
+  type: 'test'
+  ...
+# Subtest: real Z3 evidence survives a controlled costly obligation in both target orders
+ok 7 - real Z3 evidence survives a controlled costly obligation in both target orders
+  ---
+  duration_ms: 389.272417
+  type: 'test'
+  ...
+# Subtest: all source postconditions are required and oversized counterexamples name their clause
+ok 8 - all source postconditions are required and oversized counterexamples name their clause
+  ---
+  duration_ms: 1087.146458
+  type: 'test'
+  ...
+# (node:80242) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: call-time domain proofs agree with concrete replay checks
+ok 9 - call-time domain proofs agree with concrete replay checks
+  ---
+  duration_ms: 3952.475125
+  type: 'test'
+  ...
+# Subtest: the CLI explains call failures and weak-contract proof gaps
+ok 10 - the CLI explains call failures and weak-contract proof gaps
+  ---
+  duration_ms: 256.506542
+  type: 'test'
+  ...
+# Subtest: replay timeouts block callers transitively after their raw proofs
+ok 11 - replay timeouts block callers transitively after their raw proofs
+  ---
+  duration_ms: 871.3585
+  type: 'test'
+  ...
+# (node:80558) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the module examples prove a bounded clamp wrapper and a nonempty first-element wrapper
+ok 12 - the module examples prove a bounded clamp wrapper and a nonempty first-element wrapper
+  ---
+  duration_ms: 731.822625
+  type: 'test'
+  ...
+# Subtest: callers reuse verified scalar contracts through forward references and chains
+ok 13 - callers reuse verified scalar contracts through forward references and chains
+  ---
+  duration_ms: 178.254958
+  type: 'test'
+  ...
+# Subtest: a call must establish the helper's requires before using its ensures
+ok 14 - a call must establish the helper's requires before using its ensures
+  ---
+  duration_ms: 191.054041
+  type: 'test'
+  ...
+# Subtest: branches and short circuits check only calls that execute
+ok 15 - branches and short circuits check only calls that execute
+  ---
+  duration_ms: 214.324375
+  type: 'test'
+  ...
+# Subtest: weak helper contracts are opaque and produce proof gaps rather than false bugs
+ok 16 - weak helper contracts are opaque and produce proof gaps rather than false bugs
+  ---
+  duration_ms: 343.549583
+  type: 'test'
+  ...
+# Subtest: calls in array elements and builtin arguments retain their execution guards
+ok 17 - calls in array elements and builtin arguments retain their execution guards
+  ---
+  duration_ms: 191.621417
+  type: 'test'
+  ...
+# Subtest: slice receivers precede argument calls when selecting an unverified dependency
+ok 18 - slice receivers precede argument calls when selecting an unverified dependency
+  ---
+  duration_ms: 477.122291
+  type: 'test'
+  ...
+# Subtest: incompatible branch facts cannot erase a caller's failing postcondition
+ok 19 - incompatible branch facts cannot erase a caller's failing postcondition
+  ---
+  duration_ms: 190.183541
+  type: 'test'
+  ...
+# Subtest: nested calls and contradictory helper requirements remain real call violations
+ok 20 - nested calls and contradictory helper requirements remain real call violations
+  ---
+  duration_ms: 187.08075
+  type: 'test'
+  ...
+# Subtest: undefined elements in fresh arrays must meet a dense callee's domain
+ok 21 - undefined elements in fresh arrays must meet a dense callee's domain
+  ---
+  duration_ms: 2152.474958
+  type: 'test'
+  ...
+# Subtest: named function expressions allow data bindings to shadow their private self name
+ok 22 - named function expressions allow data bindings to shadow their private self name
+  ---
+  duration_ms: 202.406875
+  type: 'test'
+  ...
+# Subtest: replay keeps helper, parameter, and private invocation names separate
+ok 23 - replay keeps helper, parameter, and private invocation names separate
+  ---
+  duration_ms: 174.464083
+  type: 'test'
+  ...
+# Subtest: violations inside a helper are attributed to that helper rather than the outer caller
+ok 24 - violations inside a helper are attributed to that helper rather than the outer caller
+  ---
+  duration_ms: 188.267708
+  type: 'test'
+  ...
+# Subtest: a failed helper contract cannot support a verified caller or a transitive caller
+ok 25 - a failed helper contract cannot support a verified caller or a transitive caller
+  ---
+  duration_ms: 204.641083
+  type: 'test'
+  ...
+# Subtest: fresh helper arrays retain undefined elements and optional scalar arguments need definedness
+ok 26 - fresh helper arrays retain undefined elements and optional scalar arguments need definedness
+  ---
+  duration_ms: 579.836125
+  type: 'test'
+  ...
+# Subtest: record arguments establish required own fields and preserve optional results
+ok 27 - record arguments establish required own fields and preserve optional results
+  ---
+  duration_ms: 214.961167
+  type: 'test'
+  ...
+# Subtest: unresolved, recursive, wrong-arity and shadowed calls remain unsupported
+ok 28 - unresolved, recursive, wrong-arity and shadowed calls remain unsupported
+  ---
+  duration_ms: 1.880417
+  type: 'test'
+  ...
+# (node:80617) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: array and object examples verify against ordinary source
+ok 29 - array and object examples verify against ordinary source
+  ---
+  duration_ms: 4702.028125
+  type: 'test'
+  ...
+# Subtest: an empty array is a concrete undefined counterexample
+ok 30 - an empty array is a concrete undefined counterexample
+  ---
+  duration_ms: 186.655375
+  type: 'test'
+  ...
+# Subtest: undefined remains distinct from NaN, including after arithmetic
+ok 31 - undefined remains distinct from NaN, including after arithmetic
+  ---
+  duration_ms: 1859.271292
+  type: 'test'
+  ...
+# Subtest: out-of-range, fractional, infinite and NaN indices give undefined
+ok 32 - out-of-range, fractional, infinite and NaN indices give undefined
+  ---
+  duration_ms: 2465.48025
+  type: 'test'
+  ...
+# Subtest: array element witnesses preserve NaN and signed zero
+ok 33 - array element witnesses preserve NaN and signed zero
+  ---
+  duration_ms: 1056.174166
+  type: 'test'
+  ...
+# Subtest: an undefined index with a cached integer payload cannot read an array element
+ok 34 - an undefined index with a cached integer payload cannot read an array element
+  ---
+  duration_ms: 197.763958
+  type: 'test'
+  ...
+# Subtest: slice normalization agrees with V8 for numeric edge cases
+ok 35 - slice normalization agrees with V8 for numeric edge cases
+  ---
+  duration_ms: 486.058084
+  type: 'test'
+  ...
+# Subtest: array length proofs include the full native length range
+ok 36 - array length proofs include the full native length range
+  ---
+  duration_ms: 1360.28575
+  type: 'test'
+  ...
+# Subtest: the solver shrinks large models only for witness replay
+ok 37 - the solver shrinks large models only for witness replay
+  ---
+  duration_ms: 696.569375
+  type: 'test'
+  ...
+# Subtest: optional record values survive fallback and conditional joins
+ok 38 - optional record values survive fallback and conditional joins
+  ---
+  duration_ms: 193.297292
+  type: 'test'
+  ...
+# Subtest: spread distinguishes absent keys from own undefined properties
+ok 39 - spread distinguishes absent keys from own undefined properties
+  ---
+  duration_ms: 217.986709
+  type: 'test'
+  ...
+# Subtest: a record-bound bug has a structured, source-confirmed witness
+ok 40 - a record-bound bug has a structured, source-confirmed witness
+  ---
+  duration_ms: 209.193959
+  type: 'test'
+  ...
+# Subtest: nested records/array fields and balanced-brace JSDoc work
+ok 41 - nested records/array fields and balanced-brace JSDoc work
+  ---
+  duration_ms: 1258.150375
+  type: 'test'
+  ...
+# Subtest: record field names cannot collide with witness metadata
+ok 42 - record field names cannot collide with witness metadata
+  ---
+  duration_ms: 157.893083
+  type: 'test'
+  ...
+# Subtest: boolean arrays retain false and undefined through logical operators
+ok 43 - boolean arrays retain false and undefined through logical operators
+  ---
+  duration_ms: 1620.33525
+  type: 'test'
+  ...
+# Subtest: shape-changing methods, sparse arrays, and exotic data remain unsupported
+ok 44 - shape-changing methods, sparse arrays, and exotic data remain unsupported
+  ---
+  duration_ms: 1.420791
+  type: 'test'
+  ...
+# Subtest: reference identity verifies and unpermitted array stores produce confirmed violations
+ok 45 - reference identity verifies and unpermitted array stores produce confirmed violations
+  ---
+  duration_ms: 1067.412042
+  type: 'test'
+  ...
+# Subtest: the seeded corpus compares accepted semantics and reported witnesses with independent native execution
+ok 46 - the seeded corpus compares accepted semantics and reported witnesses with independent native execution
+  ---
+  duration_ms: 29693.164542
+  type: 'test'
+  ...
+# {"seed":1592643597,"fixtures":58,"functions":574,"nativeSamples":667,"counterexamples":20}
+# Subtest: semantic and verdict-policy mutants are detected in isolated verifier copies after passing controls
+ok 47 - semantic and verdict-policy mutants are detected in isolated verifier copies after passing controls
+  ---
+  duration_ms: 0.087916
+  type: 'test'
+  ...
+# [{"id":"addition-is-subtraction","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"samevalue-is-numeric-equality","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"slice-default-skips-first","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"spread-ignores-own-undefined","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"call-obligations-erased","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"unconfirmed-bug-accepted","observed":{"status":"counterexample"}},{"id":"final-dependency-gate-erased","observed":{"status":"verified"}},{"id":"replay-limit-becomes-proof-bound","observed":{"status":"verified"}},{"id":"loop-preservation-erased","observed":{"status":"verified"}},{"id":"loop-termination-erased","observed":{"status":"verified"}},{"id":"predicate-zeros-collapsed","observed":{"status":"unknown","reason":"replay-mismatch"}},{"id":"predicate-number-keys-collapsed","observed":{"status":"unknown","reason":"replay-mismatch"}}]
+# Subtest: the seed reproduces corpus sources and changes sampled numeric inputs
+ok 48 - the seed reproduces corpus sources and changes sampled numeric inputs
+  ---
+  duration_ms: 9.875041
+  type: 'test'
+  ...
+# (node:80958) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: pinned unchanged es-toolkit sum and mean prove the documented empty-array results and catch wrong claims
+ok 49 - pinned unchanged es-toolkit sum and mean prove the documented empty-array results and catch wrong claims
+  ---
+  duration_ms: 10906.621959
+  type: 'test'
+  ...
+# Subtest: independent native heap executions reproduce alias and write-permission witnesses
+ok 50 - independent native heap executions reproduce alias and write-permission witnesses
+  ---
+  duration_ms: 1946.730958
+  type: 'test'
+  ...
+# Subtest: heap alias, store permission and call-frame mutants cannot retain expected outcomes
+ok 51 - heap alias, store permission and call-frame mutants cannot retain expected outcomes
+  ---
+  duration_ms: 1230.866125
+  type: 'test'
+  ...
+# (node:81082) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: arbitrary shared record arguments obey writes and reconstruct a real alias witness
+ok 52 - arbitrary shared record arguments obey writes and reconstruct a real alias witness
+  ---
+  duration_ms: 396.18175
+  type: 'test'
+  ...
+# Subtest: overlapping optional schemas do not imply distinct identities, including explicit undefined
+ok 53 - overlapping optional schemas do not imply distinct identities, including explicit undefined
+  ---
+  duration_ms: 498.433667
+  type: 'test'
+  ...
+# Subtest: modifies is a write permission and native monitoring catches no-op and restored writes
+ok 54 - modifies is a write permission and native monitoring catches no-op and restored writes
+  ---
+  duration_ms: 320.277542
+  type: 'test'
+  ...
+# Subtest: callee footprint inclusion precedes its own facts and has a distinct confirmed diagnostic
+ok 55 - callee footprint inclusion precedes its own facts and has a distinct confirmed diagnostic
+  ---
+  duration_ms: 344.281375
+  type: 'test'
+  ...
+# Subtest: opaque summaries preserve disjoint fields and allow input-result aliases
+ok 56 - opaque summaries preserve disjoint fields and allow input-result aliases
+  ---
+  duration_ms: 352.326958
+  type: 'test'
+  ...
+# Subtest: old scalars freeze entry contents while old references retain their native identity
+ok 57 - old scalars freeze entry contents while old references retain their native identity
+  ---
+  duration_ms: 176.626584
+  type: 'test'
+  ...
+# Subtest: fresh shallow copies preserve nested sharing and checked contracts permit fresh helper results
+ok 58 - fresh shallow copies preserve nested sharing and checked contracts permit fresh helper results
+  ---
+  duration_ms: 362.044917
+  type: 'test'
+  ...
+# Subtest: array aliases and fresh slice/spread copies use one mutable store with native lengths
+ok 59 - array aliases and fresh slice/spread copies use one mutable store with native lengths
+  ---
+  duration_ms: 1712.278084
+  type: 'test'
+  ...
+# Subtest: primitive arguments freeze early; reference arguments and method contents see later writes
+ok 60 - primitive arguments freeze early; reference arguments and method contents see later writes
+  ---
+  duration_ms: 747.614916
+  type: 'test'
+  ...
+# Subtest: array slots preserve booleans and signed zero, with nested array footprints
+ok 61 - array slots preserve booleans and signed zero, with nested array footprints
+  ---
+  duration_ms: 2987.987334
+  type: 'test'
+  ...
+# Subtest: derived effects reject transitive writers as callbacks but keep primitive captures immutable
+ok 62 - derived effects reject transitive writers as callbacks but keep primitive captures immutable
+  ---
+  duration_ms: 175.391208
+  type: 'test'
+  ...
+# Subtest: heap writes cannot bypass the mutating-loop restriction through helpers or early returns
+ok 63 - heap writes cannot bypass the mutating-loop restriction through helpers or early returns
+  ---
+  duration_ms: 2.622208
+  type: 'test'
+  ...
+# Subtest: imported footprints retain defining identities and derived effects
+ok 64 - imported footprints retain defining identities and derived effects
+  ---
+  duration_ms: 180.211542
+  type: 'test'
+  ...
+# Subtest: heap witness validation checks types, optional overlap, dangling edges and witness-only limits
+ok 65 - heap witness validation checks types, optional overlap, dangling edges and witness-only limits
+  ---
+  duration_ms: 0.382917
+  type: 'test'
+  ...
+# Subtest: generated symbols cannot collide with user field names that resemble heap versions
+ok 66 - generated symbols cannot collide with user field names that resemble heap versions
+  ---
+  duration_ms: 163.122917
+  type: 'test'
+  ...
+# Subtest: optional reference joins remain unsupported and malformed worker graph types stay unknown
+ok 67 - optional reference joins remain unsupported and malformed worker graph types stay unknown
+  ---
+  duration_ms: 25.6605
+  type: 'test'
+  ...
+# Subtest: string-literal record keys keep their supported lookup semantics
+ok 68 - string-literal record keys keep their supported lookup semantics
+  ---
+  duration_ms: 153.861208
+  type: 'test'
+  ...
+# Subtest: possibly absent values cannot silently change a required heap cell's domain
+ok 69 - possibly absent values cannot silently change a required heap cell's domain
+  ---
+  duration_ms: 1652.94525
+  type: 'test'
+  ...
+# Subtest: heap-free callback certificates include transitive reads and allocations
+ok 70 - heap-free callback certificates include transitive reads and allocations
+  ---
+  duration_ms: 0.928792
+  type: 'test'
+  ...
+# Subtest: required fields cannot erase undefined when joining reference-valued branches
+ok 71 - required fields cannot erase undefined when joining reference-valued branches
+  ---
+  duration_ms: 0.851875
+  type: 'test'
+  ...
+# Subtest: indirect fresh results preserve old identity in every helper replay context
+ok 72 - indirect fresh results preserve old identity in every helper replay context
+  ---
+  duration_ms: 174.758667
+  type: 'test'
+  ...
+# Subtest: quantified dynamic record conformance keeps exactness checks inside their binder
+ok 73 - quantified dynamic record conformance keeps exactness checks inside their binder
+  ---
+  duration_ms: 272.336542
+  type: 'test'
+  ...
+# Subtest: new aggregates inside old preserve contained entry-reference identities
+ok 74 - new aggregates inside old preserve contained entry-reference identities
+  ---
+  duration_ms: 319.481208
+  type: 'test'
+  ...
+# Subtest: array length footprints fail explicitly while ordinary record length fields remain writable
+ok 75 - array length footprints fail explicitly while ordinary record length fields remain writable
+  ---
+  duration_ms: 158.883084
+  type: 'test'
+  ...
+# Subtest: the CLI uses each dependency's source positions and names cross-file call failures
+ok 76 - the CLI uses each dependency's source positions and names cross-file call failures
+  ---
+  duration_ms: 300.250334
+  type: 'test'
+  ...
+# Subtest: post-replay dependency gating uses file identity through multiple same-named functions
+ok 77 - post-replay dependency gating uses file identity through multiple same-named functions
+  ---
+  duration_ms: 865.700084
+  type: 'test'
+  ...
+# (node:81187) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: named imports and export aliases preserve distinct module scopes
+ok 78 - named imports and export aliases preserve distinct module scopes
+  ---
+  duration_ms: 224.077
+  type: 'test'
+  ...
+# Subtest: cross-file call counterexamples report the callee requires and file
+ok 79 - cross-file call counterexamples report the callee requires and file
+  ---
+  duration_ms: 172.54275
+  type: 'test'
+  ...
+# Subtest: changing only a helper changes provenance and blocks its caller
+ok 80 - changing only a helper changes provenance and blocks its caller
+  ---
+  duration_ms: 335.643916
+  type: 'test'
+  ...
+# Subtest: weak imported contracts stay opaque and unused bad helpers are still reported
+ok 81 - weak imported contracts stay opaque and unused bad helpers are still reported
+  ---
+  duration_ms: 185.331875
+  type: 'test'
+  ...
+# Subtest: diamonds and symlink aliases load one canonical module
+ok 82 - diamonds and symlink aliases load one canonical module
+  ---
+  duration_ms: 194.56375
+  type: 'test'
+  ...
+# Subtest: replay invocation storage cannot collide with an imported local
+ok 83 - replay invocation storage cannot collide with an imported local
+  ---
+  duration_ms: 168.738958
+  type: 'test'
+  ...
+# Subtest: source-string verification rejects imports without loading dependencies
+ok 84 - source-string verification rejects imports without loading dependencies
+  ---
+  duration_ms: 0.482167
+  type: 'test'
+  ...
+# Subtest: import syntax and local builtin shadowing fail closed
+ok 85 - import syntax and local builtin shadowing fail closed
+  ---
+  duration_ms: 10.015958
+  type: 'test'
+  ...
+# Subtest: missing files, missing exports and import cycles identify the importing file
+ok 86 - missing files, missing exports and import cycles identify the importing file
+  ---
+  duration_ms: 3.363459
+  type: 'test'
+  ...
+# Subtest: dependency syntax errors keep dependency offsets and files
+ok 87 - dependency syntax errors keep dependency offsets and files
+  ---
+  duration_ms: 1.896417
+  type: 'test'
+  ...
+# Subtest: type-only imports resolve files, including unused imported bindings
+ok 88 - type-only imports resolve files, including unused imported bindings
+  ---
+  duration_ms: 1.850375
+  type: 'test'
+  ...
+# Subtest: exact extensions do not remap JavaScript imports or guess filenames
+ok 89 - exact extensions do not remap JavaScript imports or guess filenames
+  ---
+  duration_ms: 5.013958
+  type: 'test'
+  ...
+# Subtest: JavaScript and TypeScript modules can mix; all type specifiers resolve
+ok 90 - JavaScript and TypeScript modules can mix; all type specifiers resolve
+  ---
+  duration_ms: 338.914792
+  type: 'test'
+  ...
+# Subtest: file hashes cover raw UTF-8 bytes and BOM offsets remain intact
+ok 91 - file hashes cover raw UTF-8 bytes and BOM offsets remain intact
+  ---
+  duration_ms: 155.813958
+  type: 'test'
+  ...
+# Subtest: data locals shadow import aliases and imported functions remain non-values
+ok 92 - data locals shadow import aliases and imported functions remain non-values
+  ---
+  duration_ms: 171.665625
+  type: 'test'
+  ...
+# Subtest: exact predecessor views agree with native arithmetic, comparisons, ranks and signed zeros at the u32 edges
+ok 93 - exact predecessor views agree with native arithmetic, comparisons, ranks and signed zeros at the u32 edges
+  ---
+  duration_ms: 196.912333
+  type: 'test'
+  ...
+# (node:81213) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: absence disables integer shadows and constant-one arithmetic shortcuts
+ok 94 - absence disables integer shadows and constant-one arithmetic shortcuts
+  ---
+  duration_ms: 143.032333
+  type: 'test'
+  ...
+# Subtest: bounded loop parameters preserve negative zero and old values
+ok 95 - bounded loop parameters preserve negative zero and old values
+  ---
+  duration_ms: 407.93375
+  type: 'test'
+  ...
+# Subtest: fractional or disjunctive parameter domains never acquire integer assumptions
+ok 96 - fractional or disjunctive parameter domains never acquire integer assumptions
+  ---
+  duration_ms: 392.656792
+  type: 'test'
+  ...
+# Subtest: bounded parameter links cannot hide an undefined precondition
+ok 97 - bounded parameter links cannot hide an undefined precondition
+  ---
+  duration_ms: 189.019708
+  type: 'test'
+  ...
+# Subtest: a u32 predecessor initialization retains its -1 sentinel and both zero signs
+ok 98 - a u32 predecessor initialization retains its -1 sentinel and both zero signs
+  ---
+  duration_ms: 726.226709
+  type: 'test'
+  ...
+# Subtest: a changing optional bound cannot narrow another loop variable to its entry range
+ok 99 - a changing optional bound cannot narrow another loop variable to its entry range
+  ---
+  duration_ms: 258.01225
+  type: 'test'
+  ...
+# Subtest: nonnegative safe-integer shadows retain signed zero and the entire safe range
+ok 100 - nonnegative safe-integer shadows retain signed zero and the entire safe range
+  ---
+  duration_ms: 686.459125
+  type: 'test'
+  ...
+# Subtest: safe-integer metadata cannot erase earlier requires-definedness failures
+ok 101 - safe-integer metadata cannot erase earlier requires-definedness failures
+  ---
+  duration_ms: 259.623916
+  type: 'test'
+  ...
+# (node:81240) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: aliases, scalar updates and old entry values compose
+ok 102 - aliases, scalar updates and old entry values compose
+  ---
+  duration_ms: 397.661375
+  type: 'test'
+  ...
+# Subtest: checked specs imported through type-aware barrels support mutable scalar bodies
+ok 103 - checked specs imported through type-aware barrels support mutable scalar bodies
+  ---
+  duration_ms: 177.9525
+  type: 'test'
+  ...
+# Subtest: mathematical requires remain definedness obligations before feasibility
+ok 104 - mathematical requires remain definedness obligations before feasibility
+  ---
+  duration_ms: 147.735541
+  type: 'test'
+  ...
+# Subtest: guarded exact contracts preserve scalar branch effects and entry snapshots
+ok 105 - guarded exact contracts preserve scalar branch effects and entry snapshots
+  ---
+  duration_ms: 330.337125
+  type: 'test'
+  ...
+# Subtest: backend definedness searches never assume requires or use witness bounds as proofs
+ok 106 - backend definedness searches never assume requires or use witness bounds as proofs
+  ---
+  duration_ms: 0.530916
+  type: 'test'
+  ...
+# (node:81250) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ordinary const, let, var, block and for-init locals named result verify against the actual return
+ok 107 - ordinary const, let, var, block and for-init locals named result verify against the actual return
+  ---
+  duration_ms: 3614.77025
+  type: 'test'
+  ...
+# Subtest: incorrect return claims that a namespace leak would prove are native counterexamples
+ok 108 - incorrect return claims that a namespace leak would prove are native counterexamples
+  ---
+  duration_ms: 5601.702708
+  type: 'test'
+  ...
+# Subtest: closures capture the live const result lexically and never see a contract result
+ok 109 - closures capture the live const result lexically and never see a contract result
+  ---
+  duration_ms: 529.040916
+  type: 'test'
+  ...
+# Subtest: every callbacks read the live local in invariants and the return in ensures
+ok 110 - every callbacks read the live local in invariants and the return in ensures
+  ---
+  duration_ms: 17476.690083
+  type: 'test'
+  ...
+# Subtest: TDZ, hoisting and scope exit still bound a local result
+ok 111 - TDZ, hoisting and scope exit still bound a local result
+  ---
+  duration_ms: 2.988041
+  type: 'test'
+  ...
+# Subtest: a wrong invariant about the local result is an induction gap, not a proof
+ok 112 - a wrong invariant about the local result is an induction gap, not a proof
+  ---
+  duration_ms: 617.230417
+  type: 'test'
+  ...
+# Subtest: parameter, entry, function, module, type and other reserved-name gates are unchanged
+ok 113 - parameter, entry, function, module, type and other reserved-name gates are unchanged
+  ---
+  duration_ms: 7.414417
+  type: 'test'
+  ...
+# (node:81376) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: array search proves bounds, absence and first match; counting supports continue
+ok 114 - array search proves bounds, absence and first match; counting supports continue
+  ---
+  duration_ms: 4577.754667
+  type: 'test'
+  ...
+# Subtest: an off-by-one return is a replay-confirmed source bug
+ok 115 - an off-by-one return is a replay-confirmed source bug
+  ---
+  duration_ms: 4649.429167
+  type: 'test'
+  ...
+# Subtest: verified loop helpers compose across module boundaries
+ok 116 - verified loop helpers compose across module boundaries
+  ---
+  duration_ms: 4035.38025
+  type: 'test'
+  ...
+# Subtest: the CLI distinguishes located induction gaps from confirmed bugs
+ok 117 - the CLI distinguishes located induction gaps from confirmed bugs
+  ---
+  duration_ms: 392.238875
+  type: 'test'
+  ...
+# Subtest: wrong initialization, preservation and constant ranks give located induction gaps
+ok 118 - wrong initialization, preservation and constant ranks give located induction gaps
+  ---
+  duration_ms: 863.268959
+  type: 'test'
+  ...
+# Subtest: native rank arithmetic stays rounded; explicit real arithmetic is exact
+ok 119 - native rank arithmetic stays rounded; explicit real arithmetic is exact
+  ---
+  duration_ms: 2625.1165
+  type: 'test'
+  ...
+# Subtest: rank drops larger than one are accepted; positive fractional drops are insufficient
+ok 120 - rank drops larger than one are accepted; positive fractional drops are insufficient
+  ---
+  duration_ms: 990.655292
+  type: 'test'
+  ...
+# Subtest: old in loop contracts refers only to function-entry parameters
+ok 121 - old in loop contracts refers only to function-entry parameters
+  ---
+  duration_ms: 1445.049
+  type: 'test'
+  ...
+# Subtest: a binary64 increment that stalls at 2^53 cannot verify termination
+ok 122 - a binary64 increment that stalls at 2^53 cannot verify termination
+  ---
+  duration_ms: 945.016709
+  type: 'test'
+  ...
+# Subtest: loop-head havoc preserves optional values and both signs of zero
+ok 123 - loop-head havoc preserves optional values and both signs of zero
+  ---
+  duration_ms: 2613.307416
+  type: 'test'
+  ...
+# Subtest: a scalar that becomes undefined is widened before checking loop exits
+ok 124 - a scalar that becomes undefined is widened before checking loop exits
+  ---
+  duration_ms: 2878.125375
+  type: 'test'
+  ...
+# Subtest: break restores shadowed locals and does not run a for update
+ok 125 - break restores shadowed locals and does not run a for update
+  ---
+  duration_ms: 765.973375
+  type: 'test'
+  ...
+# Subtest: continue exits block scope before running the outer for update
+ok 126 - continue exits block scope before running the outer for update
+  ---
+  duration_ms: 177.860625
+  type: 'test'
+  ...
+# Subtest: writes under false guards do not freeze loop-carried state
+ok 127 - writes under false guards do not freeze loop-carried state
+  ---
+  duration_ms: 177.807291
+  type: 'test'
+  ...
+# Subtest: calls inside loop iterations still require replay-confirmed domain safety
+ok 128 - calls inside loop iterations still require replay-confirmed domain safety
+  ---
+  duration_ms: 187.896042
+  type: 'test'
+  ...
+# Subtest: loop initialization cannot use a later helper's postcondition
+ok 129 - loop initialization cannot use a later helper's postcondition
+  ---
+  duration_ms: 269.055542
+  type: 'test'
+  ...
+# Subtest: partial real invariants and rank expressions must be defined
+ok 130 - partial real invariants and rank expressions must be defined
+  ---
+  duration_ms: 572.763208
+  type: 'test'
+  ...
+# Subtest: loop witness preferences never become proof bounds
+ok 131 - loop witness preferences never become proof bounds
+  ---
+  duration_ms: 158.962083
+  type: 'test'
+  ...
+# Subtest: precondition definedness replay does not inherit an unexecuted loop's rank preference
+ok 132 - precondition definedness replay does not inherit an unexecuted loop's rank preference
+  ---
+  duration_ms: 149.202625
+  type: 'test'
+  ...
+# Subtest: rank thresholds agree with exact integer arithmetic at the 53-bit shadow limit
+ok 133 - rank thresholds agree with exact integer arithmetic at the 53-bit shadow limit
+  ---
+  duration_ms: 155.7535
+  type: 'test'
+  ...
+# Subtest: unsupported loop shapes, writes and misplaced contracts fail closed
+ok 134 - unsupported loop shapes, writes and misplaced contracts fail closed
+  ---
+  duration_ms: 3.313625
+  type: 'test'
+  ...
+# (node:81861) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: numeric gate N01-challenge-safe-eq: public proof and unchanged native source
+ok 135 - numeric gate N01-challenge-safe-eq: public proof and unchanged native source
+  ---
+  duration_ms: 680.646333
+  type: 'test'
+  ...
+# Subtest: numeric gate N08-half-signed-zero: public proof and unchanged native source
+ok 136 - numeric gate N08-half-signed-zero: public proof and unchanged native source
+  ---
+  duration_ms: 200.237334
+  type: 'test'
+  ...
+# Subtest: numeric gate N17-index-wrap-pos-2p32: public proof and unchanged native source
+ok 137 - numeric gate N17-index-wrap-pos-2p32: public proof and unchanged native source
+  ---
+  duration_ms: 4415.634667
+  type: 'test'
+  ...
+# Subtest: numeric gate N21-index-int-pos: public proof and unchanged native source
+ok 138 - numeric gate N21-index-int-pos: public proof and unchanged native source
+  ---
+  duration_ms: 14032.637125
+  type: 'test'
+  ...
+# Subtest: numeric gate N23-index-fp-nan: public proof and unchanged native source
+ok 139 - numeric gate N23-index-fp-nan: public proof and unchanged native source
+  ---
+  duration_ms: 1118.597958
+  type: 'test'
+  ...
+# Subtest: numeric gate N24-index-negzero-pos: public proof and unchanged native source
+ok 140 - numeric gate N24-index-negzero-pos: public proof and unchanged native source
+  ---
+  duration_ms: 612.992542
+  type: 'test'
+  ...
+# Subtest: numeric gate N41-optional-field: public proof and unchanged native source
+ok 141 - numeric gate N41-optional-field: public proof and unchanged native source
+  ---
+  duration_ms: 340.979375
+  type: 'test'
+  ...
+# Subtest: numeric gate N21b-index-int-pos: public proof and unchanged native source
+ok 142 - numeric gate N21b-index-int-pos: public proof and unchanged native source
+  ---
+  duration_ms: 9385.096042
+  type: 'test'
+  ...
+# Subtest: nested signed and half-integer merges retain exact numerical cancellation
+ok 143 - nested signed and half-integer merges retain exact numerical cancellation
+  ---
+  duration_ms: 752.926583
+  type: 'test'
+  ...
+# Subtest: uncertain arithmetic, unary, builtin and index consumers preserve absence and special numbers
+ok 144 - uncertain arithmetic, unary, builtin and index consumers preserve absence and special numbers
+  ---
+  duration_ms: 644.991
+  type: 'test'
+  ...
+# Subtest: mixed present and absent nested merges never acquire finite integer facts
+ok 145 - mixed present and absent nested merges never acquire finite integer facts
+  ---
+  duration_ms: 361.155042
+  type: 'test'
+  ...
+# Subtest: derived optional indices and optional array elements retain undefined
+ok 146 - derived optional indices and optional array elements retain undefined
+  ---
+  duration_ms: 741.298167
+  type: 'test'
+  ...
+# Subtest: straight-line stores keep their domain obligation and writing loops stay unsupported
+ok 147 - straight-line stores keep their domain obligation and writing loops stay unsupported
+  ---
+  duration_ms: 733.824125
+  type: 'test'
+  ...
+# Subtest: width and index guard mutants are killed by native-refuted public proofs
+ok 148 - width and index guard mutants are killed by native-refuted public proofs
+  ---
+  duration_ms: 7810.166083
+  type: 'test'
+  ...
+# [{"id":"cap64","case":"N02-challenge-safe-cmp","patch":{"from":"const INT_WIDTH = 53;","to":"const INT_WIDTH = 64;"},"sourceSha256":"63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6","mutantSha256":"e62e06ac83ecae82e8b4a299de7aa0331f6b6f2b1955932f77a07e901a97b879","control":{"status":"counterexample","confirmed":true},"observed":{"status":"verified"},"detection":"false-verification","detected":true},{"id":"index-guard","case":"N17-index-wrap-pos-2p32","patch":{"from":"return merge(valid, owner.at(z.low), undef(), node);","to":"return merge(`(bvult ${z.low} ${owner.length.u32})`, owner.at(z.low), undef(), node);"},"sourceSha256":"63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6","mutantSha256":"a66ee0fd8e525f4b0f958a3612dbba92bbc62c0c0bef026af5861a6e89944055","control":{"status":"counterexample","confirmed":true},"observed":{"status":"verified"},"detection":"false-verification","detected":true}]
+# Subtest: symbolic small-width shadow shortcuts agree with their original FP terms
+ok 149 - symbolic small-width shadow shortcuts agree with their original FP terms
+  ---
+  duration_ms: 4202.811125
+  type: 'test'
+  ...
+# [{"id":"signed-sub-w2","width":2,"status":"unsat"},{"id":"signed-add-w2","width":2,"status":"unsat"},{"id":"signed-order-w2","width":2,"status":"unsat"},{"id":"signed-equality-w2","width":2,"status":"unsat"},{"id":"half-w2","width":2,"status":"unsat"},{"id":"half-plus-w2","width":2,"status":"unsat"},{"id":"half-order-w2","width":2,"status":"unsat"},{"id":"half-equality-w2","width":2,"status":"unsat"},{"id":"half-merge-negation-w2","width":2,"status":"unsat"},{"id":"index-range-w2","width":2,"status":"unsat"},{"id":"index-bits-w2","width":2,"status":"unsat"}]
+# Subtest: metadata selection and uncertainty obey the component width invariant
+ok 150 - metadata selection and uncertainty obey the component width invariant
+  ---
+  duration_ms: 0.186792
+  type: 'test'
+  ...
+# Subtest: floating-point table keys preserve every number class, without numerical API conversion
+ok 151 - floating-point table keys preserve every number class, without numerical API conversion
+  ---
+  duration_ms: 0.572709
+  type: 'test'
+  ...
+# Subtest: native table lookup separates signed zeros and merges NaN payloads
+ok 152 - native table lookup separates signed zeros and merges NaN payloads
+  ---
+  duration_ms: 0.5335
+  type: 'test'
+  ...
+# Subtest: real solver function witnesses replay concrete FP keys and report unsupported interpretations honestly
+ok 153 - real solver function witnesses replay concrete FP keys and report unsupported interpretations honestly
+  ---
+  duration_ms: 336.749417
+  type: 'test'
+  ...
+# Subtest: an oversized or malformed predicate table is rejected at the IPC seam
+ok 154 - an oversized or malformed predicate table is rejected at the IPC seam
+  ---
+  duration_ms: 24.971542
+  type: 'test'
+  ...
+# (node:82056) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a generic upstream contract proves first-above-threshold through an immutable closure and alias
+ok 155 - a generic upstream contract proves first-above-threshold through an immutable closure and alias
+  ---
+  duration_ms: 3597.597916
+  type: 'test'
+  ...
+# Subtest: predicate types resolve through aliases and captures retain boolean/undefined semantics
+ok 156 - predicate types resolve through aliases and captures retain boolean/undefined semantics
+  ---
+  duration_ms: 168.616875
+  type: 'test'
+  ...
+# Subtest: named NaN and negative-zero callbacks compose without losing numerical identity
+ok 157 - named NaN and negative-zero callbacks compose without losing numerical identity
+  ---
+  duration_ms: 213.653958
+  type: 'test'
+  ...
+# Subtest: distinct predicate applications get distinct results and replay real table witnesses
+ok 158 - distinct predicate applications get distinct results and replay real table witnesses
+  ---
+  duration_ms: 525.502792
+  type: 'test'
+  ...
+# Subtest: applications inside every stay closed under quantifiers and logical polarity
+ok 159 - applications inside every stay closed under quantifiers and logical polarity
+  ---
+  duration_ms: 347.210292
+  type: 'test'
+  ...
+# Subtest: a callback cannot use its own contradictory fact to prove full-domain admission
+ok 160 - a callback cannot use its own contradictory fact to prove full-domain admission
+  ---
+  duration_ms: 378.229583
+  type: 'test'
+  ...
+# Subtest: a helper's narrow domain inside a closure is checked by direct callback probe replay
+ok 161 - a helper's narrow domain inside a closure is checked by direct callback probe replay
+  ---
+  duration_ms: 187.605834
+  type: 'test'
+  ...
+# Subtest: admission probes match the executing call site, not an unreachable call to the same helper
+ok 162 - admission probes match the executing call site, not an unreachable call to the same helper
+  ---
+  duration_ms: 208.112292
+  type: 'test'
+  ...
+# Subtest: bad named callbacks block callers after replay, including callers of callers
+ok 163 - bad named callbacks block callers after replay, including callers of callers
+  ---
+  duration_ms: 203.405625
+  type: 'test'
+  ...
+# Subtest: import aliases preserve distinct callback identities even when paths sanitize to the same name
+ok 164 - import aliases preserve distinct callback identities even when paths sanitize to the same name
+  ---
+  duration_ms: 219.971667
+  type: 'test'
+  ...
+# Subtest: unsafe direct local closure calls fail explicitly, while typed predicate boundaries replay undefined
+ok 165 - unsafe direct local closure calls fail explicitly, while typed predicate boundaries replay undefined
+  ---
+  duration_ms: 150.594875
+  type: 'test'
+  ...
+# Subtest: unsupported callback captures, signatures, erased syntax and function-value contexts fail closed
+ok 166 - unsupported callback captures, signatures, erased syntax and function-value contexts fail closed
+  ---
+  duration_ms: 6.426292
+  type: 'test'
+  ...
+# Subtest: predicate witness limits do not enter proofs and data-only reports need no table trust
+ok 167 - predicate witness limits do not enter proofs and data-only reports need no table trust
+  ---
+  duration_ms: 154.266833
+  type: 'test'
+  ...
+# Subtest: the CLI serializes tables and reports callback-domain failures without exposing function source
+ok 168 - the CLI serializes tables and reports callback-domain failures without exposing function source
+  ---
+  duration_ms: 425.61125
+  type: 'test'
+  ...
+# (node:82091) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: copy contracts quantify over every numeric and boolean array element
+ok 169 - copy contracts quantify over every numeric and boolean array element
+  ---
+  duration_ms: 220.752625
+  type: 'test'
+  ...
+# Subtest: every matches JavaScript on empty and dense undefined arrays
+ok 170 - every matches JavaScript on empty and dense undefined arrays
+  ---
+  duration_ms: 1383.95275
+  type: 'test'
+  ...
+# Subtest: element equality preserves NaN, infinities, and signed zero
+ok 171 - element equality preserves NaN, infinities, and signed zero
+  ---
+  duration_ms: 207.761667
+  type: 'test'
+  ...
+# Subtest: every composes with quantified requirements and both Boolean polarities
+ok 172 - every composes with quantified requirements and both Boolean polarities
+  ---
+  duration_ms: 274.326875
+  type: 'test'
+  ...
+# Subtest: nested callbacks retain outer bindings without index capture
+ok 173 - nested callbacks retain outer bindings without index capture
+  ---
+  duration_ms: 9589.811667
+  type: 'test'
+  ...
+# Subtest: callback indices are native positive-zero integers and cannot capture input symbols
+ok 174 - callback indices are native positive-zero integers and cannot capture input symbols
+  ---
+  duration_ms: 506.097791
+  type: 'test'
+  ...
+# Subtest: proofs are not restricted to the replay witness length limit
+ok 175 - proofs are not restricted to the replay witness length limit
+  ---
+  duration_ms: 585.671833
+  type: 'test'
+  ...
+# Subtest: every rejects callbacks outside the modeled subset with source spans
+ok 176 - every rejects callbacks outside the modeled subset with source spans
+  ---
+  duration_ms: 5.013
+  type: 'test'
+  ...
+# Subtest: every remains contract-only and budget exhaustion remains unknown
+ok 177 - every remains contract-only and budget exhaustion remains unknown
+  ---
+  duration_ms: 1.9465
+  type: 'test'
+  ...
+# (node:82200) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a pinned unchanged real implementation loads through the offline project frontend
+ok 178 - a pinned unchanged real implementation loads through the offline project frontend
+  ---
+  duration_ms: 960.024791
+  type: 'test'
+  ...
+# Subtest: source-local aliases expand concrete generic records, arrays and optional primitives
+ok 179 - source-local aliases expand concrete generic records, arrays and optional primitives
+  ---
+  duration_ms: 545.544708
+  type: 'test'
+  ...
+# Subtest: type imports and export aliases retain defining spans and clause provenance
+ok 180 - type imports and export aliases retain defining spans and clause provenance
+  ---
+  duration_ms: 187.824584
+  type: 'test'
+  ...
+# Subtest: named defaults, imported local re-exports and duplicate star paths keep function identity
+ok 181 - named defaults, imported local re-exports and duplicate star paths keep function identity
+  ---
+  duration_ms: 171.111375
+  type: 'test'
+  ...
+# Subtest: default expression exports respect JavaScript const initialization order
+ok 182 - default expression exports respect JavaScript const initialization order
+  ---
+  duration_ms: 314.333584
+  type: 'test'
+  ...
+# Subtest: ambiguous/missing exports and unresolved unused type imports fail explicitly
+ok 183 - ambiguous/missing exports and unresolved unused type imports fail explicitly
+  ---
+  duration_ms: 9.843292
+  type: 'test'
+  ...
+# Subtest: explicit barrel exports override conflicting stars; star exports exclude default
+ok 184 - explicit barrel exports override conflicting stars; star exports exclude default
+  ---
+  duration_ms: 193.092
+  type: 'test'
+  ...
+# Subtest: type and runtime local collisions and reserved builtin aliases are rejected
+ok 185 - type and runtime local collisions and reserved builtin aliases are rejected
+  ---
+  duration_ms: 34.499625
+  type: 'test'
+  ...
+# Subtest: unsupported recursive, unresolved and nonconcrete type forms never verify
+ok 186 - unsupported recursive, unresolved and nonconcrete type forms never verify
+  ---
+  duration_ms: 4.272416
+  type: 'test'
+  ...
+# Subtest: concrete return/local annotations validate without overriding inferred runtime shapes
+ok 187 - concrete return/local annotations validate without overriding inferred runtime shapes
+  ---
+  duration_ms: 155.05575
+  type: 'test'
+  ...
+# Subtest: errors in imported type aliases keep the defining file and source offset
+ok 188 - errors in imported type aliases keep the defining file and source offset
+  ---
+  duration_ms: 2.318542
+  type: 'test'
+  ...
+# Subtest: source-string verification performs no resolution, including unused types and barrels
+ok 189 - source-string verification performs no resolution, including unused types and barrels
+  ---
+  duration_ms: 0.297334
+  type: 'test'
+  ...
+# Subtest: strict opt-in tsconfig paths support exact keys and longest-prefix wildcards
+ok 190 - strict opt-in tsconfig paths support exact keys and longest-prefix wildcards
+  ---
+  duration_ms: 422.105125
+  type: 'test'
+  ...
+# Subtest: unsupported configs, fallback arrays, and tied paths fail closed
+ok 191 - unsupported configs, fallback arrays, and tied paths fail closed
+  ---
+  duration_ms: 5.56325
+  type: 'test'
+  ...
+# Subtest: package exports select exact subpaths and honor Node import/default condition order
+ok 192 - package exports select exact subpaths and honor Node import/default condition order
+  ---
+  duration_ms: 179.828542
+  type: 'test'
+  ...
+# Subtest: unsupported or missing package exports and effectful helpers cannot become stubs
+ok 193 - unsupported or missing package exports and effectful helpers cannot become stubs
+  ---
+  duration_ms: 14.74825
+  type: 'test'
+  ...
+# Subtest: metadata edits invalidate graph identity while entry bytes stay unchanged
+ok 194 - metadata edits invalidate graph identity while entry bytes stay unchanged
+  ---
+  duration_ms: 666.263417
+  type: 'test'
+  ...
+# Subtest: canonical metadata is read once across package aliases and snapshots survive disk edits
+ok 195 - canonical metadata is read once across package aliases and snapshots survive disk edits
+  ---
+  duration_ms: 3.405458
+  type: 'test'
+  ...
+# Subtest: package targets cannot escape or silently cross a nested package scope
+ok 196 - package targets cannot escape or silently cross a nested package scope
+  ---
+  duration_ms: 4.538667
+  type: 'test'
+  ...
+# Subtest: local package scope metadata is captured and a stale CommonJS mode cannot verify
+ok 197 - local package scope metadata is captured and a stale CommonJS mode cannot verify
+  ---
+  duration_ms: 152.553541
+  type: 'test'
+  ...
+# Subtest: Node builtins and package self-references cannot resolve to installed stubs
+ok 198 - Node builtins and package self-references cannot resolve to installed stubs
+  ---
+  duration_ms: 3.445792
+  type: 'test'
+  ...
+# Subtest: wildcard config paths substitute filename characters literally
+ok 199 - wildcard config paths substitute filename characters literally
+  ---
+  duration_ms: 1.659875
+  type: 'test'
+  ...
+# Subtest: solver deadline preserves a cheap target in order costly, cheap
+ok 200 - solver deadline preserves a cheap target in order costly, cheap
+  ---
+  duration_ms: 0.870083
+  type: 'test'
+  ...
+# Subtest: solver deadline preserves a cheap target in order cheap, costly
+ok 201 - solver deadline preserves a cheap target in order cheap, costly
+  ---
+  duration_ms: 0.248
+  type: 'test'
+  ...
+# Subtest: hard deadline preserves a cheap target in order costly, cheap
+ok 202 - hard deadline preserves a cheap target in order costly, cheap
+  ---
+  duration_ms: 0.173833
+  type: 'test'
+  ...
+# Subtest: hard deadline preserves a cheap target in order cheap, costly
+ok 203 - hard deadline preserves a cheap target in order cheap, costly
+  ---
+  duration_ms: 0.097833
+  type: 'test'
+  ...
+# Subtest: a deferred proof retains completed obligations and uses time freed by cheap targets
+ok 204 - a deferred proof retains completed obligations and uses time freed by cheap targets
+  ---
+  duration_ms: 0.671625
+  type: 'test'
+  ...
+# Subtest: a cheap target behind two costly targets gets a turn within the original budget
+ok 205 - a cheap target behind two costly targets gets a turn within the original budget
+  ---
+  duration_ms: 0.119083
+  type: 'test'
+  ...
+# Subtest: worker errors preserve finished outcomes and let later independent targets run
+ok 206 - worker errors preserve finished outcomes and let later independent targets run
+  ---
+  duration_ms: 0.140667
+  type: 'test'
+  ...
+# Subtest: initialization, late responses, and unattempted targets consume one request budget
+ok 207 - initialization, late responses, and unattempted targets consume one request budget
+  ---
+  duration_ms: 0.132583
+  type: 'test'
+  ...
+# Subtest: initialization failure cannot erase another worker's useful outcomes
+ok 208 - initialization failure cannot erase another worker's useful outcomes
+  ---
+  duration_ms: 0.280792
+  type: 'test'
+  ...
+# Subtest: uncertainty and bounded witness infeasibility never become proofs or vacuity
+ok 209 - uncertainty and bounded witness infeasibility never become proofs or vacuity
+  ---
+  duration_ms: 0.363416
+  type: 'test'
+  ...
+# Subtest: full-domain infeasibility stays vacuous and sat postconditions retain counterexample evidence
+ok 210 - full-domain infeasibility stays vacuous and sat postconditions retain counterexample evidence
+  ---
+  duration_ms: 0.155709
+  type: 'test'
+  ...
+# Subtest: separate postconditions expose a cheap failing clause when the grouped query is costly
+ok 211 - separate postconditions expose a cheap failing clause when the grouped query is costly
+  ---
+  duration_ms: 0.069666
+  type: 'test'
+  ...
+# Subtest: the exact Ramda eager search verifies for any pure predicate; both source mutations replay
+ok 212 - the exact Ramda eager search verifies for any pure predicate; both source mutations replay
+  ---
+  duration_ms: 9379.060916
+  type: 'test'
+  ...
+# {"nativeSamples":42,"bugs":[{"name":"off-by-one","inputs":{"fn":{"entries":[],"else":"true"},"list":["0"]},"result":"1"},{"name":"skipped-first","inputs":{"fn":{"entries":[],"else":"true"},"list":["0"]},"result":"-1"}]}
+# Subtest: the predicate fixture rejects raw source or declaration drift
+ok 213 - the predicate fixture rejects raw source or declaration drift
+  ---
+  duration_ms: 1.899
+  type: 'test'
+  ...
+# (node:82249) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a real take helper composes through contracts and catches a length-correct shifted wrapper
+ok 214 - a real take helper composes through contracts and catches a length-correct shifted wrapper
+  ---
+  duration_ms: 12972.869916
+  type: 'test'
+  ...
+# (node:82270) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a pinned imported take proves composition, catches a shifted prefix and invalidates a weakened summary
+ok 215 - a pinned imported take proves composition, catches a shifted prefix and invalidates a weakened summary
+  ---
+  duration_ms: 25570.56025
+  type: 'test'
+  ...
+# (node:82452) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the unchanged Remeda eager take preserves its prefix and a shifted slice fails on contents
+ok 216 - the unchanged Remeda eager take preserves its prefix and a shifted slice fails on contents
+  ---
+  duration_ms: 21514.527084
+  type: 'test'
+  ...
+# Subtest: the Remeda proof fixture rejects source or extracted-declaration drift
+ok 217 - the Remeda proof fixture rejects source or extracted-declaration drift
+  ---
+  duration_ms: 3.36375
+  type: 'test'
+  ...
+# (node:82518) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: local updates retain earlier reads and assignment expression values
+ok 218 - local updates retain earlier reads and assignment expression values
+  ---
+  duration_ms: 216.380333
+  type: 'test'
+  ...
+# Subtest: prefix and postfix results use the correct old and new binary64 values
+ok 219 - prefix and postfix results use the correct old and new binary64 values
+  ---
+  duration_ms: 184.663542
+  type: 'test'
+  ...
+# Subtest: multiple declarators and sequence expressions run left to right
+ok 220 - multiple declarators and sequence expressions run left to right
+  ---
+  duration_ms: 157.090833
+  type: 'test'
+  ...
+# Subtest: branch joins retain writes and early returns keep their own state
+ok 221 - branch joins retain writes and early returns keep their own state
+  ---
+  duration_ms: 187.511875
+  type: 'test'
+  ...
+# Subtest: conditional expressions fork writes after evaluating their test
+ok 222 - conditional expressions fork writes after evaluating their test
+  ---
+  duration_ms: 163.544666
+  type: 'test'
+  ...
+# Subtest: block scope restores shadows and preserves writes to outer bindings
+ok 223 - block scope restores shadows and preserves writes to outer bindings
+  ---
+  duration_ms: 174.631209
+  type: 'test'
+  ...
+# Subtest: logical operators suppress writes under the same guards as their values
+ok 224 - logical operators suppress writes under the same guards as their values
+  ---
+  duration_ms: 183.997375
+  type: 'test'
+  ...
+# Subtest: undefined assignments and postfix numeric conversion preserve presence
+ok 225 - undefined assignments and postfix numeric conversion preserve presence
+  ---
+  duration_ms: 180.967417
+  type: 'test'
+  ...
+# Subtest: mutable scalar locals can read immutable arrays and records
+ok 226 - mutable scalar locals can read immutable arrays and records
+  ---
+  duration_ms: 196.045791
+  type: 'test'
+  ...
+# Subtest: local data shadows module functions only within its lexical scope
+ok 227 - local data shadows module functions only within its lexical scope
+  ---
+  duration_ms: 178.21225
+  type: 'test'
+  ...
+# Subtest: argument effects retain earlier values and short circuits suppress unsafe calls
+ok 228 - argument effects retain earlier values and short circuits suppress unsafe calls
+  ---
+  duration_ms: 190.246167
+  type: 'test'
+  ...
+# Subtest: earlier argument call facts justify requirements and later effects cannot repair a bad call
+ok 229 - earlier argument call facts justify requirements and later effects cannot repair a bad call
+  ---
+  duration_ms: 193.7995
+  type: 'test'
+  ...
+# Subtest: wrong update and join contracts produce actual-source counterexamples
+ok 230 - wrong update and join contracts produce actual-source counterexamples
+  ---
+  duration_ms: 619.11575
+  type: 'test'
+  ...
+# Subtest: numeric updates agree with V8 on nonfinite, signed-zero, rounding and subnormal values
+ok 231 - numeric updates agree with V8 on nonfinite, signed-zero, rounding and subnormal values
+  ---
+  duration_ms: 1259.55875
+  type: 'test'
+  ...
+# Subtest: unsupported scalar, scope, contract and heap effects fail closed
+ok 232 - unsupported scalar, scope, contract and heap effects fail closed
+  ---
+  duration_ms: 5.155916
+  type: 'test'
+  ...
+# Subtest: write diagnostics identify the original TypeScript target
+ok 233 - write diagnostics identify the original TypeScript target
+  ---
+  duration_ms: 0.212083
+  type: 'test'
+  ...
+# Subtest: fresh local array and record cells may be written without an input footprint
+ok 234 - fresh local array and record cells may be written without an input footprint
+  ---
+  duration_ms: 319.953541
+  type: 'test'
+  ...
+# (node:82559) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: ordinary TypeScript: bounded doubling and all clamp branches verify
+ok 235 - ordinary TypeScript: bounded doubling and all clamp branches verify
+  ---
+  duration_ms: 360.739166
+  type: 'test'
+  ...
+# Subtest: the user's exact double contract fails on NaN
+ok 236 - the user's exact double contract fails on NaN
+  ---
+  duration_ms: 245.792542
+  type: 'test'
+  ...
+# Subtest: equality alone permits overflow when NaN is excluded
+ok 237 - equality alone permits overflow when NaN is excluded
+  ---
+  duration_ms: 200.167167
+  type: 'test'
+  ...
+# Subtest: finite-result contract finds an actual overflow from a finite input
+ok 238 - finite-result contract finds an actual overflow from a finite input
+  ---
+  duration_ms: 201.171375
+  type: 'test'
+  ...
+# Subtest: a branch bug is confirmed against the original source
+ok 239 - a branch bug is confirmed against the original source
+  ---
+  duration_ms: 330.84475
+  type: 'test'
+  ...
+# Subtest: JavaScript with JSDoc types verifies without rewriting the function
+ok 240 - JavaScript with JSDoc types verifies without rewriting the function
+  ---
+  duration_ms: 152.284958
+  type: 'test'
+  ...
+# Subtest: signed zero survives solving, JSON-safe reporting, and actual replay
+ok 241 - signed zero survives solving, JSON-safe reporting, and actual replay
+  ---
+  duration_ms: 882.9835
+  type: 'test'
+  ...
+# Subtest: Object.is distinguishes zero signs while numeric equality does not
+ok 242 - Object.is distinguishes zero signs while numeric equality does not
+  ---
+  duration_ms: 168.672959
+  type: 'test'
+  ...
+# Subtest: local constants, nested returns, booleans, and block scopes retain their meaning
+ok 243 - local constants, nested returns, booleans, and block scopes retain their meaning
+  ---
+  duration_ms: 218.31075
+  type: 'test'
+  ...
+# Subtest: internal replay bindings cannot collide with source parameters
+ok 244 - internal replay bindings cannot collide with source parameters
+  ---
+  duration_ms: 151.337625
+  type: 'test'
+  ...
+# Subtest: contradictory requirements are vacuous, never verified
+ok 245 - contradictory requirements are vacuous, never verified
+  ---
+  duration_ms: 143.241209
+  type: 'test'
+  ...
+# Subtest: every supported binary operator agrees with JavaScript on numerical edge cases
+ok 246 - every supported binary operator agrees with JavaScript on numerical edge cases
+  ---
+  duration_ms: 2239.962792
+  type: 'test'
+  ...
+# Subtest: supported numeric builtins agree with JavaScript
+ok 247 - supported numeric builtins agree with JavaScript
+  ---
+  duration_ms: 517.710708
+  type: 'test'
+  ...
+# Subtest: unsupported source and specification features fail explicitly
+ok 248 - unsupported source and specification features fail explicitly
+  ---
+  duration_ms: 3.101083
+  type: 'test'
+  ...
+# Subtest: unmodeled top-level execution and missing contracts cannot be silently ignored
+ok 249 - unmodeled top-level execution and missing contracts cannot be silently ignored
+  ---
+  duration_ms: 1.081792
+  type: 'test'
+  ...
+# Subtest: unsupported diagnostics point into the original TypeScript source
+ok 250 - unsupported diagnostics point into the original TypeScript source
+  ---
+  duration_ms: 0.1965
+  type: 'test'
+  ...
+# Subtest: exhausted resource budget is unknown
+ok 251 - exhausted resource budget is unknown
+  ---
+  duration_ms: 0.188291
+  type: 'test'
+  ...
+# Subtest: the CLI exits successfully only for verified files and preserves special values in JSON
+ok 252 - the CLI exits successfully only for verified files and preserves special values in JSON
+  ---
+  duration_ms: 739.432459
+  type: 'test'
+  ...
+# (node:82601) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: exact replay decomposes binary64 and computes fractions without native rounding
+ok 253 - exact replay decomposes binary64 and computes fractions without native rounding
+  ---
+  duration_ms: 0.917792
+  type: 'test'
+  ...
+# Subtest: entry snapshots preserve missing keys, undefined, NaN, signed zero and nested data
+ok 254 - entry snapshots preserve missing keys, undefined, NaN, signed zero and nested data
+  ---
+  duration_ms: 0.26625
+  type: 'test'
+  ...
+# Subtest: finite binary64 comparisons agree with exact embedded rational order
+ok 255 - finite binary64 comparisons agree with exact embedded rational order
+  ---
+  duration_ms: 1.304917
+  type: 'test'
+  ...
+# Subtest: exact decimal, fractional, and binary64 operands have distinct meanings
+ok 256 - exact decimal, fractional, and binary64 operands have distinct meanings
+  ---
+  duration_ms: 238.565917
+  type: 'test'
+  ...
+# Subtest: number bridges check finiteness, presence, and signed zero
+ok 257 - number bridges check finiteness, presence, and signed zero
+  ---
+  duration_ms: 208.265833
+  type: 'test'
+  ...
+# Subtest: requires definedness is checked before feasibility and uses only earlier guards
+ok 258 - requires definedness is checked before feasibility and uses only earlier guards
+  ---
+  duration_ms: 189.330125
+  type: 'test'
+  ...
+# Subtest: mathematical division is partial even under negation
+ok 259 - mathematical division is partial even under negation
+  ---
+  duration_ms: 245.2705
+  type: 'test'
+  ...
+# Subtest: runtime rounding and overflow violate exact result contracts
+ok 260 - runtime rounding and overflow violate exact result contracts
+  ---
+  duration_ms: 321.077833
+  type: 'test'
+  ...
+# Subtest: old uses entry parameters in root and opaque helper contracts
+ok 261 - old uses entry parameters in root and opaque helper contracts
+  ---
+  duration_ms: 372.814417
+  type: 'test'
+  ...
+# Subtest: checked pure specifications compose exact definitions and Boolean lemmas
+ok 262 - checked pure specifications compose exact definitions and Boolean lemmas
+  ---
+  duration_ms: 261.486166
+  type: 'test'
+  ...
+# Subtest: real conditionals keep branch definedness and exact return values
+ok 263 - real conditionals keep branch definedness and exact return values
+  ---
+  duration_ms: 178.846041
+  type: 'test'
+  ...
+# Subtest: specification calls enforce domains and requires before any postcondition
+ok 264 - specification calls enforce domains and requires before any postcondition
+  ---
+  duration_ms: 190.695459
+  type: 'test'
+  ...
+# Subtest: false, vacuous and later lemma postconditions never become assumptions
+ok 265 - false, vacuous and later lemma postconditions never become assumptions
+  ---
+  duration_ms: 179.970333
+  type: 'test'
+  ...
+# Subtest: real obligations and specification domains retain quantifier polarity and nested scope
+ok 266 - real obligations and specification domains retain quantifier polarity and nested scope
+  ---
+  duration_ms: 1119.222125
+  type: 'test'
+  ...
+# Subtest: imported specification aliases use defining scopes and final statuses
+ok 267 - imported specification aliases use defining scopes and final statuses
+  ---
+  duration_ms: 348.888709
+  type: 'test'
+  ...
+# Subtest: CLI reports precondition definedness without claiming the body ran
+ok 268 - CLI reports precondition definedness without claiming the body ran
+  ---
+  duration_ms: 211.870292
+  type: 'test'
+  ...
+# Subtest: recursive specifications and cycles through requires or ensures fail closed
+ok 269 - recursive specifications and cycles through requires or ensures fail closed
+  ---
+  duration_ms: 0.812125
+  type: 'test'
+  ...
+# Subtest: unsupported mathematical and entry syntax cannot escape into runtime JavaScript
+ok 270 - unsupported mathematical and entry syntax cannot escape into runtime JavaScript
+  ---
+  duration_ms: 3.68425
+  type: 'test'
+  ...
+# Subtest: the unchanged Lodash search proves first match, absence, bounds and termination; seeded bugs replay
+ok 271 - the unchanged Lodash search proves first match, absence, bounds and termination; seeded bugs replay
+  ---
+  duration_ms: 91333.552209
+  type: 'test'
+  ...
+# {"nativeSamples":261,"bugs":[{"name":"off-by-one-mutant","inputs":{"array":["-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308","-4.450147717014403e-308"],"value":"-4.450147717014403e-308","fromIndex":"128"},"result":"129"},{"name":"skipped-first-mutant","inputs":{"array":["1.4916681462400413e-154"],"value":"1.4916681462400413e-154","fromIndex":"-0"},"result":"-1"}]}
+# Subtest: the search fixture rejects source and extracted-function drift
+ok 272 - the search fixture rejects source and extracted-function drift
+  ---
+  duration_ms: 5.128167
+  type: 'test'
+  ...
+# Subtest: the raw CJS export agrees with native strict search on numeric edge cases and every valid small start
+ok 273 - the raw CJS export agrees with native strict search on numeric edge cases and every valid small start
+  ---
+  duration_ms: 1.470584
+  type: 'test'
+  ...
+1..273
+# tests 273
+# suites 0
+# pass 273
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 399021.762958

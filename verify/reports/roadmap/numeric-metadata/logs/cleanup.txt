@@ -1,0 +1,6 @@
+Removed owned disposable baseline runtime.
+Removed owned node_modules symlink; target installation not edited.
+No numeric-metadata temporary test or mutant directories remain.
+Tracked canceled/batch/full-suite process IDs are absent; backend connections were closed by their runners.
+No baseline runtime or dependency symlink remains: True
+No Node process command references this owned worktree.

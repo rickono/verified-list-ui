@@ -1,0 +1,12 @@
+verify/data.mjs: OK
+verify/heap.mjs: OK
+verify/source.mjs: OK
+tests/verify/numeric-metadata.test.mjs: OK
+tests/verify/fixtures/numeric-metadata-cases.mjs: OK
+verify/reports/roadmap/numeric-metadata/scripts/compare.mjs: OK
+verify/reports/roadmap/numeric-metadata/scripts/corpus.mjs: OK
+verify/reports/roadmap/numeric-metadata/scripts/mutations.mjs: OK
+verify/reports/roadmap/numeric-metadata/scripts/prepare-baseline.mjs: OK
+verify/reports/roadmap/numeric-metadata/scripts/remaining-validity.mjs: OK
+verify/reports/roadmap/numeric-metadata/scripts/validity.mjs: OK
+verify/reports/roadmap/numeric-metadata/scripts/run-evidence.sh: OK
