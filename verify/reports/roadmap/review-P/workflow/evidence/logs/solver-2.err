@@ -1,0 +1,12 @@
+(node:4607) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+file:///private/tmp/p-review-out/probes-solver-2.mjs:13
+const fail = (check, detail) => { console.log(JSON.stringify({ check, ok: false, detail })); throw new Error(check); };
+                                                                                                   ^
+
+Error: repair
+    at fail (file:///private/tmp/p-review-out/probes-solver-2.mjs:13:100)
+    at file:///private/tmp/p-review-out/probes-solver-2.mjs:75:239
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+
+Node.js v22.23.1
