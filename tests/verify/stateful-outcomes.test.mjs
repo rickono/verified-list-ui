@@ -1,11 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { checkStateful } from "../../verify/stateful/index.mjs";
 import { replayTrace, decodeValue } from "../../verify/stateful/traces.mjs";
 
 const fixtures = new URL("./fixtures/stateful/", import.meta.url);
-const evidence = new URL("../../verify/reports/roadmap/stateful-C1-evidence/", import.meta.url);
 const read = (name) => readFileSync(new URL(name, fixtures), "utf8");
 const cases = [
   ["pilots/search.ts", "verified"], ["pilots/search-stale.ts", "counterexample"],
@@ -17,10 +16,8 @@ const cases = [
   ["variants/V8b-second-entry-reset.ts", "counterexample"],
 ];
 test("six pilots and all corrected judge variants run through production", async (t) => {
-  mkdirSync(evidence, { recursive: true });
   for (const [file, expected] of cases) await t.test(file, async () => {
     const source = read(file), report = await checkStateful(file, source, { timeoutMs: 30_000 });
-    writeFileSync(new URL(file.replaceAll("/", "-").replace(/\.ts$/, ".json"), evidence), `${JSON.stringify({ expected, ...report }, null, 2)}\n`);
     assert.equal(report.status, expected, JSON.stringify(report));
     if (file.startsWith("pilots/") && expected !== "unsupported") {
       const expectedUnits = ["$init", "search$0", "search$1", "search$0$keeps$search$1", "search$1$keeps$search$1"];
