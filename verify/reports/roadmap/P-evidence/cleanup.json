@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "testedCodeHead": "c9c45110b8669f99f83c4330d6efe1b6202ff1be",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a",
+  "fullSuite": {
+    "passed": 278,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "savedArtifactCli": {
+    "status": "reproduced",
+    "reproduced": 3,
+    "identity": "ffa6dc01465e53e123f77aef439e80c04c93eee8445861facbe15e24961c393c"
+  },
+  "remainingTaskProcesses": [],
+  "processAudit": [
+    "ps -axo pid=,command=",
+    "lsof -a -d cwd -c node -c Python -c make -Fpcn"
+  ],
+  "temporaryDependencyLinkRemoved": true,
+  "sharedTargetModified": false,
+  "sourceAndCanonicalFilesUnchanged": true,
+  "timestampUtc": "2026-11-13T21:58:27.113294+00:00"
+}

@@ -1,0 +1,13 @@
+(node:3099) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3099) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+file:///private/tmp/p-review-out/probes-solver.mjs:35
+const fail = (check, detail) => { const row = { check, ok: false, detail }; results.push(row); console.log(JSON.stringify(row)); throw new Error(check); };
+                                                                                                                                       ^
+
+Error: callee-gate
+    at fail (file:///private/tmp/p-review-out/probes-solver.mjs:35:136)
+    at file:///private/tmp/p-review-out/probes-solver.mjs:137:163
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)[39m
+
+Node.js v22.23.1

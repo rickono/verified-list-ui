@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "kind": "jsverify-bugs",
+  "entry": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/examples/bugs.ts",
+  "identity": "ffa6dc01465e53e123f77aef439e80c04c93eee8445861facbe15e24961c393c",
+  "graphSha256": "b1deab21313b9ebaaeb7dd45fe2edb7b501c39a131170eefe569e097e09f715d",
+  "modules": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/verify/examples/bugs.ts",
+      "sha256": "97405cd1d3fdd6a92121f28ddb6d1f8bcc18d89bf5268f08ec59a15038c161a9",
+      "imports": []
+    }
+  ],
+  "dependencies": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c517e11a/package.json",
+      "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+      "kind": "package"
+    }
+  ],
+  "witnesses": {
+    "bugs.ts#equalityAlone": {
+      "key": "f4cbd123fe9a9dad35b890e1611bb10c2322cc5dd8e1a67c0ad3d818630f4ee6",
+      "witness": [
+        "7ff4000000108bd4"
+      ],
+      "signature": "[\"counterexample\",null,null,[\"x * 2 == result\"],null]",
+      "shrunk": {
+        "witness": [
+          "7ff4000000108bd4"
+        ],
+        "replays": 5,
+        "limit": 300,
+        "changed": false,
+        "greedy": true
+      }
+    },
+    "bugs.ts#finiteDouble": {
+      "key": "88ccdccbf9d6f622d836ab07f464ba44f55cc999bbe3daffe420cb3a6f6e9de1",
+      "witness": [
+        "ffee02efeeba4836"
+      ],
+      "signature": "[\"counterexample\",null,null,[\"Number.isFinite(result)\"],null]",
+      "shrunk": {
+        "witness": [
+          "7fe0e1a6f648c89e"
+        ],
+        "replays": 29,
+        "limit": 300,
+        "changed": true,
+        "greedy": true
+      }
+    },
+    "bugs.ts#brokenClamp": {
+      "key": "b77305796dd94bce3f5810fa780569bdcecf21d0ed7f7620c64f7990877c597f",
+      "witness": [
+        "3ad4ceefab2bb8da",
+        "3a28191054d44725",
+        "3a2aabedd7164475"
+      ],
+      "signature": "[\"counterexample\",null,null,[\"lo <= result && result <= hi\"],null]",
+      "shrunk": {
+        "witness": [
+          "3ad4ceefab2bb8da",
+          "0000000000000000",
+          "0000000000000000"
+        ],
+        "replays": 14,
+        "limit": 300,
+        "changed": true,
+        "greedy": true
+      }
+    }
+  }
+}

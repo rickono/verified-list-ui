@@ -1,0 +1,60 @@
+{"check":"source-shaped declarations match parent","result":"pass","opsEqual":true,"headEqual":true,"tailEqual":true,"opsBytes":2421}
+{"check":"source-shaped ops introduce no assert","result":"pass","sample":"(define-fun heap_num_78_v1 ((r Int)) (_ FloatingPoint 11 53) (ite (= r a) ((_ to_fp 11 53) #x3ff0000000000000) (heap_num"}
+{"check":"kind-field @elements is a field on the child and an array on the parent","result":"pass","childNum":["@elements"],"childArray":{},"parentNum":[],"parentArrayKeys":["num","has"]}
+{"check":"kind-absent @elements footprint matches parent array havoc","result":"pass","equal":true,"childArray":"heap_array_num_v2","childNum":[]}
+{"check":"permission text unchanged","result":"pass"}
+{"check":"ownership symbol is enumerable and survives a role-only spread","result":"pass"}
+{"check":"empty loopHead does not alias a later write into the entry log","result":"pass"}
+{"check":"entry log stays empty after child writes","result":"pass"}
+{"check":"repeated same-cell writes dedupe to one checked location","result":"pass"}
+{"check":"deleting only the later same-cell version fails closed","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_num_78_v2","errorName":"Error"}
+{"check":"prior head history does not hide the new store","result":"pass"}
+{"check":"new version without its own log is not an empty frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_num_78_v6","errorName":"Error"}
+{"check":"restored store still reports the cell","result":"pass"}
+{"check":"restored store fails closed when the intervening version is unlogged","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_num_78_v7","errorName":"Error"}
+{"check":"no-op store creates a distinct version and a location","result":"pass"}
+{"check":"symbolic join keeps both arm locations","result":"pass","keys":["field:a:x:number","elements:xs:@elements:number","field:b:y:boolean","elements:ys:@elements:boolean"]}
+{"check":"forged join without arm a fails on a back edge and an exit","result":"pass","got":{"threw":true,"ok":true,"name":"Error","message":"Heap write audit: missing ownership for heap_array_num_v2"},"onExit":{"threw":true,"ok":true,"name":"Error","message":"Heap write audit: missing ownership for heap_array_num_v2"}}
+{"check":"forged join without arm b fails on a back edge and an exit","result":"pass","got":{"threw":true,"ok":true,"name":"Error","message":"Heap write audit: missing ownership for heap_array_bool_v5"},"onExit":{"threw":true,"ok":true,"name":"Error","message":"Heap write audit: missing ownership for heap_array_bool_v5"}}
+{"check":"concrete joins keep one arm","result":"pass"}
+{"check":"exit location is audited out of the frame","result":"pass"}
+{"check":"corrupt exit fails closed instead of returning the back frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: unknown content version not_a_version","errorName":"Error"}
+{"check":"record key @elements stays a field beside real array elements","result":"pass","kinds":["field:@elements:heap_next0","elements:@elements:heap_next_v3"]}
+{"check":"cutpoint havoc uses the discriminator both ways","result":"pass","fieldChanged":true,"arrayChanged":true}
+{"check":"source-like footprint without kind still selects array havoc","result":"pass"}
+{"check":"in-loop record allocation sets allocated and adds no field location","result":"pass","locations":[],"allocated":true}
+{"check":"later store of a fresh record is visible and still allocated","result":"pass","locations":[{"ref":"heap_next_v5","key":"x","sort":"number","kind":"field"}]}
+{"check":"exit-only allocation does not enter the back-edge frame","result":"pass"}
+{"check":"allocation before the supplied head is existing storage","result":"pass"}
+{"check":"unlogged array-presence version fails closed","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_array_has_v3","errorName":"Error"}
+{"check":"unlogged array summary havoc fails closed","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_array_bool_v5","errorName":"Error"}
+{"check":"unlogged array allocation content fails closed before an allocated flag","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_array_num_v8","errorName":"Error"}
+{"check":"unlogged record allocation content fails closed","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_num_78_v11","errorName":"Error"}
+{"check":"invalid missing symbol does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing state ownership","errorName":"Error"}
+{"check":"invalid unknown version does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: unknown content version heap_evil","errorName":"Error"}
+{"check":"invalid wrong slot does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: wrong content slot for heap_num_78_v1","errorName":"Error"}
+{"check":"invalid malformed map does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: invalid content maps","errorName":"Error"}
+{"check":"invalid extra array slot does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: invalid content maps","errorName":"Error"}
+{"check":"invalid non-descendant does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: content does not descend from loop head","errorName":"Error"}
+{"check":"invalid other owner does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: interval uses a different heap owner","errorName":"Error"}
+{"check":"invalid location mismatch does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing ownership for heap_num_78_v1","errorName":"Error"}
+{"check":"invalid detached log does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: ownership detached from content version heap_num_78_v2","errorName":"Error"}
+{"check":"invalid json round trip does not return a frame","result":"pass","threw":true,"ok":true,"message":"Heap write audit: missing state ownership","errorName":"Error"}
+{"check":"parent cycle throws and does not return locations","result":"pass","threw":true,"ok":true,"message":"Maximum call stack size exceeded","errorName":"RangeError"}
+{"check":"private array-summary omission is rejected and its control passes","result":"pass","unique":true,"sha256":"bba88ffa34c2e9d54b2009757987b932bfdd2c6ee9a612ba4f2189955a01bc19","caught":{"name":"Error","message":"Heap write audit: missing ownership for heap_array_num_v2"}}
+{"check":"private half-logged indexed store is rejected and its control passes","result":"pass","unique":true,"sha256":"b0ed3731314e7067aaf1e462497e533b12297e3c180e9d2b38f5ffb63780c447","caught":{"name":"Error","message":"Heap write audit: missing ownership for heap_array_has_v5"}}
+{"check":"private array-allocation omission is rejected and its control passes","result":"pass","unique":true,"sha256":"819710cdd858d43f35f71e08df06b0ceeec4c1ca5b61876c54546ab2529bb75c","caught":{"name":"Error","message":"Heap write audit: missing ownership for heap_array_num_v1"}}
+{"check":"private record-store omission rejects allocation and ordinary writes","result":"pass","unique":true,"sha256":"733ea4d8185c4ed2ba6d2a20354c8427bbe647ca214449f4b43c116665b91bbc","caught":{"name":"Error","message":"Heap write audit: missing ownership for heap_num_78_v1"}}
+{"check":"native record-alias","result":"pass","n":2,"holds":[true,true]}
+{"check":"native array-alias","result":"pass","n":2,"holds":[true,true]}
+{"check":"native call-frame","result":"pass","n":2,"holds":[true,true]}
+{"check":"native element-marker-field","result":"pass","n":1,"holds":[true]}
+{"check":"native noop-store","result":"pass","n":2,"holds":[true,true]}
+{"check":"native restored-store","result":"pass","n":2,"holds":[true,true]}
+{"check":"compiler output matches parent for marker","result":"pass","parent":{"phase":"compiled"},"child":{"phase":"compiled"},"declBytes":1635}
+{"check":"compiler output matches parent for alias","result":"pass","parent":{"phase":"compiled"},"child":{"phase":"compiled"},"declBytes":1543}
+{"check":"compiler output matches parent for readLoop","result":"pass","parent":{"phase":"compiled"},"child":{"phase":"compiled"},"declBytes":1608}
+{"check":"compiler output matches parent for writeLoop","result":"pass","parent":{"phase":"compile","status":"unsupported","message":"Loops that write the heap are outside the first heap slice."},"child":{"phase":"compile","status":"unsupported","message":"Loops that write the heap are outside the first heap slice."},"declBytes":0}
+{"check":"compiler output matches parent for callLoop","result":"pass","parent":{"phase":"compile","status":"unsupported","message":"Loops cannot call heap-writing or reference-returning helpers in this slice."},"child":{"phase":"compile","status":"unsupported","message":"Loops cannot call heap-writing or reference-returning helpers in this slice."},"declBytes":0}
+{"check":"compiler output matches parent for allocLoop","result":"pass","parent":{"phase":"compile","status":"unsupported","message":"Loops that allocate collections are outside the first heap slice."},"child":{"phase":"compile","status":"unsupported","message":"Loops that allocate collections are outside the first heap slice."},"declBytes":0}
+{"summary":{"checks":59,"failed":0,"names":[]}}
