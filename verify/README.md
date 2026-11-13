@@ -509,12 +509,30 @@ The [pinned Lodash search fixture](examples/lodash/README.md) proves an unchange
 
 The [pinned es-toolkit fixture](examples/es-toolkit/README.md) proves only the documented empty-array results of unchanged `sum` and `mean`: `+0` and NaN. `mean` composes through its original `./sum.ts` import. Wrong signed-zero and NaN claims and a seeded return bug produce native-confirmed counterexamples. No nonempty or real-number property is claimed. Run `node verify/examples/es-toolkit/check.mjs`.
 
+The [pinned harmonicMean fixture](examples/simple-statistics/README.md) checks
+the unchanged simple-statistics 8.0.0 implementation over every dense singleton
+with a finite positive element. It proves total return and termination, then
+replays a failure of `result > 0`: reciprocal overflow makes the result `+0`.
+Both goals use the same requires and invariant. The checker also exercises P's
+evidence/reproduce roundtrip and refuses stale source and model identities.
+
 ## Supported source
 
 This section describes `verify`, `verifyFile` and the CLI. The
 [stateful safety API](#stateful-safety-foundation) has its own source subset.
 
 Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings with simple names outside the builtin and verifier set, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
+
+An unshadowed `throw new Error("literal")` with exactly one string literal
+argument is admitted only when its path can be proved unreachable under
+requires and preceding helper facts. The compiler adds an ordered
+`throw-unreachable` check and drops that continuation without adding a return.
+An always-throwing function still lacks a supported return. Computed messages,
+shadowed constructors, other thrown values, and `try`/`catch` are unsupported,
+even on dead paths. This syntax rule does not model Error construction.
+Reachable native exceptions remain `unknown/replay-mismatch`, without confirmed
+throw attribution. Unconfirmed abstract candidates inside or after a loop are
+`unknown/induction-gap`. See the [guarded-throw contract](design/guarded-throws.md).
 
 Local scalar bindings support `=`, numeric `+=`, `-=`, `*=`, `/=`, and numeric prefix/postfix `++` and `--`. Operands and arguments evaluate left to right. Short circuits suppress both writes and calls. Branch joins retain writes, and leaving a block restores shadowed names while preserving writes to outer bindings. Local `let` and `const` bindings have block scope; `var` bindings have function scope. Parameters cannot be written, so contracts always describe entry arguments. Reference bindings retain their identity; selected primitive cells may be written under the explicit heap/frame rules.
 
