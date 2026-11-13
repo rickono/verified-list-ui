@@ -66,3 +66,16 @@ while(${inTest?"allocate()===1":"i===0"}){${inTest?"":"allocate();"}break;}retur
   assert.equal(o.status,"unsupported",JSON.stringify(o)); assert.equal(o.fn,"f");
   assert.match(o.message,/allocating/); assert.ok(o.span.end>o.span.start);
 });
+
+test("K stores use the checked numeric index boundary for signed metadata",async()=>{
+  const source=`// requires xs.length>0
+// modifies xs
+// ensures Object.is(result,7)
+function f(xs:number[]){const j=xs.length-1;xs[j]=7;return xs[j];}`;
+  const r=await check(source);
+  assert.equal(r.outcomes[0].status,"verified",JSON.stringify(r.outcomes));
+  const target=compile([parse("edges.ts",source)]).targets[0];
+  assert.ok(target.obligations.some((o)=>o.kind==="store-domain"));
+  const {indexBits}=await import("../../verify/data.mjs");
+  assert.equal(indexBits,undefined,"Modulo bits remain private to the numeric owner");
+});

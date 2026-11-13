@@ -457,8 +457,12 @@ function store(node, left, operator, rhs, env, cx, prefix) {
     if (at.sort !== "number") fail("Array writes require a numeric index.", left);
     if (at.literal !== undefined && (!Number.isInteger(at.literal) || at.literal < 0 || at.literal >= 4294967295)) fail("Named/out-of-range array properties are unsupported.", left);
     valid = and(at.present, data.builtin("Number.isInteger", [at], left).smt, data.binary(">=", at, data.literal(0), left).smt, data.binary("<", at, view.length, left).smt);
-    index = at.u32 ?? data.indexBits(at) ?? `((_ fp.to_ubv 32) RTZ ${at.smt})`; key = "@elements";
-    current = operator === "=" ? undefined : data.index(view, at, left);
+    // Reuse the numeric owner's index selection. In particular, modulo bits
+    // are exact only under the store-domain obligation below, never a u32
+    // cache or an unchecked export from data.mjs.
+    const selected = data.index({ ...view, at: (i) => { index = i; return view.at(i); } }, at, left);
+    key = "@elements";
+    current = operator === "=" ? undefined : selected;
   } else {
     if (left.computed && left.property.type !== "Literal") fail("Record writes need a fixed field name.", left);
     key = left.computed ? String(left.property.value) : left.property.name;
