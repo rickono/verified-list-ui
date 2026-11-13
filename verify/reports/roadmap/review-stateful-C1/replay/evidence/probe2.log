@@ -1,0 +1,126 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:91125) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"phase":"before-successive","results":[{"name":"promise-chain","ms":201,"status":"unknown","reason":"replay-timeout","message":"Script execution timed out after 100ms","faults":null},{"name":"promise-tight","ms":157,"status":"unknown","reason":"replay-timeout","message":"Script execution timed out after 100ms","faults":null},{"name":"promise-throw","ms":55,"status":"ok","faults":null}],"correlation":{"wrong":{"status":"illegal-environment-action","reason":"invalid-trace","message":"Resolution violates the declared resolves assumption.","shown":null},"right":{"status":"ok","reason":null,"message":null,"requests":[{"seq":1,"settled":true},{"seq":2,"settled":true}],"shown":{"type":"number","bits":"3ff0000000000000"}}}}
+{
+  "results": [
+    {
+      "name": "promise-chain",
+      "ms": 201,
+      "status": "unknown",
+      "reason": "replay-timeout",
+      "message": "Script execution timed out after 100ms",
+      "faults": null
+    },
+    {
+      "name": "promise-tight",
+      "ms": 157,
+      "status": "unknown",
+      "reason": "replay-timeout",
+      "message": "Script execution timed out after 100ms",
+      "faults": null
+    },
+    {
+      "name": "promise-throw",
+      "ms": 55,
+      "status": "ok",
+      "faults": null
+    }
+  ],
+  "correlation": {
+    "wrong": {
+      "status": "illegal-environment-action",
+      "reason": "invalid-trace",
+      "message": "Resolution violates the declared resolves assumption.",
+      "shown": null
+    },
+    "right": {
+      "status": "ok",
+      "reason": null,
+      "message": null,
+      "requests": [
+        {
+          "seq": 1,
+          "settled": true
+        },
+        {
+          "seq": 2,
+          "settled": true
+        }
+      ],
+      "shown": {
+        "type": "number",
+        "bits": "3ff0000000000000"
+      }
+    }
+  },
+  "successive": {
+    "afterFirst": {
+      "status": "ok",
+      "reason": null,
+      "message": null,
+      "requests": [
+        {
+          "seq": 1,
+          "settled": true
+        },
+        {
+          "seq": 2,
+          "settled": false
+        }
+      ],
+      "shown": {
+        "type": "number",
+        "bits": "0000000000000000"
+      },
+      "args": [
+        [
+          3
+        ],
+        [
+          8
+        ]
+      ]
+    },
+    "matchMarker": {
+      "status": "ok",
+      "reason": null,
+      "message": null,
+      "requests": [
+        {
+          "seq": 1,
+          "settled": true
+        },
+        {
+          "seq": 2,
+          "settled": true
+        }
+      ],
+      "shown": {
+        "type": "number",
+        "bits": "4020000000000000"
+      }
+    },
+    "originalQOnSecond": {
+      "status": "illegal-environment-action",
+      "reason": "invalid-trace",
+      "message": "Resolution violates the declared resolves assumption.",
+      "shown": null
+    },
+    "wrongFirst": {
+      "status": "illegal-environment-action",
+      "reason": "invalid-trace",
+      "message": "Resolution violates the declared resolves assumption.",
+      "shown": null
+    }
+  },
+  "successiveError": null,
+  "smt": {
+    "sameFile": true,
+    "units": 3,
+    "settledUnits": 3
+  }
+}
+PROBE2_EXIT 0
+no leftover
