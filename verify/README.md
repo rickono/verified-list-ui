@@ -87,7 +87,7 @@ Supported operations are `.length`, numeric indexing, array literals, a single-a
 
 Records use inline types such as `{ min: number; max: number }`, nested required records/array fields, and optional primitive fields such as `{ min?: number }`. They have declared own enumerable data properties, ordinary prototypes, and no getters, proxies, or extra properties. Type and environment assumptions appear in the report. JSDoc accepts balanced inline shapes, for example `@param {{min: number, max: number}} bounds`.
 
-Record literals, shorthand properties, property reads, and record spread are supported. Own-key presence is separate from the field's value: spreading `{min: undefined}` overwrites an earlier `min`, while spreading `{}` leaves it intact. Optional fields that could expose inherited `Object.prototype` names are rejected. Reference equality for arrays/records is unsupported; compare their fields, lengths, or elements.
+Record literals, shorthand properties, property reads, and record spread are supported. Own-key presence is separate from the field's value: spreading `{min: undefined}` overwrites an earlier `min`, while spreading `{}` leaves it intact. Optional fields that could expose inherited `Object.prototype` names are rejected. Reference comparisons use identity, including shared arguments and nested references; the [heap rules](design/heap.md) describe copies and mutation frames.
 
 Witness replay materializes at most 256 elements per input array. When a model is too large, a separate witness search tries those smaller lengths. These constraints are never added to a proof query. If no manageable witness is found, the result is `unknown`, not `vacuous` or `verified`. This also applies to precondition witnesses.
 
@@ -423,7 +423,7 @@ The model describes these operations with adequate runtime resources; allocation
 
 Each verification request owns its solver subprocesses, so concurrent API calls do not share Z3 state. Each distinct obligation has its own solver, and all targets and workers in one request share a deadline. The parent kills a process that exceeds its turn budget. Initialization errors and killed workers cannot produce new verified verdicts. Completed evidence remains available. A satisfiable precondition also gets a JavaScript witness check; a counterexample requires an actual failing source execution.
 
-Trusted components are Acorn, Node's type stripping, local module resolution and snapshots, our source translation, exact rational specification replay, Z3 and its WASM bindings, standard unmodified `Number`/`Math`/`Object`/`Array` builtins and prototypes, the heap witness/write monitor, and the JavaScript runtime. Tests check this connection but do not formally prove the translation correct. Successful verification is not an independently checkable Rocq certificate.
+Trusted components are Acorn, Node's type stripping, local module resolution and snapshots, our source translation, exact rational specification replay, Z3 and its WASM bindings, standard unmodified `Number`/`Math`/`Object`/`Array` builtins and prototypes, the heap witness/write monitor, and the JavaScript runtime. Tests check this connection but do not formally prove the translation correct. Successful verification is not an independently checkable Rocq certificate. Predicate witnesses are replayed as pure total JavaScript functions backed by solver tables with `Object.is` keys. Reports name that additional trust when it is used, for feasible-witness checks as well as counterexamples.
 
 Two design candidates and an independent cross-judge selected this split over a single verifier module using the TypeScript compiler API. The installed native TypeScript 7 package has no stable `createSourceFile` API. The synthesis retains explicit missing-contract and vacuity outcomes, JSON-safe witnesses, and per-file solver isolation. The initial slice deferred mathematical specification arithmetic.
 
@@ -437,7 +437,7 @@ The collections design selected structural views over bounded tuples or SMT aggr
 
 `tests/verify/scalar-state.test.mjs` covers local updates, captured reads, assignment values, binary64 edge cases, branch joins, early returns, block scope, shadowing, short circuits, ordered call facts and arguments, and fail-closed effects. Incorrect update contracts produce replay-confirmed counterexamples.
 
-`tests/verify/collections.test.mjs` covers array/object examples, V8 slice edge cases, structured counterexamples, key presence, undefined coercions, large-witness handling, and explicit rejection of reference identity, mutation, sparse arrays, and exotic objects.
+`tests/verify/collections.test.mjs` covers array/object examples, V8 slice edge cases, structured counterexamples, key presence, undefined coercions, large-witness handling, reference identity and confirmed unpermitted writes, and rejection of sparse arrays and exotic objects.
 
 `tests/verify/predicates.test.mjs` and `predicate-models.test.mjs` cover callback admission, captures, identities, quantifier scope, native probe replay, table limits and numeric keys. `ramda-find-index.test.mjs` checks the pinned generic search and seeded bugs.
 

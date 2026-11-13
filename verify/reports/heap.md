@@ -1,8 +1,9 @@
 # G: shared heap identity and checked frames
 
-G is implemented on `feat/heap-alias-frames`, based on H commit `37355cc`
-and stacked on [H's PR #5](https://github.com/rickono/verified-list-ui/pull/5).
-Neither branch is claimed as integrated. [Design and scope](../design/heap.md).
+G was merged in [PR #6](https://github.com/rickono/verified-list-ui/pull/6) at
+`8bbff6e3ce09b227ada4ed58f56f0ec5dd6d9416`, after H and an independent
+[landing review](roadmap/landing-G.md). The reviewed patch was unchanged when
+retargeted onto main. [Design and scope](../design/heap.md).
 
 Shared record/array identities, shallow-copy freshness, required primitive field
 and fixed-length array writes, entry snapshots and per-store permissions compose

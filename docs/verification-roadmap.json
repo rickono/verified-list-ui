@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
-  "asOf": "2026-11-11",
-  "status": "A, B, C, D and F are integrated. I is complete. E (loop induction) and J (upstream search) are merged. H (pure callbacks) and G (heap identities and frames) are validated on stacked feature branches, awaiting integration.",
-  "edgeMeaning": "All prerequisites apply. I combines the five original branches. E and J are integrated; H and G are branch-ready. P and T are ready to start. K remains gated on H and G integration. Transitively redundant edges are omitted.",
+  "asOf": "2026-11-13",
+  "status": "A, B, C, D, F, E, J, H and G are integrated. P and the stateful foundation are in independent design review. K remains in design comparison; one prototype was rejected after native false-verification reproducers. No remaining roadmap node is claimed complete.",
+  "edgeMeaning": "All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -259,17 +259,17 @@
       "deps": [
         "I"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Data model / state semantics",
       "detail": "Model object/array identity, shared references and writes. Contracts describe pre-state values and permitted mutation footprints, so helper calls preserve facts outside their effects.",
       "doneWhen": "Proofs distinguish a fresh copy from an alias and remain sound when two arguments share storage.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "A",
         "F"
       ],
       "deliveryStatus": "finished",
-      "resultSummary": "Shared record/array identities, shallow-copy freshness, entry heaps, primitive stores and per-write mutation frames compose through checked helpers. The full suite passes 249/249 and four heap-specific verifier mutants are detected alongside the twelve existing mutants. Mutating loops, reference stores and stateful callbacks remain unsupported."
+      "resultSummary": "Shared record/array identities, shallow-copy freshness, entry heaps, primitive stores and per-write mutation frames compose through checked helpers. The full suite passes 249/249 and four heap-specific verifier mutants are detected alongside the twelve existing mutants. Mutating loops, reference stores and stateful callbacks remain unsupported. Independent landing review repeated 249/249 and exercised 92 probes; merged in PR #6."
     },
     {
       "id": "H",
@@ -278,17 +278,17 @@
       "deps": [
         "I"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Function types / call verification",
       "detail": "Give callbacks and closures checked parameter/result contracts, with explicit captured-value and effect assumptions. Begin with pure callbacks; stateful callbacks also require the heap model when used.",
       "doneWhen": "Selected generic/callback helpers compose through checked function contracts without treating arbitrary callbacks as trusted.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "C",
         "F"
       ],
       "deliveryStatus": "finished",
-      "resultSummary": "Pure total unary numeric predicates compose through checked callback admission, immutable primitive captures and named contracts. The unchanged Ramda eager findIndex verifies; two seeded bugs replay. Final suite passes 219/219 and all 12 verifier mutants are detected. Stateful callbacks remain unsupported."
+      "resultSummary": "Pure total unary numeric predicates compose through checked callback admission, immutable primitive captures and named contracts. The unchanged Ramda eager findIndex verifies; two seeded bugs replay. Final suite passes 219/219 and all 12 verifier mutants are detected. Stateful callbacks remain unsupported. Independent landing review passed 219/219 and 29 adversarial probes; merged in PR #5."
     },
     {
       "id": "J",
@@ -318,7 +318,7 @@
         "G",
         "H"
       ],
-      "status": "planned",
+      "status": "ready",
       "area": "Library verification / integration",
       "detail": "Verify a selected corpus of unchanged library implementations, including helpers that mutate local storage or accept callbacks. Record contracts, assumptions, unsupported code and confirmed counterexamples.",
       "doneWhen": "Multiple realistic functions compose, seeded bugs are caught, and results survive contract/source changes honestly.",
@@ -613,10 +613,7 @@
     }
   ],
   "progress": {
-    "branchReady": [
-      "H",
-      "G"
-    ],
+    "branchReady": [],
     "partial": [],
     "integratedFromBatch": [
       "A",
@@ -626,6 +623,7 @@
       "F"
     ],
     "next": [
+      "K",
       "P",
       "T"
     ],
@@ -633,10 +631,7 @@
     "downstreamStarted": true,
     "baseline": "ff2518cd7494300084f2ab54da71f4d79185e586",
     "integrationComplete": true,
-    "pendingIntegration": [
-      "H",
-      "G"
-    ]
+    "pendingIntegration": []
   },
   "edgeDisplay": "Transitively redundant edges omitted; reachability is unchanged. capabilityDeps retains the earlier capability inputs.",
   "validation": {
@@ -691,11 +686,12 @@
     "seededBugs": 2,
     "upstreamCommit": "980b3bf7712adb8ad8b5d9b2c6aca525cb3cf143",
     "report": "../verify/reports/callbacks.md",
-    "integrated": false
+    "integrated": true,
+    "mergeCommit": "eb135b5145cceda1e225f5a42e595a4a59a7199b"
   },
   "heapDelivery": {
     "branch": "feat/heap-alias-frames",
-    "baseBranch": "feat/pure-callback-contracts",
+    "baseBranch": "main",
     "baseCommit": "37355ccf197b22286cf0c25fddf147f2e3713172",
     "tests": 249,
     "fullSuite": {
@@ -712,6 +708,7 @@
     "heapMutants": 4,
     "existingMutants": 12,
     "report": "../verify/reports/heap.md",
-    "integrated": false
+    "integrated": true,
+    "mergeCommit": "8bbff6e3ce09b227ada4ed58f56f0ec5dd6d9416"
   }
 }
