@@ -1,0 +1,16 @@
+0fd5cd71008597218c8baf8cb6af81f0a1415634a27ee9cc0041035d653a63d1  verify/reports/roadmap/review-P/workflow/evidence/commands.md
+edb8595120bff7fbcd6a2d60af9b4724b5b5db000aa78901b115ef007e5e7dd7  verify/reports/roadmap/review-P/workflow/evidence/logs/cache-io.log
+66fc20192dde9420f4802c6c41cd3eb5251a0ad306a8576bce7276c56dd0e13c  verify/reports/roadmap/review-P/workflow/evidence/logs/focused-cli.err
+f6316f773a08ee6a6d6a73d76c05667598be59397f78891e35191e609e6c7ba6  verify/reports/roadmap/review-P/workflow/evidence/logs/focused-cli.log
+73b2646a9c63cd98a75d17cd0cd87a2e17761e2e2bb8eaa0bf7947e4b976642e  verify/reports/roadmap/review-P/workflow/evidence/logs/nonsolver.err
+35b541a04d83aa060566ba7df22f49a9603c5db4f675e22e43716573dfdd24a3  verify/reports/roadmap/review-P/workflow/evidence/logs/nonsolver.log
+5a27013dfc608b65e093ced7c5b67b0ed1c8f835bbec9e97e47f245953765caa  verify/reports/roadmap/review-P/workflow/evidence/logs/solver-2.err
+c09fcaf43b5ac34fcccf60a07ed5d723d4d77b5557fc58e6cb0d6a3c8e4925b7  verify/reports/roadmap/review-P/workflow/evidence/logs/solver-2.log
+e909e88ed19e044cd8ce7edd58f6e1c6dc7d94d0e1484660a6309ac726c095aa  verify/reports/roadmap/review-P/workflow/evidence/logs/solver-2b.err
+3eb1f445446038f0c013b244497e29d1e08f08e6baa8bba657309b913314e328  verify/reports/roadmap/review-P/workflow/evidence/logs/solver-2b.log
+eceb58eb44079c633ed48136a60ac17febd2fae978000dd7a9e2e6c67ab43ffa  verify/reports/roadmap/review-P/workflow/evidence/logs/solver.err
+740700ee9b003a17feec1266a0f79a9d47250334264e5b5ec247cb5c1c351fdc  verify/reports/roadmap/review-P/workflow/evidence/logs/solver.log
+793b4496be3f06cc14448838a3204f4c82b0273720b6b9647c10a79bb8f5c352  verify/reports/roadmap/review-P/workflow/evidence/scripts/probes-nonsolver.mjs
+0fda1c0d8d424780540fcbbf62dcb7305e3e2861ee06bf40d6d2730e3fa5f1c2  verify/reports/roadmap/review-P/workflow/evidence/scripts/probes-solver-2.mjs
+c2825141d358a4e3c9d4718716a22e2d2f6805397efea86dc3fdd2ac6b0c0c89  verify/reports/roadmap/review-P/workflow/evidence/scripts/probes-solver.mjs
+470e2c85d478facf04c03b40e6b38fc9ac3ca864937237682ef99552cd88d4b4  verify/reports/roadmap/review-P/workflow/findings.md
