@@ -1,0 +1,33 @@
+{
+  "note": "Preserve raw failed TAP output; do not strip its whitespace-only diagnostic lines.",
+  "checks": [
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+        "--",
+        "verify/source.mjs",
+        "verify/stateful",
+        "tests/verify"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+        "--",
+        "verify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt"
+      ],
+      "exitCode": 2,
+      "stdout": "verify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:26: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:29: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:53: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:56: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:80: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:83: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:123: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:126: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:160: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:163: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:223: trailing whitespace.\n+    \nverify/reports/roadmap/conditional-completion-evidence/focused-1/run.txt:225: trailing whitespace.\n+    \n",
+      "stderr": ""
+    }
+  ]
+}

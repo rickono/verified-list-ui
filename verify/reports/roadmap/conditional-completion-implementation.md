@@ -2,7 +2,8 @@
 
 **PASS for this implementation slice.** The final focused pass is **61/61**,
 and the frozen full verifier suite is **496/496**, with no failures, skips, or
-cancellations. Independent review and coordinator integration remain required. It makes no U, R, S, T, V, or W completion claim.
+cancellations. Independent review and coordinator integration remain required.
+This makes no U, R, S, T, V, or W completion claim.
 
 The only repository write target is
 `/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363`.
@@ -232,3 +233,8 @@ The audit uses installed local dependencies, or `COMPLETION_PROBE_DEPS` when
 provided, with the existing shared installation as the local fallback. It
 does not run a solver. `SHA256SUMS` binds final source, tests, reports, and logs.
 Core and fixtures remain identical to the full-run implementation commit.
+
+The source/test diff passes `git diff --check`. The first failed TAP log
+contains whitespace-only diagnostic lines emitted by Node. The all-artifact
+format check reported those lines; the raw log is preserved byte for byte.
+The exact commands and results are in `conditional-completion-evidence/format-check.json`.
