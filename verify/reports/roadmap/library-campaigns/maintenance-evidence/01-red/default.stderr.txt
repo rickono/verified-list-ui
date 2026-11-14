@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: Source/provenance drift: verify/bin/jsverify.mjs
++ actual - expected
+
++ '86a58c79da35a12d72188fc50c4240785e740ac9754feaec3381a9a05527e648'
+- '20ce339ff296e3dbc47431a5bcf810ff5bfd1a9dcc54da21871ee6c02a233940'
+
+    at inputCheck (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/check.mjs:81:12)
+    at supervise (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/check.mjs:337:52)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/check.mjs:374:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)

@@ -1,6 +1,6 @@
 {
-  "schema": 1,
-  "evidenceOrigin": "inherited pin and published-contract provenance, locally hash-checked; executions are fresh",
+  "schema": 2,
+  "evidenceOrigin": "Reviewed vendored source/license bytes and inherited published-document attestation, locally hash-checked; no fresh download. Executions must be fresh under the recorded current model.",
   "inheritedCommit": "a83f50762005ae47edfe3e07295f3840b485687b",
   "inheritedPackage": "verify/reports/roadmap/upstream-validation",
   "pinDate": "2026-11-13",
@@ -32,11 +32,20 @@
       "inheritedPath": "verify/reports/roadmap/upstream-validation/sources/d3-docs/ticks.md",
       "quotedFragment": "covering the given interval",
       "interpretation": "For start <= stop, the returned pair [niceStart, niceStop] satisfies niceStart <= start and stop <= niceStop. The published example is nice(1, 9, 5) -> [0, 10].",
-      "provenanceOnly": true
+      "provenanceOnly": true,
+      "attestation": {
+        "kind": "inherited-document-attestation",
+        "historicalCampaignHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+        "historicalEvidenceTip": "7e6d9b56c36e89dac9d9b7943771feb8af4dd0ab",
+        "reviewPath": "verify/reports/roadmap/review-library-campaigns/report.md",
+        "reviewSha256": "4ad4cc43c34ab87d35f096d13513473a836b9bef95ac839b0e04f82fa975d3da",
+        "scope": "The retained independent review attests the document digest, coverage sentence and example. Default maintenance checks vendored source/license and attestation bytes, not document bytes or a new download."
+      }
     },
     "currentMainStatus": "not checked or claimed",
     "novelty": "not checked or claimed",
-    "upstreamAcknowledgementOrFix": "not checked or claimed"
+    "upstreamAcknowledgementOrFix": "not checked or claimed",
+    "inheritedLicensePath": "verify/reports/roadmap/upstream-validation/sources/d3-array/24c015e4d894ee44af6cf6a2cc9e300b1885b0d9/LICENSE"
   },
   "existingCampaigns": {
     "harmonic": "verify/examples/simple-statistics/provenance.json",

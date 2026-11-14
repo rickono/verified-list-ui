@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "rev-parse",
+    "HEAD"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.red-fixture-5iwdb65z",
+  "started": "2026-11-14T03:26:54.266954+00:00",
+  "finished": "2026-11-14T03:26:54.611506+00:00",
+  "status": 0,
+  "stdoutSha256": "d8925cafcb0d71b42bcbaf0a47e860f7f9f8bd0155b0abdf6a7014c262e1af5f",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "waited": true
+}

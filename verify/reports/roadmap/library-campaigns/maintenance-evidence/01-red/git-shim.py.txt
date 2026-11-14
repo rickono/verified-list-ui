@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+import os, sys
+old = 'a83f50762005ae47edfe3e07295f3840b485687b'
+if sys.argv[1:2] == ['show'] and any(a.startswith(old + ':') for a in sys.argv[2:]):
+    sys.stderr.write('fixture: historical object unavailable: ' + old + '\n')
+    sys.exit(128)
+os.execv('/usr/bin/git', ['/usr/bin/git', '-C', '/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803', *sys.argv[1:]])

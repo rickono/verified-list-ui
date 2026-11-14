@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { execFileSync, spawn, spawnSync } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, readlinkSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
+import { bindModel, checkInputs, freeze } from "./campaign-inputs.mjs";
 
 const self = fileURLToPath(import.meta.url), here = dirname(self);
-const root = resolve(here, "../../../.."), prefix = relative(root, here);
+const root = resolve(here, "../../../..");
 const lane = "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py";
 const sha = (data) => createHash("sha256").update(data).digest("hex");
 const read = (file) => readFileSync(file, "utf8");
 const json = (file) => JSON.parse(read(file));
-const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
 const save = (dir, name, value) => {
   const file = join(dir, name);
   mkdirSync(dirname(file), { recursive: true });
@@ -70,37 +70,6 @@ async function nativeHarmonic() {
     assert.throws(() => mean(x), { name: "Error", message }); throws.push({ x, message });
   }
   console.log(JSON.stringify({ rows, documentedExample: number(mean([2, 3])), throws }));
-}
-
-function inputCheck() {
-  const inputs = json(join(here, "inputs.json"));
-  assert.equal(inputs.baseline, "32bd5b260aa116ca88642a1479bed8d3fc447f4b");
-  git("merge-base", "--is-ancestor", inputs.baseline, "HEAD");
-  assert.ok(existsSync(join(root, "verify")));
-  for (const [file, expected] of Object.entries(inputs.files)) {
-    assert.equal(sha(readFileSync(join(root, file))), expected, `Source/provenance drift: ${file}`);
-  }
-  const provenance = json(join(here, "provenance.json")), d3 = provenance.d3Array;
-  for (const [name, entry] of Object.entries(d3.sources)) {
-    const old = execFileSync("git", ["show", `${provenance.inheritedCommit}:${entry.inheritedPath}`], { cwd: root });
-    assert.equal(sha(old), entry.sha256);
-    assert.deepEqual(readFileSync(join(here, "pins/d3-array", name)), old);
-  }
-  const contract = d3.publishedContract;
-  const oldDocs = execFileSync("git", ["show", `${provenance.inheritedCommit}:${contract.inheritedPath}`], { cwd: root });
-  assert.equal(sha(oldDocs), contract.fullDocumentSha256);
-  assert.ok(oldDocs.toString().includes(contract.quotedFragment));
-  assert.ok(oldDocs.toString().includes("d3.nice(1, 9, 5) // [0, 10]"));
-  return inputs;
-}
-
-function freeze(inputs) {
-  const paths = git("ls-tree", "-r", "--name-only", inputs.preparedParent).split("\n");
-  const files = paths.map((p) => [p, sha(readFileSync(join(root, p)))]);
-  // Keep the complete tree digest and individually named production/source hashes.
-  return { preparedParent: inputs.preparedParent, preparedTree: git("rev-parse", `${inputs.preparedParent}^{tree}`),
-    fileCount: files.length, allPreparedFilesSha256: sha(JSON.stringify(files)),
-    sourceAndMetadata: Object.fromEntries(files.filter(([p]) => Object.hasOwn(inputs.files, p))) };
 }
 
 function childCommand(out, name, args, timeoutMs) {
@@ -199,16 +168,17 @@ async function campaign(out) {
     }
     save(out, "stages.json", stages);
   };
-  const inputs = inputCheck(), before = save(out, "freeze.before.json", freeze(inputs));
+  const inputs = save(out, "input-boundary.json", checkInputs(root));
+  const before = save(out, "freeze.before.json", freeze(root));
+  assert.deepEqual(before, json(join(out, "supervisor-freeze.before.json")), "Inputs changed while waiting for the serial lane.");
   const checkerBefore = sha(readFileSync(self)), inputsBefore = sha(readFileSync(join(here, "inputs.json")));
-  const protectedDiff = git("diff", inputs.preparedParent, "--", ".", `:(exclude)${prefix}/**`);
-  assert.equal(protectedDiff, "", "The prepared source tree must be unchanged.");
   const [{ runningIdentity }, api, compiler, proofPlan, harmonic, ramda] = await Promise.all([
     import("../../../manifest.mjs"), import("../../../index.mjs"), import("../../../source.mjs"),
     import("../../../proofs.mjs"), import("../../../examples/simple-statistics/check-harmonic.mjs"),
     import("../../../examples/ramda/check.mjs"),
   ]);
-  const identity = save(out, "model.json", { codeHead: git("rev-parse", "HEAD"), ...runningIdentity() });
+  const running = runningIdentity();
+  const identity = save(out, "model.json", bindModel(before, running));
   assert.equal(identity.disabled, undefined);
   save(out, "api-calls.json", [
     { api: "checkHarmonic({outputDir})", productionChecker: "verify/examples/simple-statistics/check-harmonic.mjs", requests: [
@@ -310,18 +280,19 @@ async function campaign(out) {
     });
   });
   await stage("freeze-and-model", async () => {
-    inputCheck();
+    assert.deepEqual(checkInputs(root), inputs);
     assert.equal(sha(readFileSync(self)), checkerBefore);
     assert.equal(sha(readFileSync(join(here, "inputs.json"))), inputsBefore);
-    assert.deepEqual(save(out, "freeze.after.json", freeze(inputs)), before);
-    assert.deepEqual(runningIdentity(), Object.fromEntries(Object.entries(identity).filter(([k]) => k !== "codeHead")));
+    assert.deepEqual(save(out, "freeze.after.json", freeze(root)), before);
+    assert.deepEqual(runningIdentity(), running);
   });
   claims.push({ id: "es-toolkit-inherited", classification: "universal proof", origin: "inherited; not rerun in this campaign",
     source: "verify/examples/es-toolkit/README.md", pin: "1913a7627a2995b095249d6b0b6453b900cdd4bc",
     scope: "empty-input sum returns +0, empty-input mean returns NaN, with termination; no nonempty summation or concatenation law", countsTowardFreshCoverage: false });
   const status = stages.every((s) => s.status === "PASS") ? "PASS" : "ISSUES";
-  save(out, "evidence.json", { schema: 1, status, codeHead: identity.codeHead, runtimeEquivalentTo: inputs.runtimeEquivalentTo,
-    preparedParent: inputs.preparedParent, modelIdentity: identity.sha256, checkerSha256: checkerBefore, inputsSha256: inputsBefore,
+  save(out, "evidence.json", { schema: 2, status, codeHead: identity.codeHead, codeTree: identity.codeTree,
+    inputSnapshotSha256: before.snapshotSha256, immutableInputSha256: inputs.immutableSha256,
+    modelIdentity: identity.sha256, checkerSha256: checkerBefore, inputsSha256: inputsBefore,
     pinDate: "2026-11-13", qComplete: false, kComplete: false, independentReviewComplete: false,
     noBenchmarkClaim: true, stages, claims, artifacts: artifacts(out),
     trust: "Frontend, source snapshots, source-to-SMT and binary64 encoding, exact specification replay, Z3/WASM, native Node and unmodified standard builtins. Receipts require trusted writers and are not certificates. The diagnostic cycle argument assumes deterministic pure tickIncrement and builtins." });
@@ -334,8 +305,9 @@ async function supervise(output) {
   assert.ok(!existsSync(out), "Use a new output directory; earlier evidence, including failed experiments, is immutable.");
   mkdirSync(out, { recursive: true });
   const argv = ["python3", lane, "--", process.execPath, self, "--run", out];
-  const start = new Date().toISOString(), frozen = inputCheck();
-  const before = save(out, "supervisor-freeze.before.json", freeze(frozen));
+  const start = new Date().toISOString();
+  checkInputs(root);
+  const before = save(out, "supervisor-freeze.before.json", freeze(root));
   let dependencyLink;
   try { dependencyLink = readlinkSync(join(root, "node_modules")); } catch { /* an ordinary install is also allowed */ }
   const child = spawn(argv[0], argv.slice(1), { cwd: root, detached: true, stdio: ["ignore", "pipe", "pipe"] });
@@ -355,8 +327,9 @@ async function supervise(output) {
   try { process.kill(-child.pid, 0); remainingGroup = true; kill(); } catch (e) { if (e.code !== "ESRCH") throw e; }
   writeFileSync(join(out, "stdout.txt"), Buffer.concat(stdout));
   writeFileSync(join(out, "stderr.txt"), Buffer.concat(stderr));
-  const after = save(out, "supervisor-freeze.after.json", freeze(frozen));
-  save(out, "run.json", { argv, invokedAs: process.argv, cwd: root, codeHead: git("rev-parse", "HEAD"),
+  const after = save(out, "supervisor-freeze.after.json", freeze(root));
+  save(out, "run.json", { argv, invokedAs: process.argv, cwd: root, codeHead: before.head, codeTree: before.headTree,
+    inputSnapshotSha256: before.snapshotSha256,
     start, end: new Date().toISOString(), wallLimitMs: 600000, timedOut, launchError, ...completion,
     supervisorPid: process.pid, lanePid: child.pid, remainingProcessGroupAfterWait: remainingGroup,
     dependencyLink, protectedFilesUnchanged: JSON.stringify(before) === JSON.stringify(after),
@@ -368,8 +341,15 @@ async function supervise(output) {
 }
 
 try {
-  if (process.argv[2] === "--native-nice") await nativeNice(process.argv[3]);
+  if (process.argv[2] === "--inputs-only") {
+    assert.ok(process.argv.length === 3 || (process.argv.length === 4 && process.argv[3] === "--check-history"));
+    console.log(JSON.stringify(checkInputs(root, { checkHistory: process.argv[3] === "--check-history" }), null, 2));
+  }
+  else if (process.argv[2] === "--native-nice") await nativeNice(process.argv[3]);
   else if (process.argv[2] === "--native-harmonic") await nativeHarmonic();
   else if (process.argv[2] === "--run") await campaign(resolve(process.argv[3]));
-  else await supervise(process.argv[2]);
+  else {
+    assert.ok(process.argv.length <= 3 && !process.argv[2]?.startsWith("--"), "Usage: check.mjs [new-output-directory] | --inputs-only [--check-history]");
+    await supervise(process.argv[2]);
+  }
 } catch (e) { console.error(e.stack); process.exitCode = 1; }

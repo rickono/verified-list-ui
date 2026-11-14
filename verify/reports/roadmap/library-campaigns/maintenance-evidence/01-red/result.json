@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "meaning": "Both original failures reproduced before editing",
+  "codeHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+  "checkerSha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
+  "firstExpected": "Source/provenance drift before semantic imports",
+  "secondExpected": "Missing private history before semantic imports",
+  "fixtureOnlyHashUpdates": [
+    {
+      "path": "verify/bin/jsverify.mjs",
+      "historical": "20ce339ff296e3dbc47431a5bcf810ff5bfd1a9dcc54da21871ee6c02a233940",
+      "current": "86a58c79da35a12d72188fc50c4240785e740ac9754feaec3381a9a05527e648"
+    },
+    {
+      "path": "verify/index.mjs",
+      "historical": "5d2125c2cc86a847873afcad478250d43f682dc8f31960e30c299cff52f47571",
+      "current": "1c586efe44af4973f7e7704e4fa6d414ae7ca1f8ca5f2203ea791311741ebd58"
+    }
+  ],
+  "fixtureRemovedOnExit": true,
+  "shim": "Fails only git show of the named old object; forwards other git to the prepared repository",
+  "limitations": "The second control bypasses only historical runtime hash drift in a disposable copy. No solver or semantic verifier import ran."
+}
