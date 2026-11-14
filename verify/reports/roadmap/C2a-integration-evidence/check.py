@@ -1,6 +1,6 @@
 """Check recorded C2a test evidence; never solve or admit a proof receipt."""
 from pathlib import Path
-import gzip, hashlib, json, subprocess, sys
+import gzip, hashlib, json, subprocess, sys, tarfile
 
 here = Path(__file__).resolve().parent
 root = here.parents[3]
@@ -36,6 +36,33 @@ for name, expected in inputs.items():
     assert sha(recorded) == expected, 'Recorded source mismatch: ' + name
     if '--current' in sys.argv:
         assert sha((root / name).read_bytes()) == expected, 'Current source differs: ' + name
+
+campaign = here / 'campaign'
+if campaign.exists():
+    record = json.loads((campaign / 'summary.json').read_text())
+    archive = campaign / 'recorded-campaign.tar.gz'
+    assert sha(archive.read_bytes()) == record['rawArchiveSha256']
+    with tarfile.open(archive, 'r:gz') as packed:
+        raw = {}
+        for member in packed:
+            p = Path(member.name)
+            assert member.isfile() and not p.is_absolute() and '..' not in p.parts
+            raw[member.name] = packed.extractfile(member).read()
+    get = lambda name: json.loads(raw[name])
+    run, evidence, model = get('run.json'), get('evidence.json'), get('model.json')
+    assert run['status'] == evidence['status'] == record['status'] == 'PASS'
+    assert run['code'] == 0 and not run['timedOut'] and not run['remainingProcessGroupAfterWait']
+    assert run['protectedFilesUnchanged'] and len(evidence['stages']) == 10
+    assert all(s['status'] == 'PASS' for s in evidence['stages'])
+    assert model['sha256'] == evidence['modelIdentity'] == record['modelIdentity']
+    assert get('freeze.before.json') == get('freeze.after.json') == get('supervisor-freeze.before.json') == get('supervisor-freeze.after.json')
+    for manifest in [run, evidence]:
+        for name, entry in manifest['artifacts'].items():
+            assert sha(raw[name]) == entry['sha256'], 'Campaign artifact differs: ' + name
+    assert get('harmonic/checks.json') == record['harmonic']
+    for name in ['native-cycle5.command.json', 'native-cycle100.command.json']:
+        child = get(name)
+        assert child['signal'] == 'SIGKILL' and child['error']['code'] == 'ETIMEDOUT' and not child['aliveAfterWait']
 
 inventory = here / 'SHA256SUMS'
 if inventory.exists():

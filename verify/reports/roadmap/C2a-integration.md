@@ -80,5 +80,22 @@ contracts, not proofs of HTTP services, wall-clock timing or every Promise API.
 
 These scoped R/S/T predicates are ready for integration. They are not marked
 integrated until the implementation lands. U, V and W remain separate goals.
-Current-model numerical evidence will be recorded after its fresh campaign;
-previous model-bound evidence is not promoted across source changes.
+The [fresh numerical campaign](C2a-integration-evidence/campaign/summary.json)
+passed all ten stages at report head `73e0b4d`, with model
+`0a6c4292dda0c31b8c9e846f430984758fb9b19e7bc7af6133b1f2b080991e03`.
+All four input snapshots agree and the process group is absent after wait.
+Harmonic total return and Ramda first-match verify; the genuine harmonic
+positivity failure reproduces through API and CLI, with one new warm receipt.
+The weak invariant gives a confirmed failure in this run; earlier induction
+gaps remain their own results. Native d3 coverage failures reproduce, and its
+timeouts and separate diagnostic remain outside solver-proof claims.
+
+The complete raw campaign is stored in `campaign/recorded-campaign.tar.gz`,
+with its original paths, run receipts and per-artifact hashes. Extract it to a
+new directory to inspect or replay its P evidence. The previous model's genuine
+bug artifact is refused as `invalid-evidence`; no old proof is promoted.
+`python3 verify/reports/roadmap/C2a-integration-evidence/check.py --current`
+checks recorded source/test bytes, logs, archive and inventories without a
+solver or cache admission. Re-run source tests through the shared serial lane;
+re-run the maintained numerical checker with a new output directory. The
+recorded campaign and 510-test run are not repeated for later report imports.

@@ -1,0 +1,33 @@
+{
+  "runs": [
+    {
+      "command": [
+        "node",
+        "verify/bin/jsverify.mjs",
+        "reproduce",
+        "verify/reports/roadmap/library-campaigns/maintenance-evidence/04-current/campaign/harmonic/positive.evidence.json"
+      ],
+      "exitCode": 1,
+      "stdout": "invalid-evidence: The verification model/backend identity changed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "verify/bin/jsverify.mjs",
+        "reproduce",
+        "--json",
+        "verify/reports/roadmap/library-campaigns/maintenance-evidence/04-current/campaign/harmonic/positive.evidence.json"
+      ],
+      "exitCode": 1,
+      "stdout": "{\n  \"status\": \"invalid-evidence\",\n  \"message\": \"The verification model/backend identity changed.\"\n}\n",
+      "stderr": "",
+      "result": {
+        "status": "invalid-evidence",
+        "message": "The verification model/backend identity changed."
+      }
+    }
+  ],
+  "scope": "Identity rejection before replay; no solver or application execution.",
+  "captureCorrection": "Initial packaging attempted JSON parsing without --json and failed; these follow-up runs preserve the correct text and JSON formats."
+}
