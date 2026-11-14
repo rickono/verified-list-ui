@@ -1,0 +1,16 @@
+date: 2026-11-14T02:18:47Z
+head: 2809e885ef01e09da906ddc31e070fde1df180a2
+node: v22.23.1
+acorn: 8.19.0
+z3: 5.3.3
+predictions: 5f235d7b24b17d8d5ad01014c58d3ad1146f77629c56787b0da5dacb07dcd8fb  verify/reports/roadmap/judgment-temporal/predictions.json
+command: python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/judgment-temporal/scripts/probe.mjs
+attempt-2 date: 2026-11-14T02:34:36Z
+head: 2809e885ef01e09da906ddc31e070fde1df180a2
+predictions: 5f235d7b24b17d8d5ad01014c58d3ad1146f77629c56787b0da5dacb07dcd8fb  verify/reports/roadmap/judgment-temporal/predictions.json
+fix: import depth corrected after attempt 1 module-not-found; predictions unchanged
+command: python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/judgment-temporal/scripts/probe.mjs
+follow-up date: 2026-11-14T02:46:47Z
+predictions.json: 5f235d7b24b17d8d5ad01014c58d3ad1146f77629c56787b0da5dacb07dcd8fb  verify/reports/roadmap/judgment-temporal/predictions.json
+predictions-followup.json: 2d33b1dfc580968ca31808fed676cd581ae06900c0bcd0b15ef3e8ee991379f6  verify/reports/roadmap/judgment-temporal/predictions-followup.json
+command: python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/judgment-temporal/scripts/followup.mjs

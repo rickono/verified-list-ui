@@ -1,0 +1,1050 @@
+{
+  "predHash": "5f235d7b24b17d8d5ad01014c58d3ad1146f77629c56787b0da5dacb07dcd8fb",
+  "observed": [
+    {
+      "id": "grammar-leads",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "Unsupported or misspelled contract clause leads"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause leads.",
+        "messageIncludes": "Unsupported or misspelled contract clause leads."
+      }
+    },
+    {
+      "id": "grammar-leads-succeeds",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "clause leads"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause leads.",
+        "messageIncludes": "Unsupported or misspelled contract clause leads."
+      }
+    },
+    {
+      "id": "grammar-leads-inside",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "clause leads"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause leads.",
+        "messageIncludes": "Unsupported or misspelled contract clause leads."
+      }
+    },
+    {
+      "id": "grammar-fairness",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "clause fairness"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause fairness.",
+        "messageIncludes": "Unsupported or misspelled contract clause fairness."
+      }
+    },
+    {
+      "id": "grammar-fairness-case",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "clause FAIRNESS"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause FAIRNESS.",
+        "messageIncludes": "Unsupported or misspelled contract clause FAIRNESS."
+      }
+    },
+    {
+      "id": "grammar-fairness-punct",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "clause fairness."
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause fairness..",
+        "messageIncludes": "Unsupported or misspelled contract clause fairness.."
+      }
+    },
+    {
+      "id": "grammar-fairness-typo",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "clause fairnes"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause fairnes.",
+        "messageIncludes": "Unsupported or misspelled contract clause fairnes."
+      }
+    },
+    {
+      "id": "grammar-fairness-unicode",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "Unsupported or misspelled"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause fаirness.",
+        "messageIncludes": "Unsupported or misspelled contract clause fаirness."
+      }
+    },
+    {
+      "id": "grammar-abort",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "clause abort"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unsupported or misspelled contract clause abort.",
+        "messageIncludes": "Unsupported or misspelled contract clause abort."
+      }
+    },
+    {
+      "id": "grammar-block",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "block comments are unsupported"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Contract-looking block comments are unsupported; use one line per clause.",
+        "messageIncludes": "Contract-looking block comments are unsupported; use one line per clause."
+      }
+    },
+    {
+      "id": "grammar-settles-soon",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "Invalid settles clause"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Invalid settles clause.",
+        "messageIncludes": "Invalid settles clause."
+      }
+    },
+    {
+      "id": "grammar-env-fair",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "Unknown line in environment block"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Unknown line in environment block.",
+        "messageIncludes": "Unknown line in environment block."
+      }
+    },
+    {
+      "id": "grammar-completes-prose",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      },
+      "observed": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      }
+    },
+    {
+      "id": "grammar-fair-settlement-prose",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      },
+      "observed": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      }
+    },
+    {
+      "id": "grammar-rank-prose",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      },
+      "observed": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      }
+    },
+    {
+      "id": "grammar-commits-prose",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      },
+      "observed": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      }
+    },
+    {
+      "id": "grammar-count-prose",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      },
+      "observed": {
+        "status": "ok",
+        "kinds": [
+          "state"
+        ]
+      }
+    },
+    {
+      "id": "early-return",
+      "match": true,
+      "predicted": {
+        "status": "unsupported",
+        "messageIncludes": "Returns before a later await"
+      },
+      "observed": {
+        "status": "unsupported",
+        "message": "Returns before a later await are outside C1.",
+        "messageIncludes": "Returns before a later await are outside C1."
+      }
+    },
+    {
+      "id": "tail-return-shape",
+      "match": false,
+      "predicted": {
+        "status": "ok",
+        "awaits": 1,
+        "segments": 2,
+        "lastSegmentHasReturn": true
+      },
+      "observed": {
+        "status": "ok",
+        "awaits": 1,
+        "segments": 2,
+        "lastSegmentHasReturn": false
+      }
+    },
+    {
+      "id": "zero-shape",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "awaits": 0,
+        "segments": 1,
+        "segmentStatements": [
+          1
+        ],
+        "unitPrefix": [
+          "$init",
+          "work$0"
+        ],
+        "kinds": [
+          "init",
+          "entry"
+        ],
+        "bRank": [
+          0
+        ],
+        "aSites": 0,
+        "aTop": "0"
+      },
+      "observed": {
+        "status": "ok",
+        "awaits": 0,
+        "segments": 1,
+        "segmentStatements": [
+          1
+        ],
+        "unitPrefix": [
+          "$init",
+          "work$0"
+        ],
+        "kinds": [
+          "init",
+          "entry"
+        ],
+        "bRank": [
+          0
+        ],
+        "aSites": 0,
+        "aTop": "0"
+      }
+    },
+    {
+      "id": "two-shape",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "awaits": 2,
+        "segments": 3,
+        "firstSegmentStatements": 0,
+        "lastSegmentStatements": 1,
+        "hasEntryUnit": true,
+        "bRank": [
+          2,
+          1,
+          0
+        ],
+        "aWaiting": [
+          "4",
+          "2"
+        ],
+        "aEdgeLabels": [
+          "settle",
+          "resume-resolve",
+          "resume-reject"
+        ]
+      },
+      "observed": {
+        "status": "ok",
+        "awaits": 2,
+        "segments": 3,
+        "firstSegmentStatements": 0,
+        "lastSegmentStatements": 1,
+        "hasEntryUnit": true,
+        "bRank": [
+          2,
+          1,
+          0
+        ],
+        "aWaiting": [
+          "4",
+          "2"
+        ],
+        "aEdgeLabels": [
+          "settle",
+          "resume-resolve",
+          "resume-reject"
+        ]
+      }
+    },
+    {
+      "id": "assumptions-two",
+      "match": true,
+      "predicted": {
+        "eventBound": null,
+        "schedulerIncludes": "microtasks drained",
+        "fairnessIncludes": "none used by safety",
+        "settles": "eventually",
+        "settlesUse": "declared-unused for safety",
+        "entryIncludes": "unboundedly repeated",
+        "mentionsTotality": false
+      },
+      "observed": {
+        "eventBound": null,
+        "schedulerIncludes": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+        "fairnessIncludes": "none used by safety; settles eventually is recorded only",
+        "settles": "eventually",
+        "settlesUse": "declared-unused for safety",
+        "entryIncludes": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+        "mentionsTotality": false
+      }
+    },
+    {
+      "id": "multi-shape",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "entries": [
+          "left",
+          "right"
+        ],
+        "unitPrefix": [
+          "$init",
+          "left$0",
+          "left$1",
+          "right$0",
+          "right$1",
+          "$reject"
+        ],
+        "rejectKind": "stutter",
+        "interferenceCount": 10,
+        "progressUnitCount": 0,
+        "aModeledEntry": "left",
+        "aSites": 1
+      },
+      "observed": {
+        "status": "ok",
+        "entries": [
+          "left",
+          "right"
+        ],
+        "unitPrefix": [
+          "$init",
+          "left$0",
+          "left$1",
+          "right$0",
+          "right$1",
+          "$reject"
+        ],
+        "rejectKind": "stutter",
+        "interferenceCount": 10,
+        "progressUnitCount": 0,
+        "aModeledEntry": "left",
+        "aSites": 1
+      }
+    },
+    {
+      "id": "native-zero",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "actions": [
+          "init",
+          "call"
+        ],
+        "done": [
+          false,
+          true
+        ],
+        "finalRequests": 0
+      },
+      "observed": {
+        "status": "ok",
+        "actions": [
+          "init",
+          "call"
+        ],
+        "done": [
+          false,
+          true
+        ],
+        "finalRequests": 0
+      }
+    },
+    {
+      "id": "native-fuse",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "actions": [
+          "init",
+          "call",
+          "resolve",
+          "resolve"
+        ],
+        "n": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "finalRequests": 2,
+        "pending": 0
+      },
+      "observed": {
+        "status": "ok",
+        "actions": [
+          "init",
+          "call",
+          "resolve",
+          "resolve"
+        ],
+        "n": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "finalRequests": 2,
+        "pending": 0
+      }
+    },
+    {
+      "id": "native-reject",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "actions": [
+          "init",
+          "call",
+          "reject"
+        ],
+        "n": [
+          0,
+          0,
+          0
+        ],
+        "finalRequests": 1,
+        "pending": 0
+      },
+      "observed": {
+        "status": "ok",
+        "actions": [
+          "init",
+          "call",
+          "reject"
+        ],
+        "n": [
+          0,
+          0,
+          0
+        ],
+        "finalRequests": 1,
+        "pending": 0
+      }
+    },
+    {
+      "id": "native-suppress",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "n": 0,
+        "pending": 0
+      },
+      "observed": {
+        "status": "ok",
+        "n": 0,
+        "pending": 0
+      }
+    },
+    {
+      "id": "native-publish",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "n": 1,
+        "pending": 0
+      },
+      "observed": {
+        "status": "ok",
+        "n": 1,
+        "pending": 0
+      }
+    },
+    {
+      "id": "native-prefix",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "n": 0,
+        "pending": 1
+      },
+      "observed": {
+        "status": "ok",
+        "n": 0,
+        "pending": 1
+      }
+    },
+    {
+      "id": "native-partial-zero",
+      "match": true,
+      "predicted": {
+        "status": "illegal-environment-action",
+        "messageIncludes": "resolves"
+      },
+      "observed": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Resolution violates the declared resolves assumption.",
+        "messageIncludes": "Resolution violates the declared resolves assumption.",
+        "faultIncludes": "",
+        "actions": [],
+        "n": [],
+        "done": [],
+        "latest": null,
+        "requests": [],
+        "requestRows": []
+      }
+    },
+    {
+      "id": "native-partial-one",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "n": 1,
+        "pending": 0
+      },
+      "observed": {
+        "status": "ok",
+        "n": 1,
+        "pending": 0
+      }
+    },
+    {
+      "id": "native-false-resolve",
+      "match": true,
+      "predicted": {
+        "status": "illegal-environment-action",
+        "messageIncludes": "resolves"
+      },
+      "observed": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Resolution violates the declared resolves assumption.",
+        "messageIncludes": "Resolution violates the declared resolves assumption.",
+        "faultIncludes": "",
+        "actions": [],
+        "n": [],
+        "done": [],
+        "latest": null,
+        "requests": [],
+        "requestRows": []
+      }
+    },
+    {
+      "id": "native-collision",
+      "match": true,
+      "predicted": {
+        "status": "ok",
+        "latest": 9007199254740992,
+        "requests": 2,
+        "pending": 2
+      },
+      "observed": {
+        "status": "ok",
+        "latest": 9007199254740992,
+        "requests": 2,
+        "pending": 2
+      }
+    },
+    {
+      "id": "native-illegal",
+      "match": true,
+      "predicted": {
+        "status": "illegal-environment-action"
+      },
+      "observed": {
+        "status": "illegal-environment-action"
+      }
+    },
+    {
+      "id": "native-double",
+      "match": true,
+      "predicted": {
+        "status": "illegal-environment-action"
+      },
+      "observed": {
+        "status": "illegal-environment-action"
+      }
+    },
+    {
+      "id": "native-hash",
+      "match": true,
+      "predicted": {
+        "status": "illegal-environment-action",
+        "messageIncludes": "assumptionsSha256"
+      },
+      "observed": {
+        "status": "illegal-environment-action",
+        "reason": "invalid-trace",
+        "message": "Trace assumptionsSha256 mismatch.",
+        "messageIncludes": "Trace assumptionsSha256 mismatch.",
+        "faultIncludes": "",
+        "actions": [],
+        "n": [],
+        "done": [],
+        "latest": null,
+        "requests": [],
+        "requestRows": []
+      }
+    },
+    {
+      "id": "native-throw",
+      "match": true,
+      "predicted": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "faultIncludes": "stop"
+      },
+      "observed": {
+        "status": "unknown",
+        "reason": "replay-runtime",
+        "message": null,
+        "messageIncludes": "",
+        "faultIncludes": "stop",
+        "actions": [
+          "init",
+          "call"
+        ],
+        "n": [
+          0,
+          0
+        ],
+        "done": [
+          null,
+          null
+        ],
+        "latest": null,
+        "requests": [
+          null,
+          null
+        ],
+        "requestRows": []
+      }
+    },
+    {
+      "id": "safety-false-resolves",
+      "match": true,
+      "predicted": {
+        "status": "verified",
+        "eventBound": null,
+        "resumeStatus": "vacuous",
+        "rejectUnits": 0,
+        "fairnessIncludes": "none used by safety"
+      },
+      "observed": {
+        "status": "verified",
+        "reason": null,
+        "message": null,
+        "eventBound": null,
+        "resumeStatus": "vacuous",
+        "rejectUnits": 0,
+        "fairnessIncludes": "none used by safety; settles eventually is recorded only",
+        "maxDepth": null,
+        "units": [
+          {
+            "unit": "$init",
+            "kind": "init",
+            "status": "verified"
+          },
+          {
+            "unit": "work$0",
+            "kind": "entry",
+            "status": "verified"
+          },
+          {
+            "unit": "work$1",
+            "kind": "resume",
+            "status": "vacuous"
+          }
+        ]
+      }
+    },
+    {
+      "id": "safety-partial",
+      "match": true,
+      "predicted": {
+        "status": "verified",
+        "resumeStatus": "verified"
+      },
+      "observed": {
+        "status": "verified",
+        "reason": null,
+        "message": null,
+        "eventBound": null,
+        "resumeStatus": "verified",
+        "rejectUnits": 0,
+        "fairnessIncludes": "none used by safety; settles eventually is recorded only",
+        "maxDepth": null,
+        "units": [
+          {
+            "unit": "$init",
+            "kind": "init",
+            "status": "verified"
+          },
+          {
+            "unit": "work$0",
+            "kind": "entry",
+            "status": "verified"
+          },
+          {
+            "unit": "work$1",
+            "kind": "resume",
+            "status": "verified"
+          }
+        ]
+      }
+    },
+    {
+      "id": "safety-gap",
+      "match": true,
+      "predicted": {
+        "status": "unknown",
+        "reason": "induction-gap",
+        "maxDepth": 0
+      },
+      "observed": {
+        "status": "unknown",
+        "reason": "induction-gap",
+        "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof.",
+        "eventBound": null,
+        "resumeStatus": "counterexample",
+        "rejectUnits": 0,
+        "fairnessIncludes": "none used by safety; settles eventually is recorded only",
+        "maxDepth": 0,
+        "units": [
+          {
+            "unit": "$init",
+            "kind": "init",
+            "status": "verified"
+          },
+          {
+            "unit": "work$0",
+            "kind": "entry",
+            "status": "verified"
+          },
+          {
+            "unit": "work$1",
+            "kind": "resume",
+            "status": "counterexample"
+          }
+        ]
+      }
+    },
+    {
+      "id": "budget-gap",
+      "match": true,
+      "predicted": {
+        "status": "unknown",
+        "reasonOneOf": [
+          "solver",
+          "induction-gap"
+        ]
+      },
+      "observed": {
+        "status": "unknown",
+        "reason": "solver",
+        "message": null,
+        "eventBound": null,
+        "resumeStatus": "unknown",
+        "rejectUnits": 0,
+        "fairnessIncludes": "none used by safety; settles eventually is recorded only",
+        "maxDepth": 0,
+        "units": [
+          {
+            "unit": "$init",
+            "kind": "init",
+            "status": "unknown"
+          },
+          {
+            "unit": "work$0",
+            "kind": "entry",
+            "status": "unknown"
+          },
+          {
+            "unit": "work$1",
+            "kind": "resume",
+            "status": "unknown"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ranks",
+      "match": false,
+      "predicted": {
+        "literalDrop": "verified",
+        "literalStall": "counterexample",
+        "half": "counterexample",
+        "trueRank": "verified",
+        "saturated": "counterexample"
+      },
+      "observed": {
+        "literalDrop": "verified",
+        "literalStall": "counterexample",
+        "half": "counterexample",
+        "trueRank": "verified",
+        "saturated": "verified"
+      }
+    },
+    {
+      "id": "budget-ranks",
+      "match": true,
+      "predicted": {
+        "someUnknown": true
+      },
+      "observed": {
+        "someUnknown": true,
+        "statuses": {
+          "literalDrop": "unknown",
+          "literalStall": "unknown",
+          "half": "unknown",
+          "trueRank": "unknown",
+          "saturated": "unknown"
+        }
+      }
+    },
+    {
+      "id": "loop-scan",
+      "match": true,
+      "predicted": {
+        "status": "verified",
+        "assertionBvule": true,
+        "assertionEventBound": false,
+        "assertionBv256": false
+      },
+      "observed": {
+        "status": "verified",
+        "assertionBvule": true,
+        "assertionEventBound": false,
+        "assertionBv256": false,
+        "bitVec64Assertions": 0,
+        "ids": [
+          "loop.ts#shadow"
+        ]
+      }
+    },
+    {
+      "id": "stateful-scan",
+      "match": true,
+      "predicted": {
+        "assertionBvule": false,
+        "assertionEventBound": false,
+        "assertionBv256": false
+      },
+      "observed": {
+        "assertionBvule": false,
+        "assertionEventBound": false,
+        "assertionBv256": false,
+        "bitVec64Assertions": 0,
+        "eventBoundField": null
+      }
+    },
+    {
+      "id": "classifier-both",
+      "match": true,
+      "predicted": {
+        "class": "unfair-excluded",
+        "nativeConfirmed": false
+      },
+      "observed": {
+        "class": "unfair-excluded",
+        "nativeConfirmed": false,
+        "fairCounterexample": false,
+        "premiseUsed": true
+      }
+    },
+    {
+      "id": "classifier-only-settles",
+      "match": true,
+      "predicted": {
+        "class": "unfair-excluded",
+        "nativeConfirmed": false
+      },
+      "observed": {
+        "class": "unfair-excluded",
+        "nativeConfirmed": false,
+        "fairCounterexample": false,
+        "premiseUsed": true
+      }
+    },
+    {
+      "id": "classifier-only-fair",
+      "match": true,
+      "predicted": {
+        "class": "unfair-excluded",
+        "nativeConfirmed": false
+      },
+      "observed": {
+        "class": "unfair-excluded",
+        "nativeConfirmed": false,
+        "fairCounterexample": false,
+        "premiseUsed": true
+      }
+    },
+    {
+      "id": "classifier-neither",
+      "match": true,
+      "predicted": {
+        "class": "legal-infinite-pending",
+        "nativeConfirmed": false
+      },
+      "observed": {
+        "class": "legal-infinite-pending",
+        "nativeConfirmed": false,
+        "fairCounterexample": false,
+        "kind": "symbolic-lasso"
+      }
+    },
+    {
+      "id": "classifier-empty",
+      "match": true,
+      "predicted": {
+        "class": "illegal",
+        "nativeConfirmed": false
+      },
+      "observed": {
+        "class": "illegal",
+        "nativeConfirmed": false,
+        "fairCounterexample": false
+      }
+    },
+    {
+      "id": "classifier-fresh",
+      "match": true,
+      "predicted": {
+        "class": "legal-infinite-pending",
+        "nativeConfirmed": false,
+        "cycleHasCells": false
+      },
+      "observed": {
+        "class": "legal-infinite-pending",
+        "nativeConfirmed": false,
+        "fairCounterexample": false,
+        "kind": "symbolic-lasso",
+        "cycleHasCells": false
+      }
+    },
+    {
+      "id": "classifier-not-pending",
+      "match": true,
+      "predicted": {
+        "class": "goal-not-stuck",
+        "nativeConfirmed": false
+      },
+      "observed": {
+        "class": "goal-not-stuck",
+        "nativeConfirmed": false,
+        "fairCounterexample": false
+      }
+    },
+    {
+      "id": "composition-rule",
+      "match": true,
+      "predicted": {
+        "judgment": "unknown",
+        "reason": "no-correspondence-theorem"
+      },
+      "observed": {
+        "judgment": "unknown",
+        "reason": "no-correspondence-theorem",
+        "safety": "verified",
+        "literalDrop": "verified",
+        "note": "Review rule only. Adjacent verified queries are not a source progress theorem."
+      }
+    }
+  ]
+}

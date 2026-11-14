@@ -1,0 +1,8 @@
+{
+  "frozenBeforeRun": true,
+  "note": "Follow-up after the frozen ranks mismatch. predictions.json is unchanged. result === k + 1 verified at 2^53; these queries separate collapse from advance, and a half-step postcondition from a definedness failure.",
+  "cases": {
+    "tail-nested": { "topLevelReturn": false, "nestedReturn": true },
+    "follow-ranks": { "advances": "counterexample", "collapses": "verified", "halfStep": "counterexample" }
+  }
+}
