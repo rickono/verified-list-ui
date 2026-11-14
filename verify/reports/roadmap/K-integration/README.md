@@ -76,9 +76,11 @@ coverage failures. The d3 source remains formally unsupported; timeouts and
 the separate instrumented cycle argument are not solver proofs.
 
 The numerical review ran an 800 ms native timeout control outside the requested
-serial lane and records that policy miss. At this checkpoint the coordinator's
-separate lane-based containment check is queued; its result is not yet adopted.
-That check cannot turn a timeout into a nontermination proof. No full suite is
+serial lane and records that policy miss. The coordinator repeated that check
+through the serial lane: the original count-5 call printed its start, exceeded
+800 ms, was killed with SIGKILL, and was waited/reaped. The pid was absent.
+[The separate receipt](native-containment/receipt.json) classifies that observation
+as unknown, not a nontermination proof or speed measurement. No full suite is
 repeated for these report-only imports.
 
 Historical composition checksums bind to `aa17bb3` and its code head `b5c8828`.

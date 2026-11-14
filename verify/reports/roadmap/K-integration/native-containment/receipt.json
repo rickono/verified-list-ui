@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/reports/roadmap/library-campaigns/check.mjs",
+    "--native-nice",
+    "cycle5"
+  ],
+  "serialLane": true,
+  "timeoutMs": 800,
+  "observedTimeout": true,
+  "returnCode": -9,
+  "waited": true,
+  "pidAbsentAfterWait": true,
+  "classification": "unknown; observed timeout, not a nontermination proof or performance measurement",
+  "checkerSha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e"
+}
