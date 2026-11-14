@@ -1,0 +1,54 @@
+{
+  "publicOne": {
+    "status": "verified",
+    "reason": null,
+    "safety": "verified",
+    "nativeConfirmed": false,
+    "profile": "c1-action-cuts",
+    "goals": [
+      {
+        "status": "verified",
+        "reason": null,
+        "nativeConfirmed": false,
+        "assumptions": [
+          {
+            "kind": "per-reached-request-settlement",
+            "op": "op",
+            "classification": "assumed-used"
+          },
+          {
+            "kind": "continuing-runtime",
+            "op": null,
+            "classification": "assumed-used"
+          },
+          {
+            "kind": "total-declared-environment-calls",
+            "op": null,
+            "classification": "assumed-used"
+          },
+          {
+            "kind": "weak-resumption",
+            "op": null,
+            "classification": "discharged-used"
+          }
+        ]
+      }
+    ]
+  },
+  "toJSON": {
+    "ownership": "checked",
+    "solver": [
+      "verified",
+      "verified"
+    ],
+    "closed": true,
+    "nativeConfirmed": false,
+    "goals": [
+      {
+        "status": "verified",
+        "reason": null,
+        "nativeConfirmed": false
+      }
+    ]
+  }
+}

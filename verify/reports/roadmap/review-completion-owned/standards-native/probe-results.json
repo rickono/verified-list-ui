@@ -1,0 +1,767 @@
+{
+  "infrastructure": null,
+  "node": "v22.23.1",
+  "executed": [
+    {
+      "id": "checkout",
+      "head": "1f326fdf2d1fcae58961b76ab1f90eee92e653f5",
+      "node": "v22.23.1",
+      "baselineAncestor": true,
+      "mainAncestor": true,
+      "standardsPresent": [],
+      "protocolBlobsEqual": {
+        "protocol-native.mjs": true,
+        "protocol-transitions.mjs": true,
+        "protocol-rules.mjs": true,
+        "protocol-abort.mjs": true,
+        "protocol-machine.mjs": true,
+        "protocol-values.mjs": true
+      }
+    },
+    {
+      "id": "graph-seal",
+      "shape": {
+        "maps": 0,
+        "sets": 0,
+        "functions": 0,
+        "unfrozen": 0
+      },
+      "smtWrite": "TypeError",
+      "viabilityHasFalse": true,
+      "owned": "checked",
+      "sameObject": true
+    },
+    {
+      "id": "plain-substitutions",
+      "unownedGoal": [
+        {
+          "status": "unknown",
+          "reason": "manifest-gap",
+          "nativeConfirmed": false,
+          "assumptions": [
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "op",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "continuing-runtime",
+              "op": null,
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "op": null,
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "weak-resumption",
+              "op": null,
+              "classification": "missing"
+            }
+          ]
+        }
+      ],
+      "unownedClosed": true,
+      "unownedNative": false,
+      "dollarOwned": "missing",
+      "dollarFrameWouldPass": true,
+      "ghostOwned": "missing",
+      "ghostFrameWouldPass": false,
+      "rankOwned": "missing",
+      "inPlaceFootprint": "TypeError",
+      "freshMachineOwned": "missing",
+      "copyMachine": "Source-bound completion requires the unchanged frontend machine."
+    },
+    {
+      "id": "frontend-data-versus-hooks",
+      "plain": {
+        "threw": true,
+        "message": "Unreachable statements are outside the supported source subset.",
+        "status": "unsupported"
+      },
+      "booleanMessage": "Source-bound completion requires the unchanged frontend machine.",
+      "hiddenMessage": "Unreachable statements are outside the supported source subset.",
+      "functionResult": {
+        "threw": false,
+        "owned": "checked",
+        "identity": "live"
+      },
+      "toJSONResult": {
+        "threw": false,
+        "owned": "checked",
+        "viability": "(=> call_fact0 (exists ((completion_outcome0 (_ BitVec 64))) true))"
+      },
+      "legalRejectsSmt": "true",
+      "legalOwned": "checked"
+    },
+    {
+      "id": "solver-channel-boundary",
+      "falseLie": [
+        {
+          "status": "verified",
+          "reason": null,
+          "nativeConfirmed": false,
+          "assumptions": [
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "op",
+              "classification": "assumed-used"
+            },
+            {
+              "kind": "continuing-runtime",
+              "op": null,
+              "classification": "assumed-used"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "op": null,
+              "classification": "assumed-used"
+            },
+            {
+              "kind": "weak-resumption",
+              "op": null,
+              "classification": "discharged-used"
+            }
+          ]
+        }
+      ],
+      "falseLieClosed": true,
+      "decoy": [
+        {
+          "status": "unknown",
+          "reason": "completion-obligation",
+          "nativeConfirmed": false,
+          "assumptions": [
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "op",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "continuing-runtime",
+              "op": null,
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "op": null,
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "weak-resumption",
+              "op": null,
+              "classification": "missing"
+            }
+          ]
+        }
+      ],
+      "zeroLie": [
+        {
+          "status": "verified",
+          "reason": null,
+          "nativeConfirmed": false,
+          "assumptions": [
+            {
+              "kind": "continuing-runtime",
+              "op": null,
+              "classification": "assumed-used"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "op": null,
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "weak-resumption",
+              "op": null,
+              "classification": "discharged-unused"
+            }
+          ]
+        }
+      ],
+      "zeroNative": false,
+      "zeroProfile": "c1-action-cuts"
+    },
+    {
+      "id": "frames-and-settlement-shape",
+      "zero": {
+        "owned": "checked",
+        "missing": [],
+        "frames": [
+          {
+            "unit": "work$0",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [
+              [
+                "$s"
+              ]
+            ],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 1
+          }
+        ],
+        "rejectsInPlan": []
+      },
+      "one": {
+        "owned": "checked",
+        "missing": [],
+        "frames": [
+          {
+            "unit": "work$0",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 2
+          },
+          {
+            "unit": "work$1",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [
+              [
+                "$s"
+              ]
+            ],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 1
+          }
+        ],
+        "rejectsInPlan": [
+          "work$reject$1"
+        ]
+      },
+      "two": {
+        "owned": "checked",
+        "missing": [],
+        "frames": [
+          {
+            "unit": "work$0",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 3
+          },
+          {
+            "unit": "work$1",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [
+              [
+                "$s"
+              ]
+            ],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 2
+          },
+          {
+            "unit": "work$2",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [
+              [
+                "$s"
+              ]
+            ],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 1
+          },
+          {
+            "unit": "disturb$0",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [
+              [
+                "$s"
+              ]
+            ],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 1
+          }
+        ],
+        "rejectsInPlan": [
+          "work$reject$1",
+          "work$reject$2"
+        ]
+      },
+      "false": {
+        "owned": "checked",
+        "missing": [],
+        "frames": [
+          {
+            "unit": "work$0",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 2
+          },
+          {
+            "unit": "work$1",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [
+              [
+                "$s"
+              ]
+            ],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 1
+          }
+        ],
+        "rejectsInPlan": []
+      },
+      "partial": {
+        "owned": "checked",
+        "missing": [],
+        "frames": [
+          {
+            "unit": "work$0",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 2
+          },
+          {
+            "unit": "work$1",
+            "stored": true,
+            "recomputed": true,
+            "footprint": [
+              [
+                "$s"
+              ]
+            ],
+            "cutpoints": 0,
+            "callees": [],
+            "rankBefore": 1
+          }
+        ],
+        "rejectsInPlan": []
+      }
+    },
+    {
+      "id": "native-traces",
+      "two": {
+        "status": "ok",
+        "cells": [
+          {
+            "kind": "init",
+            "state": {
+              "n": 0
+            },
+            "activations": []
+          },
+          {
+            "kind": "call",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "live"
+              }
+            ]
+          },
+          {
+            "kind": "resolve",
+            "state": {
+              "n": 1
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "live"
+              }
+            ]
+          },
+          {
+            "kind": "resolve",
+            "state": {
+              "n": 2
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "returned"
+              }
+            ]
+          }
+        ],
+        "nativeConfirmed": null
+      },
+      "suppressed": {
+        "status": "ok",
+        "cells": [
+          {
+            "kind": "init",
+            "state": {
+              "n": 0
+            },
+            "activations": []
+          },
+          {
+            "kind": "call",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "live"
+              }
+            ]
+          },
+          {
+            "kind": "resolve",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "returned"
+              }
+            ]
+          }
+        ]
+      },
+      "published": {
+        "status": "ok",
+        "cells": [
+          {
+            "kind": "init",
+            "state": {
+              "n": 0
+            },
+            "activations": []
+          },
+          {
+            "kind": "call",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "live"
+              }
+            ]
+          },
+          {
+            "kind": "resolve",
+            "state": {
+              "n": 1
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "returned"
+              }
+            ]
+          }
+        ]
+      },
+      "rejected": {
+        "status": "ok",
+        "cells": [
+          {
+            "kind": "init",
+            "state": {
+              "n": 0
+            },
+            "activations": []
+          },
+          {
+            "kind": "call",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "live"
+              }
+            ]
+          },
+          {
+            "kind": "reject",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "environment-rejected"
+              }
+            ]
+          }
+        ]
+      },
+      "pending": {
+        "status": "ok",
+        "cells": [
+          {
+            "kind": "init",
+            "state": {
+              "n": 0
+            },
+            "activations": []
+          },
+          {
+            "kind": "call",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "live"
+              }
+            ]
+          }
+        ],
+        "confirmed": null
+      },
+      "falseResolve": {
+        "status": "illegal-environment-action",
+        "message": "Resolution violates the declared resolves assumption."
+      },
+      "partialIllegal": {
+        "status": "illegal-environment-action",
+        "message": "Resolution violates the declared resolves assumption."
+      },
+      "partialLegal": {
+        "status": "ok",
+        "cells": [
+          {
+            "kind": "init",
+            "state": {
+              "n": 0
+            },
+            "activations": []
+          },
+          {
+            "kind": "call",
+            "state": {
+              "n": 0
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "live"
+              }
+            ]
+          },
+          {
+            "kind": "resolve",
+            "state": {
+              "n": 1
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "returned"
+              }
+            ]
+          }
+        ]
+      },
+      "zero": {
+        "status": "ok",
+        "cells": [
+          {
+            "kind": "init",
+            "state": {
+              "done": false
+            },
+            "activations": []
+          },
+          {
+            "kind": "call",
+            "state": {
+              "done": true
+            },
+            "activations": [
+              {
+                "id": "1",
+                "status": "returned"
+              }
+            ]
+          }
+        ]
+      },
+      "stale": {
+        "status": "illegal-environment-action",
+        "message": "Trace sourceSha256 mismatch."
+      },
+      "suffix": {
+        "status": "illegal-environment-action",
+        "message": "Trace observations differ from unchanged-source replay."
+      },
+      "loop": {
+        "status": "unknown",
+        "reason": "replay-timeout",
+        "nativeConfirmed": null
+      }
+    },
+    {
+      "id": "captures-and-admission",
+      "letAfter": {
+        "threw": false
+      },
+      "constAfter": {
+        "threw": true,
+        "message": "Unsupported stateful top-level VariableDeclaration.",
+        "status": "unsupported"
+      },
+      "letArgument": {
+        "threw": false
+      },
+      "scheduler": {
+        "status": "unsupported",
+        "message": "Alternate scheduler/protocol temporal mode is unsupported until its correspondence is checked.",
+        "completion": null
+      },
+      "protocolGoal": {
+        "status": "unsupported",
+        "message": "Protocol temporal mode is unsupported until its correspondence is checked.",
+        "completion": null,
+        "span": {
+          "start": 0,
+          "end": 23
+        }
+      },
+      "advisoryGoal": {
+        "status": "unsupported",
+        "message": "Protocol temporal mode is unsupported until its correspondence is checked.",
+        "completion": null,
+        "span": {
+          "start": 0,
+          "end": 25
+        }
+      },
+      "words": {
+        "succeeds": {
+          "threw": true,
+          "message": "Invalid leads clause; only leads <entry> completes is supported.",
+          "status": "unsupported"
+        },
+        "fair": {
+          "threw": true,
+          "message": "Unsupported or misspelled contract clause fair.",
+          "status": "unsupported"
+        },
+        "fairnessAlone": {
+          "threw": true,
+          "message": "Resumption fairness requires a completion goal.",
+          "status": "unsupported"
+        },
+        "block": {
+          "threw": true,
+          "message": "Contract-looking block comments are unsupported; use one line per clause.",
+          "status": "unsupported"
+        },
+        "cyrillic": {
+          "threw": true,
+          "message": "Unsupported or misspelled contract clause fаirness.",
+          "status": "unsupported"
+        },
+        "v1": {
+          "threw": true,
+          "message": "Invalid leads clause; only leads <entry> completes is supported.",
+          "status": "unsupported"
+        }
+      },
+      "oldV1": "Unsupported or misspelled contract clause leads."
+    },
+    {
+      "id": "c2a-native",
+      "abortThen": {
+        "status": "ok",
+        "shown": 0,
+        "settled": true,
+        "aborted": true
+      },
+      "resolveThen": {
+        "status": "ok",
+        "shown": 1,
+        "aborted": true
+      },
+      "settleAbort": {
+        "status": "ok",
+        "shown": 0,
+        "settled": true
+      },
+      "already": {
+        "status": "ok",
+        "shown": 0
+      },
+      "handlerCuts": [
+        2,
+        1,
+        0
+      ],
+      "registrations": [
+        {
+          "id": 1,
+          "live": false
+        },
+        {
+          "id": 2,
+          "live": false
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "legacy-parity",
+      "search": {
+        "assumptionsEqual": true,
+        "transitionEqual": true,
+        "transitionAt": 81513,
+        "currentLength": 81513,
+        "previousLength": 81513,
+        "traceEqual": true,
+        "replayEqual": true,
+        "replayStatus": "ok"
+      },
+      "listeners": {
+        "assumptionsEqual": true,
+        "transitionEqual": true,
+        "transitionAt": 462337,
+        "currentLength": 462337,
+        "previousLength": 462337,
+        "traceEqual": true,
+        "replayEqual": true,
+        "replayStatus": "ok"
+      },
+      "advisory": {
+        "assumptionsEqual": true,
+        "transitionEqual": true,
+        "transitionAt": 433137,
+        "currentLength": 433137,
+        "previousLength": 433137,
+        "traceEqual": true,
+        "replayEqual": true,
+        "replayStatus": "ok"
+      }
+    }
+  ],
+  "unsuccessful": [],
+  "boundaries": []
+}

@@ -1,0 +1,318 @@
+{
+  "infrastructure": null,
+  "node": "v22.23.1",
+  "executed": [
+    {
+      "id": "public-false",
+      "status": "unknown",
+      "reason": "outcome-viability",
+      "safety": "verified",
+      "completion": {
+        "closed": true,
+        "nativeConfirmed": false,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "unknown",
+            "reason": "outcome-viability",
+            "nativeConfirmed": false,
+            "assumptions": [
+              {
+                "kind": "per-reached-request-settlement",
+                "op": "op",
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "continuing-runtime",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "total-declared-environment-calls",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "weak-resumption",
+                "op": null,
+                "classification": "missing"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "no checked infinite-word realizability",
+          "no global draining/success/commit/count theorem",
+          "protocol temporal mode unsupported"
+        ]
+      },
+      "trusted": [
+        "Acorn and Node type stripping",
+        "closed stateful frontend and AST binding rewrites",
+        "existing source body/expression/heap compiler",
+        "representative init/step/keeps induction",
+        "existing proof scheduler and Z3 binary64 backend",
+        "strict native JavaScript replay and timed process containment"
+      ]
+    },
+    {
+      "id": "public-zero",
+      "status": "verified",
+      "reason": null,
+      "safety": "verified",
+      "completion": {
+        "closed": true,
+        "nativeConfirmed": false,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "verified",
+            "reason": null,
+            "nativeConfirmed": false,
+            "assumptions": [
+              {
+                "kind": "continuing-runtime",
+                "op": null,
+                "classification": "assumed-used"
+              },
+              {
+                "kind": "total-declared-environment-calls",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "weak-resumption",
+                "op": null,
+                "classification": "discharged-unused"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "no checked infinite-word realizability",
+          "no global draining/success/commit/count theorem",
+          "protocol temporal mode unsupported"
+        ]
+      },
+      "trusted": [
+        "Acorn and Node type stripping",
+        "closed stateful frontend and AST binding rewrites",
+        "existing source body/expression/heap compiler",
+        "representative init/step/keeps induction",
+        "existing proof scheduler and Z3 binary64 backend",
+        "strict native JavaScript replay and timed process containment"
+      ]
+    },
+    {
+      "id": "zero-ignored-profile",
+      "status": "verified",
+      "reason": null,
+      "safety": "verified",
+      "completion": {
+        "closed": true,
+        "nativeConfirmed": false,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "verified",
+            "reason": null,
+            "nativeConfirmed": false,
+            "assumptions": [
+              {
+                "kind": "continuing-runtime",
+                "op": null,
+                "classification": "assumed-used"
+              },
+              {
+                "kind": "total-declared-environment-calls",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "weak-resumption",
+                "op": null,
+                "classification": "discharged-unused"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "no checked infinite-word realizability",
+          "no global draining/success/commit/count theorem",
+          "protocol temporal mode unsupported"
+        ]
+      },
+      "trusted": [
+        "Acorn and Node type stripping",
+        "closed stateful frontend and AST binding rewrites",
+        "existing source body/expression/heap compiler",
+        "representative init/step/keeps induction",
+        "existing proof scheduler and Z3 binary64 backend",
+        "strict native JavaScript replay and timed process containment"
+      ]
+    },
+    {
+      "id": "two-timeout-1",
+      "status": "unknown",
+      "reason": "solver",
+      "safety": "unknown",
+      "completion": {
+        "closed": true,
+        "nativeConfirmed": false,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "unknown",
+            "reason": "safety-prerequisite",
+            "nativeConfirmed": false,
+            "assumptions": [
+              {
+                "kind": "per-reached-request-settlement",
+                "op": "op",
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "per-reached-request-settlement",
+                "op": "unused",
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "continuing-runtime",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "total-declared-environment-calls",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "weak-resumption",
+                "op": null,
+                "classification": "missing"
+              }
+            ]
+          },
+          {
+            "entry": "disturb",
+            "status": "unknown",
+            "reason": "safety-prerequisite",
+            "nativeConfirmed": false,
+            "assumptions": [
+              {
+                "kind": "per-reached-request-settlement",
+                "op": "op",
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "per-reached-request-settlement",
+                "op": "unused",
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "continuing-runtime",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "total-declared-environment-calls",
+                "op": null,
+                "classification": "assumed-unused"
+              },
+              {
+                "kind": "weak-resumption",
+                "op": null,
+                "classification": "missing"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "no checked infinite-word realizability",
+          "no global draining/success/commit/count theorem",
+          "protocol temporal mode unsupported"
+        ]
+      },
+      "trusted": [
+        "Acorn and Node type stripping",
+        "closed stateful frontend and AST binding rewrites",
+        "existing source body/expression/heap compiler",
+        "representative init/step/keeps induction",
+        "existing proof scheduler and Z3 binary64 backend",
+        "strict native JavaScript replay and timed process containment"
+      ]
+    },
+    {
+      "id": "historical-viability-substitution",
+      "public": {
+        "status": "unknown",
+        "reason": "outcome-viability",
+        "safety": "verified",
+        "completion": {
+          "closed": true,
+          "nativeConfirmed": false,
+          "goals": [
+            {
+              "entry": "work",
+              "status": "unknown",
+              "reason": "outcome-viability",
+              "nativeConfirmed": false,
+              "assumptions": [
+                {
+                  "kind": "per-reached-request-settlement",
+                  "op": "op",
+                  "classification": "assumed-unused"
+                },
+                {
+                  "kind": "continuing-runtime",
+                  "op": null,
+                  "classification": "assumed-unused"
+                },
+                {
+                  "kind": "total-declared-environment-calls",
+                  "op": null,
+                  "classification": "assumed-unused"
+                },
+                {
+                  "kind": "weak-resumption",
+                  "op": null,
+                  "classification": "missing"
+                }
+              ]
+            }
+          ],
+          "limitations": [
+            "no checked infinite-word realizability",
+            "no global draining/success/commit/count theorem",
+            "protocol temporal mode unsupported"
+          ]
+        },
+        "trusted": [
+          "Acorn and Node type stripping",
+          "closed stateful frontend and AST binding rewrites",
+          "existing source body/expression/heap compiler",
+          "representative init/step/keeps induction",
+          "existing proof scheduler and Z3 binary64 backend",
+          "strict native JavaScript replay and timed process containment"
+        ]
+      },
+      "substitutedSolver": [
+        "verified",
+        "vacuous"
+      ],
+      "ownership": "missing",
+      "conclusion": {
+        "closed": true,
+        "nativeConfirmed": false,
+        "goals": [
+          {
+            "status": "unknown",
+            "reason": "manifest-gap",
+            "nativeConfirmed": false
+          }
+        ]
+      }
+    }
+  ],
+  "unsuccessful": []
+}
