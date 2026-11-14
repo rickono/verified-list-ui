@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { machineOf } from "../../verify/stateful/machine.mjs";
+import { machineOf, temporalMachineIdentity } from "../../verify/stateful/machine.mjs";
 import { transitionsOf } from "../../verify/stateful/transitions.mjs";
 import { completionPlan, concludeCompletion } from "../../verify/stateful/temporal.mjs";
 import { checkStateful } from "../../verify/stateful/index.mjs";
@@ -92,4 +92,18 @@ test("a modified or copied frontend machine cannot mint a source-owned completio
   assert.throws(() => transitionsOf(machine), /Source-bound completion requires the unchanged frontend/);
   const copy = { ...machineOf("one.ts", source("one")) };
   assert.throws(() => transitionsOf(copy), /Source-bound completion requires the unchanged frontend/);
+});
+
+test("source provenance preserves signed zero and nonfinite numeric literal identity", () => {
+  for (const [literal, changed] of [["0", -0], ["1e400", -Infinity], ["1e400", NaN]]) {
+    const text = source("one").replace("Number.isFinite(result)", `Object.is(result, ${literal})`);
+    const m = machineOf("numeric-provenance.ts", text);
+    const before = temporalMachineIdentity(m);
+    assert.ok(before);
+    const value = m.environment.get("op").resolves[0].ast.arguments[1];
+    assert.equal(value.type, "Literal");
+    value.value = changed;
+    assert.equal(temporalMachineIdentity(m), undefined, literal);
+    assert.throws(() => transitionsOf(m), /Source-bound completion requires the unchanged frontend/);
+  }
 });

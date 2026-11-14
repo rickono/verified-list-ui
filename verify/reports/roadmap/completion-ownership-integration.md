@@ -15,15 +15,18 @@ verified. An earlier coordinator driver accidentally supplied the public
 combined unknown status as safety; that failed for safety-prerequisite and is
 retained separately as a harness mistake, not the reproduced defect.
 
-The correction starts before planning. `machineOf` privately registers the
-parsed temporal machine's data identity. `transitionsOf` requires that original,
+The correction starts before planning. `machineOf` privately retains a
+structural snapshot and an opaque identity for the parsed temporal machine. `transitionsOf` requires that original,
 unchanged machine and seals its produced graph after all exits, rejection
 segments and keeps units have been compiled. A private ownership table records
 the graph and frontend identity. Only the producer can register this graph;
 copying it and rebuilding a plan does not acquire ownership. Graph checks,
 footprints, effects, parameter/result types and control metadata are immutable.
 Map changes to the frontend data are detected even though freezing a Map would
-not prevent `set`.
+not prevent `set`. Snapshot equality preserves signed zero and nonfinite Numbers,
+Map/Set contents, parser prototypes and trusted parser-function references.
+The conclusion compares actual bound data directly; digests identify transported
+evidence and do not authorize changed structures.
 
 Planning adds a required producer-ownership obligation. Its identity-frame
 check reads actual compiled parameter/result types and footprint locations,
@@ -47,6 +50,23 @@ main `ec325c7` with complete compiled targets, phase queries and report JSON;
 real solver responses are recorded once and replayed to compare report assembly.
 The original `5f0fb47` comparison is retained separately.
 
-The final focused integration run passed 46/46 with unchanged source/test inputs, including both baseline parity comparisons, protocol rejection, the six ownership regressions and the landed abort-frame checks. The earlier copy test attempted to structured-clone Acorn token functions and failed before the assertion; it now checks an unowned shallow copy. Combined full validation remains pending. No original roadmap acceptance
-sentence is changed, and U is not yet marked integrated. The historical 496 and
-C2a 510 results describe their own trees and are not combined validation here.
+The first focused integration run passed 46/46; a subsequent combined run on
+`1f326fd` passed 530/530 with unchanged inputs. Those results do not certify the
+later numerical provenance correction. One independent review delegate was
+rejected by automatic safety review for possible cybersecurity risk. It produced
+no completed review result. Its retained partial preflight revealed that JSON
+hashing equated a source Literal `+0` with an edited `-0`. The changed machine
+still acquired provenance. A coordinator regression reproduced that binding
+failure before the correction. The rejected brief was not retried.
+
+The correction removes JSON hashing from the frontend ownership decision, using
+retained data and direct equality instead. The numeric-focused run passed 47/47,
+including signed zero, infinities and NaN edits, both complete baseline parity
+comparisons, protocol rejection, and the landed abort-frame checks. Its inputs
+were unchanged. One earlier clone test failed on Acorn function tokens before
+its assertion; that harness error remains separate. The new comparison retains
+trusted function references rather than attempting to serialize parser code.
+
+Final combined validation and the fresh current-model campaign are pending.
+No original roadmap acceptance sentence is changed, and U is not yet marked
+integrated. Historical 496, 510 and 530 results describe their own trees.

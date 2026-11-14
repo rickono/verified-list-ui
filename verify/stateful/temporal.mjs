@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { performance } from "node:perf_hooks";
+import { isDeepStrictEqual } from "node:util";
 import { solve } from "../proofs.mjs";
 import { sha256, span, walk } from "./ast.mjs";
 import { C1_PROFILE } from "./environment.mjs";
@@ -144,10 +145,11 @@ export function completionPlan(machine, transitions) {
  * deletions exercise this private boundary; the public API accepts source only. */
 export function concludeCompletion(machine, transitions, plan, evidence, safety) {
   const expected = completionPlan(machine, transitions);
-  const closed = plan.sha256 === expected.sha256 && digest(plan.binding) === digest(expected.binding)
-    && digest(plan.obligations) === digest(expected.obligations)
-    && digest(plan.targets.map(({ unit, target }) => ({ unit, querySha256: queryIdentity(target) })))
-      === digest(expected.targets.map(({ unit, querySha256 }) => ({ unit, querySha256 })));
+  // Digests identify transported evidence; they do not authorize changed data.
+  const closed = ownsCompletionGraph(machine, transitions) && plan.sha256 === expected.sha256
+    && isDeepStrictEqual(plan.binding, expected.binding)
+    && isDeepStrictEqual(plan.obligations, expected.obligations)
+    && isDeepStrictEqual(plan.targets, expected.targets);
   const obligations = plan.obligations.map((o) => ({ ...o,
     ...(o.safetyUnit ? { status: o.status === "checked" && proved(safety.units?.find((u) => u.unit === o.safetyUnit)) ? "discharged" : "missing" } : {}),
     ...(o.unit && o.check !== undefined ? { status: closed && o.status === "checked" && proved(evidence.find((e) => e.unit === o.unit && e.querySha256 === o.querySha256)) ? "discharged" : "unresolved" } : {}) }));

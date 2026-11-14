@@ -1,4 +1,5 @@
 import { stripTypeScriptTypes } from "node:module";
+import { isDeepStrictEqual } from "node:util";
 import { Parser, tokenizer } from "acorn";
 import { blame, fail } from "../error.mjs";
 import { options, references, walk, sha256, span } from "./ast.mjs";
@@ -10,11 +11,23 @@ import { protocolEntryOf, protocolOf } from "./protocol-machine.mjs";
 // Preserve source admission provenance before any lowering consumer can edit
 // parsed clauses, operation domains, entries or the scheduler assumptions.
 const temporalMachines = new WeakMap();
-const sourceIdentity = (machine) => sha256(JSON.stringify(machine, (_, value) =>
-  value instanceof Map ? { map: [...value] } : value instanceof Set ? { set: [...value] } : value));
+// Parser data includes signed zero, nonfinite literals, Maps and parser function
+// references. Retain those values directly; JSON is a lossy identity for them.
+function sourceSnapshot(value, copies = new Map()) {
+  if (!value || typeof value !== "object") return value;
+  if (copies.has(value)) return copies.get(value);
+  const copy = value instanceof Map ? new Map() : value instanceof Set ? new Set()
+    : value instanceof RegExp ? new RegExp(value.source, value.flags)
+      : Array.isArray(value) ? [] : Object.create(Object.getPrototypeOf(value));
+  copies.set(value, copy);
+  if (value instanceof Map) for (const [key, item] of value) copy.set(sourceSnapshot(key, copies), sourceSnapshot(item, copies));
+  if (value instanceof Set) for (const item of value) copy.add(sourceSnapshot(item, copies));
+  for (const [key, item] of Object.entries(value)) copy[key] = sourceSnapshot(item, copies);
+  return copy;
+}
 export function temporalMachineIdentity(machine) {
-  const expected = temporalMachines.get(machine);
-  return expected && expected === sourceIdentity(machine) ? expected : undefined;
+  const owner = temporalMachines.get(machine);
+  return owner && isDeepStrictEqual(machine, owner.snapshot) ? owner.identity : undefined;
 }
 
 const reserved = new Set([...globals, "EventTarget", "Event", "AbortController", "AbortSignal", "Object", "Array", "result", "old", "real"]);
@@ -165,7 +178,7 @@ export function machineOf(file, source) {
     machine.executable = executable;
     machine.executableSha256 = sha256(executable);
     machine.assumptions = assumptionsOf(machine);
-    if (machine.temporal) temporalMachines.set(machine, sourceIdentity(machine));
+    if (machine.temporal) temporalMachines.set(machine, { identity: Symbol("source-owned completion"), snapshot: sourceSnapshot(machine) });
     return machine;
   });
 }
