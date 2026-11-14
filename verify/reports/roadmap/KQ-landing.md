@@ -52,3 +52,17 @@ remain explicit. GPL Reverse stays a separate licensed report fixture.
 R, S, T, U, V and W remain open. C2a's native review passes, but its proof
 review found nominal request/activation frame checks that need correction.
 Conditional completion is a separate local implementation awaiting review.
+
+## Audit follow-up
+
+The [checkpoint audit](checkpoint-KQ-review/report.md) passes with four
+non-blocking notes. This documentation branch applies the milestone receipt
+directly to merged main; it contains neither C2a nor conditional-completion
+production changes. It publishes the integrated K/Q map and corrects the stale
+unmerged sentence in the integration report. The lockfile erratum above remains
+explicit rather than changing the historical review record.
+
+The conditional-completion focused receipt's HEAD is `5f0fb47` with working
+implementation bytes; its 38 recorded source/test hashes match committed
+`20ff205`. Its full 496-test receipt names `20ff205`. Those are separate
+measurements, neither a test run of the later C2a branch nor delivery of U.
