@@ -1,0 +1,871 @@
+{
+  "source": "// @environment\n// resolves Number.isFinite(result)\n// rejects\ndeclare function op(): Promise<number>;\nlet n = 0;\n// state n >= 0\n// fairness resumptions weak\n// leads work completes\nexport async function work() {\n  // pending n >= 0\n  const a = await op();\n  if (a === 0) return;\n  n = 1;\n}\n",
+  "report": {
+    "file": "missing-settlement.ts",
+    "sourceSha256": "ff80194189228e97a6f58f2684109eef1403da54329b4cb2c6b85765c152e771",
+    "trusted": [
+      "Acorn and Node type stripping",
+      "closed stateful frontend and AST binding rewrites",
+      "existing source body/expression/heap compiler",
+      "representative init/step/keeps induction",
+      "existing proof scheduler and Z3 binary64 backend",
+      "strict native JavaScript replay and timed process containment"
+    ],
+    "executableSha256": "04f93549caeb07722434ba3ccbe0dc6dc002d4dcd4e4705d1eb75ad1f7e241fc",
+    "assumptions": {
+      "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+      "eventBound": null,
+      "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+      "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+      "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+      "initial": {
+        "n": "0"
+      },
+      "environment": [
+        {
+          "op": "op",
+          "params": [],
+          "result": "number",
+          "resolves": [
+            "Number.isFinite(result)"
+          ],
+          "rejects": "may-reject",
+          "settles": "may-never-settle",
+          "settlementOrder": "any",
+          "settlementCount": "at most once per request",
+          "settlesUse": "not declared; no progress guarantee"
+        }
+      ],
+      "entries": [
+        {
+          "entry": "work",
+          "params": []
+        }
+      ],
+      "fairness": "none used by safety; settles eventually is recorded only",
+      "unsupported": [
+        "references",
+        "imports",
+        "handlers",
+        "cancellation",
+        "ordering/abort contracts",
+        "entry contracts",
+        "pairwise/uniqueness/count induction",
+        "nested awaits",
+        "entry-to-entry calls",
+        "unverified helpers",
+        "temporal goals beyond per-invocation completion"
+      ],
+      "completion": {
+        "goals": [
+          {
+            "entry": "work",
+            "goal": "completes",
+            "span": {
+              "start": 159,
+              "end": 182
+            }
+          }
+        ],
+        "profile": {
+          "kind": "c1-action-cuts",
+          "version": 1,
+          "microtaskMode": "afterEvaluate",
+          "drain": "void 0;",
+          "resumption": "same-action-timed-drain",
+          "arrivals": "arbitrary-between-actions",
+          "eventBound": null,
+          "activationBound": null
+        },
+        "continuingRuntime": "assumed for completion",
+        "declaredEnvironmentCalls": "assumed total for completion",
+        "resumption": "checked only after finite source totality and complete exit correspondence",
+        "settlement": "assumed separately per reached request; no safety use"
+      },
+      "sha256": "06a585ccd7f846fc621b2236f7b466463161b6620780e3468e3b3dfca3cba1db"
+    },
+    "unitsSha256": "49fc93b968afdf6d7cc269af2a1c71c5fa83e7ee8615a665bd11953abe857670",
+    "properties": [
+      {
+        "kind": "state",
+        "text": "n >= 0",
+        "span": {
+          "start": 114,
+          "end": 129
+        }
+      }
+    ],
+    "units": [
+      {
+        "unit": "$init",
+        "kind": "init",
+        "span": {
+          "start": 114,
+          "end": 129
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          {
+            "roots": [],
+            "nodes": {}
+          }
+        ]
+      },
+      {
+        "unit": "work$0",
+        "kind": "entry",
+        "span": {
+          "start": 236,
+          "end": 257
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "n": [
+                    "num",
+                    "0000000000000000"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "unit": "work$1",
+        "kind": "resume",
+        "span": {
+          "start": 260,
+          "end": 289
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          "0000000000000000",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "n": [
+                    "num",
+                    "0000000000000000"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "unit": "$reject",
+        "kind": "stutter",
+        "span": {
+          "start": 114,
+          "end": 129
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "n": [
+                    "num",
+                    "0000000000000000"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "unit": "work$0$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 236,
+          "end": 257
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 236,
+            "end": 257
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "n": [
+                    "num",
+                    "0000000000000000"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "unit": "work$1$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 260,
+          "end": 289
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 236,
+            "end": 257
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          "0000000000000000",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "n": [
+                    "num",
+                    "0000000000000000"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "unit": "$reject$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 114,
+          "end": 129
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 236,
+            "end": 257
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "n": [
+                    "num",
+                    "0000000000000000"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "status": "unknown",
+    "scope": "safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions",
+    "reason": "liveness-gap",
+    "safety": {
+      "status": "verified",
+      "scope": "safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions",
+      "assumptionsUse": "temporal premises unused"
+    },
+    "completion": {
+      "manifestSha256": "c4917bc3ff8d78b4144434e9cccc8dbbb650992a3e316895c001053408b2b2dc",
+      "binding": {
+        "sourceSha256": "ff80194189228e97a6f58f2684109eef1403da54329b4cb2c6b85765c152e771",
+        "executableSha256": "04f93549caeb07722434ba3ccbe0dc6dc002d4dcd4e4705d1eb75ad1f7e241fc",
+        "assumptionsSha256": "06a585ccd7f846fc621b2236f7b466463161b6620780e3468e3b3dfca3cba1db",
+        "safetyUnitsSha256": "49fc93b968afdf6d7cc269af2a1c71c5fa83e7ee8615a665bd11953abe857670",
+        "implementationSha256": "40c6562e34e187360b07552ef60d7c1c3a59eaf2a7a445e2262c0802452c80ba",
+        "runtime": "v22.23.1",
+        "rule": "c1-per-invocation-completion-1",
+        "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45",
+        "goalsSha256": "31e814c7c6bdc4a74c7014d8d4d1696c2d980cf9dfe3f5bc9b24537ec1c4b256"
+      },
+      "closed": true,
+      "profile": {
+        "kind": "c1-action-cuts",
+        "version": 1,
+        "microtaskMode": "afterEvaluate",
+        "drain": "void 0;",
+        "resumption": "same-action-timed-drain",
+        "arrivals": "arbitrary-between-actions",
+        "eventBound": null,
+        "activationBound": null
+      },
+      "obligations": [
+        {
+          "id": "init",
+          "kind": "init",
+          "status": "discharged",
+          "safetyUnit": "$init",
+          "rule": "initial empty identity support"
+        },
+        {
+          "id": "rejection-safety",
+          "kind": "safety-step",
+          "status": "discharged",
+          "safetyUnit": "$reject"
+        },
+        {
+          "id": "work$0:safety",
+          "kind": "safety-step",
+          "status": "discharged",
+          "safetyUnit": "work$0"
+        },
+        {
+          "id": "work$0:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$0"
+        },
+        {
+          "id": "work$0:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 0,
+          "action": "call",
+          "sourceSpan": {
+            "start": 190,
+            "end": 291
+          },
+          "sourceSha256": "ff80194189228e97a6f58f2684109eef1403da54329b4cb2c6b85765c152e771"
+        },
+        {
+          "id": "work$0:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$0:creation",
+          "kind": "creation",
+          "status": "checked",
+          "rule": "fresh invocation; positive birth ordinal; call executes first segment"
+        },
+        {
+          "id": "work$0:0:own-progress",
+          "kind": "own-progress",
+          "status": "discharged",
+          "unit": "work$0",
+          "check": 1,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 236,
+              "end": 257
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "1"
+          },
+          "querySha256": "bc2d7cfd8814bbcba468dbffe5fb9f768151b0b3f419c4ef78f8ac8728a4021c"
+        },
+        {
+          "id": "work$0:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "discharged",
+          "unit": "work$0",
+          "check": 2,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 236,
+              "end": 257
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "1"
+          },
+          "querySha256": "bc2d7cfd8814bbcba468dbffe5fb9f768151b0b3f419c4ef78f8ac8728a4021c"
+        },
+        {
+          "id": "work$0:0:outcome-viability",
+          "kind": "outcome-viability",
+          "status": "discharged",
+          "unit": "work$0",
+          "check": 3,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 236,
+              "end": 257
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "1"
+          },
+          "querySha256": "bc2d7cfd8814bbcba468dbffe5fb9f768151b0b3f419c4ef78f8ac8728a4021c"
+        },
+        {
+          "id": "work$1:safety",
+          "kind": "safety-step",
+          "status": "discharged",
+          "safetyUnit": "work$1"
+        },
+        {
+          "id": "work$1:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$1"
+        },
+        {
+          "id": "work$1:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 1,
+          "action": "resolve",
+          "sourceSpan": {
+            "start": 190,
+            "end": 291
+          },
+          "sourceSha256": "ff80194189228e97a6f58f2684109eef1403da54329b4cb2c6b85765c152e771"
+        },
+        {
+          "id": "work$1:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$1:deletion",
+          "kind": "deletion",
+          "status": "checked",
+          "rule": "only actor reaches terminal; other identities remain live"
+        },
+        {
+          "id": "work$1:0:own-progress",
+          "kind": "own-progress",
+          "status": "discharged",
+          "unit": "work$1",
+          "check": 1,
+          "sourceExit": {
+            "kind": "returned",
+            "span": {
+              "start": 273,
+              "end": 280
+            },
+            "path": "(fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "478c4139fd63f2354305e9db19ac50563b9b8013e4b486ce7e85c9a2bd23bbc9"
+        },
+        {
+          "id": "work$1:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "discharged",
+          "unit": "work$1",
+          "check": 2,
+          "sourceExit": {
+            "kind": "returned",
+            "span": {
+              "start": 273,
+              "end": 280
+            },
+            "path": "(fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "478c4139fd63f2354305e9db19ac50563b9b8013e4b486ce7e85c9a2bd23bbc9"
+        },
+        {
+          "id": "work$1:1:own-progress",
+          "kind": "own-progress",
+          "status": "discharged",
+          "unit": "work$1",
+          "check": 3,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 260,
+              "end": 289
+            },
+            "path": "(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "478c4139fd63f2354305e9db19ac50563b9b8013e4b486ce7e85c9a2bd23bbc9"
+        },
+        {
+          "id": "work$1:1:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "discharged",
+          "unit": "work$1",
+          "check": 4,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 260,
+              "end": 289
+            },
+            "path": "(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "478c4139fd63f2354305e9db19ac50563b9b8013e4b486ce7e85c9a2bd23bbc9"
+        },
+        {
+          "id": "work$reject$1:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$reject$1"
+        },
+        {
+          "id": "work$reject$1:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 1,
+          "action": "reject",
+          "sourceSpan": {
+            "start": 236,
+            "end": 257
+          },
+          "sourceSha256": "ff80194189228e97a6f58f2684109eef1403da54329b4cb2c6b85765c152e771"
+        },
+        {
+          "id": "work$reject$1:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$reject$1:deletion",
+          "kind": "deletion",
+          "status": "checked",
+          "rule": "only actor reaches terminal; other identities remain live"
+        },
+        {
+          "id": "work$reject$1:0:own-progress",
+          "kind": "own-progress",
+          "status": "discharged",
+          "unit": "work$reject$1",
+          "check": 1,
+          "sourceExit": {
+            "kind": "environment-rejected",
+            "span": {
+              "start": 236,
+              "end": 257
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c08515e4e24c35d0c69faea154b2b8bbd344269e40985c47726c3a2881ad9d9c"
+        },
+        {
+          "id": "work$reject$1:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "discharged",
+          "unit": "work$reject$1",
+          "check": 2,
+          "sourceExit": {
+            "kind": "environment-rejected",
+            "span": {
+              "start": 236,
+              "end": 257
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c08515e4e24c35d0c69faea154b2b8bbd344269e40985c47726c3a2881ad9d9c"
+        },
+        {
+          "id": "work$0:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "allocation is fresh relative to every existing identity"
+        },
+        {
+          "id": "work$0:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$0",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$0:observes:work:0:alias"
+        },
+        {
+          "id": "work$1:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "same actor: own progress",
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$1:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$1",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$1:observes:work:0:alias"
+        },
+        {
+          "id": "work$reject$1:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "same actor: own progress",
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$reject$1:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$reject$1",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$reject$1:observes:work:0:alias"
+        },
+        {
+          "id": "work$0:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "discharged",
+          "safetyUnit": "work$0$keeps$work$1"
+        },
+        {
+          "id": "work$1:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "discharged",
+          "safetyUnit": "work$1$keeps$work$1"
+        },
+        {
+          "id": "$reject:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "discharged",
+          "safetyUnit": "$reject$keeps$work$1"
+        },
+        {
+          "id": "profile",
+          "kind": "profile-correspondence",
+          "status": "checked",
+          "profile": {
+            "kind": "c1-action-cuts",
+            "version": 1,
+            "microtaskMode": "afterEvaluate",
+            "drain": "void 0;",
+            "resumption": "same-action-timed-drain",
+            "arrivals": "arbitrary-between-actions",
+            "eventBound": null,
+            "activationBound": null
+          },
+          "rule": "finite total source segments; native settlement and timed microtask drain are the same C1 action"
+        }
+      ],
+      "units": [
+        {
+          "unit": "work$0",
+          "querySha256": "bc2d7cfd8814bbcba468dbffe5fb9f768151b0b3f419c4ef78f8ac8728a4021c",
+          "status": "verified",
+          "witness": [
+            "0",
+            {
+              "roots": [
+                "0"
+              ],
+              "nodes": {
+                "0": {
+                  "kind": "object",
+                  "fields": {
+                    "n": [
+                      "num",
+                      "0000000000000000"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "unit": "work$1",
+          "querySha256": "478c4139fd63f2354305e9db19ac50563b9b8013e4b486ce7e85c9a2bd23bbc9",
+          "status": "verified",
+          "witness": [
+            "0",
+            "0000000000000000",
+            {
+              "roots": [
+                "0"
+              ],
+              "nodes": {
+                "0": {
+                  "kind": "object",
+                  "fields": {
+                    "n": [
+                      "num",
+                      "0000000000000000"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "unit": "work$reject$1",
+          "querySha256": "c08515e4e24c35d0c69faea154b2b8bbd344269e40985c47726c3a2881ad9d9c",
+          "status": "verified",
+          "witness": [
+            "0",
+            "0000000000000000",
+            {
+              "roots": [
+                "0"
+              ],
+              "nodes": {
+                "0": {
+                  "kind": "object",
+                  "fields": {
+                    "n": [
+                      "num",
+                      "0000000000000000"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "goals": [
+        {
+          "entry": "work",
+          "goal": "completes",
+          "span": {
+            "start": 159,
+            "end": 182
+          },
+          "status": "liveness-gap",
+          "reason": "liveness-gap",
+          "scope": "each invocation returns normally (including suppressed writes) or reaches declared environment rejection",
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "2",
+            "waiting": [
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "assumptions": [
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "op",
+              "classification": "missing",
+              "declared": false,
+              "scope": "each reached request occurrence, not operation-kind fairness"
+            },
+            {
+              "kind": "continuing-runtime",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "weak-resumption",
+              "classification": "discharged-unused",
+              "requested": true,
+              "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45"
+            }
+          ],
+          "nativeConfirmed": false,
+          "gap": {
+            "kind": "missing-per-request-settlement",
+            "operations": [
+              "op"
+            ],
+            "evidence": "symbolic premise gap; no checked infinite word or native infinite confirmation"
+          }
+        }
+      ],
+      "nativeConfirmed": false,
+      "trusted": [
+        "finite-control completion rule and source/identity frame checker",
+        "compiler exit/definedness coverage",
+        "C1 native action and timed-drain correspondence",
+        "Z3 including quantified outcome viability"
+      ],
+      "limitations": [
+        "no checked infinite-word realizability",
+        "no global draining/success/commit/count theorem",
+        "protocol temporal mode unsupported"
+      ]
+    }
+  }
+}

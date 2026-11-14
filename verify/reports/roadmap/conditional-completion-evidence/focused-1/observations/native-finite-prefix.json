@@ -1,0 +1,64 @@
+{
+  "source": "// @environment\n// resolves Number.isFinite(result)\n// rejects\n// settles eventually\ndeclare function op(): Promise<number>;\n// @environment\n// resolves false\n// settles eventually\ndeclare function unused(): Promise<number>;\nlet n = 0;\n// state n >= 0\n// fairness resumptions weak\n// leads work completes\n// leads disturb completes\nexport async function work() {\n  // pending n >= 0\n  const a: number = await op();\n  n = 1;\n  // pending n >= 0\n  const b: number = await op();\n  if (a === 0) { if (b === 0) return; }\n  n = 2;\n}\nexport function disturb() { n = 3; }\n",
+  "result": {
+    "status": "ok",
+    "trace": {
+      "version": 1,
+      "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302",
+      "executableSha256": "fc0d5c253aa7f8e5c965b45ee03826d302eec4a47a3b906486206b7355f7fd36",
+      "assumptionsSha256": "b1b2fc72c195cec793ccf27cf28b4d5d2a5f5d5451d846caa54e13ebf10f994f",
+      "actions": [
+        {
+          "kind": "call",
+          "entry": "work",
+          "args": []
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "activations": []
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "call",
+            "entry": "work",
+            "args": []
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            }
+          ]
+        }
+      ]
+    },
+    "requests": [
+      {
+        "seq": 1,
+        "op": "op",
+        "args": [],
+        "settled": false,
+        "activation": "1"
+      }
+    ]
+  }
+}

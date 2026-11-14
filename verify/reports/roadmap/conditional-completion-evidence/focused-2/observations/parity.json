@@ -1,0 +1,40 @@
+{
+  "prepared": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+  "defaults": [
+    "bugs.ts",
+    "callback-bugs.ts",
+    "callbacks.ts",
+    "calls-bugs.ts",
+    "calls.ts",
+    "collections.ts",
+    "heap-bugs.ts",
+    "heap.ts",
+    "loop-gaps.ts",
+    "loops.ts",
+    "valid.ts"
+  ],
+  "stateful": [
+    "pilots/search-env.ts",
+    "pilots/search-gap.ts",
+    "pilots/search-overclaim.ts",
+    "pilots/search-stale.ts",
+    "pilots/search.ts",
+    "variants/V11-rejects.ts",
+    "variants/V18-two-awaits.ts",
+    "variants/V18b-two-awaits-annotated.ts",
+    "variants/V6-inflight-count.ts",
+    "variants/V7-latest-2p53.ts",
+    "variants/V8-second-entry-clear.ts",
+    "variants/V8b-second-entry-reset.ts"
+  ],
+  "reports": [
+    "pilots/search.ts",
+    "variants/V11-rejects.ts",
+    "valid.ts",
+    "bugs.ts"
+  ],
+  "native": [
+    "pilots/search.ts",
+    "variants/V11-rejects.ts"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "source": "let done = false;\n// state done === true || done === false\n// leads work completes\nexport function work() { done = true; }\n",
+  "result": {
+    "status": "ok",
+    "trace": {
+      "version": 1,
+      "sourceSha256": "a9de68ab5dc802fcde32d5453acef9fa3bd81052cb87bd449bb6ea2e5fe39e43",
+      "executableSha256": "0723f7b98d873bc60790a0536af8ea12f76b4fa8f973fb19716ede669e998118",
+      "assumptionsSha256": "e5ca524df7bdf92a139ff14f3b7635f86c40adffc1e4931e9e1905f7344253cc",
+      "actions": [
+        {
+          "kind": "call",
+          "entry": "work",
+          "args": []
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "done": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          "activations": []
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "call",
+            "entry": "work",
+            "args": []
+          },
+          "state": {
+            "done": {
+              "type": "boolean",
+              "value": true
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "returned"
+            }
+          ]
+        }
+      ]
+    },
+    "requests": []
+  }
+}

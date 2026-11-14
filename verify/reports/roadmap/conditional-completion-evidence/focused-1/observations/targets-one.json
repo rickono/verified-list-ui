@@ -1,0 +1,1362 @@
+{
+  "binding": {
+    "sourceSha256": "f02b9abe33ac9ce2e20380bd0167dbe09fe5e6ed58411ef0dff8d4ddb91c6cfa",
+    "executableSha256": "9a47ebee1a2fdab700ed95d097aaa964ac182339928296b565bd74dad8786ceb",
+    "assumptionsSha256": "91272e0e733612b2d8fe9fb7a490ba206185276edc3dec92228d5b2b3b592d73",
+    "safetyUnitsSha256": "6a3be25d38115b96a63406e4101a28c1752f59ed7f698d65c3ad3bd8714aab60",
+    "implementationSha256": "0eb80fd8dc87e0fb08423f1ed851f29f81971b4d3fdc130f4da74209ceb11302",
+    "runtime": "v22.23.1",
+    "rule": "c1-per-invocation-completion-1",
+    "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45",
+    "goalsSha256": "dfcb2efa10d9d1a526cba834cab69c8b61d11e3480177040044ad18fd45d985f"
+  },
+  "implementation": {
+    "../backend.mjs": "c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb",
+    "../cache.mjs": "7100b30c6fc411a355084a85d2b6f45f1ea110367ecfb3f0775e47aff371ebc0",
+    "../check-native-baseline.mjs": "021a5db32b73d7661206cea19f1b83f49fb787aaafe68ed2f6a0831b684065e1",
+    "../data.mjs": "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6",
+    "../error.mjs": "15f9572637f32a545a037c671ccbf20b394b030f68d840c76068d7ee5a456e62",
+    "../evidence.mjs": "f70f4aa94295477e8a0bc3a91712722a254c8a52205ee2f2eef8a9dc550ed62e",
+    "../heap-witness.mjs": "c8a60bbf7961bad2926a1fc5006c610d80d95997c73a6632f07a9f55fe58edb3",
+    "../heap.mjs": "194600ef6ff1a2d87d5b43f1a2d7b1e0313976290af0ab33b2ba6b1600bacb73",
+    "../index.mjs": "1c586efe44af4973f7e7704e4fa6d414ae7ca1f8ca5f2203ea791311741ebd58",
+    "../manifest.mjs": "406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f",
+    "../modules.mjs": "55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68",
+    "../predicate-witness.mjs": "5f460cecd470fe62418c9ebb5358e97854ad65a642cebf68827daf1d6ae39085",
+    "../proofs.mjs": "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba",
+    "../solver.mjs": "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2",
+    "../source.mjs": "15d34898dd2e14e85c4423455c0876447c1e6e567784a050d3f2728d0ec891f7",
+    "../specifications.mjs": "869d1385d30dd4747c2db0467bdd2086ae26d0e452694bd49b471260f2240c6f",
+    "../types.mjs": "9ea60c9f2bf3983a75bd7f23d6c02d1cbeaed75ab6d2e2bfed6b9754c8a5993f",
+    "./ast.mjs": "b9be90a61c8f6bc9ecbd535917df1993046de61db6115ec2dd381c350c5bbd91",
+    "./clauses.mjs": "2a6777d581c7c05655380c7eb2985d888d627d162301f104654bade3782f2daf",
+    "./environment.mjs": "1b8f019ecc955e26c0451f82fb3cf8fd661bb51a58282a1b8227e987c35389d2",
+    "./index.mjs": "94d0535588ebc02b8b7ddeeb45fe913c1ba58214a21e4261ede2f15fdbf3fa11",
+    "./machine.mjs": "c7e911950c6b8411b35aa37294f0b0b4a50e03908f677bfd3781933ea1eaa7e4",
+    "./native.mjs": "558bcf24cdd2a2ed23e145455baf9fa3889c1e3f6e6fd7ce5ded1a61b19a0f14",
+    "./replay-worker.mjs": "e581ba7a53039480fd8680d93e66bc3d7e486ef55e2c00f4d690deb92238d563",
+    "./temporal.mjs": "a35c5b8ee8a28d10cfc81b1d0784861e1a68f92df7f63b99dead7aa1c53fa359",
+    "./traces.mjs": "821647ee9058214a25ef2d5bf66e56fe68911f2de89c0a36304e9b77001c4147",
+    "./transitions.mjs": "0962a87e950c7720fb56b2cdf17d1e818df538dbc8819cf1d2ac13eb5a1f8086",
+    "./values.mjs": "5f496b9ae0403b3b8a9f8ac1dc4c574f770df5824c89eeb7a67a0cc0568e78ca"
+  },
+  "obligations": [
+    {
+      "id": "init",
+      "kind": "init",
+      "status": "checked",
+      "safetyUnit": "$init",
+      "rule": "initial empty identity support"
+    },
+    {
+      "id": "rejection-safety",
+      "kind": "safety-step",
+      "status": "checked",
+      "safetyUnit": "$reject"
+    },
+    {
+      "id": "work$0:safety",
+      "kind": "safety-step",
+      "status": "checked",
+      "safetyUnit": "work$0"
+    },
+    {
+      "id": "work$0:totality",
+      "kind": "segment-totality",
+      "status": "checked",
+      "unit": "work$0"
+    },
+    {
+      "id": "work$0:exits",
+      "kind": "source-exit-coverage",
+      "status": "checked",
+      "entry": "work",
+      "segment": 0,
+      "action": "call",
+      "sourceSpan": {
+        "start": 212,
+        "end": 313
+      },
+      "sourceSha256": "f02b9abe33ac9ce2e20380bd0167dbe09fe5e6ed58411ef0dff8d4ddb91c6cfa"
+    },
+    {
+      "id": "work$0:terminal",
+      "kind": "terminal-equivalence",
+      "status": "checked",
+      "rule": "zero iff post-terminal; every live source location is positive"
+    },
+    {
+      "id": "work$0:creation",
+      "kind": "creation",
+      "status": "checked",
+      "rule": "fresh invocation; positive birth ordinal; call executes first segment"
+    },
+    {
+      "id": "work$0:0:own-progress",
+      "kind": "own-progress",
+      "status": "checked",
+      "unit": "work$0",
+      "check": 1,
+      "sourceExit": {
+        "kind": "waiting",
+        "span": {
+          "start": 258,
+          "end": 279
+        },
+        "path": "true",
+        "rankBefore": "2",
+        "rankAfter": "1"
+      },
+      "querySha256": "143ef567f7ead90e3b9ee960bc8c3856a50d7be6393d3bcdcbf150b35b97e1c5"
+    },
+    {
+      "id": "work$0:0:rank-nonnegative",
+      "kind": "rank-nonnegative",
+      "status": "checked",
+      "unit": "work$0",
+      "check": 2,
+      "sourceExit": {
+        "kind": "waiting",
+        "span": {
+          "start": 258,
+          "end": 279
+        },
+        "path": "true",
+        "rankBefore": "2",
+        "rankAfter": "1"
+      },
+      "querySha256": "143ef567f7ead90e3b9ee960bc8c3856a50d7be6393d3bcdcbf150b35b97e1c5"
+    },
+    {
+      "id": "work$0:0:outcome-viability",
+      "kind": "outcome-viability",
+      "status": "checked",
+      "unit": "work$0",
+      "check": 3,
+      "sourceExit": {
+        "kind": "waiting",
+        "span": {
+          "start": 258,
+          "end": 279
+        },
+        "path": "true",
+        "rankBefore": "2",
+        "rankAfter": "1"
+      },
+      "querySha256": "143ef567f7ead90e3b9ee960bc8c3856a50d7be6393d3bcdcbf150b35b97e1c5"
+    },
+    {
+      "id": "work$1:safety",
+      "kind": "safety-step",
+      "status": "checked",
+      "safetyUnit": "work$1"
+    },
+    {
+      "id": "work$1:totality",
+      "kind": "segment-totality",
+      "status": "checked",
+      "unit": "work$1"
+    },
+    {
+      "id": "work$1:exits",
+      "kind": "source-exit-coverage",
+      "status": "checked",
+      "entry": "work",
+      "segment": 1,
+      "action": "resolve",
+      "sourceSpan": {
+        "start": 212,
+        "end": 313
+      },
+      "sourceSha256": "f02b9abe33ac9ce2e20380bd0167dbe09fe5e6ed58411ef0dff8d4ddb91c6cfa"
+    },
+    {
+      "id": "work$1:terminal",
+      "kind": "terminal-equivalence",
+      "status": "checked",
+      "rule": "zero iff post-terminal; every live source location is positive"
+    },
+    {
+      "id": "work$1:deletion",
+      "kind": "deletion",
+      "status": "checked",
+      "rule": "only actor reaches terminal; other identities remain live"
+    },
+    {
+      "id": "work$1:0:own-progress",
+      "kind": "own-progress",
+      "status": "checked",
+      "unit": "work$1",
+      "check": 1,
+      "sourceExit": {
+        "kind": "returned",
+        "span": {
+          "start": 295,
+          "end": 302
+        },
+        "path": "(fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))",
+        "rankBefore": "1",
+        "rankAfter": "0"
+      },
+      "querySha256": "a5862d4c5fa65ccc9f3833bc17426bfeba50905c2ff656e7fea0e308b28632d4"
+    },
+    {
+      "id": "work$1:0:rank-nonnegative",
+      "kind": "rank-nonnegative",
+      "status": "checked",
+      "unit": "work$1",
+      "check": 2,
+      "sourceExit": {
+        "kind": "returned",
+        "span": {
+          "start": 295,
+          "end": 302
+        },
+        "path": "(fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))",
+        "rankBefore": "1",
+        "rankAfter": "0"
+      },
+      "querySha256": "a5862d4c5fa65ccc9f3833bc17426bfeba50905c2ff656e7fea0e308b28632d4"
+    },
+    {
+      "id": "work$1:1:own-progress",
+      "kind": "own-progress",
+      "status": "checked",
+      "unit": "work$1",
+      "check": 3,
+      "sourceExit": {
+        "kind": "fallthrough",
+        "span": {
+          "start": 282,
+          "end": 311
+        },
+        "path": "(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))",
+        "rankBefore": "1",
+        "rankAfter": "0"
+      },
+      "querySha256": "a5862d4c5fa65ccc9f3833bc17426bfeba50905c2ff656e7fea0e308b28632d4"
+    },
+    {
+      "id": "work$1:1:rank-nonnegative",
+      "kind": "rank-nonnegative",
+      "status": "checked",
+      "unit": "work$1",
+      "check": 4,
+      "sourceExit": {
+        "kind": "fallthrough",
+        "span": {
+          "start": 282,
+          "end": 311
+        },
+        "path": "(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))",
+        "rankBefore": "1",
+        "rankAfter": "0"
+      },
+      "querySha256": "a5862d4c5fa65ccc9f3833bc17426bfeba50905c2ff656e7fea0e308b28632d4"
+    },
+    {
+      "id": "work$reject$1:totality",
+      "kind": "segment-totality",
+      "status": "checked",
+      "unit": "work$reject$1"
+    },
+    {
+      "id": "work$reject$1:exits",
+      "kind": "source-exit-coverage",
+      "status": "checked",
+      "entry": "work",
+      "segment": 1,
+      "action": "reject",
+      "sourceSpan": {
+        "start": 258,
+        "end": 279
+      },
+      "sourceSha256": "f02b9abe33ac9ce2e20380bd0167dbe09fe5e6ed58411ef0dff8d4ddb91c6cfa"
+    },
+    {
+      "id": "work$reject$1:terminal",
+      "kind": "terminal-equivalence",
+      "status": "checked",
+      "rule": "zero iff post-terminal; every live source location is positive"
+    },
+    {
+      "id": "work$reject$1:deletion",
+      "kind": "deletion",
+      "status": "checked",
+      "rule": "only actor reaches terminal; other identities remain live"
+    },
+    {
+      "id": "work$reject$1:0:own-progress",
+      "kind": "own-progress",
+      "status": "checked",
+      "unit": "work$reject$1",
+      "check": 1,
+      "sourceExit": {
+        "kind": "environment-rejected",
+        "span": {
+          "start": 258,
+          "end": 279
+        },
+        "path": "true",
+        "rankBefore": "1",
+        "rankAfter": "0"
+      },
+      "querySha256": "444ab7bf0af8eee4411eb9e068aafca23e88cf4264830de8ac046ad789505549"
+    },
+    {
+      "id": "work$reject$1:0:rank-nonnegative",
+      "kind": "rank-nonnegative",
+      "status": "checked",
+      "unit": "work$reject$1",
+      "check": 2,
+      "sourceExit": {
+        "kind": "environment-rejected",
+        "span": {
+          "start": 258,
+          "end": 279
+        },
+        "path": "true",
+        "rankBefore": "1",
+        "rankAfter": "0"
+      },
+      "querySha256": "444ab7bf0af8eee4411eb9e068aafca23e88cf4264830de8ac046ad789505549"
+    },
+    {
+      "id": "work$0:observes:work:0:alias",
+      "kind": "identity-alias",
+      "status": "checked",
+      "cases": [
+        "distinct actor: frame"
+      ],
+      "rule": "allocation is fresh relative to every existing identity"
+    },
+    {
+      "id": "work$0:observes:work:0:nonincrease",
+      "kind": "interference-nonincrease",
+      "status": "checked",
+      "unit": "work$0",
+      "observed": {
+        "entry": "work",
+        "site": 0,
+        "rank": "1"
+      },
+      "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+      "aliases": "work$0:observes:work:0:alias"
+    },
+    {
+      "id": "work$1:observes:work:0:alias",
+      "kind": "identity-alias",
+      "status": "checked",
+      "cases": [
+        "same actor: own progress",
+        "distinct actor: frame"
+      ],
+      "rule": "request belongs to exactly one invocation; at most one settlement"
+    },
+    {
+      "id": "work$1:observes:work:0:nonincrease",
+      "kind": "interference-nonincrease",
+      "status": "checked",
+      "unit": "work$1",
+      "observed": {
+        "entry": "work",
+        "site": 0,
+        "rank": "1"
+      },
+      "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+      "aliases": "work$1:observes:work:0:alias"
+    },
+    {
+      "id": "work$reject$1:observes:work:0:alias",
+      "kind": "identity-alias",
+      "status": "checked",
+      "cases": [
+        "same actor: own progress",
+        "distinct actor: frame"
+      ],
+      "rule": "request belongs to exactly one invocation; at most one settlement"
+    },
+    {
+      "id": "work$reject$1:observes:work:0:nonincrease",
+      "kind": "interference-nonincrease",
+      "status": "checked",
+      "unit": "work$reject$1",
+      "observed": {
+        "entry": "work",
+        "site": 0,
+        "rank": "1"
+      },
+      "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+      "aliases": "work$reject$1:observes:work:0:alias"
+    },
+    {
+      "id": "work$0:keeps:work:0",
+      "kind": "pending-keeps",
+      "status": "checked",
+      "safetyUnit": "work$0$keeps$work$1"
+    },
+    {
+      "id": "work$1:keeps:work:0",
+      "kind": "pending-keeps",
+      "status": "checked",
+      "safetyUnit": "work$1$keeps$work$1"
+    },
+    {
+      "id": "$reject:keeps:work:0",
+      "kind": "pending-keeps",
+      "status": "checked",
+      "safetyUnit": "$reject$keeps$work$1"
+    },
+    {
+      "id": "profile",
+      "kind": "profile-correspondence",
+      "status": "checked",
+      "profile": {
+        "kind": "c1-action-cuts",
+        "version": 1,
+        "microtaskMode": "afterEvaluate",
+        "drain": "void 0;",
+        "resumption": "same-action-timed-drain",
+        "arrivals": "arbitrary-between-actions",
+        "eventBound": null,
+        "activationBound": null
+      },
+      "rule": "finite total source segments; native settlement and timed microtask drain are the same C1 action"
+    }
+  ],
+  "targets": [
+    {
+      "unit": "work$0",
+      "querySha256": "143ef567f7ead90e3b9ee960bc8c3856a50d7be6393d3bcdcbf150b35b97e1c5",
+      "target": {
+        "id": "one.ts#work$0",
+        "file": "one.ts",
+        "name": "work$0",
+        "span": {
+          "start": 258,
+          "end": 279
+        },
+        "params": [
+          {
+            "name": "$s",
+            "type": {
+              "kind": "object",
+              "fields": [
+                {
+                  "name": "n",
+                  "type": "number",
+                  "optional": false
+                }
+              ]
+            },
+            "model": {
+              "kind": "ref",
+              "symbol": "input_0_ref",
+              "type": {
+                "kind": "object",
+                "fields": [
+                  {
+                    "name": "n",
+                    "type": "number",
+                    "optional": false
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "resultType": {
+          "kind": "object",
+          "fields": []
+        },
+        "allocates": true,
+        "effects": {
+          "kind": "heap"
+        },
+        "executableStart": 258,
+        "modifies": [],
+        "footprint": [],
+        "requires": [
+          {
+            "comment": {
+              "type": "Line",
+              "value": " state n >= 0",
+              "start": 136,
+              "end": 151
+            },
+            "kind": "state",
+            "text": "n >= 0",
+            "span": {
+              "start": 136,
+              "end": 151
+            }
+          }
+        ],
+        "ensures": [
+          {
+            "comment": {
+              "type": "Line",
+              "value": " state n >= 0",
+              "start": 136,
+              "end": 151
+            },
+            "kind": "state",
+            "text": "n >= 0",
+            "span": {
+              "start": 136,
+              "end": 151
+            }
+          },
+          {
+            "comment": {
+              "type": "Line",
+              "value": " pending n >= 0",
+              "start": 238,
+              "end": 255
+            },
+            "kind": "pending",
+            "text": "n >= 0",
+            "span": {
+              "start": 238,
+              "end": 255
+            }
+          }
+        ],
+        "callees": [],
+        "loops": [],
+        "obligations": [
+          {
+            "kind": "segment-totality",
+            "span": {
+              "start": 258,
+              "end": 279
+            }
+          },
+          {
+            "kind": "own-progress",
+            "span": {
+              "start": 258,
+              "end": 279
+            },
+            "exit": 0
+          },
+          {
+            "kind": "rank-nonnegative",
+            "span": {
+              "start": 258,
+              "end": 279
+            },
+            "exit": 0
+          },
+          {
+            "kind": "outcome-viability",
+            "span": {
+              "start": 258,
+              "end": 279
+            },
+            "exit": 0
+          }
+        ],
+        "spec": false,
+        "predicates": {
+          "library": "__specification",
+          "entry": "__entry_values",
+          "params": [
+            "$s"
+          ],
+          "requires": [
+            "__specification.binary(\">=\", ($s).n, 0)"
+          ],
+          "ensures": [
+            "__specification.binary(\">=\", ($s).n, 0)",
+            "__specification.binary(\">=\", ($s).n, 0)"
+          ]
+        },
+        "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun heap_has_6e (Int) Bool)\n(declare-fun heap_sort_6e (Int) Int)\n(declare-fun heap_ref_6e (Int) Int)\n(declare-fun heap_num_6e (Int) (_ BitVec 64))\n(declare-fun heap_bool_6e (Int) Bool)\n(define-fun heap_num0_6e ((r Int)) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_num_6e r)))\n(declare-const input_0_ref Int)\n(define-fun heap_next_v1 () Int (+ heap_next0 1))\n(define-fun heap_exact0 ((r Int)) Bool true)\n(define-fun heap_exact1 ((r Int)) Bool (not (heap_has_6e r)))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 0) (and (heap_has_6e input_0_ref) (= (heap_sort_6e input_0_ref) 1)) (heap_exact0 input_0_ref)))\n(define-fun call_fact0 () Bool (and (>= heap_next0 0) (= (heap_kind heap_next0) 0) (heap_exact1 heap_next0)))",
+        "heapModel": {
+          "kind": "heap",
+          "keys": [
+            "n"
+          ],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "object",
+              "fields": [
+                {
+                  "name": "n",
+                  "type": "number",
+                  "optional": false
+                }
+              ]
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": [
+              {
+                "name": "n",
+                "has": "heap_has_6e",
+                "tag": "heap_sort_6e",
+                "ref": "heap_ref_6e",
+                "number": "heap_num_6e",
+                "numberView": "heap_num0_6e",
+                "boolean": "heap_bool_6e"
+              }
+            ]
+          }
+        },
+        "probes": [],
+        "smallWitness": "true",
+        "replayGuards": [],
+        "pre": "(fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000))",
+        "preDefined": "true",
+        "post": "(=> call_fact0 (and (fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000)) (fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000))))",
+        "postconditions": [
+          "true",
+          "true",
+          "(=> call_fact0 (fp.geq ((_ to_fp 11 53) #x3ff0000000000000) ((_ to_fp 11 53) #x0000000000000000)))",
+          "true"
+        ],
+        "control": {
+          "entry": "work",
+          "segment": 0,
+          "action": "call",
+          "rankBefore": 2,
+          "span": {
+            "start": 258,
+            "end": 279
+          },
+          "exits": [
+            {
+              "kind": "waiting",
+              "span": {
+                "start": 258,
+                "end": 279
+              },
+              "rankAfter": 1,
+              "request": {
+                "op": "op",
+                "result": "number",
+                "rejects": true,
+                "resolves": [
+                  {
+                    "comment": {
+                      "type": "Line",
+                      "value": " resolves Number.isFinite(result)",
+                      "start": 16,
+                      "end": 51
+                    },
+                    "kind": "resolves",
+                    "text": "Number.isFinite(result)",
+                    "ast": {
+                      "type": "CallExpression",
+                      "start": 28,
+                      "end": 51,
+                      "callee": {
+                        "type": "MemberExpression",
+                        "start": 28,
+                        "end": 43,
+                        "object": {
+                          "type": "Identifier",
+                          "start": 28,
+                          "end": 34,
+                          "name": "Number"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "start": 35,
+                          "end": 43,
+                          "name": "isFinite"
+                        },
+                        "computed": false,
+                        "optional": false
+                      },
+                      "arguments": [
+                        {
+                          "type": "Identifier",
+                          "name": "$outcome",
+                          "start": 44,
+                          "end": 50
+                        }
+                      ],
+                      "optional": false
+                    },
+                    "span": {
+                      "start": 16,
+                      "end": 51
+                    }
+                  }
+                ]
+              },
+              "site": 0,
+              "path": "true",
+              "progress": 1,
+              "nonnegative": 2,
+              "viability": 3
+            }
+          ],
+          "checks": [
+            {
+              "kind": "segment-totality",
+              "smt": "true",
+              "span": {
+                "start": 258,
+                "end": 279
+              }
+            },
+            {
+              "kind": "own-progress",
+              "smt": "true",
+              "span": {
+                "start": 258,
+                "end": 279
+              },
+              "exit": 0
+            },
+            {
+              "kind": "rank-nonnegative",
+              "smt": "(=> call_fact0 (fp.geq ((_ to_fp 11 53) #x3ff0000000000000) ((_ to_fp 11 53) #x0000000000000000)))",
+              "span": {
+                "start": 258,
+                "end": 279
+              },
+              "exit": 0
+            },
+            {
+              "kind": "outcome-viability",
+              "smt": "true",
+              "span": {
+                "start": 258,
+                "end": 279
+              },
+              "exit": 0
+            }
+          ],
+          "cutpoints": 0,
+          "callees": []
+        }
+      }
+    },
+    {
+      "unit": "work$1",
+      "querySha256": "a5862d4c5fa65ccc9f3833bc17426bfeba50905c2ff656e7fea0e308b28632d4",
+      "target": {
+        "id": "one.ts#work$1",
+        "file": "one.ts",
+        "name": "work$1",
+        "span": {
+          "start": 282,
+          "end": 311
+        },
+        "params": [
+          {
+            "name": "$s",
+            "type": {
+              "kind": "object",
+              "fields": [
+                {
+                  "name": "n",
+                  "type": "number",
+                  "optional": false
+                }
+              ]
+            },
+            "model": {
+              "kind": "ref",
+              "symbol": "input_0_ref",
+              "type": {
+                "kind": "object",
+                "fields": [
+                  {
+                    "name": "n",
+                    "type": "number",
+                    "optional": false
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "a",
+            "type": "number",
+            "model": {
+              "kind": "number",
+              "symbol": "input_1"
+            }
+          }
+        ],
+        "resultType": "undefined",
+        "allocates": false,
+        "effects": {
+          "kind": "writes"
+        },
+        "executableStart": 282,
+        "modifies": [
+          {
+            "kind": "modifies",
+            "text": "n",
+            "span": {
+              "start": 305,
+              "end": 306
+            }
+          }
+        ],
+        "footprint": [
+          {
+            "path": [
+              "$s"
+            ],
+            "key": "n"
+          }
+        ],
+        "requires": [
+          {
+            "comment": {
+              "type": "Line",
+              "value": " state n >= 0",
+              "start": 136,
+              "end": 151
+            },
+            "kind": "state",
+            "text": "n >= 0",
+            "span": {
+              "start": 136,
+              "end": 151
+            }
+          },
+          {
+            "comment": {
+              "type": "Line",
+              "value": " pending n >= 0",
+              "start": 238,
+              "end": 255
+            },
+            "kind": "pending",
+            "text": "n >= 0",
+            "span": {
+              "start": 238,
+              "end": 255
+            }
+          },
+          {
+            "comment": {
+              "type": "Line",
+              "value": " resolves Number.isFinite(result)",
+              "start": 16,
+              "end": 51
+            },
+            "kind": "resolves",
+            "text": "Number.isFinite(result)",
+            "span": {
+              "start": 16,
+              "end": 51
+            }
+          }
+        ],
+        "ensures": [
+          {
+            "comment": {
+              "type": "Line",
+              "value": " state n >= 0",
+              "start": 136,
+              "end": 151
+            },
+            "kind": "state",
+            "text": "n >= 0",
+            "span": {
+              "start": 136,
+              "end": 151
+            }
+          }
+        ],
+        "callees": [],
+        "loops": [],
+        "obligations": [
+          {
+            "kind": "segment-totality",
+            "span": {
+              "start": 282,
+              "end": 311
+            }
+          },
+          {
+            "kind": "own-progress",
+            "span": {
+              "start": 295,
+              "end": 302
+            },
+            "exit": 0
+          },
+          {
+            "kind": "rank-nonnegative",
+            "span": {
+              "start": 295,
+              "end": 302
+            },
+            "exit": 0
+          },
+          {
+            "kind": "own-progress",
+            "span": {
+              "start": 282,
+              "end": 311
+            },
+            "exit": 1
+          },
+          {
+            "kind": "rank-nonnegative",
+            "span": {
+              "start": 282,
+              "end": 311
+            },
+            "exit": 1
+          }
+        ],
+        "spec": false,
+        "predicates": {
+          "library": "__specification",
+          "entry": "__entry_values",
+          "params": [
+            "$s",
+            "a"
+          ],
+          "requires": [
+            "__specification.binary(\">=\", ($s).n, 0)",
+            "__specification.binary(\">=\", ($s).n, 0)",
+            "(Number).isFinite(a)"
+          ],
+          "ensures": [
+            "__specification.binary(\">=\", ($s).n, 0)"
+          ]
+        },
+        "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun heap_has_6e (Int) Bool)\n(declare-fun heap_sort_6e (Int) Int)\n(declare-fun heap_ref_6e (Int) Int)\n(declare-fun heap_num_6e (Int) (_ BitVec 64))\n(declare-fun heap_bool_6e (Int) Bool)\n(define-fun heap_num0_6e ((r Int)) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_num_6e r)))\n(declare-const input_0_ref Int)\n(declare-const input_1 (_ BitVec 64))\n(define-fun heap_num_6e_v1 ((r Int)) (_ FloatingPoint 11 53) (ite (= r input_0_ref) ((_ to_fp 11 53) #x3ff0000000000000) (heap_num0_6e r)))\n(define-fun heap_num_6e_v2 ((r Int)) (_ FloatingPoint 11 53) (ite (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (heap_num0_6e r) (heap_num_6e_v1 r)))\n(define-fun heap_exact0 ((r Int)) Bool true)\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 0) (and (heap_has_6e input_0_ref) (= (heap_sort_6e input_0_ref) 1)) (heap_exact0 input_0_ref)))",
+        "heapModel": {
+          "kind": "heap",
+          "keys": [
+            "n"
+          ],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "object",
+              "fields": [
+                {
+                  "name": "n",
+                  "type": "number",
+                  "optional": false
+                }
+              ]
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": [
+              {
+                "name": "n",
+                "has": "heap_has_6e",
+                "tag": "heap_sort_6e",
+                "ref": "heap_ref_6e",
+                "number": "heap_num_6e",
+                "numberView": "heap_num0_6e",
+                "boolean": "heap_bool_6e"
+              }
+            ]
+          }
+        },
+        "probes": [],
+        "smallWitness": "true",
+        "replayGuards": [],
+        "pre": "(and (fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000)) (fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000)) (not (or (fp.isNaN ((_ to_fp 11 53) input_1)) (fp.isInfinite ((_ to_fp 11 53) input_1)))))",
+        "preDefined": "true",
+        "post": "(and (=> (not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))) (or (= input_0_ref input_0_ref) (>= input_0_ref heap_next0))) (fp.geq (heap_num_6e_v2 input_0_ref) ((_ to_fp 11 53) #x0000000000000000)))",
+        "postconditions": [
+          "(and (=> (not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))) (or (= input_0_ref input_0_ref) (>= input_0_ref heap_next0))) (or (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))))",
+          "true",
+          "(=> (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))",
+          "true",
+          "(=> (not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))"
+        ],
+        "control": {
+          "entry": "work",
+          "segment": 1,
+          "action": "resolve",
+          "rankBefore": 1,
+          "span": {
+            "start": 282,
+            "end": 311
+          },
+          "exits": [
+            {
+              "kind": "returned",
+              "span": {
+                "start": 295,
+                "end": 302
+              },
+              "rankAfter": 0,
+              "path": "(fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))",
+              "progress": 1,
+              "nonnegative": 2
+            },
+            {
+              "kind": "fallthrough",
+              "span": {
+                "start": 282,
+                "end": 311
+              },
+              "rankAfter": 0,
+              "path": "(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))",
+              "progress": 3,
+              "nonnegative": 4
+            }
+          ],
+          "checks": [
+            {
+              "kind": "segment-totality",
+              "smt": "(and (=> (not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))) (or (= input_0_ref input_0_ref) (>= input_0_ref heap_next0))) (or (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))))",
+              "span": {
+                "start": 282,
+                "end": 311
+              }
+            },
+            {
+              "kind": "own-progress",
+              "smt": "true",
+              "span": {
+                "start": 295,
+                "end": 302
+              },
+              "exit": 0
+            },
+            {
+              "kind": "rank-nonnegative",
+              "smt": "(=> (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))",
+              "span": {
+                "start": 295,
+                "end": 302
+              },
+              "exit": 0
+            },
+            {
+              "kind": "own-progress",
+              "smt": "true",
+              "span": {
+                "start": 282,
+                "end": 311
+              },
+              "exit": 1
+            },
+            {
+              "kind": "rank-nonnegative",
+              "smt": "(=> (not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))",
+              "span": {
+                "start": 282,
+                "end": 311
+              },
+              "exit": 1
+            }
+          ],
+          "cutpoints": 0,
+          "callees": []
+        }
+      }
+    },
+    {
+      "unit": "work$reject$1",
+      "querySha256": "444ab7bf0af8eee4411eb9e068aafca23e88cf4264830de8ac046ad789505549",
+      "target": {
+        "id": "one.ts#work$reject$1",
+        "file": "one.ts",
+        "name": "work$reject$1",
+        "span": {
+          "start": 258,
+          "end": 279
+        },
+        "params": [
+          {
+            "name": "$s",
+            "type": {
+              "kind": "object",
+              "fields": [
+                {
+                  "name": "n",
+                  "type": "number",
+                  "optional": false
+                }
+              ]
+            },
+            "model": {
+              "kind": "ref",
+              "symbol": "input_0_ref",
+              "type": {
+                "kind": "object",
+                "fields": [
+                  {
+                    "name": "n",
+                    "type": "number",
+                    "optional": false
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "a",
+            "type": "number",
+            "model": {
+              "kind": "number",
+              "symbol": "input_1"
+            }
+          }
+        ],
+        "resultType": "undefined",
+        "allocates": false,
+        "effects": {
+          "kind": "pure"
+        },
+        "executableStart": 258,
+        "modifies": [],
+        "footprint": [],
+        "requires": [
+          {
+            "comment": {
+              "type": "Line",
+              "value": " state n >= 0",
+              "start": 136,
+              "end": 151
+            },
+            "kind": "state",
+            "text": "n >= 0",
+            "span": {
+              "start": 136,
+              "end": 151
+            }
+          },
+          {
+            "comment": {
+              "type": "Line",
+              "value": " pending n >= 0",
+              "start": 238,
+              "end": 255
+            },
+            "kind": "pending",
+            "text": "n >= 0",
+            "span": {
+              "start": 238,
+              "end": 255
+            }
+          }
+        ],
+        "ensures": [
+          {
+            "comment": {
+              "type": "Line",
+              "value": " state n >= 0",
+              "start": 136,
+              "end": 151
+            },
+            "kind": "state",
+            "text": "n >= 0",
+            "span": {
+              "start": 136,
+              "end": 151
+            }
+          }
+        ],
+        "callees": [],
+        "loops": [],
+        "obligations": [
+          {
+            "kind": "segment-totality",
+            "span": {
+              "start": 258,
+              "end": 279
+            }
+          },
+          {
+            "kind": "own-progress",
+            "span": {
+              "start": 258,
+              "end": 279
+            },
+            "exit": 0
+          },
+          {
+            "kind": "rank-nonnegative",
+            "span": {
+              "start": 258,
+              "end": 279
+            },
+            "exit": 0
+          }
+        ],
+        "spec": false,
+        "predicates": {
+          "library": "__specification",
+          "entry": "__entry_values",
+          "params": [
+            "$s",
+            "a"
+          ],
+          "requires": [
+            "__specification.binary(\">=\", ($s).n, 0)",
+            "__specification.binary(\">=\", ($s).n, 0)"
+          ],
+          "ensures": [
+            "__specification.binary(\">=\", ($s).n, 0)"
+          ]
+        },
+        "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun heap_has_6e (Int) Bool)\n(declare-fun heap_sort_6e (Int) Int)\n(declare-fun heap_ref_6e (Int) Int)\n(declare-fun heap_num_6e (Int) (_ BitVec 64))\n(declare-fun heap_bool_6e (Int) Bool)\n(define-fun heap_num0_6e ((r Int)) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_num_6e r)))\n(declare-const input_0_ref Int)\n(declare-const input_1 (_ BitVec 64))\n(define-fun heap_exact0 ((r Int)) Bool true)\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 0) (and (heap_has_6e input_0_ref) (= (heap_sort_6e input_0_ref) 1)) (heap_exact0 input_0_ref)))",
+        "heapModel": {
+          "kind": "heap",
+          "keys": [
+            "n"
+          ],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "object",
+              "fields": [
+                {
+                  "name": "n",
+                  "type": "number",
+                  "optional": false
+                }
+              ]
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": [
+              {
+                "name": "n",
+                "has": "heap_has_6e",
+                "tag": "heap_sort_6e",
+                "ref": "heap_ref_6e",
+                "number": "heap_num_6e",
+                "numberView": "heap_num0_6e",
+                "boolean": "heap_bool_6e"
+              }
+            ]
+          }
+        },
+        "probes": [],
+        "smallWitness": "true",
+        "replayGuards": [],
+        "pre": "(and (fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000)) (fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000)))",
+        "preDefined": "true",
+        "post": "(fp.geq (heap_num0_6e input_0_ref) ((_ to_fp 11 53) #x0000000000000000))",
+        "postconditions": [
+          "true",
+          "true",
+          "(fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000))"
+        ],
+        "control": {
+          "entry": "work",
+          "segment": 1,
+          "action": "reject",
+          "rankBefore": 1,
+          "span": {
+            "start": 258,
+            "end": 279
+          },
+          "exits": [
+            {
+              "kind": "environment-rejected",
+              "span": {
+                "start": 258,
+                "end": 279
+              },
+              "rankAfter": 0,
+              "path": "true",
+              "progress": 1,
+              "nonnegative": 2
+            }
+          ],
+          "checks": [
+            {
+              "kind": "segment-totality",
+              "smt": "true",
+              "span": {
+                "start": 258,
+                "end": 279
+              }
+            },
+            {
+              "kind": "own-progress",
+              "smt": "true",
+              "span": {
+                "start": 258,
+                "end": 279
+              },
+              "exit": 0
+            },
+            {
+              "kind": "rank-nonnegative",
+              "smt": "(fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000))",
+              "span": {
+                "start": 258,
+                "end": 279
+              },
+              "exit": 0
+            }
+          ],
+          "cutpoints": 0,
+          "callees": []
+        }
+      }
+    }
+  ],
+  "sha256": "642d6d625521384e025cebbdddff4b733bbb79185386c8d9271da33495d02789"
+}

@@ -1,0 +1,513 @@
+TAP version 13
+# (node:82084) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: one grammar rejects reserved temporal prose, typos, confusables, case, punctuation and block clauses at original spans
+ok 1 - one grammar rejects reserved temporal prose, typos, confusables, case, punctuation and block clauses at original spans
+  ---
+  duration_ms: 46.385959
+  type: 'test'
+  ...
+# Subtest: totality never assumes termination of loops, helpers, effects, handlers or Promise adoption
+ok 2 - totality never assumes termination of loops, helpers, effects, handlers or Promise adoption
+  ---
+  duration_ms: 8.976083
+  type: 'test'
+  ...
+# Subtest: empty bodies, all-tail branches and normal fallthrough have compiler-covered terminal exits
+not ok 3 - empty bodies, all-tail branches and normal fallthrough have compiler-covered terminal exits
+  ---
+  duration_ms: 842.490292
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion-grammar.test.mjs:37:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {"file":"tails.ts","sourceSha256":"79f86f71735c0481a233cb3555eb9860a3f181427d37114cc5e1f938859e0695","trusted":["Acorn and Node type stripping","closed stateful frontend and AST binding rewrites","existing source body/expression/heap compiler","representative init/step/keeps induction","existing proof scheduler and Z3 binary64 backend","strict native JavaScript replay and timed process containment"],"executableSha256":"cd305f0ba5f395ce9879fefc52aac568707773f309d7a19a75931dbb0193a078","assumptions":{"numericDomain":"JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)","eventBound":null,"scheduler":"JS run-to-completion; external actions with microtasks drained before the next environment action","entryCalls":"external only; no entry-to-entry or recursive calls; unboundedly repeated","activationPool":"unbounded multiset; distinct identities per invocation, unary pending invariants","initial":{"done":"false"},"environment":[],"entries":[{"entry":"work","params":[]}],"fairness":"none used by safety; settles eventually is recorded only","unsupported":["references","imports","handlers","cancellation","ordering/abort contracts","entry contracts","pairwise/uniqueness/count induction","nested awaits","entry-to-entry calls","unverified helpers","temporal goals beyond per-invocation completion"],"completion":{"goals":[{"entry":"work","goal":"completes","span":{"start":59,"end":82}}],"profile":{"kind":"c1-action-cuts","version":1,"microtaskMode":"afterEvaluate","drain":"void 0;","resumption":"same-action-timed-drain","arrivals":"arbitrary-between-actions","eventBound":null,"activationBound":null},"continuingRuntime":"assumed for completion","declaredEnvironmentCalls":"assumed total for completion","resumption":"checked only after finite source totality and complete exit correspondence","settlement":"assumed separately per reached request; no safety use"},"sha256":"e5ca524df7bdf92a139ff14f3b7635f86c40adffc1e4931e9e1905f7344253cc"},"unitsSha256":"fc1a1e43bb63669d85dbe3318d1b917c3a7458e40ce2c6b55b7c69a8c8d674d5","properties":[{"kind":"state","text":"done === true || done === false","span":{"start":18,"end":58}}],"units":[{"unit":"$init","kind":"init","span":{"start":18,"end":58},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[{"roots":[],"nodes":{}}]},{"unit":"work$0","kind":"entry","span":{"start":108,"end":151},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"done":["bool","false"]}}}}]}],"status":"unknown","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions","reason":"completion-obligation","safety":{"status":"verified","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions","assumptionsUse":"temporal premises unused"},"completion":{"manifestSha256":"d9b1160ecd3be29360b5b4ca7b7b7047d9add3be57d5b63a7e6b5d7082af1ab4","binding":{"sourceSha256":"79f86f71735c0481a233cb3555eb9860a3f181427d37114cc5e1f938859e0695","executableSha256":"cd305f0ba5f395ce9879fefc52aac568707773f309d7a19a75931dbb0193a078","assumptionsSha256":"e5ca524df7bdf92a139ff14f3b7635f86c40adffc1e4931e9e1905f7344253cc","safetyUnitsSha256":"fc1a1e43bb63669d85dbe3318d1b917c3a7458e40ce2c6b55b7c69a8c8d674d5","implementationSha256":"0eb80fd8dc87e0fb08423f1ed851f29f81971b4d3fdc130f4da74209ceb11302","runtime":"v22.23.1","rule":"c1-per-invocation-completion-1","profileSha256":"bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45","goalsSha256":"1b584300f1af588deacff20a069f31b7ae798260b1cbf0f78fdf483428cd0016"},"closed":true,"profile":{"kind":"c1-action-cuts","version":1,"microtaskMode":"afterEvaluate","drain":"void 0;","resumption":"same-action-timed-drain","arrivals":"arbitrary-between-actions","eventBound":null,"activationBound":null},"obligations":[{"id":"init","kind":"init","status":"discharged","safetyUnit":"$init","rule":"initial empty identity support"},{"id":"work$0:safety","kind":"safety-step","status":"discharged","safetyUnit":"work$0"},{"id":"work$0:totality","kind":"segment-totality","status":"checked","unit":"work$0"},{"id":"work$0:exits","kind":"source-exit-coverage","status":"missing","entry":"work","segment":0,"action":"call","sourceSpan":{"start":90,"end":153},"sourceSha256":"79f86f71735c0481a233cb3555eb9860a3f181427d37114cc5e1f938859e0695"},{"id":"work$0:terminal","kind":"terminal-equivalence","status":"missing","rule":"zero iff post-terminal; every live source location is positive"},{"id":"work$0:creation","kind":"creation","status":"missing","rule":"fresh invocation; positive birth ordinal; call executes first segment"},{"id":"work$0:deletion","kind":"deletion","status":"missing","rule":"only actor reaches terminal; other identities remain live"},{"id":"work$0:0:own-progress","kind":"own-progress","status":"unresolved","unit":"work$0","check":1,"sourceExit":{"kind":"returned","span":{"start":130,"end":139},"path":"(and (heap_bool_646f6e65 input_0_ref) (heap_bool_646f6e65 input_0_ref))","rankBefore":"1","rankAfter":"0"},"querySha256":"48e197127a93ff5cf59805fe84182237df5ecd8c2b451165d084558d66d54cda"},{"id":"work$0:0:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$0","check":2,"sourceExit":{"kind":"returned","span":{"start":130,"end":139},"path":"(and (heap_bool_646f6e65 input_0_ref) (heap_bool_646f6e65 input_0_ref))","rankBefore":"1","rankAfter":"0"},"querySha256":"48e197127a93ff5cf59805fe84182237df5ecd8c2b451165d084558d66d54cda"},{"id":"work$0:1:own-progress","kind":"own-progress","status":"unresolved","unit":"work$0","check":3,"sourceExit":{"kind":"returned","span":{"start":142,"end":151},"path":"(and (heap_bool_646f6e65 input_0_ref) (not (heap_bool_646f6e65 input_0_ref)))","rankBefore":"1","rankAfter":"0"},"querySha256":"48e197127a93ff5cf59805fe84182237df5ecd8c2b451165d084558d66d54cda"},{"id":"work$0:1:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$0","check":4,"sourceExit":{"kind":"returned","span":{"start":142,"end":151},"path":"(and (heap_bool_646f6e65 input_0_ref) (not (heap_bool_646f6e65 input_0_ref)))","rankBefore":"1","rankAfter":"0"},"querySha256":"48e197127a93ff5cf59805fe84182237df5ecd8c2b451165d084558d66d54cda"},{"id":"work$0:2:own-progress","kind":"own-progress","status":"unresolved","unit":"work$0","check":5,"sourceExit":{"kind":"returned","span":{"start":142,"end":151},"path":"(not (heap_bool_646f6e65 input_0_ref))","rankBefore":"1","rankAfter":"0"},"querySha256":"48e197127a93ff5cf59805fe84182237df5ecd8c2b451165d084558d66d54cda"},{"id":"work$0:2:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$0","check":6,"sourceExit":{"kind":"returned","span":{"start":142,"end":151},"path":"(not (heap_bool_646f6e65 input_0_ref))","rankBefore":"1","rankAfter":"0"},"querySha256":"48e197127a93ff5cf59805fe84182237df5ecd8c2b451165d084558d66d54cda"},{"id":"profile","kind":"profile-correspondence","status":"missing","profile":{"kind":"c1-action-cuts","version":1,"microtaskMode":"afterEvaluate","drain":"void 0;","resumption":"same-action-timed-drain","arrivals":"arbitrary-between-actions","eventBound":null,"activationBound":null},"rule":"finite total source segments; native settlement and timed microtask drain are the same C1 action"}],"units":[{"unit":"work$0","querySha256":"48e197127a93ff5cf59805fe84182237df5ecd8c2b451165d084558d66d54cda","status":"unknown","reason":"prerequisite"}],"goals":[{"entry":"work","goal":"completes","span":{"start":59,"end":82},"status":"unknown","reason":"completion-obligation","scope":"each invocation returns normally (including suppressed writes) or reaches declared environment rejection","rank":{"domain":"exact source-control integers","birth":"1","waiting":[],"terminal":"0"},"assumptions":[{"kind":"continuing-runtime","classification":"assumed-unused"},{"kind":"total-declared-environment-calls","classification":"assumed-unused"},{"kind":"weak-resumption","classification":"missing","requested":false,"profileSha256":"bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45"}],"nativeConfirmed":false}],"nativeConfirmed":false,"trusted":["finite-control completion rule and source/identity frame checker","compiler exit/definedness coverage","C1 native action and timed-drain correspondence","Z3 including quantified outcome viability"],"limitations":["no checked infinite-word realizability","no global draining/success/commit/count theorem","protocol temporal mode unsupported"]}}
+    + actual - expected
+    
+    + 'unknown'
+    - 'verified'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'verified'
+  actual: 'unknown'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion-grammar.test.mjs:41:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# (node:82096) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: no-temporal modules preserve prepared-HEAD compile artifacts, every phase query, full reports and native cuts byte for byte
+not ok 4 - no-temporal modules preserve prepared-HEAD compile artifacts, every phase query, full reports and native cuts byte for byte
+  ---
+  duration_ms: 7030.142041
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion-parity.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    variants/V11-rejects.ts
+    + actual - expected
+    
+    + '{"file":"variants/V11-rejects.ts","sourceSha256":"33ef92574541756ed9603a065ec891ebc12fd41fe4f1691953cbc08c99128b38","trusted":["Acorn and Node type stripping","closed stateful frontend and AST binding rewrites","existing source body/expression/heap compiler","representative init/step/keeps induction","existing proof scheduler and Z3 binary64 backend","strict native JavaScript replay and timed process containment"],"executableSha256":"46dec743bf3256880720e7cb6c935c0be1103792cc221410f4571d1e821ecb55","assumptions":{"numericDomain":"JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)","eventBound":null,"scheduler":"JS run-to-completion; external actions with microtasks drained before the next environment action","entryCalls":"external only; no entry-to-entry or recursive calls; unboundedly repeated","activationPool":"unbounded multiset; distinct identities per invocation, unary pending invariants","initial":{"latest":"0","shownFor":"0","shown":"0"},"environment":[{"op":"lookup","params":[{"name":"query","type":"number"}],"result":"number","resolves":["Number.isFinite(result)"],"rejects":"may-reject","settles":"may-never-settle","settlementOrder":"any","settlementCount":"at most once per request","settlesUse":"not declared; no progress guarantee"}],"entries":[{"entry":"search","params":[{"name":"query","type":"number"}]}],"fairness":"none used by safety; settles eventually is recorded only","unsupported":["references","imports","handlers","cancellation","ordering/abort contracts","entry contracts","liveness","pairwise/uniqueness/count induction","nested awaits","entry-to-entry calls","unverified helpers"],"sha256":"7351cc972952fff21c21313ca99a6c473b5e464a0d6ab51379286649c45f8ffa"},"unitsSha256":"fa1f6549ad976f82ac0d9cab1ac3430a941393714b63c2ca9b006e443e1842a7","properties":[{"kind":"state","text":"0 <= shownFor && shownFor <= latest","span":{"start":293,"end":337}},{"kind":"state","text":"Number.isFinite(shown)","span":{"start":338,"end":369}},{"kind":"always","text":"shownFor >= old(shownFor)","span":{"start":370,"end":405}}],"units":[{"unit":"$init","kind":"init","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[{"roots":[],"nodes":{}}]},{"unit":"search$0","kind":"entry","span":{"start":455,"end":500},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0010000000000010"],"shownFor":["num","8000000000000000"],"shown":["num","0000000000000004"]}}}}]},{"unit":"search$1","kind":"resume","span":{"start":577,"end":637},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4044022000000000","0000000000000000","0000000000000400",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4054022000000011"],"shownFor":["num","0020010000000002"],"shown":["num","0000000000001000"]}}}}]},{"unit":"$reject","kind":"stutter","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0808023000000000"],"shownFor":["num","0808023000000000"],"shown":["num","0000000000010000"]}}}}]},{"unit":"search$0$keeps$search$1","kind":"interference","span":{"start":455,"end":500},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","4000389000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4811389000000001"],"shownFor":["num","1020b09000000000"],"shown":["num","0000000001000000"]}}}}]},{"unit":"search$1$keeps$search$1","kind":"interference","span":{"start":577,"end":637},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","3ff0000000000000","0000000000000000","0000002000000000","3ff0008a440f0489","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","3ff0008a440f0489"],"shownFor":["num","3fe0008a440f108a"],"shown":["num","0000000000000400"]}}}}]},{"unit":"$reject$keeps$search$1","kind":"interference","span":{"start":293,"end":337},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4000148000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4010128000000001"],"shownFor":["num","4000228000000000"],"shown":["num","0000000001000000"]}}}}]}],"status":"verified","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions"}'
+    - '{"file":"variants/V11-rejects.ts","sourceSha256":"33ef92574541756ed9603a065ec891ebc12fd41fe4f1691953cbc08c99128b38","trusted":["Acorn and Node type stripping","closed stateful frontend and AST binding rewrites","existing source body/expression/heap compiler","representative init/step/keeps induction","existing proof scheduler and Z3 binary64 backend","strict native JavaScript replay and timed process containment"],"executableSha256":"46dec743bf3256880720e7cb6c935c0be1103792cc221410f4571d1e821ecb55","assumptions":{"numericDomain":"JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)","eventBound":null,"scheduler":"JS run-to-completion; external actions with microtasks drained before the next environment action","entryCalls":"external only; no entry-to-entry or recursive calls; unboundedly repeated","activationPool":"unbounded multiset; distinct identities per invocation, unary pending invariants","initial":{"latest":"0","shownFor":"0","shown":"0"},"environment":[{"op":"lookup","params":[{"name":"query","type":"number"}],"result":"number","resolves":["Number.isFinite(result)"],"rejects":"may-reject","settles":"may-never-settle","settlementOrder":"any","settlementCount":"at most once per request","settlesUse":"not declared; no progress guarantee"}],"entries":[{"entry":"search","params":[{"name":"query","type":"number"}]}],"fairness":"none used by safety; settles eventually is recorded only","unsupported":["references","imports","handlers","cancellation","ordering/abort contracts","entry contracts","liveness","pairwise/uniqueness/count induction","nested awaits","entry-to-entry calls","unverified helpers"],"sha256":"7351cc972952fff21c21313ca99a6c473b5e464a0d6ab51379286649c45f8ffa"},"unitsSha256":"fa1f6549ad976f82ac0d9cab1ac3430a941393714b63c2ca9b006e443e1842a7","properties":[{"kind":"state","text":"0 <= shownFor && shownFor <= latest","span":{"start":293,"end":337}},{"kind":"state","text":"Number.isFinite(shown)","span":{"start":338,"end":369}},{"kind":"always","text":"shownFor >= old(shownFor)","span":{"start":370,"end":405}}],"units":[{"unit":"$init","kind":"init","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[{"roots":[],"nodes":{}}]},{"unit":"search$0","kind":"entry","span":{"start":455,"end":500},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0010000000000010"],"shownFor":["num","8000000000000000"],"shown":["num","0000000000000004"]}}}}]},{"unit":"search$1","kind":"resume","span":{"start":577,"end":637},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4044022000000000","0000000000000000","0000000000000400",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4054022000000011"],"shownFor":["num","0020010000000002"],"shown":["num","0000000000001000"]}}}}]},{"unit":"$reject","kind":"stutter","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0010000000000020"],"shownFor":["num","8000000000000000"],"shown":["num","0000000000000001"]}}}}]},{"unit":"search$0$keeps$search$1","kind":"interference","span":{"start":455,"end":500},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","3ff0000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","3ff0000000000000"],"shownFor":["num","3ff0000000000000"],"shown":["num","0000000000000000"]}}}}]},{"unit":"search$1$keeps$search$1","kind":"interference","span":{"start":577,"end":637},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","67f8600000000000","0000000000000000","0000080000000000","5c074ac10a000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","681ec2c10a000001"],"shownFor":["num","304e068402000002"],"shown":["num","0000000100000000"]}}}}]},{"unit":"$reject$keeps$search$1","kind":"interference","span":{"start":293,"end":337},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4004000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4014000000000001"],"shownFor":["num","4004008000000000"],"shown":["num","0000000000400000"]}}}}]}],"status":"verified","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions"}'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '{"file":"variants/V11-rejects.ts","sourceSha256":"33ef92574541756ed9603a065ec891ebc12fd41fe4f1691953cbc08c99128b38","trusted":["Acorn and Node type stripping","closed stateful frontend and AST binding rewrites","existing source body/expression/heap compiler","representative init/step/keeps induction","existing proof scheduler and Z3 binary64 backend","strict native JavaScript replay and timed process containment"],"executableSha256":"46dec743bf3256880720e7cb6c935c0be1103792cc221410f4571d1e821ecb55","assumptions":{"numericDomain":"JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)","eventBound":null,"scheduler":"JS run-to-completion; external actions with microtasks drained before the next environment action","entryCalls":"external only; no entry-to-entry or recursive calls; unboundedly repeated","activationPool":"unbounded multiset; distinct identities per invocation, unary pending invariants","initial":{"latest":"0","shownFor":"0","shown":"0"},"environment":[{"op":"lookup","params":[{"name":"query","type":"number"}],"result":"number","resolves":["Number.isFinite(result)"],"rejects":"may-reject","settles":"may-never-settle","settlementOrder":"any","settlementCount":"at most once per request","settlesUse":"not declared; no progress guarantee"}],"entries":[{"entry":"search","params":[{"name":"query","type":"number"}]}],"fairness":"none used by safety; settles eventually is recorded only","unsupported":["references","imports","handlers","cancellation","ordering/abort contracts","entry contracts","liveness","pairwise/uniqueness/count induction","nested awaits","entry-to-entry calls","unverified helpers"],"sha256":"7351cc972952fff21c21313ca99a6c473b5e464a0d6ab51379286649c45f8ffa"},"unitsSha256":"fa1f6549ad976f82ac0d9cab1ac3430a941393714b63c2ca9b006e443e1842a7","properties":[{"kind":"state","text":"0 <= shownFor && shownFor <= latest","span":{"start":293,"end":337}},{"kind":"state","text":"Number.isFinite(shown)","span":{"start":338,"end":369}},{"kind":"always","text":"shownFor >= old(shownFor)","span":{"start":370,"end":405}}],"units":[{"unit":"$init","kind":"init","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[{"roots":[],"nodes":{}}]},{"unit":"search$0","kind":"entry","span":{"start":455,"end":500},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0010000000000010"],"shownFor":["num","8000000000000000"],"shown":["num","0000000000000004"]}}}}]},{"unit":"search$1","kind":"resume","span":{"start":577,"end":637},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4044022000000000","0000000000000000","0000000000000400",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4054022000000011"],"shownFor":["num","0020010000000002"],"shown":["num","0000000000001000"]}}}}]},{"unit":"$reject","kind":"stutter","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0010000000000020"],"shownFor":["num","8000000000000000"],"shown":["num","0000000000000001"]}}}}]},{"unit":"search$0$keeps$search$1","kind":"interference","span":{"start":455,"end":500},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","3ff0000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","3ff0000000000000"],"shownFor":["num","3ff0000000000000"],"shown":["num","0000000000000000"]}}}}]},{"unit":"search$1$keeps$search$1","kind":"interference","span":{"start":577,"end":637},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","67f8600000000000","0000000000000000","0000080000000000","5c074ac10a000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","681ec2c10a000001"],"shownFor":["num","304e068402000002"],"shown":["num","0000000100000000"]}}}}]},{"unit":"$reject$keeps$search$1","kind":"interference","span":{"start":293,"end":337},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4004000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4014000000000001"],"shownFor":["num","4004008000000000"],"shown":["num","0000000000400000"]}}}}]}],"status":"verified","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions"}'
+  actual: '{"file":"variants/V11-rejects.ts","sourceSha256":"33ef92574541756ed9603a065ec891ebc12fd41fe4f1691953cbc08c99128b38","trusted":["Acorn and Node type stripping","closed stateful frontend and AST binding rewrites","existing source body/expression/heap compiler","representative init/step/keeps induction","existing proof scheduler and Z3 binary64 backend","strict native JavaScript replay and timed process containment"],"executableSha256":"46dec743bf3256880720e7cb6c935c0be1103792cc221410f4571d1e821ecb55","assumptions":{"numericDomain":"JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)","eventBound":null,"scheduler":"JS run-to-completion; external actions with microtasks drained before the next environment action","entryCalls":"external only; no entry-to-entry or recursive calls; unboundedly repeated","activationPool":"unbounded multiset; distinct identities per invocation, unary pending invariants","initial":{"latest":"0","shownFor":"0","shown":"0"},"environment":[{"op":"lookup","params":[{"name":"query","type":"number"}],"result":"number","resolves":["Number.isFinite(result)"],"rejects":"may-reject","settles":"may-never-settle","settlementOrder":"any","settlementCount":"at most once per request","settlesUse":"not declared; no progress guarantee"}],"entries":[{"entry":"search","params":[{"name":"query","type":"number"}]}],"fairness":"none used by safety; settles eventually is recorded only","unsupported":["references","imports","handlers","cancellation","ordering/abort contracts","entry contracts","liveness","pairwise/uniqueness/count induction","nested awaits","entry-to-entry calls","unverified helpers"],"sha256":"7351cc972952fff21c21313ca99a6c473b5e464a0d6ab51379286649c45f8ffa"},"unitsSha256":"fa1f6549ad976f82ac0d9cab1ac3430a941393714b63c2ca9b006e443e1842a7","properties":[{"kind":"state","text":"0 <= shownFor && shownFor <= latest","span":{"start":293,"end":337}},{"kind":"state","text":"Number.isFinite(shown)","span":{"start":338,"end":369}},{"kind":"always","text":"shownFor >= old(shownFor)","span":{"start":370,"end":405}}],"units":[{"unit":"$init","kind":"init","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[{"roots":[],"nodes":{}}]},{"unit":"search$0","kind":"entry","span":{"start":455,"end":500},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0010000000000010"],"shownFor":["num","8000000000000000"],"shown":["num","0000000000000004"]}}}}]},{"unit":"search$1","kind":"resume","span":{"start":577,"end":637},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4044022000000000","0000000000000000","0000000000000400",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4054022000000011"],"shownFor":["num","0020010000000002"],"shown":["num","0000000000001000"]}}}}]},{"unit":"$reject","kind":"stutter","span":{"start":293,"end":337},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","0808023000000000"],"shownFor":["num","0808023000000000"],"shown":["num","0000000000010000"]}}}}]},{"unit":"search$0$keeps$search$1","kind":"interference","span":{"start":455,"end":500},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","4000389000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4811389000000001"],"shownFor":["num","1020b09000000000"],"shown":["num","0000000001000000"]}}}}]},{"unit":"search$1$keeps$search$1","kind":"interference","span":{"start":577,"end":637},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","3ff0000000000000","0000000000000000","0000002000000000","3ff0008a440f0489","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","3ff0008a440f0489"],"shownFor":["num","3fe0008a440f108a"],"shown":["num","0000000000000400"]}}}}]},{"unit":"$reject$keeps$search$1","kind":"interference","span":{"start":293,"end":337},"keeps":{"entry":"search","span":{"start":540,"end":574}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","4000148000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"latest":["num","4010128000000001"],"shownFor":["num","4000228000000000"],"shown":["num","0000000001000000"]}}}}]}],"status":"verified","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions"}'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion-parity.test.mjs:56:14)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# (node:82504) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: zero/one/two awaits, empty prefixes, all entries and nested tail exits complete through the public API
+not ok 5 - zero/one/two awaits, empty prefixes, all entries and nested tail exits complete through the public API
+  ---
+  duration_ms: 1110.742875
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion.test.mjs:25:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {"file":"two.ts","sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302","trusted":["Acorn and Node type stripping","closed stateful frontend and AST binding rewrites","existing source body/expression/heap compiler","representative init/step/keeps induction","existing proof scheduler and Z3 binary64 backend","strict native JavaScript replay and timed process containment"],"executableSha256":"fc0d5c253aa7f8e5c965b45ee03826d302eec4a47a3b906486206b7355f7fd36","assumptions":{"numericDomain":"JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)","eventBound":null,"scheduler":"JS run-to-completion; external actions with microtasks drained before the next environment action","entryCalls":"external only; no entry-to-entry or recursive calls; unboundedly repeated","activationPool":"unbounded multiset; distinct identities per invocation, unary pending invariants","initial":{"n":"0"},"environment":[{"op":"op","params":[],"result":"number","resolves":["Number.isFinite(result)"],"rejects":"may-reject","settles":"eventually","settlementOrder":"any","settlementCount":"at most once per request","settlesUse":"declared-unused for safety"},{"op":"unused","params":[],"result":"number","resolves":["false"],"rejects":"never-rejects","settles":"eventually","settlementOrder":"any","settlementCount":"at most once per request","settlesUse":"declared-unused for safety"}],"entries":[{"entry":"work","params":[]},{"entry":"disturb","params":[]}],"fairness":"none used by safety; settles eventually is recorded only","unsupported":["references","imports","handlers","cancellation","ordering/abort contracts","entry contracts","pairwise/uniqueness/count induction","nested awaits","entry-to-entry calls","unverified helpers","temporal goals beyond per-invocation completion"],"completion":{"goals":[{"entry":"work","goal":"completes","span":{"start":281,"end":304}},{"entry":"disturb","goal":"completes","span":{"start":305,"end":331}}],"profile":{"kind":"c1-action-cuts","version":1,"microtaskMode":"afterEvaluate","drain":"void 0;","resumption":"same-action-timed-drain","arrivals":"arbitrary-between-actions","eventBound":null,"activationBound":null},"continuingRuntime":"assumed for completion","declaredEnvironmentCalls":"assumed total for completion","resumption":"checked only after finite source totality and complete exit correspondence","settlement":"assumed separately per reached request; no safety use"},"sha256":"b1b2fc72c195cec793ccf27cf28b4d5d2a5f5d5451d846caa54e13ebf10f994f"},"unitsSha256":"aaa3e5e678bc9f2646193c186a6176a3330d27851243f0f3b69b9d87b605d77d","properties":[{"kind":"state","text":"n >= 0","span":{"start":236,"end":251}}],"units":[{"unit":"$init","kind":"init","span":{"start":236,"end":251},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[{"roots":[],"nodes":{}}]},{"unit":"work$0","kind":"entry","span":{"start":385,"end":414},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"work$1","kind":"resume","span":{"start":417,"end":423},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"work$2","kind":"resume","span":{"start":478,"end":524},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"disturb$0","kind":"entry","span":{"start":555,"end":561},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"$reject","kind":"stutter","span":{"start":236,"end":251},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"work$0$keeps$work$1","kind":"interference","span":{"start":385,"end":414},"keeps":{"entry":"work","span":{"start":385,"end":414}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"work$0$keeps$work$2","kind":"interference","span":{"start":385,"end":414},"keeps":{"entry":"work","span":{"start":446,"end":475}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"work$1$keeps$work$1","kind":"interference","span":{"start":417,"end":423},"keeps":{"entry":"work","span":{"start":385,"end":414}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"work$1$keeps$work$2","kind":"interference","span":{"start":417,"end":423},"keeps":{"entry":"work","span":{"start":446,"end":475}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"work$2$keeps$work$1","kind":"interference","span":{"start":478,"end":524},"keeps":{"entry":"work","span":{"start":385,"end":414}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0018000000000000"]}}}}]},{"unit":"work$2$keeps$work$2","kind":"interference","span":{"start":478,"end":524},"keeps":{"entry":"work","span":{"start":446,"end":475}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000","0000000000000000","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"disturb$0$keeps$work$1","kind":"interference","span":{"start":555,"end":561},"keeps":{"entry":"work","span":{"start":385,"end":414}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"disturb$0$keeps$work$2","kind":"interference","span":{"start":555,"end":561},"keeps":{"entry":"work","span":{"start":446,"end":475}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"$reject$keeps$work$1","kind":"interference","span":{"start":236,"end":251},"keeps":{"entry":"work","span":{"start":385,"end":414}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0000000000000000"]}}}}]},{"unit":"$reject$keeps$work$2","kind":"interference","span":{"start":236,"end":251},"keeps":{"entry":"work","span":{"start":446,"end":475}},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0","0000000000000000",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"n":["num","0010040000000000"]}}}}]}],"status":"unknown","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions","reason":"completion-obligation","safety":{"status":"verified","scope":"safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions","assumptionsUse":"temporal premises unused"},"completion":{"manifestSha256":"3bf07c36e33de14a6cac3e7262ff29d0040d466341cf1572da2edd39e78d47f0","binding":{"sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302","executableSha256":"fc0d5c253aa7f8e5c965b45ee03826d302eec4a47a3b906486206b7355f7fd36","assumptionsSha256":"b1b2fc72c195cec793ccf27cf28b4d5d2a5f5d5451d846caa54e13ebf10f994f","safetyUnitsSha256":"aaa3e5e678bc9f2646193c186a6176a3330d27851243f0f3b69b9d87b605d77d","implementationSha256":"0eb80fd8dc87e0fb08423f1ed851f29f81971b4d3fdc130f4da74209ceb11302","runtime":"v22.23.1","rule":"c1-per-invocation-completion-1","profileSha256":"bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45","goalsSha256":"3a4f68a1d704e950a937e713863aea46f08cc8081075e39f8977a873250e982c"},"closed":true,"profile":{"kind":"c1-action-cuts","version":1,"microtaskMode":"afterEvaluate","drain":"void 0;","resumption":"same-action-timed-drain","arrivals":"arbitrary-between-actions","eventBound":null,"activationBound":null},"obligations":[{"id":"init","kind":"init","status":"discharged","safetyUnit":"$init","rule":"initial empty identity support"},{"id":"rejection-safety","kind":"safety-step","status":"discharged","safetyUnit":"$reject"},{"id":"work$0:safety","kind":"safety-step","status":"discharged","safetyUnit":"work$0"},{"id":"work$0:totality","kind":"segment-totality","status":"checked","unit":"work$0"},{"id":"work$0:exits","kind":"source-exit-coverage","status":"checked","entry":"work","segment":0,"action":"call","sourceSpan":{"start":339,"end":526},"sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"},{"id":"work$0:terminal","kind":"terminal-equivalence","status":"checked","rule":"zero iff post-terminal; every live source location is positive"},{"id":"work$0:creation","kind":"creation","status":"checked","rule":"fresh invocation; positive birth ordinal; call executes first segment"},{"id":"work$0:0:own-progress","kind":"own-progress","status":"unresolved","unit":"work$0","check":1,"sourceExit":{"kind":"waiting","span":{"start":385,"end":414},"path":"true","rankBefore":"3","rankAfter":"2"},"querySha256":"916d2a3b0d48e02ac6614f1d6f930584863b79ac8fa7b19de858573d9952f188"},{"id":"work$0:0:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$0","check":2,"sourceExit":{"kind":"waiting","span":{"start":385,"end":414},"path":"true","rankBefore":"3","rankAfter":"2"},"querySha256":"916d2a3b0d48e02ac6614f1d6f930584863b79ac8fa7b19de858573d9952f188"},{"id":"work$0:0:outcome-viability","kind":"outcome-viability","status":"unresolved","unit":"work$0","check":3,"sourceExit":{"kind":"waiting","span":{"start":385,"end":414},"path":"true","rankBefore":"3","rankAfter":"2"},"querySha256":"916d2a3b0d48e02ac6614f1d6f930584863b79ac8fa7b19de858573d9952f188"},{"id":"work$1:safety","kind":"safety-step","status":"discharged","safetyUnit":"work$1"},{"id":"work$1:totality","kind":"segment-totality","status":"checked","unit":"work$1"},{"id":"work$1:exits","kind":"source-exit-coverage","status":"checked","entry":"work","segment":1,"action":"resolve","sourceSpan":{"start":339,"end":526},"sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"},{"id":"work$1:terminal","kind":"terminal-equivalence","status":"checked","rule":"zero iff post-terminal; every live source location is positive"},{"id":"work$1:0:own-progress","kind":"own-progress","status":"unresolved","unit":"work$1","check":1,"sourceExit":{"kind":"waiting","span":{"start":446,"end":475},"path":"true","rankBefore":"2","rankAfter":"1"},"querySha256":"e6472e82d76d5252ed6791062ade5fcd482de62a4de5ddfd9877488b3f20ca25"},{"id":"work$1:0:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$1","check":2,"sourceExit":{"kind":"waiting","span":{"start":446,"end":475},"path":"true","rankBefore":"2","rankAfter":"1"},"querySha256":"e6472e82d76d5252ed6791062ade5fcd482de62a4de5ddfd9877488b3f20ca25"},{"id":"work$1:0:outcome-viability","kind":"outcome-viability","status":"unresolved","unit":"work$1","check":3,"sourceExit":{"kind":"waiting","span":{"start":446,"end":475},"path":"true","rankBefore":"2","rankAfter":"1"},"querySha256":"e6472e82d76d5252ed6791062ade5fcd482de62a4de5ddfd9877488b3f20ca25"},{"id":"work$reject$1:totality","kind":"segment-totality","status":"checked","unit":"work$reject$1"},{"id":"work$reject$1:exits","kind":"source-exit-coverage","status":"checked","entry":"work","segment":1,"action":"reject","sourceSpan":{"start":385,"end":414},"sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"},{"id":"work$reject$1:terminal","kind":"terminal-equivalence","status":"checked","rule":"zero iff post-terminal; every live source location is positive"},{"id":"work$reject$1:deletion","kind":"deletion","status":"checked","rule":"only actor reaches terminal; other identities remain live"},{"id":"work$reject$1:0:own-progress","kind":"own-progress","status":"unresolved","unit":"work$reject$1","check":1,"sourceExit":{"kind":"environment-rejected","span":{"start":385,"end":414},"path":"true","rankBefore":"2","rankAfter":"0"},"querySha256":"28ce03755e58743de201d983b9ac68f623ca1dd3be8b3aec9e85d84244f67812"},{"id":"work$reject$1:0:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$reject$1","check":2,"sourceExit":{"kind":"environment-rejected","span":{"start":385,"end":414},"path":"true","rankBefore":"2","rankAfter":"0"},"querySha256":"28ce03755e58743de201d983b9ac68f623ca1dd3be8b3aec9e85d84244f67812"},{"id":"work$2:safety","kind":"safety-step","status":"discharged","safetyUnit":"work$2"},{"id":"work$2:totality","kind":"segment-totality","status":"checked","unit":"work$2"},{"id":"work$2:exits","kind":"source-exit-coverage","status":"missing","entry":"work","segment":2,"action":"resolve","sourceSpan":{"start":339,"end":526},"sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"},{"id":"work$2:terminal","kind":"terminal-equivalence","status":"missing","rule":"zero iff post-terminal; every live source location is positive"},{"id":"work$2:deletion","kind":"deletion","status":"missing","rule":"only actor reaches terminal; other identities remain live"},{"id":"work$2:0:own-progress","kind":"own-progress","status":"unresolved","unit":"work$2","check":1,"sourceExit":{"kind":"returned","span":{"start":506,"end":513},"path":"(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000)))","rankBefore":"1","rankAfter":"0"},"querySha256":"74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540"},{"id":"work$2:0:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$2","check":2,"sourceExit":{"kind":"returned","span":{"start":506,"end":513},"path":"(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000)))","rankBefore":"1","rankAfter":"0"},"querySha256":"74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540"},{"id":"work$2:1:own-progress","kind":"own-progress","status":"unresolved","unit":"work$2","check":3,"sourceExit":{"kind":"fallthrough","span":{"start":478,"end":524},"path":"(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (not (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000))))","rankBefore":"1","rankAfter":"0"},"querySha256":"74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540"},{"id":"work$2:1:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$2","check":4,"sourceExit":{"kind":"fallthrough","span":{"start":478,"end":524},"path":"(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (not (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000))))","rankBefore":"1","rankAfter":"0"},"querySha256":"74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540"},{"id":"work$2:2:own-progress","kind":"own-progress","status":"unresolved","unit":"work$2","check":5,"sourceExit":{"kind":"fallthrough","span":{"start":478,"end":524},"path":"(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))","rankBefore":"1","rankAfter":"0"},"querySha256":"74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540"},{"id":"work$2:2:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$2","check":6,"sourceExit":{"kind":"fallthrough","span":{"start":478,"end":524},"path":"(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))","rankBefore":"1","rankAfter":"0"},"querySha256":"74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540"},{"id":"work$reject$2:totality","kind":"segment-totality","status":"checked","unit":"work$reject$2"},{"id":"work$reject$2:exits","kind":"source-exit-coverage","status":"checked","entry":"work","segment":2,"action":"reject","sourceSpan":{"start":446,"end":475},"sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"},{"id":"work$reject$2:terminal","kind":"terminal-equivalence","status":"checked","rule":"zero iff post-terminal; every live source location is positive"},{"id":"work$reject$2:deletion","kind":"deletion","status":"checked","rule":"only actor reaches terminal; other identities remain live"},{"id":"work$reject$2:0:own-progress","kind":"own-progress","status":"unresolved","unit":"work$reject$2","check":1,"sourceExit":{"kind":"environment-rejected","span":{"start":446,"end":475},"path":"true","rankBefore":"1","rankAfter":"0"},"querySha256":"ee752011b8099eafcdf5213f769f6d95780829267cb3c83a63f722ec68d4b128"},{"id":"work$reject$2:0:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"work$reject$2","check":2,"sourceExit":{"kind":"environment-rejected","span":{"start":446,"end":475},"path":"true","rankBefore":"1","rankAfter":"0"},"querySha256":"ee752011b8099eafcdf5213f769f6d95780829267cb3c83a63f722ec68d4b128"},{"id":"disturb$0:safety","kind":"safety-step","status":"discharged","safetyUnit":"disturb$0"},{"id":"disturb$0:totality","kind":"segment-totality","status":"checked","unit":"disturb$0"},{"id":"disturb$0:exits","kind":"source-exit-coverage","status":"checked","entry":"disturb","segment":0,"action":"call","sourceSpan":{"start":534,"end":563},"sourceSha256":"abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"},{"id":"disturb$0:terminal","kind":"terminal-equivalence","status":"checked","rule":"zero iff post-terminal; every live source location is positive"},{"id":"disturb$0:creation","kind":"creation","status":"checked","rule":"fresh invocation; positive birth ordinal; call executes first segment"},{"id":"disturb$0:deletion","kind":"deletion","status":"checked","rule":"only actor reaches terminal; other identities remain live"},{"id":"disturb$0:0:own-progress","kind":"own-progress","status":"unresolved","unit":"disturb$0","check":1,"sourceExit":{"kind":"fallthrough","span":{"start":555,"end":561},"path":"true","rankBefore":"1","rankAfter":"0"},"querySha256":"9840f949ea7309654d8a813b9bbf421ed191cdf2a70de112427111c196c292fa"},{"id":"disturb$0:0:rank-nonnegative","kind":"rank-nonnegative","status":"unresolved","unit":"disturb$0","check":2,"sourceExit":{"kind":"fallthrough","span":{"start":555,"end":561},"path":"true","rankBefore":"1","rankAfter":"0"},"querySha256":"9840f949ea7309654d8a813b9bbf421ed191cdf2a70de112427111c196c292fa"},{"id":"work$0:observes:work:0:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"allocation is fresh relative to every existing identity"},{"id":"work$0:observes:work:0:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$0","observed":{"entry":"work","site":0,"rank":"2"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$0:observes:work:0:alias"},{"id":"work$1:observes:work:0:alias","kind":"identity-alias","status":"checked","cases":["same actor: own progress","distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$1:observes:work:0:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$1","observed":{"entry":"work","site":0,"rank":"2"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$1:observes:work:0:alias"},{"id":"work$reject$1:observes:work:0:alias","kind":"identity-alias","status":"checked","cases":["same actor: own progress","distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$reject$1:observes:work:0:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$reject$1","observed":{"entry":"work","site":0,"rank":"2"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$reject$1:observes:work:0:alias"},{"id":"work$2:observes:work:0:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$2:observes:work:0:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$2","observed":{"entry":"work","site":0,"rank":"2"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$2:observes:work:0:alias"},{"id":"work$reject$2:observes:work:0:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$reject$2:observes:work:0:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$reject$2","observed":{"entry":"work","site":0,"rank":"2"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$reject$2:observes:work:0:alias"},{"id":"disturb$0:observes:work:0:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"allocation is fresh relative to every existing identity"},{"id":"disturb$0:observes:work:0:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"disturb$0","observed":{"entry":"work","site":0,"rank":"2"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"disturb$0:observes:work:0:alias"},{"id":"work$0:keeps:work:0","kind":"pending-keeps","status":"discharged","safetyUnit":"work$0$keeps$work$1"},{"id":"work$1:keeps:work:0","kind":"pending-keeps","status":"discharged","safetyUnit":"work$1$keeps$work$1"},{"id":"work$2:keeps:work:0","kind":"pending-keeps","status":"discharged","safetyUnit":"work$2$keeps$work$1"},{"id":"disturb$0:keeps:work:0","kind":"pending-keeps","status":"discharged","safetyUnit":"disturb$0$keeps$work$1"},{"id":"$reject:keeps:work:0","kind":"pending-keeps","status":"discharged","safetyUnit":"$reject$keeps$work$1"},{"id":"work$0:observes:work:1:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"allocation is fresh relative to every existing identity"},{"id":"work$0:observes:work:1:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$0","observed":{"entry":"work","site":1,"rank":"1"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$0:observes:work:1:alias"},{"id":"work$1:observes:work:1:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$1:observes:work:1:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$1","observed":{"entry":"work","site":1,"rank":"1"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$1:observes:work:1:alias"},{"id":"work$reject$1:observes:work:1:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$reject$1:observes:work:1:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$reject$1","observed":{"entry":"work","site":1,"rank":"1"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$reject$1:observes:work:1:alias"},{"id":"work$2:observes:work:1:alias","kind":"identity-alias","status":"checked","cases":["same actor: own progress","distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$2:observes:work:1:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$2","observed":{"entry":"work","site":1,"rank":"1"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$2:observes:work:1:alias"},{"id":"work$reject$2:observes:work:1:alias","kind":"identity-alias","status":"checked","cases":["same actor: own progress","distinct actor: frame"],"rule":"request belongs to exactly one invocation; at most one settlement"},{"id":"work$reject$2:observes:work:1:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"work$reject$2","observed":{"entry":"work","site":1,"rank":"1"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"work$reject$2:observes:work:1:alias"},{"id":"disturb$0:observes:work:1:alias","kind":"identity-alias","status":"checked","cases":["distinct actor: frame"],"rule":"allocation is fresh relative to every existing identity"},{"id":"disturb$0:observes:work:1:nonincrease","kind":"interference-nonincrease","status":"checked","unit":"disturb$0","observed":{"entry":"work","site":1,"rank":"1"},"rule":"distinct-identity frame: body writes scalar cells/actor locals; only actor control changes","aliases":"disturb$0:observes:work:1:alias"},{"id":"work$0:keeps:work:1","kind":"pending-keeps","status":"discharged","safetyUnit":"work$0$keeps$work$2"},{"id":"work$1:keeps:work:1","kind":"pending-keeps","status":"discharged","safetyUnit":"work$1$keeps$work$2"},{"id":"work$2:keeps:work:1","kind":"pending-keeps","status":"discharged","safetyUnit":"work$2$keeps$work$2"},{"id":"disturb$0:keeps:work:1","kind":"pending-keeps","status":"discharged","safetyUnit":"disturb$0$keeps$work$2"},{"id":"$reject:keeps:work:1","kind":"pending-keeps","status":"discharged","safetyUnit":"$reject$keeps$work$2"},{"id":"profile","kind":"profile-correspondence","status":"missing","profile":{"kind":"c1-action-cuts","version":1,"microtaskMode":"afterEvaluate","drain":"void 0;","resumption":"same-action-timed-drain","arrivals":"arbitrary-between-actions","eventBound":null,"activationBound":null},"rule":"finite total source segments; native settlement and timed microtask drain are the same C1 action"}],"units":[{"unit":"work$0","querySha256":"916d2a3b0d48e02ac6614f1d6f930584863b79ac8fa7b19de858573d9952f188","status":"unknown","reason":"prerequisite"},{"unit":"work$1","querySha256":"e6472e82d76d5252ed6791062ade5fcd482de62a4de5ddfd9877488b3f20ca25","status":"unknown","reason":"prerequisite"},{"unit":"work$reject$1","querySha256":"28ce03755e58743de201d983b9ac68f623ca1dd3be8b3aec9e85d84244f67812","status":"unknown","reason":"prerequisite"},{"unit":"work$2","querySha256":"74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540","status":"unknown","reason":"prerequisite"},{"unit":"work$reject$2","querySha256":"ee752011b8099eafcdf5213f769f6d95780829267cb3c83a63f722ec68d4b128","status":"unknown","reason":"prerequisite"},{"unit":"disturb$0","querySha256":"9840f949ea7309654d8a813b9bbf421ed191cdf2a70de112427111c196c292fa","status":"unknown","reason":"prerequisite"}],"goals":[{"entry":"work","goal":"completes","span":{"start":281,"end":304},"status":"unknown","reason":"completion-obligation","scope":"each invocation returns normally (including suppressed writes) or reaches declared environment rejection","rank":{"domain":"exact source-control integers","birth":"3","waiting":["2","1"],"terminal":"0"},"assumptions":[{"kind":"per-reached-request-settlement","op":"op","classification":"assumed-unused","declared":true,"scope":"each reached request occurrence, not operation-kind fairness"},{"kind":"per-reached-request-settlement","op":"unused","classification":"assumed-unused","declared":true,"scope":"each reached request occurrence, not operation-kind fairness"},{"kind":"continuing-runtime","classification":"assumed-unused"},{"kind":"total-declared-environment-calls","classification":"assumed-unused"},{"kind":"weak-resumption","classification":"missing","requested":true,"profileSha256":"bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45"}],"nativeConfirmed":false},{"entry":"disturb","goal":"completes","span":{"start":305,"end":331},"status":"unknown","reason":"completion-obligation","scope":"each invocation returns normally (including suppressed writes) or reaches declared environment rejection","rank":{"domain":"exact source-control integers","birth":"1","waiting":[],"terminal":"0"},"assumptions":[{"kind":"per-reached-request-settlement","op":"op","classification":"assumed-unused","declared":true,"scope":"each reached request occurrence, not operation-kind fairness"},{"kind":"per-reached-request-settlement","op":"unused","classification":"assumed-unused","declared":true,"scope":"each reached request occurrence, not operation-kind fairness"},{"kind":"continuing-runtime","classification":"assumed-unused"},{"kind":"total-declared-environment-calls","classification":"assumed-unused"},{"kind":"weak-resumption","classification":"missing","requested":true,"profileSha256":"bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45"}],"nativeConfirmed":false}],"nativeConfirmed":false,"trusted":["finite-control completion rule and source/identity frame checker","compiler exit/definedness coverage","C1 native action and timed-drain correspondence","Z3 including quantified outcome viability"],"limitations":["no checked infinite-word realizability","no global draining/success/commit/count theorem","protocol temporal mode unsupported"]}}
+    + actual - expected
+    
+    + 'unknown'
+    - 'verified'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'verified'
+  actual: 'unknown'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion.test.mjs:28:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: native return, suppressed tail, rejection and arbitrary other-entry interference retain action cuts
+ok 6 - native return, suppressed tail, rejection and arbitrary other-entry interference retain action cuts
+  ---
+  duration_ms: 308.009666
+  type: 'test'
+  ...
+# Subtest: viability is full-domain outcome existence, separate from safety and resume postconditions
+ok 7 - viability is full-domain outcome existence, separate from safety and resume postconditions
+  ---
+  duration_ms: 2187.872584
+  type: 'test'
+  ...
+# Subtest: missing settlement is a symbolic liveness gap and unsupported schedulers/protocols fail closed
+ok 8 - missing settlement is a symbolic liveness gap and unsupported schedulers/protocols fail closed
+  ---
+  duration_ms: 495.517084
+  type: 'test'
+  ...
+# Subtest: private progress, interference, keeps, totality, alias and exit omissions kill completion independently of safety
+not ok 9 - private progress, interference, keeps, totality, alias and exit omissions kill completion independently of safety
+  ---
+  duration_ms: 306.759875
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion.test.mjs:100:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'unknown'
+    - 'verified'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'verified'
+  actual: 'unknown'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion.test.mjs:105:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: actual source exits reject stalling and half-unit ranks through specifications.rankDecrease
+ok 10 - actual source exits reject stalling and half-unit ranks through specifications.rankDecrease
+  ---
+  duration_ms: 320.0105
+  type: 'test'
+  ...
+# Subtest: wrong safety, one-ms timeout and maxDepth0 never authorize completion
+ok 11 - wrong safety, one-ms timeout and maxDepth0 never authorize completion
+  ---
+  duration_ms: 612.096958
+  type: 'test'
+  ...
+# Subtest: source Number saturation does not merge semantic invocation/request identities
+not ok 12 - source Number saturation does not merge semantic invocation/request identities
+  ---
+  duration_ms: 662.467584
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion.test.mjs:150:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - 'counterexample'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'counterexample'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/conditional-completion.test.mjs:159:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# (node:82821) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: unsupported stateful loops return original source diagnostics instead of throwing
+ok 13 - unsupported stateful loops return original source diagnostics instead of throwing
+  ---
+  duration_ms: 31.48625
+  type: 'test'
+  ...
+# Subtest: original compiler rejects a false capture annotation before it can become a resumption assumption
+ok 14 - original compiler rejects a false capture annotation before it can become a resumption assumption
+  ---
+  duration_ms: 2.130167
+  type: 'test'
+  ...
+# Subtest: request parameter assumptions use the captured request value across interference
+ok 15 - request parameter assumptions use the captured request value across interference
+  ---
+  duration_ms: 124.272292
+  type: 'test'
+  ...
+# Subtest: always-only properties use pre-step old, including rejection stutter
+ok 16 - always-only properties use pre-step old, including rejection stutter
+  ---
+  duration_ms: 535.193459
+  type: 'test'
+  ...
+# Subtest: unsupported clauses and source constructs retain exact original spans
+ok 17 - unsupported clauses and source constructs retain exact original spans
+  ---
+  duration_ms: 2.498708
+  type: 'test'
+  ...
+# (node:82830) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all recovered pilots/variants are audited by the production frontend
+ok 18 - all recovered pilots/variants are audited by the production frontend
+  ---
+  duration_ms: 42.746125
+  type: 'test'
+  ...
+# Subtest: closed grammar rejects case, colon, edit distance, block and unknown environment lines
+not ok 19 - closed grammar rejects case, colon, edit distance, block and unknown environment lines
+  ---
+  duration_ms: 3.101709
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/stateful-frontend.test.mjs:17:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /clause|expression/. Input:
+    
+    'Error: Only fairness resumptions weak is supported.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'Only fairness resumptions weak is supported.'
+  stack: |-
+    fail (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/verify/error.mjs:10:9)
+    file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/verify/stateful/clauses.mjs:47:64
+    Array.map (<anonymous>)
+    parseClauses (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/verify/stateful/clauses.mjs:31:19)
+    file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/verify/stateful/machine.mjs:80:21
+    blame (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/verify/error.mjs:16:16)
+    machineOf (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/verify/stateful/machine.mjs:70:10)
+    file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/stateful-frontend.test.mjs:19:25
+    getActual (node:assert:609:5)
+    Function.throws (node:assert:757:24)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/tests/verify/stateful-frontend.test.mjs:19:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: assumptions expose defaults, declared-unused settling and canonical identity
+ok 20 - assumptions expose defaults, declared-unused settling and canonical identity
+  ---
+  duration_ms: 1.839416
+  type: 'test'
+  ...
+# Subtest: module state, ambient signatures, binding identities and nested awaits fail closed
+ok 21 - module state, ambient signatures, binding identities and nested awaits fail closed
+  ---
+  duration_ms: 1.994375
+  type: 'test'
+  ...
+# Subtest: Unicode edits in clause keywords cannot silently discard properties
+ok 22 - Unicode edits in clause keywords cannot silently discard properties
+  ---
+  duration_ms: 1.832292
+  type: 'test'
+  ...
+# (node:82831) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: six pilots and all corrected judge variants run through production
+    # Subtest: pilots/search.ts
+    ok 1 - pilots/search.ts
+      ---
+      duration_ms: 1572.782542
+      type: 'test'
+      ...
+    # Subtest: pilots/search-stale.ts
+    ok 2 - pilots/search-stale.ts
+      ---
+      duration_ms: 2391.667
+      type: 'test'
+      ...
+    # Subtest: pilots/search-gap.ts
+    ok 3 - pilots/search-gap.ts
+      ---
+      duration_ms: 3933.577542
+      type: 'test'
+      ...
+    # Subtest: pilots/search-env.ts
+    ok 4 - pilots/search-env.ts
+      ---
+      duration_ms: 1830.873917
+      type: 'test'
+      ...
+    # Subtest: pilots/search-overclaim.ts
+    ok 5 - pilots/search-overclaim.ts
+      ---
+      duration_ms: 2220.039666
+      type: 'test'
+      ...
+    # Subtest: pilots/search-unsupported.ts
+    ok 6 - pilots/search-unsupported.ts
+      ---
+      duration_ms: 1.558042
+      type: 'test'
+      ...
+    # Subtest: variants/V1-leads-no-settles.ts
+    ok 7 - variants/V1-leads-no-settles.ts
+      ---
+      duration_ms: 0.692625
+      type: 'test'
+      ...
+    # Subtest: variants/V1b-leads-settles.ts
+    ok 8 - variants/V1b-leads-settles.ts
+      ---
+      duration_ms: 0.741334
+      type: 'test'
+      ...
+    # Subtest: variants/V2-entry-ensures-false.ts
+    ok 9 - variants/V2-entry-ensures-false.ts
+      ---
+      duration_ms: 0.651
+      type: 'test'
+      ...
+    # Subtest: variants/V3-state-colon-typo.ts
+    ok 10 - variants/V3-state-colon-typo.ts
+      ---
+      duration_ms: 0.547209
+      type: 'test'
+      ...
+    # Subtest: variants/V4-block-comment-state.ts
+    ok 11 - variants/V4-block-comment-state.ts
+      ---
+      duration_ms: 0.705083
+      type: 'test'
+      ...
+    # Subtest: variants/V5-no-properties.ts
+    ok 12 - variants/V5-no-properties.ts
+      ---
+      duration_ms: 0.493292
+      type: 'test'
+      ...
+    # Subtest: variants/V5b-no-properties-no-pending.ts
+    ok 13 - variants/V5b-no-properties-no-pending.ts
+      ---
+      duration_ms: 0.413667
+      type: 'test'
+      ...
+    # Subtest: variants/V9-resolves-typo.ts
+    ok 14 - variants/V9-resolves-typo.ts
+      ---
+      duration_ms: 0.527375
+      type: 'test'
+      ...
+    # Subtest: variants/V10-rejects-sometimes.ts
+    ok 15 - variants/V10-rejects-sometimes.ts
+      ---
+      duration_ms: 0.45325
+      type: 'test'
+      ...
+    # Subtest: variants/V14-entry-calls-entry.ts
+    ok 16 - variants/V14-entry-calls-entry.ts
+      ---
+      duration_ms: 0.828334
+      type: 'test'
+      ...
+    # Subtest: variants/V15-old-in-state.ts
+    ok 17 - variants/V15-old-in-state.ts
+      ---
+      duration_ms: 0.789583
+      type: 'test'
+      ...
+    # Subtest: variants/V16-undeclared-write.ts
+    ok 18 - variants/V16-undeclared-write.ts
+      ---
+      duration_ms: 0.580334
+      type: 'test'
+      ...
+    # Subtest: variants/V6-inflight-count.ts
+    ok 19 - variants/V6-inflight-count.ts
+      ---
+      duration_ms: 2742.240458
+      type: 'test'
+      ...
+    # Subtest: variants/V18-two-awaits.ts
+    ok 20 - variants/V18-two-awaits.ts
+      ---
+      duration_ms: 8023.404
+      type: 'test'
+      ...
+    # Subtest: variants/V7-latest-2p53.ts
+    ok 21 - variants/V7-latest-2p53.ts
+      ---
+      duration_ms: 1706.399584
+      type: 'test'
+      ...
+    # Subtest: variants/V8-second-entry-clear.ts
+    ok 22 - variants/V8-second-entry-clear.ts
+      ---
+      duration_ms: 3378.405166
+      type: 'test'
+      ...
+    # Subtest: variants/V11-rejects.ts
+    ok 23 - variants/V11-rejects.ts
+      ---
+      duration_ms: 1631.912
+      type: 'test'
+      ...
+    # Subtest: variants/V18b-two-awaits-annotated.ts
+    ok 24 - variants/V18b-two-awaits-annotated.ts
+      ---
+      duration_ms: 2535.898042
+      type: 'test'
+      ...
+    # Subtest: variants/V8b-second-entry-reset.ts
+    ok 25 - variants/V8b-second-entry-reset.ts
+      ---
+      duration_ms: 1969.076792
+      type: 'test'
+      ...
+    1..25
+ok 23 - six pilots and all corrected judge variants run through production
+  ---
+  duration_ms: 33947.085584
+  type: 'test'
+  ...
+# Subtest: binary64 request IDs really collide at 2^53 without violating the stated properties
+ok 24 - binary64 request IDs really collide at 2^53 without violating the stated properties
+  ---
+  duration_ms: 62.221459
+  type: 'test'
+  ...
+# Subtest: real solver budget exhaustion remains unknown/solver and attributes the request budget
+ok 25 - real solver budget exhaustion remains unknown/solver and attributes the request budget
+  ---
+  duration_ms: 2.657416
+  type: 'test'
+  ...
+# Subtest: witness depth cannot authorize a proof
+ok 26 - witness depth cannot authorize a proof
+  ---
+  duration_ms: 1697.760166
+  type: 'test'
+  ...
+# (node:83408) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: strict native source replay is repeatable, hash-bound, and may remain pending
+ok 27 - strict native source replay is repeatable, hash-bound, and may remain pending
+  ---
+  duration_ms: 369.542417
+  type: 'test'
+  ...
+# Subtest: illegal action types, identities, args/results and outcomes are refused
+ok 28 - illegal action types, identities, args/results and outcomes are refused
+  ---
+  duration_ms: 854.022167
+  type: 'test'
+  ...
+# Subtest: wire scalars preserve binary64 exceptional values
+ok 29 - wire scalars preserve binary64 exceptional values
+  ---
+  duration_ms: 62.678125
+  type: 'test'
+  ...
+# Subtest: continuation loop is contained below one second with real native promises
+ok 30 - continuation loop is contained below one second with real native promises
+  ---
+  duration_ms: 162.698208
+  type: 'test'
+  ...
+# Subtest: unchanged executable runs in strict realm and rejects unbound this
+ok 31 - unchanged executable runs in strict realm and rejects unbound this
+  ---
+  duration_ms: 58.170791
+  type: 'test'
+  ...
+# Subtest: an initially false property cannot mask an illegal action suffix
+ok 32 - an initially false property cannot mask an illegal action suffix
+  ---
+  duration_ms: 56.228334
+  type: 'test'
+  ...
+# (node:83436) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: original AST segments prove guarded search and both annotated awaits
+ok 33 - original AST segments prove guarded search and both annotated awaits
+  ---
+  duration_ms: 5858.573083
+  type: 'test'
+  ...
+# Subtest: keeps refutes overclaim; private deletion reproduces the unsound ablation
+ok 34 - keeps refutes overclaim; private deletion reproduces the unsound ablation
+  ---
+  duration_ms: 2646.02975
+  type: 'test'
+  ...
+# Subtest: AST seam preserves original statements/spans and has no witness bound
+ok 35 - AST seam preserves original statements/spans and has no witness bound
+  ---
+  duration_ms: 2.847583
+  type: 'test'
+  ...
+1..35
+# tests 60
+# suites 0
+# pass 54
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 60923.436791
