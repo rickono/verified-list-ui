@@ -1,0 +1,11 @@
+{
+  "source": "let x=0;\n// state x===0\nexport function entry(){const c:AbortController=0;c.abort();}",
+  "status": "unsupported",
+  "message": "Unsupported or unresolved type AbortController.",
+  "span": {
+    "start": 54,
+    "end": 55
+  },
+  "sourceSha256": "ad91330e1eab3d589528ca82d59ce093c084debb74f1ca91103f49bf081b4df5",
+  "scope": "frontend-only negative control; no solver or application execution"
+}

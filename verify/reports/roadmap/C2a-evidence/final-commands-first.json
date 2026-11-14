@@ -1,0 +1,46 @@
+[
+  {
+    "name": "proof-final",
+    "command": [
+      "node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/capture-final.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/proof-final.json"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "native-direct",
+    "command": [
+      "node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/native-direct.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/native-direct.json"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "fp-after",
+    "command": [
+      "node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/fp-probe.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/fp-after.json"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "baseline-compare",
+    "command": [
+      "node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/baseline-compare.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/reports/roadmap/C2a-evidence/baseline-compare.json"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "full-final",
+    "command": [
+      "make",
+      "test-verify"
+    ],
+    "exit": 0
+  }
+]

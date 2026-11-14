@@ -1,0 +1,10 @@
+{
+  "source": "// @environment\n// protocol node22-event-target-v1\ndeclare const events: EventTarget;\nlet disposed = false;\nlet shown = 0;\n// state shown === 0 || shown === 1\n// always !old(disposed) || shown === old(shown)\nexport function bind(skip: boolean) {\n  if (skip) return;\n  const value: number = 1;\n  const handler = () => { if (!disposed) shown = 1; };\n  events.addEventListener(\"x\", handler);\n  events.addEventListener(\"x\", handler);\n  return () => events.removeEventListener(\"x\", handler);\n}\nexport function dispose() { disposed = true; }\n",
+  "sourceSha256": "94cf32cbdbea316426e7acfbfbe4eac4ee6dcde2e203946035a07fb7e522600c",
+  "expected": "illegal-environment-action for requested remover absent on this return path",
+  "result": {
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Entry did not return a callable remover on this path."
+  }
+}

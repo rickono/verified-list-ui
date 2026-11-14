@@ -1,0 +1,194 @@
+{
+  "source": "// @environment\n// rejects\n// abort advisory signal\ndeclare function lookup(q: number, signal: AbortSignal): Promise<number>;\nlet disposed = false;\nlet shown = 0;\n// state shown === 0 || shown === 1\n// always !old(disposed) || shown === old(shown)\nexport async function search(q: number, signal: AbortSignal) {\n  const value = await lookup(q, signal);\n  if (disposed || signal.aborted) return;\n  shown = value;\n}\nexport function dispose(controller: AbortController) {\n  disposed = true;\n  controller.abort();\n}\n",
+  "sourceSha256": "9839d9706c97978688244926a702aa5ac786c9aca06d479611794bb370b3abc8",
+  "inputBits": "7ff8000000000042",
+  "result": {
+    "status": "ok",
+    "trace": {
+      "version": 2,
+      "sourceSha256": "9839d9706c97978688244926a702aa5ac786c9aca06d479611794bb370b3abc8",
+      "executableSha256": "f0d985395c874f7de83ed3385353d598e039a74933a70401cd7cdf2e8ab5c660",
+      "assumptionsSha256": "cd127930ec5c9f3f0e4a4922f10d9ff5d4a1d6315c64632bced3a53c93707544",
+      "protocolSha256": "839f2074bc3bed56053391cb02313cdeec8c7af15ab37a5e97bd4281bf71dac1",
+      "replaySchemaSha256": "b1300839081e2eb97fca712a1728ff2d0caf9acec02eb9f0956c66c873e66ddd",
+      "inputs": [
+        {
+          "id": "10",
+          "signal": "11",
+          "aborted": false
+        }
+      ],
+      "targets": {},
+      "actions": [
+        {
+          "kind": "call",
+          "entry": "search",
+          "args": [
+            {
+              "type": "number",
+              "bits": "0000000000000000"
+            },
+            {
+              "type": "handle",
+              "sort": "signal",
+              "id": "11"
+            }
+          ]
+        },
+        {
+          "kind": "resolve",
+          "request": 1,
+          "op": "lookup",
+          "value": {
+            "type": "number",
+            "bits": "7ff8000000000042"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "disposed": {
+              "type": "boolean",
+              "value": false
+            },
+            "shown": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          }
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "call",
+            "entry": "search",
+            "args": [
+              {
+                "type": "number",
+                "bits": "0000000000000000"
+              },
+              {
+                "type": "handle",
+                "sort": "signal",
+                "id": "11"
+              }
+            ]
+          },
+          "state": {
+            "disposed": {
+              "type": "boolean",
+              "value": false
+            },
+            "shown": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "cuts": [
+            {
+              "kind": "action",
+              "registration": null,
+              "invocation": null,
+              "state": {
+                "disposed": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "shown": {
+                  "type": "number",
+                  "bits": "0000000000000000"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": {
+            "kind": "resolve",
+            "request": 1,
+            "op": "lookup",
+            "value": {
+              "type": "number",
+              "bits": "7ff8000000000042"
+            }
+          },
+          "state": {
+            "disposed": {
+              "type": "boolean",
+              "value": false
+            },
+            "shown": {
+              "type": "number",
+              "bits": "7ff8000000000042"
+            }
+          },
+          "cuts": [
+            {
+              "kind": "action",
+              "registration": null,
+              "invocation": null,
+              "state": {
+                "disposed": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "shown": {
+                  "type": "number",
+                  "bits": "7ff8000000000042"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "invocation": 1,
+        "args": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "handle",
+            "sort": "signal",
+            "id": "11"
+          }
+        ],
+        "settled": true
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ],
+    "registrations": [],
+    "violation": {
+      "kind": "state",
+      "text": "shown === 0 || shown === 1",
+      "span": {
+        "start": 163,
+        "end": 198
+      }
+    }
+  }
+}

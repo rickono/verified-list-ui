@@ -1,0 +1,3 @@
+(node:38402) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+unknown ok { kind: 'always', text: 'x !== old(x)', span: { start: 27, end: 49 } }

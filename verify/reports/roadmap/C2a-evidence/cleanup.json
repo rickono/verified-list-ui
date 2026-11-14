@@ -1,0 +1,10 @@
+{
+  "ownedSolverOrReplayOrDriverProcesses": [],
+  "temporaryBaselineDirectories": [],
+  "dependencyLinkPresent": false,
+  "coreAndTestsUnchangedSinceTestedCommit": true,
+  "testedCommit": "c1df5f6a7302dc70ede1c43649aa61295d3d80f7",
+  "testedTree": "e6ab0ad2fa9b16633ac86795d0a5bd0c285e4f17",
+  "canonicalRoadmapAuditEdits": false,
+  "externalActions": "no pushes, PRs, merges, messages, watches or subagents"
+}

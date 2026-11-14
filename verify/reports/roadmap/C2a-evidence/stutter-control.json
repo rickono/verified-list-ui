@@ -1,0 +1,825 @@
+{
+  "source": "let x=false;\n// state true\n// always x !== old(x)\nexport function flip(controller:AbortController){x=!x;}",
+  "sourceSha256": "191638a0c35b55b0c21aa95317636900b4f4ba5933b86c2be6e53ea4b1a84a2d",
+  "expected": "never verified: legal external abort is a cell-state stutter and violates this non-reflexive always relation",
+  "report": {
+    "file": "abort-stutter.ts",
+    "sourceSha256": "191638a0c35b55b0c21aa95317636900b4f4ba5933b86c2be6e53ea4b1a84a2d",
+    "trusted": [
+      "Acorn and Node type stripping",
+      "closed stateful frontend and AST binding rewrites",
+      "existing source body/expression/heap compiler",
+      "representative init/step/keeps induction",
+      "existing proof scheduler and Z3 binary64 backend",
+      "strict native JavaScript replay and timed process containment"
+    ],
+    "executableSha256": "00e4bdf86e0e1fb4edf16c7b6259f9d6724527231cb3503d611f05e2c16ff4f9",
+    "assumptions": {
+      "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+      "eventBound": null,
+      "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+      "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+      "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+      "initial": {
+        "x": "false"
+      },
+      "environment": [],
+      "entries": [
+        {
+          "entry": "flip",
+          "params": [
+            {
+              "name": "controller",
+              "type": "AbortController"
+            }
+          ]
+        }
+      ],
+      "fairness": "none used by safety; settles eventually is recorded only",
+      "unsupported": [
+        "imports",
+        "general reference stores",
+        "mutable captures",
+        "async listeners",
+        "payloads",
+        "options",
+        "handler registration mutation",
+        "reentrancy",
+        "EventEmitter",
+        "signal-as-target",
+        "reject-on-abort",
+        "counts/uniqueness/temporal clauses"
+      ],
+      "protocol": {
+        "version": "C2a-1",
+        "event": "none",
+        "runtime": "v22.23.1",
+        "registry": "initially empty; source-owned; outside mutation excluded",
+        "capture": false,
+        "delivery": "synchronous registration order; no external actions or microtasks between handlers",
+        "abort": "advisory contents only; no request or invocation deletion",
+        "scalarStutters": "external allocation and abort observe stutters of module cells",
+        "identity": "unbounded; allocation history; compatible inputs may alias",
+        "counts": "unsupported",
+        "temporal": "unsupported",
+        "sha256": "839f2074bc3bed56053391cb02313cdeec8c7af15ab37a5e97bd4281bf71dac1"
+      },
+      "observationCuts": "C1 action cuts",
+      "handleInputs": "compatible inputs may alias; signals may already be aborted; controller.signal has one stable owner; signals excluded from EventTarget domain",
+      "sha256": "6dbbfa481948002669ee472cabc55ad11784fa7670119171cdd52e10341f3fba"
+    },
+    "unitsSha256": "cb4a548d923b3c4a11a88f52e74b7f91698f5a38f2b81323a08c9add41dea7d5",
+    "properties": [
+      {
+        "kind": "state",
+        "text": "true",
+        "span": {
+          "start": 13,
+          "end": 26
+        }
+      },
+      {
+        "kind": "always",
+        "text": "x !== old(x)",
+        "span": {
+          "start": 27,
+          "end": 49
+        }
+      }
+    ],
+    "protocol": {
+      "version": "C2a-1",
+      "event": "none",
+      "runtime": "v22.23.1",
+      "registry": "initially empty; source-owned; outside mutation excluded",
+      "capture": false,
+      "delivery": "synchronous registration order; no external actions or microtasks between handlers",
+      "abort": "advisory contents only; no request or invocation deletion",
+      "scalarStutters": "external allocation and abort observe stutters of module cells",
+      "identity": "unbounded; allocation history; compatible inputs may alias",
+      "counts": "unsupported",
+      "temporal": "unsupported",
+      "sha256": "839f2074bc3bed56053391cb02313cdeec8c7af15ab37a5e97bd4281bf71dac1",
+      "structuralValidation": "complete required schema set",
+      "projectionReplay": "original source owner; internal identity predicates are not standalone executable predicates"
+    },
+    "units": [
+      {
+        "unit": "$init",
+        "kind": "init",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          {
+            "roots": [],
+            "nodes": {}
+          }
+        ]
+      },
+      {
+        "unit": "$registry$init",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$occurrence-index",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$index-occurrence",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$keeps-unary",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$keeps-pair",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$occurrence-index",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$index-occurrence",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$keeps-unary",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$keeps-pair",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$occurrence-index",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$index-occurrence",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$keeps-unary",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$keeps-pair",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$occurrence-index",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$index-occurrence",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$keeps-unary",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$keeps-pair",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$creation",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$uniqueness",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$allocation",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$keeps-unary",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$keeps-pair",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$alias-ownership",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$abort$contents",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$creation",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$settlement",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$abort-keeps",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$selected-keeps",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$closure$allocation",
+        "kind": "protocol-rule",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "flip$0",
+        "kind": "entry",
+        "span": {
+          "start": 57,
+          "end": 105
+        },
+        "protocolActions": [],
+        "effects": {
+          "kind": "writes"
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "x": [
+                    "bool",
+                    "false"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "unit": "$stutter",
+        "kind": "stutter",
+        "span": {
+          "start": 13,
+          "end": 26
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "counterexample",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "x": [
+                    "bool",
+                    "false"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "label": {
+          "kind": "ensures",
+          "span": {
+            "start": 27,
+            "end": 49
+          },
+          "abstract": false
+        }
+      }
+    ],
+    "searched": {
+      "maxDepth": 0,
+      "maxExecutions": 2000,
+      "numbers": [
+        {
+          "type": "number",
+          "bits": "0000000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "3ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff8000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "fff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "8000000000000000"
+        }
+      ],
+      "executions": 1
+    },
+    "status": "unknown",
+    "reason": "induction-gap",
+    "abstract": [
+      "$stutter"
+    ],
+    "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof."
+  },
+  "native": {
+    "status": "ok",
+    "trace": {
+      "version": 2,
+      "sourceSha256": "191638a0c35b55b0c21aa95317636900b4f4ba5933b86c2be6e53ea4b1a84a2d",
+      "executableSha256": "00e4bdf86e0e1fb4edf16c7b6259f9d6724527231cb3503d611f05e2c16ff4f9",
+      "assumptionsSha256": "6dbbfa481948002669ee472cabc55ad11784fa7670119171cdd52e10341f3fba",
+      "protocolSha256": "839f2074bc3bed56053391cb02313cdeec8c7af15ab37a5e97bd4281bf71dac1",
+      "replaySchemaSha256": "b1300839081e2eb97fca712a1728ff2d0caf9acec02eb9f0956c66c873e66ddd",
+      "inputs": [
+        {
+          "id": "10",
+          "signal": "11",
+          "aborted": false
+        }
+      ],
+      "targets": {},
+      "actions": [
+        {
+          "kind": "abort",
+          "controller": {
+            "type": "handle",
+            "sort": "controller",
+            "id": "10"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "x": {
+              "type": "boolean",
+              "value": false
+            }
+          }
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "abort",
+            "controller": {
+              "type": "handle",
+              "sort": "controller",
+              "id": "10"
+            }
+          },
+          "state": {
+            "x": {
+              "type": "boolean",
+              "value": false
+            }
+          },
+          "cuts": [
+            {
+              "kind": "action",
+              "registration": null,
+              "invocation": null,
+              "state": {
+                "x": {
+                  "type": "boolean",
+                  "value": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "requests": [],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      }
+    ],
+    "invocations": [],
+    "registrations": [],
+    "violation": {
+      "kind": "always",
+      "text": "x !== old(x)",
+      "span": {
+        "start": 27,
+        "end": 49
+      }
+    }
+  },
+  "privateStutterDeletion": {
+    "allRemainingVerified": true,
+    "units": [
+      {
+        "unit": "$init",
+        "status": "verified",
+        "witness": [
+          {
+            "roots": [],
+            "nodes": {}
+          }
+        ]
+      },
+      {
+        "unit": "$registry$init",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$occurrence-index",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$index-occurrence",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$keeps-unary",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$create$keeps-pair",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$occurrence-index",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$index-occurrence",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$keeps-unary",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$duplicate$keeps-pair",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$occurrence-index",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$index-occurrence",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$keeps-unary",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$remove$keeps-pair",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$occurrence-index",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$index-occurrence",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$keeps-unary",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$absent-remove$keeps-pair",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$creation",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$registry$uniqueness",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$allocation",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$keeps-unary",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$keeps-pair",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$handles$alias-ownership",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$abort$contents",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$creation",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$settlement",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$abort-keeps",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$request$selected-keeps",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "$closure$allocation",
+        "status": "verified",
+        "witness": []
+      },
+      {
+        "unit": "flip$0",
+        "status": "verified",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "x": [
+                    "bool",
+                    "false"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
