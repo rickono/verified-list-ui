@@ -57,7 +57,7 @@ if delivery := data.get("heapDelivery"):
     state = "integrated" if delivery["integrated"] else "implemented and awaiting integration"
     next_step = "K can now build on the integrated prerequisites." if delivery["integrated"] and data.get("callbackDelivery", {}).get("integrated") else "K remains gated on integration."
     lines += ["## Heap and frame delivery", "",
-        f"G is {state} on `{delivery['branch']}`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes {delivery['tests']}/{delivery['tests']}; {delivery['heapMutants']} heap-specific verifier mutants join the {delivery['existingMutants']} existing mutants. [Heap validation report]({delivery['report']}). Mutating loops, reference stores and stateful callbacks remain unsupported. {next_step} P and T can proceed independently.", ""]
+        f"G is {state} on `{delivery['branch']}`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes {delivery['tests']}/{delivery['tests']}; {delivery['heapMutants']} heap-specific verifier mutants join the {delivery['existingMutants']} existing mutants. [Heap validation report]({delivery['report']}). Mutating loops, reference stores and stateful callbacks remain unsupported in the integrated heap subset. {next_step}", ""]
 if delivery := data.get("statefulFoundationDelivery"):
     state = "integrated" if delivery["integrated"] else "awaiting integration"
     lines += ["## Stateful safety foundation", "",

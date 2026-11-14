@@ -2,7 +2,7 @@
 
 Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12 with 49 focused and 371 full tests; R/S/T/U remain incomplete. K Gate3 is implemented locally (418 tests) and awaits independent review. Guarded throws and the unchanged harmonicMean campaign passed independent review and await combined integration. Two cancellation/listener designs await comparison.
 
-All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.
+All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -78,7 +78,7 @@ H is integrated on `feat/pure-callback-contracts`. Pure total unary numeric pred
 
 ## Heap and frame delivery
 
-G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K can now build on the integrated prerequisites. P and T can proceed independently.
+G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported in the integrated heap subset. K can now build on the integrated prerequisites.
 
 ## Stateful safety foundation
 

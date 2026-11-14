@@ -48,6 +48,7 @@ The regression fails on the earlier archived parser
 ([red log](stateful-C1-evidence/review-unicode-before.log)). All five frontend
 tests pass both in the corrected archive and in the integrated production
 checkout ([production log](stateful-C1-evidence/review-unicode-production.log)).
-These are frontend checks, not additional solver proofs. Final combined C1
-verification on top of main's P, numeric and heap gates is recorded separately
-when it completes. No R/S/T/U completion follows from the correction.
+These are frontend checks, not additional solver proofs. The final combined C1
+run on top of main's P, numeric and heap gates passed 49 focused and 371 full
+tests at `0345a9a`. [The landing receipt](C1-landing.md) records that run and
+the earlier failed baseline comparison. No R/S/T/U completion follows from the correction.
