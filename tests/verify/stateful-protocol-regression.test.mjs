@@ -9,8 +9,10 @@ import { single, load } from "../../verify/modules.mjs";
 import { verify, verifyFile } from "../../verify/index.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
-const parent = "77c95f3";
-test("C2a keeps public main 77c95f3 synchronous artifacts, queries, graph hashes and complete reports exact", async () => {
+// This published baseline includes K's allocation effect and guarded throws.
+// Compare the complete synchronous artifact; C2a must add no further fields.
+const parent = "e5d040dff6d443cb3be80a9a82dfa652d612a379";
+test("C2a keeps the published K/throw/budget synchronous artifacts, queries, graph hashes and complete reports exact", async () => {
   const temporary = mkdtempSync(join(root, "verify/.stateful-baseline-"));
   try {
     const paths = execFileSync("git", ["ls-tree", "-r", "--name-only", parent, "verify"], { cwd: root, encoding: "utf8" }).trim().split("\n").filter((p) => /^verify\/[^/]+\.mjs$/.test(p));
