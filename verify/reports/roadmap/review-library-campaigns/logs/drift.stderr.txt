@@ -1,0 +1,13 @@
+AssertionError [ERR_ASSERTION]: Source/provenance drift: verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js
+[32mactual[39m [31mexpected[39m
+
+[39m'[39m[32m0[39m[31ma[39m[31m1[39m[31m9[39m[31m6[39m[31md[39m[31m4[39m[31m1[39m[39mf[39m[32m0[39m[31ma[39m[31m2[39m[31mc[39m[31m9[39m[31ma[39m[39mb[39m[31mb[39m[31me[39m[31m0[39m[31m1[39m[31m7[39m[39mf[39m[31m4[39m[39m1[39m[32md[39m[32mb[39m[39m5[39m[32m5[39m[32md[39m[31m3[39m[39m4[39m[32md[39m[32m4[39m[31m2[39m[39m1[39m[31m8[39m[31mc[39m[39m5[39m[32m6[39m[31m4[39m[31m3[39m[39m8[39m[32md[39m[32m6[39m[32ma[39m[32m0[39m[39mf[39m[39m5[39m[32mb[39m[31m6[39m[31mf[39m[31m1[39m[31mf[39m[39mc[39m[39md[39m[32m4[39m[32m4[39m[39m5[39m[31m7[39m[39m6[39m[32mf[39m[31m6[39m[39mc[39m[32m0[39m[32m3[39m[32m5[39m[32me[39m[39m6[39m[31m6[39m[31m5[39m[39m2[39m[39m6[39m[32mc[39m[31m2[39m[39mf[39m[39mb[39m[32m3[39m[32m5[39m[32m7[39m[32m5[39m[32md[39m[39mb[39m[32me[39m[32mf[39m[32m0[39m[32mb[39m[39mc[39m[32mb[39m[32m7[39m[32md[39m[32md[39m[32m4[39m[32m2[39m[32ma[39m[32m0[39m[31mc[39m[39m9[39m[31mc[39m[39m2[39m[31m5[39m[31mb[39m[31m9[39m[31m9[39m[39m'[39m
+
+    at inputCheck (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-fb28f6c4/verify/reports/roadmap/review-library-campaigns/.tmp-drift/verify/reports/roadmap/library-campaigns/check.mjs:81:12)
+    at supervise (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-fb28f6c4/verify/reports/roadmap/review-library-campaigns/.tmp-drift/verify/reports/roadmap/library-campaigns/check.mjs:337:52)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-fb28f6c4/verify/reports/roadmap/review-library-campaigns/.tmp-drift/verify/reports/roadmap/library-campaigns/check.mjs:374:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+(node:20973) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
