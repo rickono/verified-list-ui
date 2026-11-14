@@ -40,6 +40,45 @@ abort-frame and K/throw seam run passed 25 of 25. After adding assumption and
 effect-certificate rejection, the eight abort-frame checks passed 8 of 8.
 Each run froze source/test inputs; the distinct results are preserved separately.
 
-The final combined full suite and current-model numerical evidence will be
-recorded after their frozen runs. The standalone 390 and merged 483 receipts
-are historical measurements of their own trees, not a full pass on this branch.
+The final combined full suite passed **510/510**, with zero failures, skips or
+cancellations, at committed source `e1a76a3`. All 212 recorded inputs match
+before and after the run and still match this branch. The receipt's tracked
+diff is empty before and after. [The evidence summary](C2a-integration-evidence/summary.json)
+keeps each earlier run separate. Raw TAP logs are compressed without changing
+their bytes; receipt hashes cover the decompressed text. The recorded runner
+and exact command are included. The full suite ran once after the correction.
+The standalone 390 and merged 483 receipts remain measurements of their own
+trees, not a combined pass on this branch.
+
+Both original review reports remain unchanged: native PASS and proof ISSUES on
+`c1df5f6`. The coordinator corrected the finding and tested the changed code;
+the original reviewer did not review `e1a76a3`. The full suite includes the
+current native protocol cases and eight new binding/mutation checks. It does
+not include the separate conditional-completion implementation `20ff205`.
+That implementation has native PASS and a separate source-plan integrity issue
+which is still pending; this landing does not deliver U.
+
+## First-layer acceptance
+
+R's lifecycle property is safety over arbitrary modeled listener sequences,
+including deliveries after disposal. The guarded listener fixture proves that
+property with no event bound, and native closure-identity/cleanup controls give
+2/1/0 deliveries. The EventTarget domain excludes asynchronous handlers,
+payloads, registration mutation and EventEmitter reentrancy.
+
+S's ordering property includes arbitrary modeled scalar async interleavings,
+legal resolve/reject outcomes, and advisory abort before or after selection.
+Guard removals reproduce real native safety failures. Scalar C1 entries retain
+multiple awaits; protocol entries have one await and separate listener modules.
+Abort changes contents and preserves invocations rather than deleting work.
+
+T's declared-operation model exposes response domains, rejection, handle
+ownership, cancellation policy and settlement assumptions. Native replay
+refuses undeclared/illegal outcomes and malformed ownership. Safety does not
+discharge external production or fairness. These are explicit scalar/protocol
+contracts, not proofs of HTTP services, wall-clock timing or every Promise API.
+
+These scoped R/S/T predicates are ready for integration. They are not marked
+integrated until the implementation lands. U, V and W remain separate goals.
+Current-model numerical evidence will be recorded after its fresh campaign;
+previous model-bound evidence is not promoted across source changes.

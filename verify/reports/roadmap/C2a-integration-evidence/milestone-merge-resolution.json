@@ -1,0 +1,14 @@
+[
+  {
+    "path": ".audit/roadmap-20261113.tsv",
+    "oursIsPrefixOfMain": true,
+    "oursBytes": 31541,
+    "mainBytes": 32869
+  },
+  {
+    "path": "verify/reports/roadmap/KQ-landing.md",
+    "oursIsPrefixOfMain": true,
+    "oursBytes": 3511,
+    "mainBytes": 4274
+  }
+]

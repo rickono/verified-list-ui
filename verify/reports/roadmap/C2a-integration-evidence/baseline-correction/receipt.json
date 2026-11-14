@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "tests/verify/stateful-protocol-regression.test.mjs"
+  ],
+  "head": "0d9bc371cba09fb7386d28817d6d59ed0ab63069",
+  "startedAt": "2026-11-14T04:03:01.271981+00:00",
+  "diffBefore": "",
+  "exitCode": 0,
+  "finishedAt": "2026-11-14T04:03:37.387711+00:00",
+  "inputsUnchanged": true,
+  "diffAfter": "",
+  "logSha256": "340d89fcd6a79eb0ee2ef196218e61918601653a0c21463584b1033166a5fbcb"
+}

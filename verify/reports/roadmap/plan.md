@@ -23,19 +23,17 @@ fairness for liveness. W requires both Q and V, with trust and scope visible.
 Steps 1 and 2 are complete. H and G landed on main after independent exact-patch
 reviews; P landed in PR #10 after two independent review axes. Numeric Gate1
 and heap Gate2 are merged. C1 is merged in PR #12 with both admission fixes,
-49 focused tests and a 371-test combined suite. C2a passed its standalone
-390-test suite. Native review passes; the proof review found reflexive request
-checks disconnected from abort, which must be corrected before landing.
-K passed both independent reviews; guarded throws passed a separate production
-review. Their combined tree passed 477 tests, followed by 483 after the reviewed
-resource-boundary change. A 180000 ms request proved the three-module graph
-cold and in a fresh audit; all fifteen postconditions and 36 phase plans match
-the earlier source. Historical 60000 ms unknowns remain. PR #14 has merged as `e364946`; K and Q meet their scoped completion predicates.
-The numerical campaign and current-model maintenance passed independent reviews;
-all ten current stages pass with strict library pins and no required private
-history. PR #14 merged as `e364946`. [The K/Q receipt](KQ-landing.md) records the scoped milestone. The completed temporal judgment selects the
-conditional source-completion rule; its first local implementation passed
-496 tests and awaits independent review.
+49 focused tests and a 371-test combined suite. K and Q landed in PR #14,
+and PR #15 publishes their audited milestone map. Corrected C2a passed one
+510-test combined suite after the request/activation abort checks were tied to
+one shared before/after operation and source-bound clauses. Its original native
+review passes; its original proof finding is corrected locally with executable
+mutation controls. Current-model campaigns and publication remain pending.
+The local conditional-completion unit passed 496 tests and native review; its
+proof review found compiled-artifact ownership/footprint binding gaps to correct
+before integration. A pinned historical p-event timeout regression reproduces
+on unchanged old/fixed source with real dependencies. Production admission is
+still unsupported, so the corrected source has no universal proof yet.
 [The landing receipt](landing-summary.md) records the merges and checks.
 The numbered list below preserves the execution order chosen at the
 start; the remaining steps are still in progress.

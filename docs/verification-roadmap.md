@@ -1,6 +1,6 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H, G, P, K and Q are integrated. PR #14 landed reviewed library composition, guarded throws, resource policy and current-model proof/bug maintenance. The matching source/test tree passed 483 tests, and the ten-stage numerical campaign passed independent review. R, S, T, U, V and W remain open. C2a native review passes; its request/activation proof correction is pending. Conditional completion passed 496 local tests and awaits independent review.
+Status as of 2026-11-14: K and Q are integrated, with the public milestone map in PR #15. Corrected C2a passed510/510 combined tests and is preparing publication with fresh model-bound campaigns; R/S/T remain unintegrated. Conditional completion has native reviewPASS and a compiled-artifact integrity finding to correct before U. The historical p-event timeout regression reproduces on unchanged old/fixed modules, but production admission is unsupported; V/W remain open.
 
 All prerequisites apply. K and Q are integrated in their documented source subsets. C1 supplies the stateful safety foundation; listener/cancellation proof correction, environment usage and temporal completion reviews remain open. Transitively redundant edges are omitted.
 
@@ -20,11 +20,11 @@ flowchart TD
   K["K: Broader library proofs<br/>integrated"]
   P["P: Project proof workflow<br/>integrated"]
   Q["Q: Pure JS/TS proofs &amp; bugs<br/>integrated"]
-  R["R: Event &amp; lifecycle semantics<br/>PARTIAL"]
-  S["S: Async ordering model<br/>PARTIAL"]
-  T["T: Environment contracts<br/>PARTIAL"]
+  R["R: Event &amp; lifecycle semantics<br/>branch-ready"]
+  S["S: Async ordering model<br/>branch-ready"]
+  T["T: Environment contracts<br/>branch-ready"]
   U["U: Temporal verification<br/>PARTIAL"]
-  V["V: Stateful app pilots"]
+  V["V: Stateful app pilots<br/>PARTIAL"]
   W["W: Existing JS/TS verification"]
   NOW --> A
   NOW --> B
@@ -101,7 +101,7 @@ These counts describe the original isolated branches. D's original partial resul
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
 Ready packages: .
-Branches awaiting integration: none.
+Branches awaiting integration: R, S, T.
 
 To regenerate this document after editing the data:
 

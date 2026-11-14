@@ -1,0 +1,85 @@
+{
+  "testedCodeHead": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+  "testedTree": "1a8e42222b17bc0f8608efe5c08fee58e8ea73a2",
+  "currentInputsMatch": true,
+  "frozenInputCount": 212,
+  "fullRunsAfterCorrection": 1,
+  "scope": "C2a combined with merged K/throws/budget. Conditional-completion implementation is not integrated.",
+  "runs": [
+    {
+      "label": "initial",
+      "head": "df36b19adb3bc509a25aa1390cda84d4b6aa6e87",
+      "exitCode": 1,
+      "inputsUnchanged": true,
+      "logSha256": "06b3fa0b9f9a6c74d231782e2961760ea4ed6be7fe4d3cf0d10893e412973111",
+      "tap": {
+        "tests": 21,
+        "pass": 20,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "label": "baseline-correction",
+      "head": "0d9bc371cba09fb7386d28817d6d59ed0ab63069",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "logSha256": "340d89fcd6a79eb0ee2ef196218e61918601653a0c21463584b1033166a5fbcb",
+      "tap": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "label": "abort-correction",
+      "head": "f7f4ec742da020ab4dded19847817fc2bc83eee1",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "logSha256": "186bc015d3de4b9e66e44ab73698afd64d8a96e1a716272702f8d95416956900",
+      "tap": {
+        "tests": 25,
+        "pass": 25,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "label": "binding-boundary",
+      "head": "f7f4ec742da020ab4dded19847817fc2bc83eee1",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "logSha256": "75c8b9b6ae30419c1477be69238acf34484e50325f02f8f2191ec4984e77bac7",
+      "tap": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "label": "full-final",
+      "head": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "logSha256": "15f45f34b8d24f1d822c1b93dc929562cb29413fd5973b362a65579f87cb15ee",
+      "tap": {
+        "tests": 510,
+        "pass": 510,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup": {
+    "ownedStatefulAbortDirectories": [],
+    "ownedBaselineDirectories": []
+  },
+  "recordedAt": "2026-11-14T13:40:17.229504+00:00"
+}
