@@ -37,7 +37,10 @@ repeated. This failed expectation is retained in the combined receipt.
 
 Model-bound artifacts are historical after a semantic update. The combined
 numeric artifact belongs to `dedde91`; the P-only artifact belongs to the P
-runtime hashes in its folder. Regenerate evidence for a new model, or check out
+runtime hashes in its folder. `P-integration/runtime-SHA256SUMS` binds to the
+PR #10 merge tree `b908127`, which includes the landed heap audit. The isolated
+278-test run binds to `c9c4511`; the combined 322-test run binds to `dedde91`.
+Regenerate evidence for a new model, or check out
 the recorded model. Neither a cached witness nor native replay is an
 independent proof certificate.
 

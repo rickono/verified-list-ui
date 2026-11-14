@@ -1,0 +1,175 @@
+{
+  "seat": "B",
+  "node": "v22.23.1",
+  "cases": [
+    {
+      "name": "try-catch",
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Unsupported TryStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected."
+      },
+      "outcomes": [
+        {
+          "fn": "caught",
+          "status": "unsupported",
+          "message": "Unsupported TryStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected."
+        }
+      ]
+    },
+    {
+      "name": "shadow-local-dead",
+      "ms": 152,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "shadowLocal",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 131,
+                  "end": 154
+                },
+                "abstract": false
+              }
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "shadowLocal",
+          "status": "verified",
+          "message": null,
+          "inputs": {
+            "flag": "false"
+          },
+          "result": "0"
+        }
+      ]
+    },
+    {
+      "name": "shadow-local-live",
+      "ms": 155,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "shadowLocalLive",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 109,
+                  "end": 132
+                },
+                "abstract": false
+              }
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "shadowLocalLive",
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "message": "JavaScript replay failed: Error is not a constructor"
+        }
+      ]
+    },
+    {
+      "name": "shadow-module-dead",
+      "ms": 167,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "Error",
+            "throwEvents": []
+          },
+          {
+            "name": "shadowModule",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 160,
+                  "end": 183
+                },
+                "abstract": false
+              }
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "Error",
+          "status": "verified",
+          "message": null,
+          "inputs": {},
+          "result": "0"
+        },
+        {
+          "fn": "shadowModule",
+          "status": "verified",
+          "message": null,
+          "inputs": {
+            "flag": "false"
+          },
+          "result": "0"
+        }
+      ]
+    },
+    {
+      "name": "shadow-module-live",
+      "ms": 169,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "Error",
+            "throwEvents": []
+          },
+          {
+            "name": "shadowModuleLive",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 138,
+                  "end": 161
+                },
+                "abstract": false
+              }
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "Error",
+          "status": "verified",
+          "message": null,
+          "inputs": {},
+          "result": "0"
+        },
+        {
+          "fn": "shadowModuleLive",
+          "status": "unknown",
+          "reason": "replay-mismatch",
+          "message": "JavaScript replay failed: Error is not a constructor"
+        }
+      ]
+    }
+  ]
+}

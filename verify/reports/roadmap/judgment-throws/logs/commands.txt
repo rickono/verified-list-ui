@@ -1,0 +1,26 @@
+# Executed from /Users/rick/.t3/worktrees/verified-list-ui/t3-2206e15c
+# head 5e501991dcf124ebc06f149e3d603adf00caa737
+# Node v22.23.1
+# Both lane commands exited 0.
+
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- bash verify/reports/roadmap/judgment-throws/scripts/run.sh
+
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- bash -c '
+set -u
+repo="/Users/rick/.t3/worktrees/verified-list-ui/t3-2206e15c"
+out="$repo/verify/reports/roadmap/judgment-throws/logs"
+deps="/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/node_modules"
+tmp="$(mktemp -d /tmp/judgment-throws-follow.XXXXXX)"
+trap "rm -rf \"$tmp\"" EXIT
+git -C "$repo" archive HEAD verify | tar -x -C "$tmp"
+git -C "$repo" archive f5473537eb543470feef3f886e778f2737f8ed43 verify/reports/roadmap/candidate-throws-codex | tar -x -C "$tmp"
+git -C "$repo" archive f5c3d471afda371b5f3805ee888c9d0e4688c38e verify/reports/roadmap/candidate-throws-grok | tar -x -C "$tmp"
+ln -s "$deps" "$tmp/node_modules"
+node "$repo/verify/reports/roadmap/judgment-throws/scripts/followup.mjs" A "$out/followup-A.json" "$tmp"
+node "$repo/verify/reports/roadmap/judgment-throws/scripts/followup.mjs" B "$out/followup-B.json" "$tmp"
+'
+
+# scripts/followup.sh is the same sequence, written after this run.
+# Candidate archives: A f5473537eb543470feef3f886e778f2737f8ed43
+# B f5c3d471afda371b5f3805ee888c9d0e4688c38e
+# Core hashes before and after are in logs/extract.txt and the focused JSON.

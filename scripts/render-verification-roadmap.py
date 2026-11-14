@@ -57,7 +57,11 @@ if delivery := data.get("heapDelivery"):
     state = "integrated" if delivery["integrated"] else "implemented and awaiting integration"
     next_step = "K can now build on the integrated prerequisites." if delivery["integrated"] and data.get("callbackDelivery", {}).get("integrated") else "K remains gated on integration."
     lines += ["## Heap and frame delivery", "",
-        f"G is {state} on `{delivery['branch']}`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes {delivery['tests']}/{delivery['tests']}; {delivery['heapMutants']} heap-specific verifier mutants join the {delivery['existingMutants']} existing mutants. [Heap validation report]({delivery['report']}). Mutating loops, reference stores and stateful callbacks remain unsupported. {next_step} P and T can proceed independently.", ""]
+        f"G is {state} on `{delivery['branch']}`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes {delivery['tests']}/{delivery['tests']}; {delivery['heapMutants']} heap-specific verifier mutants join the {delivery['existingMutants']} existing mutants. [Heap validation report]({delivery['report']}). Mutating loops, reference stores and stateful callbacks remain unsupported in the integrated heap subset. {next_step}", ""]
+if delivery := data.get("statefulFoundationDelivery"):
+    state = "integrated" if delivery["integrated"] else "awaiting integration"
+    lines += ["## Stateful safety foundation", "",
+        f"C1 is {state}: source-linked scalar await segments use init, step and interference/keeps over unbounded activations. The focused run passes {delivery['focusedTests']}/{delivery['focusedTests']}; the combined suite passes {delivery['fullTests']}/{delivery['fullTests']}. [Acceptance and scope]({delivery['report']}). Cancellation, listeners, counts and liveness remain future units; R/S/T/U are incomplete.", ""]
 lines += [
     "## Original branch results", "",
     "These counts describe the original isolated branches. D's original partial result is retained as historical evidence; the combined validation above closes that acceptance gap.", "",

@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-13",
-  "status": "A, B, C, D, F, E, J, H and G are integrated. P and the stateful foundation are in independent design review. K remains in design comparison; one prototype was rejected after native false-verification reproducers. No remaining roadmap node is claimed complete.",
-  "edgeMeaning": "All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.",
+  "status": "A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12 with 49 focused and 371 full tests; R/S/T/U remain incomplete. K Gate3 is implemented locally (418 tests) and awaits independent review. Guarded throws and the unchanged harmonicMean campaign passed independent review and await combined integration. Two cancellation/listener designs await comparison.",
+  "edgeMeaning": "All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -337,15 +337,18 @@
       "deps": [
         "I"
       ],
-      "status": "ready",
+      "status": "integrated",
       "area": "Developer tooling / CI",
       "detail": "Select proof targets, rerun affected functions in CI, shrink and replay witnesses, and report useful source-level failures. Any cached result includes source dependencies, contracts, semantic model, configuration and backend identity.",
       "doneWhen": "A dependency or verification-model change invalidates affected results; a reviewer can reproduce every reported bug or proof.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "B",
         "C"
-      ]
+      ],
+      "deliveryStatus": "finished",
+      "resultSummary": "Target selection, exact-query receipts, no-solver planning, current-source replay and dependency gating, and source/model-bound native bug evidence are merged in PR #10. Both independent reviews passed. The P/heap/numeric stack passed 322/322; source/model edits invalidate honestly. Receipt integrity remains an explicit trust assumption.",
+      "integrationAcceptance": "Original doneWhen met by source/model invalidation, fresh solves and native evidence reproduction; see P-landing.md."
     },
     {
       "id": "Q",
@@ -624,7 +627,6 @@
     ],
     "next": [
       "K",
-      "P",
       "T"
     ],
     "agentRunFinished": true,
@@ -710,5 +712,39 @@
     "report": "../verify/reports/heap.md",
     "integrated": true,
     "mergeCommit": "8bbff6e3ce09b227ada4ed58f56f0ec5dd6d9416"
+  },
+  "numericGateDelivery": {
+    "integrated": true,
+    "mergeCommit": "8fa17d652d3b6e5b7ebbccc42b2d81e90ead701e",
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/11",
+    "report": "../verify/reports/roadmap/numeric-metadata-landing.md",
+    "scope": "Exact signed-integer and half-integer derived metadata only; heap-writing loops remain unsupported until Gate3.",
+    "limits": [
+      "N12 unpinned 20-second query timeout, known failures remain satisfiable",
+      "15 validity queries unsat and 23 unknown; generic width reasoning stays within trusted translation"
+    ]
+  },
+  "workflowDelivery": {
+    "implementationCommit": "c9c45110b8669f99f83c4330d6efe1b6202ff1be",
+    "mergeCommit": "b908127edf34202233912b98e43715ee42ba2233",
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/10",
+    "independentReviews": [
+      "b0b1f70ee939308b8c2610dacd3c97fb23d471d6",
+      "92aa7402e519e855973461a22294d6c6f624f18f"
+    ],
+    "implementationSuite": 278,
+    "combinedStackSuite": 322,
+    "nativeBugReproductions": 3,
+    "report": "../verify/reports/roadmap/P-landing.md"
+  },
+  "statefulFoundationDelivery": {
+    "integrated": true,
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/12",
+    "mergeCommit": "41079c5d22ba889005075d23ffd5ef5ca7a1e600",
+    "testedHead": "0345a9adb631f0785ff79ccb7cb9dc842393080a",
+    "focusedTests": 49,
+    "fullTests": 371,
+    "report": "../verify/reports/roadmap/C1-landing.md",
+    "scope": "Scalar source-linked async safety foundation; no cancellation, listeners, exact counts or liveness; no R/S/T/U completion."
   }
 }

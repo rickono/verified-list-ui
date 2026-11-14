@@ -1,0 +1,158 @@
+{
+  "seat": "A",
+  "node": "v22.23.1",
+  "cases": [
+    {
+      "name": "try-catch",
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Unsupported TryStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected."
+      },
+      "outcomes": [
+        {
+          "fn": "caught",
+          "status": "unsupported",
+          "message": "Unsupported TryStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected."
+        }
+      ]
+    },
+    {
+      "name": "shadow-local-dead",
+      "ms": 0,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+      },
+      "outcomes": [
+        {
+          "fn": "shadowLocal",
+          "status": "unsupported",
+          "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+        }
+      ]
+    },
+    {
+      "name": "shadow-local-live",
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+      },
+      "outcomes": [
+        {
+          "fn": "shadowLocalLive",
+          "status": "unsupported",
+          "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+        }
+      ]
+    },
+    {
+      "name": "shadow-module-dead",
+      "ms": 1,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+      },
+      "outcomes": [
+        {
+          "fn": "shadowModule",
+          "status": "unsupported",
+          "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+        }
+      ]
+    },
+    {
+      "name": "shadow-module-live",
+      "ms": 0,
+      "error": null,
+      "compiled": {
+        "ok": false,
+        "status": "unsupported",
+        "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+      },
+      "outcomes": [
+        {
+          "fn": "shadowModuleLive",
+          "status": "unsupported",
+          "message": "Candidate throw admission requires unshadowed throw new Error(\"literal\")."
+        }
+      ]
+    },
+    {
+      "name": "weak-audit",
+      "original": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+      "stripsToOriginal": true,
+      "removedOnlySumInvariant": [
+        "// invariant (i === 0 && Object.is(reciprocalSum, 0)) || (i === 1 && Object.is(reciprocalSum, 1 / x[0]))"
+      ]
+    },
+    {
+      "name": "harmonic-weak",
+      "ms": 5154,
+      "error": null,
+      "compiled": {
+        "ok": true,
+        "targets": [
+          {
+            "name": "harmonicMean",
+            "throwEvents": [
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 909,
+                  "end": 974
+                },
+                "abstract": false
+              },
+              {
+                "kind": "throw-unreachable",
+                "span": {
+                  "start": 1341,
+                  "end": 1443
+                },
+                "abstract": true,
+                "loop": {
+                  "start": 1203,
+                  "end": 1495
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "outcomes": [
+        {
+          "fn": "harmonicMean",
+          "status": "counterexample",
+          "confirmed": true,
+          "message": null,
+          "inputs": {
+            "x": [
+              "1.35807730622e-312"
+            ]
+          },
+          "result": "0"
+        }
+      ]
+    },
+    {
+      "name": "harmonic-weak-native",
+      "sample": [
+        "1.35807730622e-312"
+      ],
+      "native": {
+        "result": 0,
+        "positiveZero": true
+      }
+    }
+  ]
+}

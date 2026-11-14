@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H and G are integrated. P and the stateful foundation are in independent design review. K remains in design comparison; one prototype was rejected after native false-verification reproducers. No remaining roadmap node is claimed complete.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12 with 49 focused and 371 full tests; R/S/T/U remain incomplete. K Gate3 is implemented locally (418 tests) and awaits independent review. Guarded throws and the unchanged harmonicMean campaign passed independent review and await combined integration. Two cancellation/listener designs await comparison.
 
-All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.
+All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -18,7 +18,7 @@ flowchart TD
   H["H: Higher-order contracts<br/>integrated"]
   J["J: Search proof pilot<br/>integrated"]
   K["K: Broader library proofs<br/>READY"]
-  P["P: Project proof workflow<br/>READY"]
+  P["P: Project proof workflow<br/>integrated"]
   Q["Q: Pure JS/TS proofs &amp; bugs"]
   R["R: Event &amp; lifecycle semantics"]
   S["S: Async ordering model"]
@@ -78,7 +78,11 @@ H is integrated on `feat/pure-callback-contracts`. Pure total unary numeric pred
 
 ## Heap and frame delivery
 
-G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported. K can now build on the integrated prerequisites. P and T can proceed independently.
+G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported in the integrated heap subset. K can now build on the integrated prerequisites.
+
+## Stateful safety foundation
+
+C1 is integrated: source-linked scalar await segments use init, step and interference/keeps over unbounded activations. The focused run passes 49/49; the combined suite passes 371/371. [Acceptance and scope](../verify/reports/roadmap/C1-landing.md). Cancellation, listeners, counts and liveness remain future units; R/S/T/U are incomplete.
 
 ## Original branch results
 
@@ -96,7 +100,7 @@ These counts describe the original isolated branches. D's original partial resul
 
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
-Ready packages: K, P, T.
+Ready packages: K, T.
 Branches awaiting integration: none.
 
 To regenerate this document after editing the data:
