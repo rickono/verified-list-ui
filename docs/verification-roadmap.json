@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-14",
-  "status": "K and Q are integrated, with the public milestone map in PR #15. Corrected C2a passed510/510 combined tests and is preparing publication with fresh model-bound campaigns; R/S/T remain unintegrated. Conditional completion has native reviewPASS and a compiled-artifact integrity finding to correct before U. The historical p-event timeout regression reproduces on unchanged old/fixed modules, but production admission is unsupported; V/W remain open.",
-  "edgeMeaning": "All prerequisites apply. K and Q are integrated in their documented source subsets. C1 supplies the stateful safety foundation; listener/cancellation proof correction, environment usage and temporal completion reviews remain open. Transitively redundant edges are omitted.",
+  "status": "R, S and T are integrated in the scoped C1/C2a domain after PR #16. K/Q remain integrated with fresh current-model campaign evidence. U is next: conditional completion needs producer-owned proof artifacts before integration. V has an unchanged-source historical native regression; factory proof designs are in progress. W remains open.",
+  "edgeMeaning": "All prerequisites apply. Integrated nodes refer to their documented first-layer subsets. U can build on the landed stateful safety and explicit-environment foundation; V and W still require maintained real stateful source proofs. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -378,17 +378,18 @@
         "G",
         "H"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "extension": true,
       "area": "Stateful runtime semantics",
       "detail": "Model registering/removing listeners, callback identity, lifecycle ownership and legal state transitions. Callback writes use heap footprints rather than assumed purity.",
       "doneWhen": "Listener/disposal safety properties hold across arbitrary modeled event sequences, including stale events.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "G",
         "H"
       ],
-      "workInProgress": "Corrected C2a e1a76a3 passed510combined tests. Original proof finding corrected with shared source transition and8binding/mutation tests; native reviewPASS. Current-model campaign and publication pending. No main integration yet."
+      "resultSummary": "PR #16 models EventTarget listener identity, ownership, registration/removal and disposal safety across arbitrary modeled sequences. Guarded source proves safety; native cleanup gives 2/1/0 deliveries. Synchronous zero-argument handlers only; EventEmitter, payloads and async handlers remain unsupported.",
+      "integrationAcceptance": "Original doneWhen met within the documented first-layer C1/C2a source/protocol domain; see RST-landing.md. No completion/liveness or p-event factory proof is claimed."
     },
     {
       "id": "S",
@@ -398,17 +399,18 @@
         "G",
         "H"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "extension": true,
       "area": "Async semantics / execution order",
       "detail": "Model suspension, resumption, Promise outcomes, cancellation and relevant happens-before relations. Specify the supported event-loop scheduling abstraction and its environment assumptions.",
       "doneWhen": "Proofs account for allowed interleavings and detect a seeded stale-response or cancellation bug.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "G",
         "H"
       ],
-      "workInProgress": "Corrected C2a e1a76a3 passed510combined tests. Original proof finding corrected with shared source transition and8binding/mutation tests; native reviewPASS. Current-model campaign and publication pending. No main integration yet."
+      "resultSummary": "PR #16 combines scalar async init/step/keeps with protocol advisory cancellation and source-bound abort frames. Seeded stale-response/guard controls fail natively. Scalar entries allow multiple awaits; protocol entries one await. Aborting preserves pending/selected/running invocations.",
+      "integrationAcceptance": "Original doneWhen met within the documented first-layer C1/C2a source/protocol domain; see RST-landing.md. No completion/liveness or p-event factory proof is claimed."
     },
     {
       "id": "T",
@@ -417,16 +419,17 @@
       "deps": [
         "I"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "extension": true,
       "area": "Boundary models / protocol assumptions",
       "detail": "Specify external operations through nondeterministic outcomes and protocol contracts: success, failure, timing and response shape. Assumptions about servers and the browser remain visible rather than becoming implicit guarantees.",
       "doneWhen": "External behaviors and fairness assumptions are explicit, replayable and distinct from properties proved about application code.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "F"
       ],
-      "workInProgress": "Corrected C2a e1a76a3 passed510combined tests. Original proof finding corrected with shared source transition and8binding/mutation tests; native reviewPASS. Current-model campaign and publication pending. No main integration yet."
+      "resultSummary": "PR #16 exposes declared outcome shapes, resolves/rejects, handle ownership, cancellation policy and settlement/fairness premises. Replay rejects illegal outcomes and environment actions. External production and fairness remain assumptions, not discharged application properties; no wall-clock or general service guarantee.",
+      "integrationAcceptance": "Original doneWhen met within the documented first-layer C1/C2a source/protocol domain; see RST-landing.md. No completion/liveness or p-event factory proof is claimed."
     },
     {
       "id": "U",
@@ -437,7 +440,7 @@
         "S",
         "T"
       ],
-      "status": "partial",
+      "status": "next",
       "extension": true,
       "area": "Transition systems / backend integration",
       "detail": "Translate supported stateful source behavior into transition obligations. Check safety across event sequences and liveness under stated scheduling/fairness assumptions. Choose SMT, induction or model-checking backends by the property.",
@@ -470,7 +473,7 @@
         "D",
         "P"
       ],
-      "workInProgress": "Pinned historical p-event issue7 native old/fixed cleanup regression passed with realp-timeout1.1.1. Both production APIs remain unsupported at use-strict directive. No universal corrected-source proof; next source-bridge designs planned."
+      "workInProgress": "Historical p-event issue 7 cleanup regression reproduces on unchanged old/fixed source with real p-timeout 1.1.1. Production admission remains unsupported. Two source-bridge design packages are being compared; no corrected-factory proof yet."
     },
     {
       "id": "W",
@@ -820,5 +823,15 @@
     "nativeReview": "0baef16b995e892ad420a8d309339cbdcace4f24",
     "originalProofReview": "ee0316ec83aab783f71e7d9b17542e26f94fb54d ISSUES corrected by coordinator; no independent corrected-code PASS claimed",
     "scope": "Node22 EventTarget synchronous owned listeners, scalar C1 async plus one protocol await, advisory cancellation and explicit primitive/handle environment contracts."
+  },
+  "statefulProtocolDelivery": {
+    "integrated": true,
+    "mergeCommit": "a60ae39abcaff2d6c49be39beb60e8a53409a19c",
+    "testedCode": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+    "tests": 510,
+    "abortBindingTests": 8,
+    "campaignStages": 10,
+    "modelIdentity": "0a6c4292dda0c31b8c9e846f430984758fb9b19e7bc7af6133b1f2b080991e03",
+    "report": "../verify/reports/roadmap/RST-landing.md"
   }
 }

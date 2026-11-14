@@ -28,7 +28,7 @@ and PR #15 publishes their audited milestone map. Corrected C2a passed one
 510-test combined suite after the request/activation abort checks were tied to
 one shared before/after operation and source-bound clauses. Its original native
 review passes; its original proof finding is corrected locally with executable
-mutation controls. Current-model campaigns and publication remain pending.
+mutation controls. The fresh current-model campaign passed all ten stages, and PR #16 merged at `a60ae39`. R/S/T now meet their original predicates within the documented C1/C2a subset.
 The local conditional-completion unit passed 496 tests and native review; its
 proof review found compiled-artifact ownership/footprint binding gaps to correct
 before integration. A pinned historical p-event timeout regression reproduces
@@ -39,7 +39,7 @@ The numbered list below preserves the execution order chosen at the
 start; the remaining steps are still in progress.
 
 H and G were implemented in PRs #5 and #6 at the start of this run. K and Q
-landed in PR #14. Six nodes remain: R, S, T, U, V, W. C1 does not complete any of R/S/T/U. Baseline source is `32bd5b260aa116ca88642a1479bed8d3fc447f4b`,
+landed in PR #14. R/S/T landed in PR #16. Three nodes remain: U, V, W. C1 does not complete any of R/S/T/U. Baseline source is `32bd5b260aa116ca88642a1479bed8d3fc447f4b`,
 which passed 249/249 tests and JSON/text CLI checks. The final baseline log is
 `artifacts/heap-design/full-final.log` outside the repository.
 
