@@ -6,9 +6,10 @@ The combined suite passed 477 of 477 tests at `59ee1dc`, with zero failures,
 skips or cancellations, a clean checkout, and unchanged recorded inputs.
 [The receipt](final/receipt.json) binds that exact tree. Report and campaign
 imports left those tested inputs unchanged. The later resource amendment below
-changes the budget boundary and has its own 483-test receipt. K remains unmerged
-in PR #14; the current-model numerical campaign repair and its independent
-review have now passed.
+changes the budget boundary and has its own 483-test receipt. K landed in
+PR #14 as `e364946`; the current-model numerical campaign repair and its
+independent review also passed. [The milestone receipt](../KQ-landing.md)
+records the scoped K/Q completion.
 
 The only source conflict was the loop iteration context. The resolution keeps
 K's context for the test, body and update, and the collector span used by throw
