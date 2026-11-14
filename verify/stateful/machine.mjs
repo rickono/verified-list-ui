@@ -7,6 +7,16 @@ import { environmentOf, assumptionsOf, primitives, handles, globals } from "./en
 
 import { protocolEntryOf, protocolOf } from "./protocol-machine.mjs";
 
+// Preserve source admission provenance before any lowering consumer can edit
+// parsed clauses, operation domains, entries or the scheduler assumptions.
+const temporalMachines = new WeakMap();
+const sourceIdentity = (machine) => sha256(JSON.stringify(machine, (_, value) =>
+  value instanceof Map ? { map: [...value] } : value instanceof Set ? { set: [...value] } : value));
+export function temporalMachineIdentity(machine) {
+  const expected = temporalMachines.get(machine);
+  return expected && expected === sourceIdentity(machine) ? expected : undefined;
+}
+
 const reserved = new Set([...globals, "EventTarget", "Event", "AbortController", "AbortSignal", "Object", "Array", "result", "old", "real"]);
 function named(name, at, used) {
   if (name.startsWith("$") || reserved.has(name) || used.has(name)) fail(`Duplicate, shadowed or reserved binding ${name}.`, at);
@@ -155,6 +165,7 @@ export function machineOf(file, source) {
     machine.executable = executable;
     machine.executableSha256 = sha256(executable);
     machine.assumptions = assumptionsOf(machine);
+    if (machine.temporal) temporalMachines.set(machine, sourceIdentity(machine));
     return machine;
   });
 }

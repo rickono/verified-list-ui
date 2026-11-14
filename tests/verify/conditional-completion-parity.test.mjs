@@ -13,8 +13,9 @@ import { replayTrace, traceOf } from "../../verify/stateful/traces.mjs";
 import { recordCompletion as record } from "./fixtures/completion-cases.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
-const prepared = "5f0fb47a0a822d62537f296ef804d5037eebba5c";
-test("no-temporal modules preserve prepared-HEAD compile artifacts, every phase query, full reports and native cuts byte for byte", async () => {
+const published = "ec325c7eb605ab0751e21b2d629a8fe96ff666e8";
+for (const prepared of ["5f0fb47a0a822d62537f296ef804d5037eebba5c", published])
+test(`no-temporal modules preserve ${prepared.slice(0, 7)} compile artifacts, every phase query, full reports and native cuts byte for byte`, async () => {
   const temporary = mkdtempSync(join(root, "verify/.completion-parity-"));
   const observed = { prepared, defaults: [], stateful: [], reports: [], native: [] };
   try {
@@ -73,7 +74,7 @@ test("no-temporal modules preserve prepared-HEAD compile artifacts, every phase 
       compareQueries(oldCompiler.compile(oldModules.load(path).records).targets, compile(load(path).records).targets, name);
       observed.defaults.push(name);
     }
-    for (const folder of ["pilots", "variants"]) for (const name of readdirSync(join(root, "tests/verify/fixtures/stateful", folder)).sort()) {
+    for (const folder of ["pilots", "variants", ...(prepared === published ? ["protocols"] : [])]) for (const name of readdirSync(join(root, "tests/verify/fixtures/stateful", folder)).sort()) {
       const source = readFileSync(join(root, "tests/verify/fixtures/stateful", folder, name), "utf8");
       let original;
       try { original = oldTransitions.transitionsOf(oldMachine.machineOf(name, source)); }
@@ -91,6 +92,11 @@ test("no-temporal modules preserve prepared-HEAD compile artifacts, every phase 
       const trace = traceOf(m, actions);
       assert.equal(JSON.stringify(await replayTrace(name, source, trace)), JSON.stringify(await oldTraces.replayTrace(name, source, trace)), name);
       observed.native.push(name);
+    }
+    if (prepared === published) for (const name of ["protocols/listeners.ts", "protocols/advisory.ts"]) {
+      const source = readFileSync(join(root, "tests/verify/fixtures/stateful", name), "utf8");
+      await identicalReports(() => oldStateful.checkStateful(name, source, { timeoutMs: 30_000, maxDepth: 0 }),
+        () => currentStateful.checkStateful(name, source, { timeoutMs: 30_000, maxDepth: 0 }), name);
     }
     for (const name of ["valid.ts", "bugs.ts"]) {
       const path = join(root, "verify/examples", name);

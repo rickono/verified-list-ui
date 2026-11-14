@@ -3,6 +3,7 @@ import { performance } from "node:perf_hooks";
 import { solve } from "../proofs.mjs";
 import { sha256, span, walk } from "./ast.mjs";
 import { C1_PROFILE } from "./environment.mjs";
+import { ownsCompletionGraph } from "./transitions.mjs";
 
 // Trusted finite-control rule, not an omega search. Fix any invocation. Its
 // positive source ordinal decreases on its own call/settlements, and the
@@ -17,7 +18,14 @@ const implementation = Object.fromEntries([
   ...readdirSync(new URL("../", import.meta.url)).filter((p) => p.endsWith(".mjs")).map((p) => `../${p}`),
 ].sort().map((p) => [p, sha256(readFileSync(new URL(p, import.meta.url)))]));
 const queryIdentity = (t) => digest({ id: t.id, declarations: t.declarations, pre: t.pre,
-  preDefined: t.preDefined, postconditions: t.postconditions });
+  preDefined: t.preDefined, postconditions: t.postconditions, params: t.params, resultType: t.resultType,
+  footprint: t.footprint, effects: t.effects, allocates: t.allocates, callees: t.callees, control: t.control });
+const scalar = (type) => ["number", "boolean", "undefined"].includes(type);
+const scalarRecord = (type) => type?.kind === "object" && type.fields.every((f) => scalar(f.type) && !f.optional);
+const identityFrame = (target) => !!target
+  && target.params.every((p) => scalar(p.type) || p.name === "$s" && scalarRecord(p.type))
+  && (scalar(target.resultType) || scalarRecord(target.resultType))
+  && target.footprint.every((f) => f.path[0] === "$s");
 const sameSpan = (a, b) => a?.start === b?.start && a?.end === b?.end;
 const proved = (o) => o && ["verified", "vacuous"].includes(o.status);
 
@@ -27,6 +35,8 @@ export function completionPlan(machine, transitions) {
   const obligations = [], targets = [], units = transitions.units;
   const add = (id, kind, checked, detail = {}) => obligations.push({ id, kind,
     status: checked ? "checked" : "missing", ...detail });
+  add("producer", "producer-ownership", ownsCompletionGraph(machine, transitions),
+    { rule: "unchanged graph sealed by the source transition producer; same machine and source binding" });
   const unit = (name) => {
     const found = units.filter((u) => u.name === name);
     return found.length === 1 ? found[0] : undefined;
@@ -53,7 +63,7 @@ export function completionPlan(machine, transitions) {
   for (const a of actions) {
     const { name, entry, k, action } = a, c = a.unit?.target.control;
     const bound = !!c && c.entry === entry.name && c.segment === k && c.action === action
-      && c.rankBefore === entry.segments.length - k && c.cutpoints === 0 && c.callees.length === 0 && c.identityFrame === true;
+      && c.rankBefore === entry.segments.length - k && c.cutpoints === 0 && c.callees.length === 0 && c.identityFrame === true && identityFrame(a.unit.target);
     if (action !== "reject") add(`${name}:safety`, "safety-step", !!a.unit, { safetyUnit: name });
     add(`${name}:totality`, "segment-totality", bound && c.checks[0]?.kind === "segment-totality", { unit: name });
     const returns = [];
@@ -101,7 +111,7 @@ export function completionPlan(machine, transitions) {
     for (const a of actions) {
       const prefix = `${a.name}:observes:${observed.name}:${j}`;
       const own = a.entry === observed && a.action !== "call" && a.k === j + 1;
-      const framed = a.unit?.target.control?.identityFrame === true;
+      const framed = a.unit?.target.control?.identityFrame === true && identityFrame(a.unit.target);
       add(`${prefix}:alias`, "identity-alias", framed, { cases: own ? ["same actor: own progress", "distinct actor: frame"] : ["distinct actor: frame"],
         rule: a.action === "call" ? "allocation is fresh relative to every existing identity" : "request belongs to exactly one invocation; at most one settlement" });
       add(`${prefix}:nonincrease`, "interference-nonincrease", framed,

@@ -3,6 +3,21 @@ import { fail } from "../error.mjs";
 import { id, member, reference, transform, span, walk, sha256 } from "./ast.mjs";
 
 import { protocolTransitionsOf } from "./protocol-transitions.mjs";
+import { temporalMachineIdentity } from "./machine.mjs";
+
+// Only the transition producer can register a completion graph. A copied or
+// substituted compiler result cannot gain provenance by rebuilding its plan.
+const completionGraphs = new WeakMap();
+function freezeGraph(value, seen = new WeakSet()) {
+  if (!value || typeof value !== "object" || seen.has(value)) return;
+  seen.add(value);
+  for (const child of Object.values(value)) freezeGraph(child, seen);
+  Object.freeze(value);
+}
+export function ownsCompletionGraph(machine, graph) {
+  const owner = completionGraphs.get(graph);
+  return !!owner && owner.machine === machine && owner.identity === temporalMachineIdentity(machine);
+}
 
 const clause = (c, ast) => ({ ...c, ast });
 const undef = (at) => id("undefined", at);
@@ -18,6 +33,9 @@ const captures = (entry, k) => entry.awaits[k].captures;
  */
 export function transitionsOf(machine) {
   if (machine.protocol) return protocolTransitionsOf(machine);
+  const sourceIdentity = machine.temporal ? temporalMachineIdentity(machine) : undefined;
+  if (machine.temporal && !sourceIdentity)
+    fail("Source-bound completion requires the unchanged frontend machine.", machine.temporal.goals[0].span);
   const units = [], completionRejections = [], cells = [...machine.cells.values()], at = machine.state[0]?.span ?? machine.always[0].span;
   const stateType = { kind: "object", fields: cells.map((c) => ({ name: c.name, type: c.type, optional: false })) };
   const stateParam = { name: "$s", type: stateType, node: id("$s", at) };
@@ -119,7 +137,14 @@ export function transitionsOf(machine) {
       params: [...step.params, ...other], requires: [...step.requires, ...pending], ensures: pending,
       ...(machine.temporal ? { control: undefined } : {}) });
   });
-  return { units, sha256: sha256(JSON.stringify(units.map(({ target }) => ({ id: target.id, declarations: target.declarations,
+  const graph = { units, sha256: sha256(JSON.stringify(units.map(({ target }) => ({ id: target.id, declarations: target.declarations,
     pre: target.pre, preDefined: target.preDefined, postconditions: target.postconditions })))),
     ...(machine.temporal ? { completionRejections } : {}) };
+  if (machine.temporal) {
+    freezeGraph(graph);
+    if (temporalMachineIdentity(machine) !== sourceIdentity)
+      fail("Source-bound completion machine changed during lowering.", machine.temporal.goals[0].span);
+    completionGraphs.set(graph, { machine, identity: sourceIdentity });
+  }
+  return graph;
 }
