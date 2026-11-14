@@ -1,0 +1,346 @@
+[
+  {
+    "name": "baseline-ancestor",
+    "argv": [
+      "git",
+      "merge-base",
+      "--is-ancestor",
+      "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+      "HEAD"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:34.497Z",
+    "finished": "2026-11-14T04:06:34.505Z",
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "maintenance-shasum",
+    "argv": [
+      "shasum",
+      "-a",
+      "256",
+      "-c",
+      "verify/reports/roadmap/library-campaigns/maintenance-SHA256SUMS"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:38.888Z",
+    "finished": "2026-11-14T04:06:38.968Z",
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "cat-file-snapshot-0",
+    "status": 0,
+    "count": 200
+  },
+  {
+    "name": "cat-file-snapshot-200",
+    "status": 0,
+    "count": 200
+  },
+  {
+    "name": "cat-file-snapshot-400",
+    "status": 0,
+    "count": 200
+  },
+  {
+    "name": "cat-file-snapshot-600",
+    "status": 0,
+    "count": 200
+  },
+  {
+    "name": "cat-file-snapshot-800",
+    "status": 0,
+    "count": 200
+  },
+  {
+    "name": "cat-file-snapshot-1000",
+    "status": 0,
+    "count": 200
+  },
+  {
+    "name": "cat-file-snapshot-1200",
+    "status": 0,
+    "count": 200
+  },
+  {
+    "name": "cat-file-snapshot-1400",
+    "status": 0,
+    "count": 57
+  },
+  {
+    "name": "inputs-only-under-shim",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:39.070Z",
+    "finished": "2026-11-14T04:06:39.160Z",
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "history-under-shim",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only",
+      "--check-history"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:39.160Z",
+    "finished": "2026-11-14T04:06:39.239Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "history-without-shim",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only",
+      "--check-history"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:39.239Z",
+    "finished": "2026-11-14T04:06:39.303Z",
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "path-inheritance",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/path-hop-dJuUnm/hop-parent.mjs",
+      "/tmp/path-hop-dJuUnm",
+      "/tmp/path-hop-dJuUnm/hop.py"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:39.613Z",
+    "finished": "2026-11-14T04:06:39.688Z",
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "historical-default",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/old-red-s64zrI/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/old-red-s64zrI/out-default"
+    ],
+    "cwd": "/tmp/old-red-s64zrI",
+    "started": "2026-11-14T04:06:39.717Z",
+    "finished": "2026-11-14T04:06:39.786Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "historical-private-object",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/old-red-s64zrI/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/old-red-s64zrI/out-private"
+    ],
+    "cwd": "/tmp/old-red-s64zrI",
+    "started": "2026-11-14T04:06:39.787Z",
+    "finished": "2026-11-14T04:06:39.851Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "drift-library-source",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/boundary-fixture-SLDROa/out-library-source"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:39.856Z",
+    "finished": "2026-11-14T04:06:39.937Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "drift-provenance",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/boundary-fixture-SLDROa/out-provenance"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:39.937Z",
+    "finished": "2026-11-14T04:06:39.994Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "drift-license",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/boundary-fixture-SLDROa/out-license"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:39.994Z",
+    "finished": "2026-11-14T04:06:40.052Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "drift-adapter",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/boundary-fixture-SLDROa/out-adapter"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:40.052Z",
+    "finished": "2026-11-14T04:06:40.108Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "drift-application-contract",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/boundary-fixture-SLDROa/out-application-contract"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:40.109Z",
+    "finished": "2026-11-14T04:06:40.165Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "drift-inherited-attestation",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/tmp/boundary-fixture-SLDROa/out-inherited-attestation"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:40.166Z",
+    "finished": "2026-11-14T04:06:40.224Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "legacy-files",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:40.224Z",
+    "finished": "2026-11-14T04:06:40.248Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "malformed-json",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:40.248Z",
+    "finished": "2026-11-14T04:06:40.272Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "schema-1",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/tmp/boundary-fixture-SLDROa/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only"
+    ],
+    "cwd": "/tmp/boundary-fixture-SLDROa",
+    "started": "2026-11-14T04:06:40.272Z",
+    "finished": "2026-11-14T04:06:40.295Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "preserve-current-output",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/maintenance-evidence/04-current/campaign"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:40.295Z",
+    "finished": "2026-11-14T04:06:40.320Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "package-status-after-preserve",
+    "argv": [
+      "git",
+      "status",
+      "--porcelain",
+      "--",
+      "verify/reports/roadmap/library-campaigns"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:40.320Z",
+    "finished": "2026-11-14T04:06:40.332Z",
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "queued-snapshot-mismatch",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--run",
+      "/tmp/queue-mismatch-MH9smR"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:40.332Z",
+    "finished": "2026-11-14T04:06:40.448Z",
+    "status": 1,
+    "signal": null,
+    "error": null
+  },
+  {
+    "name": "final-status",
+    "argv": [
+      "git",
+      "status",
+      "--porcelain"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc",
+    "started": "2026-11-14T04:06:40.874Z",
+    "finished": "2026-11-14T04:06:40.892Z",
+    "status": 0,
+    "signal": null,
+    "error": null
+  }
+]
