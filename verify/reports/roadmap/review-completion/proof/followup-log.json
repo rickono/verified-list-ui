@@ -1,0 +1,161 @@
+{
+  "cases": [
+    {
+      "id": "cross-compile-gate",
+      "match": true,
+      "observed": {
+        "publicClosed": true,
+        "publicManifest": "9cb0086b7a4b5e89c728732f774fd2fef79d4356911e9c972bad7988aae87875",
+        "freshManifest": "9cb0086b7a4b5e89c728732f774fd2fef79d4356911e9c972bad7988aae87875",
+        "sameManifest": true,
+        "crossGoals": [
+          "verified",
+          "verified"
+        ],
+        "crossClosed": true,
+        "hashPairs": [
+          {
+            "unit": "work$0",
+            "plan": "916d2a3b0d48e02ac6614f1d6f930584863b79ac8fa7b19de858573d9952f188",
+            "evidence": "916d2a3b0d48e02ac6614f1d6f930584863b79ac8fa7b19de858573d9952f188"
+          },
+          {
+            "unit": "work$1",
+            "plan": "e6472e82d76d5252ed6791062ade5fcd482de62a4de5ddfd9877488b3f20ca25",
+            "evidence": "e6472e82d76d5252ed6791062ade5fcd482de62a4de5ddfd9877488b3f20ca25"
+          },
+          {
+            "unit": "work$reject$1",
+            "plan": "28ce03755e58743de201d983b9ac68f623ca1dd3be8b3aec9e85d84244f67812",
+            "evidence": "28ce03755e58743de201d983b9ac68f623ca1dd3be8b3aec9e85d84244f67812"
+          },
+          {
+            "unit": "work$2",
+            "plan": "74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540",
+            "evidence": "74cdc8e357db5e8c570cb5c834efe9a2b60df7167431a6c20d3ccff741fc9540"
+          },
+          {
+            "unit": "work$reject$2",
+            "plan": "ee752011b8099eafcdf5213f769f6d95780829267cb3c83a63f722ec68d4b128",
+            "evidence": "ee752011b8099eafcdf5213f769f6d95780829267cb3c83a63f722ec68d4b128"
+          },
+          {
+            "unit": "disturb$0",
+            "plan": "9840f949ea7309654d8a813b9bbf421ed191cdf2a70de112427111c196c292fa",
+            "evidence": "9840f949ea7309654d8a813b9bbf421ed191cdf2a70de112427111c196c292fa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "same-compile-gate",
+      "match": true,
+      "observed": {
+        "closed": true,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "verified",
+            "reason": null
+          },
+          {
+            "entry": "disturb",
+            "status": "verified",
+            "reason": null
+          }
+        ],
+        "outcomes": [
+          {
+            "unit": "work$0",
+            "status": "verified"
+          },
+          {
+            "unit": "work$1",
+            "status": "verified"
+          },
+          {
+            "unit": "work$reject$1",
+            "status": "verified"
+          },
+          {
+            "unit": "work$2",
+            "status": "verified"
+          },
+          {
+            "unit": "work$reject$2",
+            "status": "verified"
+          },
+          {
+            "unit": "disturb$0",
+            "status": "verified"
+          }
+        ]
+      }
+    },
+    {
+      "id": "empty-middle",
+      "match": true,
+      "expected": {
+        "status": "verified",
+        "closed": true
+      },
+      "observed": {
+        "status": "verified",
+        "message": null,
+        "safety": "verified",
+        "reason": null,
+        "closed": true,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "verified",
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "negzero-constant",
+      "match": true,
+      "expected": {
+        "status": "verified"
+      },
+      "observed": {
+        "status": "verified",
+        "message": null,
+        "safety": "verified",
+        "reason": null,
+        "closed": true,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "verified",
+            "reason": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "reachable-partial",
+      "match": true,
+      "expected": {
+        "status": "verified"
+      },
+      "observed": {
+        "status": "verified",
+        "message": null,
+        "safety": "verified",
+        "reason": null,
+        "closed": true,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "verified",
+            "reason": null
+          }
+        ]
+      }
+    }
+  ],
+  "mismatches": []
+}
