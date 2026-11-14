@@ -1,0 +1,8 @@
+{
+  "temporaryDependencyLinkRemoved": true,
+  "temporaryDependencyTarget": "/Users/rick/verification-vibes/verified-list-ui/node_modules",
+  "ownedProcesses": [],
+  "recordCheck": "PASS",
+  "privateScratch": "absent",
+  "scope": "Review commands exited. The temporary node_modules symlink was removed. No review process remains."
+}
