@@ -1,7 +1,7 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-13",
-  "status": "A, B, C, D, F, E, J, H, G and P are integrated. PR #11 merged exact numeric metadata, another enabling gate for K; K loop cutpoints and guarded throws are in production implementation. C1 has independent reviews and two local admission corrections awaiting final combined checks. No other remaining node is claimed complete.",
+  "status": "A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12 with 49 focused and 371 full tests; R/S/T/U remain incomplete. K Gate3 is implemented locally (418 tests) and awaits independent review. Guarded throws and the unchanged harmonicMean campaign passed independent review and await combined integration. Two cancellation/listener designs await comparison.",
   "edgeMeaning": "All prerequisites apply. The implemented first subsets of H and G are merged. P and T can proceed independently; K, R and S now have their original prerequisites. The stateful foundation is being designed together. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
@@ -736,5 +736,15 @@
     "combinedStackSuite": 322,
     "nativeBugReproductions": 3,
     "report": "../verify/reports/roadmap/P-landing.md"
+  },
+  "statefulFoundationDelivery": {
+    "integrated": true,
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/12",
+    "mergeCommit": "41079c5d22ba889005075d23ffd5ef5ca7a1e600",
+    "testedHead": "0345a9adb631f0785ff79ccb7cb9dc842393080a",
+    "focusedTests": 49,
+    "fullTests": 371,
+    "report": "../verify/reports/roadmap/C1-landing.md",
+    "scope": "Scalar source-linked async safety foundation; no cancellation, listeners, exact counts or liveness; no R/S/T/U completion."
   }
 }
