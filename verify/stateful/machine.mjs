@@ -113,7 +113,9 @@ export function machineOf(file, source) {
     }
     if (!state.length && !always.length) fail("No state or always property; pending clauses alone cannot establish safety.", program);
     const machine = { targets, types: syntax.types, file, source, stripped, program, tokens, clauses, environment, cells, state, always, sourceSha256: sha256(source), entries: [] };
-    if (targets.size || [...syntax.types.values()].some((t) => handles.has(t)) || [...environment.values()].some((op) => op.abort)) {
+    let constructsController = false;
+    walk(program, (n) => { if (n.type === "NewExpression" && n.callee.type === "Identifier" && n.callee.name === "AbortController") constructsController = true; });
+    if (constructsController || targets.size || [...syntax.types.values()].some((t) => handles.has(t)) || [...environment.values()].some((op) => op.abort)) {
       machine.protocol = protocolOf(machine);
       for (const fn of functions) machine.entries.push(protocolEntryOf(machine, fn, syntax.types, clauses, used, names));
       if (targets.size && machine.entries.some((e) => e.awaits.length)) fail("Listener and advisory-await modules are separate in C2a.", program);

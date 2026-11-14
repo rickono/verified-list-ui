@@ -219,3 +219,11 @@ test("all protocol modules check external stutters; private deletion exposes a f
   const native=await replay(source,[{kind:'abort',controller:h('controller','10')}]);assert.equal(native.status,'ok');assert.equal(native.violation.kind,'always');
   const report=await checkStateful('stutter.ts',source,{maxDepth:0});assert.equal(report.status,'unknown');assert.equal(report.reason,'induction-gap');
 });
+
+test("a standalone unannotated controller constructor selects checked protocol admission", async () => {
+  const source=`let x=0;\n// state x===0\nexport function allocate(){const c=new AbortController();const alias=c;return alias;}`;
+  const report=await checkStateful('standalone.ts',source,{maxDepth:0});assert.equal(report.status,'verified',JSON.stringify(report));
+  const native=await replay(source,[call('allocate',[],{returns:'1000000000'}),call('allocate',[],{returns:'1000000002'})],[]);
+  assert.equal(native.status,'ok',JSON.stringify(native));
+  assert.deepEqual(native.signals.map(s=>[s.owner,s.signal]),[['1000000000','1000000001'],['1000000002','1000000003']]);
+});
