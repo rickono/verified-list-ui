@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-14: K and Q are integrated, with the public milestone map in PR #15. Corrected C2a passed510/510 combined tests and is preparing publication with fresh model-bound campaigns; R/S/T remain unintegrated. Conditional completion has native reviewPASS and a compiled-artifact integrity finding to correct before U. The historical p-event timeout regression reproduces on unchanged old/fixed modules, but production admission is unsupported; V/W remain open.
+Status as of 2026-11-14: R, S and T are integrated in the scoped C1/C2a domain after PR #16. K/Q remain integrated with fresh current-model campaign evidence. U is next: conditional completion needs producer-owned proof artifacts before integration. V has an unchanged-source historical native regression; factory proof designs are in progress. W remains open.
 
-All prerequisites apply. K and Q are integrated in their documented source subsets. C1 supplies the stateful safety foundation; listener/cancellation proof correction, environment usage and temporal completion reviews remain open. Transitively redundant edges are omitted.
+All prerequisites apply. Integrated nodes refer to their documented first-layer subsets. U can build on the landed stateful safety and explicit-environment foundation; V and W still require maintained real stateful source proofs. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -20,10 +20,10 @@ flowchart TD
   K["K: Broader library proofs<br/>integrated"]
   P["P: Project proof workflow<br/>integrated"]
   Q["Q: Pure JS/TS proofs &amp; bugs<br/>integrated"]
-  R["R: Event &amp; lifecycle semantics<br/>branch-ready"]
-  S["S: Async ordering model<br/>branch-ready"]
-  T["T: Environment contracts<br/>branch-ready"]
-  U["U: Temporal verification<br/>PARTIAL"]
+  R["R: Event &amp; lifecycle semantics<br/>integrated"]
+  S["S: Async ordering model<br/>integrated"]
+  T["T: Environment contracts<br/>integrated"]
+  U["U: Temporal verification<br/>NEXT"]
   V["V: Stateful app pilots<br/>PARTIAL"]
   W["W: Existing JS/TS verification"]
   NOW --> A
@@ -78,11 +78,15 @@ H is integrated on `feat/pure-callback-contracts`. Pure total unary numeric pred
 
 ## Heap and frame delivery
 
-G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). Mutating loops, reference stores and stateful callbacks remain unsupported in the integrated heap subset. K can now build on the integrated prerequisites.
+G is integrated on `feat/heap-alias-frames`, building on H. Shared identities, shallow copies, entry heaps, primitive stores and per-write mutation frames compose through helper calls. The full suite passes 249/249; 4 heap-specific verifier mutants join the 12 existing mutants. [Heap validation report](../verify/reports/heap.md). At the G checkpoint, mutating loops, reference stores and stateful callbacks remained outside that delivery; later K and stateful sections record extensions. K subsequently integrated these prerequisites.
 
 ## Stateful safety foundation
 
-C1 is integrated: source-linked scalar await segments use init, step and interference/keeps over unbounded activations. The focused run passes 49/49; the combined suite passes 371/371. [Acceptance and scope](../verify/reports/roadmap/C1-landing.md). Cancellation, listeners, counts and liveness remain future units; R/S/T/U are incomplete.
+C1 is integrated: source-linked scalar await segments use init, step and interference/keeps over unbounded activations. The focused run passes 49/49; the combined suite passes 371/371. [Acceptance and scope](../verify/reports/roadmap/C1-landing.md). C1 alone did not deliver cancellation, listeners, counts or liveness; later units are recorded separately.
+
+## Stateful protocols and environment contracts
+
+R, S and T are integrated in the documented C1/C2a domain at `a60ae39`. The combined suite passes 510/510, including 8 abort-binding checks; the current-model numerical campaign passes 10 stages. Original native review PASS and proof review ISSUES are preserved with the coordinator's tested correction. [Acceptance, source bindings and limits](../verify/reports/roadmap/RST-landing.md). Conditional completion U and real stateful factory proof V remain open.
 
 ## Original branch results
 
@@ -101,7 +105,7 @@ These counts describe the original isolated branches. D's original partial resul
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
 Ready packages: .
-Branches awaiting integration: R, S, T.
+Branches awaiting integration: none.
 
 To regenerate this document after editing the data:
 
