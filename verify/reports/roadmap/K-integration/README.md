@@ -7,7 +7,8 @@ skips or cancellations, a clean checkout, and unchanged recorded inputs.
 [The receipt](final/receipt.json) binds that exact tree. Report and campaign
 imports left those tested inputs unchanged. The later resource amendment below
 changes the budget boundary and has its own 483-test receipt. K remains unmerged
-in PR #14; current-model numerical campaign maintenance is still pending.
+in PR #14; the current-model numerical campaign repair and its independent
+review have now passed.
 
 The only source conflict was the loop iteration context. The resolution keeps
 K's context for the test, body and update, and the collector span used by throw
@@ -97,9 +98,20 @@ the harmonic-mean total-return proof and genuine reciprocal-overflow failure,
 Ramda's generic first-match theorem with seeded controls, and native d3-array
 coverage failures. The d3 source remains formally unsupported; timeouts and
 the separate instrumented cycle argument are not solver proofs. Its model-bound
-receipts remain historical. The campaign runner still pins old verifier hashes
-and requires an unpublished validation commit; a separate maintenance unit is
-repairing that boundary before a fresh full campaign under the current model.
+receipts remain historical. The [maintenance unit](../library-campaigns/maintenance.md)
+separates immutable library inputs from fresh verifier snapshots and removes
+mandatory unpublished-history reads. Its current-model campaign passed all ten
+stages, twelve focused controls and eight audit groups, with 345 package hashes.
+The [independent maintenance review](../review-campaign-maintenance/report.md)
+passes: it executed drift, missing-history, queued-snapshot and replay controls,
+and checked the recorded full campaign without repeating it. Root checked the
+imported input gate and all 345 hashes. The recorded proof identity is
+`09d21829`; none of the old model's artifacts are promoted.
+
+One sentence in that review calls the lockfile `package-lock.json`; this
+repository tracks `pnpm-lock.yaml` and has no tracked `package-lock.json`.
+Root checked that `package.json` and `pnpm-lock.yaml` match the 483-test head
+`7feca28`. This correction changes no source, receipt or proof claim.
 
 The numerical review ran an 800 ms native timeout control outside the requested
 serial lane and records that policy miss. The coordinator repeated that check
