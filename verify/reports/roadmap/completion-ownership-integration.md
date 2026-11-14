@@ -70,3 +70,27 @@ trusted function references rather than attempting to serialize parser code.
 Final combined validation and the fresh current-model campaign are pending.
 No original roadmap acceptance sentence is changed, and U is not yet marked
 integrated. Historical 496, 510 and 530 results describe their own trees.
+
+## Current validation and review scope
+
+The first post-correction combined run on `776fa71` finished with 519 passes and
+12 failures out of 531; no inputs changed. The next campaign was not started.
+All failing outcomes were resource-related unknowns or mismatched unknown reasons;
+the full log remains a failed run, not a pass. OS power logs record 68 Sleep,
+67 DarkWake and one Wake event inside that run's interval, including clamshell
+sleep and subsequent maintenance sleeps. Several individual tests with short
+request budgets consumed many minutes. This is evidence of host suspension
+contaminating wall-clock checks, not proof that every failure has that cause.
+Targeted unchanged-budget rechecks and a clean combined run remain required.
+
+The [completed standards/native review](review-completion-owned/standards-native/report.md)
+passes its executed cases on `1f326fd`, with the original reviewer limits retained.
+It does not cover `776fa71`. Its JSON/object-hook examples and the failed review's
+partial signed-zero case explain why the coordinator removed JSON from the
+ownership decision. New coordinator checks reject signed-zero substitution,
+added `toJSON` and added function-valued control data before lowering. The hook
+is never invoked. An initial coordinator hook probe selected an empty prefix
+and failed before its assertion; that harness error is preserved separately.
+There is no completed second proof-axis review: automatic safety review rejected
+that delegate, and it was not retried. Historical source/native findings,
+coordinator regression controls and the independent completed axis remain distinct.
