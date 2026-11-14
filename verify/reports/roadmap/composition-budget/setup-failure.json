@@ -1,0 +1,20 @@
+{
+  "phase": "before recorded parent regression; no solver started",
+  "observedError": "Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'acorn' imported from /Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/source.mjs",
+  "capture": "Preserved from the initial tool output, before the rerunnable recorder was installed. No solver result was produced.",
+  "correction": "Replaced only the temporary link with /Users/rick/verification-vibes/verified-list-ui/node_modules; subsequent parent-red used this dependency set.",
+  "commands": [
+    [
+      "ln",
+      "-s",
+      "/Users/rick/verification-vibes/node_modules",
+      "node_modules"
+    ],
+    [
+      "node",
+      "-e",
+      "import(\"./verify/index.mjs\").then(async ({verify}) => { try { await verify(\"// ensures result\\nconst ok = () => true;\", {timeoutMs:180000}); process.exitCode=1; } catch (error) { console.log(JSON.stringify({name:error.name,message:error.message})); if (!(error instanceof TypeError) || !/60000/.test(error.message)) process.exitCode=2; } });"
+    ]
+  ],
+  "stdoutRedirect": "verify/reports/roadmap/composition-budget/parent-rejection.json (empty; removed after the failed import)"
+}

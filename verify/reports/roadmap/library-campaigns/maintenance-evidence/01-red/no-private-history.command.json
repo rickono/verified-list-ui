@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "node",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.red-fixture-5iwdb65z/verify/reports/roadmap/library-campaigns/check.mjs",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.red-fixture-5iwdb65z/output"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.red-fixture-5iwdb65z",
+  "started": "2026-11-14T03:26:54.611675+00:00",
+  "finished": "2026-11-14T03:26:54.691494+00:00",
+  "status": 1,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "3fec8b85f1eb4176b5258705c8e4a85fb9e9a14257424d685bcbd169aa925884",
+  "waited": true
+}

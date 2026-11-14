@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "node",
+    "verify/reports/roadmap/library-campaigns/check.mjs",
+    "--inputs-only",
+    "--check-history"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+  "start": "2026-11-14T03:37:49.960184+00:00",
+  "end": "2026-11-14T03:37:50.132675+00:00",
+  "status": 0,
+  "stdoutSha256": "b4eacca17cbf0df0d66782234c8d315bc39e21aa09c5843f9d08af54be72c502",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "meaning": "Explicit optional validation using locally available historical objects; no download; not a maintained-campaign prerequisite"
+}

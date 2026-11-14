@@ -115,6 +115,30 @@ export function registry(unit) {
   return unit.heap;
 }
 
+// A compiler trial shares this owner with the pre-loop states. Roll back its
+// registry universe as well as its facts: finish() quantifies exact shapes over
+// keys and emits decls/asserts even when no returned state mentions the trial.
+// Content names are never reused. Discarded provenance is removed, so keeping
+// a discarded state by mistake fails the normal unknown-version audit.
+export function trial(unit) {
+  const reg = registry(unit), owner = ownerFor(unit);
+  const saved = { ...reg, keys: new Set(reg.keys), exact: [...reg.exact],
+    asserts: [...reg.asserts], decls: [...reg.decls], roots: [...reg.roots], rootTypes: [...reg.rootTypes] };
+  const names = new Set(owner.versions.keys());
+  let active = true;
+  return {
+    commit() { if (!active) auditError("trial already ended"); active = false; },
+    rollback() {
+      if (!active) auditError("trial already ended");
+      active = false;
+      const versions = reg.versions;
+      for (const key of Object.keys(reg)) delete reg[key];
+      Object.assign(reg, saved, { versions });
+      for (const name of owner.versions.keys()) if (!names.has(name)) owner.versions.delete(name);
+    },
+  };
+}
+
 function touch(unit, k) {
   const reg = registry(unit);
   if (reg.keys.has(k)) return;
@@ -242,7 +266,7 @@ export function writableField(type, key, node) {
   if (!f) fail(`Heap writes may target only declared fields; ${key} is not one (no key additions).`, node);
   const t = fieldType(f);
   if (f.optional || t?.kind === "optional") fail(`Heap writes may target only required present fields; ${key} may be absent or undefined.`, node);
-  if (isRecordType(t)) fail("Reference stores are outside the first heap slice; only primitive contents may change.", node);
+  if (isReferenceType(t)) fail("Reference stores are outside the first heap slice; only primitive contents may change.", node);
   if (!["number", "boolean"].includes(t)) fail(`Heap writes need a number or boolean field; ${key} is ${JSON.stringify(t)}.`, node);
   return t;
 }

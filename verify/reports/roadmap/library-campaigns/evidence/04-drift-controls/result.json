@@ -1,0 +1,69 @@
+{
+  "status": "ISSUES",
+  "command": [
+    "python3",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/evidence/04-drift-controls/run.py"
+  ],
+  "checks": [
+    {
+      "id": "source",
+      "classification": "finite control",
+      "origin": "own execution",
+      "argv": [
+        "python3",
+        "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+        "--",
+        "/Users/rick/.local/bin/node",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-pyisr647/verify/reports/roadmap/library-campaigns/check.mjs",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-pyisr647/output"
+      ],
+      "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-pyisr647",
+      "start": "2026-11-14T01:31:28.814414+00:00",
+      "end": "2026-11-14T01:31:48.818420+00:00",
+      "codeHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+      "checkerSha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
+      "timeoutSeconds": 20,
+      "exitCode": -9,
+      "timedOut": true,
+      "remainingProcessGroup": false,
+      "expectedDiagnostic": "Source/provenance drift: verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js",
+      "originalSha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+      "changedSha256": "73dc792fd18ad5f8b07ddaad43a742256afdac8f3b8643f560dd2489d67c8de7",
+      "noSourceVerification": "Manifest validation refused the copy before semantic imports or solver launch.",
+      "stdoutSha256": "54c1dcefee9bbeb12d2cbb279b332ddded4dd30461ee3c3826170db0bc7add2d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "ISSUES",
+      "scratchRemoved": true
+    },
+    {
+      "id": "provenance",
+      "classification": "finite control",
+      "origin": "own execution",
+      "argv": [
+        "python3",
+        "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+        "--",
+        "/Users/rick/.local/bin/node",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-ioju_loq/verify/reports/roadmap/library-campaigns/check.mjs",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-ioju_loq/output"
+      ],
+      "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-ioju_loq",
+      "start": "2026-11-14T01:31:48.842382+00:00",
+      "end": "2026-11-14T01:32:08.846359+00:00",
+      "codeHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+      "checkerSha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
+      "timeoutSeconds": 20,
+      "exitCode": -9,
+      "timedOut": true,
+      "remainingProcessGroup": false,
+      "expectedDiagnostic": "Source/provenance drift: verify/reports/roadmap/library-campaigns/provenance.json",
+      "originalSha256": "eb213e56d305a3a0a5185107bcb45351dc9b775aaa2f8b68ddcd49b0e7b150bd",
+      "changedSha256": "5c743cc75be82312853609bc38175fc7d6fe3413dd8b5f8f950cd050d30ea5a5",
+      "noSourceVerification": "Manifest validation refused the copy before semantic imports or solver launch.",
+      "stdoutSha256": "54c1dcefee9bbeb12d2cbb279b332ddded4dd30461ee3c3826170db0bc7add2d",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "ISSUES",
+      "scratchRemoved": true
+    }
+  ]
+}

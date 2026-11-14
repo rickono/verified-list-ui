@@ -1,0 +1,298 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# Subtest: worker errors, signal exits, invalid verdicts, ids, and witnesses fail closed
+ok 1 - worker errors, signal exits, invalid verdicts, ids, and witnesses fail closed
+  ---
+  duration_ms: 158.977875
+  type: 'test'
+  ...
+# Subtest: a controlled 25 ms hard deadline interrupts and reaps an unresponsive worker
+ok 2 - a controlled 25 ms hard deadline interrupts and reaps an unresponsive worker
+  ---
+  duration_ms: 21.177666
+  type: 'test'
+  ...
+# Subtest: a controlled 180000 ms hard deadline interrupts and reaps an unresponsive worker
+ok 3 - a controlled 180000 ms hard deadline interrupts and reaps an unresponsive worker
+  ---
+  duration_ms: 21.8645
+  type: 'test'
+  ...
+# (node:25048) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: missing capabilities and invalid startup messages cannot support proofs
+ok 4 - missing capabilities and invalid startup messages cannot support proofs
+  ---
+  duration_ms: 41.8005
+  type: 'test'
+  ...
+# Subtest: independent concurrent requests keep proofs, vacuity, and replay witnesses isolated
+ok 5 - independent concurrent requests keep proofs, vacuity, and replay witnesses isolated
+  ---
+  duration_ms: 273.170791
+  type: 'test'
+  ...
+# Subtest: real Z3 queries isolate assertions even when target symbols have the same names
+ok 6 - real Z3 queries isolate assertions even when target symbols have the same names
+  ---
+  duration_ms: 142.902917
+  type: 'test'
+  ...
+# Subtest: an unreplayable callee blocks callers transitively while an independent target verifies
+ok 7 - an unreplayable callee blocks callers transitively while an independent target verifies
+  ---
+  duration_ms: 1747.242042
+  type: 'test'
+  ...
+# Subtest: real Z3 evidence survives a controlled costly obligation in both target orders
+ok 8 - real Z3 evidence survives a controlled costly obligation in both target orders
+  ---
+  duration_ms: 317.072208
+  type: 'test'
+  ...
+# Subtest: all source postconditions are required and oversized counterexamples name their clause
+ok 9 - all source postconditions are required and oversized counterexamples name their clause
+  ---
+  duration_ms: 1095.468708
+  type: 'test'
+  ...
+# (node:25087) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: public APIs accept a caller-requested 180000 ms budget and replay a real proof
+ok 10 - public APIs accept a caller-requested 180000 ms budget and replay a real proof
+  ---
+  duration_ms: 317.082667
+  type: 'test'
+  ...
+# Subtest: public APIs reject invalid budgets before reading a file or solving
+ok 11 - public APIs reject invalid budgets before reading a file or solving
+  ---
+  duration_ms: 0.612459
+  type: 'test'
+  ...
+# Subtest: default verification works and a one millisecond request stays contained
+ok 12 - default verification works and a one millisecond request stays contained
+  ---
+  duration_ms: 145.3755
+  type: 'test'
+  ...
+# Subtest: CLI --timeout accepts 180000 and rejects the same invalid numeric budgets
+ok 13 - CLI --timeout accepts 180000 and rejects the same invalid numeric budgets
+  ---
+  duration_ms: 900.094583
+  type: 'test'
+  ...
+# (node:25104) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: independent OS writers and readers never observe torn receipt bytes or lose other keys
+ok 14 - independent OS writers and readers never observe torn receipt bytes or lose other keys
+  ---
+  duration_ms: 165.642875
+  type: 'test'
+  ...
+# Subtest: mid-write SIGKILL leaves absent/complete entries; dead stale temps sweep while active, foreign and unrelated files remain
+ok 15 - mid-write SIGKILL leaves absent/complete entries; dead stale temps sweep while active, foreign and unrelated files remain
+  ---
+  duration_ms: 56.859834
+  type: 'test'
+  ...
+# Subtest: size caps, symlinks, schema and invalid writes fail closed and leave no temporary files
+ok 16 - size caps, symlinks, schema and invalid writes fail closed and leave no temporary files
+  ---
+  duration_ms: 8.028833
+  type: 'test'
+  ...
+# (node:25113) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: cold/warm/audit, API default, source/label changes and equivalent-query sharing
+ok 17 - cold/warm/audit, API default, source/label changes and equivalent-query sharing
+  ---
+  duration_ms: 1535.090709
+  type: 'test'
+  ...
+# Subtest: source, spec, helper contract/shape and type changes invalidate exactly the translated obligations
+ok 18 - source, spec, helper contract/shape and type changes invalidate exactly the translated obligations
+  ---
+  duration_ms: 4780.719834
+  type: 'test'
+  ...
+# Subtest: tsconfig redirects preserve equal queries and invalidate changed contracts
+ok 19 - tsconfig redirects preserve equal queries and invalidate changed contracts
+  ---
+  duration_ms: 557.50425
+  type: 'test'
+  ...
+# Subtest: naive own-source identities miss helper shape and type changes that real plans detect
+ok 20 - naive own-source identities miss helper shape and type changes that real plans detect
+  ---
+  duration_ms: 359.638625
+  type: 'test'
+  ...
+# Subtest: a current broken callee gates an otherwise reusable caller, including target selection
+ok 21 - a current broken callee gates an otherwise reusable caller, including target selection
+  ---
+  duration_ms: 595.790792
+  type: 'test'
+  ...
+# Subtest: readonly/audit/plan never create an absent cache; failures and residuals never hit
+ok 22 - readonly/audit/plan never create an absent cache; failures and residuals never hit
+  ---
+  duration_ms: 1317.3755
+  type: 'test'
+  ...
+# Subtest: judge's nine malformed/oversized forgeries are rejected, re-solved once and repaired
+ok 23 - judge's nine malformed/oversized forgeries are rejected, re-solved once and repaired
+  ---
+  duration_ms: 6762.634708
+  type: 'test'
+  ...
+# Subtest: unparseable, schema, identity, key, format and replay failures are repaired; audit reports them
+ok 24 - unparseable, schema, identity, key, format and replay failures are repaired; audit reports them
+  ---
+  duration_ms: 3398.990208
+  type: 'test'
+  ...
+# Subtest: benign forgery is a visible cache-integrity trust assumption; audit independently catches stale naive spec evidence
+ok 25 - benign forgery is a visible cache-integrity trust assumption; audit independently catches stale naive spec evidence
+  ---
+  duration_ms: 744.202291
+  type: 'test'
+  ...
+# Subtest: bug evidence keeps original witness, greedily shrinks and natively reproduces; stale or forged evidence refuses
+ok 26 - bug evidence keeps original witness, greedily shrinks and natively reproduces; stale or forged evidence refuses
+  ---
+  duration_ms: 630.909792
+  type: 'test'
+  ...
+# Subtest: evidence binds project config and survives relocation of the identical source/config graph
+ok 27 - evidence binds project config and survives relocation of the identical source/config graph
+  ---
+  duration_ms: 430.933167
+  type: 'test'
+  ...
+# Subtest: heap and predicate counterexamples reproduce and explicitly skip unsupported shrinking
+ok 28 - heap and predicate counterexamples reproduce and explicitly skip unsupported shrinking
+  ---
+  duration_ms: 529.616
+  type: 'test'
+  ...
+# (node:25505) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AST closure follows static, side-effect, re-export, literal dynamic/template imports and worker URLs
+ok 29 - AST closure follows static, side-effect, re-export, literal dynamic/template imports and worker URLs
+  ---
+  duration_ms: 3958.869292
+  type: 'test'
+  ...
+# Subtest: computed imports, loader APIs, computed worker URLs and transitive unresolved dynamic code disable reuse
+ok 30 - computed imports, loader APIs, computed worker URLs and transitive unresolved dynamic code disable reuse
+  ---
+  duration_ms: 118.425208
+  type: 'test'
+  ...
+# Subtest: whole solver package JS, wasm and transitive dependencies, runtime and protocol bind receipt identity
+ok 31 - whole solver package JS, wasm and transitive dependencies, runtime and protocol bind receipt identity
+  ---
+  duration_ms: 1869.041291
+  type: 'test'
+  ...
+# Subtest: editing a loaded semantic module disables the running API rather than naming new disk bytes
+ok 32 - editing a loaded semantic module disables the running API rather than naming new disk bytes
+  ---
+  duration_ms: 256.287417
+  type: 'test'
+  ...
+# Subtest: solver deadline preserves a cheap target in order costly, cheap
+ok 33 - solver deadline preserves a cheap target in order costly, cheap
+  ---
+  duration_ms: 0.943833
+  type: 'test'
+  ...
+# Subtest: solver deadline preserves a cheap target in order cheap, costly
+ok 34 - solver deadline preserves a cheap target in order cheap, costly
+  ---
+  duration_ms: 0.283958
+  type: 'test'
+  ...
+# Subtest: hard deadline preserves a cheap target in order costly, cheap
+ok 35 - hard deadline preserves a cheap target in order costly, cheap
+  ---
+  duration_ms: 0.266042
+  type: 'test'
+  ...
+# Subtest: hard deadline preserves a cheap target in order cheap, costly
+ok 36 - hard deadline preserves a cheap target in order cheap, costly
+  ---
+  duration_ms: 0.436125
+  type: 'test'
+  ...
+# Subtest: a deferred proof retains completed obligations and uses time freed by cheap targets
+ok 37 - a deferred proof retains completed obligations and uses time freed by cheap targets
+  ---
+  duration_ms: 0.447416
+  type: 'test'
+  ...
+# Subtest: a cheap target behind two costly targets gets a turn within the original budget
+ok 38 - a cheap target behind two costly targets gets a turn within the original budget
+  ---
+  duration_ms: 0.125083
+  type: 'test'
+  ...
+# Subtest: worker errors preserve finished outcomes and let later independent targets run
+ok 39 - worker errors preserve finished outcomes and let later independent targets run
+  ---
+  duration_ms: 0.104084
+  type: 'test'
+  ...
+# Subtest: initialization, late responses, and unattempted targets consume one 10 ms request budget
+ok 40 - initialization, late responses, and unattempted targets consume one 10 ms request budget
+  ---
+  duration_ms: 0.151291
+  type: 'test'
+  ...
+# Subtest: initialization, late responses, and unattempted targets consume one 180000 ms request budget
+ok 41 - initialization, late responses, and unattempted targets consume one 180000 ms request budget
+  ---
+  duration_ms: 0.37475
+  type: 'test'
+  ...
+# Subtest: initialization failure cannot erase another worker's useful outcomes
+ok 42 - initialization failure cannot erase another worker's useful outcomes
+  ---
+  duration_ms: 0.477958
+  type: 'test'
+  ...
+# Subtest: uncertainty and bounded witness infeasibility never become proofs or vacuity
+ok 43 - uncertainty and bounded witness infeasibility never become proofs or vacuity
+  ---
+  duration_ms: 0.291917
+  type: 'test'
+  ...
+# Subtest: full-domain infeasibility stays vacuous and sat postconditions retain counterexample evidence
+ok 44 - full-domain infeasibility stays vacuous and sat postconditions retain counterexample evidence
+  ---
+  duration_ms: 0.127667
+  type: 'test'
+  ...
+# Subtest: separate postconditions expose a cheap failing clause when the grouped query is costly
+ok 45 - separate postconditions expose a cheap failing clause when the grouped query is costly
+  ---
+  duration_ms: 0.063042
+  type: 'test'
+  ...
+# Subtest: CLI cold/warm/audit, plan/selection and native evidence reproduction use real source
+ok 46 - CLI cold/warm/audit, plan/selection and native evidence reproduction use real source
+  ---
+  duration_ms: 3867.794458
+  type: 'test'
+  ...
+1..46
+# tests 46
+# suites 0
+# pass 46
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 37666.51975

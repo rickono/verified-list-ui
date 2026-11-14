@@ -1,0 +1,114 @@
+[
+  {
+    "event": "returned",
+    "id": "coverage-1",
+    "start": {
+      "value": "0.9299999999999999",
+      "bits": "3fedc28f5c28f5c2"
+    },
+    "stop": {
+      "value": "0.93",
+      "bits": "3fedc28f5c28f5c3"
+    },
+    "count": 1,
+    "increment": {
+      "value": "-10000000000000000",
+      "bits": "c341c37937e08000"
+    },
+    "result": [
+      {
+        "value": "0.93",
+        "bits": "3fedc28f5c28f5c3"
+      },
+      {
+        "value": "0.93",
+        "bits": "3fedc28f5c28f5c3"
+      }
+    ],
+    "covers": false
+  },
+  {
+    "event": "returned",
+    "id": "coverage-5000",
+    "start": {
+      "value": "0.9299999999999999",
+      "bits": "3fedc28f5c28f5c2"
+    },
+    "stop": {
+      "value": "0.93",
+      "bits": "3fedc28f5c28f5c3"
+    },
+    "count": 5000,
+    "increment": {
+      "value": "-50000000000000000000",
+      "bits": "c405af1d78b58c40"
+    },
+    "result": [
+      {
+        "value": "0.93",
+        "bits": "3fedc28f5c28f5c3"
+      },
+      {
+        "value": "0.93",
+        "bits": "3fedc28f5c28f5c3"
+      }
+    ],
+    "covers": false
+  },
+  {
+    "event": "returned",
+    "id": "documented-example",
+    "start": {
+      "value": "1",
+      "bits": "3ff0000000000000"
+    },
+    "stop": {
+      "value": "9",
+      "bits": "4022000000000000"
+    },
+    "count": 5,
+    "increment": {
+      "value": "2",
+      "bits": "4000000000000000"
+    },
+    "result": [
+      {
+        "value": "0",
+        "bits": "0000000000000000"
+      },
+      {
+        "value": "10",
+        "bits": "4024000000000000"
+      }
+    ],
+    "covers": true
+  },
+  {
+    "event": "returned",
+    "id": "fixed-issue-282",
+    "start": {
+      "value": "0.9299999999999999",
+      "bits": "3fedc28f5c28f5c2"
+    },
+    "stop": {
+      "value": "1.07",
+      "bits": "3ff11eb851eb851f"
+    },
+    "count": 5000,
+    "increment": {
+      "value": "-50000",
+      "bits": "c0e86a0000000000"
+    },
+    "result": [
+      {
+        "value": "0.92998",
+        "bits": "3fedc2656abde3fc"
+      },
+      {
+        "value": "1.07",
+        "bits": "3ff11eb851eb851f"
+      }
+    ],
+    "covers": true
+  }
+]

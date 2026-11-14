@@ -1,0 +1,44 @@
+{
+  "schema": 2,
+  "baseline": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+  "immutable": {
+    "sources": {
+      "verify/examples/es-toolkit/mean.spec.upstream.ts": "27c1b2e5a4afd77e10c5f54549939d22a9abda2929b1543ec3f4dac324e69182",
+      "verify/examples/es-toolkit/mean.upstream.ts": "b0445d7e281b1e8b646c9729efa1d3d4806217c93dc9954cc434261690573ca7",
+      "verify/examples/es-toolkit/sum.spec.upstream.ts": "2be85eec5f5a6eedf9fe2295146e04fd18f13cb30caa3f8b6bad11f517be8a62",
+      "verify/examples/es-toolkit/sum.upstream.ts": "932fb45fe749f343a198e093a9c4fc1628aa8c21204957cf481e038903347507",
+      "verify/examples/ramda/findIndex.upstream.js": "78467c00c06ef87c44d6d8415a9d9ee3cd7c41c549890fb0fef2b87d06e4bac1",
+      "verify/examples/ramda/search.js": "a588b7ceaa00346778072e95195bcbb6850d56d1f701338f4c4f7d4993d7fbd8",
+      "verify/examples/simple-statistics/harmonic-positive.js": "d4a067ec6747c27c836ae46f46350e5ac9334bc2c32df3cc36e6a64948725189",
+      "verify/examples/simple-statistics/harmonic-total.js": "8d22d077cec2448eb235f896b647975a6ff1855a3aa98b15d8fcbe0f29774391",
+      "verify/examples/simple-statistics/harmonic-weak.js": "fdd63831d5724a6fdf87820ee12631e6ce462e7fdba1d3da4fe42b9639f051d1",
+      "verify/examples/simple-statistics/harmonic_mean.js": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+      "verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+      "verify/reports/roadmap/library-campaigns/pins/d3-array/ticks.js": "79eac11e378fd34364801fd59534cfb3b34f46e54693537ad65c06c93bcb9a0f"
+    },
+    "licenses": {
+      "verify/examples/es-toolkit/LICENSE": "51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7",
+      "verify/examples/ramda/LICENSE.txt": "62fba31dc0582fb6ee413403e47f2de319a4f14140ebd71be094c1f8c7a839ff",
+      "verify/examples/simple-statistics/LICENSE": "63b5b6a85bc21476ebee13febd48d0a52056a695754a73aaed1ed7eafb059f29",
+      "verify/reports/roadmap/library-campaigns/pins/d3-array/LICENSE": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3"
+    },
+    "provenance": {
+      "verify/examples/es-toolkit/provenance.json": "b05eccb5068d04ac12750fcaeb693498bd8551e90cae937af30cb07111e903d1",
+      "verify/examples/ramda/provenance.json": "f14cbaf602c8f811d0ac4f25e6f9084873ced5c165248491f03dd50892427188",
+      "verify/examples/simple-statistics/provenance.json": "c5607a9cc44d2a54be4796b641cf007ef205e749da551e50d2a094d73a67dc97",
+      "verify/reports/roadmap/library-campaigns/provenance.json": "2a8a9b9eaf3bb1c9a8b5aa26f3b2b37ab0ebff10bef2f5a2b5cbfd4e627700d6"
+    },
+    "adapters": {
+      "verify/examples/es-toolkit/check.mjs": "c899e3d4be7c827a553d252a350f535a218fcf323aaa7e0398baf1416d7381da",
+      "verify/examples/ramda/check.mjs": "a33eda2d5daf86d3b31a52222b31970466c28db540d303e66344d6d4038cb129",
+      "verify/examples/simple-statistics/check-harmonic.mjs": "a51b4480dd2eb043289a428eaac94591f1d935c761c7c24aa1847da9a3cda09b"
+    },
+    "documentation": {
+      "verify/examples/es-toolkit/README.md": "ca73fe54400c857587fdbde51826f1213897f5e98de628db3d94171b5cf1028a",
+      "verify/examples/ramda/README.md": "0613382e0173fa77f0e921e6bd5ccd632ff56cc68001ac264cf15308db37caf8",
+      "verify/examples/simple-statistics/README.md": "01621ddd701fe61a2c0583b02ed4a95add295d38927e11f8a8f9edfeb376589d",
+      "verify/reports/roadmap/review-library-campaigns/report.md": "4ad4cc43c34ab87d35f096d13513473a836b9bef95ac839b0e04f82fa975d3da"
+    }
+  },
+  "currentRuntime": "snapshot-current-tree-and-runtime-before-and-after; fresh-solve-and-replay"
+}

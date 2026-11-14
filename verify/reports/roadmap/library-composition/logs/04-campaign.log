@@ -1,0 +1,37 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:77126) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"event":"native","name":"baseline","samples":179,"wrapperFailures":0}
+{"event":"start","name":"warm","requestBudgetMs":60000,"mode":"readwrite"}
+{"event":"result","name":"warm","ms":82.51049999999998,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"verified"}],"hits":["Reverse","reverseFirstTwo","takeImplementation"],"solved":[],"written":[],"rejected":[]}
+{"event":"start","name":"baseline-audit","requestBudgetMs":60000,"mode":"audit"}
+{"event":"result","name":"baseline-audit","ms":52735.037958,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"verified"}],"hits":["Reverse","reverseFirstTwo","takeImplementation"],"solved":["Reverse","reverseFirstTwo","takeImplementation"],"written":[],"rejected":[]}
+{"event":"native","name":"wrong-order","samples":179,"wrapperFailures":21}
+{"event":"start","name":"wrong-order","requestBudgetMs":60000,"mode":"readwrite"}
+{"event":"result","name":"wrong-order","ms":6263.607167000002,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"counterexample","confirmed":true}],"hits":["Reverse","takeImplementation"],"solved":["reverseFirstTwo"],"written":[],"rejected":[]}
+{"event":"start","name":"wrong-order-warm","requestBudgetMs":60000,"mode":"readonly"}
+{"event":"result","name":"wrong-order-warm","ms":4481.881416999997,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"counterexample","confirmed":true}],"hits":["Reverse","takeImplementation"],"solved":["reverseFirstTwo"],"written":[],"rejected":[]}
+{"event":"start","name":"wrong-order-audit","requestBudgetMs":60000,"mode":"audit"}
+{"event":"result","name":"wrong-order-audit","ms":60045.81270899999,"outcomes":[{"fn":"Reverse","status":"unknown","reason":"request-timeout"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"counterexample","confirmed":true}],"hits":["Reverse","takeImplementation"],"solved":["Reverse","reverseFirstTwo","takeImplementation"],"written":[],"rejected":[]}
+{"status":"ISSUES","output":"/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/logs/campaign/run-cC4nIK","records":15}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(report.cache.disagreements.every((d) => ["replay", "fresh-replay"].includes(d.kind) && d.target.endsWith("#reverseFirstTwo")))
+
+    at audit (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/campaign.mjs:98:12)
+    at async campaign (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/campaign.mjs:183:22)
+    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/check.mjs:4:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.23.1

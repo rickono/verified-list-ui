@@ -23,11 +23,21 @@ fairness for liveness. W requires both Q and V, with trust and scope visible.
 Steps 1 and 2 are complete. H and G landed on main after independent exact-patch
 reviews; P landed in PR #10 after two independent review axes. Numeric Gate1
 and heap Gate2 are merged. C1 is merged in PR #12 with both admission fixes,
-49 focused tests and a 371-test combined suite. Cancellation/listener designs
-are ready for comparison. K Gate3 has a local 418-test implementation awaiting
-independent review. Guarded throws and the harmonicMean campaign have a passing
-independent review and still need combined integration. [The landing receipt](landing-summary.md) records the merges and
-checks. The numbered list below preserves the execution order chosen at the
+49 focused tests and a 371-test combined suite. C2a passed its standalone
+390-test suite. Native review passes; the proof review found reflexive request
+checks disconnected from abort, which must be corrected before landing.
+K passed both independent reviews; guarded throws passed a separate production
+review. Their combined tree passed 477 tests, followed by 483 after the reviewed
+resource-boundary change. A 180000 ms request proved the three-module graph
+cold and in a fresh audit; all fifteen postconditions and 36 phase plans match
+the earlier source. Historical 60000 ms unknowns remain. PR #14 is open.
+The numerical campaign and current-model maintenance passed independent reviews;
+all ten current stages pass with strict library pins and no required private
+history. PR #14 is ready to merge. The completed temporal judgment selects the
+conditional source-completion rule; its first local implementation passed
+496 tests and awaits independent review.
+[The landing receipt](landing-summary.md) records the merges and checks.
+The numbered list below preserves the execution order chosen at the
 start; the remaining steps are still in progress.
 
 H and G were implemented in PRs #5 and #6 at the start of this run. Eight nodes remain: K, Q, R, S, T, U, V, W. C1 does not complete any of R/S/T/U. Baseline source is `32bd5b260aa116ca88642a1479bed8d3fc447f4b`,

@@ -1,0 +1,109 @@
+{
+  "status": "ISSUES",
+  "requestBudgetMs": 60000,
+  "head": "b5c8828f0c281df812751371f651603481f3aefb",
+  "records": [
+    {
+      "name": "inputs",
+      "sha256": "3373d04eeeddc6bfc3799ad28edc32fb1a12f44358b3bedd24623cb1fc1c368b"
+    },
+    {
+      "name": "baseline-graph",
+      "sha256": "1cbfe12304241df36ce10004df7028de1d2f565ed8be10c12a4dd62a3a3d471b"
+    },
+    {
+      "name": "baseline-native",
+      "sha256": "1c08b0c60b2f1c7bebd5188ce736e296083a6b79483a9a7d8dfd0168f53bd069"
+    },
+    {
+      "name": "plan-absent",
+      "sha256": "d00a16755ad83a57910449afaf205572bad60286345cf833f34b393155da713b"
+    },
+    {
+      "name": "cold",
+      "sha256": "cd309406a2e384635048574b6eb80d42d58ed6c262b71b8ece6f1f9bb9cc0fe5"
+    },
+    {
+      "name": "baseline-plan",
+      "sha256": "29485d561d8e31c8b301ac7c3187513cd2ccfd76e6e77c91c75fbdfa424e1024"
+    },
+    {
+      "name": "warm",
+      "sha256": "8dc1aea2aa049d2be5b4a589f2e3d54501093d662754b9d7decd82d51ae781ad"
+    },
+    {
+      "name": "baseline-audit",
+      "sha256": "b7efb2ecc120a06d12612aa356b2963451eca0c2df50f61edea5af8de34fe219"
+    },
+    {
+      "name": "wrong-order-graph",
+      "sha256": "53bd41e06b0867c1987e6a85098541f5d05097a298c572e3abbc18d814ef5b07"
+    },
+    {
+      "name": "wrong-order-native",
+      "sha256": "0fd88cc439437352e616c936ea966a28b1f2fdc7d1d78489d6bb9e6e1e5e84f1"
+    },
+    {
+      "name": "wrong-order-plan",
+      "sha256": "3392e718160c794abdf8a26a964f31fb5896d4044eac5cf7c54aa711b4fde548"
+    },
+    {
+      "name": "wrong-order",
+      "sha256": "5f25f5babde26d4f536446115aac4a909afeec35de4cd93f31ae236c3c0a90e0"
+    },
+    {
+      "name": "wrong-order-replay",
+      "sha256": "cdcbbd94a975842b21630e34250e89b62917d9eb51594c6ee3a9bb0a65505808"
+    },
+    {
+      "name": "wrong-order-warm",
+      "sha256": "68c0a091f5a25e39b69a383f67f57ee3eee5928f2ba4b2c7bca88518d7afd76d"
+    },
+    {
+      "name": "wrong-order-audit",
+      "sha256": "ae01e591212790e845693261f38897ec5961000f8c2c66da7107d4b79761a12f"
+    },
+    {
+      "name": "weak-contract-graph",
+      "sha256": "f47de47e31b4b4c43e361d4f98fb83cc5acccf0ae75b6a72dbeba5d573d01e7d"
+    },
+    {
+      "name": "weak-contract-native",
+      "sha256": "1c08b0c60b2f1c7bebd5188ce736e296083a6b79483a9a7d8dfd0168f53bd069"
+    },
+    {
+      "name": "wrong-order-evidence-after-contract-edit",
+      "sha256": "c55bbf26df2a73e1bf13b4597ffa5d0102ec90a09e69fa21d52960b6fa6a50e0"
+    },
+    {
+      "name": "weak-contract-plan",
+      "sha256": "9d4bd3665de7c366a52c5ee4fc69abb26e717a302538a13a4521afedcc508d31"
+    },
+    {
+      "name": "weak-contract",
+      "sha256": "db6ba94c7d0b2f8b9f4786d7500723eabaf605ee7187eca8fc7ea4ca16d9bec9"
+    }
+  ],
+  "observedLimits": [
+    {
+      "name": "wrong-order-audit",
+      "fn": "Reverse",
+      "status": "unknown",
+      "reason": "request-timeout",
+      "obligation": {
+        "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+        "phase": "postcondition",
+        "domain": "full",
+        "postcondition": 6,
+        "postconditionCount": 9,
+        "backend": "z3"
+      }
+    }
+  ],
+  "cleanup": {
+    "sourcesRestored": true,
+    "workDirectoryRemoved": true,
+    "nativeWorkersTerminated": true
+  },
+  "limits": "Dense ordinary numeric arrays, every native length. Trusted compiler/model/solver/runtime and cache writers; no certificates. Native samples are finite. Seeded failures are not upstream bugs. K/Q completion remains root-owned."
+}

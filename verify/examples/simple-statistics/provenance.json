@@ -1,0 +1,18 @@
+{
+  "package": "simple-statistics",
+  "version": "8.0.0",
+  "repository": "https://github.com/simple-statistics/simple-statistics",
+  "commit": "a9ec6767820e3fc7c29ab5f179778308c75a2f47",
+  "path": "src/harmonic_mean.js",
+  "sourceUrl": "https://github.com/simple-statistics/simple-statistics/blob/a9ec6767820e3fc7c29ab5f179778308c75a2f47/src/harmonic_mean.js",
+  "sha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+  "gitBlob": "7705c21eebc0898068cc6a5565566b0ec3873c53",
+  "license": "ISC",
+  "licenseSha256": "63b5b6a85bc21476ebee13febd48d0a52056a695754a73aaed1ed7eafb059f29",
+  "inheritedFrom": {
+    "candidate": "f5473537eb543470feef3f886e778f2737f8ed43",
+    "validation": "a83f50762005ae47edfe3e07295f3840b485687b",
+    "judgment": "e97d03da4fbe664b78640ac19b5576c6da21ac63"
+  },
+  "changes": "Contract comments only; original implementation and export bytes retained."
+}

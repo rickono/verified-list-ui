@@ -1,0 +1,136 @@
+TAP version 13
+# (node:13705) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a real first discarded trial leaves the same ordered queries as starting at the fixed point
+not ok 1 - a real first discarded trial leaves the same ordered queries as starting at the fixed point
+  ---
+  duration_ms: 3.625292
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/loop-trials.test.mjs:62:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot find package 'acorn' imported from /private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/loop-trial-V7On98/source.mjs"
+  code: 'ERR_MODULE_NOT_FOUND'
+  stack: |-
+    Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    packageResolve (node:internal/modules/esm/resolve:768:81)
+    moduleResolve (node:internal/modules/esm/resolve:855:18)
+    defaultResolve (node:internal/modules/esm/resolve:985:11)
+    #cachedDefaultResolve (node:internal/modules/esm/loader:747:20)
+    ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)
+    ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)
+    ModuleJob._link (node:internal/modules/esm/module_job:182:49)
+  ...
+# Subtest: discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+not ok 2 - discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+  ---
+  duration_ms: 36.281833
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/loop-trials.test.mjs:88:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot find package 'acorn' imported from /private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/loop-trial-mUkCDg/source.mjs"
+  code: 'ERR_MODULE_NOT_FOUND'
+  stack: |-
+    Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    packageResolve (node:internal/modules/esm/resolve:768:81)
+    moduleResolve (node:internal/modules/esm/resolve:855:18)
+    defaultResolve (node:internal/modules/esm/resolve:985:11)
+    #cachedDefaultResolve (node:internal/modules/esm/loader:747:20)
+    ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)
+    ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)
+    ModuleJob._link (node:internal/modules/esm/module_job:182:49)
+  ...
+# Subtest: the heap owner rolls back field boundaries and provenance without reusing version names
+not ok 3 - the heap owner rolls back field boundaries and provenance without reusing version names
+  ---
+  duration_ms: 1.006833
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/loop-trials.test.mjs:118:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+    
+      {
+        head: [
+          '(declare-const heap_next0 Int)',
+          '(declare-fun heap_kind (Int) Int)',
+          '(declare-fun heap_length (Int) (_ BitVec 32))',
+    ...
+          '(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))',
+    -     '(declare-fun heap_has_6469736361726465645f6f6e6c79 (Int) Bool)',
+    -     '(declare-fun heap_sort_6469736361726465645f6f6e6c79 (Int) Int)',
+    -     '(declare-fun heap_ref_6469736361726465645f6f6e6c79 (Int) Int)',
+    -     '(declare-fun heap_num_6469736361726465645f6f6e6c79 (Int) (_ BitVec 64))',
+    -     '(declare-fun heap_bool_6469736361726465645f6f6e6c79 (Int) Bool)',
+    -     '(define-fun heap_num0_6469736361726465645f6f6e6c79 ((r Int)) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_num_6469736361726465645f6f6e6c79 r)))',
+    -     '(declare-fun heap_has_67686f7374 (Int) Bool)',
+    -     '(declare-fun heap_sort_67686f7374 (Int) Int)',
+    -     '(declare-fun heap_ref_67686f7374 (Int) Int)',
+    -     '(declare-fun heap_num_67686f7374 (Int) (_ BitVec 64))',
+    -     '(declare-fun heap_bool_67686f7374 (Int) Bool)',
+    -     '(define-fun heap_num0_67686f7374 ((r Int)) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_num_67686f7374 r)))'
+        ],
+        model: undefined,
+        tail: []
+      }
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    head:
+      0: '(declare-const heap_next0 Int)'
+      1: '(declare-fun heap_kind (Int) Int)'
+      2: '(declare-fun heap_length (Int) (_ BitVec 32))'
+      3: '(declare-fun heap_element (Int) Int)'
+      4: '(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))'
+      5: '(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)'
+      6: '(declare-fun heap_array_dense (Int) Bool)'
+      7: '(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)'
+      8: '(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))'
+      9: '(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))'
+      10: '(declare-fun heap_has_6469736361726465645f6f6e6c79 (Int) Bool)'
+      11: '(declare-fun heap_sort_6469736361726465645f6f6e6c79 (Int) Int)'
+      12: '(declare-fun heap_ref_6469736361726465645f6f6e6c79 (Int) Int)'
+      13: '(declare-fun heap_num_6469736361726465645f6f6e6c79 (Int) (_ BitVec 64))'
+      14: '(declare-fun heap_bool_6469736361726465645f6f6e6c79 (Int) Bool)'
+      15: '(define-fun heap_num0_6469736361726465645f6f6e6c79 ((r Int)) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_num_6469736361726465645f6f6e6c79 r)))'
+      16: '(declare-fun heap_has_67686f7374 (Int) Bool)'
+      17: '(declare-fun heap_sort_67686f7374 (Int) Int)'
+      18: '(declare-fun heap_ref_67686f7374 (Int) Int)'
+      19: '(declare-fun heap_num_67686f7374 (Int) (_ BitVec 64))'
+      20: '(declare-fun heap_bool_67686f7374 (Int) Bool)'
+      21: '(define-fun heap_num0_67686f7374 ((r Int)) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_num_67686f7374 r)))'
+    tail:
+  actual:
+    head:
+      0: '(declare-const heap_next0 Int)'
+      1: '(declare-fun heap_kind (Int) Int)'
+      2: '(declare-fun heap_length (Int) (_ BitVec 32))'
+      3: '(declare-fun heap_element (Int) Int)'
+      4: '(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))'
+      5: '(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)'
+      6: '(declare-fun heap_array_dense (Int) Bool)'
+      7: '(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)'
+      8: '(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))'
+      9: '(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))'
+    tail:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/loop-trials.test.mjs:125:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 80.478334

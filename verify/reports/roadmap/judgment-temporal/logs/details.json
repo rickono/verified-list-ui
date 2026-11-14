@@ -1,0 +1,92 @@
+{
+  "fuseRequests": [
+    {
+      "seq": 1,
+      "op": "op",
+      "args": [],
+      "settled": true
+    },
+    {
+      "seq": 2,
+      "op": "op",
+      "args": [],
+      "settled": true
+    }
+  ],
+  "fuseSteps": [
+    {
+      "kind": "init",
+      "n": 0
+    },
+    {
+      "kind": "call",
+      "n": 0
+    },
+    {
+      "kind": "resolve",
+      "n": 1
+    },
+    {
+      "kind": "resolve",
+      "n": 2
+    }
+  ],
+  "falseSafety": [
+    {
+      "unit": "$init",
+      "kind": "init",
+      "status": "verified"
+    },
+    {
+      "unit": "work$0",
+      "kind": "entry",
+      "status": "verified"
+    },
+    {
+      "unit": "work$1",
+      "kind": "resume",
+      "status": "vacuous"
+    }
+  ],
+  "ranks": [
+    {
+      "fn": "literalDrop",
+      "status": "verified",
+      "reason": null,
+      "phase": null
+    },
+    {
+      "fn": "literalStall",
+      "status": "counterexample",
+      "reason": null,
+      "phase": null
+    },
+    {
+      "fn": "half",
+      "status": "counterexample",
+      "reason": null,
+      "phase": "requires-definedness"
+    },
+    {
+      "fn": "trueRank",
+      "status": "verified",
+      "reason": null,
+      "phase": null
+    },
+    {
+      "fn": "saturated",
+      "status": "verified",
+      "reason": null,
+      "phase": null
+    }
+  ],
+  "loop": {
+    "assertionBvule": true,
+    "assertionEventBound": false,
+    "assertionBv256": false,
+    "bitVec64Assertions": 0,
+    "ids": [
+      "loop.ts#shadow"
+    ]
+  }
+}

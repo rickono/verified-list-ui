@@ -1,0 +1,26 @@
+{
+  "format": 1,
+  "identity": "86f9e10064d037421d83775d3a2d35d8ddaffa18c9c81d590a175a9332007826",
+  "key": "cb1a84a6f65cb62116dad200c49dfb4533e051cb2d19522041c513720e1bc8c7",
+  "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+  "witness": [
+    "0",
+    {
+      "roots": [
+        "0"
+      ],
+      "nodes": {
+        "0": {
+          "kind": "array",
+          "element": "number",
+          "values": [
+            [
+              "num",
+              "0018000000000000"
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

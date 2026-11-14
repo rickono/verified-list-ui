@@ -1,0 +1,697 @@
+{
+  "origin": "compiled static query plan, not a solver execution trace or certificate",
+  "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+  "budgetMsPerPublicRequest": 60000,
+  "queries": [
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "feasibility",
+      "domain": "full",
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "feasibility-witness",
+      "domain": "replay-witness",
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(bvule (heap_length input_0_ref) (_ bv256 32))",
+        "loop_replay0"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 1,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000)) false))"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 1,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000)) false))",
+        "(bvule (heap_length input_0_ref) (_ bv256 32))",
+        "loop_replay0"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 2,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (ite (not (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))))))"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 2,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (ite (not (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000))) (ite (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (= ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)))))))",
+        "(bvule (heap_length input_0_ref) (_ bv256 32))",
+        "loop_replay0"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 3,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000))) false))"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 3,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000))) false))",
+        "(bvule (heap_length input_0_ref) (_ bv256 32))",
+        "loop_replay0"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 4,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_0_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))) (ite (not (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)))))))"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 4,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_0_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))) (ite (not (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001))) (ite (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)) (= (fp.add RNE ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)))) ((_ to_fp 11 53) #x0000000000000000)) (= (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000000)))))))",
+        "(bvule (heap_length input_0_ref) (_ bv256 32))",
+        "loop_replay0"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 5,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (and (bvuge (heap_length input_0_ref) loop1_u32) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))))"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    },
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/examples/simple-statistics/harmonic-total.js#harmonicMean",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 5,
+      "postconditionCount": 5,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-const input_0_ref Int)\n(declare-const loop_replay0 Bool)\n(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop1_u32 (_ BitVec 32))\n(declare-const loop1_negative_zero Bool)\n(declare-const loop2 (_ BitVec 64))\n(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))",
+      "assertions": [
+        "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "(not (=> (and (and (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))) (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 (heap_length input_0_ref)) (bvule #x00000000 loop1_u32)) (ite (not (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))) (ite (= loop1_u32 #x00000001) (= ((_ to_fp 11 53) loop2) (fp.div RNE ((_ to_fp 11 53) #x3ff0000000000000) (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)))) (= loop1_u32 #x00000001)) (ite (= loop1_u32 #x00000000) (= ((_ to_fp 11 53) loop2) ((_ to_fp 11 53) #x0000000000000000)) (= loop1_u32 #x00000000))))) (bvult loop1_u32 (heap_length input_0_ref))) (not (fp.leq (ite (ite (bvult loop1_u32 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref loop1_u32) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (and (bvuge (heap_length input_0_ref) loop1_u32) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))))",
+        "(bvule (heap_length input_0_ref) (_ bv256 32))",
+        "loop_replay0"
+      ],
+      "models": [
+        {
+          "kind": "ref",
+          "symbol": "input_0_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_0_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay0"
+      ]
+    }
+  ]
+}

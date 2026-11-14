@@ -1,0 +1,35 @@
+Prepared HEAD 5f0fb47a0a822d62537f296ef804d5037eebba5c
+Implementation under review 7feca2830d90e237227fc1522e77e1a11ce3abee
+Evidence under review c84aeab73ad34b9aa1a83f3b2ee4e682e39bcba3
+Root imports 045139ce5df5a89f222ca2986c3b4fe1fa56947b and 6e0843e9b216b053ceae09cf052ba13447af505c
+Node v22.23.1. Solver lane: /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py
+Temporary dependency, removed before record.py --check:
+  node_modules -> /Users/rick/verification-vibes/verified-list-ui/node_modules
+
+python3 verify/reports/roadmap/review-composition-budget/scripts/audit.py
+  exit 0. 20 checks PASS. Log: logs/artifact-audit.json
+
+node verify/reports/roadmap/review-composition-budget/scripts/virtual-clock.mjs
+  exit 0. First three-target budget 90000. Max budget 179996. Late budgets 180000, 179999.
+  Log: logs/virtual-clock.json
+
+node verify/reports/roadmap/review-composition-budget/scripts/boundary.mjs
+  exit 0. Identity 09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef.
+  Parent artifact refusal invalid-evidence. 15 postcondition strings. 36 phases.
+  Log: logs/boundary.json
+
+node --test --test-concurrency=1 tests/verify/proof-backends.test.mjs
+  exit 0. 13 pass, 0 fail, duration_ms 41.555833. Log: logs/proof-backends.txt
+
+node --test --test-concurrency=1 --test-name-pattern 'hard deadline' tests/verify/backend-process.test.mjs
+  exit 0. 2 pass, 0 fail, duration_ms 135.082208. Log: logs/hard-deadline.txt
+
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 tests/verify/budgets.test.mjs
+  exit 0. Lane acquired. 4 pass, 0 fail, duration_ms 1506.499125. Log: logs/budgets.txt
+
+rm node_modules
+python3 verify/reports/roadmap/composition-budget/record.py --check
+  exit 0. PASS: evidence hashes and recorded verifier/test bytes match.
+
+ps owned review/test processes: none. composition-budget/.scratch absent.
+No full suite. No 180000 ms composition graph rerun. No 60000 ms composition rerun.

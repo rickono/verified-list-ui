@@ -1,0 +1,37 @@
+{
+  "status": "reproduced",
+  "graphSha256": "3feb24f61825ce2ed1f6b1fe00467800f1fc9b183e3d8e33fcc571d46317e07a",
+  "outcomes": [
+    {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "status": "counterexample",
+      "inputs": {
+        "arr": [
+          "2.716154612436e-312",
+          "4.243991582e-314",
+          "3.16e-322",
+          "4.144523e-317"
+        ]
+      },
+      "result": [
+        "4.144523e-317",
+        "3.16e-322",
+        "3.16e-322",
+        "4.144523e-317"
+      ],
+      "failed": [
+        {
+          "kind": "ensures",
+          "text": "arr.every((v, k) => Object.is(v, old(arr.slice())[arr.length - 1 - k]))",
+          "span": {
+            "start": 82,
+            "end": 153
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js"
+        }
+      ],
+      "confirmed": true,
+      "reproduced": true
+    }
+  ]
+}

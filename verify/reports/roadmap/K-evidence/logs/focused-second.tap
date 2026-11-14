@@ -1,0 +1,896 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# Subtest: record, boolean, indexed and summary writers have checked location ownership
+ok 1 - record, boolean, indexed and summary writers have checked location ownership
+  ---
+  duration_ms: 1.854834
+  type: 'test'
+  ...
+# Subtest: both symbolic join arms retain record and array ownership; concrete joins select one arm
+ok 2 - both symbolic join arms retain record and array ownership; concrete joins select one arm
+  ---
+  duration_ms: 0.469667
+  type: 'test'
+  ...
+# Subtest: intervals distinguish repeated locations, no-op attempts and restored values from prior writes
+ok 3 - intervals distinguish repeated locations, no-op attempts and restored values from prior writes
+  ---
+  duration_ms: 0.364959
+  type: 'test'
+  ...
+# Subtest: exit writes are audited without flowing into the back-edge frame
+ok 4 - exit writes are audited without flowing into the back-edge frame
+  ---
+  duration_ms: 0.130333
+  type: 'test'
+  ...
+# Subtest: existing fresh allocations are writable while allocation and content changes stay distinct
+ok 5 - existing fresh allocations are writable while allocation and content changes stay distinct
+  ---
+  duration_ms: 0.507208
+  type: 'test'
+  ...
+# Subtest: cutpoints preserve allocator, roles, shape, presence, identity and prior views
+ok 6 - cutpoints preserve allocator, roles, shape, presence, identity and prior views
+  ---
+  duration_ms: 0.466416
+  type: 'test'
+  ...
+# Subtest: unknown versions, owners, missing tracking and heaps outside the interval fail internally
+ok 7 - unknown versions, owners, missing tracking and heaps outside the interval fail internally
+  ---
+  duration_ms: 0.273292
+  type: 'test'
+  ...
+# Subtest: a record named @elements cannot be confused with whole-array contents at a cutpoint
+ok 8 - a record named @elements cannot be confused with whole-array contents at a cutpoint
+  ---
+  duration_ms: 0.132291
+  type: 'test'
+  ...
+# Subtest: private record writer-log omission is detected even for an already-written location
+ok 9 - private record writer-log omission is detected even for an already-written location
+  ---
+  duration_ms: 5.002333
+  type: 'test'
+  ...
+# {"sha256":"eb6dc5caaced9190af1b1b102c67c62cef044999c325fb9c3c669aca9d298200","control":"passed","detected":true}
+# Subtest: private summary writer-log omission is detected at the same audit boundary
+ok 10 - private summary writer-log omission is detected at the same audit boundary
+  ---
+  duration_ms: 1.935375
+  type: 'test'
+  ...
+# {"sha256":"789674c65e056e210a1d077f18450a637cd75716c105f29c20c83c53ab6e96cb","control":"passed","detected":true}
+# Subtest: private indexed writer-log omission fails for an existing fresh array
+ok 11 - private indexed writer-log omission fails for an existing fresh array
+  ---
+  duration_ms: 1.948125
+  type: 'test'
+  ...
+# {"sha256":"e82004815a9a1f451421ad7c51cef3ec94f5d3296546352b9cc903726d05eeeb","control":"passed","detected":true}
+# Subtest: private join-log omission of arm a fails for its concrete target
+ok 12 - private join-log omission of arm a fails for its concrete target
+  ---
+  duration_ms: 1.769667
+  type: 'test'
+  ...
+# {"sha256":"a12171b4d4f7f9cf4bf8456fde67d7d63414d9a0d4f764422d737e3f99d26828","control":"passed","detected":true}
+# Subtest: private join-log omission of arm b fails for its concrete target
+ok 13 - private join-log omission of arm b fails for its concrete target
+  ---
+  duration_ms: 1.803959
+  type: 'test'
+  ...
+# {"sha256":"e83299d850eb8a98fa23741f244f71aaab17c1fb1f008e95030a3c4c0a179882","control":"passed","detected":true}
+# Subtest: private missing location data cannot construct a new content version
+ok 14 - private missing location data cannot construct a new content version
+  ---
+  duration_ms: 1.190666
+  type: 'test'
+  ...
+# {"sha256":"8435f13c1eee001a9842a2f58846008d742d9ced1d3c0ee1e38465451976d89f","control":"passed","detected":true}
+# Subtest: public straightline scenarios agree with independent native execution
+    # Subtest: record-alias
+    ok 1 - record-alias
+      ---
+      duration_ms: 178.626792
+      type: 'test'
+      ...
+    # Subtest: array-alias
+    ok 2 - array-alias
+      ---
+      duration_ms: 610.906542
+      type: 'test'
+      ...
+    # Subtest: call-frame
+    ok 3 - call-frame
+      ---
+      duration_ms: 180.35775
+      type: 'test'
+      ...
+    # Subtest: join-arms
+    ok 4 - join-arms
+      ---
+      duration_ms: 162.9315
+      type: 'test'
+      ...
+    # Subtest: short-circuit
+    ok 5 - short-circuit
+      ---
+      duration_ms: 397.182292
+      type: 'test'
+      ...
+    # Subtest: fresh-snapshot
+    ok 6 - fresh-snapshot
+      ---
+      duration_ms: 634.295709
+      type: 'test'
+      ...
+    # Subtest: old-and-presence
+    ok 7 - old-and-presence
+      ---
+      duration_ms: 162.418
+      type: 'test'
+      ...
+    # Subtest: boolean-presence
+    ok 8 - boolean-presence
+      ---
+      duration_ms: 591.9065
+      type: 'test'
+      ...
+    # Subtest: fresh-local
+    ok 9 - fresh-local
+      ---
+      duration_ms: 192.661417
+      type: 'test'
+      ...
+    # Subtest: noop-store
+    ok 10 - noop-store
+      ---
+      duration_ms: 180.5055
+      type: 'test'
+      ...
+    # Subtest: restored-store
+    ok 11 - restored-store
+      ---
+      duration_ms: 173.276292
+      type: 'test'
+      ...
+    # Subtest: local-result
+    ok 12 - local-result
+      ---
+      duration_ms: 149.511083
+      type: 'test'
+      ...
+    # Subtest: element-marker-field
+    ok 13 - element-marker-field
+      ---
+      duration_ms: 156.650542
+      type: 'test'
+      ...
+    1..13
+ok 15 - public straightline scenarios agree with independent native execution
+  ---
+  duration_ms: 3772.126833
+  type: 'test'
+  ...
+# {"id":"record-alias","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":2}
+# {"id":"array-alias","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":2}
+# {"id":"call-frame","outcomes":[{"fn":"set","status":"verified"},{"fn":"f","status":"verified"}],"nativeSamples":2}
+# {"id":"join-arms","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":2}
+# {"id":"short-circuit","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":2}
+# {"id":"fresh-snapshot","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":3}
+# {"id":"old-and-presence","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":3}
+# {"id":"boolean-presence","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":3}
+# {"id":"fresh-local","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":2}
+# {"id":"noop-store","outcomes":[{"fn":"f","status":"counterexample","reason":"frame-write","confirmed":true}],"nativeSamples":2}
+# {"id":"restored-store","outcomes":[{"fn":"f","status":"counterexample","reason":"frame-write","confirmed":true}],"nativeSamples":2}
+# {"id":"local-result","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":3}
+# {"id":"element-marker-field","outcomes":[{"fn":"f","status":"verified"}],"nativeSamples":1}
+# (node:14438) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: arbitrary shared record arguments obey writes and reconstruct a real alias witness
+ok 16 - arbitrary shared record arguments obey writes and reconstruct a real alias witness
+  ---
+  duration_ms: 384.194375
+  type: 'test'
+  ...
+# Subtest: overlapping optional schemas do not imply distinct identities, including explicit undefined
+ok 17 - overlapping optional schemas do not imply distinct identities, including explicit undefined
+  ---
+  duration_ms: 539.304667
+  type: 'test'
+  ...
+# Subtest: modifies is a write permission and native monitoring catches no-op and restored writes
+ok 18 - modifies is a write permission and native monitoring catches no-op and restored writes
+  ---
+  duration_ms: 323.97275
+  type: 'test'
+  ...
+# Subtest: callee footprint inclusion precedes its own facts and has a distinct confirmed diagnostic
+ok 19 - callee footprint inclusion precedes its own facts and has a distinct confirmed diagnostic
+  ---
+  duration_ms: 350.482083
+  type: 'test'
+  ...
+# Subtest: opaque summaries preserve disjoint fields and allow input-result aliases
+ok 20 - opaque summaries preserve disjoint fields and allow input-result aliases
+  ---
+  duration_ms: 355.464709
+  type: 'test'
+  ...
+# Subtest: old scalars freeze entry contents while old references retain their native identity
+ok 21 - old scalars freeze entry contents while old references retain their native identity
+  ---
+  duration_ms: 176.950375
+  type: 'test'
+  ...
+# Subtest: fresh shallow copies preserve nested sharing and checked contracts permit fresh helper results
+ok 22 - fresh shallow copies preserve nested sharing and checked contracts permit fresh helper results
+  ---
+  duration_ms: 358.436166
+  type: 'test'
+  ...
+# Subtest: array aliases and fresh slice/spread copies use one mutable store with native lengths
+ok 23 - array aliases and fresh slice/spread copies use one mutable store with native lengths
+  ---
+  duration_ms: 1687.026584
+  type: 'test'
+  ...
+# Subtest: primitive arguments freeze early; reference arguments and method contents see later writes
+ok 24 - primitive arguments freeze early; reference arguments and method contents see later writes
+  ---
+  duration_ms: 734.163125
+  type: 'test'
+  ...
+# Subtest: array slots preserve booleans and signed zero, with nested array footprints
+ok 25 - array slots preserve booleans and signed zero, with nested array footprints
+  ---
+  duration_ms: 2995.751
+  type: 'test'
+  ...
+# Subtest: derived effects reject transitive writers as callbacks but keep primitive captures immutable
+ok 26 - derived effects reject transitive writers as callbacks but keep primitive captures immutable
+  ---
+  duration_ms: 187.407541
+  type: 'test'
+  ...
+# Subtest: writing loops admit primitive exit stores and helpers but still exclude allocation
+ok 27 - writing loops admit primitive exit stores and helpers but still exclude allocation
+  ---
+  duration_ms: 366.008917
+  type: 'test'
+  ...
+# Subtest: imported footprints retain defining identities and derived effects
+ok 28 - imported footprints retain defining identities and derived effects
+  ---
+  duration_ms: 185.877125
+  type: 'test'
+  ...
+# Subtest: heap witness validation checks types, optional overlap, dangling edges and witness-only limits
+ok 29 - heap witness validation checks types, optional overlap, dangling edges and witness-only limits
+  ---
+  duration_ms: 0.378125
+  type: 'test'
+  ...
+# Subtest: generated symbols cannot collide with user field names that resemble heap versions
+ok 30 - generated symbols cannot collide with user field names that resemble heap versions
+  ---
+  duration_ms: 161.01025
+  type: 'test'
+  ...
+# Subtest: optional reference joins remain unsupported and malformed worker graph types stay unknown
+ok 31 - optional reference joins remain unsupported and malformed worker graph types stay unknown
+  ---
+  duration_ms: 24.153666
+  type: 'test'
+  ...
+# Subtest: string-literal record keys keep their supported lookup semantics
+ok 32 - string-literal record keys keep their supported lookup semantics
+  ---
+  duration_ms: 153.796417
+  type: 'test'
+  ...
+# Subtest: possibly absent values cannot silently change a required heap cell's domain
+ok 33 - possibly absent values cannot silently change a required heap cell's domain
+  ---
+  duration_ms: 1633.767625
+  type: 'test'
+  ...
+# Subtest: heap-free callback certificates include transitive reads and allocations
+ok 34 - heap-free callback certificates include transitive reads and allocations
+  ---
+  duration_ms: 0.931584
+  type: 'test'
+  ...
+# Subtest: required fields cannot erase undefined when joining reference-valued branches
+ok 35 - required fields cannot erase undefined when joining reference-valued branches
+  ---
+  duration_ms: 0.694458
+  type: 'test'
+  ...
+# Subtest: indirect fresh results preserve old identity in every helper replay context
+ok 36 - indirect fresh results preserve old identity in every helper replay context
+  ---
+  duration_ms: 203.636875
+  type: 'test'
+  ...
+# Subtest: quantified dynamic record conformance keeps exactness checks inside their binder
+ok 37 - quantified dynamic record conformance keeps exactness checks inside their binder
+  ---
+  duration_ms: 273.987375
+  type: 'test'
+  ...
+# Subtest: new aggregates inside old preserve contained entry-reference identities
+ok 38 - new aggregates inside old preserve contained entry-reference identities
+  ---
+  duration_ms: 316.876375
+  type: 'test'
+  ...
+# Subtest: array length footprints fail explicitly while ordinary record length fields remain writable
+ok 39 - array length footprints fail explicitly while ordinary record length fields remain writable
+  ---
+  duration_ms: 161.124041
+  type: 'test'
+  ...
+# (node:14498) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a real first discarded trial leaves the same ordered queries as starting at the fixed point
+ok 40 - a real first discarded trial leaves the same ordered queries as starting at the fixed point
+  ---
+  duration_ms: 47.846125
+  type: 'test'
+  ...
+# {"trials":[{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":10,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":["last"],"grow":1,"returns":0},{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":13,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":[],"grow":0,"returns":0}],"committedObligations":["invariant-init","call","frame-inclusion","invariant-preserve","rank"],"queries":5,"committedFacts":3}
+# Subtest: discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+ok 41 - discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+  ---
+  duration_ms: 24.140666
+  type: 'test'
+  ...
+# Subtest: the heap owner rolls back field boundaries and provenance without reusing version names
+ok 42 - the heap owner rolls back field boundaries and provenance without reusing version names
+  ---
+  duration_ms: 0.341708
+  type: 'test'
+  ...
+# Subtest: the GPL report pilot preserves pinned bytes, declaration tokens and native semantics
+ok 43 - the GPL report pilot preserves pinned bytes, declaration tokens and native semantics
+  ---
+  duration_ms: 7.734166
+  type: 'test'
+  ...
+# {"bytes":539,"sha256":"8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46","nativeSamples":11,"mutants":3}
+# (node:14500) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: K judgment H01-fresh-array
+ok 44 - K judgment H01-fresh-array
+  ---
+  duration_ms: 475.492792
+  type: 'test'
+  ...
+# {"id":"H01-fresh-array","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H02-fresh-record
+ok 45 - K judgment H02-fresh-record
+  ---
+  duration_ms: 397.174375
+  type: 'test'
+  ...
+# {"id":"H02-fresh-record","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H03-fresh-array-boolean
+ok 46 - K judgment H03-fresh-array-boolean
+  ---
+  duration_ms: 217.933708
+  type: 'test'
+  ...
+# {"id":"H03-fresh-array-boolean","expect":"reject","native":[true,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H04-fresh-array-pos
+ok 47 - K judgment H04-fresh-array-pos
+  ---
+  duration_ms: 364.654
+  type: 'test'
+  ...
+# {"id":"H04-fresh-array-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H05-fresh-record-pos
+ok 48 - K judgment H05-fresh-record-pos
+  ---
+  duration_ms: 359.868792
+  type: 'test'
+  ...
+# {"id":"H05-fresh-record-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H06-alias-local
+ok 49 - K judgment H06-alias-local
+  ---
+  duration_ms: 443.835292
+  type: 'test'
+  ...
+# {"id":"H06-alias-local","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H07-alias-param
+ok 50 - K judgment H07-alias-param
+  ---
+  duration_ms: 3307.779042
+  type: 'test'
+  ...
+# {"id":"H07-alias-param","expect":"reject","native":[false,true,true],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H08-alias-param-pos
+ok 51 - K judgment H08-alias-param-pos
+  ---
+  duration_ms: 2201.974667
+  type: 'test'
+  ...
+# {"id":"H08-alias-param-pos","expect":"verify","native":[true,true,true,true],"status":"verified"}
+# Subtest: K judgment H09-seq-copy
+ok 52 - K judgment H09-seq-copy
+  ---
+  duration_ms: 494.874084
+  type: 'test'
+  ...
+# {"id":"H09-seq-copy","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H10-seq-first-write
+ok 53 - K judgment H10-seq-first-write
+  ---
+  duration_ms: 464.982333
+  type: 'test'
+  ...
+# {"id":"H10-seq-first-write","expect":"reject","native":[true,false,false],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H11-seq-frame-pos
+ok 54 - K judgment H11-seq-frame-pos
+  ---
+  duration_ms: 454.070792
+  type: 'test'
+  ...
+# {"id":"H11-seq-frame-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H12-nested
+ok 55 - K judgment H12-nested
+  ---
+  duration_ms: 0.865917
+  type: 'test'
+  ...
+# {"id":"H12-nested","expect":"unsupported","native":[true,false,false],"status":"unsupported","message":"Nested loops are outside this slice."}
+# Subtest: K judgment H13-branch-flag
+ok 56 - K judgment H13-branch-flag
+  ---
+  duration_ms: 476.290542
+  type: 'test'
+  ...
+# {"id":"H13-branch-flag","expect":"reject","native":[false,true,false],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H14-false-guard
+ok 57 - K judgment H14-false-guard
+  ---
+  duration_ms: 395.707167
+  type: 'test'
+  ...
+# {"id":"H14-false-guard","expect":"no-false-verify","native":[true,true,true],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H15-short-circuit
+ok 58 - K judgment H15-short-circuit
+  ---
+  duration_ms: 442.680917
+  type: 'test'
+  ...
+# {"id":"H15-short-circuit","expect":"reject","native":[false,true],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H16-ternary-write
+ok 59 - K judgment H16-ternary-write
+  ---
+  duration_ms: 443.461833
+  type: 'test'
+  ...
+# {"id":"H16-ternary-write","expect":"reject","native":[false,true],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H17-break-write
+ok 60 - K judgment H17-break-write
+  ---
+  duration_ms: 423.005458
+  type: 'test'
+  ...
+# {"id":"H17-break-write","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H18-continue-write
+ok 61 - K judgment H18-continue-write
+  ---
+  duration_ms: 475.020375
+  type: 'test'
+  ...
+# {"id":"H18-continue-write","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H19-return-prev-iteration
+ok 62 - K judgment H19-return-prev-iteration
+  ---
+  duration_ms: 403.783917
+  type: 'test'
+  ...
+# {"id":"H19-return-prev-iteration","expect":"reject","native":[true,true,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H20-return-write
+ok 63 - K judgment H20-return-write
+  ---
+  duration_ms: 412.553167
+  type: 'test'
+  ...
+# {"id":"H20-return-write","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H21-for-update-write
+ok 64 - K judgment H21-for-update-write
+  ---
+  duration_ms: 379.444167
+  type: 'test'
+  ...
+# {"id":"H21-for-update-write","expect":"reject","native":[true,false,false],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H22-test-write
+ok 65 - K judgment H22-test-write
+  ---
+  duration_ms: 537.631542
+  type: 'test'
+  ...
+# {"id":"H22-test-write","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H23-call-writer-fresh
+ok 66 - K judgment H23-call-writer-fresh
+  ---
+  duration_ms: 444.717917
+  type: 'test'
+  ...
+# {"id":"H23-call-writer-fresh","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H24-call-writer-param
+ok 67 - K judgment H24-call-writer-param
+  ---
+  duration_ms: 2233.860917
+  type: 'test'
+  ...
+# {"id":"H24-call-writer-param","expect":"reject","native":[false,true],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H25-call-in-test
+ok 68 - K judgment H25-call-in-test
+  ---
+  duration_ms: 450.376917
+  type: 'test'
+  ...
+# {"id":"H25-call-in-test","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H26-call-in-update
+ok 69 - K judgment H26-call-in-update
+  ---
+  duration_ms: 2713.116
+  type: 'test'
+  ...
+# {"id":"H26-call-in-update","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H27-frame-write-unlisted
+ok 70 - K judgment H27-frame-write-unlisted
+  ---
+  duration_ms: 1908.953958
+  type: 'test'
+  ...
+# {"id":"H27-frame-write-unlisted","expect":"reject","native":[false],"status":"counterexample","reason":"frame-write","confirmed":true,"message":"f writes a[0] outside its modifies frame"}
+# Subtest: K judgment H28-frame-alias-permission
+ok 71 - K judgment H28-frame-alias-permission
+  ---
+  duration_ms: 376.085708
+  type: 'test'
+  ...
+# {"id":"H28-frame-alias-permission","expect":"reject","native":[false],"status":"counterexample","reason":"frame-write","confirmed":true,"message":"f writes b.x outside its modifies frame"}
+# Subtest: K judgment H29-frame-mixed-pos
+ok 72 - K judgment H29-frame-mixed-pos
+  ---
+  duration_ms: 1319.308167
+  type: 'test'
+  ...
+# {"id":"H29-frame-mixed-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H30-loop-chosen-target
+ok 73 - K judgment H30-loop-chosen-target
+  ---
+  duration_ms: 1.191708
+  type: 'test'
+  ...
+# {"id":"H30-loop-chosen-target","expect":"unsupported","native":[true],"status":"unsupported","message":"A loop writes through a reference chosen inside the loop; write targets must be fixed at loop entry."}
+# Subtest: K judgment H31-preloop-ternary-target
+ok 74 - K judgment H31-preloop-ternary-target
+  ---
+  duration_ms: 446.186375
+  type: 'test'
+  ...
+# {"id":"H31-preloop-ternary-target","expect":"reject","native":[false,true],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H32-loop-alloc
+ok 75 - K judgment H32-loop-alloc
+  ---
+  duration_ms: 0.742833
+  type: 'test'
+  ...
+# {"id":"H32-loop-alloc","expect":"unsupported","native":[true,true,true],"status":"unsupported","message":"Loops that allocate collections are outside the K slice; only existing primitive contents may change."}
+# Subtest: K judgment H33-invariant-init
+ok 76 - K judgment H33-invariant-init
+  ---
+  duration_ms: 492.856208
+  type: 'test'
+  ...
+# {"id":"H33-invariant-init","expect":"reject","native":[false,true,true],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H34-invariant-preserve
+ok 77 - K judgment H34-invariant-preserve
+  ---
+  duration_ms: 371.510583
+  type: 'test'
+  ...
+# {"id":"H34-invariant-preserve","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H35-frame-precision-pos
+ok 78 - K judgment H35-frame-precision-pos
+  ---
+  duration_ms: 321.991333
+  type: 'test'
+  ...
+# {"id":"H35-frame-precision-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H36-index-write
+ok 79 - K judgment H36-index-write
+  ---
+  duration_ms: 469.574833
+  type: 'test'
+  ...
+# {"id":"H36-index-write","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H37-index-write-growth
+ok 80 - K judgment H37-index-write-growth
+  ---
+  duration_ms: 341.65275
+  type: 'test'
+  ...
+# {"id":"H37-index-write-growth","expect":"reject","native":[true,true,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H38-index-every-pos
+ok 81 - K judgment H38-index-every-pos
+  ---
+  duration_ms: 3550.135666
+  type: 'test'
+  ...
+# {"id":"H38-index-every-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H39-old-in-loop
+ok 82 - K judgment H39-old-in-loop
+  ---
+  duration_ms: 2316.03925
+  type: 'test'
+  ...
+# {"id":"H39-old-in-loop","expect":"reject","native":[false,true],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H40-nested-field-param
+ok 83 - K judgment H40-nested-field-param
+  ---
+  duration_ms: 2701.259875
+  type: 'test'
+  ...
+# {"id":"H40-nested-field-param","expect":"reject","native":[false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H41-do-while
+ok 84 - K judgment H41-do-while
+  ---
+  duration_ms: 0.720083
+  type: 'test'
+  ...
+# {"id":"H41-do-while","expect":"unsupported","native":[true,true,true],"status":"unsupported","message":"Unsupported DoWhileStatement. do-while, for-in/of, labels, heap effects, and unmodeled calls are rejected."}
+# Subtest: K judgment H42-compound-write
+ok 85 - K judgment H42-compound-write
+  ---
+  duration_ms: 450.618041
+  type: 'test'
+  ...
+# {"id":"H42-compound-write","expect":"reject","native":[true,false,false],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K judgment H43-increment-write
+ok 86 - K judgment H43-increment-write
+  ---
+  duration_ms: 453.298583
+  type: 'test'
+  ...
+# {"id":"H43-increment-write","expect":"reject","native":[true,false,false],"status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K candidate old-slice-swap
+ok 87 - K candidate old-slice-swap
+  ---
+  duration_ms: 1870.859542
+  type: 'test'
+  ...
+# {"id":"old-slice-swap","expect":"verified","status":"verified"}
+# Subtest: K candidate old-slice-swap-wrong
+ok 88 - K candidate old-slice-swap-wrong
+  ---
+  duration_ms: 2368.944125
+  type: 'test'
+  ...
+# {"id":"old-slice-swap-wrong","expect":"counterexample","status":"counterexample","confirmed":true}
+# Subtest: K candidate old-callback-local
+ok 89 - K candidate old-callback-local
+  ---
+  duration_ms: 0.4655
+  type: 'test'
+  ...
+# {"id":"old-callback-local","expect":"unsupported","status":"unsupported","message":"Unknown value k. Calls and ambient values need explicit support."}
+# Subtest: K candidate fill
+ok 90 - K candidate fill
+  ---
+  duration_ms: 3321.598416
+  type: 'test'
+  ...
+# {"id":"fill","expect":"verified","status":"verified"}
+# Subtest: K candidate fill-weak-invariant
+ok 91 - K candidate fill-weak-invariant
+  ---
+  duration_ms: 4544.6325
+  type: 'test'
+  ...
+# {"id":"fill-weak-invariant","expect":"unknown/induction-gap","status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K candidate fill-negated-mutant
+ok 92 - K candidate fill-negated-mutant
+  ---
+  duration_ms: 7441.182584
+  type: 'test'
+  ...
+# {"id":"fill-negated-mutant","expect":"counterexample (confirmed)","status":"counterexample","confirmed":true}
+# Subtest: K candidate fill-unpermitted-write
+ok 93 - K candidate fill-unpermitted-write
+  ---
+  duration_ms: 13882.376292
+  type: 'test'
+  ...
+# {"id":"fill-unpermitted-write","expect":"counterexample frame-write","status":"counterexample","reason":"frame-write","confirmed":true,"message":"clearBoth writes other[0] outside its modifies frame"}
+# Subtest: K candidate alias-inc-into
+ok 94 - K candidate alias-inc-into
+  ---
+  duration_ms: 34192.004292
+  type: 'test'
+  ...
+# {"id":"alias-inc-into","expect":"verified","status":"verified"}
+# Subtest: K candidate alias-inc-into-no-suffix
+ok 95 - K candidate alias-inc-into-no-suffix
+  ---
+  duration_ms: 60007.959917
+  type: 'test'
+  ...
+# {"id":"alias-inc-into-no-suffix","expect":"unknown/induction-gap","status":"unknown","reason":"request-timeout","phase":"invariant-preserve","message":"The shared wall-clock verification budget was exhausted."}
+# Subtest: K candidate alias-reverse-copy
+ok 96 - K candidate alias-reverse-copy
+  ---
+  duration_ms: 42685.513542
+  type: 'test'
+  ...
+# {"id":"alias-reverse-copy","expect":"counterexample with aliases (or induction-gap if the model picks equal elements)","status":"counterexample","confirmed":true}
+# Subtest: K candidate replace-first-return
+ok 97 - K candidate replace-first-return
+  ---
+  duration_ms: 3627.93275
+  type: 'test'
+  ...
+# {"id":"replace-first-return","expect":"verified","status":"verified"}
+# Subtest: K candidate clamp-break-continue
+ok 98 - K candidate clamp-break-continue
+  ---
+  duration_ms: 5551.54575
+  type: 'test'
+  ...
+# {"id":"clamp-break-continue","expect":"verified","status":"verified"}
+# Subtest: K candidate record-flag
+ok 99 - K candidate record-flag
+  ---
+  duration_ms: 7951.911917
+  type: 'test'
+  ...
+# {"id":"record-flag","expect":"verified","status":"verified"}
+# Subtest: K candidate pre-loop-write-entry-old
+ok 100 - K candidate pre-loop-write-entry-old
+  ---
+  duration_ms: 14028.786708
+  type: 'test'
+  ...
+# {"id":"pre-loop-write-entry-old","expect":"verified","status":"verified"}
+# Subtest: K candidate pre-loop-write-forgotten
+ok 101 - K candidate pre-loop-write-forgotten
+  ---
+  duration_ms: 5283.694334
+  type: 'test'
+  ...
+# {"id":"pre-loop-write-forgotten","expect":"unknown/induction-gap","status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}
+# Subtest: K candidate loop-calls-writer
+ok 102 - K candidate loop-calls-writer
+  ---
+  duration_ms: 3876.3505
+  type: 'test'
+  ...
+# {"id":"loop-calls-writer","expect":"verified","status":"verified"}
+# Subtest: K candidate loop-call-outside-frame
+ok 103 - K candidate loop-call-outside-frame
+  ---
+  duration_ms: 11712.795667
+  type: 'test'
+  ...
+# {"id":"loop-call-outside-frame","expect":"counterexample frame-inclusion","status":"counterexample","reason":"frame-inclusion","confirmed":true,"message":"clearAt's modifies frame exceeds clearOther's frame"}
+# Subtest: K candidate write-wrong-rank
+ok 104 - K candidate write-wrong-rank
+  ---
+  duration_ms: 4021.949125
+  type: 'test'
+  ...
+# {"id":"write-wrong-rank","expect":"unknown/induction-gap rank","status":"unknown","reason":"induction-gap","phase":"rank","message":"The decreases measure may not stay nonnegative and drop by at least 1, and replay did not confirm nontermination."}
+# Subtest: K candidate excluded-alloc-in-loop
+ok 105 - K candidate excluded-alloc-in-loop
+  ---
+  duration_ms: 0.654917
+  type: 'test'
+  ...
+# {"id":"excluded-alloc-in-loop","expect":"unsupported (allocation)","status":"unsupported","message":"Loops that allocate collections are outside the K slice; only existing primitive contents may change."}
+# Subtest: K candidate excluded-loop-chosen-target
+ok 106 - K candidate excluded-loop-chosen-target
+  ---
+  duration_ms: 0.55175
+  type: 'test'
+  ...
+# {"id":"excluded-loop-chosen-target","expect":"unsupported (loop-chosen write target)","status":"unsupported","message":"A loop writes through a reference chosen inside the loop; write targets must be fixed at loop entry."}
+# Subtest: K candidate excluded-length-change
+ok 107 - K candidate excluded-length-change
+  ---
+  duration_ms: 0.517667
+  type: 'test'
+  ...
+# {"id":"excluded-length-change","expect":"unsupported (length change)","status":"unsupported","message":"Loop length/shape changes are outside the K slice."}
+# Subtest: K exclusion dynamic exit target
+ok 108 - K exclusion dynamic exit target
+  ---
+  duration_ms: 0.54675
+  type: 'test'
+  ...
+# Subtest: K exclusion dynamic helper target
+ok 109 - K exclusion dynamic helper target
+  ---
+  duration_ms: 0.5485
+  type: 'test'
+  ...
+# Subtest: K exclusion body allocation
+ok 110 - K exclusion body allocation
+  ---
+  duration_ms: 0.468333
+  type: 'test'
+  ...
+# Subtest: K exclusion test allocation
+ok 111 - K exclusion test allocation
+  ---
+  duration_ms: 0.312959
+  type: 'test'
+  ...
+# Subtest: K exclusion update allocation
+ok 112 - K exclusion update allocation
+  ---
+  duration_ms: 0.440584
+  type: 'test'
+  ...
+# Subtest: K exclusion length change
+ok 113 - K exclusion length change
+  ---
+  duration_ms: 0.433167
+  type: 'test'
+  ...
+# Subtest: K exclusion reference store
+ok 114 - K exclusion reference store
+  ---
+  duration_ms: 0.394125
+  type: 'test'
+  ...
+# Subtest: K exclusion reference call in test
+ok 115 - K exclusion reference call in test
+  ---
+  duration_ms: 0.498834
+  type: 'test'
+  ...
+# Subtest: K no-op stores still require permission
+ok 116 - K no-op stores still require permission
+  ---
+  duration_ms: 177.085042
+  type: 'test'
+  ...
+# Subtest: K restored stores still require permission
+ok 117 - K restored stores still require permission
+  ---
+  duration_ms: 180.501541
+  type: 'test'
+  ...
+# Subtest: K writing helper results cannot establish their own requires
+ok 118 - K writing helper results cannot establish their own requires
+  ---
+  duration_ms: 202.148791
+  type: 'test'
+  ...
+# Subtest: K writing helper facts cannot establish invariant initialization
+ok 119 - K writing helper facts cannot establish invariant initialization
+  ---
+  duration_ms: 185.066375
+  type: 'test'
+  ...
+1..119
+# tests 132
+# suites 0
+# pass 132
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 277860.686375

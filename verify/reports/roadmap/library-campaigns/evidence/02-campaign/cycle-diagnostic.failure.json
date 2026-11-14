@@ -1,0 +1,8 @@
+{
+  "id": "cycle-diagnostic",
+  "status": "ISSUES",
+  "startedAt": "2026-11-14T01:27:38.163Z",
+  "finishedAt": "2026-11-14T01:27:38.165Z",
+  "message": "Cannot use import statement outside a module",
+  "stack": "SyntaxError: Cannot use import statement outside a module\n    at new Function (<anonymous>)\n    at cycleDiagnostic (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:147:18)\n    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:247:5\n    at async stage (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:188:7)\n    at async campaign (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:246:3)\n    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:368:41"
+}

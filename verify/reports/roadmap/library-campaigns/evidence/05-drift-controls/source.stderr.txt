@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: Source/provenance drift: verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js
++ actual - expected
+
++ '73dc792fd18ad5f8b07ddaad43a742256afdac8f3b8643f560dd2489d67c8de7'
+- 'a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99'
+
+    at inputCheck (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-234xjr9u/verify/reports/roadmap/library-campaigns/check.mjs:81:12)
+    at supervise (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-234xjr9u/verify/reports/roadmap/library-campaigns/check.mjs:337:52)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-234xjr9u/verify/reports/roadmap/library-campaigns/check.mjs:374:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)

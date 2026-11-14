@@ -1,0 +1,60 @@
+{
+  "originalSha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+  "rows": [
+    {
+      "x": "5e-324",
+      "inputBits": "0000000000000001",
+      "reciprocal": "Infinity",
+      "result": "0",
+      "resultBits": "0000000000000000"
+    },
+    {
+      "x": "5.562684646268003e-309",
+      "inputBits": "0004000000000000",
+      "reciprocal": "Infinity",
+      "result": "0",
+      "resultBits": "0000000000000000"
+    },
+    {
+      "x": "1",
+      "inputBits": "3ff0000000000000",
+      "reciprocal": "1",
+      "result": "1",
+      "resultBits": "3ff0000000000000"
+    },
+    {
+      "x": "2",
+      "inputBits": "4000000000000000",
+      "reciprocal": "0.5",
+      "result": "2",
+      "resultBits": "4000000000000000"
+    },
+    {
+      "x": "49",
+      "inputBits": "4048800000000000",
+      "reciprocal": "0.02040816326530612",
+      "result": "49.00000000000001",
+      "resultBits": "4048800000000001"
+    }
+  ],
+  "nativeThrows": [
+    {
+      "x": [],
+      "message": "harmonicMean requires at least one data point"
+    },
+    {
+      "x": [
+        -1
+      ],
+      "message": "harmonicMean requires only positive numbers as input"
+    },
+    {
+      "x": [
+        0
+      ],
+      "message": "harmonicMean requires only positive numbers as input"
+    }
+  ],
+  "roundingAt49": "one ulp; not the positivity failure",
+  "twoElementExample": 2.4000000000000004
+}

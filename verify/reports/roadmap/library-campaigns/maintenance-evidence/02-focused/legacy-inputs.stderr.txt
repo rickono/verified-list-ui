@@ -1,0 +1,16 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    'baseline',
+    'currentRuntime',
++   'files',
+    'immutable',
+    'schema'
+  ]
+
+    at checkInputs (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-3lQyaI/verify/reports/roadmap/library-campaigns/campaign-inputs.mjs:20:10)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-3lQyaI/verify/reports/roadmap/library-campaigns/check.mjs:347:32
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)

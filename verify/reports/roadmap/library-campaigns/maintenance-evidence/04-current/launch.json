@@ -1,0 +1,39 @@
+{
+  "argv": [
+    "/Users/rick/.local/bin/node",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/check.mjs",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/maintenance-evidence/04-current/campaign"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+  "codeHead": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+  "codeTree": "a17853b86d535fd245a8922ad1e2b011138d9b72",
+  "start": "2026-11-14T03:38:34.283520+00:00",
+  "end": "2026-11-14T03:39:27.648191+00:00",
+  "pid": 81813,
+  "status": 0,
+  "aliveAfterWait": false,
+  "gitShimSha256": "f1433a065e79c0a68728f073cd919235a2008ab1057a8d561c242ef229b982cd",
+  "realGit": "/usr/bin/git",
+  "noPrivateObjectProbe": {
+    "argv": [
+      "git",
+      "show",
+      "a83f50762005ae47edfe3e07295f3840b485687b:unneeded"
+    ],
+    "status": 128
+  },
+  "normalGitProbe": {
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "status": 0,
+    "observed": "524d03a44a7c5b8e151489673753c0a4c6afa2c7"
+  },
+  "serialLane": "The default checker launches serial-verify.py; the wrapper does not acquire a second lane lock.",
+  "laneSha256": "731d3577afa7a8ba6c4bf7e646f9c4a72d35268057acf3d8ae01b9cd8be4fe1b",
+  "stdoutSha256": "492ddf4d5cf971fef587072a23760b280d4798caa0ee2369fdce6e43bd6f06c5",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "temporaryGitShimRemovedOnExit": true
+}

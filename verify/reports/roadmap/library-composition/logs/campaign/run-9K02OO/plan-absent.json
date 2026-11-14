@@ -1,0 +1,221 @@
+{
+  "ms": 51.093209,
+  "report": {
+    "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js",
+    "sha256": "a7906328545f559638d5018327a48bd650b24ac23ed2a774b549e7765a31117a",
+    "trusted": [
+      "Acorn parser",
+      "Node TypeScript type stripping",
+      "project type and module resolution and source snapshots",
+      "source-to-SMT translation",
+      "exact rational specification replay",
+      "Z3 and its WASM bindings",
+      "unmodified standard Number/Math/Object/Array builtins and prototypes",
+      "JavaScript runtime",
+      "solver-model heap graphs replayed with shared identities and a write-monitoring Proxy membrane"
+    ],
+    "modules": [
+      {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js",
+        "sha256": "a7906328545f559638d5018327a48bd650b24ac23ed2a774b549e7765a31117a",
+        "imports": [
+          "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js",
+          "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js"
+        ]
+      },
+      {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js",
+        "sha256": "a3837fdffd757aa470a7b340ad67892c45a7ab6611976eb0d57d42adab02df46",
+        "imports": []
+      },
+      {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js",
+        "sha256": "3a10c589727ea95be47ba4a4ab048e76f9ac7b728a5b0279262d39dfc5927566",
+        "imports": []
+      }
+    ],
+    "dependencies": [
+      {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/package.json",
+        "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+        "kind": "package"
+      }
+    ],
+    "graphSha256": "c59463e822bf9ad28cb373d08d2d36389d364573a4f7697f4c177e0311ad38e2",
+    "outcomes": [],
+    "selection": {
+      "requested": [
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo"
+      ],
+      "included": [
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo"
+      ],
+      "omitted": 0
+    },
+    "plan": {
+      "noSolver": true,
+      "note": "Receipts are provisional; current-source replay and current callee statuses are still required.",
+      "targets": [
+        {
+          "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+          "key": "ea10b136f4450dbecde5149a38f8a1c4a2b6e8ad40cd456dedff89d16f2c4d23",
+          "cached": false,
+          "needsSolve": true,
+          "state": "pending",
+          "waitingOn": []
+        },
+        {
+          "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation",
+          "key": "f6211fb17795e199b51014843d0b9a18643ec130a6f7ca590527e558633f0133",
+          "cached": false,
+          "needsSolve": true,
+          "state": "pending",
+          "waitingOn": []
+        },
+        {
+          "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo",
+          "key": "3cdb60cf480a2fdbbecaf255ccfa60a8fae4a7e8f8957032d5e65be6e04b4936",
+          "cached": false,
+          "needsSolve": true,
+          "state": "pending",
+          "waitingOn": [
+            "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+            "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation"
+          ]
+        }
+      ]
+    },
+    "cache": {
+      "mode": "readwrite",
+      "identity": "59fcdb663665a4e71ccdac0fed7e25fd9bfae4d4a2ad32ab0a48bc8ae0fdf9e1",
+      "protocol": "jsverify-receipt-1/query-1",
+      "backend": {
+        "package": "z3-solver@5.3.3",
+        "sha256": "86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685",
+        "files": [
+          [
+            "LICENSE.txt",
+            "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"
+          ],
+          [
+            "README.md",
+            "c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f"
+          ],
+          [
+            "build/browser.d.ts",
+            "65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507"
+          ],
+          [
+            "build/browser.js",
+            "ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df"
+          ],
+          [
+            "build/high-level/high-level.d.ts",
+            "7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9"
+          ],
+          [
+            "build/high-level/high-level.js",
+            "b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986"
+          ],
+          [
+            "build/high-level/index.d.ts",
+            "5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb"
+          ],
+          [
+            "build/high-level/index.js",
+            "a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e"
+          ],
+          [
+            "build/high-level/types.d.ts",
+            "a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f"
+          ],
+          [
+            "build/high-level/types.js",
+            "6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616"
+          ],
+          [
+            "build/high-level/utils.d.ts",
+            "b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4"
+          ],
+          [
+            "build/high-level/utils.js",
+            "3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7"
+          ],
+          [
+            "build/kill-threads.d.ts",
+            "dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85"
+          ],
+          [
+            "build/kill-threads.js",
+            "2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238"
+          ],
+          [
+            "build/low-level/index.d.ts",
+            "592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390"
+          ],
+          [
+            "build/low-level/index.js",
+            "862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c"
+          ],
+          [
+            "build/low-level/types.__GENERATED__.d.ts",
+            "11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3"
+          ],
+          [
+            "build/low-level/types.__GENERATED__.js",
+            "d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e"
+          ],
+          [
+            "build/low-level/wrapper.__GENERATED__.d.ts",
+            "27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10"
+          ],
+          [
+            "build/low-level/wrapper.__GENERATED__.js",
+            "cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a"
+          ],
+          [
+            "build/node.d.ts",
+            "17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873"
+          ],
+          [
+            "build/node.js",
+            "28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98"
+          ],
+          [
+            "build/z3-built.js",
+            "5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6"
+          ],
+          [
+            "build/z3-built.wasm",
+            "591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"
+          ],
+          [
+            "package.json",
+            "3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"
+          ]
+        ],
+        "node": "v22.23.1",
+        "platform": "darwin",
+        "arch": "arm64"
+      },
+      "trust": "Receipt integrity and trusted writers are required; no proof certificates. Readonly does not authenticate. Audit re-solves independently of receipts.",
+      "keys": {
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse": "ea10b136f4450dbecde5149a38f8a1c4a2b6e8ad40cd456dedff89d16f2c4d23",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation": "f6211fb17795e199b51014843d0b9a18643ec130a6f7ca590527e558633f0133",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo": "3cdb60cf480a2fdbbecaf255ccfa60a8fae4a7e8f8957032d5e65be6e04b4936"
+      },
+      "hits": [],
+      "misses": [
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo"
+      ],
+      "solved": [],
+      "written": [],
+      "rejected": [],
+      "errors": []
+    }
+  }
+}

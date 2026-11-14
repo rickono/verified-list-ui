@@ -1,0 +1,27 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /fp\.div RNE/. Input:
+
+'(declare-const heap_next0 Int)\n' +
+  '(declare-fun heap_kind (Int) Int)\n' +
+  '(declare-fun heap_length (Int) (_ BitVec 32))\n' +
+  '(declare-fun heap_element (Int) Int)\n' +
+  '(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n' +
+  '(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n' +
+  '(declare-fun heap_array_dense (Int) Bool)\n' +
+  '(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n' +
+  '(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n' +
+  '(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n' +
+  '(declare-const input_0_ref Int)\n' +
+  '(declare-const loop_replay0 Bool)\n' +
+  '(assert (= loop_replay0 (=> (and (not (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x0000000000000000))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n' +
+  '(declare-const loop1_u32 (_ BitVec 32))\n' +
+  '(declare-const loop1_negative_zero Bool)\n' +
+  '(declare-const loop2 (_ BitVec 64))\n' +
+  '(assert (and (>= input_0_ref 0) (< input_0_ref heap_next0) (= (heap_kind input_0_ref) 1) (=> (bvugt (heap_length input_0_ref) #x00000000) (= (heap_element input_0_ref) 1)) (heap_array_dense input_0_ref)))'
+
+    at checkHarmonic (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/check-harmonic.mjs:58:12)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-7c06aa52/verify/examples/simple-statistics/check-harmonic.mjs:133:42
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)

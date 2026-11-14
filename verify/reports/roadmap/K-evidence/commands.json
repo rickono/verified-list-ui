@@ -1,0 +1,123 @@
+[
+  {
+    "id": "focused-first",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-name-pattern='H0[1-6]-|helper results|helper facts|exclusion' tests/verify/mutating-loops.test.mjs",
+    "log": "logs/focused-first.tap",
+    "exitCode": 1,
+    "observed": "16 tests, 15 pass, 1 incorrect outcome-reason assertion; the counterexample was already confirmed.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "transactions-first",
+    "command": "node --test tests/verify/loop-trials.test.mjs",
+    "log": "logs/transactions-first.tap",
+    "exitCode": 1,
+    "observed": "3 failures: scratch acorn resolution and an expected snapshot that retained a live declaration array.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "transactions-second",
+    "command": "node --test tests/verify/loop-trials.test.mjs",
+    "log": "logs/transactions-second.tap",
+    "exitCode": 1,
+    "observed": "2 pass, 1 alpha-renaming comparison failure on serialized symbol strings.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "transactions-third",
+    "command": "node --test tests/verify/loop-trials.test.mjs",
+    "log": "logs/transactions-third.tap",
+    "exitCode": 0,
+    "observed": "3 pass.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "focused-second",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 tests/verify/mutating-loops.test.mjs tests/verify/loop-trials.test.mjs tests/verify/mutating-loop-pin.test.mjs tests/verify/heap.test.mjs tests/verify/heap-write-audit.test.mjs",
+    "log": "logs/focused-second.tap",
+    "exitCode": 0,
+    "observed": "132 pass, 0 fail. Includes 43 judgment rows and 21 candidate rows.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "focused-third",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 tests/verify/loop-trials.test.mjs tests/verify/mutating-loop-pin.test.mjs tests/verify/mutating-loop-edges.test.mjs tests/verify/mutating-loop-audit.test.mjs",
+    "log": "logs/focused-third.tap",
+    "exitCode": 1,
+    "observed": "18 pass, 1 incorrect expected reason. Actual was dependency-violation, not dependency-unverified.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "focused-final",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 --test-name-pattern='trial|K (exclusion|rejects|test stores|update stores|H25|H26|continue|boolean|a callee|full proof)|compiler fails|GPL report' tests/verify/loop-trials.test.mjs tests/verify/mutating-loop-pin.test.mjs tests/verify/mutating-loop-edges.test.mjs tests/verify/mutating-loop-audit.test.mjs tests/verify/mutating-loops.test.mjs",
+    "log": "logs/focused-final.tap",
+    "exitCode": 0,
+    "observed": "26 pass, 0 fail.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "pilot-queued-canceled",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/K-evidence/pilot/check.mjs",
+    "log": "logs/pilot-production.log",
+    "exitCode": 143,
+    "observed": "Terminated the owned queued runner before fixing the unavailable numeric API; no public pilot ran.",
+    "expected": "Upstream verified; lost-temp and over-swap confirmed; short-bound confirmed or a visible timeout, never verified. 60,000 ms per request."
+  },
+  {
+    "id": "pilot-query-dump-initial",
+    "command": "node verify/reports/roadmap/K-evidence/pilot/check.mjs --dump verify/reports/roadmap/K-evidence/smt",
+    "log": "logs/pilot-query-dump.log",
+    "exitCode": 1,
+    "observed": "Compile found data.indexBits is not a function. Corrected source to reuse data.index without changing data.mjs.",
+    "expected": "Compile 36 full postcondition queries without a solver."
+  },
+  {
+    "id": "pilot-query-dump-fixed",
+    "command": "node verify/reports/roadmap/K-evidence/pilot/check.mjs --dump verify/reports/roadmap/K-evidence/smt",
+    "log": "logs/pilot-query-dump-fixed.log",
+    "exitCode": 0,
+    "observed": "36 full postcondition queries built, 9 for each source variant.",
+    "expected": "Compile 36 full postcondition queries without a solver."
+  },
+  {
+    "id": "index-boundary-focused",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 --test-name-pattern='K stores|K (test stores|update stores|H25|H26|continue)|trial' tests/verify/mutating-loop-edges.test.mjs tests/verify/loop-trials.test.mjs",
+    "log": "logs/index-boundary-focused.tap",
+    "exitCode": 0,
+    "observed": "8 pass, 0 fail; signed-metadata stores prove without an indexBits export.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "pilot-production-final",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/K-evidence/pilot/check.mjs",
+    "log": "logs/pilot-production-final.log",
+    "exitCode": 0,
+    "observed": "Unchanged upstream verified. All three mutants produced confirmed counterexamples, independently compared with native reversal. 11 positive native samples.",
+    "expected": "Upstream verified; lost-temp and over-swap confirmed; short-bound confirmed or a visible timeout, never verified. 60,000 ms per request."
+  },
+  {
+    "id": "full-before-oracle-update",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- make test-verify",
+    "log": "logs/full-before-oracle-update.tap",
+    "exitCode": 2,
+    "observed": "418 tests: 417 pass, 1 obsolete numeric-metadata loop-admission oracle failed. All new controls and arithmetic/guard mutations passed. No core changes followed this run.",
+    "expected": "All selected test assertions pass; unknown outcomes are accepted only where explicitly required by the source case."
+  },
+  {
+    "id": "numeric-oracle-focused",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-name-pattern='straight-line and loop stores' tests/verify/numeric-metadata.test.mjs",
+    "log": "logs/numeric-oracle-focused.tap",
+    "exitCode": 0,
+    "expected": "The unchanged dead loop verifies, wrapping stores fail their native domain, and allocation stays unsupported.",
+    "observed": "1 test passed, including all four source variants."
+  },
+  {
+    "id": "full-final",
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- make test-verify",
+    "log": "logs/full-final.tap",
+    "codeSha": "00e5fc4244f6f756b045e2ea4b6af9ddaaf1715b",
+    "expected": "All final-tree tests pass, including conformance, numeric and heap mutations, and the new loop controls.",
+    "exitCode": 0,
+    "observed": "418/418 pass; no failures, skipped or cancelled tests. 96 added tests. 64 inherited public rows: 15 verified, 26 confirmed counterexamples, 14 induction gaps, 1 request timeout, 8 exclusions."
+  }
+]

@@ -1,0 +1,134 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:13575) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: K judgment H01-fresh-array
+ok 1 - K judgment H01-fresh-array
+  ---
+  duration_ms: 477.958583
+  type: 'test'
+  ...
+# {"id":"H01-fresh-array","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H02-fresh-record
+ok 2 - K judgment H02-fresh-record
+  ---
+  duration_ms: 405.401084
+  type: 'test'
+  ...
+# {"id":"H02-fresh-record","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H03-fresh-array-boolean
+ok 3 - K judgment H03-fresh-array-boolean
+  ---
+  duration_ms: 221.034542
+  type: 'test'
+  ...
+# {"id":"H03-fresh-array-boolean","expect":"reject","native":[true,false],"status":"counterexample","confirmed":true}
+# Subtest: K judgment H04-fresh-array-pos
+ok 4 - K judgment H04-fresh-array-pos
+  ---
+  duration_ms: 367.068125
+  type: 'test'
+  ...
+# {"id":"H04-fresh-array-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H05-fresh-record-pos
+ok 5 - K judgment H05-fresh-record-pos
+  ---
+  duration_ms: 364.707417
+  type: 'test'
+  ...
+# {"id":"H05-fresh-record-pos","expect":"verify","native":[true,true,true],"status":"verified"}
+# Subtest: K judgment H06-alias-local
+ok 6 - K judgment H06-alias-local
+  ---
+  duration_ms: 449.2925
+  type: 'test'
+  ...
+# {"id":"H06-alias-local","expect":"reject","native":[true,false,false],"status":"counterexample","confirmed":true}
+# Subtest: K exclusion dynamic exit target
+ok 7 - K exclusion dynamic exit target
+  ---
+  duration_ms: 1.798125
+  type: 'test'
+  ...
+# Subtest: K exclusion dynamic helper target
+ok 8 - K exclusion dynamic helper target
+  ---
+  duration_ms: 1.181917
+  type: 'test'
+  ...
+# Subtest: K exclusion body allocation
+ok 9 - K exclusion body allocation
+  ---
+  duration_ms: 0.865291
+  type: 'test'
+  ...
+# Subtest: K exclusion test allocation
+ok 10 - K exclusion test allocation
+  ---
+  duration_ms: 0.787792
+  type: 'test'
+  ...
+# Subtest: K exclusion update allocation
+ok 11 - K exclusion update allocation
+  ---
+  duration_ms: 0.542709
+  type: 'test'
+  ...
+# Subtest: K exclusion length change
+ok 12 - K exclusion length change
+  ---
+  duration_ms: 0.451041
+  type: 'test'
+  ...
+# Subtest: K exclusion reference store
+ok 13 - K exclusion reference store
+  ---
+  duration_ms: 0.365417
+  type: 'test'
+  ...
+# Subtest: K exclusion reference call in test
+ok 14 - K exclusion reference call in test
+  ---
+  duration_ms: 0.546791
+  type: 'test'
+  ...
+# Subtest: K writing helper results cannot establish their own requires
+not ok 15 - K writing helper results cannot establish their own requires
+  ---
+  duration_ms: 203.304459
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/mutating-loops.test.mjs:93:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - 'requires'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'requires'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/mutating-loops.test.mjs:100:101)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: K writing helper facts cannot establish invariant initialization
+ok 16 - K writing helper facts cannot establish invariant initialization
+  ---
+  duration_ms: 184.314084
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 15
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2778.389708

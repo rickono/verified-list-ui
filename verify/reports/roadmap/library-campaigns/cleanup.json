@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "classification": "finite control",
+  "origin": "own execution",
+  "at": "2026-11-14T01:39:19.013447+00:00",
+  "dependencyLinkBefore": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/node_modules",
+  "dependencyLinkRemoved": true,
+  "scratchDirectoriesRemaining": [],
+  "knownCompletedPids": [
+    89985,
+    90083,
+    90198,
+    90199,
+    90201,
+    90207,
+    90415,
+    91322,
+    91420,
+    91534,
+    91535,
+    91536,
+    91541,
+    91624
+  ],
+  "liveKnownPids": {},
+  "liveOwnedCommandMatches": [],
+  "processCommand": [
+    "ps",
+    "-ax",
+    "-o",
+    "pid=,ppid=,pgid=,state=,command="
+  ],
+  "nativeReaping": "Every spawnSync command recorded aliveAfterWait=false. Both timeout children per run have ETIMEDOUT/SIGKILL.",
+  "solverReaping": "Production backend.close kills and awaits each solver child. Each campaign supervisor observed an empty owned process group after wait.",
+  "driftControls": "Finite-control process groups ended and temporary copies were removed. Earlier lane-only controls were killed and waited, with no Node or solver started."
+}

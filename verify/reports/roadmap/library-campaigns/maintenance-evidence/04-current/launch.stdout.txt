@@ -1,0 +1,23 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+Starting native-harmonic
+PASS native-harmonic
+Starting native-d3
+PASS native-d3
+Starting native-cycle100
+PASS native-cycle100
+Starting native-cycle5
+PASS native-cycle5
+Starting cycle-diagnostic
+PASS cycle-diagnostic
+Starting d3-admission
+PASS d3-admission
+Starting harmonic
+PASS harmonic
+Starting ramda
+PASS ramda
+Starting query-inputs
+PASS query-inputs
+Starting freeze-and-model
+PASS freeze-and-model
+PASS: campaign evidence in /Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/maintenance-evidence/04-current/campaign

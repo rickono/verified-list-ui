@@ -171,7 +171,7 @@ function apply(p:(x:number)=>boolean,x:number){return p(x);}
 function f(a:{x:number},x:number){const k=a.x;const match=(n:number):boolean=>n>k;a.x=7;return apply(match,x);}`));
 });
 
-test("heap writes cannot bypass the mutating-loop restriction through helpers or early returns",async()=>{
+test("writing loops admit primitive exit stores and helpers but still exclude allocation",async()=>{
   for(const body of ["a.x=1;return true;","return poke(a);","const b={x:1};return true;"]){
     const r=await check(`// modifies a.x
 // ensures true
@@ -182,7 +182,10 @@ function f(a:{x:number}){let i=0;
 // invariant i===0
 // decreases real(1)-real(i)
 while(i===0){${body}}return true;}`);
-    status(r.outcomes[0],"unsupported");
+    if(body.includes("const b=")){
+      status(r.outcomes[0],"unsupported");
+      assert.match(r.outcomes[0].message,/allocate/);
+    }else allVerified(r);
   }
 });
 

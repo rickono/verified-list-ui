@@ -1,0 +1,93 @@
+[
+  {
+    "file": "13/13727c9509f42a51c9d1c28489b9eea65a84af5926f1562d687554ba5bbb1d74.json",
+    "sha256": "967fb48d1163ee2e1719d4bb3e5226f01699e1716451f9fb6ee48501c2c00036",
+    "data": {
+      "format": 1,
+      "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+      "key": "13727c9509f42a51c9d1c28489b9eea65a84af5926f1562d687554ba5bbb1d74",
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "witness": [
+        "0",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "array",
+              "element": "number",
+              "values": [
+                [
+                  "num",
+                  "0000000000000000"
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "file": "2d/2da1d8bff39c9f51caf45fa46df30c0720870d4e97f829dca5b5fd6c90e3d2b0.json",
+    "sha256": "0be82f5ac2c5f11be497843677c0c95bf119f8fb3987205e9c5fb9c568f89cd8",
+    "data": {
+      "format": 1,
+      "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+      "key": "2da1d8bff39c9f51caf45fa46df30c0720870d4e97f829dca5b5fd6c90e3d2b0",
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo",
+      "witness": [
+        "0",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "array",
+              "element": "number",
+              "values": [
+                [
+                  "num",
+                  "0000000000000000"
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "file": "59/59f90dc0c3109d0f89404db96de3e2cc4ddaaba8c05e7cbf8da1461df048ff26.json",
+    "sha256": "fb9bdfe893931cd02cc55c73193d28ba36829b3e9c95357a4456e56b942d310a",
+    "data": {
+      "format": 1,
+      "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+      "key": "59f90dc0c3109d0f89404db96de3e2cc4ddaaba8c05e7cbf8da1461df048ff26",
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation",
+      "witness": [
+        "0",
+        "4330000000000000",
+        {
+          "roots": [
+            "0"
+          ],
+          "nodes": {
+            "0": {
+              "kind": "array",
+              "element": "number",
+              "values": [
+                [
+                  "num",
+                  "0000000000000000"
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+]

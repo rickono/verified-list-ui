@@ -1,0 +1,90 @@
+TAP version 13
+# (node:80382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: solver deadline preserves a cheap target in order costly, cheap
+ok 1 - solver deadline preserves a cheap target in order costly, cheap
+  ---
+  duration_ms: 0.8435
+  type: 'test'
+  ...
+# Subtest: solver deadline preserves a cheap target in order cheap, costly
+ok 2 - solver deadline preserves a cheap target in order cheap, costly
+  ---
+  duration_ms: 0.237083
+  type: 'test'
+  ...
+# Subtest: hard deadline preserves a cheap target in order costly, cheap
+ok 3 - hard deadline preserves a cheap target in order costly, cheap
+  ---
+  duration_ms: 0.159542
+  type: 'test'
+  ...
+# Subtest: hard deadline preserves a cheap target in order cheap, costly
+ok 4 - hard deadline preserves a cheap target in order cheap, costly
+  ---
+  duration_ms: 0.354291
+  type: 'test'
+  ...
+# Subtest: a deferred proof retains completed obligations and uses time freed by cheap targets
+ok 5 - a deferred proof retains completed obligations and uses time freed by cheap targets
+  ---
+  duration_ms: 0.389541
+  type: 'test'
+  ...
+# Subtest: a cheap target behind two costly targets gets a turn within the original budget
+ok 6 - a cheap target behind two costly targets gets a turn within the original budget
+  ---
+  duration_ms: 0.111125
+  type: 'test'
+  ...
+# Subtest: worker errors preserve finished outcomes and let later independent targets run
+ok 7 - worker errors preserve finished outcomes and let later independent targets run
+  ---
+  duration_ms: 0.095292
+  type: 'test'
+  ...
+# Subtest: initialization, late responses, and unattempted targets consume one 10 ms request budget
+ok 8 - initialization, late responses, and unattempted targets consume one 10 ms request budget
+  ---
+  duration_ms: 0.128833
+  type: 'test'
+  ...
+# Subtest: initialization, late responses, and unattempted targets consume one 180000 ms request budget
+ok 9 - initialization, late responses, and unattempted targets consume one 180000 ms request budget
+  ---
+  duration_ms: 0.210958
+  type: 'test'
+  ...
+# Subtest: initialization failure cannot erase another worker's useful outcomes
+ok 10 - initialization failure cannot erase another worker's useful outcomes
+  ---
+  duration_ms: 0.266
+  type: 'test'
+  ...
+# Subtest: uncertainty and bounded witness infeasibility never become proofs or vacuity
+ok 11 - uncertainty and bounded witness infeasibility never become proofs or vacuity
+  ---
+  duration_ms: 0.181542
+  type: 'test'
+  ...
+# Subtest: full-domain infeasibility stays vacuous and sat postconditions retain counterexample evidence
+ok 12 - full-domain infeasibility stays vacuous and sat postconditions retain counterexample evidence
+  ---
+  duration_ms: 0.111083
+  type: 'test'
+  ...
+# Subtest: separate postconditions expose a cheap failing clause when the grouped query is costly
+ok 13 - separate postconditions expose a cheap failing clause when the grouped query is costly
+  ---
+  duration_ms: 0.058792
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 41.555833

@@ -1,0 +1,58 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+ok grammar-leads
+ok grammar-leads-succeeds
+ok grammar-leads-inside
+ok grammar-fairness
+ok grammar-fairness-case
+ok grammar-fairness-punct
+ok grammar-fairness-typo
+ok grammar-fairness-unicode
+ok grammar-abort
+ok grammar-block
+ok grammar-settles-soon
+ok grammar-env-fair
+ok grammar-completes-prose
+ok grammar-fair-settlement-prose
+ok grammar-rank-prose
+ok grammar-commits-prose
+ok grammar-count-prose
+ok early-return
+DIFF tail-return-shape
+ok zero-shape
+ok two-shape
+ok assumptions-two
+ok multi-shape
+(node:46832) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ok native-zero
+ok native-fuse
+ok native-reject
+ok native-suppress
+ok native-publish
+ok native-prefix
+ok native-partial-zero
+ok native-partial-one
+ok native-false-resolve
+ok native-collision
+ok native-illegal
+ok native-double
+ok native-hash
+ok native-throw
+ok safety-false-resolves
+ok safety-partial
+ok safety-gap
+ok budget-gap
+DIFF ranks
+ok budget-ranks
+ok loop-scan
+ok stateful-scan
+ok classifier-both
+ok classifier-only-settles
+ok classifier-only-fair
+ok classifier-neither
+ok classifier-empty
+ok classifier-fresh
+ok classifier-not-pending
+ok composition-rule
+{"predHash":"5f235d7b24b17d8d5ad01014c58d3ad1146f77629c56787b0da5dacb07dcd8fb","diffs":["tail-return-shape","ranks"],"cases":53,"head":"2809e885ef01e09da906ddc31e070fde1df180a2"}

@@ -1,0 +1,161 @@
+{
+  "pin": {
+    "package": "simple-statistics",
+    "version": "8.0.0",
+    "repository": "https://github.com/simple-statistics/simple-statistics",
+    "commit": "a9ec6767820e3fc7c29ab5f179778308c75a2f47",
+    "path": "src/harmonic_mean.js",
+    "sourceUrl": "https://github.com/simple-statistics/simple-statistics/blob/a9ec6767820e3fc7c29ab5f179778308c75a2f47/src/harmonic_mean.js",
+    "sha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+    "gitBlob": "7705c21eebc0898068cc6a5565566b0ec3873c53",
+    "license": "ISC",
+    "licenseSha256": "63b5b6a85bc21476ebee13febd48d0a52056a695754a73aaed1ed7eafb059f29",
+    "inheritedFrom": {
+      "candidate": "f5473537eb543470feef3f886e778f2737f8ed43",
+      "validation": "a83f50762005ae47edfe3e07295f3840b485687b",
+      "judgment": "e97d03da4fbe664b78640ac19b5576c6da21ac63"
+    },
+    "changes": "Contract comments only; original implementation and export bytes retained."
+  },
+  "sources": {
+    "harmonic-total.js": {
+      "sha256": "8d22d077cec2448eb235f896b647975a6ff1855a3aa98b15d8fcbe0f29774391",
+      "commentsOnly": true,
+      "runtimeTokensEqual": true,
+      "annotations": [
+        "// requires x.length === 1",
+        "// requires Number.isFinite(x[0]) && x[0] > 0",
+        "// ensures true",
+        "    // invariant x.length === 1",
+        "    // invariant Number.isFinite(x[0]) && x[0] > 0",
+        "    // invariant Number.isInteger(i) && 0 <= i && i <= x.length",
+        "    // invariant (i === 0 && Object.is(reciprocalSum, 0)) || (i === 1 && Object.is(reciprocalSum, 1 / x[0]))",
+        "    // decreases real(x.length) - real(i)"
+      ],
+      "throws": [
+        {
+          "kind": "throw-unreachable",
+          "span": {
+            "start": 903,
+            "end": 968
+          },
+          "abstract": false
+        },
+        {
+          "kind": "throw-unreachable",
+          "span": {
+            "start": 1444,
+            "end": 1546
+          },
+          "abstract": true,
+          "loop": {
+            "start": 1306,
+            "end": 1598
+          }
+        }
+      ],
+      "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+      "preDefined": "true",
+      "postconditionSha256": [
+        "5e54768ccec016cb07a7ae2034c08fd49f04d08877b3a61c8fd68437b65c207b",
+        "f31b935af2b19010b74e6c8b82616c38f322b1b4a49a4d2dde72d343cb72e24c",
+        "aa91f31407b7275a7123f50cb9d1160ebc933b2bc632dfb062df4a7cb87bdea7",
+        "fe3e5c491394be19a1e3c14615ac65e13b7ebcd4e69d5f7eadaa6054b6dbdb27",
+        "dd4f6b16c9015afc7e8894e526bfeb0e46883ff291676dcbed3d2ce4ea4f2320"
+      ]
+    },
+    "harmonic-positive.js": {
+      "sha256": "d4a067ec6747c27c836ae46f46350e5ac9334bc2c32df3cc36e6a64948725189",
+      "commentsOnly": true,
+      "runtimeTokensEqual": true,
+      "annotations": [
+        "// requires x.length === 1",
+        "// requires Number.isFinite(x[0]) && x[0] > 0",
+        "// ensures result > 0",
+        "    // invariant x.length === 1",
+        "    // invariant Number.isFinite(x[0]) && x[0] > 0",
+        "    // invariant Number.isInteger(i) && 0 <= i && i <= x.length",
+        "    // invariant (i === 0 && Object.is(reciprocalSum, 0)) || (i === 1 && Object.is(reciprocalSum, 1 / x[0]))",
+        "    // decreases real(x.length) - real(i)"
+      ],
+      "throws": [
+        {
+          "kind": "throw-unreachable",
+          "span": {
+            "start": 909,
+            "end": 974
+          },
+          "abstract": false
+        },
+        {
+          "kind": "throw-unreachable",
+          "span": {
+            "start": 1450,
+            "end": 1552
+          },
+          "abstract": true,
+          "loop": {
+            "start": 1312,
+            "end": 1604
+          }
+        }
+      ],
+      "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+      "preDefined": "true",
+      "postconditionSha256": [
+        "5e54768ccec016cb07a7ae2034c08fd49f04d08877b3a61c8fd68437b65c207b",
+        "f31b935af2b19010b74e6c8b82616c38f322b1b4a49a4d2dde72d343cb72e24c",
+        "aa91f31407b7275a7123f50cb9d1160ebc933b2bc632dfb062df4a7cb87bdea7",
+        "fe3e5c491394be19a1e3c14615ac65e13b7ebcd4e69d5f7eadaa6054b6dbdb27",
+        "dd4f6b16c9015afc7e8894e526bfeb0e46883ff291676dcbed3d2ce4ea4f2320",
+        "d3134091943f348330cfcff94c51c8f993932b7a71219ae61febf77f2f82b28f"
+      ]
+    },
+    "harmonic-weak.js": {
+      "sha256": "fdd63831d5724a6fdf87820ee12631e6ce462e7fdba1d3da4fe42b9639f051d1",
+      "commentsOnly": true,
+      "runtimeTokensEqual": true,
+      "annotations": [
+        "// requires x.length === 1",
+        "// requires Number.isFinite(x[0]) && x[0] > 0",
+        "// ensures result > 0",
+        "    // invariant x.length === 1",
+        "    // invariant Number.isFinite(x[0]) && x[0] > 0",
+        "    // invariant Number.isInteger(i) && 0 <= i && i <= x.length",
+        "    // decreases real(x.length) - real(i)"
+      ],
+      "throws": [
+        {
+          "kind": "throw-unreachable",
+          "span": {
+            "start": 909,
+            "end": 974
+          },
+          "abstract": false
+        },
+        {
+          "kind": "throw-unreachable",
+          "span": {
+            "start": 1341,
+            "end": 1443
+          },
+          "abstract": true,
+          "loop": {
+            "start": 1203,
+            "end": 1495
+          }
+        }
+      ],
+      "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+      "preDefined": "true",
+      "postconditionSha256": [
+        "5e54768ccec016cb07a7ae2034c08fd49f04d08877b3a61c8fd68437b65c207b",
+        "cbffc64af2920d18b4fe50fbc8aafaacc745dcf0bcc787237a7b98d56ad147b5",
+        "6601f7203dff27a5b879971a1c2af3aa29de0c069a14f0db4648cfab78e5e1df",
+        "af7f1912fa237c0dc0b5f7d319459f1650190467895f292dc6535b04c8728482",
+        "f99ca4601f9520848e2d888ef07518b3a7349ff0596298d2e767db4950c69306",
+        "678ccddf2c5993f9036560627423b4af235d3d094c43de041d3b04f422a2bbb3"
+      ]
+    }
+  }
+}

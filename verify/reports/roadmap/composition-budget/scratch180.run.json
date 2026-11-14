@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "node",
+    "verify/reports/roadmap/composition-budget/check.mjs",
+    "scratch"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a",
+  "head": "2809e885ef01e09da906ddc31e070fde1df180a2",
+  "startedUnix": 1794621898.934149,
+  "elapsedIncludingQueueSeconds": 36.909634828567505,
+  "exitCode": 0,
+  "log": "scratch180.txt",
+  "trackedDiff": ""
+}

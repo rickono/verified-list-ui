@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "node",
+    "--input-type=module",
+    "-e",
+    "import { verifyFile } from \"./verify/index.mjs\"; console.log(JSON.stringify(await verifyFile(\"verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js\", { timeoutMs: 1000, plan: true }), null, 2));"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524",
+  "codeHead": "203ad818169be544432b3bad93ff1c4f01ef20a3",
+  "start": "2026-11-14T01:20:57.211796+00:00",
+  "end": "2026-11-14T01:20:57.461829+00:00",
+  "exitCode": 0,
+  "budgetMs": 1000,
+  "planOnly": true,
+  "stdoutSha256": "120ea09165249e16bd32195fa3608bf9dfa4c5067de1f1d9f91670a2a019cb34"
+}

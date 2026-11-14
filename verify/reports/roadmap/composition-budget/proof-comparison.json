@@ -1,0 +1,13 @@
+{
+  "postconditionCount": 15,
+  "byteEquality": true,
+  "allPlannedPhases": 36,
+  "allPhaseQueriesModelsReplayGuardsIdentical": true,
+  "graphSha256": "c59463e822bf9ad28cb373d08d2d36389d364573a4f7697f4c177e0311ad38e2",
+  "root60sGraphEqualsCurrent": true,
+  "root60sModuleHashesEqualCurrent": true,
+  "parentIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+  "currentIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+  "scratchIdentityEqualsProduction": true,
+  "currentHead": "7feca2830d90e237227fc1522e77e1a11ce3abee"
+}

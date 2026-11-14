@@ -347,6 +347,8 @@ Each request uses at most two isolated workers, with one active query per worker
 
 This policy explicitly permits two workers' CPU and memory use. The worker cap is fixed, independent of graph size. `timeoutMs` remains one wall-clock request budget, not a fresh budget per worker or target. All workers stop at the original deadline and are reaped before the request returns.
 
+`verify` and `verifyFile` accept an integer `timeoutMs` from 1 through 180,000 ms, with a default of 10,000 ms. CLI `--timeout MS` uses the same range and default. The solver budget includes worker initialization, all query phases, and restarts across the selected graph. Source loading, compilation, and JavaScript replay remain outside that solver deadline. Native replay keeps its separate 100 ms limit, and replay-witness materialization limits stay unchanged. A larger requested budget gives costly obligations more time but does not guarantee a proof. Exhaustion remains `unknown`, and an unverified dependency still blocks its callers.
+
 The parent retains completed query evidence and outcomes. A worker crash or hard timeout cannot erase unrelated completed results. A hard timeout kills and reaps the worker, and a later target can use a replacement if time remains. A caller still needs every callee's final post-replay status to be verified.
 
 `backend.mjs` exposes the internal worker boundary: `start(remainingMs)`, `check(obligation, turnRemainingMs)`, and `close()`. Z3 advertises SMT-LIB 2, binary64, bitvectors, uninterpreted functions, quantifiers, and model extraction. The current frontend requires that conservative capability profile. The worker returns only `sat`, `unsat`, or `unknown`; the parent combines those answers and replays witnesses. The public API has no backend override or additional budget option.
@@ -472,8 +474,9 @@ later restored; helper footprints must fit the caller's permission.
 `old(a.x)` reads entry contents; `old(a)` retains its identity, so `old(a).x`
 reads the current field. Reports add `aliases` groups, and replay reconstructs
 shared storage. A write monitor confirms input-graph frame violations. Unobserved
-abstract frame violations stay unknown. Length/shape changes, reference stores,
-optional-field writes and mutating loops remain unsupported.
+abstract frame violations stay unknown. Length/shape changes, reference stores
+and optional-field writes remain unsupported. Loops can change existing
+primitive contents under the induction rules below.
 
 See [heap.ts](examples/heap.ts), [deliberate failures](examples/heap-bugs.ts),
 [the design and replay limits](design/heap.md), and
@@ -501,7 +504,16 @@ Native measure arithmetic stays rounded: `n - i` means `real(n - i)`. Use `real(
 
 A weak or wrong invariant can produce `unknown/induction-gap`, with its phase, source location and candidate input. Only replay of the unchanged source can confirm a contract bug. Witness searches prefer arrays and entry measures at most 256; these limits never enter proof queries. A timeout or unavailable small witness remains `unknown`.
 
-The [loop examples](examples/loops.ts) prove first-match search and counting bounds. The [loop design](design/loops.md) describes the proof rules, numeric shadows and limitations. Nested loops, labeled jumps, `do`, `for-in`, `for-of`, `var` declarations inside a loop and heap mutation inside loops remain unsupported.
+Loops can write existing primitive array elements and required record fields,
+including through scalar-returning helpers. `modifies` checks each attempted
+write and helper footprint. The loop head forgets only the locations derived
+from audited back edges, including fresh pre-loop storage and aliases.
+Whole-array havoc requires invariants to describe unchanged elements too.
+Initialization uses the actual pre-loop heap; test, update, `continue`, `break`
+and return effects retain their JavaScript order. Invariants can name entry
+elements with `old(values.slice())[k]`.
+
+The [loop examples](examples/loops.ts) prove first-match search and counting bounds. The [loop design](design/loops.md) describes the scalar proof rules. The [mutating-loop receipt](reports/roadmap/K-implementation.md) records the compiler, rollback controls and the separate GPL-3.0 report pilot. Nested loops, labeled jumps, `do`, `for-in`, `for-of`, `var` declarations inside a loop, runtime allocation in repeated loop parts, reference-returning or runtime-allocating helpers, and targets chosen from changing loop values remain unsupported.
 
 The [gap examples](examples/loop-gaps.ts) contain correct implementations with an incorrect invariant and a constant measure. Both return `unknown/induction-gap`, and the CLI exits 1. Correcting an annotation can close a proof gap without changing the function body.
 
@@ -509,12 +521,30 @@ The [pinned Lodash search fixture](examples/lodash/README.md) proves an unchange
 
 The [pinned es-toolkit fixture](examples/es-toolkit/README.md) proves only the documented empty-array results of unchanged `sum` and `mean`: `+0` and NaN. `mean` composes through its original `./sum.ts` import. Wrong signed-zero and NaN claims and a seeded return bug produce native-confirmed counterexamples. No nonempty or real-number property is claimed. Run `node verify/examples/es-toolkit/check.mjs`.
 
+The [pinned harmonicMean fixture](examples/simple-statistics/README.md) checks
+the unchanged simple-statistics 8.0.0 implementation over every dense singleton
+with a finite positive element. It proves total return and termination, then
+replays a failure of `result > 0`: reciprocal overflow makes the result `+0`.
+Both goals use the same requires and invariant. The checker also exercises P's
+evidence/reproduce roundtrip and refuses stale source and model identities.
+
 ## Supported source
 
 This section describes `verify`, `verifyFile` and the CLI. The
 [stateful safety API](#stateful-safety-foundation) has its own source subset.
 
 Supported functions take the primitive or collection data types above and return a compatible data shape on every syntactic path. Primitive `| undefined` types are also accepted. Bodies can use initialized local `const`, `let`, and `var` bindings with simple names outside the builtin and verifier set, multiple declarators, blocks, `if`/`else`, expression statements, and `return`. Expressions include numeric, boolean, and undefined values, arithmetic `+ - * /`, unary `+ - !`, comparisons, primitive equality, `&&`/`||`/`??`, conditional and sequence expressions, and the collection operations above.
+
+An unshadowed `throw new Error("literal")` with exactly one string literal
+argument is admitted only when its path can be proved unreachable under
+requires and preceding helper facts. The compiler adds an ordered
+`throw-unreachable` check and drops that continuation without adding a return.
+An always-throwing function still lacks a supported return. Computed messages,
+shadowed constructors, other thrown values, and `try`/`catch` are unsupported,
+even on dead paths. This syntax rule does not model Error construction.
+Reachable native exceptions remain `unknown/replay-mismatch`, without confirmed
+throw attribution. Unconfirmed abstract candidates inside or after a loop are
+`unknown/induction-gap`. See the [guarded-throw contract](design/guarded-throws.md).
 
 Local scalar bindings support `=`, numeric `+=`, `-=`, `*=`, `/=`, and numeric prefix/postfix `++` and `--`. Operands and arguments evaluate left to right. Short circuits suppress both writes and calls. Branch joins retain writes, and leaving a block restores shadowed names while preserving writes to outer bindings. Local `let` and `const` bindings have block scope; `var` bindings have function scope. Parameters cannot be written, so contracts always describe entry arguments. Reference bindings retain their identity; selected primitive cells may be written under the explicit heap/frame rules.
 

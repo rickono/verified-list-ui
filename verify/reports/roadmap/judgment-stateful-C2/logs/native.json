@@ -1,0 +1,267 @@
+{
+  "node": "v22.23.1",
+  "scope": "finite native controls and explicitly labeled design countermodels; no C2 verifier",
+  "rows": [
+    {
+      "id": "B-event-domain",
+      "expected": "Actual Event object; declared finite number is false",
+      "observed": {
+        "sourceSha256": "401ed2e45fd13b874cfa67c15cb4fe76288c08f54420e36de72b726b9ded6a90",
+        "executableSha256": "6dea27594353d2d1df9aa13feff44edab4abed6184fce17807b08c3d5ed8a3e1",
+        "shownType": "object",
+        "shownIsEvent": true,
+        "shown": "<Event>",
+        "finite": false,
+        "open": 1,
+        "retained": true
+      }
+    },
+    {
+      "id": "B-forgotten-removal",
+      "expected": "Listener remains but closed guard blocks shown write",
+      "observed": {
+        "sourceSha256": "53267fd902c4d95d918308a53a0f7cd689dc5ee5d1b69b88f0459a17de42d9b6",
+        "executableSha256": "4cdbde6981dd8faa907700b11c59966516cd1e6bf545fabccac997df0f034d9e",
+        "shownType": "number",
+        "shownIsEvent": false,
+        "shown": 0,
+        "finite": true,
+        "open": 0,
+        "retained": true
+      }
+    },
+    {
+      "id": "B-removed-dispatch",
+      "expected": "Whole-target dispatch remains legal and empty; removed-id invocation would be illegal",
+      "observed": {
+        "sourceSha256": "401ed2e45fd13b874cfa67c15cb4fe76288c08f54420e36de72b726b9ded6a90",
+        "executableSha256": "6dea27594353d2d1df9aa13feff44edab4abed6184fce17807b08c3d5ed8a3e1",
+        "shownType": "number",
+        "shownIsEvent": false,
+        "shown": 0,
+        "finite": true,
+        "open": 0,
+        "retained": false
+      }
+    },
+    {
+      "id": "observation-cuts",
+      "expected": "0→1→2 satisfies adjacent R, not outer R; identity and run-to-completion preserved",
+      "observed": {
+        "plain": {
+          "x": 2,
+          "observations": [],
+          "beforeDrain": [
+            "handler",
+            "handler",
+            "dispatch-return"
+          ],
+          "order": [
+            "handler",
+            "handler",
+            "dispatch-return",
+            "microtask",
+            "microtask"
+          ],
+          "distinctClosures": true,
+          "aliasSame": true,
+          "remaining": 0
+        },
+        "observed": {
+          "x": 2,
+          "observations": [
+            1,
+            2
+          ],
+          "beforeDrain": [
+            "handler",
+            "handler",
+            "dispatch-return"
+          ],
+          "order": [
+            "handler",
+            "handler",
+            "dispatch-return",
+            "microtask",
+            "microtask"
+          ],
+          "distinctClosures": true,
+          "aliasSame": true,
+          "remaining": 0
+        },
+        "adjacentR": [
+          true,
+          true
+        ],
+        "outerR": false,
+        "limit": "Extra observers are a finite native feasibility control, not a contained C2 adapter or proof of async cuts"
+      }
+    },
+    {
+      "id": "global-absence-and-index",
+      "expected": "Nonmatching other does not license fresh; both index directions necessary",
+      "observed": {
+        "calls": 2,
+        "liveCount": 2,
+        "adviceFromBProse": [
+          "noop",
+          "fresh"
+        ],
+        "anyMatching": true,
+        "complete": {
+          "liveToKey": true,
+          "keyToLive": true
+        },
+        "missing": {
+          "liveToKey": false,
+          "keyToLive": true
+        },
+        "phantom": {
+          "liveToKey": true,
+          "keyToLive": false
+        },
+        "limit": "Advice/index rows are finite countermodels to stated design premises, not executed C2 rules"
+      }
+    },
+    {
+      "id": "capture-and-alias",
+      "expected": "Primitive snapshot stays false; handle observes true; signal/target domains overlap",
+      "observed": {
+        "start": {
+          "frozen": false,
+          "current": false
+        },
+        "end": {
+          "frozen": false,
+          "current": true
+        },
+        "alias": true,
+        "distinct": true,
+        "signalIsEventTarget": true,
+        "compatibleInputsMayAlias": true
+      }
+    },
+    {
+      "id": "abort-settlement",
+      "expected": "Advisory fulfills; rejecting producer rejects only if abort settles first",
+      "observed": [
+        {
+          "policy": "advisory",
+          "order": "already",
+          "log": [
+            "abort-observed",
+            "resolve-called"
+          ],
+          "outcome": "fulfilled",
+          "value": 7,
+          "abortedAtResume": true
+        },
+        {
+          "policy": "advisory",
+          "order": "queued-before-sync-abort",
+          "log": [
+            "abort-called",
+            "abort-observed",
+            "resolve-called"
+          ],
+          "outcome": "fulfilled",
+          "value": 7,
+          "abortedAtResume": true
+        },
+        {
+          "policy": "reject-pending",
+          "order": "already",
+          "log": [
+            "abort-observed",
+            "resolve-called"
+          ],
+          "outcome": "rejected",
+          "error": "AbortError"
+        },
+        {
+          "policy": "reject-pending",
+          "order": "queued-before-sync-abort",
+          "log": [
+            "abort-called",
+            "abort-observed",
+            "resolve-called"
+          ],
+          "outcome": "rejected",
+          "error": "AbortError"
+        },
+        {
+          "policy": "reject-pending",
+          "order": "settled-before-abort",
+          "log": [
+            "resolve-called",
+            "abort-called",
+            "abort-observed"
+          ],
+          "outcome": "fulfilled",
+          "value": 7,
+          "abortedAtResume": true
+        },
+        {
+          "policy": "reject-pending",
+          "order": "queue-order",
+          "log": [
+            "resolve-called",
+            "abort-called",
+            "abort-observed"
+          ],
+          "outcome": "fulfilled",
+          "value": 7,
+          "abortedAtResume": true
+        }
+      ]
+    },
+    {
+      "id": "running-survives-removal",
+      "expected": "One start each; guarded 0, unsafe 9 after removal/abort",
+      "observed": [
+        {
+          "guarded": true,
+          "starts": 1,
+          "shown": 0,
+          "aborted": true,
+          "registrations": 0
+        },
+        {
+          "guarded": false,
+          "starts": 1,
+          "shown": 9,
+          "aborted": true,
+          "registrations": 0
+        }
+      ]
+    },
+    {
+      "id": "add-during-dispatch",
+      "expected": "Native list shape changes result; keep unsupported",
+      "observed": {
+        "onlyFirst": [
+          "first"
+        ],
+        "hasTail": [
+          "first",
+          "tail",
+          "late"
+        ]
+      }
+    },
+    {
+      "id": "emitter-reentrancy",
+      "expected": "Native hook precedes store; synthetic control only, no fetched source executed",
+      "observed": [
+        [
+          "hook-count",
+          0
+        ],
+        [
+          "after-count",
+          1
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# Subtest: pinned harmonicMean proves total positive-singleton return and reproduces reciprocal-overflow +0 through P
+ok 1 - pinned harmonicMean proves total positive-singleton return and reproduces reciprocal-overflow +0 through P
+  ---
+  duration_ms: 39084.777208
+  type: 'test'
+  ...
+# {"status":"PASS","codeSha":"dedde91b9f6e1fec3a30f5e39cae65f5381b6b26","identity":"86f9e10064d037421d83775d3a2d35d8ddaffa18c9c81d590a175a9332007826","graphSha256":"48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469","total":"verified","positive":"counterexample","confirmed":true,"nativeWitness":{"input":3.3951948877e-313,"inputBits":"0000001000008041","reciprocal":"Infinity","result":"+0","resultBits":"0000000000000000"},"warmReceiptHits":1,"reproduce":"reproduced","originalReproduce":"reproduced","staleSource":"stale","staleModel":"invalid-evidence","weak":{"status":"unknown","reason":"induction-gap"},"sourceSha256":"c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d","scope":"all dense finite positive singletons","qComplete":false}
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 39176.758209

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "node",
+    "verify/reports/roadmap/library-campaigns/check.mjs",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/maintenance-evidence/01-red/default-output"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+  "started": "2026-11-14T03:26:54.084262+00:00",
+  "finished": "2026-11-14T03:26:54.252098+00:00",
+  "status": 1,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrSha256": "074496b9c707accf9d34a9a98571752372b244e889f30eaf67384a7a577dc44f",
+  "waited": true
+}

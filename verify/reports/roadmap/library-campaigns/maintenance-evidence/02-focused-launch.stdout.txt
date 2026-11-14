@@ -1,0 +1,13 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+PASS precise-object-availability
+PASS no-private-history-or-semantic-import
+PASS history-is-explicit-and-fails-when-absent
+PASS reject-library-source-drift-before-import
+PASS reject-provenance-drift-before-import
+PASS reject-license-drift-before-import
+PASS reject-adapter-drift-before-import
+PASS reject-application-contract-drift-before-import
+PASS reject-inherited-attestation-drift-before-import
+PASS refuse-existing-artifacts
+PASS reject-ambiguous-legacy-inputs

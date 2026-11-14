@@ -1,0 +1,337 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "name": "wrong-order",
+      "confirmedFunction": "reverseFirstTwo",
+      "classification": "Confirmed authored wrong-order wrapper failure at the exact replay witness; length still holds.",
+      "native": {
+        "encoding": "binary64 big-endian hex; comparison uses Object.is (NaNs compare equal)",
+        "count": 3,
+        "failures": 2,
+        "checks": [
+          {
+            "before": [
+              "0004000000000000",
+              "0000000000000010",
+              "0000000000000000",
+              "0000000000000001"
+            ],
+            "result": [
+              "0000000000000010",
+              "0004000000000000"
+            ],
+            "after": [
+              "0004000000000000",
+              "0000000000000010",
+              "0000000000000000",
+              "0000000000000001"
+            ],
+            "length": true,
+            "contents": false,
+            "wrapperHolds": false,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000"
+            ],
+            "result": [
+              "4000000000000000",
+              "3ff0000000000000"
+            ],
+            "after": [
+              "3ff0000000000000",
+              "4000000000000000"
+            ],
+            "length": true,
+            "contents": true,
+            "wrapperHolds": true,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "result": [
+              "4000000000000000",
+              "3ff0000000000000"
+            ],
+            "after": [
+              "3ff0000000000000",
+              "4000000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "length": true,
+            "contents": false,
+            "wrapperHolds": false,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "lost-temp",
+      "confirmedFunction": "Reverse",
+      "classification": "Confirmed seeded helper failure; caller is dependency unknown. That helper witness passes the wrapper. A separate native [1,2] wrapper failure is demonstrated.",
+      "native": {
+        "encoding": "binary64 big-endian hex; comparison uses Object.is (NaNs compare equal)",
+        "count": 3,
+        "failures": 1,
+        "checks": [
+          {
+            "before": [
+              "0000008000000000",
+              "0000000200000000",
+              "0000000000000040",
+              "0000000000800000"
+            ],
+            "result": [
+              "0000000000800000",
+              "0000000000000040"
+            ],
+            "after": [
+              "0000000000800000",
+              "0000000000000040",
+              "0000000000000040",
+              "0000000000800000"
+            ],
+            "length": true,
+            "contents": true,
+            "wrapperHolds": true,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000"
+            ],
+            "result": [
+              "4000000000000000",
+              "4000000000000000"
+            ],
+            "after": [
+              "4000000000000000",
+              "4000000000000000"
+            ],
+            "length": true,
+            "contents": false,
+            "wrapperHolds": false,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "result": [
+              "4010000000000000",
+              "4008000000000000"
+            ],
+            "after": [
+              "4010000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "length": true,
+            "contents": true,
+            "wrapperHolds": true,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "lost-temp-warm",
+      "confirmedFunction": "Reverse",
+      "classification": "Confirmed seeded helper failure; caller is dependency unknown. That helper witness passes the wrapper. A separate native [1,2] wrapper failure is demonstrated.",
+      "native": {
+        "encoding": "binary64 big-endian hex; comparison uses Object.is (NaNs compare equal)",
+        "count": 3,
+        "failures": 1,
+        "checks": [
+          {
+            "before": [
+              "0000008000000000",
+              "0000000200000000",
+              "0000000000000040",
+              "0000000000800000"
+            ],
+            "result": [
+              "0000000000800000",
+              "0000000000000040"
+            ],
+            "after": [
+              "0000000000800000",
+              "0000000000000040",
+              "0000000000000040",
+              "0000000000800000"
+            ],
+            "length": true,
+            "contents": true,
+            "wrapperHolds": true,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000"
+            ],
+            "result": [
+              "4000000000000000",
+              "4000000000000000"
+            ],
+            "after": [
+              "4000000000000000",
+              "4000000000000000"
+            ],
+            "length": true,
+            "contents": false,
+            "wrapperHolds": false,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "result": [
+              "4010000000000000",
+              "4008000000000000"
+            ],
+            "after": [
+              "4010000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "length": true,
+            "contents": true,
+            "wrapperHolds": true,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "lost-temp-audit",
+      "confirmedFunction": "Reverse",
+      "classification": "Confirmed seeded helper failure; caller is dependency unknown. That helper witness passes the wrapper. A separate native [1,2] wrapper failure is demonstrated.",
+      "native": {
+        "encoding": "binary64 big-endian hex; comparison uses Object.is (NaNs compare equal)",
+        "count": 3,
+        "failures": 1,
+        "checks": [
+          {
+            "before": [
+              "0000008000000000",
+              "0000000200000000",
+              "0000000000000040",
+              "0000000000800000"
+            ],
+            "result": [
+              "0000000000800000",
+              "0000000000000040"
+            ],
+            "after": [
+              "0000000000800000",
+              "0000000000000040",
+              "0000000000000040",
+              "0000000000800000"
+            ],
+            "length": true,
+            "contents": true,
+            "wrapperHolds": true,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000"
+            ],
+            "result": [
+              "4000000000000000",
+              "4000000000000000"
+            ],
+            "after": [
+              "4000000000000000",
+              "4000000000000000"
+            ],
+            "length": true,
+            "contents": false,
+            "wrapperHolds": false,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          },
+          {
+            "before": [
+              "3ff0000000000000",
+              "4000000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "result": [
+              "4010000000000000",
+              "4008000000000000"
+            ],
+            "after": [
+              "4010000000000000",
+              "4008000000000000",
+              "4008000000000000",
+              "4010000000000000"
+            ],
+            "length": true,
+            "contents": true,
+            "wrapperHolds": true,
+            "inputFullyReversed": false,
+            "resultFresh": true,
+            "inputLengthPreserved": true,
+            "noExtraInputProperties": true
+          }
+        ]
+      }
+    }
+  ]
+}

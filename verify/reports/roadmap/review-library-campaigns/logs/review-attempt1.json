@@ -1,0 +1,364 @@
+{
+  "classificationNotes": [],
+  "commands": [
+    "node scripts/hang-nice.mjs 3fbcc42ba089e7d0 3fbcc42ba089e7d1 5 with spawnSync timeout 800 SIGKILL",
+    "node <scratch>/check.mjs <scratch>/output after appending one comment to copied nice.js"
+  ],
+  "checkout": {
+    "head": "2809e885ef01e09da906ddc31e070fde1df180a2",
+    "branch": "t3/review-library-campaigns",
+    "baselineAncestor": true,
+    "verifyExists": true,
+    "packageBlobEqualToTip": true
+  },
+  "modelIdentity": {
+    "sha256": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+    "disabled": null,
+    "matchesRecorded": true,
+    "runtime": {
+      "node": "v22.23.1",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "origin": "new run of runningIdentity(); no solver"
+  },
+  "harmonicContracts": {
+    "origin": "new compile of current sources; no solver",
+    "stripEqualsOriginal": true,
+    "tokensEqual": true,
+    "positiveIsTotalWithEnsures": true,
+    "weakDropsOnlyReciprocalInvariant": true,
+    "preEqual": true,
+    "preHasReciprocalFiniteness": false,
+    "kinds": {
+      "total": {
+        "obligationKinds": [
+          "throw-unreachable",
+          "invariant-init",
+          "throw-unreachable",
+          "invariant-preserve",
+          "rank"
+        ],
+        "requires": [
+          "x.length === 1",
+          "Number.isFinite(x[0]) && x[0] > 0"
+        ],
+        "ensures": [
+          "true"
+        ],
+        "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "throwSpans": [
+          {
+            "start": 903,
+            "end": 968
+          },
+          {
+            "start": 1444,
+            "end": 1546
+          }
+        ]
+      },
+      "positive": {
+        "obligationKinds": [
+          "throw-unreachable",
+          "invariant-init",
+          "throw-unreachable",
+          "invariant-preserve",
+          "rank",
+          "ensures"
+        ],
+        "requires": [
+          "x.length === 1",
+          "Number.isFinite(x[0]) && x[0] > 0"
+        ],
+        "ensures": [
+          "result > 0"
+        ],
+        "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "throwSpans": [
+          {
+            "start": 909,
+            "end": 974
+          },
+          {
+            "start": 1450,
+            "end": 1552
+          }
+        ]
+      },
+      "weak": {
+        "obligationKinds": [
+          "throw-unreachable",
+          "invariant-init",
+          "throw-unreachable",
+          "invariant-preserve",
+          "rank",
+          "ensures"
+        ],
+        "requires": [
+          "x.length === 1",
+          "Number.isFinite(x[0]) && x[0] > 0"
+        ],
+        "ensures": [
+          "result > 0"
+        ],
+        "pre": "(and (fp.eq ((_ to_fp_unsigned 11 53) RNE (heap_length input_0_ref)) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000))))) (fp.gt (ite (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (heap_array_num0 input_0_ref #x00000000) ((_ to_fp 11 53) #x7ff8000000000000)) ((_ to_fp 11 53) #x0000000000000000)) (and (ite (bvult #x00000000 (heap_length input_0_ref)) true false) (not (or (fp.isNaN (heap_array_num0 input_0_ref #x00000000)) (fp.isInfinite (heap_array_num0 input_0_ref #x00000000)))))))",
+        "throwSpans": [
+          {
+            "start": 909,
+            "end": 974
+          },
+          {
+            "start": 1341,
+            "end": 1443
+          }
+        ]
+      }
+    },
+    "sourceSha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+    "licenseSha256": "63b5b6a85bc21476ebee13febd48d0a52056a695754a73aaed1ed7eafb059f29"
+  },
+  "harmonicNative": {
+    "origin": "new native import of unchanged harmonic_mean.js",
+    "rows": [
+      {
+        "inputBits": "0000000000000001",
+        "reciprocal": "Infinity",
+        "resultBits": "0000000000000000"
+      },
+      {
+        "inputBits": "0004000000000000",
+        "reciprocal": "Infinity",
+        "resultBits": "0000000000000000"
+      },
+      {
+        "inputBits": "0010000000000000",
+        "reciprocal": "4.49423283715579e+307",
+        "resultBits": "0010000000000000"
+      },
+      {
+        "inputBits": "4048800000000000",
+        "reciprocal": "0.02040816326530612",
+        "resultBits": "4048800000000001"
+      }
+    ],
+    "minValueIsPlusZero": true,
+    "subnormal1024IsPlusZero": true,
+    "smallestNormalRoundTrip": true,
+    "fortyNineUlp": "1",
+    "documented": "2.40"
+  },
+  "harmonicReplay": {
+    "freshReproduce": {
+      "origin": "new reproduce() call; reproduce does not call solve",
+      "status": "reproduced",
+      "result": "0",
+      "confirmed": true,
+      "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469"
+    },
+    "staleSource": {
+      "origin": "new run",
+      "status": "stale",
+      "graphSha256": "d6aa0ea1948bbafc7b78cd21a588b3473d2fb17f4e71be8a325050b348505d9c"
+    },
+    "staleModel": {
+      "origin": "new run",
+      "status": "invalid-evidence",
+      "message": "The verification model/backend identity changed."
+    },
+    "warmReceipt": {
+      "origin": "inherited log, not re-executed",
+      "status": "verified",
+      "solved": [],
+      "hits": 1,
+      "identity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106"
+    },
+    "recordedGraph": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469"
+  },
+  "ramda": {
+    "origin": "new source extraction; solver receipt inherited",
+    "fileSha256": "78467c00c06ef87c44d6d8415a9d9ee3cd7c41c549890fb0fef2b87d06e4bac1",
+    "fileShaMatchesPin": true,
+    "declarationBytes": 174,
+    "declarationSha256": "9005ea9989f87b9f5ce349fa5467f8256cd1c085a5a0e7faaca330eb68167275",
+    "declarationShaMatchesPin": true,
+    "commitNamedByPin": "980b3bf7712adb8ad8b5d9b2c6aca525cb3cf143",
+    "commitObjectPresent": false,
+    "licenseSha256": "62fba31dc0582fb6ee413403e47f2de319a4f14140ebd71be094c1f8c7a839ff",
+    "licenseShaMatchesPin": true,
+    "licenseHead": "The MIT License (MIT)\n\nCopyright (c) 201",
+    "upstreamStatus": "verified",
+    "callbackDomain": "Pure total predicates from every binary64 number to a present boolean: includes NaN, infinities, signed zeros and subnormals; excludes undefined, effects, exceptions and mutable captures. NaN payloads are not distinguished; function identity, properties and this are unsupported.",
+    "arrayDomain": "Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields.",
+    "ensures": 2,
+    "mutantStatuses": [
+      {
+        "name": "off-by-one",
+        "status": "counterexample",
+        "confirmed": true,
+        "result": "1",
+        "nativeInputs": {
+          "fn": {
+            "entries": [],
+            "else": "true"
+          },
+          "list": [
+            "0"
+          ]
+        }
+      },
+      {
+        "name": "skipped-first",
+        "status": "counterexample",
+        "confirmed": true,
+        "result": "-1",
+        "nativeInputs": {
+          "fn": {
+            "entries": [],
+            "else": "true"
+          },
+          "list": [
+            "0"
+          ]
+        }
+      }
+    ],
+    "countedAsRealBugsInManifest": false
+  },
+  "d3Bytes": {
+    "origin": "new git show of a83f507 objects versus pin bytes",
+    "sources": {
+      "nice.js": {
+        "local": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+        "inherited": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+        "equal": true
+      },
+      "ticks.js": {
+        "local": "79eac11e378fd34364801fd59534cfb3b34f46e54693537ad65c06c93bcb9a0f",
+        "inherited": "79eac11e378fd34364801fd59534cfb3b34f46e54693537ad65c06c93bcb9a0f",
+        "equal": true
+      }
+    },
+    "licenseEqual": true,
+    "licenseSha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
+    "docsSha256": "728883f5266670f4abbccf6ef8ea57a9e4b15f5cec02969b3d48f24843fba531",
+    "docsQuotePresent": true,
+    "ticksPrefix": "\"const e10 = Math.sqrt(50),\\n    e5 = Math.sqrt(10),\\n    e2 = Math.sqrt(2);\"",
+    "ticksPrefixLength": 73
+  },
+  "d3Admission": {
+    "origin": "new load+compile; solve() not called",
+    "threw": true,
+    "name": "TypeError",
+    "message": "Cannot read properties of undefined (reading 'file')",
+    "line": null,
+    "solverInvoked": false
+  },
+  "d3Finite": {
+    "origin": "new native import of pinned unchanged modules",
+    "coverage": [
+      {
+        "id": "coverage-1",
+        "result": [
+          "3fedc28f5c28f5c3",
+          "3fedc28f5c28f5c3"
+        ],
+        "covers": false,
+        "incrementBits": "c341c37937e08000"
+      },
+      {
+        "id": "coverage-5000",
+        "result": [
+          "3fedc28f5c28f5c3",
+          "3fedc28f5c28f5c3"
+        ],
+        "covers": false,
+        "incrementBits": "c405af1d78b58c40"
+      }
+    ],
+    "documented": [
+      "0000000000000000",
+      "4024000000000000"
+    ],
+    "documentedEquals0and10": true,
+    "fixedIssue282Covers": true
+  },
+  "d3Timeout": {
+    "origin": "new run of unchanged nice.js; hard 800 ms SIGKILL; not a solver and not a nontermination proof",
+    "classification": "unknown",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "scripts/hang-nice.mjs",
+      "3fbcc42ba089e7d0",
+      "3fbcc42ba089e7d1",
+      "5"
+    ],
+    "timeoutMs": 800,
+    "status": 1,
+    "signal": null,
+    "aliveAfterWait": false,
+    "stdout": ""
+  },
+  "d3Diagnostic": {
+    "origin": "new pure-state walk using pinned tickIncrement and the original loop formulas; conditional on deterministic pure builtins",
+    "classification": "finite control plus conditional mathematical argument; not an unchanged-source solver theorem",
+    "states": [
+      {
+        "iteration": 1,
+        "stepBits": "c39bc16d674ec800",
+        "pureRepeat": true,
+        "returns": false,
+        "nextStartBits": "3fbcc42ba089e7cf",
+        "nextStopBits": "3fbcc42ba089e7d1",
+        "nextPreBits": "c39bc16d674ec800",
+        "repeated": null
+      },
+      {
+        "iteration": 2,
+        "stepBits": "c386345785d8a000",
+        "pureRepeat": true,
+        "returns": false,
+        "nextStartBits": "3fbcc42ba089e7d0",
+        "nextStopBits": "3fbcc42ba089e7d1",
+        "nextPreBits": "c386345785d8a000",
+        "repeated": null
+      },
+      {
+        "iteration": 3,
+        "stepBits": "c39bc16d674ec800",
+        "pureRepeat": true,
+        "returns": false,
+        "nextStartBits": "3fbcc42ba089e7cf",
+        "nextStopBits": "3fbcc42ba089e7d1",
+        "nextPreBits": "c39bc16d674ec800",
+        "repeated": null
+      },
+      {
+        "iteration": 4,
+        "stepBits": "c386345785d8a000",
+        "pureRepeat": true,
+        "returns": false,
+        "nextStartBits": "3fbcc42ba089e7d0",
+        "nextStopBits": "3fbcc42ba089e7d1",
+        "nextPreBits": "c386345785d8a000",
+        "repeated": 2
+      }
+    ],
+    "tickIncrementName": "tickIncrement",
+    "period": 2
+  },
+  "drift": {
+    "origin": "new run of copied check.mjs on one mutated pin; hash gate only",
+    "exitCode": 1,
+    "stderrHasDrift": true,
+    "sawLaneWait": false,
+    "outputDirCreatedBeforeRefusal": true,
+    "signal": null
+  },
+  "driftScratchRemoved": true,
+  "solverLane": {
+    "probe": "BUSY",
+    "serialVerifyNotCalled": true,
+    "reason": "Lane probe was non-blocking. A blocking serial-verify call would wait on the other checkout."
+  }
+}

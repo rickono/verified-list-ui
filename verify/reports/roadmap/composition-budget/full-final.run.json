@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "make",
+    "test-verify"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a",
+  "head": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+  "startedUnix": 1794622127.819338,
+  "elapsedIncludingQueueSeconds": 1518.0569987297058,
+  "exitCode": 0,
+  "log": "full-final.txt",
+  "trackedDiff": ""
+}

@@ -7,9 +7,13 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { compile } from "../../verify/source.mjs";
 import { single, load } from "../../verify/modules.mjs";
 import { verify, verifyFile } from "../../verify/index.mjs";
+import { legacyTargets } from "./fixtures/legacy-compiled.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const parent = "8fa17d652d3b6e5b7ebbccc42b2d81e90ead701e";
+function legacyArtifact(compiled) {
+  return { ...compiled, targets: legacyTargets(compiled.targets) };
+}
 test("default examples keep exact compiled obligations, graph hashes and outcome reports", async () => {
   const temporary = mkdtempSync(join(root, "verify/.stateful-baseline-"));
   try {
@@ -22,7 +26,7 @@ test("default examples keep exact compiled obligations, graph hashes and outcome
       const source = readFileSync(join(root, "verify/examples", name), "utf8");
       const entry = join(root, "verify/examples", name);
       const before = original.compile(oldModules.load(entry).records), after = compile(load(entry).records);
-      assert.deepEqual(after, before, `${name}: complete compiled artifact`);
+      assert.deepEqual(legacyArtifact(after), before, `${name}: complete legacy compiled artifact`);
       const previous = await oldIndex.verifyFile(entry, { timeoutMs: 30_000 });
       const current = await verifyFile(entry, { timeoutMs: 30_000 });
       assert.deepEqual(current, previous, `${name}: complete report`);
@@ -30,7 +34,7 @@ test("default examples keep exact compiled obligations, graph hashes and outcome
     const entry = join(root, "verify/examples/valid.ts");
     const standalone = readFileSync(entry, "utf8");
     assert.deepEqual(await verify(standalone), await oldIndex.verify(standalone));
-    assert.deepEqual(compile(single("input.ts", standalone).records), original.compile(oldModules.single("input.ts", standalone).records));
+    assert.deepEqual(legacyArtifact(compile(single("input.ts", standalone).records)), original.compile(oldModules.single("input.ts", standalone).records));
     assert.deepEqual(await verifyFile(entry), await oldIndex.verifyFile(entry));
     const cli = JSON.parse(execFileSync(process.execPath, [join(root, "verify/bin/jsverify.mjs"), "--json", entry], { cwd: root, encoding: "utf8" }));
     assert.deepEqual(cli, [await verifyFile(entry)]);

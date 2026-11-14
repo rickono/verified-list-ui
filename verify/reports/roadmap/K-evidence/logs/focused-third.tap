@@ -1,0 +1,159 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:16439) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a real first discarded trial leaves the same ordered queries as starting at the fixed point
+ok 1 - a real first discarded trial leaves the same ordered queries as starting at the fixed point
+  ---
+  duration_ms: 48.380791
+  type: 'test'
+  ...
+# {"trials":[{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":10,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":["last"],"grow":1,"returns":0},{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":13,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":[],"grow":0,"returns":0}],"committedObligations":["invariant-init","call","frame-inclusion","invariant-preserve","rank"],"queries":5,"committedFacts":3}
+# Subtest: discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+ok 2 - discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+  ---
+  duration_ms: 24.321
+  type: 'test'
+  ...
+# Subtest: the heap owner rolls back field boundaries and provenance without reusing version names
+ok 3 - the heap owner rolls back field boundaries and provenance without reusing version names
+  ---
+  duration_ms: 0.328625
+  type: 'test'
+  ...
+# (node:16440) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: K compiler fails closed on record-ownership mutation
+ok 4 - K compiler fails closed on record-ownership mutation
+  ---
+  duration_ms: 60.366458
+  type: 'test'
+  ...
+# {"id":"record-ownership","controls":1,"detected":1,"sha256":"6dc34ca48d94c42e4e87e66c3c2babb8b9237c67d9a47f32525a0698ae5b1533"}
+# Subtest: K compiler fails closed on array-ownership mutation
+ok 5 - K compiler fails closed on array-ownership mutation
+  ---
+  duration_ms: 27.269916
+  type: 'test'
+  ...
+# {"id":"array-ownership","controls":3,"detected":3,"sha256":"6fa554378a0517186dd3cb7bab0d9785fdee82572e0adf45dd26c487fc53c2e0"}
+# Subtest: K compiler fails closed on summary-ownership mutation
+ok 6 - K compiler fails closed on summary-ownership mutation
+  ---
+  duration_ms: 21.993125
+  type: 'test'
+  ...
+# {"id":"summary-ownership","controls":1,"detected":1,"sha256":"40fc5d54ac6a40772665d70f5dc2c69cfd09d513100d02f26f92f989b74104e7"}
+# Subtest: K compiler fails closed on join-left mutation
+ok 7 - K compiler fails closed on join-left mutation
+  ---
+  duration_ms: 19.148833
+  type: 'test'
+  ...
+# {"id":"join-left","controls":1,"detected":1,"sha256":"659803deae746403c3a5b3a53844f44f52c69171aefcc4b3227e95d628d03009"}
+# Subtest: K compiler fails closed on join-right mutation
+ok 8 - K compiler fails closed on join-right mutation
+  ---
+  duration_ms: 19.250125
+  type: 'test'
+  ...
+# {"id":"join-right","controls":1,"detected":1,"sha256":"26e6fbe3e3272b27d17eae5e0ebba20f98d99e23ad44494dc109f7d97c566c94"}
+# (node:16442) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: K test stores keep the false-test exit value
+ok 9 - K test stores keep the false-test exit value
+  ---
+  duration_ms: 540.0235
+  type: 'test'
+  ...
+# Subtest: K update stores keep the next head value
+ok 10 - K update stores keep the next head value
+  ---
+  duration_ms: 792.061584
+  type: 'test'
+  ...
+# Subtest: K H25 helper writes in test or update
+ok 11 - K H25 helper writes in test or update
+  ---
+  duration_ms: 434.549584
+  type: 'test'
+  ...
+# Subtest: K H26 helper writes in test or update
+ok 12 - K H26 helper writes in test or update
+  ---
+  duration_ms: 8520.598916
+  type: 'test'
+  ...
+# Subtest: K continue performs update stores
+ok 13 - K continue performs update stores
+  ---
+  duration_ms: 309.212709
+  type: 'test'
+  ...
+# Subtest: K boolean array contents share head havoc
+ok 14 - K boolean array contents share head havoc
+  ---
+  duration_ms: 197.010416
+  type: 'test'
+  ...
+# Subtest: K a callee's missing write permission blocks its loop caller
+not ok 15 - K a callee's missing write permission blocks its loop caller
+  ---
+  duration_ms: 201.9315
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/mutating-loop-edges.test.mjs:29:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'dependency-violation'
+    - 'dependency-unverified'
+                  ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'dependency-unverified'
+  actual: 'dependency-violation'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/tests/verify/mutating-loop-edges.test.mjs:41:71)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: K full proof assertions do not contain replay bounds
+ok 16 - K full proof assertions do not contain replay bounds
+  ---
+  duration_ms: 2.043541
+  type: 'test'
+  ...
+# Subtest: K rejects transitive runtime allocation in body calls
+ok 17 - K rejects transitive runtime allocation in body calls
+  ---
+  duration_ms: 1.866625
+  type: 'test'
+  ...
+# Subtest: K rejects transitive runtime allocation in test calls
+ok 18 - K rejects transitive runtime allocation in test calls
+  ---
+  duration_ms: 0.932375
+  type: 'test'
+  ...
+# Subtest: the GPL report pilot preserves pinned bytes, declaration tokens and native semantics
+ok 19 - the GPL report pilot preserves pinned bytes, declaration tokens and native semantics
+  ---
+  duration_ms: 7.962417
+  type: 'test'
+  ...
+# {"bytes":539,"sha256":"8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46","nativeSamples":11,"mutants":3}
+1..19
+# tests 19
+# suites 0
+# pass 18
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11441.192542

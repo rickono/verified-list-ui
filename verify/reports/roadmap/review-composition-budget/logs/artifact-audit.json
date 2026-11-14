@@ -1,0 +1,330 @@
+{
+  "status": "PASS",
+  "findings": [
+    {
+      "check": "sha256sums",
+      "ok": true,
+      "detail": {
+        "files": 67,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "code-inputs-match-7feca28-and-worktree",
+      "ok": true,
+      "detail": {
+        "files": 199,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "focused-46",
+      "ok": true,
+      "detail": {
+        "summary": {
+          "tests": 46,
+          "pass": 46,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "ok": 46,
+        "notOk": 0
+      }
+    },
+    {
+      "check": "full-483",
+      "ok": true,
+      "detail": {
+        "summary": {
+          "tests": 483,
+          "pass": 483,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "okLines": 445,
+        "notOk": 0
+      }
+    },
+    {
+      "check": "full-suite-committed-clean",
+      "ok": true,
+      "detail": {
+        "head": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+        "exit": 0,
+        "elapsedIncludingQueueSeconds": 1518.0569987297058
+      }
+    },
+    {
+      "check": "focused-is-parent-plus-dirty-diff",
+      "ok": true,
+      "detail": {
+        "head": "2809e885ef01e09da906ddc31e070fde1df180a2",
+        "exit": 0
+      }
+    },
+    {
+      "check": "fifteen-postcondition-strings",
+      "ok": true,
+      "detail": {
+        "count": 15,
+        "historicalFiles": 15,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "thirty-six-phases",
+      "ok": true,
+      "detail": {
+        "current": 36,
+        "parent": 36,
+        "currentHead": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+        "parentHead": "2809e885ef01e09da906ddc31e070fde1df180a2",
+        "currentIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "parentIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106"
+      }
+    },
+    {
+      "check": "graph-and-module-hash",
+      "ok": true,
+      "detail": {
+        "graph": "c59463e822bf9ad28cb373d08d2d36389d364573a4f7697f4c177e0311ad38e2"
+      }
+    },
+    {
+      "check": "historical-60s-unknown",
+      "ok": true,
+      "detail": [
+        {
+          "fn": "Reverse",
+          "status": "unknown",
+          "reason": "request-timeout",
+          "phase": "postcondition",
+          "postcondition": 6,
+          "postconditionCount": 9,
+          "attempts": 10,
+          "label": "invariant-preserve"
+        },
+        {
+          "fn": "takeImplementation",
+          "status": "verified",
+          "reason": null,
+          "phase": null,
+          "postcondition": null,
+          "postconditionCount": null,
+          "attempts": null,
+          "label": null
+        },
+        {
+          "fn": "reverseFirstTwo",
+          "status": "unknown",
+          "reason": "dependency",
+          "phase": null,
+          "postcondition": null,
+          "postconditionCount": null,
+          "attempts": null,
+          "label": null
+        }
+      ]
+    },
+    {
+      "check": "production-requests",
+      "ok": true,
+      "detail": {
+        "receipts": [
+          {
+            "name": "cold",
+            "requestBudgetMs": 180000,
+            "elapsedMs": 36139.706917,
+            "outcomes": [
+              {
+                "fn": "Reverse",
+                "status": "verified"
+              },
+              {
+                "fn": "takeImplementation",
+                "status": "verified"
+              },
+              {
+                "fn": "reverseFirstTwo",
+                "status": "verified"
+              }
+            ],
+            "hits": 0,
+            "solved": 3,
+            "written": 3
+          },
+          {
+            "name": "warm",
+            "requestBudgetMs": 180000,
+            "elapsedMs": 94.79954199999338,
+            "outcomes": [
+              {
+                "fn": "Reverse",
+                "status": "verified"
+              },
+              {
+                "fn": "takeImplementation",
+                "status": "verified"
+              },
+              {
+                "fn": "reverseFirstTwo",
+                "status": "verified"
+              }
+            ],
+            "hits": 3,
+            "solved": 0,
+            "written": 0
+          },
+          {
+            "name": "audit",
+            "requestBudgetMs": 180000,
+            "elapsedMs": 35429.267167000005,
+            "outcomes": [
+              {
+                "fn": "Reverse",
+                "status": "verified"
+              },
+              {
+                "fn": "takeImplementation",
+                "status": "verified"
+              },
+              {
+                "fn": "reverseFirstTwo",
+                "status": "verified"
+              }
+            ],
+            "hits": 3,
+            "solved": 3,
+            "written": 0,
+            "disagreements": []
+          }
+        ],
+        "auditDisagreements": []
+      }
+    },
+    {
+      "check": "scratch-cold-only",
+      "ok": true,
+      "detail": {
+        "elapsedMs": 33149.001291,
+        "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef"
+      }
+    },
+    {
+      "check": "ipc-first-turn",
+      "ok": true,
+      "detail": {
+        "firstBudget": 89951,
+        "preserve": {
+          "phase": "postcondition",
+          "postcondition": 6,
+          "domain": "full",
+          "budgetMs": 86719,
+          "sentAtMs": 3325.587541,
+          "elapsedMs": 29165.534667,
+          "status": "unsat",
+          "querySha256": "a12952814fda3922e53008fb48b59c08f5fb2366c592ccdc4752cb7faf8726f1"
+        },
+        "earlierElapsedMs": 3231.277541,
+        "reverseQueries": 10,
+        "spawned": 2,
+        "closed": 2
+      }
+    },
+    {
+      "check": "parent-138-artifact",
+      "ok": true,
+      "detail": {
+        "artifactIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+        "result": {
+          "status": "invalid-evidence",
+          "message": "The verification model/backend identity changed."
+        }
+      }
+    },
+    {
+      "check": "harmonic-09",
+      "ok": true,
+      "detail": {
+        "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "weak": "counterexample",
+        "old": {
+          "status": "invalid-evidence",
+          "message": "The verification model/backend identity changed."
+        },
+        "native": {
+          "input": 3.3951948877e-313,
+          "inputBits": "0000001000008041",
+          "reciprocal": "Infinity",
+          "result": "+0",
+          "resultBits": "0000000000000000"
+        }
+      }
+    },
+    {
+      "check": "suite-weak-not-relabeled",
+      "ok": true,
+      "detail": {
+        "dedicatedWeak": "counterexample",
+        "suiteContainsUnknownWeak": true
+      }
+    },
+    {
+      "check": "campaign-runner-cap-interaction",
+      "ok": true,
+      "detail": {
+        "runtimeEquivalentTo": "f974b30da4efcf16b69df889b909975e3321dcb2",
+        "diff": [
+          "verify/bin/jsverify.mjs",
+          "verify/index.mjs"
+        ],
+        "pinMismatches": [
+          "verify/index.mjs",
+          "verify/bin/jsverify.mjs"
+        ],
+        "note": "Cap-specific interaction only. The historical runner hash/private-commit dependency is not repaired here."
+      }
+    },
+    {
+      "check": "scheduler-blobs-unchanged",
+      "ok": true,
+      "detail": {
+        "indexCeilingOnly": true,
+        "unchanged": {
+          "verify/proofs.mjs": true,
+          "verify/backend.mjs": true,
+          "verify/solver.mjs": true,
+          "verify/data.mjs": true,
+          "verify/cache.mjs": true
+        }
+      }
+    },
+    {
+      "check": "prepared-checkout",
+      "ok": true,
+      "detail": {
+        "preparedHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+        "baselineAncestor": true
+      }
+    },
+    {
+      "check": "imported-blobs",
+      "ok": true,
+      "detail": {
+        "files": {
+          "verify/index.mjs": true,
+          "verify/bin/jsverify.mjs": true,
+          "tests/verify/budgets.test.mjs": true,
+          "tests/verify/proof-backends.test.mjs": true,
+          "tests/verify/backend-process.test.mjs": true,
+          "verify/README.md": true
+        },
+        "evidenceTreeIdentical": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+[
+  {
+    "name": "bugs.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "callback-bugs.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "callbacks.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.3.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.4.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "calls-bugs.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.3.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "calls.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.3.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "collections.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": true
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": true
+      },
+      {
+        "path": "compile.targets.3.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.4.allocates",
+        "after": true
+      },
+      {
+        "path": "compile.targets.5.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "heap-bugs.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "heap.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.2.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.3.allocates",
+        "after": true
+      },
+      {
+        "path": "compile.targets.4.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.5.allocates",
+        "after": true
+      }
+    ]
+  },
+  {
+    "name": "loop-gaps.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "loops.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      }
+    ]
+  },
+  {
+    "name": "valid.ts",
+    "differences": [
+      {
+        "path": "compile.targets.0.allocates",
+        "after": false
+      },
+      {
+        "path": "compile.targets.1.allocates",
+        "after": false
+      }
+    ]
+  }
+]

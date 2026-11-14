@@ -1,0 +1,19 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# Subtest: old reports and exact queries match P; its old evidence and receipts become stale
+ok 1 - old reports and exact queries match P; its old evidence and receipts become stale
+  ---
+  duration_ms: 1226.775375
+  type: 'test'
+  ...
+# {"oldIdentity":"12daf216c0fa3223c5aeac468fdcfe9c005a18d54b151cf6f9ba5a234a025fbd","newIdentity":"13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106","oldEvidence":"invalid-evidence","oldReceiptHits":0}
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1340.164

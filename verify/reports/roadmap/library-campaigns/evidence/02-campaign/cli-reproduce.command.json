@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/Users/rick/.hermes/node/bin/node",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/bin/jsverify.mjs",
+    "reproduce",
+    "--json",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/evidence/02-campaign/harmonic/positive.evidence.json",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/examples/simple-statistics/harmonic-positive.js"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524",
+  "startedAt": "2026-11-14T01:28:14.364Z",
+  "finishedAt": "2026-11-14T01:28:14.499Z",
+  "timeoutMs": 15000,
+  "pid": 90415,
+  "status": 0,
+  "signal": null,
+  "stdoutSha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "aliveAfterWait": false,
+  "reaping": "spawnSync returned after wait; this subprocess starts no workers"
+}

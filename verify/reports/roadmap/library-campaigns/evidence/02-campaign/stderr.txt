@@ -1,0 +1,7 @@
+SyntaxError: Cannot use import statement outside a module
+    at new Function (<anonymous>)
+    at cycleDiagnostic (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:147:18)
+    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:247:5
+    at async stage (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:188:7)
+    at async campaign (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:246:3)
+    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:368:41

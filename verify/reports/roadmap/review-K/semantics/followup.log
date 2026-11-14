@@ -1,0 +1,12 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+{"name":"witness-placement","smallWitness":"true","pre":"true","equalBecauseBothTrue":true,"feasibilityHasWitness":true,"postHasDistinctWitness":false,"witnessPhaseHasBound":true,"replayGuardCount":1,"guardInPost":false}
+(node:77077) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"name":"computed-nan-index","ms":824,"outcomes":[{"fn":"f","status":"counterexample","reason":"store-domain","confirmed":true,"message":"Array store is outside the fixed-length dense domain."}],"verified":false}
+{"name":"computed-fractional-index","ms":1021,"outcomes":[{"fn":"f","status":"counterexample","reason":"store-domain","confirmed":true,"message":"Array store is outside the fixed-length dense domain."}],"verified":false}
+{"name":"index-side-effect-store","ms":177,"outcomes":[{"fn":"f","status":"verified"}],"verified":true}
+{"name":"index-side-effect-later-read","ms":160,"outcomes":[{"fn":"f","status":"verified"}],"verified":true}
+{"name":"admitted-short-circuit","ms":196,"outcomes":[{"fn":"f","status":"unknown","reason":"induction-gap","phase":"ensures","message":"The ensures may not follow from the loop invariant at exit; replay did not confirm a failure. Strengthen the invariant."}],"verified":false}
+{"name":"summary","failed":["index-side-effect-store","index-side-effect-later-read"],"ok":false}
+EXIT:1

@@ -1,0 +1,22 @@
+{
+  "startedNodePidsFromRawLogs": [
+    70852,
+    71259,
+    72472,
+    73459,
+    73662,
+    73752,
+    77126,
+    78970,
+    83874,
+    83875,
+    83876,
+    84174,
+    86848
+  ],
+  "remainingOwnedNodeProcesses": [],
+  "sourcesRestored": true,
+  "campaignWorkDirectoryRemoved": true,
+  "temporaryDependencyLinkRemoved": true,
+  "processObservation": "ps -axo pid=,ppid=,comm=,args=, filtered to recorded Node PIDs and this checkout verifier path"
+}

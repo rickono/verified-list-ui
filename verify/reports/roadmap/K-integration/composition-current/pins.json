@@ -1,0 +1,90 @@
+{
+  "reverse": {
+    "repository": "https://github.com/TheAlgorithms/JavaScript",
+    "commit": "636017ca51dad05339cde3b5c66cbe1d71957f7e",
+    "commitDate": "2022-10-20T11:38:56Z",
+    "commitTitle": "algorithm: reverse (#1197)",
+    "path": "Data-Structures/Array/Reverse.js",
+    "fetchedFrom": "https://raw.githubusercontent.com/TheAlgorithms/JavaScript/636017ca51dad05339cde3b5c66cbe1d71957f7e/Data-Structures/Array/Reverse.js",
+    "sha256": "8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46",
+    "declaration": "Reverse",
+    "declarationSha256": "a601e235f96a6eb3c572203b73a690bc7e49914b4540561139e7dc91489c70ad",
+    "license": "GPL-3.0",
+    "licensePath": "LICENSE",
+    "licenseFetchedFrom": "https://raw.githubusercontent.com/TheAlgorithms/JavaScript/636017ca51dad05339cde3b5c66cbe1d71957f7e/LICENSE",
+    "licenseSha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
+    "laterHistory": "6fe21d21e92d4f07b476d56fbcad838633e74550 (2024-04-13) rewrote the body to a destructuring swap, which the verifier grammar does not admit; this pin is the last temp-variable version.",
+    "reusedSource": "../K-evidence/pilot/Reverse.upstream.js",
+    "reusedProvenance": "../K-evidence/pilot/provenance.json",
+    "reusedLicense": "../K-evidence/pilot/LICENSE",
+    "sourceSha256": "8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46",
+    "tokenSha256": "fea39bd5afdc618703449f1b296b20acbd36984c9d586ed9e6fbb6180ba4a109",
+    "sourceImports": [],
+    "contracts": [
+      "modifies arr",
+      "ensures result === arr",
+      "ensures arr.every((v, k) => Object.is(v, old(arr.slice())[arr.length - 1 - k]))"
+    ],
+    "annotations": [
+      "invariant Number.isInteger(i) && 0 <= i && i <= arr.length",
+      "invariant Number.isInteger(j) && -1 <= j && j < arr.length && j === arr.length - 1 - i",
+      "invariant arr.every((v, k) => k < i || k > j ? Object.is(v, old(arr.slice())[arr.length - 1 - k]) : Object.is(v, old(arr.slice())[k]))",
+      "decreases real(arr.length) - real(i)"
+    ],
+    "rankAdaptation": {
+      "before": "decreases real(arr.length) - real(i)",
+      "after": "decreases real(arr.length - 0) - real(i)",
+      "authored": true,
+      "rationale": "The inspected rank obligation retains FP finiteness tests for raw length. Subtracting zero is exact for every native length and gives the maintained numeric owner an explicit signed-integer expression before embedding it. Same rank, same entry replay measure, no input bound. The unrun real(length - i) and real(length + 0) - real(i) candidates retained FP rank comparisons and were rejected after query inspection."
+    },
+    "adapter": "../K-evidence/pilot/check.mjs",
+    "adapterSha256": "c6d3c782dab72bca05eba40ff1f9dd6e159995df321b0ef68bd068412cc9358f"
+  },
+  "take": {
+    "repository": "https://github.com/remeda/remeda",
+    "commit": "004b09194f6d39f727118c0a71adc9986bcc13e1",
+    "path": "packages/remeda/src/take.ts",
+    "sha256": "64ccd5ad15d4c387b2aa57cb6173a541b8bd79dcdfa06cc57e0136141e539bdf",
+    "declaration": "takeImplementation",
+    "license": "MIT",
+    "licensePath": "LICENSE",
+    "declarationSha256": "13c5bb5511ccc94ce8a711a2a20c523928a8251c4624f4059b531ba1f48f6a91",
+    "reusedSource": "../../../examples/remeda/take.upstream.ts",
+    "reusedProvenance": "../../../examples/remeda/provenance.json",
+    "reusedLicense": "../../../examples/remeda/LICENSE",
+    "sourceSha256": "64ccd5ad15d4c387b2aa57cb6173a541b8bd79dcdfa06cc57e0136141e539bdf",
+    "erasedSourceSha256": "ab176ca631f53db1aab30a1a4e7a0ce89bd7b45220003a43e48b07c0b66dcf24",
+    "tokenSha256": "57a4f35cf51b5e2d1a73947850e6b41f916a1dbd1a24606404a13d6851992e6b",
+    "licenseSha256": "acf30083045d768ce20640237313ee31a45d548d66ef76df5bb5fb0745479535",
+    "sourceImports": [
+      "./internal/makeStoppable",
+      "./internal/purryWithLazy"
+    ],
+    "extractedDeclarationImports": [],
+    "adapter": "../../../examples/remeda/check.mjs",
+    "adapterSha256": "4b33ea6d3abbcca102a4ef42a271eeb9f234e552fa79fb074dcc708212259ea1"
+  },
+  "fixtures": {
+    "Reverse.helper.js": {
+      "sha256": "a3837fdffd757aa470a7b340ad67892c45a7ab6611976eb0d57d42adab02df46",
+      "tokenSha256": "f8659542f68fa043bfce5e959aa6bd332eb892353d7e5d00b5c61a8e76144994",
+      "imports": [],
+      "origin": "maintained pin adapter; annotations and export only"
+    },
+    "take.helper.js": {
+      "sha256": "3a10c589727ea95be47ba4a4ab048e76f9ac7b728a5b0279262d39dfc5927566",
+      "tokenSha256": "ce84122a2ff1aad68aa10b1f2120359b37ea1d8ba9ac65810c81cf9942ee85b7",
+      "imports": [],
+      "origin": "maintained pin adapter; annotations and export only"
+    },
+    "caller.js": {
+      "sha256": "a7906328545f559638d5018327a48bd650b24ac23ed2a774b549e7765a31117a",
+      "tokenSha256": "7311f5acc22f337cb11d597016f0659df8781190a450942194a00bd257774cea",
+      "imports": [
+        "./Reverse.helper.js",
+        "./take.helper.js"
+      ],
+      "origin": "authored"
+    }
+  }
+}

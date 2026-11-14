@@ -1,0 +1,513 @@
+{
+  "status": "PASS",
+  "startedAt": "2026-11-14T04:06:34.479Z",
+  "finishedAt": "2026-11-14T04:06:40.899Z",
+  "head": "f383d624d031613dbf22d6a1db92e6b32b26b6c0",
+  "checks": [
+    {
+      "name": "prepared-checkout",
+      "status": "PASS",
+      "detail": {
+        "head": "f383d624d031613dbf22d6a1db92e6b32b26b6c0",
+        "tree": "002791fa70cfafe0d5ee4572e242f7bf47038c83",
+        "baselineAncestor": true,
+        "verifyExists": true,
+        "node": "v22.23.1",
+        "platform": "darwin",
+        "arch": "arm64",
+        "implTree": "a17853b86d535fd245a8922ad1e2b011138d9b72",
+        "evidenceCommit": "8364bfc92a79e231bc556d5521cb59c5f67d8e11",
+        "importedImpl": "ea9896f6d2e7bc9eabb0d33b57d92d0af7368f6a",
+        "importedEvidence": "f383d624d031613dbf22d6a1db92e6b32b26b6c0"
+      }
+    },
+    {
+      "name": "package-scope",
+      "status": "PASS",
+      "detail": {
+        "changedPaths": 189,
+        "allUnderLibraryCampaigns": true,
+        "nonPackageDiffSinceImplementation": [
+          ".audit/roadmap-20261113.tsv",
+          "docs/verification-roadmap.json",
+          "docs/verification-roadmap.md",
+          "verify/reports/roadmap/K-integration/README.md",
+          "verify/reports/roadmap/plan.md",
+          "verify/reports/roadmap/review-composition-budget/SHA256SUMS",
+          "verify/reports/roadmap/review-composition-budget/cleanup.json",
+          "verify/reports/roadmap/review-composition-budget/commands.txt",
+          "verify/reports/roadmap/review-composition-budget/logs/artifact-audit.json",
+          "verify/reports/roadmap/review-composition-budget/logs/boundary.json",
+          "verify/reports/roadmap/review-composition-budget/logs/budgets.txt",
+          "verify/reports/roadmap/review-composition-budget/logs/hard-deadline.txt",
+          "verify/reports/roadmap/review-composition-budget/logs/proof-backends.txt",
+          "verify/reports/roadmap/review-composition-budget/logs/virtual-clock.json",
+          "verify/reports/roadmap/review-composition-budget/report.md",
+          "verify/reports/roadmap/review-composition-budget/scripts/audit.py",
+          "verify/reports/roadmap/review-composition-budget/scripts/boundary.mjs",
+          "verify/reports/roadmap/review-composition-budget/scripts/virtual-clock.mjs"
+        ]
+      }
+    },
+    {
+      "name": "production-since-483-receipt",
+      "status": "PASS",
+      "detail": {
+        "productionSinceReceipt": [
+          "verify/design/conditional-completion.md"
+        ],
+        "lockDrift": []
+      }
+    },
+    {
+      "name": "exact-package-bytes",
+      "status": "PASS",
+      "detail": {
+        "evidencePaths": 189,
+        "blobMismatch": 0,
+        "implPaths": 82,
+        "implMismatch": 0,
+        "libraryCampaignTreeEqual": true
+      }
+    },
+    {
+      "name": "inventories",
+      "status": "PASS",
+      "detail": {
+        "historicalLines": 161,
+        "historicalMismatchAgainst7e6d9b5": 0,
+        "maintenanceLines": 345,
+        "maintenanceShasumStatus": 0,
+        "maintenanceShasumTail": "verify/reports/roadmap/library-campaigns/test-maintenance.mjs: OK",
+        "historicalCheckerStillPinned": true,
+        "currentChecker": "03cb953f2272ac6a929302fec047ca54d8022f993687e6fafd77724604a0d09d",
+        "currentInputs": "746a8cf9b990aacf98c167307d4f720532c4c2835e4fefb312d15e315e4da3f7"
+      }
+    },
+    {
+      "name": "campaign-snapshot",
+      "status": "PASS",
+      "detail": {
+        "storedHead": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+        "storedTree": "a17853b86d535fd245a8922ad1e2b011138d9b72",
+        "trackedChangesEmpty": true,
+        "trackedFiles": 1457,
+        "snapshotMismatch": 0,
+        "sample": [],
+        "recomputedSnapshot": "ab4a823128de2278bfe6b0ae388470715567e89f230b72948d87d4fa77704db3",
+        "storedSnapshot": "ab4a823128de2278bfe6b0ae388470715567e89f230b72948d87d4fa77704db3",
+        "snapshotHashMatches": true,
+        "runtimeFiles": 118,
+        "runtimeNotEqualTracked": [],
+        "campaignFreezeHashes": [
+          "8b8b1946750c48530c090f545420b109f68e0bd8f5763eac3e911f4a24839f53",
+          "8b8b1946750c48530c090f545420b109f68e0bd8f5763eac3e911f4a24839f53",
+          "8b8b1946750c48530c090f545420b109f68e0bd8f5763eac3e911f4a24839f53",
+          "8b8b1946750c48530c090f545420b109f68e0bd8f5763eac3e911f4a24839f53"
+        ],
+        "focusedBeforeEqualsCampaignBefore": true,
+        "node": {
+          "version": "v22.23.1",
+          "platform": "darwin",
+          "arch": "arm64"
+        }
+      }
+    },
+    {
+      "name": "retained-campaign-receipt",
+      "status": "PASS",
+      "detail": {
+        "stages": [
+          "native-harmonic:PASS",
+          "native-d3:PASS",
+          "native-cycle100:PASS",
+          "native-cycle5:PASS",
+          "cycle-diagnostic:PASS",
+          "d3-admission:PASS",
+          "harmonic:PASS",
+          "ramda:PASS",
+          "query-inputs:PASS",
+          "freeze-and-model:PASS"
+        ],
+        "evidenceStatus": "PASS",
+        "modelIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "codeHead": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+        "codeTree": "a17853b86d535fd245a8922ad1e2b011138d9b72",
+        "inputSnapshot": "ab4a823128de2278bfe6b0ae388470715567e89f230b72948d87d4fa77704db3",
+        "claims": [
+          {
+            "id": "harmonic-independent-import",
+            "classification": "independent native reproducer"
+          },
+          {
+            "id": "nice-coverage",
+            "classification": "independent native reproducer"
+          },
+          {
+            "id": "nice-documented-and-fixed-282",
+            "classification": "finite control"
+          },
+          {
+            "id": "nice-cycle100-timeout",
+            "classification": "unknown/unsupported"
+          },
+          {
+            "id": "nice-cycle5-timeout",
+            "classification": "unknown/unsupported"
+          },
+          {
+            "id": "nice-pure-state-repeat",
+            "classification": "finite control"
+          },
+          {
+            "id": "nice-formal-boundary",
+            "classification": "unknown/unsupported",
+            "outcome": "unsupported"
+          },
+          {
+            "id": "harmonic-total",
+            "classification": "universal proof"
+          },
+          {
+            "id": "harmonic-positivity",
+            "classification": "solver-confirmed native failure"
+          },
+          {
+            "id": "harmonic-weak",
+            "classification": "unknown/unsupported",
+            "outcome": "unknown",
+            "weak": "induction-gap"
+          },
+          {
+            "id": "harmonic-P-controls",
+            "classification": "finite control"
+          },
+          {
+            "id": "ramda-first-match",
+            "classification": "universal proof"
+          },
+          {
+            "id": "ramda-mutants",
+            "classification": "solver-confirmed native failure"
+          },
+          {
+            "id": "ramda-native-comparisons",
+            "classification": "finite control"
+          },
+          {
+            "id": "es-toolkit-inherited",
+            "classification": "universal proof"
+          }
+        ],
+        "harmonic": {
+          "status": "PASS",
+          "codeSha": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+          "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+          "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+          "total": "verified",
+          "positive": "counterexample",
+          "confirmed": true,
+          "nativeWitness": {
+            "input": 3.3951948877e-313,
+            "inputBits": "0000001000008041",
+            "reciprocal": "Infinity",
+            "result": "+0",
+            "resultBits": "0000000000000000"
+          },
+          "warmReceiptHits": 1,
+          "reproduce": "reproduced",
+          "originalReproduce": "reproduced",
+          "staleSource": "stale",
+          "staleModel": "invalid-evidence",
+          "weak": {
+            "status": "unknown",
+            "reason": "induction-gap"
+          },
+          "sourceSha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+          "scope": "all dense finite positive singletons",
+          "qComplete": false
+        },
+        "ramda": {
+          "nativeSamples": 42,
+          "scope": "Exact eager function, wrappers/currying/dispatch excluded; every native dense numeric-array length and every admitted pure total unary numeric predicate (no NaN-payload inspection).",
+          "checks": [
+            {
+              "name": "upstream",
+              "status": "verified"
+            },
+            {
+              "name": "off-by-one",
+              "status": "counterexample"
+            },
+            {
+              "name": "skipped-first",
+              "status": "counterexample"
+            }
+          ]
+        },
+        "admission": {
+          "status": "unsupported",
+          "span": {
+            "start": 0,
+            "end": 73
+          },
+          "message": "Only ordinary top-level functions and const function expressions are supported.",
+          "file": true
+        },
+        "diagnostic": [
+          {
+            "first": 2,
+            "repeated": 4,
+            "period": 2
+          },
+          {
+            "first": 2,
+            "repeated": 4,
+            "period": 2
+          }
+        ],
+        "cycles": {
+          "cycle5": {
+            "signal": "SIGKILL",
+            "error": "ETIMEDOUT",
+            "alive": false
+          },
+          "cycle100": {
+            "signal": "SIGKILL",
+            "error": "ETIMEDOUT",
+            "alive": false
+          }
+        },
+        "warm": {
+          "hits": 1,
+          "solved": 0,
+          "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+          "status": [
+            "verified"
+          ]
+        },
+        "launch": {
+          "status": 0,
+          "codeHead": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+          "shim": "f1433a065e79c0a68728f073cd919235a2008ab1057a8d561c242ef229b982cd",
+          "probe": {
+            "argv": [
+              "git",
+              "show",
+              "a83f50762005ae47edfe3e07295f3840b485687b:unneeded"
+            ],
+            "status": 128
+          },
+          "argv": [
+            "bin/node",
+            "library-campaigns/check.mjs",
+            "04-current/campaign"
+          ]
+        },
+        "run": {
+          "status": "PASS",
+          "code": 0,
+          "argv0": [
+            "python3",
+            "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+            "--"
+          ],
+          "mode": [
+            "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/check.mjs",
+            "--run",
+            "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/maintenance-evidence/04-current/campaign"
+          ],
+          "lanePid": 81842,
+          "supervisorPid": 81813,
+          "protected": true
+        },
+        "stdoutEqual": true,
+        "launchStdoutSha": "492ddf4d5cf971fef587072a23760b280d4798caa0ee2369fdce6e43bd6f06c5",
+        "recordedStdoutSha": "492ddf4d5cf971fef587072a23760b280d4798caa0ee2369fdce6e43bd6f06c5",
+        "shimMatchesFile": true,
+        "laneHash": "731d3577afa7a8ba6c4bf7e646f9c4a72d35268057acf3d8ae01b9cd8be4fe1b",
+        "recordedLaneHash": "731d3577afa7a8ba6c4bf7e646f9c4a72d35268057acf3d8ae01b9cd8be4fe1b",
+        "campaignStdoutMentionsOldObject": false,
+        "campaignStderrBytes": 0,
+        "modelSha": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "oldIdentityInModelFiles": false
+      }
+    },
+    {
+      "name": "live-boundary-under-shim",
+      "status": "PASS",
+      "detail": {
+        "inputsOnlyStatus": 0,
+        "freshDownload": false,
+        "checkedDocumentBytes": false,
+        "historyRequested": {
+          "requested": false,
+          "checked": false
+        },
+        "attestationKind": "inherited-document-attestation",
+        "historyDeniedStatus": 1,
+        "historyDeniedStderr": "fixture: historical object unavailable: a83f50762005ae47edfe3e07295f3840b485687b\nError: Command failed: git show a83f50762005ae47edfe3e07295f3840b485687b:verify/reports/roadmap/upstream-validation/sources/d3-array/24c015e4d894ee44af6cf6a2cc9e300b1885b0d9/src/nice.js\nfixture: historical object unavailable: a83f50762005ae47edfe3e07295f3840b485687b\n\n    at genericNodeError (node:internal/errors:983:15)\n    at wrappedFn (node:internal/errors:537:14)\n    at checkExecSyncError (node:child_process:916:11)\n    at execFileSync (node:child_process:952:15)\n    at old (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/campaign-inputs.mjs:45:27)\n    at checkInputs (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/campaign-inputs.mjs:47:24)\n    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-738d4adc/verify/reports/roadmap/library-campaigns/check.mjs:346:32\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n(node:22779) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)",
+        "historyPresentStatus": 0,
+        "historyPresentChecked": true,
+        "liveHead": "f383d624d031613dbf22d6a1db92e6b32b26b6c0",
+        "liveTree": "002791fa70cfafe0d5ee4572e242f7bf47038c83",
+        "liveChangesEmpty": true,
+        "liveTracked": 1577,
+        "liveRuntime": 118,
+        "defaultShimCommands": [
+          "merge-base --is-ancestor 32bd5b260aa116ca88642a1479bed8d3fc447f4b"
+        ],
+        "defaultShimSawOldObject": false,
+        "historyShimSawOldObject": true,
+        "freezeShimCommands": [
+          "ls-files -z",
+          "rev-parse HEAD",
+          "rev-parse HEAD^{tree}",
+          "diff --binary HEAD"
+        ],
+        "freezeShimSawOldObject": false
+      }
+    },
+    {
+      "name": "path-inheritance",
+      "status": "PASS",
+      "detail": {
+        "status": 0,
+        "stdout": "present\n/tmp/path-hop-dJuUnm",
+        "stderr": "",
+        "shimDir": "/tmp/path-hop-dJuUnm"
+      }
+    },
+    {
+      "name": "historical-reds",
+      "status": "PASS",
+      "detail": {
+        "firstStatus": 1,
+        "firstDrift": true,
+        "firstSawShow": false,
+        "firstGitLog": "['merge-base', '--is-ancestor', '32bd5b260aa116ca88642a1479bed8d3fc447f4b', 'HEAD']\n",
+        "driftedPaths": [
+          "verify/bin/jsverify.mjs",
+          "verify/index.mjs"
+        ],
+        "secondStatus": 1,
+        "secondDenied": true,
+        "secondAtInputCheck": true
+      }
+    },
+    {
+      "name": "independent-rejections",
+      "status": "PASS",
+      "detail": {
+        "driftResults": [
+          {
+            "label": "library-source",
+            "status": 1,
+            "named": true,
+            "imported": false,
+            "lane": false
+          },
+          {
+            "label": "provenance",
+            "status": 1,
+            "named": true,
+            "imported": false,
+            "lane": false
+          },
+          {
+            "label": "license",
+            "status": 1,
+            "named": true,
+            "imported": false,
+            "lane": false
+          },
+          {
+            "label": "adapter",
+            "status": 1,
+            "named": true,
+            "imported": false,
+            "lane": false
+          },
+          {
+            "label": "application-contract",
+            "status": 1,
+            "named": true,
+            "imported": false,
+            "lane": false
+          },
+          {
+            "label": "inherited-attestation",
+            "status": 1,
+            "named": true,
+            "imported": false,
+            "lane": false
+          }
+        ],
+        "legacyStatus": 1,
+        "legacyImported": false,
+        "malformedStatus": 1,
+        "schemaStatus": 1,
+        "preserveStatus": 1,
+        "preserveMessage": true,
+        "evidenceUnchanged": true,
+        "packageStatus": ""
+      }
+    },
+    {
+      "name": "queued-snapshot-mismatch",
+      "status": "PASS",
+      "detail": {
+        "status": 1,
+        "refused": true,
+        "startedStage": false
+      }
+    },
+    {
+      "name": "model-and-native",
+      "status": "PASS",
+      "detail": {
+        "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "expectedIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "identityMatchesCampaign": true,
+        "historicalEvidenceIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+        "historicalReplay": {
+          "status": "invalid-evidence",
+          "message": "The verification model/backend identity changed."
+        },
+        "freshReplay": {
+          "status": "reproduced",
+          "confirmed": true
+        },
+        "bindCurrent": true,
+        "bindRejected": true,
+        "addedRuntimeChangesSnapshot": true,
+        "addedRuntimeKeepsIdentity": true,
+        "restoredMatches": true,
+        "nativeMinValueBits": "0000000000000000",
+        "reciprocalInfinite": true,
+        "niceCoverage": [
+          0.93,
+          0.93
+        ],
+        "admission": {
+          "status": "unsupported",
+          "span": {
+            "start": 0,
+            "end": 73
+          },
+          "file": true
+        },
+        "closureOmitsDesignDoc": true
+      }
+    },
+    {
+      "name": "cleanup-before-report-commit",
+      "status": "PASS",
+      "detail": {
+        "status": "?? verify/reports/roadmap/review-campaign-maintenance/\n",
+        "extraAbsent": true,
+        "modulesAbsent": true
+      }
+    }
+  ]
+}

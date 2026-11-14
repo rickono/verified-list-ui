@@ -1,0 +1,56 @@
+{
+  "schema": 2,
+  "evidenceOrigin": "Reviewed vendored source/license bytes and inherited published-document attestation, locally hash-checked; no fresh download. Executions must be fresh under the recorded current model.",
+  "inheritedCommit": "a83f50762005ae47edfe3e07295f3840b485687b",
+  "inheritedPackage": "verify/reports/roadmap/upstream-validation",
+  "pinDate": "2026-11-13",
+  "d3Array": {
+    "repository": "https://github.com/d3/d3-array",
+    "release": "v3.2.5",
+    "commit": "24c015e4d894ee44af6cf6a2cc9e300b1885b0d9",
+    "license": "ISC",
+    "licensePath": "pins/d3-array/LICENSE",
+    "licenseSha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
+    "sources": {
+      "nice.js": {
+        "upstreamPath": "src/nice.js",
+        "sha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+        "inheritedPath": "verify/reports/roadmap/upstream-validation/sources/d3-array/24c015e4d894ee44af6cf6a2cc9e300b1885b0d9/src/nice.js"
+      },
+      "ticks.js": {
+        "upstreamPath": "src/ticks.js",
+        "sha256": "79eac11e378fd34364801fd59534cfb3b34f46e54693537ad65c06c93bcb9a0f",
+        "inheritedPath": "verify/reports/roadmap/upstream-validation/sources/d3-array/24c015e4d894ee44af6cf6a2cc9e300b1885b0d9/src/ticks.js"
+      }
+    },
+    "publishedContract": {
+      "url": "https://d3js.org/d3-array/ticks#nice",
+      "repository": "https://github.com/d3/d3",
+      "path": "docs/d3-array/ticks.md",
+      "gitBlob": "5747e2deab69a06f7d0b215f0493b1e4745ff83c",
+      "fullDocumentSha256": "728883f5266670f4abbccf6ef8ea57a9e4b15f5cec02969b3d48f24843fba531",
+      "inheritedPath": "verify/reports/roadmap/upstream-validation/sources/d3-docs/ticks.md",
+      "quotedFragment": "covering the given interval",
+      "interpretation": "For start <= stop, the returned pair [niceStart, niceStop] satisfies niceStart <= start and stop <= niceStop. The published example is nice(1, 9, 5) -> [0, 10].",
+      "provenanceOnly": true,
+      "attestation": {
+        "kind": "inherited-document-attestation",
+        "historicalCampaignHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+        "historicalEvidenceTip": "7e6d9b56c36e89dac9d9b7943771feb8af4dd0ab",
+        "reviewPath": "verify/reports/roadmap/review-library-campaigns/report.md",
+        "reviewSha256": "4ad4cc43c34ab87d35f096d13513473a836b9bef95ac839b0e04f82fa975d3da",
+        "scope": "The retained independent review attests the document digest, coverage sentence and example. Default maintenance checks vendored source/license and attestation bytes, not document bytes or a new download."
+      }
+    },
+    "currentMainStatus": "not checked or claimed",
+    "novelty": "not checked or claimed",
+    "upstreamAcknowledgementOrFix": "not checked or claimed",
+    "inheritedLicensePath": "verify/reports/roadmap/upstream-validation/sources/d3-array/24c015e4d894ee44af6cf6a2cc9e300b1885b0d9/LICENSE"
+  },
+  "existingCampaigns": {
+    "harmonic": "verify/examples/simple-statistics/provenance.json",
+    "ramda": "verify/examples/ramda/provenance.json",
+    "esToolkit": "verify/examples/es-toolkit/provenance.json"
+  },
+  "historicalAdmission": "The inherited harmonic ThrowStatement rejection predates guarded throws. It is not a current result and is not imported."
+}

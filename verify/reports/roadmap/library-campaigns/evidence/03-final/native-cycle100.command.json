@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/Users/rick/.hermes/node/bin/node",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs",
+    "--native-nice",
+    "cycle100"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524",
+  "startedAt": "2026-11-14T01:28:59.864Z",
+  "finishedAt": "2026-11-14T01:29:01.867Z",
+  "timeoutMs": 2000,
+  "pid": 91536,
+  "status": null,
+  "signal": "SIGKILL",
+  "error": {
+    "code": "ETIMEDOUT",
+    "message": "spawnSync /Users/rick/.hermes/node/bin/node ETIMEDOUT"
+  },
+  "stdoutSha256": "4ad0364f568a6a39390ac529b1a95b69dac3185cb1c3f2485637e085d4763d11",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "aliveAfterWait": false,
+  "reaping": "spawnSync returned after wait; this subprocess starts no workers"
+}

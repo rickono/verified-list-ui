@@ -1,0 +1,65 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:20442) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a real first discarded trial leaves the same ordered queries as starting at the fixed point
+ok 1 - a real first discarded trial leaves the same ordered queries as starting at the fixed point
+  ---
+  duration_ms: 48.508583
+  type: 'test'
+  ...
+# {"trials":[{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":10,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":["last"],"grow":1,"returns":0},{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":13,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":[],"grow":0,"returns":0}],"committedObligations":["invariant-init","call","frame-inclusion","invariant-preserve","rank"],"queries":5,"committedFacts":3}
+# Subtest: discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+ok 2 - discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+  ---
+  duration_ms: 24.575208
+  type: 'test'
+  ...
+# (node:20443) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: K test stores keep the false-test exit value
+ok 3 - K test stores keep the false-test exit value
+  ---
+  duration_ms: 537.274
+  type: 'test'
+  ...
+# Subtest: K update stores keep the next head value
+ok 4 - K update stores keep the next head value
+  ---
+  duration_ms: 796.953167
+  type: 'test'
+  ...
+# Subtest: K H25 helper writes in test or update
+ok 5 - K H25 helper writes in test or update
+  ---
+  duration_ms: 431.940708
+  type: 'test'
+  ...
+# Subtest: K H26 helper writes in test or update
+ok 6 - K H26 helper writes in test or update
+  ---
+  duration_ms: 8526.741875
+  type: 'test'
+  ...
+# Subtest: K continue performs update stores
+ok 7 - K continue performs update stores
+  ---
+  duration_ms: 308.48575
+  type: 'test'
+  ...
+# Subtest: K stores use the checked numeric index boundary for signed metadata
+ok 8 - K stores use the checked numeric index boundary for signed metadata
+  ---
+  duration_ms: 622.977875
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11435.871791

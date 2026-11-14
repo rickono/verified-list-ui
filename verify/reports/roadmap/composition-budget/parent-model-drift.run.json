@@ -1,0 +1,18 @@
+{
+  "command": [
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "node",
+    "--input-type=module",
+    "-e",
+    "import assert from \"node:assert/strict\"; import {readFileSync,writeFileSync} from \"node:fs\"; import {createHash} from \"node:crypto\"; import {reproduce} from \"./verify/index.mjs\"; import {runningIdentity} from \"./verify/manifest.mjs\"; const file=\"verify/reports/roadmap/library-campaigns/evidence/03-final/harmonic/positive.evidence.json\"; const bytes=readFileSync(file); const old=JSON.parse(bytes); const parent=JSON.parse(readFileSync(\"verify/reports/roadmap/composition-budget/parent-inputs.json\")).identity; assert.equal(old.identity,parent.sha256); const identity=runningIdentity(); assert.notEqual(identity.sha256,old.identity); const result=reproduce(\"verify/examples/simple-statistics/harmonic-positive.js\",old); assert.equal(result.status,\"invalid-evidence\"); assert.match(result.message,/model\\/backend identity changed/); const receipt={artifact:file,artifactSha256:createHash(\"sha256\").update(bytes).digest(\"hex\"),parentIdentity:old.identity,currentIdentity:identity.sha256,result}; writeFileSync(\"verify/reports/roadmap/composition-budget/harmonic-parent-invalid.json\",JSON.stringify(receipt,null,2)+\"\\n\"); console.log(JSON.stringify(receipt));"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a",
+  "head": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+  "startedUnix": 1794622742.5976782,
+  "elapsedIncludingQueueSeconds": 904.3732028007507,
+  "exitCode": 0,
+  "log": "parent-model-drift.txt",
+  "trackedDiff": ""
+}

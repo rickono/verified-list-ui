@@ -1,0 +1,205 @@
+{
+  "status": "PASS",
+  "classification": "measured checks of retained artifacts and live state",
+  "at": "2026-11-14T03:43:27.436163+00:00",
+  "checks": [
+    {
+      "name": "scope-and-baseline",
+      "status": "PASS",
+      "detail": {
+        "preparedHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+        "testedHead": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+        "baseline": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+        "productionLockfileCanonicalAndOtherPathsUnchanged": true
+      }
+    },
+    {
+      "name": "current-frozen-inputs-and-model",
+      "status": "PASS",
+      "detail": {
+        "head": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+        "tree": "a17853b86d535fd245a8922ad1e2b011138d9b72",
+        "snapshotSha256": "ab4a823128de2278bfe6b0ae388470715567e89f230b72948d87d4fa77704db3",
+        "trackedFiles": 1457,
+        "currentRuntimeFiles": 118,
+        "checkerInputs": 6,
+        "modelIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "historicalIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+        "allFourCampaignAndTwoFocusedSnapshotsEqual": true
+      }
+    },
+    {
+      "name": "stages-focused-controls-and-artifact-hashes",
+      "status": "PASS",
+      "detail": {
+        "stages": [
+          "native-harmonic",
+          "native-d3",
+          "native-cycle100",
+          "native-cycle5",
+          "cycle-diagnostic",
+          "d3-admission",
+          "harmonic",
+          "ramda",
+          "query-inputs",
+          "freeze-and-model"
+        ],
+        "focusedChecks": 12,
+        "recordedArtifactHashComparisons": 124,
+        "defaultCampaignPassedWithoutPrivateObject": true,
+        "inheritedDocumentAttestationNotFreshDownload": true
+      }
+    },
+    {
+      "name": "fresh-proofs-replays-and-current-receipt",
+      "status": "PASS",
+      "detail": {
+        "harmonic": {
+          "status": "PASS",
+          "codeSha": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+          "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+          "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+          "total": "verified",
+          "positive": "counterexample",
+          "confirmed": true,
+          "nativeWitness": {
+            "input": 3.3951948877e-313,
+            "inputBits": "0000001000008041",
+            "reciprocal": "Infinity",
+            "result": "+0",
+            "resultBits": "0000000000000000"
+          },
+          "warmReceiptHits": 1,
+          "reproduce": "reproduced",
+          "originalReproduce": "reproduced",
+          "staleSource": "stale",
+          "staleModel": "invalid-evidence",
+          "weak": {
+            "status": "unknown",
+            "reason": "induction-gap"
+          },
+          "sourceSha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+          "scope": "all dense finite positive singletons",
+          "qComplete": false
+        },
+        "weakStatus": "unknown",
+        "ramdaTheoremAndBothMutants": true,
+        "ramdaNativeComparisons": 42,
+        "queryPlans": 6,
+        "totalReceiptKey": "6d91d9d38da709aefe13ff68519350fa4d71f5ffe28a4740243ed730fcd8ae3b",
+        "receiptIsCertificate": false
+      }
+    },
+    {
+      "name": "d3-unknowns-stay-unknown",
+      "status": "PASS",
+      "detail": {
+        "nativeTimeouts": 2,
+        "timeoutMs": 2000,
+        "classification": "unknown/unsupported",
+        "admission": {
+          "fn": null,
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/pins/d3-array/ticks.js",
+          "status": "unsupported",
+          "span": {
+            "start": 0,
+            "end": 73
+          },
+          "line": 1,
+          "column": 1,
+          "message": "Only ordinary top-level functions and const function expressions are supported."
+        },
+        "cycleArgument": "Separate instrumented finite diagnostic, conditional on pure deterministic builtins; no source-verifier proof"
+      }
+    },
+    {
+      "name": "explicit-historical-owner-audit",
+      "status": "PASS",
+      "detail": {
+        "inventoryOwner": "7e6d9b56c36e89dac9d9b7943771feb8af4dd0ab",
+        "inventoryRows": 161,
+        "preparedParent": "203ad818169be544432b3bad93ff1c4f01ef20a3",
+        "historicalParentFiles": 825,
+        "historicalParentDigest": "cddcdf5230636188466bce3b4822a4cc877d65811f63146e031d57e2d8a0ec39",
+        "originalREDCheckerHash": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e"
+      }
+    },
+    {
+      "name": "historical-records-unchanged",
+      "status": "PASS",
+      "detail": {
+        "paths": [
+          "verify/reports/roadmap/library-campaigns/report.md",
+          "verify/reports/roadmap/library-campaigns/manifest.json",
+          "verify/reports/roadmap/library-campaigns/integrity.json",
+          "verify/reports/roadmap/library-campaigns/cleanup.json",
+          "verify/reports/roadmap/library-campaigns/SHA256SUMS",
+          "verify/reports/roadmap/library-campaigns/bugs.md",
+          "verify/reports/roadmap/library-campaigns/pins",
+          "verify/reports/roadmap/library-campaigns/evidence"
+        ],
+        "original161EntryInventoryUnmodified": true,
+        "validation": "at its owning head only; not asserted against the maintained checker"
+      }
+    },
+    {
+      "name": "cleanup-and-no-raw-source-mutation",
+      "status": "PASS",
+      "detail": {
+        "checkedPids": [
+          79226,
+          79228,
+          79229,
+          79232,
+          79236,
+          79240,
+          79243,
+          79246,
+          79249,
+          79252,
+          79255,
+          79256,
+          79742,
+          79744,
+          79745,
+          79749,
+          79753,
+          79756,
+          79759,
+          79762,
+          79765,
+          79768,
+          79771,
+          79772,
+          81703,
+          81706,
+          81709,
+          81712,
+          81716,
+          81720,
+          81723,
+          81727,
+          81730,
+          81733,
+          81736,
+          81737,
+          81813,
+          81842,
+          81854,
+          81855,
+          81856,
+          81857,
+          82057
+        ],
+        "liveKnownPids": [],
+        "liveOwnedCommandMatches": [],
+        "laneProcessGroupAbsent": true,
+        "dependencyLinkRemoved": true,
+        "dependencyLinkDuringRun": "/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/node_modules",
+        "scratchDirectories": [],
+        "noRawSourceMutation": true,
+        "protectedSnapshotUnchanged": true
+      }
+    }
+  ]
+}

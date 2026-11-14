@@ -1,0 +1,17 @@
+file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:460
+    index = at.u32 ?? data.indexBits(at) ?? `((_ fp.to_ubv 32) RTZ ${at.smt})`; key = "@elements";
+                           ^
+
+TypeError: data.indexBits is not a function
+    at store (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:460:28)
+    at expression (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:576:12)
+    at statements (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:799:35)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:750:17
+    at Array.flatMap (<anonymous>)
+    at scopedStatements (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:746:17)
+    at iterate (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:1006:16)
+    at loop (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:937:11)
+    at statements (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:803:16)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c31012ad/verify/source.mjs:750:17
+
+Node.js v22.23.1

@@ -1,0 +1,5 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:48013) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[{"id":"tail-nested","match":true,"observed":{"topLevelReturn":false,"nestedReturn":true}},{"id":"follow-ranks","match":true,"observed":{"advances":{"status":"counterexample","phase":null,"reason":null},"collapses":{"status":"verified","phase":null,"reason":null},"halfStep":{"status":"counterexample","phase":null,"reason":null}}}]

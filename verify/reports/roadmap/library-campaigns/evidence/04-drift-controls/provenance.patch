@@ -1,0 +1,11 @@
+--- /Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/provenance.json	2026-11-13 19:20:37
++++ /Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-ioju_loq/verify/reports/roadmap/library-campaigns/provenance.json	2026-11-13 19:31:48
+@@ -6,7 +6,7 @@
+   "pinDate": "2026-11-13",
+   "d3Array": {
+     "repository": "https://github.com/d3/d3-array",
+-    "release": "v3.2.5",
++    "release": "intentional-drift-control",
+     "commit": "24c015e4d894ee44af6cf6a2cc9e300b1885b0d9",
+     "license": "ISC",
+     "licensePath": "pins/d3-array/LICENSE",

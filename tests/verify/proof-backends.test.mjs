@@ -122,15 +122,20 @@ test("worker errors preserve finished outcomes and let later independent targets
   assert.ok(harness.peak <= 2);
 });
 
-test("initialization, late responses, and unattempted targets consume one request budget", async () => {
-  const startup = controlled(() => assert.fail("no query can run after startup exhausts the budget"), { initialization: 100 });
-  const init = await solve([target("a"), target("b")], 10, startup.options);
+for (const timeoutMs of [10, 180_000]) test(`initialization, late responses, and unattempted targets consume one ${timeoutMs} ms request budget`, async () => {
+  const startup = controlled(() => assert.fail("no query can run after startup exhausts the budget"), { initialization: timeoutMs });
+  const init = await solve([target("a"), target("b")], timeoutMs, startup.options);
   assert.ok(init.every((o) => o.status === "unknown" && o.reason === "request-timeout" && o.attempts === 0));
+  assert.equal(startup.time, timeoutMs);
+  assert.equal(startup.closed, startup.connections);
   const late = controlled((query, budget, consume) => {
     consume(query.phase === "feasibility" ? 1 : budget + 1);
     return query.phase === "feasibility" ? sat : unsat;
   });
-  assert.equal((await solve([target("a")], 10, late.options))[0].status, "unknown");
+  const [outcome] = await solve([target("a")], timeoutMs, late.options);
+  assert.equal(outcome.status, "unknown");
+  assert.equal(outcome.reason, "request-timeout");
+  assert.equal(late.closed, late.connections);
 });
 
 test("initialization failure cannot erase another worker's useful outcomes", async () => {

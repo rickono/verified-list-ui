@@ -1,0 +1,39 @@
+{
+  "shared": {
+    "firstBudget": 90000,
+    "maxBudget": 179996,
+    "budgets": [
+      90000,
+      89999,
+      89998,
+      89997,
+      179996,
+      179995
+    ],
+    "time": 6,
+    "peak": 2,
+    "closed": 2,
+    "connections": 2
+  },
+  "startup": {
+    "time": 180000,
+    "queries": 0,
+    "attempts": [
+      0,
+      0
+    ],
+    "reasons": [
+      "request-timeout",
+      "request-timeout"
+    ]
+  },
+  "late": {
+    "budgets": [
+      180000,
+      179999
+    ],
+    "reason": "request-timeout",
+    "closed": 1,
+    "connections": 1
+  }
+}

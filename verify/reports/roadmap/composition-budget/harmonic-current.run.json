@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "node",
+    "verify/reports/roadmap/composition-budget/check.mjs",
+    "harmonic"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a",
+  "head": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+  "startedUnix": 1794622101.8382678,
+  "elapsedIncludingQueueSeconds": 645.4897971153259,
+  "exitCode": 0,
+  "log": "harmonic-current.txt",
+  "trackedDiff": ""
+}

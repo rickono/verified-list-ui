@@ -1,0 +1,233 @@
+{
+  "codeSha": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+  "schema": 1,
+  "files": [
+    [
+      "backend.mjs",
+      "c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb"
+    ],
+    [
+      "cache.mjs",
+      "7100b30c6fc411a355084a85d2b6f45f1ea110367ecfb3f0775e47aff371ebc0"
+    ],
+    [
+      "data.mjs",
+      "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6"
+    ],
+    [
+      "error.mjs",
+      "15f9572637f32a545a037c671ccbf20b394b030f68d840c76068d7ee5a456e62"
+    ],
+    [
+      "evidence.mjs",
+      "f70f4aa94295477e8a0bc3a91712722a254c8a52205ee2f2eef8a9dc550ed62e"
+    ],
+    [
+      "heap-witness.mjs",
+      "c8a60bbf7961bad2926a1fc5006c610d80d95997c73a6632f07a9f55fe58edb3"
+    ],
+    [
+      "heap.mjs",
+      "194600ef6ff1a2d87d5b43f1a2d7b1e0313976290af0ab33b2ba6b1600bacb73"
+    ],
+    [
+      "index.mjs",
+      "1c586efe44af4973f7e7704e4fa6d414ae7ca1f8ca5f2203ea791311741ebd58"
+    ],
+    [
+      "manifest.mjs",
+      "406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f"
+    ],
+    [
+      "modules.mjs",
+      "55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68"
+    ],
+    [
+      "predicate-witness.mjs",
+      "5f460cecd470fe62418c9ebb5358e97854ad65a642cebf68827daf1d6ae39085"
+    ],
+    [
+      "proofs.mjs",
+      "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba"
+    ],
+    [
+      "solver.mjs",
+      "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2"
+    ],
+    [
+      "source.mjs",
+      "5dd84a202abb6843afd08dc45d8e903723f224bfaf95c12fecbb6e88a3add880"
+    ],
+    [
+      "specifications.mjs",
+      "869d1385d30dd4747c2db0467bdd2086ae26d0e452694bd49b471260f2240c6f"
+    ],
+    [
+      "types.mjs",
+      "9ea60c9f2bf3983a75bd7f23d6c02d1cbeaed75ab6d2e2bfed6b9754c8a5993f"
+    ]
+  ],
+  "packages": [
+    {
+      "name": "acorn",
+      "version": "8.19.0",
+      "sha256": "1ed5ad01258647b3552b030521979142e2a13a508054670cf4e8fc96a064ae2d",
+      "dependencies": []
+    },
+    {
+      "name": "async-mutex",
+      "version": "0.3.2",
+      "sha256": "b83a6fe5087099757e98d7c1cb68e08401a73e616880babbe71a759470e36884",
+      "dependencies": [
+        [
+          "tslib",
+          "tslib@2.9.1"
+        ]
+      ]
+    },
+    {
+      "name": "tslib",
+      "version": "2.9.1",
+      "sha256": "2753f4182709f59b1e9d2517424a8fa0fad0d68de2103624bac567aff5aa1dd8",
+      "dependencies": []
+    },
+    {
+      "name": "z3-solver",
+      "version": "5.3.3",
+      "sha256": "86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685",
+      "dependencies": [
+        [
+          "async-mutex",
+          "async-mutex@0.3.2"
+        ]
+      ]
+    }
+  ],
+  "builtins": [
+    "node:child_process",
+    "node:crypto",
+    "node:fs",
+    "node:module",
+    "node:os",
+    "node:path",
+    "node:perf_hooks",
+    "node:url",
+    "node:vm"
+  ],
+  "runtime": {
+    "node": "v22.23.1",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "protocol": "jsverify-receipt-1/query-1",
+  "sha256": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+  "backend": {
+    "package": "z3-solver@5.3.3",
+    "sha256": "86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685",
+    "files": [
+      [
+        "LICENSE.txt",
+        "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"
+      ],
+      [
+        "README.md",
+        "c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f"
+      ],
+      [
+        "build/browser.d.ts",
+        "65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507"
+      ],
+      [
+        "build/browser.js",
+        "ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df"
+      ],
+      [
+        "build/high-level/high-level.d.ts",
+        "7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9"
+      ],
+      [
+        "build/high-level/high-level.js",
+        "b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986"
+      ],
+      [
+        "build/high-level/index.d.ts",
+        "5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb"
+      ],
+      [
+        "build/high-level/index.js",
+        "a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e"
+      ],
+      [
+        "build/high-level/types.d.ts",
+        "a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f"
+      ],
+      [
+        "build/high-level/types.js",
+        "6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616"
+      ],
+      [
+        "build/high-level/utils.d.ts",
+        "b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4"
+      ],
+      [
+        "build/high-level/utils.js",
+        "3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7"
+      ],
+      [
+        "build/kill-threads.d.ts",
+        "dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85"
+      ],
+      [
+        "build/kill-threads.js",
+        "2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238"
+      ],
+      [
+        "build/low-level/index.d.ts",
+        "592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390"
+      ],
+      [
+        "build/low-level/index.js",
+        "862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c"
+      ],
+      [
+        "build/low-level/types.__GENERATED__.d.ts",
+        "11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3"
+      ],
+      [
+        "build/low-level/types.__GENERATED__.js",
+        "d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e"
+      ],
+      [
+        "build/low-level/wrapper.__GENERATED__.d.ts",
+        "27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10"
+      ],
+      [
+        "build/low-level/wrapper.__GENERATED__.js",
+        "cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a"
+      ],
+      [
+        "build/node.d.ts",
+        "17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873"
+      ],
+      [
+        "build/node.js",
+        "28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98"
+      ],
+      [
+        "build/z3-built.js",
+        "5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6"
+      ],
+      [
+        "build/z3-built.wasm",
+        "591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"
+      ],
+      [
+        "package.json",
+        "3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"
+      ]
+    ],
+    "node": "v22.23.1",
+    "platform": "darwin",
+    "arch": "arm64"
+  }
+}

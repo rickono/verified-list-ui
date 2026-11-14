@@ -1,0 +1,50 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+{
+  "file": "verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js",
+  "sha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+  "trusted": [
+    "Acorn parser",
+    "Node TypeScript type stripping",
+    "project type and module resolution and source snapshots",
+    "source-to-SMT translation",
+    "exact rational specification replay",
+    "Z3 and its WASM bindings",
+    "unmodified standard Number/Math/Object/Array builtins and prototypes",
+    "JavaScript runtime"
+  ],
+  "modules": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js",
+      "sha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+      "imports": []
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/pins/d3-array/ticks.js",
+      "sha256": "79eac11e378fd34364801fd59534cfb3b34f46e54693537ad65c06c93bcb9a0f",
+      "imports": []
+    }
+  ],
+  "dependencies": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/package.json",
+      "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+      "kind": "package"
+    }
+  ],
+  "graphSha256": "fe75bb5db2627e9fd6bb08281176ad69b77b9e7993cac6a9c265fdd4110d5334",
+  "outcomes": [
+    {
+      "fn": null,
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/pins/d3-array/ticks.js",
+      "status": "unsupported",
+      "span": {
+        "start": 0,
+        "end": 73
+      },
+      "line": 1,
+      "column": 1,
+      "message": "Only ordinary top-level functions and const function expressions are supported."
+    }
+  ]
+}

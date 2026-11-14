@@ -1,0 +1,15 @@
+{
+  "classification": "finite control",
+  "origin": "own failed capture setup; no solver",
+  "status": "ISSUES",
+  "command": "python3 heredoc for final inventory and cleanup",
+  "failedExpression": "assert len(evidence['stages']) == 11",
+  "input": "../03-final/evidence.json",
+  "expectedStageCount": 11,
+  "actualStageCount": 10,
+  "allActualStagesPassed": true,
+  "rawError": "Traceback (most recent call last):\n  File \"<stdin>\", line 16, in <module>\nAssertionError\n",
+  "correction": "The campaign has 10 stages. Use the actual stage list and correct the inventory count to 10. No verification result or acceptance criterion changed.",
+  "sideEffectsBeforeFailure": "none; dependency link and sources were untouched",
+  "coreDefect": false
+}

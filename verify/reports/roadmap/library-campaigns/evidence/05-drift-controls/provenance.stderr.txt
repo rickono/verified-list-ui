@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: Source/provenance drift: verify/reports/roadmap/library-campaigns/provenance.json
++ actual - expected
+
++ '5c743cc75be82312853609bc38175fc7d6fe3413dd8b5f8f950cd050d30ea5a5'
+- 'eb213e56d305a3a0a5185107bcb45351dc9b775aaa2f8b68ddcd49b0e7b150bd'
+
+    at inputCheck (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-3b8erots/verify/reports/roadmap/library-campaigns/check.mjs:81:12)
+    at supervise (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-3b8erots/verify/reports/roadmap/library-campaigns/check.mjs:337:52)
+    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-3b8erots/verify/reports/roadmap/library-campaigns/check.mjs:374:14
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)

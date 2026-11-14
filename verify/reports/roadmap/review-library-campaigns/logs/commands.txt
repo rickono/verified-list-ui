@@ -1,0 +1,17 @@
+# Review commands. Solver lane was busy; serial-verify.py was not invoked.
+
+git rev-parse HEAD
+git merge-base --is-ancestor 32bd5b260aa116ca88642a1479bed8d3fc447f4b HEAD
+shasum -a 256 -c verify/reports/roadmap/library-campaigns/SHA256SUMS
+
+# Temporary link to the coordinator install, removed before commit:
+# ln -s /Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/node_modules node_modules
+node verify/reports/roadmap/review-library-campaigns/scripts/review.mjs
+
+# First hang command used a bad relative path and is retained in
+# logs/hang-nice-attempt1.stderr.txt. The corrected command is inside review.mjs:
+# node scripts/hang-nice.mjs 3fbcc42ba089e7d0 3fbcc42ba089e7d1 5
+# spawnSync timeout 800 ms, killSignal SIGKILL, then a liveness check.
+
+node --input-type=module -e 'ramda mutant Function replay'
+# exact script output: logs/ramda-mutant-native.json

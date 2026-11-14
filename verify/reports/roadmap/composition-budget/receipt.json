@@ -1,0 +1,266 @@
+{
+  "status": "PASS",
+  "scope": "Budget correction and recorded source checks; no repeatability or roadmap-completion claim.",
+  "parent": "2809e885ef01e09da906ddc31e070fde1df180a2",
+  "testedCodeHead": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+  "defaultMs": 10000,
+  "minMs": 1,
+  "maxMs": 180000,
+  "focused": {
+    "tests": 46,
+    "pass": 46,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "full": {
+    "tests": 483,
+    "pass": 483,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "fullRuns": 1,
+  "comparison": {
+    "postconditionCount": 15,
+    "byteEquality": true,
+    "allPlannedPhases": 36,
+    "allPhaseQueriesModelsReplayGuardsIdentical": true,
+    "graphSha256": "c59463e822bf9ad28cb373d08d2d36389d364573a4f7697f4c177e0311ad38e2",
+    "root60sGraphEqualsCurrent": true,
+    "root60sModuleHashesEqualCurrent": true,
+    "parentIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+    "currentIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+    "scratchIdentityEqualsProduction": true,
+    "currentHead": "7feca2830d90e237227fc1522e77e1a11ce3abee"
+  },
+  "graphRequests": [
+    {
+      "name": "cold",
+      "requestBudgetMs": 180000,
+      "elapsedMs": 36139.706917,
+      "outcomes": [
+        {
+          "fn": "Reverse",
+          "status": "verified"
+        },
+        {
+          "fn": "takeImplementation",
+          "status": "verified"
+        },
+        {
+          "fn": "reverseFirstTwo",
+          "status": "verified"
+        }
+      ],
+      "hits": 0,
+      "solved": 3,
+      "written": 3
+    },
+    {
+      "name": "warm",
+      "requestBudgetMs": 180000,
+      "elapsedMs": 94.79954199999338,
+      "outcomes": [
+        {
+          "fn": "Reverse",
+          "status": "verified"
+        },
+        {
+          "fn": "takeImplementation",
+          "status": "verified"
+        },
+        {
+          "fn": "reverseFirstTwo",
+          "status": "verified"
+        }
+      ],
+      "hits": 3,
+      "solved": 0,
+      "written": 0
+    },
+    {
+      "name": "audit",
+      "requestBudgetMs": 180000,
+      "elapsedMs": 35429.267167000005,
+      "outcomes": [
+        {
+          "fn": "Reverse",
+          "status": "verified"
+        },
+        {
+          "fn": "takeImplementation",
+          "status": "verified"
+        },
+        {
+          "fn": "reverseFirstTwo",
+          "status": "verified"
+        }
+      ],
+      "hits": 3,
+      "solved": 3,
+      "written": 0,
+      "disagreements": []
+    }
+  ],
+  "cause": "The public ceiling rejected a working larger whole-graph request. Initial turns share the request budget. Changed SMT semantics are excluded for this graph; intrinsic query cost above 60s is not established.",
+  "harmonic": {
+    "status": "PASS",
+    "codeSha": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+    "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+    "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+    "total": "verified",
+    "positive": "counterexample",
+    "confirmed": true,
+    "nativeWitness": {
+      "input": 3.3951948877e-313,
+      "inputBits": "0000001000008041",
+      "reciprocal": "Infinity",
+      "result": "+0",
+      "resultBits": "0000000000000000"
+    },
+    "warmReceiptHits": 1,
+    "reproduce": "reproduced",
+    "originalReproduce": "reproduced",
+    "staleSource": "stale",
+    "staleModel": "invalid-evidence",
+    "weak": {
+      "status": "counterexample"
+    },
+    "sourceSha256": "c0bcedc78add016bd1f22ce9eb1a417363ac72d8cb5c0e7dfa4c74062a19f71d",
+    "scope": "all dense finite positive singletons",
+    "qComplete": false
+  },
+  "parentArtifact": {
+    "artifact": "verify/reports/roadmap/library-campaigns/evidence/03-final/harmonic/positive.evidence.json",
+    "artifactSha256": "402863e3a122ccef199c13b66bd9f2dddb4feb8f4fcd500bf3b28fefab444ab1",
+    "parentIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+    "currentIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+    "result": {
+      "status": "invalid-evidence",
+      "message": "The verification model/backend identity changed."
+    }
+  },
+  "remainingFullSuiteUnknowns": [
+    {
+      "id": "full-suite-harmonic-weak",
+      "status": "unknown",
+      "reason": "induction-gap"
+    },
+    {
+      "id": "H07-alias-param",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H10-seq-first-write",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H13-branch-flag",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H14-false-guard",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H15-short-circuit",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H16-ternary-write",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H21-for-update-write",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H26-call-in-update",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H31-preloop-ternary-target",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H39-old-in-loop",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H42-compound-write",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "H43-increment-write",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "fill-weak-invariant",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "alias-inc-into-no-suffix",
+      "status": "unknown",
+      "reason": "request-timeout",
+      "phase": "invariant-preserve"
+    },
+    {
+      "id": "pre-loop-write-forgotten",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "ensures"
+    },
+    {
+      "id": "write-wrong-rank",
+      "status": "unknown",
+      "reason": "induction-gap",
+      "phase": "rank"
+    }
+  ],
+  "limits": [
+    "Original composition remains historical ISSUES at 60000ms.",
+    "Future solver completion within 180000ms is not established.",
+    "Existing induction gaps and explicit 60000ms request timeouts remain unknown."
+  ],
+  "cleanup": {
+    "checkedAtUtc": "2026-11-14T02:38:00.177344+00:00",
+    "ownedProcesses": [],
+    "processCommand": [
+      "ps",
+      "-Ao",
+      "pid=,ppid=,command="
+    ],
+    "temporaryDependencyLinkRemoved": true,
+    "temporaryDependencyTarget": "/Users/rick/verification-vibes/verified-list-ui/node_modules",
+    "privateScratchRemoved": true,
+    "allOwnedExecSessionsCompleted": true,
+    "scope": "All recorded commands exited; backend workers were awaited/reaped; no owned worker or report runner remains."
+  }
+}

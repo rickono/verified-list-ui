@@ -1,0 +1,340 @@
+{
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504",
+  "head": "b5c8828f0c281df812751371f651603481f3aefb",
+  "branch": "t3/library-composition-proof",
+  "command": [
+    "/Users/rick/.hermes/node/bin/node",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/check.mjs",
+    "--continue-controls"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504",
+  "requestBudgetMs": 60000,
+  "identity": {
+    "schema": 1,
+    "files": [
+      [
+        "backend.mjs",
+        "c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb"
+      ],
+      [
+        "cache.mjs",
+        "7100b30c6fc411a355084a85d2b6f45f1ea110367ecfb3f0775e47aff371ebc0"
+      ],
+      [
+        "data.mjs",
+        "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6"
+      ],
+      [
+        "error.mjs",
+        "15f9572637f32a545a037c671ccbf20b394b030f68d840c76068d7ee5a456e62"
+      ],
+      [
+        "evidence.mjs",
+        "f70f4aa94295477e8a0bc3a91712722a254c8a52205ee2f2eef8a9dc550ed62e"
+      ],
+      [
+        "heap-witness.mjs",
+        "c8a60bbf7961bad2926a1fc5006c610d80d95997c73a6632f07a9f55fe58edb3"
+      ],
+      [
+        "heap.mjs",
+        "194600ef6ff1a2d87d5b43f1a2d7b1e0313976290af0ab33b2ba6b1600bacb73"
+      ],
+      [
+        "index.mjs",
+        "bcb92bc429c375505863ff97d881b960fa3422cda35886803d1832820a03d7e9"
+      ],
+      [
+        "manifest.mjs",
+        "406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f"
+      ],
+      [
+        "modules.mjs",
+        "55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68"
+      ],
+      [
+        "predicate-witness.mjs",
+        "5f460cecd470fe62418c9ebb5358e97854ad65a642cebf68827daf1d6ae39085"
+      ],
+      [
+        "proofs.mjs",
+        "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba"
+      ],
+      [
+        "solver.mjs",
+        "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2"
+      ],
+      [
+        "source.mjs",
+        "23303028c50971d980159ee46b36f8f18bb984628bfc0bceb3b4deafd4cee68a"
+      ],
+      [
+        "specifications.mjs",
+        "869d1385d30dd4747c2db0467bdd2086ae26d0e452694bd49b471260f2240c6f"
+      ],
+      [
+        "types.mjs",
+        "9ea60c9f2bf3983a75bd7f23d6c02d1cbeaed75ab6d2e2bfed6b9754c8a5993f"
+      ]
+    ],
+    "packages": [
+      {
+        "name": "acorn",
+        "version": "8.19.0",
+        "sha256": "1ed5ad01258647b3552b030521979142e2a13a508054670cf4e8fc96a064ae2d",
+        "dependencies": []
+      },
+      {
+        "name": "async-mutex",
+        "version": "0.3.2",
+        "sha256": "b83a6fe5087099757e98d7c1cb68e08401a73e616880babbe71a759470e36884",
+        "dependencies": [
+          [
+            "tslib",
+            "tslib@2.9.1"
+          ]
+        ]
+      },
+      {
+        "name": "tslib",
+        "version": "2.9.1",
+        "sha256": "2753f4182709f59b1e9d2517424a8fa0fad0d68de2103624bac567aff5aa1dd8",
+        "dependencies": []
+      },
+      {
+        "name": "z3-solver",
+        "version": "5.3.3",
+        "sha256": "86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685",
+        "dependencies": [
+          [
+            "async-mutex",
+            "async-mutex@0.3.2"
+          ]
+        ]
+      }
+    ],
+    "builtins": [
+      "node:child_process",
+      "node:crypto",
+      "node:fs",
+      "node:module",
+      "node:os",
+      "node:path",
+      "node:perf_hooks",
+      "node:url",
+      "node:vm"
+    ],
+    "runtime": {
+      "node": "v22.23.1",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "protocol": "jsverify-receipt-1/query-1",
+    "sha256": "59fcdb663665a4e71ccdac0fed7e25fd9bfae4d4a2ad32ab0a48bc8ae0fdf9e1",
+    "backend": {
+      "package": "z3-solver@5.3.3",
+      "sha256": "86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685",
+      "files": [
+        [
+          "LICENSE.txt",
+          "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"
+        ],
+        [
+          "README.md",
+          "c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f"
+        ],
+        [
+          "build/browser.d.ts",
+          "65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507"
+        ],
+        [
+          "build/browser.js",
+          "ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df"
+        ],
+        [
+          "build/high-level/high-level.d.ts",
+          "7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9"
+        ],
+        [
+          "build/high-level/high-level.js",
+          "b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986"
+        ],
+        [
+          "build/high-level/index.d.ts",
+          "5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb"
+        ],
+        [
+          "build/high-level/index.js",
+          "a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e"
+        ],
+        [
+          "build/high-level/types.d.ts",
+          "a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f"
+        ],
+        [
+          "build/high-level/types.js",
+          "6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616"
+        ],
+        [
+          "build/high-level/utils.d.ts",
+          "b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4"
+        ],
+        [
+          "build/high-level/utils.js",
+          "3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7"
+        ],
+        [
+          "build/kill-threads.d.ts",
+          "dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85"
+        ],
+        [
+          "build/kill-threads.js",
+          "2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238"
+        ],
+        [
+          "build/low-level/index.d.ts",
+          "592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390"
+        ],
+        [
+          "build/low-level/index.js",
+          "862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c"
+        ],
+        [
+          "build/low-level/types.__GENERATED__.d.ts",
+          "11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3"
+        ],
+        [
+          "build/low-level/types.__GENERATED__.js",
+          "d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e"
+        ],
+        [
+          "build/low-level/wrapper.__GENERATED__.d.ts",
+          "27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10"
+        ],
+        [
+          "build/low-level/wrapper.__GENERATED__.js",
+          "cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a"
+        ],
+        [
+          "build/node.d.ts",
+          "17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873"
+        ],
+        [
+          "build/node.js",
+          "28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98"
+        ],
+        [
+          "build/z3-built.js",
+          "5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6"
+        ],
+        [
+          "build/z3-built.wasm",
+          "591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"
+        ],
+        [
+          "package.json",
+          "3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"
+        ]
+      ],
+      "node": "v22.23.1",
+      "platform": "darwin",
+      "arch": "arm64"
+    }
+  },
+  "pins": {
+    "reverse": {
+      "repository": "https://github.com/TheAlgorithms/JavaScript",
+      "commit": "636017ca51dad05339cde3b5c66cbe1d71957f7e",
+      "commitDate": "2022-10-20T11:38:56Z",
+      "commitTitle": "algorithm: reverse (#1197)",
+      "path": "Data-Structures/Array/Reverse.js",
+      "fetchedFrom": "https://raw.githubusercontent.com/TheAlgorithms/JavaScript/636017ca51dad05339cde3b5c66cbe1d71957f7e/Data-Structures/Array/Reverse.js",
+      "sha256": "8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46",
+      "declaration": "Reverse",
+      "declarationSha256": "a601e235f96a6eb3c572203b73a690bc7e49914b4540561139e7dc91489c70ad",
+      "license": "GPL-3.0",
+      "licensePath": "LICENSE",
+      "licenseFetchedFrom": "https://raw.githubusercontent.com/TheAlgorithms/JavaScript/636017ca51dad05339cde3b5c66cbe1d71957f7e/LICENSE",
+      "licenseSha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
+      "laterHistory": "6fe21d21e92d4f07b476d56fbcad838633e74550 (2024-04-13) rewrote the body to a destructuring swap, which the verifier grammar does not admit; this pin is the last temp-variable version.",
+      "reusedSource": "../K-evidence/pilot/Reverse.upstream.js",
+      "reusedProvenance": "../K-evidence/pilot/provenance.json",
+      "reusedLicense": "../K-evidence/pilot/LICENSE",
+      "sourceSha256": "8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46",
+      "tokenSha256": "fea39bd5afdc618703449f1b296b20acbd36984c9d586ed9e6fbb6180ba4a109",
+      "sourceImports": [],
+      "contracts": [
+        "modifies arr",
+        "ensures result === arr",
+        "ensures arr.every((v, k) => Object.is(v, old(arr.slice())[arr.length - 1 - k]))"
+      ],
+      "annotations": [
+        "invariant Number.isInteger(i) && 0 <= i && i <= arr.length",
+        "invariant Number.isInteger(j) && -1 <= j && j < arr.length && j === arr.length - 1 - i",
+        "invariant arr.every((v, k) => k < i || k > j ? Object.is(v, old(arr.slice())[arr.length - 1 - k]) : Object.is(v, old(arr.slice())[k]))",
+        "decreases real(arr.length) - real(i)"
+      ],
+      "rankAdaptation": {
+        "before": "decreases real(arr.length) - real(i)",
+        "after": "decreases real(arr.length - 0) - real(i)",
+        "authored": true,
+        "rationale": "The inspected rank obligation retains FP finiteness tests for raw length. Subtracting zero is exact for every native length and gives the maintained numeric owner an explicit signed-integer expression before embedding it. Same rank, same entry replay measure, no input bound. The unrun real(length - i) and real(length + 0) - real(i) candidates retained FP rank comparisons and were rejected after query inspection."
+      },
+      "adapter": "../K-evidence/pilot/check.mjs",
+      "adapterSha256": "c6d3c782dab72bca05eba40ff1f9dd6e159995df321b0ef68bd068412cc9358f"
+    },
+    "take": {
+      "repository": "https://github.com/remeda/remeda",
+      "commit": "004b09194f6d39f727118c0a71adc9986bcc13e1",
+      "path": "packages/remeda/src/take.ts",
+      "sha256": "64ccd5ad15d4c387b2aa57cb6173a541b8bd79dcdfa06cc57e0136141e539bdf",
+      "declaration": "takeImplementation",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "declarationSha256": "13c5bb5511ccc94ce8a711a2a20c523928a8251c4624f4059b531ba1f48f6a91",
+      "reusedSource": "../../../examples/remeda/take.upstream.ts",
+      "reusedProvenance": "../../../examples/remeda/provenance.json",
+      "reusedLicense": "../../../examples/remeda/LICENSE",
+      "sourceSha256": "64ccd5ad15d4c387b2aa57cb6173a541b8bd79dcdfa06cc57e0136141e539bdf",
+      "erasedSourceSha256": "ab176ca631f53db1aab30a1a4e7a0ce89bd7b45220003a43e48b07c0b66dcf24",
+      "tokenSha256": "57a4f35cf51b5e2d1a73947850e6b41f916a1dbd1a24606404a13d6851992e6b",
+      "licenseSha256": "acf30083045d768ce20640237313ee31a45d548d66ef76df5bb5fb0745479535",
+      "sourceImports": [
+        "./internal/makeStoppable",
+        "./internal/purryWithLazy"
+      ],
+      "extractedDeclarationImports": [],
+      "adapter": "../../../examples/remeda/check.mjs",
+      "adapterSha256": "4b33ea6d3abbcca102a4ef42a271eeb9f234e552fa79fb074dcc708212259ea1"
+    },
+    "fixtures": {
+      "Reverse.helper.js": {
+        "sha256": "a3837fdffd757aa470a7b340ad67892c45a7ab6611976eb0d57d42adab02df46",
+        "tokenSha256": "f8659542f68fa043bfce5e959aa6bd332eb892353d7e5d00b5c61a8e76144994",
+        "imports": [],
+        "origin": "maintained pin adapter; annotations and export only"
+      },
+      "take.helper.js": {
+        "sha256": "3a10c589727ea95be47ba4a4ab048e76f9ac7b728a5b0279262d39dfc5927566",
+        "tokenSha256": "ce84122a2ff1aad68aa10b1f2120359b37ea1d8ba9ac65810c81cf9942ee85b7",
+        "imports": [],
+        "origin": "maintained pin adapter; annotations and export only"
+      },
+      "caller.js": {
+        "sha256": "a7906328545f559638d5018327a48bd650b24ac23ed2a774b549e7765a31117a",
+        "tokenSha256": "7311f5acc22f337cb11d597016f0659df8781190a450942194a00bd257774cea",
+        "imports": [
+          "./Reverse.helper.js",
+          "./take.helper.js"
+        ],
+        "origin": "authored"
+      }
+    }
+  },
+  "authoredHashes": {
+    "check.mjs": "a01eb966190191e43b768b6787b42c6059b762272b4659adde9ee6fc443a74aa",
+    "campaign.mjs": "ca3e24661e46fae8d02f7d7b0fe41a6758eced2f74a32a3dc2fd868ea23ff035",
+    "fixture.mjs": "45d286bcdb148d771a9ae09602a7aa50cac1119599b7c98f59f137da0b51b562",
+    "native.mjs": "3672d9cd69bc951e2b1a3be8e93b757b0473b7d17c5f64f383ce5d3f6fd55b88"
+  }
+}

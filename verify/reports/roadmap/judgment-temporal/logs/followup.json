@@ -1,0 +1,43 @@
+{
+  "rows": [
+    {
+      "id": "tail-nested",
+      "match": true,
+      "predicted": {
+        "topLevelReturn": false,
+        "nestedReturn": true
+      },
+      "observed": {
+        "topLevelReturn": false,
+        "nestedReturn": true
+      }
+    },
+    {
+      "id": "follow-ranks",
+      "match": true,
+      "predicted": {
+        "advances": "counterexample",
+        "collapses": "verified",
+        "halfStep": "counterexample"
+      },
+      "observed": {
+        "advances": {
+          "status": "counterexample",
+          "phase": null,
+          "reason": null
+        },
+        "collapses": {
+          "status": "verified",
+          "phase": null,
+          "reason": null
+        },
+        "halfStep": {
+          "status": "counterexample",
+          "phase": null,
+          "reason": null
+        }
+      }
+    }
+  ],
+  "diffs": []
+}

@@ -1,0 +1,5 @@
+{
+  "name": "upstream",
+  "implementation": "function findIndex(fn, list) {\n  var idx = 0;\n  var len = list.length;\n  while (idx < len) {\n    if (fn(list[idx])) {\n      return idx;\n    }\n    idx += 1;\n  }\n  return -1;\n}",
+  "source": "/** @param {(x: number) => boolean} fn\n * @param {number[]} list */\n// ensures Number.isInteger(result) && -1 <= result && result < list.length\n// ensures result === -1 || (0 <= result && result < list.length && fn(list[result]))\n// ensures list.every((value, i) => result !== -1 && result <= i || !fn(value))\nfunction findIndex(fn, list) {\n  var idx = 0;\n  var len = list.length;\n  // invariant Number.isInteger(idx) && 0 <= idx && idx <= len\n  // invariant list.every((value, i) => idx <= i || !fn(value))\n  // decreases real(len) - real(idx)\n  while (idx < len) {\n    if (fn(list[idx])) {\n      return idx;\n    }\n    idx += 1;\n  }\n  return -1;\n}\n"
+}

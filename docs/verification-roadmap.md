@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12 with 49 focused and 371 full tests; R/S/T/U remain incomplete. K Gate3 is implemented locally (418 tests) and awaits independent review. Guarded throws and the unchanged harmonicMean campaign passed independent review and await combined integration. Two cancellation/listener designs await comparison.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K, guarded throws, resource policy and current-model numerical maintenance passed independent reviews. The matching verifier tree passed 483 tests, and the maintained numerical campaign passed all ten stages. PR #14 is ready to merge. C2a native review passes; its proof review found unbound request/activation checks and correction remains pending. Conditional source completion passed a local 496-test suite and awaits independent review.
 
-All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.
+All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites, completed reviews, and pending integration. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -17,9 +17,9 @@ flowchart TD
   G["G: Heap, aliases &amp; frames<br/>integrated"]
   H["H: Higher-order contracts<br/>integrated"]
   J["J: Search proof pilot<br/>integrated"]
-  K["K: Broader library proofs<br/>READY"]
+  K["K: Broader library proofs<br/>branch-ready"]
   P["P: Project proof workflow<br/>integrated"]
-  Q["Q: Pure JS/TS proofs &amp; bugs"]
+  Q["Q: Pure JS/TS proofs &amp; bugs<br/>PARTIAL"]
   R["R: Event &amp; lifecycle semantics"]
   S["S: Async ordering model"]
   T["T: Environment contracts<br/>READY"]
@@ -100,8 +100,8 @@ These counts describe the original isolated branches. D's original partial resul
 
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
-Ready packages: K, T.
-Branches awaiting integration: none.
+Ready packages: T.
+Branches awaiting integration: K.
 
 To regenerate this document after editing the data:
 

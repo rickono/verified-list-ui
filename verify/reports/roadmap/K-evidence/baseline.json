@@ -1,0 +1,6 @@
+{
+  "ancestorCommand": "git merge-base --is-ancestor 32bd5b2 HEAD",
+  "exitCode": 0,
+  "verifyExists": true,
+  "parent": "dedde91b9f6e1fec3a30f5e39cae65f5381b6b26"
+}
