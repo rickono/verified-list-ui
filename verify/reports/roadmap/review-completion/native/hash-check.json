@@ -1,0 +1,105 @@
+{
+  "implementation": "20ff20556fe19a72f73ccf3708d7bd7329ec2bc0",
+  "archiveHead": "1926a8af8effb2316c325b919cd501161877f40e",
+  "sha256sumsEntries": 180,
+  "sha256sumsMismatches": [],
+  "receipts": {
+    "focused-1": {
+      "exitCode": 1,
+      "runHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "preparedHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "coreUnchangedDuringRun": true,
+      "counts": {
+        "tests": 60,
+        "pass": 54,
+        "fail": 6,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "notOkMarkers": 6,
+      "preservesFailureText": true,
+      "hashMismatchesAgainstImplementation": [
+        "tests/verify/conditional-completion-grammar.test.mjs",
+        "tests/verify/conditional-completion-parity.test.mjs",
+        "tests/verify/conditional-completion.test.mjs",
+        "verify/source.mjs",
+        "verify/stateful/clauses.mjs",
+        "verify/stateful/temporal.mjs"
+      ],
+      "hashMismatchesAgainstArchive": [
+        "tests/verify/conditional-completion-grammar.test.mjs",
+        "tests/verify/conditional-completion-parity.test.mjs",
+        "tests/verify/conditional-completion.test.mjs",
+        "verify/source.mjs",
+        "verify/stateful/clauses.mjs",
+        "verify/stateful/temporal.mjs"
+      ]
+    },
+    "focused-2": {
+      "exitCode": 0,
+      "runHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "preparedHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "coreUnchangedDuringRun": true,
+      "counts": {
+        "tests": 60,
+        "pass": 60,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "notOkMarkers": 0,
+      "preservesFailureText": false,
+      "hashMismatchesAgainstImplementation": [
+        "tests/verify/conditional-completion-grammar.test.mjs",
+        "tests/verify/conditional-completion.test.mjs",
+        "verify/source.mjs",
+        "verify/stateful/clauses.mjs",
+        "verify/stateful/temporal.mjs"
+      ],
+      "hashMismatchesAgainstArchive": [
+        "tests/verify/conditional-completion-grammar.test.mjs",
+        "tests/verify/conditional-completion.test.mjs",
+        "verify/source.mjs",
+        "verify/stateful/clauses.mjs",
+        "verify/stateful/temporal.mjs"
+      ]
+    },
+    "focused-final": {
+      "exitCode": 0,
+      "runHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "preparedHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "coreUnchangedDuringRun": true,
+      "counts": {
+        "tests": 61,
+        "pass": 61,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "notOkMarkers": 0,
+      "preservesFailureText": false,
+      "hashMismatchesAgainstImplementation": [],
+      "hashMismatchesAgainstArchive": []
+    },
+    "full-final": {
+      "exitCode": 0,
+      "runHead": "20ff20556fe19a72f73ccf3708d7bd7329ec2bc0",
+      "preparedHead": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "coreUnchangedDuringRun": true,
+      "counts": {
+        "tests": 496,
+        "pass": 496,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "notOkMarkers": 0,
+      "preservesFailureText": false,
+      "hashMismatchesAgainstImplementation": [],
+      "hashMismatchesAgainstArchive": []
+    }
+  },
+  "focusedFinalIs61": true,
+  "fullFinalIs496": true,
+  "focused1PreservedFailure": true
+}

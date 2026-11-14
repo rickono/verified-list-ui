@@ -1,0 +1,60 @@
+{
+  "archiveHead": "1926a8af8effb2316c325b919cd501161877f40e",
+  "pinsMatch20ff205": true,
+  "pins": {
+    "verify/stateful/temporal.mjs": "1b84ca9bed641aabdf23b6b7e07112f8554636410c0dc7477bcf321b428837c7",
+    "verify/stateful/machine.mjs": "c7e911950c6b8411b35aa37294f0b0b4a50e03908f677bfd3781933ea1eaa7e4",
+    "verify/stateful/clauses.mjs": "12df5559e1e3b545d2d559d8c1f8f05611a78c8bce1c993359abe80eec2186bc"
+  },
+  "machineUrl": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-64551363/verify/stateful/machine.mjs",
+  "rows": [
+    {
+      "name": "adjacent-prose",
+      "status": "unsupported",
+      "message": "Unknown line in temporal contract block."
+    },
+    {
+      "name": "separated-prose",
+      "status": "parsed",
+      "goals": [
+        "work"
+      ],
+      "entries": [
+        "marker",
+        "work"
+      ],
+      "captures": []
+    },
+    {
+      "name": "let-live-across-await",
+      "status": "unsupported",
+      "message": "Captured held requires an immutable annotated scalar binding."
+    },
+    {
+      "name": "const-live-across-await",
+      "status": "parsed",
+      "goals": [
+        "work"
+      ],
+      "entries": [
+        "work"
+      ],
+      "captures": [
+        [
+          "const:held"
+        ]
+      ]
+    },
+    {
+      "name": "double-space-leads",
+      "status": "parsed",
+      "goals": [
+        "work"
+      ],
+      "entries": [
+        "work"
+      ],
+      "captures": []
+    }
+  ]
+}
