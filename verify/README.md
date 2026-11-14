@@ -6,6 +6,8 @@ The supported subset is deliberately small. The verifier trusts its frontend and
 
 ## Run the examples
 
+Start with the [executable example gallery](examples/README.md): floating-point failures, exact specifications, array-prefix bugs, helper contracts and local updates. Its snippets run directly from the README with `node verify/examples/check-readme.mjs`.
+
 From the repository root, after `pnpm install --frozen-lockfile`:
 
 ```sh
