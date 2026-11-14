@@ -4,6 +4,11 @@ import { sha256, references } from "./ast.mjs";
 export const globals = new Set(["Number", "Math", "Object", "Array", "NaN", "Infinity", "undefined"]);
 export const handles = new Set(["EventTarget", "AbortController", "AbortSignal"]);
 export const primitives = new Set(["number", "boolean"]);
+// The native owner uses these exact settings. Other schedulers need their own
+// source/continuation correspondence before they can discharge resumptions.
+export const C1_PROFILE = Object.freeze({ kind: "c1-action-cuts", version: 1,
+  microtaskMode: "afterEvaluate", drain: "void 0;", resumption: "same-action-timed-drain",
+  arrivals: "arbitrary-between-actions", eventBound: null, activationBound: null });
 export function environmentOf(declarations, clauses, source) {
   const environment = new Map(), targets = new Map(), used = new Set();
   for (const declaration of declarations) {
@@ -62,6 +67,13 @@ export function assumptionsOf(machine) {
     record.handleInputs = "compatible inputs may alias; signals may already be aborted; controller.signal has one stable owner; signals excluded from EventTarget domain";
     record.environment = record.environment.map((op) => ({ ...op, abort: machine.environment.get(op.op).abort ?? "none" }));
     record.unsupported = ["imports", "general reference stores", "mutable captures", "async listeners", "payloads", "options", "handler registration mutation", "reentrancy", "EventEmitter", "signal-as-target", "reject-on-abort", "counts/uniqueness/temporal clauses"];
+  }
+  if (machine.temporal) {
+    record.completion = { goals: machine.temporal.goals.map((g) => ({ entry: g.entry, goal: "completes", span: g.span })),
+      profile: C1_PROFILE, continuingRuntime: "assumed for completion", declaredEnvironmentCalls: "assumed total for completion",
+      resumption: "checked only after finite source totality and complete exit correspondence",
+      settlement: "assumed separately per reached request; no safety use" };
+    record.unsupported = record.unsupported.filter((item) => item !== "liveness").concat("temporal goals beyond per-invocation completion");
   }
   return { ...record, sha256: sha256(JSON.stringify(record)) };
 }

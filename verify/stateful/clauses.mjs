@@ -8,8 +8,14 @@ const grammar = new Map([
   ...["state", "always", "pending", "resolves"].map((w) => [w, "expression"]),
   ["protocol", "protocol"], ["abort", "abort"],
   ["@environment", "marker"], ["rejects", "marker"], ["settles", "eventually"],
-  ...["order", "leads", "ensures", "requires", "invariant", "safety", "live", "liveness", "fairness", "decreases", "modifies", "environment", "event", "delivers", "count", "counts", "unique", "uniqueness", "rank", "enabled", "enabledness", "eventually", "until", "next", "temporal"].map((w) => [w, "unsupported"]),
+  ["leads", "completion"], ["fairness", "resumptions"],
+  ...["order", "ensures", "requires", "invariant", "safety", "live", "liveness", "decreases", "modifies", "environment", "event", "delivers", "counts", "unique", "uniqueness", "enabled", "enabledness", "eventually", "until", "next", "temporal"].map((w) => [w, "unsupported"]),
+  ...["completes", "completion", "succeeds", "success", "commits", "commit", "count", "rank", "ranks", "fair", "scheduler"].map((w) => [w, "temporal-unsupported"]),
 ]);
+const confusables = new Map(Object.entries({ а: "a", е: "e", о: "o", р: "p", с: "c", у: "y", х: "x", і: "i", ј: "j", ѕ: "s",
+  ԁ: "d", ӏ: "l", ԛ: "q", ɡ: "g", α: "a", ε: "e", ο: "o", ρ: "p", ι: "i", κ: "k", τ: "t", ν: "v" }));
+const skeleton = (token) => [...token.normalize("NFKC").toLowerCase().replace(/\p{Default_Ignorable_Code_Point}/gu, "")]
+  .map((c) => confusables.get(c) ?? c).join("");
 function near(a, b) {
   const left = [...a], right = [...b];
   if (Math.abs(left.length - right.length) > 1) return false;
@@ -26,22 +32,27 @@ export function parseClauses(comments) {
   return comments.map((comment) => {
     const lines = comment.value.split("\n").map((s) => s.replace(/^\s*\*?\s*/, ""));
     const looks = lines.some((line) => {
-      const token = line.split(/\s/)[0].normalize("NFKC").toLowerCase().replace(/\p{Default_Ignorable_Code_Point}/gu, "");
+      const token = skeleton(line.split(/\s/)[0]);
       // Inspect the entire token before extracting punctuation. Recognition
       // normalizes lookalikes; admission below still requires the exact keyword.
       const word = /^(@?[\p{L}\p{M}]+)(?=$|[^\p{L}\p{M}_-])/u.exec(token)?.[1] ?? token;
-      const confusables = { "а":"a", "е":"e", "о":"o", "р":"p", "с":"c", "у":"y", "х":"x", "і":"i", "ѕ":"s", "Α":"a", "α":"a", "ο":"o", "ρ":"p", "ε":"e", "τ":"t", "ν":"v" };
-      const skeleton = word.replace(/[аеорсухіѕΑαορετν]/gu, (c) => confusables[c] ?? c);
-      return [token, word, skeleton].some((candidate) => candidate && [...grammar.keys()].some((reserved) => near(candidate, reserved)));
+      const prefix = /^(@?[\p{L}\p{M}]+)/u.exec(token)?.[1];
+      const temporal = [...grammar].filter(([, rule]) => ["completion", "resumptions", "temporal-unsupported"].includes(rule)).map(([w]) => w);
+      const suffix = skeleton(line.trim().split(/\s+/).at(-1)).replace(/[.!,:;]$/, "");
+      return [token, word].some((candidate) => candidate && [...grammar.keys()].some((reserved) => near(candidate, reserved)))
+        || prefix && temporal.some((reserved) => near(prefix, reserved))
+        || line.includes(" ") && temporal.some((reserved) => near(suffix, reserved));
     });
     if (!looks) return { comment };
     if (comment.type !== "Line") fail("Contract-looking block comments are unsupported; use one line per clause.", comment);
     const text = comment.value.trim(), [kind] = text.split(/\s/), rule = grammar.get(kind);
-    if (!rule || rule === "unsupported") fail(`Unsupported or misspelled contract clause ${kind}.`, comment);
+    if (!rule || rule === "unsupported" || rule === "temporal-unsupported") fail(`Unsupported or misspelled contract clause ${kind}.`, comment);
     const tail = text.slice(kind.length).trim();
     if (rule === "marker" && tail || rule === "eventually" && tail !== "eventually") fail(`Invalid ${kind} clause.`, comment);
     if (rule === "protocol" && tail !== "node22-event-target-v1") fail("Unsupported protocol clause.", comment);
     if (rule === "abort" && !/^advisory [A-Za-z_][\w]*$/.test(tail)) fail("Unsupported abort clause; use abort advisory <signal parameter>.", comment);
+    if (rule === "completion" && !/^[A-Za-z_][\w]* completes$/.test(tail)) fail("Invalid leads clause; only leads <entry> completes is supported.", comment);
+    if (rule === "resumptions" && tail !== "resumptions weak") fail("Invalid fairness clause; only fairness resumptions weak is supported.", comment);
     let ast;
     if (rule === "expression") {
       const start = comment.start + 2 + comment.value.indexOf(tail, comment.value.indexOf(kind) + kind.length);

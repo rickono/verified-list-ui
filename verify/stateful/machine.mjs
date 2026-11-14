@@ -120,6 +120,35 @@ export function machineOf(file, source) {
       for (const fn of functions) machine.entries.push(protocolEntryOf(machine, fn, syntax.types, clauses, used, names));
       if (targets.size && machine.entries.some((e) => e.awaits.length)) fail("Listener and advisory-await modules are separate in C2a.", program);
     } else for (const fn of functions) machine.entries.push(entryOf(machine, fn, syntax.types, clauses, used, names));
+    const goals = clauses.filter((c) => c.kind === "leads"), fairness = clauses.filter((c) => c.kind === "fairness");
+    if (goals.length || fairness.length) {
+      if (machine.protocol) fail("Protocol temporal mode is unsupported until its correspondence is checked.", (goals[0] ?? fairness[0]).span);
+      if (!goals.length) fail("Resumption fairness requires a completion goal.", fairness[0].span);
+      if (fairness.length > 1) fail("Duplicate resumption fairness request.", fairness[1].span);
+      const seen = new Set();
+      for (const c of [...goals, ...fairness]) {
+        if (inside(c)) fail("Temporal clauses belong at module scope.", c.span);
+        const index = clauses.indexOf(c);
+        for (const direction of [-1, 1]) {
+          let cursor = c.comment;
+          for (let i = index + direction; i >= 0 && i < clauses.length; i += direction) {
+            const next = clauses[i];
+            const between = direction === -1 ? machine.source.slice(next.comment.end, cursor.start) : machine.source.slice(cursor.end, next.comment.start);
+            if (between.trim()) break;
+            if (!next.kind) fail("Unknown line in temporal contract block.", next.comment);
+            cursor = next.comment;
+          }
+        }
+        used.add(c);
+      }
+      for (const goal of goals) {
+        const name = goal.text.split(" ")[0];
+        if (!machine.entries.some((e) => e.name === name)) fail(`Unknown completion entry ${name}.`, goal.span);
+        if (seen.has(name)) fail(`Duplicate completion goal ${name}.`, goal.span);
+        seen.add(name);
+      }
+      machine.temporal = { goals: goals.map((c) => ({ ...c, entry: c.text.split(" ")[0] })), fairness };
+    }
     for (const c of clauses) if (c.kind && !used.has(c)) fail(`Misplaced ${c.kind} clause.`, c.span);
     let executable = stripped;
     for (const top of program.body) if (top.type === "ExportNamedDeclaration") executable = executable.slice(0, top.start) + " ".repeat(top.declaration.start - top.start) + executable.slice(top.declaration.start);
