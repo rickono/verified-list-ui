@@ -1,0 +1,221 @@
+{
+  "classification": "finite control",
+  "origin": "own execution; inference conditional on pure deterministic builtins",
+  "modifiedSourceSha256": "fe732f4c7e119b34ddfb5bc37281d939fc106f907601086bf213ccf4bfcc237c",
+  "boundFunctionSha256": "8b901f5070230e81ec8e542973c1c49f9b44e79c668312b83b1cfb6b269f510a",
+  "originalSourceSha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+  "results": [
+    {
+      "id": "cycle100",
+      "repeat": {
+        "first": 2,
+        "repeated": 4,
+        "period": 2
+      },
+      "states": [
+        {
+          "iteration": 1,
+          "start": {
+            "value": "0.0016664689572718978",
+            "bits": "3f5b4dad6af648df"
+          },
+          "stop": {
+            "value": "0.0016664689572718982",
+            "bits": "3f5b4dad6af648e1"
+          },
+          "count": {
+            "value": "100",
+            "bits": "4059000000000000"
+          },
+          "prestep": {
+            "value": "undefined"
+          },
+          "step": {
+            "value": "-200000000000000000000",
+            "bits": "c425af1d78b58c40"
+          },
+          "returns": false
+        },
+        {
+          "iteration": 2,
+          "start": {
+            "value": "0.001666468957271898",
+            "bits": "3f5b4dad6af648e0"
+          },
+          "stop": {
+            "value": "0.0016664689572718982",
+            "bits": "3f5b4dad6af648e1"
+          },
+          "count": {
+            "value": "100",
+            "bits": "4059000000000000"
+          },
+          "prestep": {
+            "value": "-200000000000000000000",
+            "bits": "c425af1d78b58c40"
+          },
+          "step": {
+            "value": "-500000000000000000000",
+            "bits": "c43b1ae4d6e2ef50"
+          },
+          "returns": false
+        },
+        {
+          "iteration": 3,
+          "start": {
+            "value": "0.0016664689572718978",
+            "bits": "3f5b4dad6af648df"
+          },
+          "stop": {
+            "value": "0.0016664689572718982",
+            "bits": "3f5b4dad6af648e1"
+          },
+          "count": {
+            "value": "100",
+            "bits": "4059000000000000"
+          },
+          "prestep": {
+            "value": "-500000000000000000000",
+            "bits": "c43b1ae4d6e2ef50"
+          },
+          "step": {
+            "value": "-200000000000000000000",
+            "bits": "c425af1d78b58c40"
+          },
+          "returns": false
+        },
+        {
+          "iteration": 4,
+          "start": {
+            "value": "0.001666468957271898",
+            "bits": "3f5b4dad6af648e0"
+          },
+          "stop": {
+            "value": "0.0016664689572718982",
+            "bits": "3f5b4dad6af648e1"
+          },
+          "count": {
+            "value": "100",
+            "bits": "4059000000000000"
+          },
+          "prestep": {
+            "value": "-200000000000000000000",
+            "bits": "c425af1d78b58c40"
+          },
+          "step": {
+            "value": "-500000000000000000000",
+            "bits": "c43b1ae4d6e2ef50"
+          },
+          "returns": false
+        }
+      ]
+    },
+    {
+      "id": "cycle5",
+      "repeat": {
+        "first": 2,
+        "repeated": 4,
+        "period": 2
+      },
+      "states": [
+        {
+          "iteration": 1,
+          "start": {
+            "value": "0.11236832303430266",
+            "bits": "3fbcc42ba089e7d0"
+          },
+          "stop": {
+            "value": "0.11236832303430268",
+            "bits": "3fbcc42ba089e7d1"
+          },
+          "count": {
+            "value": "5",
+            "bits": "4014000000000000"
+          },
+          "prestep": {
+            "value": "undefined"
+          },
+          "step": {
+            "value": "-500000000000000000",
+            "bits": "c39bc16d674ec800"
+          },
+          "returns": false
+        },
+        {
+          "iteration": 2,
+          "start": {
+            "value": "0.11236832303430265",
+            "bits": "3fbcc42ba089e7cf"
+          },
+          "stop": {
+            "value": "0.11236832303430268",
+            "bits": "3fbcc42ba089e7d1"
+          },
+          "count": {
+            "value": "5",
+            "bits": "4014000000000000"
+          },
+          "prestep": {
+            "value": "-500000000000000000",
+            "bits": "c39bc16d674ec800"
+          },
+          "step": {
+            "value": "-200000000000000000",
+            "bits": "c386345785d8a000"
+          },
+          "returns": false
+        },
+        {
+          "iteration": 3,
+          "start": {
+            "value": "0.11236832303430266",
+            "bits": "3fbcc42ba089e7d0"
+          },
+          "stop": {
+            "value": "0.11236832303430268",
+            "bits": "3fbcc42ba089e7d1"
+          },
+          "count": {
+            "value": "5",
+            "bits": "4014000000000000"
+          },
+          "prestep": {
+            "value": "-200000000000000000",
+            "bits": "c386345785d8a000"
+          },
+          "step": {
+            "value": "-500000000000000000",
+            "bits": "c39bc16d674ec800"
+          },
+          "returns": false
+        },
+        {
+          "iteration": 4,
+          "start": {
+            "value": "0.11236832303430265",
+            "bits": "3fbcc42ba089e7cf"
+          },
+          "stop": {
+            "value": "0.11236832303430268",
+            "bits": "3fbcc42ba089e7d1"
+          },
+          "count": {
+            "value": "5",
+            "bits": "4014000000000000"
+          },
+          "prestep": {
+            "value": "-500000000000000000",
+            "bits": "c39bc16d674ec800"
+          },
+          "step": {
+            "value": "-200000000000000000",
+            "bits": "c386345785d8a000"
+          },
+          "returns": false
+        }
+      ]
+    }
+  ],
+  "diagnosticBinding": "The module import/export are replaced by an explicit binding to the unchanged imported tickIncrement. The loop body has one added trace hook. Both diagnostic texts and the license are retained.",
+  "argument": "The full loop-head state (start, stop, fixed count, prestep) repeats bit-for-bit at iterations 2 and 4; neither intervening state returns. The unchanged transition with pure tickIncrement therefore repeats indefinitely. This diagnostic adds a trace/stop hook and is not an unchanged-source verifier proof."
+}

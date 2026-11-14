@@ -70,3 +70,9 @@ The run creates the following evidence:
 Keep failed run directories. The checker refuses to overwrite them. This package
 does not complete Q or K. Independent review and final integration belong to the
 coordinator. The separate composition campaign owns Reverse and helper integration.
+
+To check the committed package's stored bytes from the repository root, run:
+
+```sh
+shasum -a 256 -c verify/reports/roadmap/library-campaigns/SHA256SUMS
+```

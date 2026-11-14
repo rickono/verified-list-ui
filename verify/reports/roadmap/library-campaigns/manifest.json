@@ -1,0 +1,1179 @@
+{
+  "schema": 1,
+  "status": "PASS",
+  "scope": "Maintained pinned numerical campaign package only; independent review and final integration pending.",
+  "package": "verify/reports/roadmap/library-campaigns",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524",
+  "baselineAncestor": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+  "preparedParent": "203ad818169be544432b3bad93ff1c4f01ef20a3",
+  "runtimeEquivalentTo": "f974b30da4efcf16b69df889b909975e3321dcb2",
+  "implementationCommits": [
+    "cf7c183a6cefcf14742738bc11e21a695f99cb67",
+    "42567fc7b286e2a8e838279396fcb444e1118253"
+  ],
+  "testedHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+  "testedCheckerSha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
+  "inputManifestSha256": "700ad9ebfbd8ee57e652b6f4cbd1b6eae64dfd8d55f7ec87f3fa1b8e5992e7a5",
+  "modelIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+  "sourceGraphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+  "runtime": {
+    "node": "v22.23.1",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "pinDate": "2026-11-13",
+  "timeZone": "America/Chicago",
+  "freshFinalRun": "evidence/03-final/run.json",
+  "finalStagesPassed": 10,
+  "budgetMs": {
+    "eachPublicProofRequest": 60000,
+    "eachNativeCycleSubprocess": 2000,
+    "nativeFiniteSubprocess": 10000,
+    "cliReproduction": 15000,
+    "unsupportedAdmissionRequest": 1000,
+    "outerGuard": 600000
+  },
+  "sourcePolicy": "Current production checkers and modules only. d3 native imports use unchanged exact pin bytes. Diagnostic copies are explicitly modified and supply no unchanged-source verifier theorem.",
+  "qComplete": false,
+  "kComplete": false,
+  "independentReviewComplete": false,
+  "currentMainStatusChecked": false,
+  "noveltyClaimed": false,
+  "upstreamAcknowledgementOrFixClaimed": false,
+  "fullSuiteRun": false,
+  "benchmarkClaim": false,
+  "productionEdits": false,
+  "externalMessagesOrIssuePosting": false,
+  "claims": [
+    {
+      "id": "harmonic-independent-import",
+      "classification": "independent native reproducer",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/native-harmonic.json",
+      "result": [
+        {
+          "input": {
+            "value": "5e-324",
+            "bits": "0000000000000001"
+          },
+          "reciprocal": {
+            "value": "Infinity",
+            "bits": "7ff0000000000000"
+          },
+          "result": {
+            "value": "0",
+            "bits": "0000000000000000"
+          },
+          "positive": false
+        },
+        {
+          "input": {
+            "value": "5.562684646268003e-309",
+            "bits": "0004000000000000"
+          },
+          "reciprocal": {
+            "value": "Infinity",
+            "bits": "7ff0000000000000"
+          },
+          "result": {
+            "value": "0",
+            "bits": "0000000000000000"
+          },
+          "positive": false
+        }
+      ],
+      "sourceModified": false
+    },
+    {
+      "id": "nice-coverage",
+      "classification": "independent native reproducer",
+      "origin": "own execution",
+      "sourceModified": false,
+      "artifact": "evidence/03-final/native-d3.json",
+      "cases": [
+        {
+          "event": "returned",
+          "id": "coverage-1",
+          "start": {
+            "value": "0.9299999999999999",
+            "bits": "3fedc28f5c28f5c2"
+          },
+          "stop": {
+            "value": "0.93",
+            "bits": "3fedc28f5c28f5c3"
+          },
+          "count": 1,
+          "increment": {
+            "value": "-10000000000000000",
+            "bits": "c341c37937e08000"
+          },
+          "result": [
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            },
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            }
+          ],
+          "covers": false
+        },
+        {
+          "event": "returned",
+          "id": "coverage-5000",
+          "start": {
+            "value": "0.9299999999999999",
+            "bits": "3fedc28f5c28f5c2"
+          },
+          "stop": {
+            "value": "0.93",
+            "bits": "3fedc28f5c28f5c3"
+          },
+          "count": 5000,
+          "increment": {
+            "value": "-50000000000000000000",
+            "bits": "c405af1d78b58c40"
+          },
+          "result": [
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            },
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            }
+          ],
+          "covers": false
+        }
+      ]
+    },
+    {
+      "id": "nice-documented-and-fixed-282",
+      "classification": "finite control",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/native-d3.json",
+      "cases": [
+        {
+          "event": "returned",
+          "id": "documented-example",
+          "start": {
+            "value": "1",
+            "bits": "3ff0000000000000"
+          },
+          "stop": {
+            "value": "9",
+            "bits": "4022000000000000"
+          },
+          "count": 5,
+          "increment": {
+            "value": "2",
+            "bits": "4000000000000000"
+          },
+          "result": [
+            {
+              "value": "0",
+              "bits": "0000000000000000"
+            },
+            {
+              "value": "10",
+              "bits": "4024000000000000"
+            }
+          ],
+          "covers": true
+        },
+        {
+          "event": "returned",
+          "id": "fixed-issue-282",
+          "start": {
+            "value": "0.9299999999999999",
+            "bits": "3fedc28f5c28f5c2"
+          },
+          "stop": {
+            "value": "1.07",
+            "bits": "3ff11eb851eb851f"
+          },
+          "count": 5000,
+          "increment": {
+            "value": "-50000",
+            "bits": "c0e86a0000000000"
+          },
+          "result": [
+            {
+              "value": "0.92998",
+              "bits": "3fedc2656abde3fc"
+            },
+            {
+              "value": "1.07",
+              "bits": "3ff11eb851eb851f"
+            }
+          ],
+          "covers": true
+        }
+      ],
+      "countedAsBug": false
+    },
+    {
+      "id": "nice-cycle100-timeout",
+      "classification": "unknown/unsupported",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/native-cycle100.command.json",
+      "observation": "unchanged module did not return before a 2000 ms subprocess timeout; killed and waited",
+      "verified": false,
+      "provesNontermination": false
+    },
+    {
+      "id": "nice-cycle5-timeout",
+      "classification": "unknown/unsupported",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/native-cycle5.command.json",
+      "observation": "unchanged module did not return before a 2000 ms subprocess timeout; killed and waited",
+      "verified": false,
+      "provesNontermination": false
+    },
+    {
+      "id": "nice-pure-state-repeat",
+      "classification": "finite control",
+      "origin": "own execution and conditional inference",
+      "artifact": "evidence/03-final/d3-cycle-diagnostic.json",
+      "verifierProof": false,
+      "sourceModified": true
+    },
+    {
+      "id": "nice-formal-boundary",
+      "classification": "unknown/unsupported",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/d3-admission.json",
+      "outcome": {
+        "fn": null,
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/pins/d3-array/ticks.js",
+        "status": "unsupported",
+        "span": {
+          "start": 0,
+          "end": 73
+        },
+        "line": 1,
+        "column": 1,
+        "message": "Only ordinary top-level functions and const function expressions are supported."
+      },
+      "verified": false,
+      "noSolver": true
+    },
+    {
+      "id": "harmonic-total",
+      "classification": "universal proof",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/harmonic/total.report.json",
+      "domain": "all dense singletons with one finite positive binary64 element; no fixed value or reciprocal-finiteness restriction",
+      "ensures": "true; total return and termination"
+    },
+    {
+      "id": "harmonic-positivity",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/harmonic/positive.report.json",
+      "evidence": "evidence/03-final/harmonic/positive.evidence.json",
+      "apiAndCliReproduced": true,
+      "modelIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+      "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+      "sourceModified": false,
+      "seededMutant": false
+    },
+    {
+      "id": "harmonic-weak",
+      "classification": "unknown/unsupported",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/harmonic/weak.report.json",
+      "outcome": {
+        "status": "unknown",
+        "reason": "induction-gap"
+      }
+    },
+    {
+      "id": "harmonic-P-controls",
+      "classification": "finite control",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/harmonic/checks.json",
+      "warmReceiptHits": 1,
+      "staleSource": "stale",
+      "staleModel": "invalid-evidence"
+    },
+    {
+      "id": "ramda-first-match",
+      "classification": "universal proof",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/ramda/upstream.report.json",
+      "scope": "Exact eager function, wrappers/currying/dispatch excluded; every native dense numeric-array length and every admitted pure total unary numeric predicate (no NaN-payload inspection).",
+      "theorem": "integer bounds, matching result, first-match order, absence, and termination; no proof array-length or predicate-table bound"
+    },
+    {
+      "id": "ramda-mutants",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/ramda.json",
+      "seededMutants": [
+        "off-by-one",
+        "skipped-first"
+      ],
+      "countedAsRealBugs": false
+    },
+    {
+      "id": "ramda-native-comparisons",
+      "classification": "finite control",
+      "origin": "own execution",
+      "artifact": "evidence/03-final/ramda.json",
+      "samples": 42
+    },
+    {
+      "id": "es-toolkit-inherited",
+      "classification": "universal proof",
+      "origin": "inherited; not rerun in this campaign",
+      "source": "verify/examples/es-toolkit/README.md",
+      "pin": "1913a7627a2995b095249d6b0b6453b900cdd4bc",
+      "scope": "empty-input sum returns +0, empty-input mean returns NaN, with termination; no nonempty summation or concatenation law",
+      "countsTowardFreshCoverage": false
+    }
+  ],
+  "experiments": [
+    {
+      "path": "evidence/01-admission",
+      "result": "unsupported",
+      "origin": "own no-solver admission preflight at prepared parent"
+    },
+    {
+      "path": "evidence/02-campaign",
+      "result": "ISSUES",
+      "reason": "diagnostic wrapper retained an import; all other stages passed",
+      "testedHead": "cf7c183a6cefcf14742738bc11e21a695f99cb67"
+    },
+    {
+      "path": "evidence/03-final",
+      "result": "PASS",
+      "reason": "all 10 focused stages passed",
+      "testedHead": "42567fc7b286e2a8e838279396fcb444e1118253"
+    },
+    {
+      "path": "evidence/04-drift-controls",
+      "result": "ISSUES",
+      "reason": "20-second bounds expired waiting for the shared lane before Node ran; premature explanatory field corrected in correction.json"
+    },
+    {
+      "path": "evidence/05-drift-controls",
+      "result": "PASS",
+      "reason": "source bytes and provenance each refused by the lightweight hash gate before semantic imports or solver launch"
+    },
+    {
+      "path": "evidence/06-integrity-setup",
+      "result": "ISSUES",
+      "reason": "inventory expected 11 stages, but the passing final list has 10; corrected without changing verifier results"
+    }
+  ],
+  "trust": "Frontend, source snapshots, source-to-SMT and binary64 encoding, exact specification replay, Z3/WASM, native Node and unmodified standard builtins. Receipts require trusted writers and are not certificates. The diagnostic cycle argument assumes deterministic pure tickIncrement and builtins.",
+  "queryPlans": "Compiler-generated full/replay query plans are static inferred inputs, not solver transcripts or proof certificates. No external prototype is used.",
+  "cleanup": "cleanup.json",
+  "integrity": "integrity.json",
+  "artifacts": {
+    "README.md": {
+      "sha256": "798cb01c78678a82a31449ca1054561e6305deded72d54a5fd97b403c89ded4c",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "bugs.md": {
+      "sha256": "799035a02ea3e53a3cd109749e0b5ae695f05a66cf5487217520a7c0c316d3bd",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "check.mjs": {
+      "sha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "cleanup.json": {
+      "sha256": "11cef0986b0b98aa2e3f122b45b03c11743e2b20186b2c042a406379e6a22e51",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/01-admission/command.json": {
+      "sha256": "b246ffafb7ffe7a96afa44a2a9ba964a60275ea01a55909c116db4ac8025c8c1",
+      "classification": "unknown/unsupported",
+      "origin": "own unsupported admission observation; no solver"
+    },
+    "evidence/01-admission/stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "own unsupported admission observation; no solver"
+    },
+    "evidence/01-admission/stdout.txt": {
+      "sha256": "120ea09165249e16bd32195fa3608bf9dfa4c5067de1f1d9f91670a2a019cb34",
+      "classification": "unknown/unsupported",
+      "origin": "own unsupported admission observation; no solver"
+    },
+    "evidence/02-campaign/api-calls.json": {
+      "sha256": "2ac9ca85d24c3ae0c03725ffb7058a2df4cf398e8f3a8786775388dd84d97fc5",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/cli-reproduce.command.json": {
+      "sha256": "8feb2ed77706cbd47cf4ef225784bb45d1de83e32ff434f579d92b9510728ffb",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/cli-reproduce.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/cli-reproduce.stdout.txt": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/cycle-diagnostic.failure.json": {
+      "sha256": "c112100302cb8930b863e90a9b6a2da0fca66bf0d8abb97e0c99fc01945e21f7",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/d3-admission.json": {
+      "sha256": "21ff3f1357417c999f28938154452397af2a4a5ce5d78d3600ef720992498e54",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/diagnostic/LICENSE": {
+      "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/diagnostic/nice.js": {
+      "sha256": "fe732f4c7e119b34ddfb5bc37281d939fc106f907601086bf213ccf4bfcc237c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/evidence.json": {
+      "sha256": "63ed70b330a4970d2229bb15a09d314bee1fc8c1d31ae25739325073ec533e9f",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/freeze.after.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/freeze.before.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/checks.json": {
+      "sha256": "7ac04a3773d1f7b4a973d4b5e0da157f9d61f09872b200fb1aadbb1434286d67",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/model.json": {
+      "sha256": "d11345fa116b87d7431619ce5290890bbffb448a4c8b71c5216702ff2ed65665",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/native.json": {
+      "sha256": "2849fa1f50c1c62a1c41f430b50a8f418482755208b2d5dfeb29744efb9fc1f1",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/negative.stale-model.json": {
+      "sha256": "948b33cfd5ccd9d1f7a86af4d4966857511ae7442132032cfccf640229e90127",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/negative.stale-source.json": {
+      "sha256": "38512a8f49efa30d9366ec6c32f43e4c8a7ea20f6cffc522c80262517c881cba",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/positive.evidence.json": {
+      "sha256": "402863e3a122ccef199c13b66bd9f2dddb4feb8f4fcd500bf3b28fefab444ab1",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/positive.original-reproduced.json": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/positive.relocated-reproduced.json": {
+      "sha256": "f073bd3af5c5dfef1291181d065af19556ba4cc0456f3f47d40e2c38d8106fa8",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/positive.report.json": {
+      "sha256": "70dd8b98b96ffd29c76387366f9e10e60245defefe698d1e42eca9b0b7af2642",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/positive.reproduced.json": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/sources.json": {
+      "sha256": "192d77690774f7ac5b4482c0baf5075cca1a4263a3309ff0ddcf94590bb12724",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/total.receipt.json": {
+      "sha256": "a3a219314d711d720f7ce4338579848b806d912edd75833bc2912d5af63e7ffe",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/total.report.json": {
+      "sha256": "71f08c0ba2145046e2a26449d4d211d9130bfecdda3ef6f878ac52a5f42ed178",
+      "classification": "universal proof",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/total.warm.json": {
+      "sha256": "90080a88b4e40aa59c0b60cb4feb885e3639e77609358d9fb2ae8f599ed4249f",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic/weak.report.json": {
+      "sha256": "cee62ef96091f0985870ddd2a0a6b0da31ffe089b20b166c6c2fe48ba86baeb1",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/harmonic-result.json": {
+      "sha256": "7ac04a3773d1f7b4a973d4b5e0da157f9d61f09872b200fb1aadbb1434286d67",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/model.json": {
+      "sha256": "505382b3b15532d0eae7438f76e0a66eee8a82eb28e70be3d7d2b5b490ed9346",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-cycle100.command.json": {
+      "sha256": "34a25806b9865190d5be0816220a7a763a525795fc68c03519675bec679dc2de",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-cycle100.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-cycle100.stdout.txt": {
+      "sha256": "4ad0364f568a6a39390ac529b1a95b69dac3185cb1c3f2485637e085d4763d11",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-cycle5.command.json": {
+      "sha256": "8a1548e4fe9224b998adb02bd7581dac17500002d5ebcb9d7318fb99c6df6e0b",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-cycle5.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-cycle5.stdout.txt": {
+      "sha256": "50645b2b8093a7f59191c07b3d311af3556690f8661d320d5264a6a94d2ae79c",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-d3.command.json": {
+      "sha256": "5798706de083c082dadfa01627b6620e4bf96313ed2f090e34f63b9f0919cb68",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-d3.json": {
+      "sha256": "ebae448af4ccb43f789e2f05555d8e5cfe391c7bded1d434c664fd9269694028",
+      "classification": "independent native reproducer",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-d3.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-d3.stdout.txt": {
+      "sha256": "8ba8f303e10828035024812ca3ffbccba2dab6a190bf9dec2fee45b3bf958424",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-harmonic.command.json": {
+      "sha256": "cc18440c9a3aba61be1140a7414ed9a55ad0f3cea55b65b7e1a5cc9cb16b7843",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-harmonic.json": {
+      "sha256": "44afb1c6eb1e7454a6307d4a5b86005956058da692fd4805b3c8b13cc841169c",
+      "classification": "independent native reproducer",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-harmonic.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/native-harmonic.stdout.txt": {
+      "sha256": "7c0a4e5d19f19587dcaef8f2943c354e5df9b1d85e2c55de831e12c9cb223664",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/query-inputs/harmonic-positive.json": {
+      "sha256": "f0deba3d7643815b701f31f0df2f77dbd34f6ddd685942b879d2bf3908a21107",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/02-campaign/query-inputs/harmonic-total.json": {
+      "sha256": "4adf6893670af9aa8c8d7767385d1badadaea65d8fb561766cf580852d9282bb",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/02-campaign/query-inputs/harmonic-weak.json": {
+      "sha256": "2cfa300c5f0092b4ebcea202c689019f00521f3e35ccd49e4238f434e1b8d0d5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/02-campaign/query-inputs/ramda-off-by-one.json": {
+      "sha256": "0b29596dcadf9d20601f8dcd83051c9bf96b6e19f86e0e37a97dda0659a2daf5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/02-campaign/query-inputs/ramda-skipped-first.json": {
+      "sha256": "244c4ca575fa3aa2dd8b7784aaed416368dcf53bd3f51c45dfbf8d09489962b5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/02-campaign/query-inputs/ramda-upstream.json": {
+      "sha256": "a14a7fdc124b41aab206f1e8a55fb5f93df40f2ecf6752fe08f1e4a3bf6b1256",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/02-campaign/ramda/off-by-one.report.json": {
+      "sha256": "0c7ddd4c4c406b7d671c52f0fa7b868bb4cb94096e68653028904159f3be08ae",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda/skipped-first.report.json": {
+      "sha256": "0743a13414ed9afa29e3d9c2ee30b21e0e88215d7818b0044e4f5045cedffa85",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda/upstream.report.json": {
+      "sha256": "f83989c901cc1e9832a5e7862e477dbb199cd6437a74090400cea29312d8d544",
+      "classification": "universal proof",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda-sources/LICENSE.txt": {
+      "sha256": "62fba31dc0582fb6ee413403e47f2de319a4f14140ebd71be094c1f8c7a839ff",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda-sources/off-by-one.json": {
+      "sha256": "22a2cc57e79dab931b52f16514d648a8964d4c4c3c3ee6d58a8ff6f47239d675",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda-sources/provenance.json": {
+      "sha256": "f14cbaf602c8f811d0ac4f25e6f9084873ced5c165248491f03dd50892427188",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda-sources/skipped-first.json": {
+      "sha256": "c947214201f956a9b073bd08be92935883e1f97df632e6035e488a00ae82e94e",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda-sources/upstream.json": {
+      "sha256": "13f8ced17c8f4d3d979825354250543485aa7944cdba3f8f36b743f4deb66edf",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/ramda.json": {
+      "sha256": "8dccf52f187a5cb5fb2878b26358a72adb2624aa96f488edba15586b05526b73",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/run.json": {
+      "sha256": "acae63aa1b2a278e0de403a3fa892b1250e4667fca2fe1a6870550a45b878711",
+      "classification": "finite control",
+      "origin": "own execution; run summary"
+    },
+    "evidence/02-campaign/stages.json": {
+      "sha256": "ef1799afeb30c992aadb84e0978eb78f68ad0adeb804cdcd32c681a248603e7e",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/stderr.txt": {
+      "sha256": "405581be4e20a8fb9c08123a6a3ec97f378e8d2a96dbd100c0e5180b3e1b8590",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/stdout.txt": {
+      "sha256": "6b3830c883e716bc7d26a7ca9b7f6d2c00aea04743e79aeafb3d213ff6866af5",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/supervisor-freeze.after.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/02-campaign/supervisor-freeze.before.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/api-calls.json": {
+      "sha256": "2ac9ca85d24c3ae0c03725ffb7058a2df4cf398e8f3a8786775388dd84d97fc5",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/cli-reproduce.command.json": {
+      "sha256": "5bcd4517c5cf420996dc999d8c841e8cdc1ea4096cfd7698aab5ec7abd39f9c1",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/cli-reproduce.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/cli-reproduce.stdout.txt": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/d3-admission.json": {
+      "sha256": "21ff3f1357417c999f28938154452397af2a4a5ce5d78d3600ef720992498e54",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/d3-cycle-diagnostic.json": {
+      "sha256": "9b62ef7de8bca7dd015e54cc7e312a5c936431a19cb8e797f3ef8fec10809533",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/diagnostic/LICENSE": {
+      "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/diagnostic/bound-function.js": {
+      "sha256": "8b901f5070230e81ec8e542973c1c49f9b44e79c668312b83b1cfb6b269f510a",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/diagnostic/nice.js": {
+      "sha256": "fe732f4c7e119b34ddfb5bc37281d939fc106f907601086bf213ccf4bfcc237c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/evidence.json": {
+      "sha256": "f8de34ecc9178a5659dac77e7334883ac1800fccbd5a4462262ff405363fce86",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/freeze.after.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/freeze.before.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/checks.json": {
+      "sha256": "36ed46d60e2d4fe1e6397ef7db77631aba751a4a5f21bc16829e56404add12e4",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/model.json": {
+      "sha256": "12fd7969a3ac2cbf83c9a4644df76f0a117bf42f96ed2f9b82415936a1aa337e",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/native.json": {
+      "sha256": "2849fa1f50c1c62a1c41f430b50a8f418482755208b2d5dfeb29744efb9fc1f1",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/negative.stale-model.json": {
+      "sha256": "948b33cfd5ccd9d1f7a86af4d4966857511ae7442132032cfccf640229e90127",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/negative.stale-source.json": {
+      "sha256": "38512a8f49efa30d9366ec6c32f43e4c8a7ea20f6cffc522c80262517c881cba",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/positive.evidence.json": {
+      "sha256": "402863e3a122ccef199c13b66bd9f2dddb4feb8f4fcd500bf3b28fefab444ab1",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/positive.original-reproduced.json": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/positive.relocated-reproduced.json": {
+      "sha256": "03c76eb0d5761b78fc2ab26afb9d5d2285ec1cde980dc7c05aa98e9df59c2e10",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/positive.report.json": {
+      "sha256": "70dd8b98b96ffd29c76387366f9e10e60245defefe698d1e42eca9b0b7af2642",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/positive.reproduced.json": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/sources.json": {
+      "sha256": "192d77690774f7ac5b4482c0baf5075cca1a4263a3309ff0ddcf94590bb12724",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/total.receipt.json": {
+      "sha256": "a3a219314d711d720f7ce4338579848b806d912edd75833bc2912d5af63e7ffe",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/total.report.json": {
+      "sha256": "71f08c0ba2145046e2a26449d4d211d9130bfecdda3ef6f878ac52a5f42ed178",
+      "classification": "universal proof",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/total.warm.json": {
+      "sha256": "90080a88b4e40aa59c0b60cb4feb885e3639e77609358d9fb2ae8f599ed4249f",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic/weak.report.json": {
+      "sha256": "d22d9e5abb14e1d63b8278ab1aecf3457491f9c2379ee3e15c1e21148faa1fcc",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/harmonic-result.json": {
+      "sha256": "36ed46d60e2d4fe1e6397ef7db77631aba751a4a5f21bc16829e56404add12e4",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/model.json": {
+      "sha256": "d7f59beabb748c992ca65a8812166e4f73173b5fdee0b5ff67054cc4cdc6c6df",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-cycle100.command.json": {
+      "sha256": "2470427212d44c6ccb1cae40bf087305a14db0f7aa5a5713d3ae8211cd05419e",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-cycle100.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-cycle100.stdout.txt": {
+      "sha256": "4ad0364f568a6a39390ac529b1a95b69dac3185cb1c3f2485637e085d4763d11",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-cycle5.command.json": {
+      "sha256": "e70f06c6d416f9dc3928c832d8c78f15ccae1c20e175ef623f1619edb3fb8d0b",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-cycle5.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-cycle5.stdout.txt": {
+      "sha256": "50645b2b8093a7f59191c07b3d311af3556690f8661d320d5264a6a94d2ae79c",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-d3.command.json": {
+      "sha256": "29dd2129bd2d05056a9af7541e552bf2aeb35840d7525a45c3b5b7df59f51bcc",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-d3.json": {
+      "sha256": "ebae448af4ccb43f789e2f05555d8e5cfe391c7bded1d434c664fd9269694028",
+      "classification": "independent native reproducer",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-d3.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-d3.stdout.txt": {
+      "sha256": "8ba8f303e10828035024812ca3ffbccba2dab6a190bf9dec2fee45b3bf958424",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-harmonic.command.json": {
+      "sha256": "5d4dc775e5c5462df5b884dadc04fc82f940f3a7bec8cee9febcae2f5d991f36",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-harmonic.json": {
+      "sha256": "44afb1c6eb1e7454a6307d4a5b86005956058da692fd4805b3c8b13cc841169c",
+      "classification": "independent native reproducer",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-harmonic.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/native-harmonic.stdout.txt": {
+      "sha256": "7c0a4e5d19f19587dcaef8f2943c354e5df9b1d85e2c55de831e12c9cb223664",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/query-inputs/harmonic-positive.json": {
+      "sha256": "f0deba3d7643815b701f31f0df2f77dbd34f6ddd685942b879d2bf3908a21107",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/03-final/query-inputs/harmonic-total.json": {
+      "sha256": "4adf6893670af9aa8c8d7767385d1badadaea65d8fb561766cf580852d9282bb",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/03-final/query-inputs/harmonic-weak.json": {
+      "sha256": "2cfa300c5f0092b4ebcea202c689019f00521f3e35ccd49e4238f434e1b8d0d5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/03-final/query-inputs/ramda-off-by-one.json": {
+      "sha256": "0b29596dcadf9d20601f8dcd83051c9bf96b6e19f86e0e37a97dda0659a2daf5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/03-final/query-inputs/ramda-skipped-first.json": {
+      "sha256": "244c4ca575fa3aa2dd8b7784aaed416368dcf53bd3f51c45dfbf8d09489962b5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/03-final/query-inputs/ramda-upstream.json": {
+      "sha256": "a14a7fdc124b41aab206f1e8a55fb5f93df40f2ecf6752fe08f1e4a3bf6b1256",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "evidence/03-final/ramda/off-by-one.report.json": {
+      "sha256": "0c7ddd4c4c406b7d671c52f0fa7b868bb4cb94096e68653028904159f3be08ae",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda/skipped-first.report.json": {
+      "sha256": "0743a13414ed9afa29e3d9c2ee30b21e0e88215d7818b0044e4f5045cedffa85",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda/upstream.report.json": {
+      "sha256": "f83989c901cc1e9832a5e7862e477dbb199cd6437a74090400cea29312d8d544",
+      "classification": "universal proof",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda-sources/LICENSE.txt": {
+      "sha256": "62fba31dc0582fb6ee413403e47f2de319a4f14140ebd71be094c1f8c7a839ff",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda-sources/off-by-one.json": {
+      "sha256": "22a2cc57e79dab931b52f16514d648a8964d4c4c3c3ee6d58a8ff6f47239d675",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda-sources/provenance.json": {
+      "sha256": "f14cbaf602c8f811d0ac4f25e6f9084873ced5c165248491f03dd50892427188",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda-sources/skipped-first.json": {
+      "sha256": "c947214201f956a9b073bd08be92935883e1f97df632e6035e488a00ae82e94e",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda-sources/upstream.json": {
+      "sha256": "13f8ced17c8f4d3d979825354250543485aa7944cdba3f8f36b743f4deb66edf",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/ramda.json": {
+      "sha256": "8dccf52f187a5cb5fb2878b26358a72adb2624aa96f488edba15586b05526b73",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/run.json": {
+      "sha256": "2437eff0ff913347202395a0b2a59d7991e755b74f34db816d2cf99a0af92da1",
+      "classification": "finite control",
+      "origin": "own execution; run summary"
+    },
+    "evidence/03-final/stages.json": {
+      "sha256": "1f509a7ec1a83939b4e35612b90d287912559130a27823fdaa1b6730acd49684",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/stdout.txt": {
+      "sha256": "8ba30e399ba4da1499f5e31ff5926fd23841897c0738c221c3f5076e0d7b480d",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/supervisor-freeze.after.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/03-final/supervisor-freeze.before.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "evidence/04-drift-controls/correction.json": {
+      "sha256": "f605abd685130dfd13758e3255cc3e7a9f09e07a4017d0dc65488737c1b6c299",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/provenance.patch": {
+      "sha256": "1434bcdec8513c871fd028a00ad881b85ad8344c6565b26ca13bde35d7c33512",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/provenance.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/provenance.stdout.txt": {
+      "sha256": "54c1dcefee9bbeb12d2cbb279b332ddded4dd30461ee3c3826170db0bc7add2d",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/result.json": {
+      "sha256": "3f9f9a3082f6960df9f257ddc92ed603127ed1f012436100629fc675a5b466c2",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/run.py": {
+      "sha256": "cf2ea23a84ae3e4cf7637b7bc0f843aa9698a063f71a98b2dddc85bf6af60b71",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/source.patch": {
+      "sha256": "acde8d259b293e0d27446601c5a793d42571c793ea881eb977a6d3a7ff2b7e5f",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/source.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/04-drift-controls/source.stdout.txt": {
+      "sha256": "54c1dcefee9bbeb12d2cbb279b332ddded4dd30461ee3c3826170db0bc7add2d",
+      "classification": "unknown/unsupported",
+      "origin": "failed auxiliary lane wait; no source-verifier command ran; see correction.json"
+    },
+    "evidence/05-drift-controls/provenance.patch": {
+      "sha256": "89c06300203440c8d5c9570f2a2de5915516f1ec5747a8517175530d1994c837",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/05-drift-controls/provenance.stderr.txt": {
+      "sha256": "ad9b321d1c0af59bcd2e6bb7c1453b6c53c8d2dd538e67f6632a14f6ec3f6035",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/05-drift-controls/provenance.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/05-drift-controls/result.json": {
+      "sha256": "d4daa6f9c86e678828b483e2bff048dcb7a51d4a62787df328e8f2ce4a2ef805",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/05-drift-controls/run.py": {
+      "sha256": "32eb2c9757c64a4381a7a72fa0960cfdbad544db624354bcd6da79972d019991",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/05-drift-controls/source.patch": {
+      "sha256": "4914bfc40cbae44a49cd597a7c230fb9e832466859e19e73ebe2db848dc74fe5",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/05-drift-controls/source.stderr.txt": {
+      "sha256": "dc9bb7fff4a92c9dd58949f79862e417e4cf65f5c7d3fcd7b94c82e40fd69b05",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/05-drift-controls/source.stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/06-integrity-setup/failure.json": {
+      "sha256": "13c7966be459cb44d478eae4d40c02a5aaf6323871fee329febeb5bbdbba7cbb",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "evidence/audit.py": {
+      "sha256": "235565c6b31c59d414cc9e0ea285fe6a0d0d015311a3871175c760bf62e31e16",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "inputs.json": {
+      "sha256": "700ad9ebfbd8ee57e652b6f4cbd1b6eae64dfd8d55f7ec87f3fa1b8e5992e7a5",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "integrity.json": {
+      "sha256": "babff2c71eaf9d4764e34810fc360e7a51e6e46ff28832e5d9530833725c1864",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    },
+    "pins/d3-array/LICENSE": {
+      "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
+      "classification": "finite control",
+      "origin": "inherited pinned input, locally checked; not a theorem"
+    },
+    "pins/d3-array/nice.js": {
+      "sha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+      "classification": "finite control",
+      "origin": "inherited pinned input, locally checked; not a theorem"
+    },
+    "pins/d3-array/ticks.js": {
+      "sha256": "79eac11e378fd34364801fd59534cfb3b34f46e54693537ad65c06c93bcb9a0f",
+      "classification": "finite control",
+      "origin": "inherited pinned input, locally checked; not a theorem"
+    },
+    "provenance.json": {
+      "sha256": "eb213e56d305a3a0a5185107bcb45351dc9b775aaa2f8b68ddcd49b0e7b150bd",
+      "classification": "finite control",
+      "origin": "inherited pinned input, locally checked; not a theorem"
+    },
+    "report.md": {
+      "sha256": "2a6bfdba3f141cde2bdbb974b0670df98ae83f16e83983e82d7051a76658e283",
+      "classification": "finite control",
+      "origin": "own package code, run metadata, documentation or finite control; not a theorem"
+    }
+  },
+  "selfHash": "Not self-referential; SHA256SUMS includes this manifest."
+}

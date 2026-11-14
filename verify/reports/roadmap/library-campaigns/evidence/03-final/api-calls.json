@@ -1,0 +1,58 @@
+[
+  {
+    "api": "checkHarmonic({outputDir})",
+    "productionChecker": "verify/examples/simple-statistics/check-harmonic.mjs",
+    "requests": [
+      {
+        "file": "harmonic-total.js",
+        "timeoutMs": 60000,
+        "cache": "fresh temporary directory"
+      },
+      {
+        "file": "harmonic-total.js",
+        "timeoutMs": 60000,
+        "cache": "warm"
+      },
+      {
+        "file": "harmonic-positive.js",
+        "timeoutMs": 60000,
+        "evidence": true
+      },
+      {
+        "file": "harmonic-weak.js",
+        "timeoutMs": 60000
+      }
+    ],
+    "replay": [
+      "preferred",
+      "original",
+      "relocated",
+      "stale-source",
+      "stale-model"
+    ]
+  },
+  {
+    "api": "verifyFile(nice.js, {timeoutMs:1000})",
+    "requests": 1,
+    "annotation": "none",
+    "expected": "unsupported, no solver"
+  },
+  {
+    "api": "checkPredicateSearch()",
+    "productionChecker": "verify/examples/ramda/check.mjs",
+    "requests": [
+      {
+        "name": "upstream",
+        "timeoutMs": 60000
+      },
+      {
+        "name": "off-by-one",
+        "timeoutMs": 60000
+      },
+      {
+        "name": "skipped-first",
+        "timeoutMs": 60000
+      }
+    ]
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "command": [
+    "python3",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/evidence/05-drift-controls/run.py"
+  ],
+  "checks": [
+    {
+      "id": "source",
+      "classification": "finite control",
+      "origin": "own execution",
+      "argv": [
+        "/Users/rick/.local/bin/node",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-234xjr9u/verify/reports/roadmap/library-campaigns/check.mjs",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-234xjr9u/output"
+      ],
+      "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-234xjr9u",
+      "start": "2026-11-14T01:32:49.445631+00:00",
+      "end": "2026-11-14T01:32:49.495469+00:00",
+      "codeHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+      "checkerSha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
+      "timeoutSeconds": 20,
+      "exitCode": 1,
+      "timedOut": false,
+      "remainingProcessGroup": false,
+      "expectedDiagnostic": "Source/provenance drift: verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js",
+      "originalSha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+      "changedSha256": "73dc792fd18ad5f8b07ddaad43a742256afdac8f3b8643f560dd2489d67c8de7",
+      "noSourceVerification": "Refusal before semantic imports; checked by the exact drift diagnostic below.",
+      "cpuScope": "Only builtin imports, Git ancestry and hashes of 47 small inputs. No parser, source verification or solver is reached. This finite input-gate check is not CPU-heavy.",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "dc9bb7fff4a92c9dd58949f79862e417e4cf65f5c7d3fcd7b94c82e40fd69b05",
+      "status": "PASS",
+      "scratchRemoved": true
+    },
+    {
+      "id": "provenance",
+      "classification": "finite control",
+      "origin": "own execution",
+      "argv": [
+        "/Users/rick/.local/bin/node",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-3b8erots/verify/reports/roadmap/library-campaigns/check.mjs",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-3b8erots/output"
+      ],
+      "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-3b8erots",
+      "start": "2026-11-14T01:32:49.517891+00:00",
+      "end": "2026-11-14T01:32:49.558358+00:00",
+      "codeHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+      "checkerSha256": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
+      "timeoutSeconds": 20,
+      "exitCode": 1,
+      "timedOut": false,
+      "remainingProcessGroup": false,
+      "expectedDiagnostic": "Source/provenance drift: verify/reports/roadmap/library-campaigns/provenance.json",
+      "originalSha256": "eb213e56d305a3a0a5185107bcb45351dc9b775aaa2f8b68ddcd49b0e7b150bd",
+      "changedSha256": "5c743cc75be82312853609bc38175fc7d6fe3413dd8b5f8f950cd050d30ea5a5",
+      "noSourceVerification": "Refusal before semantic imports; checked by the exact drift diagnostic below.",
+      "cpuScope": "Only builtin imports, Git ancestry and hashes of 47 small inputs. No parser, source verification or solver is reached. This finite input-gate check is not CPU-heavy.",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "ad9b321d1c0af59bcd2e6bb7c1453b6c53c8d2dd538e67f6632a14f6ec3f6035",
+      "status": "PASS",
+      "scratchRemoved": true
+    }
+  ]
+}

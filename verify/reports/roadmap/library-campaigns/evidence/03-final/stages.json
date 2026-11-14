@@ -1,0 +1,62 @@
+[
+  {
+    "id": "native-harmonic",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:28:59.811Z",
+    "finishedAt": "2026-11-14T01:28:59.837Z"
+  },
+  {
+    "id": "native-d3",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:28:59.838Z",
+    "finishedAt": "2026-11-14T01:28:59.863Z"
+  },
+  {
+    "id": "native-cycle100",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:28:59.864Z",
+    "finishedAt": "2026-11-14T01:29:01.867Z"
+  },
+  {
+    "id": "native-cycle5",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:29:01.867Z",
+    "finishedAt": "2026-11-14T01:29:03.870Z"
+  },
+  {
+    "id": "cycle-diagnostic",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:29:03.870Z",
+    "finishedAt": "2026-11-14T01:29:03.875Z"
+  },
+  {
+    "id": "d3-admission",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:29:03.875Z",
+    "finishedAt": "2026-11-14T01:29:03.880Z"
+  },
+  {
+    "id": "harmonic",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:29:03.880Z",
+    "finishedAt": "2026-11-14T01:29:44.521Z"
+  },
+  {
+    "id": "ramda",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:29:44.521Z",
+    "finishedAt": "2026-11-14T01:29:54.206Z"
+  },
+  {
+    "id": "query-inputs",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:29:54.206Z",
+    "finishedAt": "2026-11-14T01:29:54.214Z"
+  },
+  {
+    "id": "freeze-and-model",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:29:54.214Z",
+    "finishedAt": "2026-11-14T01:29:54.437Z"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "classification": "unknown/unsupported",
+  "origin": "own inspection of retained stdout, stderr and timedOut fields",
+  "observed": "Both attempts waited for the shared lane and were killed by the 20-second outer bound before Node ran. No drift refusal was measured.",
+  "invalidatedFields": [
+    "checks[*].noSourceVerification"
+  ],
+  "reason": "The first capture script wrote a premature explanation even when the lane timed out. Raw logs, script, patch and nonpassing result remain unchanged.",
+  "replacement": "../05-drift-controls/result.json",
+  "solverResult": false,
+  "coreDefect": false
+}

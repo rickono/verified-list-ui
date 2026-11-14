@@ -1,0 +1,8 @@
+--- /Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js	2026-11-13 19:20:37
++++ /Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/.drift-control-234xjr9u/verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js	2026-11-13 19:32:49
+@@ -21,3 +21,5 @@
+     prestep = step;
+   }
+ }
++
++// byte drift control
