@@ -23,14 +23,17 @@ fairness for liveness. W requires both Q and V, with trust and scope visible.
 Steps 1 and 2 are complete. H and G landed on main after independent exact-patch
 reviews; P landed in PR #10 after two independent review axes. Numeric Gate1
 and heap Gate2 are merged. C1 is merged in PR #12 with both admission fixes,
-49 focused tests and a 371-test combined suite. The selected C2a protocol unit
-is being implemented. K passed both independent reviews; guarded throws passed
-a separate production review. Their combined tree passed 477 tests. The numerical
-campaign also passed independent review. These units remain unmerged while a
-resource-budget investigation addresses inconclusive fresh composition requests.
-All fifteen current composition queries match a prior successful graph proof,
-but the fresh 60-second request remained unknown. Conditional-progress designs
-are complete and their cross-judge is recovering from a transport failure.
+49 focused tests and a 371-test combined suite. C2a passed its standalone
+390-test suite and is undergoing independent proof and native-replay reviews.
+K passed both independent reviews; guarded throws passed a separate production
+review. Their combined tree passed 477 tests, followed by 483 after the reviewed
+resource-boundary change. A 180000 ms request proved the three-module graph
+cold and in a fresh audit; all fifteen postconditions and 36 phase plans match
+the earlier source. Historical 60000 ms unknowns remain. PR #14 is open.
+The numerical campaign passed independent historical review; its runner is
+being maintained for the current model and to remove a private-history dependency.
+The completed temporal judgment selects the conditional source-completion rule;
+the first production vertical is now being implemented.
 [The landing receipt](landing-summary.md) records the merges and checks.
 The numbered list below preserves the execution order chosen at the
 start; the remaining steps are still in progress.

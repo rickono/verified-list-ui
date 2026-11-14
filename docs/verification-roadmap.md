@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K passed its two independent reviews; guarded throws passed a separate production review. Their combined suite passed 477 tests, and the numerical campaign passed independent review. These units remain unmerged. Composition has successful full-domain proofs but additional 60-second requests time out honestly; a resource-budget investigation is active. C2a is being implemented. Both temporal designs are complete, with a recovered cross-judge active.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K and guarded throws passed independent reviews; their combined source passed 477 tests, followed by 483 with the reviewed resource ceiling. A 180000 ms request verified the three-module Reverse/take graph cold and in a fresh audit; historical 60000 ms unknowns remain. PR #14 is open. Numerical campaign maintenance is in progress after a model change. C2a passed its standalone 390-test suite and awaits two independent reviews. The temporal judgment selects a source-completion rule; implementation is in progress.
 
-All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.
+All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites, completed reviews, and pending integration. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD

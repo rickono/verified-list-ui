@@ -4,9 +4,10 @@ This checkpoint combines the independently reviewed guarded-throw unit and
 K implementation with public C1 main `77c95f3`. Both K review axes pass.
 The combined suite passed 477 of 477 tests at `59ee1dc`, with zero failures,
 skips or cancellations, a clean checkout, and unchanged recorded inputs.
-[The receipt](final/receipt.json) binds that exact tree; later imports contain
-only reports and campaign scripts. K remains unmerged while publication and
-the separate resource-budget investigation proceed.
+[The receipt](final/receipt.json) binds that exact tree. Report and campaign
+imports left those tested inputs unchanged. The later resource amendment below
+changes the budget boundary and has its own 483-test receipt. K remains unmerged
+in PR #14; current-model numerical campaign maintenance is still pending.
 
 The only source conflict was the loop iteration context. The resolution keeps
 K's context for the test, body and update, and the collector span used by throw
@@ -62,18 +63,43 @@ on Reverse's invariant preservation. Take verified; the caller remained
 All 15 current postcondition SMT strings match the earlier successful campaign
 byte-for-byte. [The comparison](composition-current/query-comparison.json) and
 [raw result](composition-current/cold.json) preserve that distinction. A separate
-isolated task is testing a larger resource budget without changing contracts,
+isolated task tested a larger resource budget without changing contracts,
 proof domains or witness limits. The 477-test pass does not resolve this query's
 resource limit.
 
+### Reviewed resource amendment
+
+The [budget unit](../composition-budget/README.md) admits caller requests through
+180000 ms while retaining the 10000 ms default, one shared graph deadline,
+100 ms native replay, and witness-only limits. The implementation `7feca28`
+passed 46 focused checks and one final full run of 483 tests. Its recorded
+verifier and test inputs match this branch. The coordinator ran its inventory
+checker; the full suite was not repeated for subsequent report-only imports.
+
+An [independent review](../review-composition-budget/report.md) passes. It checked
+67 artifact hashes, current source bytes, all 15 postconditions and all 36
+phase queries/models/replay guards, and ran compact API/CLI and virtual-clock
+checks. The resource boundary is the only production logic amendment.
+
+At the current model `09d21829`, the recorded cold request and fresh audit each
+verified Reverse, take and their caller; warm replay hit all three receipts.
+These are those requests, not a future completion guarantee or evidence that
+any individual query needs more than 60 seconds. The larger first scheduling
+turn explains the diagnostic observation; the historical 60-second unknowns
+remain preserved. The amendment also records fresh harmonic failure evidence
+and refusal of the old model's artifact.
+
 ## Maintained numerical campaign
 
-The [numerical campaign](../library-campaigns/report.md) passed all ten stages
+The historical [numerical campaign](../library-campaigns/report.md) passed all ten stages
 and [independent review](../review-library-campaigns/report.md). It preserves
 the harmonic-mean total-return proof and genuine reciprocal-overflow failure,
 Ramda's generic first-match theorem with seeded controls, and native d3-array
 coverage failures. The d3 source remains formally unsupported; timeouts and
-the separate instrumented cycle argument are not solver proofs.
+the separate instrumented cycle argument are not solver proofs. Its model-bound
+receipts remain historical. The campaign runner still pins old verifier hashes
+and requires an unpublished validation commit; a separate maintenance unit is
+repairing that boundary before a fresh full campaign under the current model.
 
 The numerical review ran an 800 ms native timeout control outside the requested
 serial lane and records that policy miss. The coordinator repeated that check

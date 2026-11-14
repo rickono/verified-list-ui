@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-13",
-  "status": "A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K passed its two independent reviews; guarded throws passed a separate production review. Their combined suite passed 477 tests, and the numerical campaign passed independent review. These units remain unmerged. Composition has successful full-domain proofs but additional 60-second requests time out honestly; a resource-budget investigation is active. C2a is being implemented. Both temporal designs are complete, with a recovered cross-judge active.",
-  "edgeMeaning": "All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.",
+  "status": "A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K and guarded throws passed independent reviews; their combined source passed 477 tests, followed by 483 with the reviewed resource ceiling. A 180000 ms request verified the three-module Reverse/take graph cold and in a fresh audit; historical 60000 ms unknowns remain. PR #14 is open. Numerical campaign maintenance is in progress after a model change. C2a passed its standalone 390-test suite and awaits two independent reviews. The temporal judgment selects a source-completion rule; implementation is in progress.",
+  "edgeMeaning": "All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites, completed reviews, and pending integration. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -329,7 +329,7 @@
         "H",
         "B"
       ],
-      "resultSummary": "Heap-writing loops, guarded throws and C1 compose in477passing tests. Two K reviews PASS. Reverse/take content and length proofs and edit controls are recorded; some independent/current60-second requests remain unknown, never counted as proofs. Publication and resource investigation pending."
+      "resultSummary": "Heap-writing loops, guarded throws and C1 passed477tests; the reviewed larger resource boundary passed483. Reverse/take length and contents verify cold and in a fresh180000ms audit, with genuine edit controls. Historical60-second unknowns remain. PR14 is open; integration is pending."
     },
     {
       "id": "P",
@@ -368,7 +368,7 @@
         "K",
         "P"
       ],
-      "resultSummary": "Pinned harmonicMean and Ramda campaigns plus independent native d3 reproducers are maintained and reviewed; no d3 solver proof, novelty or upstream-fix claim. Integration and K prerequisite remain pending."
+      "resultSummary": "Pinned harmonicMean and Ramda proofs plus independent native d3 failures passed historical campaign/review. No d3 solver proof or novelty/fix claim. Current-model campaign runner maintenance and K integration are pending."
     },
     {
       "id": "R",
@@ -387,7 +387,8 @@
       "capabilityDeps": [
         "G",
         "H"
-      ]
+      ],
+      "workInProgress": "C2a tested c1df5f6, standalone390/390; two independent reviews pending. Not integrated; no full-node completion."
     },
     {
       "id": "S",
@@ -406,7 +407,8 @@
       "capabilityDeps": [
         "G",
         "H"
-      ]
+      ],
+      "workInProgress": "C2a tested c1df5f6, standalone390/390; two independent reviews pending. Not integrated; no full-node completion."
     },
     {
       "id": "T",
@@ -445,7 +447,8 @@
         "S",
         "T",
         "B"
-      ]
+      ],
+      "workInProgress": "Temporal judgment357635ce selects per-invocation source/exit correspondence with explicit settlement premises. First source-completion vertical is being implemented; no source liveness theorem delivered yet."
     },
     {
       "id": "V",
@@ -753,15 +756,18 @@
     "integrated": false,
     "branch": "work/heap-loops-and-throws",
     "implementationCommit": "bc9fec06ff535da4fa87012904775ec6eece2804",
-    "testedTree": "59ee1dcf7d646d46fdfc847f94e0798c631d7908",
-    "fullTests": 477,
+    "testedTree": "d874e6e355d82e2eb4b8544469739904c26089e8",
+    "fullTests": 483,
     "report": "../verify/reports/roadmap/K-integration/README.md",
     "reviews": {
       "ownership": "4adee93ccff69dd36281791eab5fadb731d6ec18",
       "semantics": "c7754225f0d7ec2aac71805bd183d09941252fe1"
     },
     "compositionReport": "../verify/reports/roadmap/library-composition/README.md",
-    "resourceStatus": "Some60-second requests remain unknown. All15postcondition SMT strings equal a prior successful whole-graph proof. No changed contract or bounded proof."
+    "resourceStatus": "Reviewed180000ms shared admission ceiling, default10000ms unchanged. One recorded cold graph and one fresh audit verified all3targets, warm replay hit3. All15postconditions and36phase plans match. Historical60000ms unknowns remain; no future completion guarantee.",
+    "testedCodeHead": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+    "historicalCombinedCode": "59ee1dcf7d646d46fdfc847f94e0798c631d7908",
+    "historicalCombinedTests": 477
   },
   "numericalCampaignDelivery": {
     "integrated": false,
@@ -770,6 +776,20 @@
     "reviewCommit": "7baad71df9d62fee14a9664e14fcaf80e994aab8",
     "report": "../verify/reports/roadmap/library-campaigns/report.md",
     "stages": 10,
-    "scope": "Universal harmonic singleton total-return and Ramda predicate theorem; genuine harmonic overflow and independent native d3 cases. No solver proof of d3."
+    "scope": "Universal harmonic singleton total-return and Ramda predicate theorem; genuine harmonic overflow and independent native d3 cases. No solver proof of d3.",
+    "maintenanceStatus": "Historical campaign and independent review pass at model13874e72. Current model09d21829 needs fresh runner execution; strict historical runtime pins and unpublished-history dependency are under repair. Existing historical artifacts are preserved."
+  },
+  "resourceBudgetDelivery": {
+    "integrated": false,
+    "implementationCommit": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+    "reviewCommit": "6814713e95685c2c1bafd6f47adf73de5776bf91",
+    "fullTests": 483,
+    "focusedTests": 46,
+    "report": "../verify/reports/roadmap/composition-budget/README.md",
+    "review": "../verify/reports/roadmap/review-composition-budget/report.md",
+    "defaultMs": 10000,
+    "maxMs": 180000,
+    "nativeReplayMs": 100,
+    "replayLimit": 256
   }
 }
