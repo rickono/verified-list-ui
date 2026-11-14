@@ -1,0 +1,33 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:78970) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"event":"native","name":"baseline","samples":179,"wrapperFailures":0}
+{"event":"start","name":"warm","requestBudgetMs":60000,"mode":"readwrite"}
+{"event":"result","name":"warm","ms":75.12008400000002,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"verified"}],"hits":["Reverse","reverseFirstTwo","takeImplementation"],"solved":[],"written":[],"rejected":[]}
+{"event":"native","name":"wrong-order","samples":179,"wrapperFailures":21}
+{"event":"native","name":"weak-contract","samples":179,"wrapperFailures":0}
+{"event":"start","name":"weak-contract","requestBudgetMs":60000,"mode":"readwrite"}
+{"event":"result","name":"weak-contract","ms":60135.527917,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"unknown","reason":"request-timeout"}],"hits":["Reverse"],"solved":["reverseFirstTwo","takeImplementation"],"written":["takeImplementation"],"rejected":[]}
+{"status":"ISSUES","output":"/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/logs/campaign/run-9K02OO","records":20,"observedLimits":[{"name":"wrong-order-audit","fn":"Reverse","status":"unknown","reason":"request-timeout","obligation":{"target":"/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse","phase":"postcondition","domain":"full","postcondition":6,"postconditionCount":9,"backend":"z3"}}]}
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'request-timeout'
+- 'contract-gap'
+
+    at campaign (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/campaign.mjs:235:14)
+    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/check.mjs:4:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'request-timeout',
+  expected: 'contract-gap',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.1

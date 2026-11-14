@@ -1,0 +1,197 @@
+{
+  "status": "ISSUES",
+  "requestBudgetMs": 60000,
+  "head": "b5c8828f0c281df812751371f651603481f3aefb",
+  "records": [
+    {
+      "name": "inputs",
+      "sha256": "15ed00efe19561ad436890ad810f3565df9ae97e11d8aa6735abe54730cbb624"
+    },
+    {
+      "name": "baseline-graph",
+      "sha256": "1cbfe12304241df36ce10004df7028de1d2f565ed8be10c12a4dd62a3a3d471b"
+    },
+    {
+      "name": "baseline-native",
+      "sha256": "1c08b0c60b2f1c7bebd5188ce736e296083a6b79483a9a7d8dfd0168f53bd069"
+    },
+    {
+      "name": "plan-absent",
+      "sha256": "fd5a4d8e98fb83767092b96dee72334d511910c44cf2ee63479d2ef75b9ef552"
+    },
+    {
+      "name": "cold",
+      "sha256": "cd309406a2e384635048574b6eb80d42d58ed6c262b71b8ece6f1f9bb9cc0fe5"
+    },
+    {
+      "name": "baseline-plan",
+      "sha256": "69c6ee1b4581858b62fe0eebbc3d57c24ee74051c8ca495029585e99e1480ae8"
+    },
+    {
+      "name": "warm",
+      "sha256": "b41b1ef2bd7465cca6695e2f503d06622d57e210edcbaf05ba3c5c8041a457db"
+    },
+    {
+      "name": "baseline-audit",
+      "sha256": "b7efb2ecc120a06d12612aa356b2963451eca0c2df50f61edea5af8de34fe219"
+    },
+    {
+      "name": "wrong-order-graph",
+      "sha256": "53bd41e06b0867c1987e6a85098541f5d05097a298c572e3abbc18d814ef5b07"
+    },
+    {
+      "name": "wrong-order-native",
+      "sha256": "0fd88cc439437352e616c936ea966a28b1f2fdc7d1d78489d6bb9e6e1e5e84f1"
+    },
+    {
+      "name": "wrong-order-plan",
+      "sha256": "76cdbaa0bafc97845a27614183444b62ceb09d27660e2a50b2ac18d5c967c6a9"
+    },
+    {
+      "name": "wrong-order",
+      "sha256": "5f25f5babde26d4f536446115aac4a909afeec35de4cd93f31ae236c3c0a90e0"
+    },
+    {
+      "name": "wrong-order-replay",
+      "sha256": "cdcbbd94a975842b21630e34250e89b62917d9eb51594c6ee3a9bb0a65505808"
+    },
+    {
+      "name": "wrong-order-warm",
+      "sha256": "68c0a091f5a25e39b69a383f67f57ee3eee5928f2ba4b2c7bca88518d7afd76d"
+    },
+    {
+      "name": "wrong-order-audit",
+      "sha256": "ae01e591212790e845693261f38897ec5961000f8c2c66da7107d4b79761a12f"
+    },
+    {
+      "name": "weak-contract-graph",
+      "sha256": "f47de47e31b4b4c43e361d4f98fb83cc5acccf0ae75b6a72dbeba5d573d01e7d"
+    },
+    {
+      "name": "weak-contract-native",
+      "sha256": "1c08b0c60b2f1c7bebd5188ce736e296083a6b79483a9a7d8dfd0168f53bd069"
+    },
+    {
+      "name": "wrong-order-evidence-after-contract-edit",
+      "sha256": "c55bbf26df2a73e1bf13b4597ffa5d0102ec90a09e69fa21d52960b6fa6a50e0"
+    },
+    {
+      "name": "weak-contract-plan",
+      "sha256": "6d6c088a92648c73a12015e6aac0d2179375764d7b7b3c5526ee24aee9e2a9dc"
+    },
+    {
+      "name": "weak-contract",
+      "sha256": "acc45fbeed1768e404fb563a17cff6b089becb477c6e1510fd590c452c1e3550"
+    },
+    {
+      "name": "weak-contract-warm",
+      "sha256": "f73184aa21659ef8113d9fa2594f5cd9fa24ad2b08a4688ac1642d1c9ae56c71"
+    },
+    {
+      "name": "weak-contract-audit",
+      "sha256": "b5910e9ec9ce8adbad5a97adb196edc10f6d4aab9fbe04eb332a0f11257c95a8"
+    },
+    {
+      "name": "lost-temp-mutant-graph",
+      "sha256": "d2719483a5b83d6084ac81de708827fbd5cd02e6364bb3c6eaaefd24871f3fed"
+    },
+    {
+      "name": "lost-temp-mutant-native",
+      "sha256": "942cf96c56bb0c87d6ba073aa474c47bd74031f1568dae2258c38cadbed15cf6"
+    },
+    {
+      "name": "lost-temp-plan",
+      "sha256": "43b22ba7e26c98525d5849d9e4689974280b6e9465b2ca19b14645f8daa05674"
+    },
+    {
+      "name": "lost-temp",
+      "sha256": "990411433aa591072c8c8ec5d3e3f4ff636feff2c4c530af83ace9e890d4f1ae"
+    },
+    {
+      "name": "lost-temp-replay",
+      "sha256": "4f9a411dfb8986b29a647679f71fc054251c11def24eda86b5d10df67752e60f"
+    },
+    {
+      "name": "lost-temp-warm",
+      "sha256": "7a94f2a29b79d6204d222c809bb18f0eb96d53f7ce9a8ccf6b5c758a6b727652"
+    },
+    {
+      "name": "lost-temp-warm-replay",
+      "sha256": "4f9a411dfb8986b29a647679f71fc054251c11def24eda86b5d10df67752e60f"
+    },
+    {
+      "name": "lost-temp-audit",
+      "sha256": "9e239ba1d1edf68939526776dbc908ae25e32c5186f21d5a502cb9fda7ee472c"
+    },
+    {
+      "name": "lost-temp-audit-replay",
+      "sha256": "4f9a411dfb8986b29a647679f71fc054251c11def24eda86b5d10df67752e60f"
+    },
+    {
+      "name": "restored-graph",
+      "sha256": "1cbfe12304241df36ce10004df7028de1d2f565ed8be10c12a4dd62a3a3d471b"
+    },
+    {
+      "name": "wrong-order-evidence-after-source-restore",
+      "sha256": "080a2a15b35425e94efff96ad4b5c4de2f214f12ec935f960dbd90f0caaaed6c"
+    },
+    {
+      "name": "restored",
+      "sha256": "9863e9f0210086d950f4fba8f77140a0789c443387b0e609eed1ecd92c28c8b2"
+    },
+    {
+      "name": "cache-final",
+      "sha256": "263999f6e5ef2310122db69c8f2b0824aaccff9ceda882c67772a2377003d178"
+    }
+  ],
+  "observedLimits": [
+    {
+      "name": "wrong-order-audit",
+      "fn": "Reverse",
+      "status": "unknown",
+      "reason": "request-timeout",
+      "obligation": {
+        "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+        "phase": "postcondition",
+        "domain": "full",
+        "postcondition": 6,
+        "postconditionCount": 9,
+        "backend": "z3"
+      }
+    },
+    {
+      "name": "weak-contract-audit",
+      "fn": "Reverse",
+      "status": "unknown",
+      "reason": "request-timeout",
+      "obligation": {
+        "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+        "phase": "postcondition",
+        "domain": "full",
+        "postcondition": 6,
+        "postconditionCount": 9,
+        "backend": "z3"
+      }
+    },
+    {
+      "name": "weak-contract-audit",
+      "fn": "reverseFirstTwo",
+      "status": "unknown",
+      "reason": "request-timeout",
+      "obligation": {
+        "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo",
+        "phase": "postcondition",
+        "domain": "full",
+        "postcondition": 4,
+        "postconditionCount": 4,
+        "backend": "z3"
+      }
+    }
+  ],
+  "cleanup": {
+    "sourcesRestored": true,
+    "workDirectoryRemoved": true,
+    "nativeWorkersTerminated": true
+  },
+  "limits": "Dense ordinary numeric arrays, every native length. Trusted compiler/model/solver/runtime and cache writers; no certificates. Native samples are finite. Seeded failures are not upstream bugs. K/Q completion remains root-owned."
+}

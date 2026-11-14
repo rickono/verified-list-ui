@@ -1,0 +1,230 @@
+[
+  {
+    "name": "Reverse.1.smt2",
+    "sha256": "1655112c38ce5e00442280cd108824eeceaba08df4d5640c53afd67f3a0f863b",
+    "bytes": 7710,
+    "kind": "invariant-init",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 1,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.2.smt2",
+    "sha256": "d44087a27c721f98be5d3d633bf7215b10eab65d5fa0c9d22ea6ffacb41027f4",
+    "bytes": 5360,
+    "kind": "store-domain",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 2,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.3.smt2",
+    "sha256": "c06228d6f333e381f8b08a2c9af21efbf0235eb58fffe0f4a5e0aa70eb1f5c34",
+    "bytes": 5121,
+    "kind": "frame-write",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 3,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.4.smt2",
+    "sha256": "93c03f40d68f8738087a59e4b714aee7bf9ee319c8b54785804ce03052709a77",
+    "bytes": 5324,
+    "kind": "store-domain",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 4,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.5.smt2",
+    "sha256": "c06228d6f333e381f8b08a2c9af21efbf0235eb58fffe0f4a5e0aa70eb1f5c34",
+    "bytes": 5121,
+    "kind": "frame-write",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 5,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.6.smt2",
+    "sha256": "a12952814fda3922e53008fb48b59c08f5fb2366c592ccdc4752cb7faf8726f1",
+    "bytes": 9338,
+    "kind": "invariant-preserve",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 6,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.7.smt2",
+    "sha256": "09c07d3d16d61f34a3603c5c24eeebcf6fd08f2c474d176f623b8344534fab6f",
+    "bytes": 5492,
+    "kind": "rank",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 7,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.8.smt2",
+    "sha256": "29497059fb606fc7cb44c9d55084e5284295aad985a502144e392a70819e5acf",
+    "bytes": 5094,
+    "kind": "ensures",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 8,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "Reverse.9.smt2",
+    "sha256": "e9ac660890c01995e32e019477d990024cf57b7465ecca0f1fe94f2bf02ea24d",
+    "bytes": 6034,
+    "kind": "ensures",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 9,
+      "postconditionCount": 9,
+      "replayGuards": [
+        "loop_replay7"
+      ]
+    }
+  },
+  {
+    "name": "takeImplementation.1.smt2",
+    "sha256": "9389d1e2d55621748b1cd2f14296c6ae9047e3ee36c5f703034f496c472254f7",
+    "bytes": 5954,
+    "kind": "ensures",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 1,
+      "postconditionCount": 2,
+      "replayGuards": []
+    }
+  },
+  {
+    "name": "takeImplementation.2.smt2",
+    "sha256": "3323fe70f1e6fae3bedace0e21018fd9e3daef42142162b395c468dac2825ac2",
+    "bytes": 6000,
+    "kind": "ensures",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js#takeImplementation",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 2,
+      "postconditionCount": 2,
+      "replayGuards": []
+    }
+  },
+  {
+    "name": "reverseFirstTwo.1.smt2",
+    "sha256": "61e689dbb7f07178940d7947a030490d490049fa605194c2044656125feb4333",
+    "bytes": 3807,
+    "kind": "frame-inclusion",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 1,
+      "postconditionCount": 4,
+      "replayGuards": []
+    }
+  },
+  {
+    "name": "reverseFirstTwo.2.smt2",
+    "sha256": "a52c8873bff139e614372e91196bc1fd5eee9e2e61396241dd8199f38ba76a05",
+    "bytes": 4451,
+    "kind": "call",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 2,
+      "postconditionCount": 4,
+      "replayGuards": []
+    }
+  },
+  {
+    "name": "reverseFirstTwo.3.smt2",
+    "sha256": "f255125430a19b131c2d8d74024849380ebb34d6c133880cdbb422e4443396b9",
+    "bytes": 3998,
+    "kind": "ensures",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 3,
+      "postconditionCount": 4,
+      "replayGuards": []
+    }
+  },
+  {
+    "name": "reverseFirstTwo.4.smt2",
+    "sha256": "e053d55dabb8a566c6f5b8791f7b74c423bb1c4c00a5e16a79fdfe1922bd4e7e",
+    "bytes": 4691,
+    "kind": "ensures",
+    "metadata": {
+      "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js#reverseFirstTwo",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 4,
+      "postconditionCount": 4,
+      "replayGuards": []
+    }
+  }
+]

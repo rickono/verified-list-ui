@@ -1,0 +1,73 @@
+{
+  "status": "ISSUES",
+  "requestBudgetMs": 60000,
+  "head": "b5c8828f0c281df812751371f651603481f3aefb",
+  "records": [
+    {
+      "name": "inputs",
+      "sha256": "78f98410594dcd66df541d48b8458af364f204bf4f6a206ebc6246c4e5235e7a"
+    },
+    {
+      "name": "baseline-graph",
+      "sha256": "1cbfe12304241df36ce10004df7028de1d2f565ed8be10c12a4dd62a3a3d471b"
+    },
+    {
+      "name": "baseline-native",
+      "sha256": "1c08b0c60b2f1c7bebd5188ce736e296083a6b79483a9a7d8dfd0168f53bd069"
+    },
+    {
+      "name": "plan-absent",
+      "sha256": "2725ed61d9f82c52b1e62ada030bb609ca9a3f9bd6bb88bafb3657a8133d8454"
+    },
+    {
+      "name": "cold",
+      "sha256": "cd309406a2e384635048574b6eb80d42d58ed6c262b71b8ece6f1f9bb9cc0fe5"
+    },
+    {
+      "name": "baseline-plan",
+      "sha256": "d9dae70479f6dcb66c2f05de64a96c73c7e3727659819903e20f656b78231b27"
+    },
+    {
+      "name": "warm",
+      "sha256": "3cba66d80424eacb65feb0a73c65e01799265b329b735ed393600abd231b5b36"
+    },
+    {
+      "name": "baseline-audit",
+      "sha256": "7344086cf4fa6178dcd356ff84fac8c0095567e3018c446be8d7e213470064c1"
+    },
+    {
+      "name": "wrong-order-graph",
+      "sha256": "53bd41e06b0867c1987e6a85098541f5d05097a298c572e3abbc18d814ef5b07"
+    },
+    {
+      "name": "wrong-order-native",
+      "sha256": "0fd88cc439437352e616c936ea966a28b1f2fdc7d1d78489d6bb9e6e1e5e84f1"
+    },
+    {
+      "name": "wrong-order-plan",
+      "sha256": "2e58dcf8f83becf3d497c8d7a77b5f27228104c10bf305cb885783aa0f6723ae"
+    },
+    {
+      "name": "wrong-order",
+      "sha256": "f82822248f74b2eb3ca0259d8d6c20c014568c6f398297dfea71582db717f62f"
+    },
+    {
+      "name": "wrong-order-replay",
+      "sha256": "cdcbbd94a975842b21630e34250e89b62917d9eb51594c6ee3a9bb0a65505808"
+    },
+    {
+      "name": "wrong-order-warm",
+      "sha256": "d77ec62e57d80e7ef8da8ad891aa32148efb3f2252242d3fa6a5d5ce0ff87308"
+    },
+    {
+      "name": "wrong-order-audit",
+      "sha256": "5559c8ffe1696f50ad0f187095cbcc60b4bc99a11780decd4467b5b5bbbbfc9d"
+    }
+  ],
+  "cleanup": {
+    "sourcesRestored": true,
+    "workDirectoryRemoved": true,
+    "nativeWorkersTerminated": true
+  },
+  "limits": "Dense ordinary numeric arrays, every native length. Trusted compiler/model/solver/runtime and cache writers; no certificates. Native samples are finite. Seeded failures are not upstream bugs. K/Q completion remains root-owned."
+}

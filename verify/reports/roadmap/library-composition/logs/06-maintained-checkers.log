@@ -1,0 +1,43 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# Subtest: the GPL report pilot preserves pinned bytes, declaration tokens and native semantics
+ok 1 - the GPL report pilot preserves pinned bytes, declaration tokens and native semantics
+  ---
+  duration_ms: 6.949166
+  type: 'test'
+  ...
+# {"bytes":539,"sha256":"8049944060cfc7e8a3a95cc65f5e097ebb07469c5e8b871b678f151312e88e46","nativeSamples":11,"mutants":3}
+# (node:83874) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the Remeda proof fixture rejects source or extracted-declaration drift
+ok 2 - the Remeda proof fixture rejects source or extracted-declaration drift
+  ---
+  duration_ms: 25.072167
+  type: 'test'
+  ...
+# (node:83875) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: unmodeled top-level execution and missing contracts cannot be silently ignored
+ok 3 - unmodeled top-level execution and missing contracts cannot be silently ignored
+  ---
+  duration_ms: 27.22475
+  type: 'test'
+  ...
+# (node:83876) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: unsupported stateful loops return original source diagnostics instead of throwing
+ok 4 - unsupported stateful loops return original source diagnostics instead of throwing
+  ---
+  duration_ms: 32.465
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 354.7965

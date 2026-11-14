@@ -1,0 +1,14 @@
+{
+  "status": "ISSUES",
+  "codeHead": "b5c8828f0c281df812751371f651603481f3aefb",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504",
+  "scope": "Pinned Reverse + eager take composition; no K/Q completion claim.",
+  "evidence": "measured-outcomes.json",
+  "commands": "commands.json",
+  "coreFilesCheckedUnchanged": 129,
+  "limits": "One initial timeout and later independent P resource unknowns remain visible. No unknown is a proof or an upstream bug.",
+  "cleanup": {
+    "workDirectoryRemoved": true,
+    "temporaryDependencyLinkRemoved": true
+  }
+}

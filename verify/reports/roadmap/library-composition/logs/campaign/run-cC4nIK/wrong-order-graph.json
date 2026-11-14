@@ -1,0 +1,30 @@
+{
+  "graphSha256": "9ca8773060ce33ed1b4872017d41d0ae8109acdab6a744c839d58877ade6c5ac",
+  "modules": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js",
+      "sha256": "be83360950920312a6f600a5914de2a6235894d41eab4765f7a5c63744f6277d",
+      "imports": [
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js",
+        "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js"
+      ]
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js",
+      "sha256": "a3837fdffd757aa470a7b340ad67892c45a7ab6611976eb0d57d42adab02df46",
+      "imports": []
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js",
+      "sha256": "3a10c589727ea95be47ba4a4ab048e76f9ac7b728a5b0279262d39dfc5927566",
+      "imports": []
+    }
+  ],
+  "dependencies": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-c713e504/package.json",
+      "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+      "kind": "package"
+    }
+  ]
+}

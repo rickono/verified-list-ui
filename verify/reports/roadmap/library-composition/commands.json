@@ -1,0 +1,96 @@
+[
+  {
+    "command": "git cherry-pick 85d121d 78de466 098160f bc9fec0 00e5fc4 7a98698",
+    "exitCode": 0,
+    "observed": "Six imported commits; same authors and patch IDs; C1 source guard retained."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --write-fixtures",
+    "log": "logs/00-dependency-setup-failure.log",
+    "exitCode": 1,
+    "observed": "Wrong temporary dependency link: acorn unavailable. No solver request occurred."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --write-fixtures",
+    "log": "logs/01-first-proof.log",
+    "exitCode": 1,
+    "observed": "First graph: rank timeout at 60020.589375 ms; take verified, caller dependency. The owned query dumper then threw on string.join."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --dump-only",
+    "log": "logs/02-actual-obligations.log",
+    "exitCode": 0,
+    "observed": "Actual production obligations inspected, no solver."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --write-fixtures --dump-only",
+    "log": "logs/03-retry-obligation-inspection.log",
+    "exitCode": 0,
+    "observed": "Proof-only rank candidate compiled and inspected without a solver."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --write-fixtures --dump-only",
+    "log": "logs/03-final-retry-inspection.log",
+    "exitCode": 0,
+    "observed": "Proof-only rank candidate compiled and inspected without a solver."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --write-fixtures --dump-only",
+    "log": "logs/03-selected-retry-inspection.log",
+    "exitCode": 0,
+    "observed": "Proof-only rank candidate compiled and inspected without a solver."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs",
+    "log": "logs/03-second-proof.log",
+    "exitCode": 0,
+    "observed": "Single informed proof retry: all three modules verified at 23594.679583 ms, cold receipts written."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --resume-second",
+    "log": "logs/04-campaign.log",
+    "exitCode": 1,
+    "observed": "Baseline audit passed. Wrong-order source/native/replay controls passed. A negative-case audit exposed a timeout; an overly specific owned disagreement assertion stopped the campaign."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --continue-controls",
+    "log": "logs/05-controls-continuation.log",
+    "exitCode": 1,
+    "observed": "Original positive proofs and replay reused with identity/hash checks; weak-contract caller timed out. An owned assertion predicted contract-gap too narrowly."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --test --test-concurrency=1 --test-name-pattern='GPL report pilot|Remeda proof fixture rejects|unsupported stateful loops|unmodeled top-level execution' tests/verify/mutating-loop-pin.test.mjs tests/verify/remeda-take.test.mjs tests/verify/stateful-boundaries.test.mjs tests/verify/source.test.mjs",
+    "log": "logs/06-maintained-checkers.log",
+    "exitCode": 0,
+    "observed": "4 selected maintained checks passed; no full suite or K corpus."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check.mjs --continue-controls",
+    "log": "logs/07-complete-controls.log",
+    "exitCode": 1,
+    "observed": "See complete campaign receipt and measured-outcomes.json; resource unknowns remain ISSUES."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/library-composition/check-witnesses.mjs",
+    "log": "logs/08-native-witnesses.log",
+    "exitCode": 0,
+    "observed": "Four recorded reports, twelve actual wrapper executions. Helper witness passes wrapper; separate [1,2] mutant wrapper fails. Wrong-order wrapper witness fails contents only."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node --check verify/reports/roadmap/library-composition/campaign.mjs",
+    "log": "logs/09-checker-syntax.log",
+    "exitCode": 0,
+    "observed": "Final campaign checker syntax accepted."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- python3 verify/reports/roadmap/library-composition/record.py",
+    "log": "logs/10-recording.log",
+    "exitCode": 0,
+    "observed": "Imported authors and patch identities checked; 129 maintained verifier/test files unchanged; report inventory generated. Repeated without redirect after final documentation and cleanup."
+  },
+  {
+    "command": "python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- python3 verify/reports/roadmap/library-composition/record.py --check",
+    "exitCode": 0,
+    "observed": "Final artifact hashes and unchanged core checked after generation; stdout is in the agent tool result, not a self-hashed output file."
+  }
+]
