@@ -1,0 +1,753 @@
+{
+  "predictions": {
+    "listener-shape": "38 units include both correspondence directions, stutter, and unary keeps; creation uses literal 1; queries have no search cap",
+    "advisory-shape": "34 units include stutter and both directions; no listener handler",
+    "abort-keeps-smt": "request abort/selected keeps are reflexive and do not mention abort or an updated membership map",
+    "allocation-fresh-constant": "allocation inverse obligations mention the updated functions; the non-aborted conjunct is a reflexive ite",
+    "creation-absence": "creation assumes global occupied absence, not one mismatched representative",
+    "weaken-absence": "replacing the occupied-absence premise makes create's forward VC not verified",
+    "omit-stutter": "deleting the stutter unit throws Incomplete protocol induction",
+    "omit-forward": "deleting occurrence-index units throws",
+    "omit-reverse": "deleting index-occurrence units throws",
+    "omit-keeps": "deleting handler keeps throws",
+    "direct-signal-member": "c.signal.aborted without an alias is rejected, not verified",
+    "fresh-aborted-same-turn": "verified: a constructor signal read in the same segment is not aborted",
+    "fresh-distinct": "not verified: two constructor identities are not a proved inequality",
+    "input-alias": "not verified: distinct parameters may alias",
+    "signal-stable": "verified: one controller's signal reads are the same identity",
+    "stutter-load": "not verified: non-reflexive always fails the external stutter; native allocate/abort confirms",
+    "collision-same": "verified: 2^53 neighbors are the same binary64 value",
+    "collision-diff": "not verified: those neighbors are not proved distinct",
+    "negzero-objectis": "not verified: assigning -0 does not establish Object.is(x, 0)",
+    "negzero-init": "verified: a -0 cell initializer stays Object.is -0",
+    "negzero-eq": "verified: assigning -0 preserves x === 0",
+    "nan-isnan": "verified: 0/0 establishes Number.isNaN",
+    "nan-objectis-zero": "not verified: 0/0 does not establish Object.is(x, 0)",
+    "capture-plus": "not verified: a non-literal capture is not pinned to 2",
+    "capture-zero-objectis": "capture literal 0 does not prove Object.is(shown, -0)",
+    "div-after-allocate": "not verified: allocation does not admit division by an arbitrary parameter",
+    "resolves-partial": "not verified: resolves 1/result === 1 does not discharge its own definedness",
+    "resolves-handle": "rejected: signal.aborted in resolves",
+    "pending-member": "rejected: protocol member in pending",
+    "across-await-abort": "not verified: post-await aborted is not frozen false",
+    "dead-division": "same-segment fresh aborted=false makes the division branch dead or the module unverified",
+    "pure-read": "a signal.aborted read is heap, not pure",
+    "pure-abort": "a bare abort is writes, not pure",
+    "api-table": "a non-string source is rejected",
+    "reserved-result": "a cell named result is rejected",
+    "stutter-present-handle-only": "a constructor-only module still emits $stutter"
+  },
+  "cases": [
+    {
+      "id": "listener-shape",
+      "prediction": "38 units include both correspondence directions, stutter, and unary keeps; creation uses literal 1; queries have no search cap",
+      "observed": {
+        "count": 38,
+        "stutter": [
+          "$stutter",
+          "$stutter$keeps$$closure_278"
+        ],
+        "keeps": [
+          "bind$0$keeps$$closure_278",
+          "dispose$0$keeps$$closure_278",
+          "$stutter$keeps$$closure_278",
+          "$closure_278$keeps$$closure_278"
+        ],
+        "forward": [
+          "$registry$create$occurrence-index",
+          "$registry$duplicate$occurrence-index",
+          "$registry$remove$occurrence-index",
+          "$registry$absent-remove$occurrence-index"
+        ],
+        "reverse": [
+          "$registry$create$index-occurrence",
+          "$registry$duplicate$index-occurrence",
+          "$registry$remove$index-occurrence",
+          "$registry$absent-remove$index-occurrence"
+        ],
+        "handlerRequires": [
+          [
+            "shown === 0 || shown === 1",
+            "created immutable capture"
+          ]
+        ],
+        "captureEnsures": [
+          [
+            "immutable capture creation"
+          ]
+        ],
+        "capInSmt": false
+      }
+    },
+    {
+      "id": "advisory-shape",
+      "prediction": "34 units include stutter and both directions; no listener handler",
+      "observed": {
+        "count": 34,
+        "stutter": true,
+        "handlers": [
+          "$closure$allocation"
+        ],
+        "forward": true,
+        "reverse": true
+      }
+    },
+    {
+      "id": "abort-keeps-smt",
+      "prediction": "request abort/selected keeps are reflexive and do not mention abort or an updated membership map",
+      "observed": {
+        "abort": {
+          "pre": "true",
+          "post": [
+            "(= ($pending $request) ($pending $request))",
+            "(= ($settled $request) ($settled $request))",
+            "(= ($running $invocation) ($running $invocation))"
+          ],
+          "defined": "true"
+        },
+        "selected": {
+          "pre": "($settled $request)",
+          "post": [
+            "($settled $request)"
+          ],
+          "defined": "true"
+        },
+        "mentionsAbort": false
+      }
+    },
+    {
+      "id": "allocation-fresh-constant",
+      "prediction": "allocation inverse obligations mention the updated functions; the non-aborted conjunct is a reflexive ite",
+      "observed": {
+        "pre": "(and (not ($controllerHistory $freshController)) (not ($signalHistory $freshSignal)))",
+        "post": [
+          "(= (ite (and (= (ite (and (= $freshController $freshController)) $freshSignal ($signalOf $freshController)) $freshSignal)) $freshController ($ownerOf (ite (and (= $freshController $freshController)) $freshSignal ($signalOf $freshController)))) $freshController)",
+          "(= (ite (and (= (ite (and (= $freshSignal $freshSignal)) $freshController ($ownerOf $freshSignal)) $freshController)) $freshSignal ($signalOf (ite (and (= $freshSignal $freshSignal)) $freshController ($ownerOf $freshSignal)))) $freshSignal)",
+          "(not (ite (= $freshSignal $freshSignal) false ($aborted $freshSignal)))"
+        ],
+        "defined": "true"
+      }
+    },
+    {
+      "id": "creation-absence",
+      "prediction": "creation assumes global occupied absence, not one mismatched representative",
+      "observed": {
+        "pre": "(and (not ($occupied $target $event $callback)) (not ($registrationHistory $freshOccurrence)) (or (not ($live $freshOccurrence)) ($registrationHistory $freshOccurrence)))",
+        "forwardPre": "(and (not ($occupied $target $event $callback)) (not ($registrationHistory $freshOccurrence)) (or (not ($live $freshOccurrence)) ($registrationHistory $freshOccurrence)) (or (not ($live $occurrence)) (and ($occupied ($targetOf $occurrence) ($eventOf $occurrence) ($callbackOf $occurrence)) (= ($index ($targetOf $occurrence) ($eventOf $occurrence) ($callbackOf $occurrence)) $occurrence))))"
+      }
+    },
+    {
+      "id": "weaken-absence",
+      "prediction": "replacing the occupied-absence premise makes create's forward VC not verified",
+      "observed": {
+        "replaced": true,
+        "outcome": {
+          "status": "counterexample"
+        },
+        "originalPreHasAbsence": true
+      }
+    },
+    {
+      "id": "omit-stutter",
+      "prediction": "deleting the stutter unit throws Incomplete protocol induction",
+      "observed": {
+        "patched": true,
+        "threw": true,
+        "message": "Incomplete protocol induction: missing $stutter"
+      }
+    },
+    {
+      "id": "omit-forward",
+      "prediction": "deleting occurrence-index units throws",
+      "observed": {
+        "patched": true,
+        "threw": true,
+        "message": "Incomplete protocol induction: missing $registry$create$occurrence-index"
+      }
+    },
+    {
+      "id": "omit-reverse",
+      "prediction": "deleting index-occurrence units throws",
+      "observed": {
+        "patched": true,
+        "threw": true,
+        "message": "Incomplete protocol induction: missing $registry$create$index-occurrence"
+      }
+    },
+    {
+      "id": "omit-keeps",
+      "prediction": "deleting handler keeps throws",
+      "observed": {
+        "patched": true,
+        "threw": true,
+        "message": "Incomplete protocol induction: missing bind$0$keeps$$closure_278"
+      }
+    },
+    {
+      "id": "direct-signal-member",
+      "prediction": "c.signal.aborted without an alias is rejected, not verified",
+      "observed": {
+        "rejected": true,
+        "message": "Unknown value c. Calls and ambient values need explicit support.",
+        "status": "unsupported"
+      }
+    },
+    {
+      "id": "fresh-aborted-same-turn",
+      "prediction": "verified: a constructor signal read in the same segment is not aborted",
+      "observed": {
+        "rejected": false,
+        "proved": true,
+        "bad": [],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "allocate",
+              "alias"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-distinct",
+      "prediction": "not verified: two constructor identities are not a proved inequality",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "f$0",
+            "kind": "entry",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "allocate",
+              "allocate"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "input-alias",
+      "prediction": "not verified: distinct parameters may alias",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "f$0",
+            "kind": "entry",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "signal-stable",
+      "prediction": "verified: one controller's signal reads are the same identity",
+      "observed": {
+        "rejected": false,
+        "proved": true,
+        "bad": [],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "alias"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "stutter-load",
+      "prediction": "not verified: non-reflexive always fails the external stutter; native allocate/abort confirms",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "step$0",
+            "kind": "entry",
+            "status": "counterexample"
+          },
+          {
+            "name": "$stutter",
+            "kind": "stutter",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "step$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "collision-same",
+      "prediction": "verified: 2^53 neighbors are the same binary64 value",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "$init",
+            "kind": "init",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "collision-diff",
+      "prediction": "not verified: those neighbors are not proved distinct",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "f$0",
+            "kind": "entry",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "negzero-objectis",
+      "prediction": "not verified: assigning -0 does not establish Object.is(x, 0)",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "f$0",
+            "kind": "entry",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "negzero-init",
+      "prediction": "verified: a -0 cell initializer stays Object.is -0",
+      "observed": {
+        "rejected": false,
+        "proved": true,
+        "bad": [],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "pure"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "negzero-eq",
+      "prediction": "verified: assigning -0 preserves x === 0",
+      "observed": {
+        "rejected": false,
+        "proved": true,
+        "bad": [],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "nan-isnan",
+      "prediction": "verified: 0/0 establishes Number.isNaN",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "$init",
+            "kind": "init",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "nan-objectis-zero",
+      "prediction": "not verified: 0/0 does not establish Object.is(x, 0)",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "f$0",
+            "kind": "entry",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "capture-plus",
+      "prediction": "not verified: a non-literal capture is not pinned to 2",
+      "observed": {
+        "rejected": true,
+        "error": "Unsupported or mutable closure capture value.",
+        "status": "unsupported",
+        "span": {
+          "start": 203,
+          "end": 227
+        }
+      }
+    },
+    {
+      "id": "capture-zero-objectis",
+      "prediction": "capture literal 0 does not prove Object.is(shown, -0)",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "$closure_208",
+            "kind": "handler",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "bind$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "closure",
+              "add"
+            ]
+          },
+          {
+            "name": "$closure_208",
+            "effects": {
+              "kind": "writes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "div-after-allocate",
+      "prediction": "not verified: allocation does not admit division by an arbitrary parameter",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "$init",
+            "kind": "init",
+            "status": "counterexample"
+          },
+          {
+            "name": "f$0",
+            "kind": "entry",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "allocate"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "resolves-partial",
+      "prediction": "not verified: resolves 1/result === 1 does not discharge its own definedness",
+      "observed": {
+        "rejected": false,
+        "proved": true,
+        "bad": [],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "request-creation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "resolves-handle",
+      "prediction": "rejected: signal.aborted in resolves",
+      "observed": {
+        "rejected": true,
+        "message": "Handle reads in resolves are unsupported."
+      }
+    },
+    {
+      "id": "pending-member",
+      "prediction": "rejected: protocol member in pending",
+      "observed": {
+        "rejected": true,
+        "message": "Protocol-reading pending clauses are outside C2a."
+      }
+    },
+    {
+      "id": "across-await-abort",
+      "prediction": "not verified: post-await aborted is not frozen false",
+      "observed": {
+        "rejected": false,
+        "proved": false,
+        "bad": [
+          {
+            "name": "f$1",
+            "kind": "resume",
+            "status": "counterexample"
+          }
+        ],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "allocate",
+              "alias",
+              "request-creation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "dead-division",
+      "prediction": "same-segment fresh aborted=false makes the division branch dead or the module unverified",
+      "observed": {
+        "rejected": false,
+        "proved": true,
+        "bad": [],
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              "allocate",
+              "alias"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "pure-read",
+      "prediction": "a signal.aborted read is heap, not pure",
+      "observed": {
+        "effects": [
+          {
+            "kind": "heap"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pure-abort",
+      "prediction": "a bare abort is writes, not pure",
+      "observed": {
+        "effects": [
+          {
+            "name": "f$0",
+            "effects": {
+              "kind": "writes"
+            },
+            "actions": [
+              {
+                "kind": "abort",
+                "span": {
+                  "start": 68,
+                  "end": 77
+                },
+                "rules": [
+                  "$abort$contents",
+                  "$request$abort-keeps",
+                  "$request$selected-keeps"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "api-table",
+      "prediction": "a non-string source is rejected",
+      "observed": {
+        "threw": true,
+        "name": "TypeError",
+        "message": "checkStateful accepts a file name and source text, never a transition relation."
+      }
+    },
+    {
+      "id": "reserved-result",
+      "prediction": "a cell named result is rejected",
+      "observed": {
+        "rejected": true,
+        "message": "Duplicate, shadowed or reserved binding result."
+      }
+    },
+    {
+      "id": "stutter-present-handle-only",
+      "prediction": "a constructor-only module still emits $stutter",
+      "observed": {
+        "names": [
+          "$registry$create$occurrence-index",
+          "$registry$create$index-occurrence",
+          "$registry$duplicate$occurrence-index",
+          "$registry$duplicate$index-occurrence",
+          "$registry$remove$occurrence-index",
+          "$registry$remove$index-occurrence",
+          "$registry$absent-remove$occurrence-index",
+          "$registry$absent-remove$index-occurrence",
+          "$stutter"
+        ]
+      }
+    },
+    {
+      "id": "stutter-load-native",
+      "observed": {
+        "call": {
+          "status": "ok",
+          "violation": null,
+          "reason": null
+        },
+        "abort": {
+          "status": "ok",
+          "violation": {
+            "kind": "always",
+            "text": "x === old(x) + 1",
+            "span": {
+              "start": 11,
+              "end": 37
+            }
+          },
+          "reason": null,
+          "message": null
+        }
+      }
+    }
+  ],
+  "solved": [
+    "fresh-aborted-same-turn",
+    "fresh-distinct",
+    "input-alias",
+    "signal-stable",
+    "stutter-load",
+    "collision-same",
+    "collision-diff",
+    "negzero-objectis",
+    "negzero-init",
+    "negzero-eq",
+    "nan-isnan",
+    "nan-objectis-zero",
+    "capture-plus",
+    "capture-zero-objectis",
+    "div-after-allocate",
+    "resolves-partial",
+    "across-await-abort",
+    "dead-division"
+  ],
+  "duplicateDeclarations": [],
+  "node": "v22.23.1"
+}

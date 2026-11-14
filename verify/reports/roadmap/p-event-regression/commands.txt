@@ -1,0 +1,27 @@
+Prepared checkout:
+/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c
+
+Executed baseline and snapshot checks:
+git status --short
+git rev-parse HEAD
+git merge-base --is-ancestor 32bd5b260aa116ca88642a1479bed8d3fc447f4b HEAD
+test -d verify
+
+Exact pilot invocation from the checkout root, with no root dependency install:
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- python3 verify/reports/roadmap/p-event-regression/scripts/run.py --output verify/reports/roadmap/p-event-regression/evidence/run-01 > verify/reports/roadmap/p-event-regression/evidence/run-01-lane.stdout.txt 2> verify/reports/roadmap/p-event-regression/evidence/run-01-lane.stderr.txt
+
+Raw per-child argv, PID, hard deadline, return code, wait/reap and process-group observations:
+evidence/run-01/processes.json
+
+Exact git preflight and final scope commands, with their outputs:
+evidence/run-01/git-commands.json
+
+Offline rerun from the checkout root, using a new task-owned output directory:
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- python3 verify/reports/roadmap/p-event-regression/scripts/run.py --output verify/reports/roadmap/p-event-regression/rerun-02
+
+Artifact integrity check from verify/reports/roadmap/p-event-regression/:
+shasum -a 256 -c SHA256SUMS
+
+The rerun uses committed tarballs and snapshots. It performs no network fetch,
+npm/pnpm install, lifecycle script, source rewrite, cache/proof substitution,
+full suite, upstream action or canonical roadmap write.

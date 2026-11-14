@@ -1,5 +1,6 @@
 import { fork } from "node:child_process";
 import { performance } from "node:perf_hooks";
+import { handleValue } from "./protocol-values.mjs";
 import { machineOf } from "./machine.mjs";
 import { encodeValue, decodeValue, traceOf } from "./values.mjs";
 export { encodeValue, decodeValue, traceOf } from "./values.mjs";
@@ -42,6 +43,7 @@ export async function replayTrace(file, source, trace, options) {
 const unique = (xs) => xs.filter((v, i) => xs.findIndex((w) => Object.is(v, w)) === i);
 /** Finite BFS can confirm a property failure, never authorize a proof. */
 export async function searchWitness(machine, { maxDepth = 4, seeds = [], deadline = Infinity } = {}) {
+  if (machine.protocol) return searchProtocolWitness(machine, { maxDepth, seeds, deadline });
   const pool = unique([0, 1, NaN, Infinity, -Infinity, -0, ...seeds]).slice(0, 10);
   const bounds = { maxDepth, numbers: pool.map(encodeValue), entryArguments: [0, 1], maxExecutions: 5_000 };
   const session = replaySession(machine);
@@ -74,5 +76,43 @@ export async function searchWitness(machine, { maxDepth = 4, seeds = [], deadlin
       layer = next;
     }
     return { status: "exhausted", searched: { ...bounds, executions } };
+  } finally { await session.close(); }
+}
+
+// Bounds here affect finding a concrete witness only. No proof target reads
+// this function, its input graph or any of these materialization limits.
+async function searchProtocolWitness(machine, { maxDepth, seeds, deadline }) {
+  const numbers = unique([0, 1, NaN, Infinity, -Infinity, -0, ...seeds]).slice(0, 10);
+  const inputs = [{ id: "10", signal: "11", aborted: false }, { id: "20", signal: "21", aborted: true }];
+  const searched = { maxDepth, maxExecutions: 2000, numbers: numbers.map(encodeValue), executions: 0 };
+  const session = replaySession(machine);
+  let layer = [{ actions: [], requests: [] }];
+  try {
+    const ready = await session.start();
+    if (ready.status !== "ready") return { ...ready, searched };
+    const initial = await session.execute(traceOf(machine, [], { inputs })); searched.executions++;
+    if (initial.status !== "ok" || initial.violation) return { ...initial, searched };
+    for (let depth = 1; depth <= maxDepth; depth++) {
+      const next = [];
+      for (const node of layer) {
+        const calls = machine.entries.flatMap((entry) => [0, 1].slice(0, entry.params.length ? 2 : 1).map((i) => ({ kind: "call", entry: entry.name,
+          args: entry.params.map((p) => p.type === "number" ? i : p.type === "boolean" ? !!i : p.type === "AbortSignal" ? handleValue("signal", i ? "21" : "11") : p.type === "AbortController" ? handleValue("controller", i ? "20" : "10") : handleValue("target", "1")) })));
+        const events = new Set(machine.entries.flatMap((e) => [...e.actions.values()].filter((a) => a.kind === "add").map((a) => a.event)));
+        const dispatches = [...machine.targets.keys()].flatMap((_, i) => [...events].map((event) => ({ kind: "dispatch", target: handleValue("target", String(i + 1)), event })));
+        const settlements = node.requests.filter((r) => !r.settled).flatMap((r) => {
+          const op = machine.environment.get(r.op);
+          return [...(op.result === "boolean" ? [false, true] : numbers).map((value) => ({ kind: "resolve", request: r.seq, op: r.op, value })), ...(op.rejects ? [{ kind: "reject", request: r.seq, op: r.op }] : [])];
+        });
+        for (const action of [...calls, ...dispatches, ...settlements]) {
+          if (performance.now() >= deadline || searched.executions >= searched.maxExecutions) return { status: "unknown", reason: "witness-budget", searched };
+          const actions = [...node.actions, action];
+          const result = await session.execute(traceOf(machine, actions, { inputs })); searched.executions++;
+          if (result.status === "unknown" || result.violation) return { ...result, searched };
+          if (result.status === "ok") next.push({ actions, requests: result.requests });
+        }
+      }
+      layer = next;
+    }
+    return { status: "exhausted", searched };
   } finally { await session.close(); }
 }

@@ -1,0 +1,442 @@
+[
+  {
+    "id": "identity",
+    "node": "v22.23.1",
+    "listenerSha": "caffe023b53b4005064699ae33240af4eb9fb97aaf028182f16d312a652d1b73",
+    "advisorySha": "4358227cc2aed584cbb0220bf97da366443d924a03bfbbb12355ebe597e5118f",
+    "nativeSha": "fa84999228b2acca54f9e3a0bd957bdb60ccdd4df73879390805bdb7bcbd6b5f"
+  },
+  {
+    "id": "duplicate-once",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "n": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "n": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "n": 1
+    }
+  },
+  {
+    "id": "cleanup-210",
+    "ms": 69,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          },
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "empty-dispatch",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": false
+      },
+      {
+        "id": 2,
+        "live": false
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      },
+      {
+        "id": 2,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 1
+    }
+  },
+  {
+    "id": "readd-absent",
+    "ms": 66,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "n": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "n": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "empty-dispatch",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": false
+      },
+      {
+        "id": 2,
+        "live": false
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "cycle",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "n": 1
+    }
+  },
+  {
+    "id": "uninstrumented",
+    "raw": [
+      2,
+      1,
+      0,
+      1,
+      {
+        "seen": "Event",
+        "ignored": 1,
+        "order": [
+          "first",
+          "trail",
+          "added"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "probe-exception",
+    "message": "Error: Ambient functions require an @environment block.\n    at fail (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-83761/verify/error.mjs:10:9)\n    at environmentOf (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-83761/verify/stateful/environment.mjs:18:21)\n    at file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-83761/verify/stateful/machine.mjs:87:78\n    at blame (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-83761/verify/error.mjs:16:16)\n    at Object.machineOf (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-83761/verify/stateful/machine.mjs:77:10)\n    at play (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-12ed5a98/verify/reports/roadmap/review-C2a/native/probe.mjs:99:23)\n    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-12ed5a98/verify/reports/roadmap/review-C2a/native/probe.mjs:216:36\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)"
+  },
+  {
+    "id": "workers-final",
+    "workers": ""
+  }
+]

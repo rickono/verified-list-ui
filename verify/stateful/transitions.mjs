@@ -2,6 +2,8 @@ import { compileAstUnit } from "../source.mjs";
 import { fail } from "../error.mjs";
 import { id, member, reference, transform, span, walk, sha256 } from "./ast.mjs";
 
+import { protocolTransitionsOf } from "./protocol-transitions.mjs";
+
 const clause = (c, ast) => ({ ...c, ast });
 const undef = (at) => id("undefined", at);
 const returning = (argument, at) => ({ type: "ReturnStatement", argument, ...span(at) });
@@ -15,6 +17,7 @@ const captures = (entry, k) => entry.awaits[k].captures;
  * There are no concrete activation slots or trace bounds in these units.
  */
 export function transitionsOf(machine) {
+  if (machine.protocol) return protocolTransitionsOf(machine);
   const units = [], cells = [...machine.cells.values()], at = machine.state[0]?.span ?? machine.always[0].span;
   const stateType = { kind: "object", fields: cells.map((c) => ({ name: c.name, type: c.type, optional: false })) };
   const stateParam = { name: "$s", type: stateType, node: id("$s", at) };

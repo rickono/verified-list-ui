@@ -1,0 +1,47 @@
+{
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3",
+  "node": "v22.23.1",
+  "testedCommit": "c1df5f6a7302dc70ede1c43649aa61295d3d80f7",
+  "testedTree": "e6ab0ad2fa9b16633ac86795d0a5bd0c285e4f17",
+  "dependencies": {
+    "acorn": {
+      "path": "/Users/rick/verification-vibes/verified-list-ui/node_modules/.pnpm/acorn@8.19.0/node_modules/acorn/package.json",
+      "version": "8.19.0",
+      "sha256": "04d6fecaafb5e3d20a38fc3b64fed84bb3830a7759a8c00400ebcb87331fec00"
+    },
+    "z3-solver": {
+      "path": "/Users/rick/verification-vibes/verified-list-ui/node_modules/.pnpm/z3-solver@5.3.3/node_modules/z3-solver/package.json",
+      "version": "5.3.3",
+      "sha256": "3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"
+    }
+  },
+  "contracts": {
+    "/Users/rick/verification-vibes/artifacts/roadmap-20261113/common.md": {
+      "sha256": "2f27742571e001ea3eeaa9e00e952bf36506bd68bb225e03f55102d6b8fa758c"
+    },
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py": {
+      "sha256": "731d3577afa7a8ba6c4bf7e646f9c4a72d35268057acf3d8ae01b9cd8be4fe1b"
+    },
+    "verify/design/stateful-protocols.md": {
+      "sha256": "cee965d042f8173d4f0d3a2444ab4dbcfa9e587a8de9caef27e178e4787410db"
+    },
+    "verify/reports/roadmap/judgment-stateful-C2/judgment.md": {
+      "sha256": "7f78e30d9e0c12569664f6dc98482d8cf4feacce330b90247d8773b6a7ca708b"
+    },
+    "d87f70040f05c4b2449476334936feabe727ba01:verify/reports/roadmap/candidate-stateful-C2-codex/contracts.md": {
+      "sha256": "ace5811be496944e687610ce2221f296156f4d687db43f336b11024dc5f67959"
+    },
+    "d87f70040f05c4b2449476334936feabe727ba01:verify/reports/roadmap/candidate-stateful-C2-codex/design.md": {
+      "sha256": "196b6469690c1dda0067a9766846c74ba2cba2c54446089314643a821c39b485"
+    },
+    "d87f70040f05c4b2449476334936feabe727ba01:verify/reports/roadmap/candidate-stateful-C2-codex/sketch.mjs": {
+      "sha256": "960802e487543da363880a9de3d235745e885dff817725af24abd83bcc4c2c76"
+    },
+    "d87f70040f05c4b2449476334936feabe727ba01:verify/reports/roadmap/candidate-stateful-C2-codex/grounding.md": {
+      "sha256": "ce551c2b14824ed4e4fb799a088edf3c7f73505e97cc3a5b357c3c7418779621"
+    },
+    "d87f70040f05c4b2449476334936feabe727ba01:verify/reports/roadmap/candidate-stateful-C2-codex/evidence.md": {
+      "sha256": "4817a8a4b1cb8964aaad490ad60bb01ae18816f873f8f5239244a1c21a4c9fb2"
+    }
+  }
+}

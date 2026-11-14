@@ -1,0 +1,22 @@
+{
+  "verify/source.mjs": "0a06f25ae9182448e34056e43166fd073bb8bba82976b6c136bf2f142a9b0d8d",
+  "verify/stateful/projection.mjs": "87cc37ce318db20c9d3a3a98d8232039bb9838635ab9cb35eef2c687bccd362c",
+  "verify/stateful/protocol-rules.mjs": "f7690c75d76990ab17213cfe075d0c40c81395b23c26b134badf8e5db8974da2",
+  "verify/stateful/environment.mjs": "f693da4ca7a24fd22429def227b465c7f7d1ddd56bbb52de43c5a2018de0f46c",
+  "verify/stateful/ast.mjs": "b9be90a61c8f6bc9ecbd535917df1993046de61db6115ec2dd381c350c5bbd91",
+  "verify/stateful/replay-worker.mjs": "e581ba7a53039480fd8680d93e66bc3d7e486ef55e2c00f4d690deb92238d563",
+  "verify/stateful/transitions.mjs": "4afa9a2e3e5894dd3bb35d9b87c2bc563e618d2fb641a023d7698cc29722a364",
+  "verify/stateful/protocol-values.mjs": "661325895ac76a54b1bfeb0ad85d077454b51284cc3089d51b9bea76663b7d3f",
+  "verify/stateful/machine.mjs": "88322cd2c2def5870cdbd0b645b3970a7a0416b21a8e2f654ac7cf8de0479dc8",
+  "verify/stateful/clauses.mjs": "04d13f1ef8118cdc95e3115bd1f6b22dcf0b41b2b18bdc09a227bde294958663",
+  "verify/stateful/traces.mjs": "80addf6a083402c88d808e2a774e81abf65ef677cfed60ceb3e55f96a53f5f52",
+  "verify/stateful/values.mjs": "b6b01d41024d35d3df98dc30120bb275f8c1c76cdd1f7b1182861a29e18fb853",
+  "verify/stateful/index.mjs": "9070313a60c7429ee8039e11701ab5ab03c481d077ee3acbf897b08fab9fc669",
+  "verify/stateful/protocol-machine.mjs": "4144b02ccb0287d2160b148a10e02ca5eb65fd24d003372fd46741e09d4f5752",
+  "verify/stateful/native.mjs": "783161aa87eb27ea9fb6297569a06d91449455a1d1bdc3bf5b862dad7e489a82",
+  "verify/stateful/protocol-transitions.mjs": "a1199f93f64f9706fc21c6b449a3faa2d5496a973904c8160ee1d2c2d1bb17e6",
+  "verify/stateful/protocol-native.mjs": "7c82d17371e825a391626bd078d65c07fc04271fc371f132725f077e50cd2e31",
+  "tests/verify/stateful-protocols.test.mjs": "0e6da69390a2c60c4b4cba202d4bedd2b0dd8652855c396868629fb763d2f11b",
+  "tests/verify/fixtures/stateful/protocols/advisory.ts": "4358227cc2aed584cbb0220bf97da366443d924a03bfbbb12355ebe597e5118f",
+  "tests/verify/fixtures/stateful/protocols/listeners.ts": "caffe023b53b4005064699ae33240af4eb9fb97aaf028182f16d312a652d1b73"
+}

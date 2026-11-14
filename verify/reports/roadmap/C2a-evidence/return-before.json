@@ -1,0 +1,102 @@
+{
+  "source": "// @environment\n// protocol node22-event-target-v1\ndeclare const events: EventTarget;\nlet disposed = false;\nlet shown = 0;\n// state shown === 0 || shown === 1\n// always !old(disposed) || shown === old(shown)\nexport function bind(skip: boolean) {\n  if (skip) return;\n  const value: number = 1;\n  const handler = () => { if (!disposed) shown = 1; };\n  events.addEventListener(\"x\", handler);\n  events.addEventListener(\"x\", handler);\n  return () => events.removeEventListener(\"x\", handler);\n}\nexport function dispose() { disposed = true; }\n",
+  "sourceSha256": "94cf32cbdbea316426e7acfbfbe4eac4ee6dcde2e203946035a07fb7e522600c",
+  "expected": "illegal-environment-action for requested remover absent on this return path",
+  "result": {
+    "status": "ok",
+    "trace": {
+      "version": 2,
+      "sourceSha256": "94cf32cbdbea316426e7acfbfbe4eac4ee6dcde2e203946035a07fb7e522600c",
+      "executableSha256": "66de579f9d194a333170cb74bb0c548ca7a3784b07daec6abf951b83617485bd",
+      "assumptionsSha256": "767bc474ea905a83f9461e30869d39fb3f859d02b0afc21fe76e0830c93d1835",
+      "protocolSha256": "f2ec770070b2fc527be7075f176a1f03dbbd9642a195aa0e66205dc3fc33e3f9",
+      "replaySchemaSha256": "b1300839081e2eb97fca712a1728ff2d0caf9acec02eb9f0956c66c873e66ddd",
+      "inputs": [],
+      "targets": {
+        "events": "1"
+      },
+      "actions": [
+        {
+          "kind": "call",
+          "entry": "bind",
+          "args": [
+            {
+              "type": "boolean",
+              "value": true
+            }
+          ],
+          "returns": "100"
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "disposed": {
+              "type": "boolean",
+              "value": false
+            },
+            "shown": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          }
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "call",
+            "entry": "bind",
+            "args": [
+              {
+                "type": "boolean",
+                "value": true
+              }
+            ],
+            "returns": "100"
+          },
+          "state": {
+            "disposed": {
+              "type": "boolean",
+              "value": false
+            },
+            "shown": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "cuts": [
+            {
+              "kind": "action",
+              "registration": null,
+              "invocation": null,
+              "state": {
+                "disposed": {
+                  "type": "boolean",
+                  "value": false
+                },
+                "shown": {
+                  "type": "number",
+                  "bits": "0000000000000000"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "registrations": []
+  }
+}

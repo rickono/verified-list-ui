@@ -1,0 +1,225 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+[
+  {
+    "id": "call",
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "x": {
+      "type": "boolean",
+      "value": true
+    },
+    "cuts": [
+      {
+        "action": "call",
+        "x": {
+          "type": "boolean",
+          "value": true
+        },
+        "cuts": [
+          "action"
+        ]
+      }
+    ],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "invocation": 1,
+        "args": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "handle",
+            "sort": "signal",
+            "id": "11"
+          }
+        ],
+        "settled": false
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": false
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "awaiting"
+      }
+    ]
+  },
+  {
+    "id": "abort",
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "x !== old(x)",
+      "span": {
+        "start": 162,
+        "end": 184
+      }
+    },
+    "x": {
+      "type": "boolean",
+      "value": true
+    },
+    "cuts": [
+      {
+        "action": "call",
+        "x": {
+          "type": "boolean",
+          "value": true
+        },
+        "cuts": [
+          "action"
+        ]
+      },
+      {
+        "action": "abort",
+        "x": {
+          "type": "boolean",
+          "value": true
+        },
+        "cuts": [
+          "action"
+        ]
+      }
+    ],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "invocation": 1,
+        "args": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "handle",
+            "sort": "signal",
+            "id": "11"
+          }
+        ],
+        "settled": false
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "awaiting"
+      }
+    ]
+  },
+  {
+    "id": "settle",
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "x": {
+      "type": "boolean",
+      "value": false
+    },
+    "cuts": [
+      {
+        "action": "call",
+        "x": {
+          "type": "boolean",
+          "value": true
+        },
+        "cuts": [
+          "action"
+        ]
+      },
+      {
+        "action": "settle-abort",
+        "x": {
+          "type": "boolean",
+          "value": false
+        },
+        "cuts": [
+          "action"
+        ]
+      }
+    ],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "invocation": 1,
+        "args": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "handle",
+            "sort": "signal",
+            "id": "11"
+          }
+        ],
+        "settled": true
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ]
+  },
+  {
+    "id": "crafted-id",
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Fabricated handle or incompatible handle sort.",
+    "violation": null,
+    "x": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  }
+]

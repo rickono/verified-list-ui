@@ -1,0 +1,120 @@
+TAP version 13
+# (node:37451) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: both corrected complete verticals prove over full domains with no witness search
+ok 1 - both corrected complete verticals prove over full domains with no witness search
+  ---
+  duration_ms: 1009.964166
+  type: 'test'
+  ...
+# Subtest: two closure evaluations, duplicate no-op, alias removal and repeated cleanup give native 2/1/0
+ok 2 - two closure evaluations, duplicate no-op, alias removal and repeated cleanup give native 2/1/0
+  ---
+  duration_ms: 842.361542
+  type: 'test'
+  ...
+# Subtest: fresh same-body removal retains the listener, while its existing safety property still proves
+ok 3 - fresh same-body removal retains the listener, while its existing safety property still proves
+  ---
+  duration_ms: 642.826125
+  type: 'test'
+  ...
+# Subtest: both real guard removals produce legally confirmed native property failures
+ok 4 - both real guard removals produce legally confirmed native property failures
+  ---
+  duration_ms: 1808.538166
+  type: 'test'
+  ...
+# Subtest: per-handler non-transitive relation observes 0/1/2 with no dispatch endpoint theorem
+ok 5 - per-handler non-transitive relation observes 0/1/2 with no dispatch endpoint theorem
+  ---
+  duration_ms: 3525.287625
+  type: 'test'
+  ...
+# Subtest: advisory late responses, same/different controllers, already-aborted and settled-not-resumed
+ok 6 - advisory late responses, same/different controllers, already-aborted and settled-not-resumed
+  ---
+  duration_ms: 419.154792
+  type: 'test'
+  ...
+# Subtest: input aliases are compatible; native allocations are fresh, own stable signal aliases
+ok 7 - input aliases are compatible; native allocations are fresh, own stable signal aliases
+  ---
+  duration_ms: 1037.610792
+  type: 'test'
+  ...
+# Subtest: private deletion of keeps or either index direction fails structural completeness
+ok 8 - private deletion of keeps or either index direction fails structural completeness
+  ---
+  duration_ms: 6.50225
+  type: 'test'
+  ...
+# Subtest: grammar reserves all new/future words and rejects Unicode, case, typo, blocks and punctuation at original spans
+ok 9 - grammar reserves all new/future words and rejects Unicode, case, typo, blocks and punctuation at original spans
+  ---
+  duration_ms: 10.846917
+  type: 'test'
+  ...
+# Subtest: unsupported listener syntax/effects fail closed, including H helpers and payload assumptions
+ok 10 - unsupported listener syntax/effects fail closed, including H helpers and payload assumptions
+  ---
+  duration_ms: 7.148208
+  type: 'test'
+  ...
+# Subtest: hashes, domain, suffix, identity, ownership and duplicate settlements are checked independently
+ok 11 - hashes, domain, suffix, identity, ownership and duplicate settlements are checked independently
+  ---
+  duration_ms: 1286.646125
+  type: 'test'
+  ...
+# Subtest: protocol native timeout is contained, strict, and workers are reaped
+ok 12 - protocol native timeout is contained, strict, and workers are reaped
+  ---
+  duration_ms: 238.386958
+  type: 'test'
+  ...
+# Subtest: protocol writes/allocation and projected reads never acquire pure effects after scalar lowering
+ok 13 - protocol writes/allocation and projected reads never acquire pure effects after scalar lowering
+  ---
+  duration_ms: 2.073334
+  type: 'test'
+  ...
+# Subtest: correspondence VCs reject private missing absence and inverse-preservation premises
+ok 14 - correspondence VCs reject private missing absence and inverse-preservation premises
+  ---
+  duration_ms: 266.707292
+  type: 'test'
+  ...
+# Subtest: protocol scalar transport retains all input bits, including noncanonical NaN payloads
+ok 15 - protocol scalar transport retains all input bits, including noncanonical NaN payloads
+  ---
+  duration_ms: 521.022291
+  type: 'test'
+  ...
+# Subtest: returned handle admission checks the actual path's callability and owned sort
+ok 16 - returned handle admission checks the actual path's callability and owned sort
+  ---
+  duration_ms: 564.287958
+  type: 'test'
+  ...
+# Subtest: all protocol modules check external stutters; private deletion exposes a false proof
+ok 17 - all protocol modules check external stutters; private deletion exposes a false proof
+  ---
+  duration_ms: 916.21975
+  type: 'test'
+  ...
+# Subtest: a standalone unannotated controller constructor selects checked protocol admission
+ok 18 - a standalone unannotated controller constructor selects checked protocol admission
+  ---
+  duration_ms: 453.611041
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13625.518667

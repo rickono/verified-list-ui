@@ -6,8 +6,9 @@ import { options, walk } from "./ast.mjs";
 // recognized deliberately, so a typo cannot silently erase an obligation.
 const grammar = new Map([
   ...["state", "always", "pending", "resolves"].map((w) => [w, "expression"]),
+  ["protocol", "protocol"], ["abort", "abort"],
   ["@environment", "marker"], ["rejects", "marker"], ["settles", "eventually"],
-  ...["order", "abort", "leads", "ensures", "requires", "invariant", "safety", "live", "liveness", "fairness", "decreases", "modifies", "environment"].map((w) => [w, "unsupported"]),
+  ...["order", "leads", "ensures", "requires", "invariant", "safety", "live", "liveness", "fairness", "decreases", "modifies", "environment", "event", "delivers", "count", "counts", "unique", "uniqueness", "rank", "enabled", "enabledness", "eventually", "until", "next", "temporal"].map((w) => [w, "unsupported"]),
 ]);
 function near(a, b) {
   const left = [...a], right = [...b];
@@ -29,7 +30,9 @@ export function parseClauses(comments) {
       // Inspect the entire token before extracting punctuation. Recognition
       // normalizes lookalikes; admission below still requires the exact keyword.
       const word = /^(@?[\p{L}\p{M}]+)(?=$|[^\p{L}\p{M}_-])/u.exec(token)?.[1] ?? token;
-      return [token, word].some((candidate) => candidate && [...grammar.keys()].some((reserved) => near(candidate, reserved)));
+      const confusables = { "а":"a", "е":"e", "о":"o", "р":"p", "с":"c", "у":"y", "х":"x", "і":"i", "ѕ":"s", "Α":"a", "α":"a", "ο":"o", "ρ":"p", "ε":"e", "τ":"t", "ν":"v" };
+      const skeleton = word.replace(/[аеорсухіѕΑαορετν]/gu, (c) => confusables[c] ?? c);
+      return [token, word, skeleton].some((candidate) => candidate && [...grammar.keys()].some((reserved) => near(candidate, reserved)));
     });
     if (!looks) return { comment };
     if (comment.type !== "Line") fail("Contract-looking block comments are unsupported; use one line per clause.", comment);
@@ -37,6 +40,8 @@ export function parseClauses(comments) {
     if (!rule || rule === "unsupported") fail(`Unsupported or misspelled contract clause ${kind}.`, comment);
     const tail = text.slice(kind.length).trim();
     if (rule === "marker" && tail || rule === "eventually" && tail !== "eventually") fail(`Invalid ${kind} clause.`, comment);
+    if (rule === "protocol" && tail !== "node22-event-target-v1") fail("Unsupported protocol clause.", comment);
+    if (rule === "abort" && !/^advisory [A-Za-z_][\w]*$/.test(tail)) fail("Unsupported abort clause; use abort advisory <signal parameter>.", comment);
     let ast;
     if (rule === "expression") {
       const start = comment.start + 2 + comment.value.indexOf(tail, comment.value.indexOf(kind) + kind.length);

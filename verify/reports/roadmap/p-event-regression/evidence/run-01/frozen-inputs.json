@@ -1,0 +1,30 @@
+{
+  "expectationsSha256": "2ef1d38ab326c7ab0d3a000cc8049b8125fc22bdc27ed4bab4ca37472cebe500",
+  "files": {
+    "expectations.json": "2ef1d38ab326c7ab0d3a000cc8049b8125fc22bdc27ed4bab4ca37472cebe500",
+    "pins/dependencies/acorn-8.19.0/LICENSE": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7",
+    "pins/dependencies/acorn-8.19.0/package.json": "04d6fecaafb5e3d20a38fc3b64fed84bb3830a7759a8c00400ebcb87331fec00",
+    "pins/dependencies/p-timeout-1.1.1/index.js": "e256785c427c6de7f49d7a7f96899627b831b2226c038fce1df73887e49111ed",
+    "pins/dependencies/p-timeout-1.1.1/license": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+    "pins/dependencies/p-timeout-1.1.1/package.json": "892819d3c1991584ff3c9e8c3ac3fd5fa033c269f34bea957de16b92e0c8880b",
+    "pins/p-event/before/index.js": "ce6a001c40f13395cdb87a322c16e3a19f086498d74adadc4e89167f59a5affd",
+    "pins/p-event/before/license": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+    "pins/p-event/before/package.json": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+    "pins/p-event/before/test.js": "56a04f1686335fe9aa6cb46da6216dd6f1b3d76b61bd341b2edd15602bf8f451",
+    "pins/p-event/commit.json": "eac92fa4c505631a217750da12180ff2dd2b8a2fe54fdc7bd24e8e4dd8d73352",
+    "pins/p-event/fixed/index.js": "5a8c58248377106a9591233c97c17a521812c742ded80e22f2842ccf141364d4",
+    "pins/p-event/fixed/license": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+    "pins/p-event/fixed/package.json": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+    "pins/p-event/fixed/test.js": "35c9636fe8358226e7ce2420f4f63e4064d77fb0810d0fcaa209d0d4a0909e41",
+    "pins/p-event/issue.json": "6ef1c2468447c6ad6bab4a49692f850884653e470b427f9535192f8346e4c72c",
+    "pins/registry/acorn-8.19.0.json": "458e6883dec9155aba1fbbe3c7d9da2cf83b9ce0cc1e5342c880d19b0e81215e",
+    "pins/registry/p-timeout-1.1.1.json": "7cee0489f3ac47020d8ee8335f5c001a5fe4db9c5aa41a1f2e27f0902497f449",
+    "pins/tarballs/acorn-8.19.0.tgz": "c6fad21ffa1f2ba20338bf1dde1de911c2093c1aaf7b3af17c477661bd3bfaaf",
+    "pins/tarballs/p-timeout-1.1.1.tgz": "e7fc442d58c5016a455be7ffcebefe5fd2eba72b1c267576677b9e32b47f53d7",
+    "provenance.json": "500fe488d81e7f889d201a90edc3879f5888fd8761bae2beb56d9077b54f1d5f",
+    "scripts/admission.mjs": "c75b56b05a8e86bcffead42dd7c51349534462e7a0786ba01a2ef6899d393ad4",
+    "scripts/native.mjs": "974695ab0565213bac63659390e0544d6664e53270c638527d09e32354c55d1e",
+    "scripts/resolve-acorn.mjs": "b0576d93ba7d05e287a549408df77995541259bb3055d296fac7b5d3fb0b76df",
+    "scripts/run.py": "9a77de072b9a4b26000db83b0346c44009fdc26b15a1647640d11c4c5fec4f4b"
+  }
+}

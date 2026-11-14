@@ -1,0 +1,833 @@
+{
+  "classification": "measured admission plus explicitly inferred gap mapping",
+  "node": "v22.23.1",
+  "parserVersion": "8.19.0",
+  "rows": [
+    {
+      "classification": "measured",
+      "variant": "before",
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/before/index.js",
+      "sourceSha256": "ce6a001c40f13395cdb87a322c16e3a19f086498d74adadc4e89167f59a5affd",
+      "stateless": {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/before/index.js",
+        "sha256": "ce6a001c40f13395cdb87a322c16e3a19f086498d74adadc4e89167f59a5affd",
+        "trusted": [
+          "Acorn parser",
+          "Node TypeScript type stripping",
+          "project type and module resolution and source snapshots",
+          "source-to-SMT translation",
+          "exact rational specification replay",
+          "Z3 and its WASM bindings",
+          "unmodified standard Number/Math/Object/Array builtins and prototypes",
+          "JavaScript runtime"
+        ],
+        "modules": [
+          {
+            "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/before/index.js",
+            "sha256": "ce6a001c40f13395cdb87a322c16e3a19f086498d74adadc4e89167f59a5affd",
+            "imports": []
+          }
+        ],
+        "dependencies": [
+          {
+            "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/before/package.json",
+            "sha256": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+            "kind": "package"
+          }
+        ],
+        "graphSha256": "54fb88a79ea2cf5d9471f42350d8a83ab592c280ef7d64fa5cb828e5d5cce552",
+        "outcomes": [
+          {
+            "fn": null,
+            "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/before/index.js",
+            "status": "unsupported",
+            "span": {
+              "start": 0,
+              "end": 13
+            },
+            "line": 1,
+            "column": 1,
+            "message": "Only ordinary top-level functions and const function expressions are supported."
+          }
+        ]
+      },
+      "stateful": {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/before/index.js",
+        "sourceSha256": "ce6a001c40f13395cdb87a322c16e3a19f086498d74adadc4e89167f59a5affd",
+        "trusted": [
+          "Acorn and Node type stripping",
+          "closed stateful frontend and AST binding rewrites",
+          "existing source body/expression/heap compiler",
+          "representative init/step/keeps induction",
+          "existing proof scheduler and Z3 binary64 backend",
+          "strict native JavaScript replay and timed process containment"
+        ],
+        "status": "unsupported",
+        "message": "Unsupported stateful top-level ExpressionStatement.",
+        "span": {
+          "start": 0,
+          "end": 13
+        },
+        "line": 1,
+        "column": 1
+      },
+      "statelessSourceAtSpans": [
+        "'use strict';"
+      ],
+      "statefulSourceAtSpan": "'use strict';"
+    },
+    {
+      "classification": "measured",
+      "variant": "fixed",
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/fixed/index.js",
+      "sourceSha256": "5a8c58248377106a9591233c97c17a521812c742ded80e22f2842ccf141364d4",
+      "stateless": {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/fixed/index.js",
+        "sha256": "5a8c58248377106a9591233c97c17a521812c742ded80e22f2842ccf141364d4",
+        "trusted": [
+          "Acorn parser",
+          "Node TypeScript type stripping",
+          "project type and module resolution and source snapshots",
+          "source-to-SMT translation",
+          "exact rational specification replay",
+          "Z3 and its WASM bindings",
+          "unmodified standard Number/Math/Object/Array builtins and prototypes",
+          "JavaScript runtime"
+        ],
+        "modules": [
+          {
+            "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/fixed/index.js",
+            "sha256": "5a8c58248377106a9591233c97c17a521812c742ded80e22f2842ccf141364d4",
+            "imports": []
+          }
+        ],
+        "dependencies": [
+          {
+            "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/fixed/package.json",
+            "sha256": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+            "kind": "package"
+          }
+        ],
+        "graphSha256": "e5d80525091be8a0fe376caeb4833bcdf76390427c988469d1886cfa58c66e3d",
+        "outcomes": [
+          {
+            "fn": null,
+            "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/fixed/index.js",
+            "status": "unsupported",
+            "span": {
+              "start": 0,
+              "end": 13
+            },
+            "line": 1,
+            "column": 1,
+            "message": "Only ordinary top-level functions and const function expressions are supported."
+          }
+        ]
+      },
+      "stateful": {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/pins/p-event/fixed/index.js",
+        "sourceSha256": "5a8c58248377106a9591233c97c17a521812c742ded80e22f2842ccf141364d4",
+        "trusted": [
+          "Acorn and Node type stripping",
+          "closed stateful frontend and AST binding rewrites",
+          "existing source body/expression/heap compiler",
+          "representative init/step/keeps induction",
+          "existing proof scheduler and Z3 binary64 backend",
+          "strict native JavaScript replay and timed process containment"
+        ],
+        "status": "unsupported",
+        "message": "Unsupported stateful top-level ExpressionStatement.",
+        "span": {
+          "start": 0,
+          "end": 13
+        },
+        "line": 1,
+        "column": 1
+      },
+      "statelessSourceAtSpans": [
+        "'use strict';"
+      ],
+      "statefulSourceAtSpan": "'use strict';"
+    }
+  ],
+  "inspections": [
+    {
+      "classification": "inferred from read-only source inspection; not additional admission diagnostics",
+      "variant": "before",
+      "boundary": {
+        "start": 54,
+        "end": 1517,
+        "line": 4,
+        "column": 1,
+        "sha256": "b76f53001844fcbf2eff3c94bbf23c3bc706a9757ba752f04a520488ab434185",
+        "text": "module.exports = (emitter, event, opts) => {\n\tlet cancel;\n\n\tconst ret = new Promise((resolve, reject) => {\n\t\tif (typeof opts === 'function') {\n\t\t\topts = {filter: opts};\n\t\t}\n\n\t\topts = Object.assign({\n\t\t\trejectionEvents: ['error'],\n\t\t\tmultiArgs: false\n\t\t}, opts);\n\n\t\tlet addListener = emitter.on || emitter.addListener || emitter.addEventListener;\n\t\tlet removeListener = emitter.off || emitter.removeListener || emitter.removeEventListener;\n\n\t\tif (!addListener || !removeListener) {\n\t\t\tthrow new TypeError('Emitter is not compatible');\n\t\t}\n\n\t\taddListener = addListener.bind(emitter);\n\t\tremoveListener = removeListener.bind(emitter);\n\n\t\tconst resolveHandler = function (value) {\n\t\t\tif (opts.multiArgs) {\n\t\t\t\tvalue = [].slice.apply(arguments);\n\t\t\t}\n\n\t\t\tif (opts.filter && !opts.filter(value)) {\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tcancel();\n\t\t\tresolve(value);\n\t\t};\n\n\t\tconst rejectHandler = function (reason) {\n\t\t\tcancel();\n\n\t\t\tif (opts.multiArgs) {\n\t\t\t\treject([].slice.apply(arguments));\n\t\t\t} else {\n\t\t\t\treject(reason);\n\t\t\t}\n\t\t};\n\n\t\tcancel = () => {\n\t\t\tremoveListener(event, resolveHandler);\n\n\t\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\t\tremoveListener(rejectionEvent, rejectHandler);\n\t\t\t}\n\t\t};\n\n\t\taddListener(event, resolveHandler);\n\n\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\taddListener(rejectionEvent, rejectHandler);\n\t\t}\n\t});\n\n\tret.cancel = cancel;\n\n\tif (typeof opts.timeout === 'number') {\n\t\treturn pTimeout(ret, opts.timeout);\n\t}\n\n\treturn ret;\n}"
+      },
+      "commonJSDependencyBinding": {
+        "start": 20,
+        "end": 51,
+        "line": 2,
+        "column": 7,
+        "sha256": "375fc22174036afc7566f1151bf8c07b6961620c2b53ddf9c796150dbe90c944",
+        "text": "pTimeout = require('p-timeout')"
+      },
+      "promiseConstruction": {
+        "start": 120,
+        "end": 1394,
+        "line": 7,
+        "column": 8,
+        "sha256": "297fd65c7d6d42794e125cd83ca306cfda032bc0b771def9fa06a4b4bf0b23d9",
+        "text": "ret = new Promise((resolve, reject) => {\n\t\tif (typeof opts === 'function') {\n\t\t\topts = {filter: opts};\n\t\t}\n\n\t\topts = Object.assign({\n\t\t\trejectionEvents: ['error'],\n\t\t\tmultiArgs: false\n\t\t}, opts);\n\n\t\tlet addListener = emitter.on || emitter.addListener || emitter.addEventListener;\n\t\tlet removeListener = emitter.off || emitter.removeListener || emitter.removeEventListener;\n\n\t\tif (!addListener || !removeListener) {\n\t\t\tthrow new TypeError('Emitter is not compatible');\n\t\t}\n\n\t\taddListener = addListener.bind(emitter);\n\t\tremoveListener = removeListener.bind(emitter);\n\n\t\tconst resolveHandler = function (value) {\n\t\t\tif (opts.multiArgs) {\n\t\t\t\tvalue = [].slice.apply(arguments);\n\t\t\t}\n\n\t\t\tif (opts.filter && !opts.filter(value)) {\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tcancel();\n\t\t\tresolve(value);\n\t\t};\n\n\t\tconst rejectHandler = function (reason) {\n\t\t\tcancel();\n\n\t\t\tif (opts.multiArgs) {\n\t\t\t\treject([].slice.apply(arguments));\n\t\t\t} else {\n\t\t\t\treject(reason);\n\t\t\t}\n\t\t};\n\n\t\tcancel = () => {\n\t\t\tremoveListener(event, resolveHandler);\n\n\t\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\t\tremoveListener(rejectionEvent, rejectHandler);\n\t\t\t}\n\t\t};\n\n\t\taddListener(event, resolveHandler);\n\n\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\taddListener(rejectionEvent, rejectHandler);\n\t\t}\n\t})"
+      },
+      "mutableCancelBinding": {
+        "start": 104,
+        "end": 110,
+        "line": 5,
+        "column": 6,
+        "sha256": "2374d91794b79f4fb4ec9587d2cf00aecc4f9953fab3ed1dd12ab147a0b721f9",
+        "text": "cancel"
+      },
+      "smallestUnchangedCleanupAssignment": {
+        "start": 1068,
+        "end": 1243,
+        "line": 50,
+        "column": 3,
+        "sha256": "88f006cbb7769ee739a48fea260e52ecc5a695265a85e736662e47ccfaebcc58",
+        "text": "cancel = () => {\n\t\t\tremoveListener(event, resolveHandler);\n\n\t\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\t\tremoveListener(rejectionEvent, rejectHandler);\n\t\t\t}\n\t\t}"
+      },
+      "resolveHandlerCleanupOrdering": {
+        "start": 694,
+        "end": 898,
+        "line": 27,
+        "column": 9,
+        "sha256": "5252e301cd05ca87f20357ecf02c3eb40079e304f8231f530f103c3e6df7f571",
+        "text": "resolveHandler = function (value) {\n\t\t\tif (opts.multiArgs) {\n\t\t\t\tvalue = [].slice.apply(arguments);\n\t\t\t}\n\n\t\t\tif (opts.filter && !opts.filter(value)) {\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tcancel();\n\t\t\tresolve(value);\n\t\t}"
+      },
+      "rejectHandlerCleanupOrdering": {
+        "start": 909,
+        "end": 1063,
+        "line": 40,
+        "column": 9,
+        "sha256": "a449ef2261fa6c00ea9fd76d068a63cbc0dba8df1bae01aff20b6607af442e81",
+        "text": "rejectHandler = function (reason) {\n\t\t\tcancel();\n\n\t\t\tif (opts.multiArgs) {\n\t\t\t\treject([].slice.apply(arguments));\n\t\t\t} else {\n\t\t\t\treject(reason);\n\t\t\t}\n\t\t}"
+      },
+      "timeoutRejectionOrderingAndRethrow": {
+        "start": 1421,
+        "end": 1501,
+        "line": 67,
+        "column": 2,
+        "sha256": "f3c0f31594b6973d957627919f40c9e4481391085526a5bfdb0de031cd13a087",
+        "text": "if (typeof opts.timeout === 'number') {\n\t\treturn pTimeout(ret, opts.timeout);\n\t}"
+      }
+    },
+    {
+      "classification": "inferred from read-only source inspection; not additional admission diagnostics",
+      "variant": "fixed",
+      "boundary": {
+        "start": 54,
+        "end": 1618,
+        "line": 4,
+        "column": 1,
+        "sha256": "a88c8d2384fd4a8b2c44e7d2ca640886a84351b2c851f47c30c5e2b9e75bdee6",
+        "text": "module.exports = (emitter, event, opts) => {\n\tlet cancel;\n\n\tconst ret = new Promise((resolve, reject) => {\n\t\tif (typeof opts === 'function') {\n\t\t\topts = {filter: opts};\n\t\t}\n\n\t\topts = Object.assign({\n\t\t\trejectionEvents: ['error'],\n\t\t\tmultiArgs: false\n\t\t}, opts);\n\n\t\tlet addListener = emitter.on || emitter.addListener || emitter.addEventListener;\n\t\tlet removeListener = emitter.off || emitter.removeListener || emitter.removeEventListener;\n\n\t\tif (!addListener || !removeListener) {\n\t\t\tthrow new TypeError('Emitter is not compatible');\n\t\t}\n\n\t\taddListener = addListener.bind(emitter);\n\t\tremoveListener = removeListener.bind(emitter);\n\n\t\tconst resolveHandler = function (value) {\n\t\t\tif (opts.multiArgs) {\n\t\t\t\tvalue = [].slice.apply(arguments);\n\t\t\t}\n\n\t\t\tif (opts.filter && !opts.filter(value)) {\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tcancel();\n\t\t\tresolve(value);\n\t\t};\n\n\t\tconst rejectHandler = function (reason) {\n\t\t\tcancel();\n\n\t\t\tif (opts.multiArgs) {\n\t\t\t\treject([].slice.apply(arguments));\n\t\t\t} else {\n\t\t\t\treject(reason);\n\t\t\t}\n\t\t};\n\n\t\tcancel = () => {\n\t\t\tremoveListener(event, resolveHandler);\n\n\t\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\t\tremoveListener(rejectionEvent, rejectHandler);\n\t\t\t}\n\t\t};\n\n\t\taddListener(event, resolveHandler);\n\n\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\taddListener(rejectionEvent, rejectHandler);\n\t\t}\n\t});\n\n\tret.cancel = cancel;\n\n\tif (typeof opts.timeout === 'number') {\n\t\treturn pTimeout(ret, opts.timeout).catch(err => {\n\t\t\tif (err instanceof pTimeout.TimeoutError) {\n\t\t\t\tcancel();\n\t\t\t}\n\n\t\t\tthrow err;\n\t\t});\n\t}\n\n\treturn ret;\n}"
+      },
+      "commonJSDependencyBinding": {
+        "start": 20,
+        "end": 51,
+        "line": 2,
+        "column": 7,
+        "sha256": "375fc22174036afc7566f1151bf8c07b6961620c2b53ddf9c796150dbe90c944",
+        "text": "pTimeout = require('p-timeout')"
+      },
+      "promiseConstruction": {
+        "start": 120,
+        "end": 1394,
+        "line": 7,
+        "column": 8,
+        "sha256": "297fd65c7d6d42794e125cd83ca306cfda032bc0b771def9fa06a4b4bf0b23d9",
+        "text": "ret = new Promise((resolve, reject) => {\n\t\tif (typeof opts === 'function') {\n\t\t\topts = {filter: opts};\n\t\t}\n\n\t\topts = Object.assign({\n\t\t\trejectionEvents: ['error'],\n\t\t\tmultiArgs: false\n\t\t}, opts);\n\n\t\tlet addListener = emitter.on || emitter.addListener || emitter.addEventListener;\n\t\tlet removeListener = emitter.off || emitter.removeListener || emitter.removeEventListener;\n\n\t\tif (!addListener || !removeListener) {\n\t\t\tthrow new TypeError('Emitter is not compatible');\n\t\t}\n\n\t\taddListener = addListener.bind(emitter);\n\t\tremoveListener = removeListener.bind(emitter);\n\n\t\tconst resolveHandler = function (value) {\n\t\t\tif (opts.multiArgs) {\n\t\t\t\tvalue = [].slice.apply(arguments);\n\t\t\t}\n\n\t\t\tif (opts.filter && !opts.filter(value)) {\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tcancel();\n\t\t\tresolve(value);\n\t\t};\n\n\t\tconst rejectHandler = function (reason) {\n\t\t\tcancel();\n\n\t\t\tif (opts.multiArgs) {\n\t\t\t\treject([].slice.apply(arguments));\n\t\t\t} else {\n\t\t\t\treject(reason);\n\t\t\t}\n\t\t};\n\n\t\tcancel = () => {\n\t\t\tremoveListener(event, resolveHandler);\n\n\t\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\t\tremoveListener(rejectionEvent, rejectHandler);\n\t\t\t}\n\t\t};\n\n\t\taddListener(event, resolveHandler);\n\n\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\taddListener(rejectionEvent, rejectHandler);\n\t\t}\n\t})"
+      },
+      "mutableCancelBinding": {
+        "start": 104,
+        "end": 110,
+        "line": 5,
+        "column": 6,
+        "sha256": "2374d91794b79f4fb4ec9587d2cf00aecc4f9953fab3ed1dd12ab147a0b721f9",
+        "text": "cancel"
+      },
+      "smallestUnchangedCleanupAssignment": {
+        "start": 1068,
+        "end": 1243,
+        "line": 50,
+        "column": 3,
+        "sha256": "88f006cbb7769ee739a48fea260e52ecc5a695265a85e736662e47ccfaebcc58",
+        "text": "cancel = () => {\n\t\t\tremoveListener(event, resolveHandler);\n\n\t\t\tfor (const rejectionEvent of opts.rejectionEvents) {\n\t\t\t\tremoveListener(rejectionEvent, rejectHandler);\n\t\t\t}\n\t\t}"
+      },
+      "resolveHandlerCleanupOrdering": {
+        "start": 694,
+        "end": 898,
+        "line": 27,
+        "column": 9,
+        "sha256": "5252e301cd05ca87f20357ecf02c3eb40079e304f8231f530f103c3e6df7f571",
+        "text": "resolveHandler = function (value) {\n\t\t\tif (opts.multiArgs) {\n\t\t\t\tvalue = [].slice.apply(arguments);\n\t\t\t}\n\n\t\t\tif (opts.filter && !opts.filter(value)) {\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tcancel();\n\t\t\tresolve(value);\n\t\t}"
+      },
+      "rejectHandlerCleanupOrdering": {
+        "start": 909,
+        "end": 1063,
+        "line": 40,
+        "column": 9,
+        "sha256": "a449ef2261fa6c00ea9fd76d068a63cbc0dba8df1bae01aff20b6607af442e81",
+        "text": "rejectHandler = function (reason) {\n\t\t\tcancel();\n\n\t\t\tif (opts.multiArgs) {\n\t\t\t\treject([].slice.apply(arguments));\n\t\t\t} else {\n\t\t\t\treject(reason);\n\t\t\t}\n\t\t}"
+      },
+      "timeoutRejectionOrderingAndRethrow": {
+        "start": 1421,
+        "end": 1602,
+        "line": 67,
+        "column": 2,
+        "sha256": "5d4af1aefc098ecf01e20eb55b0d349867c78e5736b8203449fdd93e10643bea",
+        "text": "if (typeof opts.timeout === 'number') {\n\t\treturn pTimeout(ret, opts.timeout).catch(err => {\n\t\t\tif (err instanceof pTimeout.TimeoutError) {\n\t\t\t\tcancel();\n\t\t\t}\n\n\t\t\tthrow err;\n\t\t});\n\t}"
+      }
+    }
+  ],
+  "resolutionLog": [
+    {
+      "specifier": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs"
+    },
+    {
+      "specifier": "node:assert/strict",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "node:assert/strict"
+    },
+    {
+      "specifier": "node:crypto",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "node:crypto"
+    },
+    {
+      "specifier": "node:fs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "node:fs"
+    },
+    {
+      "specifier": "node:url",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "node:url"
+    },
+    {
+      "specifier": "acorn",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/node_modules/acorn/dist/acorn.mjs"
+    },
+    {
+      "specifier": "../../../../index.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs"
+    },
+    {
+      "specifier": "../../../../stateful/index.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs"
+    },
+    {
+      "specifier": "node:path",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "node:path"
+    },
+    {
+      "specifier": "node:vm",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "node:vm"
+    },
+    {
+      "specifier": "./source.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs"
+    },
+    {
+      "specifier": "./error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./modules.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/modules.mjs"
+    },
+    {
+      "specifier": "./data.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/data.mjs"
+    },
+    {
+      "specifier": "./specifications.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/specifications.mjs"
+    },
+    {
+      "specifier": "./proofs.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/proofs.mjs"
+    },
+    {
+      "specifier": "./heap-witness.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/heap-witness.mjs"
+    },
+    {
+      "specifier": "./cache.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs"
+    },
+    {
+      "specifier": "./manifest.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/manifest.mjs"
+    },
+    {
+      "specifier": "./evidence.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/evidence.mjs"
+    },
+    {
+      "specifier": "node:perf_hooks",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "node:perf_hooks"
+    },
+    {
+      "specifier": "../error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "../proofs.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/proofs.mjs"
+    },
+    {
+      "specifier": "./machine.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs"
+    },
+    {
+      "specifier": "./transitions.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/transitions.mjs"
+    },
+    {
+      "specifier": "./traces.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/traces.mjs"
+    },
+    {
+      "specifier": "./values.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/values.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/index.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "node:module",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs",
+      "url": "node:module"
+    },
+    {
+      "specifier": "acorn",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/node_modules/acorn/dist/acorn.mjs"
+    },
+    {
+      "specifier": "./error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./data.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/data.mjs"
+    },
+    {
+      "specifier": "./types.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/types.mjs"
+    },
+    {
+      "specifier": "./specifications.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/specifications.mjs"
+    },
+    {
+      "specifier": "./heap.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/heap.mjs"
+    },
+    {
+      "specifier": "node:fs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/modules.mjs",
+      "url": "node:fs"
+    },
+    {
+      "specifier": "node:path",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/modules.mjs",
+      "url": "node:path"
+    },
+    {
+      "specifier": "node:crypto",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/modules.mjs",
+      "url": "node:crypto"
+    },
+    {
+      "specifier": "node:module",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/modules.mjs",
+      "url": "node:module"
+    },
+    {
+      "specifier": "./source.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/modules.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs"
+    },
+    {
+      "specifier": "./error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/modules.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/data.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./predicate-witness.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/data.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/predicate-witness.mjs"
+    },
+    {
+      "specifier": "./error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/specifications.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./data.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/specifications.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/data.mjs"
+    },
+    {
+      "specifier": "node:perf_hooks",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/proofs.mjs",
+      "url": "node:perf_hooks"
+    },
+    {
+      "specifier": "./backend.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/proofs.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs"
+    },
+    {
+      "specifier": "node:crypto",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs",
+      "url": "node:crypto"
+    },
+    {
+      "specifier": "node:fs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs",
+      "url": "node:fs"
+    },
+    {
+      "specifier": "node:os",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs",
+      "url": "node:os"
+    },
+    {
+      "specifier": "node:path",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs",
+      "url": "node:path"
+    },
+    {
+      "specifier": "./proofs.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/proofs.mjs"
+    },
+    {
+      "specifier": "./backend.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs"
+    },
+    {
+      "specifier": "node:crypto",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/manifest.mjs",
+      "url": "node:crypto"
+    },
+    {
+      "specifier": "node:fs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/manifest.mjs",
+      "url": "node:fs"
+    },
+    {
+      "specifier": "node:module",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/manifest.mjs",
+      "url": "node:module"
+    },
+    {
+      "specifier": "node:path",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/manifest.mjs",
+      "url": "node:path"
+    },
+    {
+      "specifier": "node:url",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/manifest.mjs",
+      "url": "node:url"
+    },
+    {
+      "specifier": "acorn",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/manifest.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/node_modules/acorn/dist/acorn.mjs"
+    },
+    {
+      "specifier": "./backend.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/evidence.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs"
+    },
+    {
+      "specifier": "./cache.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/evidence.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/cache.mjs"
+    },
+    {
+      "specifier": "node:module",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs",
+      "url": "node:module"
+    },
+    {
+      "specifier": "acorn",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/node_modules/acorn/dist/acorn.mjs"
+    },
+    {
+      "specifier": "../error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "./clauses.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/clauses.mjs"
+    },
+    {
+      "specifier": "./environment.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/environment.mjs"
+    },
+    {
+      "specifier": "./protocol-machine.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-machine.mjs"
+    },
+    {
+      "specifier": "../source.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs"
+    },
+    {
+      "specifier": "../error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "./protocol-transitions.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs"
+    },
+    {
+      "specifier": "node:child_process",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/traces.mjs",
+      "url": "node:child_process"
+    },
+    {
+      "specifier": "node:perf_hooks",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/traces.mjs",
+      "url": "node:perf_hooks"
+    },
+    {
+      "specifier": "./protocol-values.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/traces.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-values.mjs"
+    },
+    {
+      "specifier": "./machine.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/traces.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/machine.mjs"
+    },
+    {
+      "specifier": "./values.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/traces.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/values.mjs"
+    },
+    {
+      "specifier": "./protocol-values.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/values.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-values.mjs"
+    },
+    {
+      "specifier": "node:crypto",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs",
+      "url": "node:crypto"
+    },
+    {
+      "specifier": "acorn",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/types.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/node_modules/acorn/dist/acorn.mjs"
+    },
+    {
+      "specifier": "./error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/types.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/heap.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./data.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/heap.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/data.mjs"
+    },
+    {
+      "specifier": "node:child_process",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs",
+      "url": "node:child_process"
+    },
+    {
+      "specifier": "node:url",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs",
+      "url": "node:url"
+    },
+    {
+      "specifier": "./data.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/data.mjs"
+    },
+    {
+      "specifier": "./heap-witness.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/heap-witness.mjs"
+    },
+    {
+      "specifier": "./predicate-witness.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/backend.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/predicate-witness.mjs"
+    },
+    {
+      "specifier": "acorn",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/clauses.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/node_modules/acorn/dist/acorn.mjs"
+    },
+    {
+      "specifier": "../error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/clauses.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/clauses.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "../error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/environment.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/environment.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "../error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "./environment.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-machine.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/environment.mjs"
+    },
+    {
+      "specifier": "../source.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/source.mjs"
+    },
+    {
+      "specifier": "../error.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/error.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "./environment.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/environment.mjs"
+    },
+    {
+      "specifier": "./protocol-rules.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-rules.mjs"
+    },
+    {
+      "specifier": "./protocol-abort.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-abort.mjs"
+    },
+    {
+      "specifier": "./projection.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-transitions.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/projection.mjs"
+    },
+    {
+      "specifier": "./ast.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-values.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/ast.mjs"
+    },
+    {
+      "specifier": "./values.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-values.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/values.mjs"
+    },
+    {
+      "specifier": "./projection.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-rules.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/projection.mjs"
+    },
+    {
+      "specifier": "./protocol-abort.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-rules.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-abort.mjs"
+    },
+    {
+      "specifier": "./projection.mjs",
+      "parentURL": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/protocol-abort.mjs",
+      "url": "file:///Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/stateful/projection.mjs"
+    }
+  ],
+  "scope": "Complete pinned modules rejected before proof; unchanged nested declarations inspected only; no extracted/reimplemented proof or second semantic model"
+}

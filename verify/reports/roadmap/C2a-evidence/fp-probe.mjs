@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {machineOf} from '../../../stateful/machine.mjs';
+import {traceOf,replayTrace} from '../../../stateful/traces.mjs';
+import {handleValue} from '../../../stateful/protocol-values.mjs';
+const source=readFileSync('tests/verify/fixtures/stateful/protocols/advisory.ts','utf8').replace('// resolves result === 1\n','');
+const file='payload.ts',m=machineOf(file,source),trace=traceOf(m,[{kind:'call',entry:'search',args:[0,handleValue('signal','11')]},{kind:'resolve',request:1,op:'lookup',value:NaN}],{inputs:[{id:'10',signal:'11',aborted:false}]});
+trace.actions[1].value.bits='7ff8000000000042';
+const result=await replayTrace(file,source,trace);
+writeFileSync(process.argv[2],JSON.stringify({source,sourceSha256:m.sourceSha256,inputBits:trace.actions[1].value.bits,result},null,2)+'\n');
+console.log(result.status,result.trace?.steps.at(-1).state.shown);

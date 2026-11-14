@@ -146,12 +146,59 @@ The proof checks initialization, arbitrary steps and interference with every
 other pending activation. Native trace replay confirms property failures.
 Witness-search depth never bounds a proof. Number/boolean state, immutable
 primitive captures and declared operation outcomes are supported. The scheduler
-drains microtasks between external actions. Cancellation, listeners, reference
-state and liveness remain future work; settling assumptions are unused by
-safety. This API has its own source subset and does not use P caching.
+drains microtasks between external actions. General reference state and liveness
+remain unsupported; settling assumptions are unused by safety. The restricted
+protocol extension below adds listeners and advisory cancellation. This API has its own source subset and does not use P caching.
 
 See [the safety foundation receipt](reports/roadmap/C1-landing.md) for scope,
 assumptions, independent reviews and the final 371-test combined run.
+
+## Restricted listener and advisory protocols
+
+The same `checkStateful` API admits two separate source subsets. The complete
+[listener fixture](../tests/verify/fixtures/stateful/protocols/listeners.ts)
+selects `// protocol node22-event-target-v1` on an ambient `EventTarget`.
+Its registry starts empty and source-owned. Synchronous, parameterless arrows
+capture immutable primitives. Repeated arrow evaluation creates distinct
+closures; aliases preserve identity. Duplicate add is a no-op. A simple
+expression-bodied returned remover supports idempotent cleanup.
+
+The separate [advisory fixture](../tests/verify/fixtures/stateful/protocols/advisory.ts)
+uses `// abort advisory signal` on a declared operation's signal parameter.
+Compatible inputs may alias, and input signals may already be aborted.
+Constructors allocate fresh controller/signal pairs. Abort changes signal
+contents without settling or deleting requests. Legal late fulfillment and
+already selected responses remain possible. Rejection requires `// rejects`.
+
+Source aborts and their induction rules use the same persistent state update.
+The checks bind changed signal contents and preserved request/invocation
+membership to that update and to the original source action. Substituting a
+matching rule name without its clauses is rejected. Private membership-deletion
+mutants fail the abstract checks; native replay remains the check for individual
+application failures. The protocol model and compiler remain trusted.
+
+Proofs check creation, removal, unary and pairwise preservation, and both
+registration index/occurrence directions over arbitrary representatives.
+No finite identity pool or event limit enters the queries. Protocol dispatch
+observes adjacent handler cuts and an empty-dispatch stutter. A nonempty
+dispatch has no additional outer `always` endpoint check. C1 action cuts remain
+unchanged.
+
+Native replay uses Node v22.23.1, real closures, separate observer listeners,
+strict timed realms, and killed/reaped worker processes. Version-2 traces bind
+source, executable, assumptions, protocol, and schema hashes. Typed handle
+identities travel separately from binary64 bit encodings. Every action suffix
+is validated, even after an earlier property violation.
+
+This first unit requires ambient targets, separate listener/advisory modules,
+and at most one protocol await per entry. Scalar C1 entries retain multiple
+awaits. Unsupported forms report original source spans: payload access,
+options, EventEmitter, signal-as-target overlap, mutable captures, asynchronous
+listeners, handler registration mutation, reentrancy, imports, general reference
+stores, helper calls, protocol-reading pending clauses, stronger abort policies,
+and count, uniqueness, or temporal clauses. General immutable capture
+expressions may need stronger source invariants; the checker never assumes a
+finite or safe captured number.
 
 ## Write a contract
 

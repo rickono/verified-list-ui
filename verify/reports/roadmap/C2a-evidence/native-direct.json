@@ -1,0 +1,34 @@
+{
+  "node": "v22.23.1",
+  "comparisons": [
+    {
+      "variant": "original",
+      "sourceSha256": "caffe023b53b4005064699ae33240af4eb9fb97aaf028182f16d312a652d1b73",
+      "executableSha256": "0dbfd8b8bdc207dc724335d16457d9a519d7eaab6a3485acf967d4620fc66a4d",
+      "counts": [
+        2,
+        1,
+        0
+      ],
+      "shown": 1,
+      "callbacks": "native registrations contain the original closure instances; no wrappers or observer listeners"
+    },
+    {
+      "variant": "fresh-remover",
+      "sourceSha256": "9f8ab7ef99f11c6324f04713b72a6c42eb0956b5ff62b361c749a5251f5044b6",
+      "executableSha256": "f8271ae68985739d619d688a4bcc46eeca763d234fe97dd07f82fa33ef9cde5a",
+      "counts": [
+        2,
+        2,
+        2
+      ],
+      "shown": 1,
+      "callbacks": "native registrations contain the original closure instances; no wrappers or observer listeners"
+    }
+  ],
+  "microtaskOrder": [
+    "first",
+    "second",
+    "microtask"
+  ]
+}

@@ -1,0 +1,18 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+Running protocol-final-focused
+protocol-final-focused exit 0
+Running proof-final
+proof-final exit 0
+Running native-direct
+native-direct exit 0
+Running fp-after
+fp-after exit 0
+Running return-after
+return-after exit 0
+Running baseline-compare
+baseline-compare exit 0
+Running stutter-control
+stutter-control exit 0
+Running full-final
+full-final exit 0

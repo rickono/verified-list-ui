@@ -1,0 +1,111 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:98471) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: both corrected complete verticals prove over full domains with no witness search
+ok 1 - both corrected complete verticals prove over full domains with no witness search
+  ---
+  duration_ms: 824.056042
+  type: 'test'
+  ...
+# Subtest: two closure evaluations, duplicate no-op, alias removal and repeated cleanup give native 2/1/0
+ok 2 - two closure evaluations, duplicate no-op, alias removal and repeated cleanup give native 2/1/0
+  ---
+  duration_ms: 601.417083
+  type: 'test'
+  ...
+# Subtest: fresh same-body removal retains the listener, while its existing safety property still proves
+ok 3 - fresh same-body removal retains the listener, while its existing safety property still proves
+  ---
+  duration_ms: 515.111584
+  type: 'test'
+  ...
+# Subtest: both real guard removals produce legally confirmed native property failures
+ok 4 - both real guard removals produce legally confirmed native property failures
+  ---
+  duration_ms: 1582.992417
+  type: 'test'
+  ...
+# Subtest: per-handler non-transitive relation observes 0/1/2 with no dispatch endpoint theorem
+not ok 5 - per-handler non-transitive relation observes 0/1/2 with no dispatch endpoint theorem
+  ---
+  duration_ms: 601.32175
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/tests/verify/stateful-protocols.test.mjs:67:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {"file":"cuts.ts","sourceSha256":"c70e26673fbf431f75be971ddf7df55bd17c072f4552333eaf71665e51cb283d","trusted":["Acorn and Node type stripping","closed stateful frontend and AST binding rewrites","existing source body/expression/heap compiler","representative init/step/keeps induction","existing proof scheduler and Z3 binary64 backend","strict native JavaScript replay and timed process containment"],"executableSha256":"5ee14f433872cf803324e0473a4c9d3954db98ff5f32451255991d61a0741510","assumptions":{"numericDomain":"JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)","eventBound":null,"scheduler":"JS run-to-completion; external actions with microtasks drained before the next environment action","entryCalls":"external only; no entry-to-entry or recursive calls; unboundedly repeated","activationPool":"unbounded multiset; distinct identities per invocation, unary pending invariants","initial":{"x":"0"},"environment":[],"entries":[{"entry":"bind","params":[]},{"entry":"noop","params":[]}],"fairness":"none used by safety; settles eventually is recorded only","unsupported":["imports","general reference stores","mutable captures","async listeners","payloads","options","handler registration mutation","reentrancy","EventEmitter","signal-as-target","reject-on-abort","counts/uniqueness/temporal clauses"],"protocol":{"version":"C2a-1","event":"node22-event-target-v1","runtime":"v22.23.1","registry":"initially empty; source-owned; outside mutation excluded","capture":false,"delivery":"synchronous registration order; no external actions or microtasks between handlers","abort":"advisory contents only; no request or invocation deletion","identity":"unbounded; allocation history; compatible inputs may alias","counts":"unsupported","temporal":"unsupported","sha256":"f2ec770070b2fc527be7075f176a1f03dbbd9642a195aa0e66205dc3fc33e3f9"},"observationCuts":"adjacent source handlers; empty dispatch stutters; no outer nonempty-dispatch check","handleInputs":"compatible inputs may alias; signals may already be aborted; controller.signal has one stable owner; signals excluded from EventTarget domain","sha256":"91d39b70c543535738ecdac6cedfe4e68a77731271cbcddba0fcaa14a211cbb4"},"unitsSha256":"bb9ce706f102039ba02b38d2bab3b14fc0a78a8360b3cbfd13f663860a0b1f88","properties":[{"kind":"state","text":"0 <= x && x <= 2","span":{"start":95,"end":120}},{"kind":"always","text":"x - old(x) <= 1","span":{"start":121,"end":146}}],"protocol":{"version":"C2a-1","event":"node22-event-target-v1","runtime":"v22.23.1","registry":"initially empty; source-owned; outside mutation excluded","capture":false,"delivery":"synchronous registration order; no external actions or microtasks between handlers","abort":"advisory contents only; no request or invocation deletion","identity":"unbounded; allocation history; compatible inputs may alias","counts":"unsupported","temporal":"unsupported","sha256":"f2ec770070b2fc527be7075f176a1f03dbbd9642a195aa0e66205dc3fc33e3f9","structuralValidation":"complete required schema set","projectionReplay":"original source owner; internal identity predicates are not standalone executable predicates"},"units":[{"unit":"$init","kind":"init","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[{"roots":[],"nodes":{}}]},{"unit":"$registry$init","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$create$occurrence-index","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$create$index-occurrence","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$create$keeps-unary","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$create$keeps-pair","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$duplicate$occurrence-index","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$duplicate$index-occurrence","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$duplicate$keeps-unary","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$duplicate$keeps-pair","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$remove$occurrence-index","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$remove$index-occurrence","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$remove$keeps-unary","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$remove$keeps-pair","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$absent-remove$occurrence-index","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$absent-remove$index-occurrence","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$absent-remove$keeps-unary","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$absent-remove$keeps-pair","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$creation","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$registry$uniqueness","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$handles$allocation","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$handles$keeps-unary","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$handles$keeps-pair","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$handles$alias-ownership","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$abort$contents","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$request$creation","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$request$settlement","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$request$abort-keeps","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$request$selected-keeps","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"$closure$allocation","kind":"protocol-rule","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":[]},{"unit":"bind$0","kind":"entry","span":{"start":154,"end":246},"protocolActions":[{"kind":"closure","span":{"start":186,"end":205},"rules":["$closure$allocation"]},{"kind":"add","span":{"start":207,"end":243},"rules":["$registry$creation","$registry$duplicate$occurrence-index","$registry$duplicate$index-occurrence"]}],"effects":{"kind":"writes"},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","4000000000000000"]}}}}]},{"unit":"noop$0","kind":"entry","span":{"start":254,"end":272},"protocolActions":[],"effects":{"kind":"pure"},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","4000000000000000"]}}}}]},{"unit":"$stutter","kind":"stutter","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","4000000000000000"]}}}}]},{"unit":"$closure_186","kind":"handler","span":{"start":186,"end":205},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"counterexample","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","3ff0020000000004"]}}}}],"label":{"kind":"ensures","span":{"start":95,"end":120},"abstract":false}},{"unit":"bind$0$keeps$$closure_186","kind":"interference","span":{"start":154,"end":246},"protocolActions":[{"kind":"closure","span":{"start":186,"end":205},"rules":["$closure$allocation"]},{"kind":"add","span":{"start":207,"end":243},"rules":["$registry$creation","$registry$duplicate$occurrence-index","$registry$duplicate$index-occurrence"]}],"effects":{"kind":"writes"},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","4000000000000000"]}}}}]},{"unit":"noop$0$keeps$$closure_186","kind":"interference","span":{"start":254,"end":272},"protocolActions":[],"effects":{"kind":"pure"},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","4000000000000000"]}}}}]},{"unit":"$stutter$keeps$$closure_186","kind":"interference","span":{"start":95,"end":120},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","4000000000000000"]}}}}]},{"unit":"$closure_186$keeps$$closure_186","kind":"interference","span":{"start":186,"end":205},"scope":"abstract induction obligation; satisfiable is not an application counterexample","status":"verified","witness":["0",{"roots":["0"],"nodes":{"0":{"kind":"object","fields":{"x":["num","4000000000000000"]}}}}]}],"searched":{"maxDepth":0,"maxExecutions":2000,"numbers":[{"type":"number","bits":"0000000000000000"},{"type":"number","bits":"3ff0000000000000"},{"type":"number","bits":"7ff8000000000000"},{"type":"number","bits":"7ff0000000000000"},{"type":"number","bits":"fff0000000000000"},{"type":"number","bits":"8000000000000000"},{"type":"number","bits":"4000000000000000"},{"type":"number","bits":"3ff0020000000004"}],"executions":1},"status":"unknown","reason":"induction-gap","abstract":["$closure_186"],"message":"An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof."}
+    + actual - expected
+    
+    + 'unknown'
+    - 'verified'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'verified'
+  actual: 'unknown'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/tests/verify/stateful-protocols.test.mjs:74:82)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: advisory late responses, same/different controllers, already-aborted and settled-not-resumed
+ok 6 - advisory late responses, same/different controllers, already-aborted and settled-not-resumed
+  ---
+  duration_ms: 387.152916
+  type: 'test'
+  ...
+# Subtest: input aliases are compatible; native allocations are fresh, own stable signal aliases
+ok 7 - input aliases are compatible; native allocations are fresh, own stable signal aliases
+  ---
+  duration_ms: 879.758417
+  type: 'test'
+  ...
+# Subtest: private deletion of keeps or either index direction fails structural completeness
+ok 8 - private deletion of keeps or either index direction fails structural completeness
+  ---
+  duration_ms: 2.48175
+  type: 'test'
+  ...
+# Subtest: grammar reserves all new/future words and rejects Unicode, case, typo, blocks and punctuation at original spans
+ok 9 - grammar reserves all new/future words and rejects Unicode, case, typo, blocks and punctuation at original spans
+  ---
+  duration_ms: 7.571792
+  type: 'test'
+  ...
+# Subtest: unsupported listener syntax/effects fail closed, including H helpers and payload assumptions
+ok 10 - unsupported listener syntax/effects fail closed, including H helpers and payload assumptions
+  ---
+  duration_ms: 4.359375
+  type: 'test'
+  ...
+# Subtest: hashes, domain, suffix, identity, ownership and duplicate settlements are checked independently
+ok 11 - hashes, domain, suffix, identity, ownership and duplicate settlements are checked independently
+  ---
+  duration_ms: 1199.771542
+  type: 'test'
+  ...
+# Subtest: protocol native timeout is contained, strict, and workers are reaped
+ok 12 - protocol native timeout is contained, strict, and workers are reaped
+  ---
+  duration_ms: 232.083792
+  type: 'test'
+  ...
+# Subtest: protocol writes/allocation and projected reads never acquire pure effects after scalar lowering
+ok 13 - protocol writes/allocation and projected reads never acquire pure effects after scalar lowering
+  ---
+  duration_ms: 2.08975
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 12
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6890.738959

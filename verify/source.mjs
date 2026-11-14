@@ -493,6 +493,11 @@ function store(node, left, operator, rhs, env, cx, prefix) {
 function expression(node, env, cx) {
   const read = (child) => expression(child, env, cx);
   const under = (child, guard, inner) => expression(child, inner, { ...cx, guard: and(cx.guard, guard) });
+  if (node.type === "StatefulProjection") {
+    if (!cx.scope.projection || cx.pure) fail("Protocol projections cannot acquire a pure callback certificate.", node);
+    heap.registry(cx.unit).reads = true;
+    return data.bool(cx.scope.projection(node.term, node));
+  }
   if (node.type === "ParenthesizedExpression") return read(node.expression);
   if (node.type === "Literal") {
     if (["number", "boolean"].includes(typeof node.value)) return data.literal(node.value);
@@ -1151,8 +1156,10 @@ function body(h, scope) {
       probes: [], functions: new Map(), emittedFunctions: new Set(), pendingAxioms: [], owner: name };
     const env = new Map();
     if (fn.type === "FunctionExpression" && fn.id) bind(env, fn.id, SELF, "self");
-    const declarations = [], lengths = [];
-    heap.registry(unit);
+    const declarations = [...(scope.protocolDeclarations ?? [])], lengths = [];
+    const effects = heap.registry(unit);
+    if (scope.protocolEffects?.writes) effects.writes = true;
+    if (scope.protocolEffects?.reads || scope.protocolEffects?.allocates) effects.reads = true;
     const params = h.params.map((p, index) => {
       const value = heap.isReferenceType(p.type) ? { ...heap.refInput(unit, p.type, `input_${index}`, p.node), lengths: heap.inputLengths(p.type, `input_${index}_ref`) } : data.input(p.type, `input_${index}`);
       bind(env, p.node, value.value, "parameter");
@@ -1263,8 +1270,8 @@ function body(h, scope) {
       spec: h.spec,
       predicates: {
         ...replay,
-        requires: h.requires.map((c) => specifications.replayExpression(c.ast, replay)),
-        ensures: h.ensures.map((c) => specifications.replayExpression(c.ast, replay)),
+        requires: scope.projection ? [] : h.requires.map((c) => specifications.replayExpression(c.ast, replay)),
+        ensures: scope.projection ? [] : h.ensures.map((c) => specifications.replayExpression(c.ast, replay)),
         ...(h.spec ? { body: specifications.replayExpression(fn.body, replay) } : {}),
       },
       executable: scope.stripped.slice(fn.start, fn.end),
@@ -1288,6 +1295,44 @@ export function compileAstUnit({ file, source, stripped, tokens }, header) {
   const scope = { file, source, stripped, tokens, names: new Map(),
     validateType: (text, at) => data.parseType(text, at),
   };
+  if (header.protocolProjection) {
+    // This internal seam has no source spelling. Only typed identity equality,
+    // membership reads and persistent functional updates cross it. Application
+    // arithmetic/logic, partiality, effects and ordered facts stay in body().
+    scope.protocolEffects = header.protocolEffects;
+    const { variables, maps } = header.protocolProjection;
+    const domains = ["target", "event", "closure", "registration", "invocation", "request", "controller", "signal"];
+    const types = new Set([...domains, "boolean"]);
+    const name = (n) => { if (!/^\$[A-Za-z_][\w]*$/.test(n)) fail("Invalid internal protocol symbol.", h.top); return n; };
+    const sort = (t) => { if (!types.has(t)) fail("Invalid internal protocol sort.", h.top); return t === "boolean" ? "Bool" : `Protocol_${t}`; };
+    const vars = new Map(variables.map((v) => [name(v.name), v.sort]));
+    const fns = new Map(maps.map((m) => [name(m.name), m]));
+    scope.protocolDeclarations = [
+      ...domains.map((t) => `(declare-sort ${sort(t)} 0)`),
+      ...variables.map((v) => `(declare-const ${name(v.name)} ${sort(v.sort)})`),
+      ...maps.map((m) => `(declare-fun ${name(m.name)} (${m.inputs.map(sort).join(" ")}) ${sort(m.output)})`),
+    ];
+    const render = (t, at) => {
+      const check = (c) => { if (!c) fail("Ill-typed internal protocol projection.", at); };
+      check(t && types.has(t.sort));
+      if (t.kind === "variable") { check(vars.get(t.name) === t.sort); return name(t.name); }
+      if (t.kind === "constant") { check(t.sort === "boolean" && typeof t.value === "boolean"); return String(t.value); }
+      if (t.kind === "equal") { check(t.sort === "boolean" && t.a.sort === t.b.sort); return `(= ${render(t.a, at)} ${render(t.b, at)})`; }
+      if (t.kind === "choose") { check(t.test.sort === "boolean" && t.yes.sort === t.no.sort && t.sort === t.yes.sort); return `(ite ${render(t.test, at)} ${render(t.yes, at)} ${render(t.no, at)})`; }
+      if (["and", "or", "not"].includes(t.kind)) {
+        const args = t.kind === "not" ? [t.arg] : t.args;
+        check(t.sort === "boolean" && args.every((a) => a.sort === "boolean"));
+        if (!args.length) return t.kind === "and" ? "true" : "false";
+        return `(${t.kind} ${args.map((a) => render(a, at)).join(" ")})`;
+      }
+      if (t.kind === "read") {
+        const m = fns.get(t.fn.name); check(m && m.output === t.sort && m.inputs.length === t.args.length && m.inputs.every((s, i) => s === t.args[i].sort));
+        return `(${name(m.name)} ${t.args.map((a) => render(a, at)).join(" ")})`;
+      }
+      fail("Unknown internal protocol projection.", at);
+    };
+    scope.projection = (t, at) => { if (t.sort !== "boolean") fail("Only boolean protocol observations cross the expression boundary.", at); return render(t, at); };
+  }
   return { ...body(h, scope), executable: undefined };
 }
 

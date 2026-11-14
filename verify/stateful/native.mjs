@@ -1,10 +1,11 @@
+import { executeProtocolNative } from "./protocol-native.mjs";
 import { Script, createContext } from "node:vm";
 import { reference, walk } from "./ast.mjs";
 import { decodeValue, encodeValue } from "./values.mjs";
 
 // Only observation expressions are rendered. Application execution uses the
 // unchanged type-stripped source, with export keywords blanked at their spans.
-function expression(machine, ast, names, pre) {
+export function expression(machine, ast, names, pre) {
   const edits = [];
   walk(ast, (n, p, key) => {
     if (n.type === "CallExpression" && n.callee.type === "Identifier" && n.callee.name === "old") {
@@ -27,6 +28,7 @@ const shape = (value, type) => typeof value === type;
 
 /** Synchronous native run, called only within the owned containment process. */
 export function executeNative(machine, envelope, timeoutMs) {
+  if (machine.protocol) return executeProtocolNative(machine, envelope, timeoutMs);
   const steps = [];
   try {
     for (const [key, expected] of Object.entries({ version: 1, sourceSha256: machine.sourceSha256, executableSha256: machine.executableSha256, assumptionsSha256: machine.assumptions.sha256 }))

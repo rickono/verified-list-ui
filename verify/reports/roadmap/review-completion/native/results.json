@@ -1,0 +1,533 @@
+{
+  "implementation": "20ff20556fe19a72f73ccf3708d7bd7329ec2bc0",
+  "parent": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+  "preparedHead": "c47bbc1bfe15461b27380c9226dcfe07b486d424",
+  "verdict": "ISSUES",
+  "defects": [
+    {
+      "id": "grammar",
+      "grammarMisses": [],
+      "attachmentMisses": [
+        {
+          "name": "prose",
+          "message": "Unknown line in temporal contract block."
+        }
+      ]
+    },
+    {
+      "id": "immutable-capture",
+      "ok": "ok",
+      "args": [
+        1
+      ],
+      "bad": "illegal-environment-action",
+      "mutableStatus": "parsed"
+    },
+    {
+      "id": "stale-evidence",
+      "closed": true,
+      "goals": [
+        "unknown",
+        "unknown"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "runtime",
+      "node": "v22.23.1",
+      "acorn": "8.19.0",
+      "z3": "5.3.3",
+      "extractedNew": 78,
+      "extractedOld": 70,
+      "temporal": "/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/review-completion-native-20ff205/new/verify/stateful/temporal.mjs"
+    },
+    {
+      "id": "legacy-fixtures",
+      "compared": 31,
+      "queryBytesEqual": true,
+      "temporal": false
+    },
+    {
+      "id": "legacy-examples",
+      "equal": true
+    },
+    {
+      "id": "legacy-native-replay",
+      "status": "ok",
+      "steps": 3,
+      "equal": true
+    },
+    {
+      "id": "attachment-unknown-prose",
+      "message": "Unknown line in temporal contract block."
+    },
+    {
+      "id": "attachment-fairness-without-goal",
+      "message": "Resumption fairness requires a completion goal."
+    },
+    {
+      "id": "attachment-duplicate-goal",
+      "message": "Duplicate completion goal work."
+    },
+    {
+      "id": "attachment-duplicate-fairness",
+      "message": "Duplicate resumption fairness request."
+    },
+    {
+      "id": "attachment-inside-entry",
+      "message": "Temporal clauses belong at module scope."
+    },
+    {
+      "id": "attachment-environment-leads",
+      "message": "Unknown line in environment block."
+    },
+    {
+      "id": "attachment-environment-fairness",
+      "message": "Unknown line in environment block."
+    },
+    {
+      "id": "attachment-unknown-entry",
+      "message": "Unknown completion entry ghost."
+    },
+    {
+      "id": "admission",
+      "admitted": [
+        {
+          "body": "while (false) {}",
+          "status": "unsupported",
+          "completion": false,
+          "message": "This compiler entry does not support loops without parsed contracts."
+        },
+        {
+          "body": "for (;;) {}",
+          "status": "unsupported",
+          "completion": false,
+          "message": "This compiler entry does not support loops without parsed contracts."
+        },
+        {
+          "body": "Math.random();",
+          "status": "unsupported",
+          "completion": false,
+          "message": "Unsupported builtin call Math.random."
+        },
+        {
+          "body": "const a = {};",
+          "status": "unsupported",
+          "completion": false,
+          "message": "Completion supports scalar acyclic segments; adoption and allocation effects are unsupported."
+        },
+        {
+          "body": "return Promise.resolve(0);",
+          "status": "unsupported",
+          "completion": false,
+          "message": "Unsupported CallExpression. Only pure, explicitly modeled data operations are accepted."
+        },
+        {
+          "body": "try {} catch {}",
+          "status": "unsupported",
+          "completion": false,
+          "message": "Closures, handlers and classes are outside C1."
+        },
+        {
+          "body": "const f = () => 0; f();",
+          "status": "unsupported",
+          "completion": false,
+          "message": "Closures, handlers and classes are outside C1."
+        },
+        {
+          "body": "work();",
+          "status": "unsupported",
+          "completion": false,
+          "message": "Entries cannot call entries; environment operations must be awaited."
+        },
+        {
+          "body": "return {then: 0};",
+          "status": "unsupported",
+          "completion": false,
+          "message": "Completion supports scalar acyclic segments; adoption and allocation effects are unsupported."
+        }
+      ]
+    },
+    {
+      "id": "two-await-sequence",
+      "seq": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "steps": 4
+    },
+    {
+      "id": "observer",
+      "harnessMarkersInExecutable": false,
+      "bodyKept": true
+    },
+    {
+      "id": "suppressed-tail",
+      "n": 0,
+      "status": "returned"
+    },
+    {
+      "id": "rejection-terminal",
+      "n": 0,
+      "requests": 1,
+      "status": "environment-rejected"
+    },
+    {
+      "id": "finite-prefix",
+      "status": "ok",
+      "activation": "live",
+      "nativeConfirmed": false
+    },
+    {
+      "id": "illegal-not-counterexample",
+      "cases": [
+        "illegal-zero",
+        "stutter",
+        "stale-envelope",
+        "bad-suffix"
+      ],
+      "status": "illegal-environment-action"
+    },
+    {
+      "id": "saturation-identities",
+      "latest": 9007199254740992,
+      "activations": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "sync-throw",
+      "status": "unknown",
+      "reason": "replay-runtime",
+      "faults": [
+        "stop"
+      ]
+    },
+    {
+      "id": "continuation-fault-containment",
+      "status": "unknown",
+      "reason": "replay-runtime",
+      "faults": [
+        "stop"
+      ]
+    },
+    {
+      "id": "worker-kill-containment",
+      "status": "unknown",
+      "reason": "replay-timeout"
+    },
+    {
+      "id": "disabled-settlement",
+      "status": "unknown",
+      "reason": "outcome-viability",
+      "safety": "verified",
+      "hasCompletion": true,
+      "nativeConfirmed": false,
+      "goals": [
+        {
+          "entry": "work",
+          "status": "unknown",
+          "reason": "outcome-viability",
+          "nativeConfirmed": false,
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "2",
+            "waiting": [
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "classes": [
+            "per-reached-request-settlement:op=assumed-unused",
+            "continuing-runtime=assumed-unused",
+            "total-declared-environment-calls=assumed-unused",
+            "weak-resumption=missing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "partial-domain",
+      "status": "unknown",
+      "reason": "outcome-viability",
+      "safety": "verified",
+      "hasCompletion": true,
+      "nativeConfirmed": false,
+      "goals": [
+        {
+          "entry": "work",
+          "status": "unknown",
+          "reason": "outcome-viability",
+          "nativeConfirmed": false,
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "2",
+            "waiting": [
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "classes": [
+            "per-reached-request-settlement:op=assumed-unused",
+            "continuing-runtime=assumed-unused",
+            "total-declared-environment-calls=assumed-unused",
+            "weak-resumption=missing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "missing-settlement",
+      "status": "unknown",
+      "reason": "liveness-gap",
+      "safety": "verified",
+      "hasCompletion": true,
+      "nativeConfirmed": false,
+      "goals": [
+        {
+          "entry": "work",
+          "status": "liveness-gap",
+          "reason": "liveness-gap",
+          "nativeConfirmed": false,
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "2",
+            "waiting": [
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "classes": [
+            "per-reached-request-settlement:op=missing",
+            "continuing-runtime=assumed-unused",
+            "total-declared-environment-calls=assumed-unused",
+            "weak-resumption=discharged-unused"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unresolved-viability-blocks-every-goal",
+      "status": "unknown",
+      "reason": "outcome-viability",
+      "safety": "verified",
+      "hasCompletion": true,
+      "nativeConfirmed": false,
+      "goals": [
+        {
+          "entry": "work",
+          "status": "unknown",
+          "reason": "outcome-viability",
+          "nativeConfirmed": false,
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "2",
+            "waiting": [
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "classes": [
+            "per-reached-request-settlement:op=assumed-unused",
+            "per-reached-request-settlement:bad=assumed-unused",
+            "continuing-runtime=assumed-unused",
+            "total-declared-environment-calls=assumed-unused",
+            "weak-resumption=missing"
+          ]
+        },
+        {
+          "entry": "other",
+          "status": "unknown",
+          "reason": "outcome-viability",
+          "nativeConfirmed": false,
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "2",
+            "waiting": [
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "classes": [
+            "per-reached-request-settlement:op=assumed-unused",
+            "per-reached-request-settlement:bad=assumed-unused",
+            "continuing-runtime=assumed-unused",
+            "total-declared-environment-calls=assumed-unused",
+            "weak-resumption=missing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "legacy-report-shape",
+      "status": "verified",
+      "completion": false
+    },
+    {
+      "id": "throw-not-completion",
+      "status": "unsupported",
+      "hasCompletion": false
+    },
+    {
+      "id": "safety-counterexample-not-infinite",
+      "status": "counterexample",
+      "confirmed": "strict native replay of the unchanged executable source",
+      "completion": [
+        {
+          "entry": "work",
+          "status": "unknown",
+          "reason": "safety-prerequisite",
+          "nativeConfirmed": false,
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "2",
+            "waiting": [
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "classes": [
+            "per-reached-request-settlement:op=assumed-unused",
+            "continuing-runtime=assumed-unused",
+            "total-declared-environment-calls=assumed-unused",
+            "weak-resumption=missing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bounds-not-infinite",
+      "timed": {
+        "status": "unknown",
+        "reason": "solver",
+        "safety": "unknown",
+        "safetyReason": "solver",
+        "hasCompletion": true,
+        "nativeConfirmed": false,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "unknown",
+            "reason": "safety-prerequisite",
+            "nativeConfirmed": false,
+            "rank": {
+              "domain": "exact source-control integers",
+              "birth": "3",
+              "waiting": [
+                "2",
+                "1"
+              ],
+              "terminal": "0"
+            },
+            "classes": [
+              "per-reached-request-settlement:op=assumed-unused",
+              "per-reached-request-settlement:unused=assumed-unused",
+              "continuing-runtime=assumed-unused",
+              "total-declared-environment-calls=assumed-unused",
+              "weak-resumption=missing"
+            ]
+          },
+          {
+            "entry": "disturb",
+            "status": "unknown",
+            "reason": "safety-prerequisite",
+            "nativeConfirmed": false,
+            "rank": {
+              "domain": "exact source-control integers",
+              "birth": "1",
+              "waiting": [],
+              "terminal": "0"
+            },
+            "classes": [
+              "per-reached-request-settlement:op=assumed-unused",
+              "per-reached-request-settlement:unused=assumed-unused",
+              "continuing-runtime=assumed-unused",
+              "total-declared-environment-calls=assumed-unused",
+              "weak-resumption=missing"
+            ]
+          }
+        ]
+      },
+      "depth": {
+        "status": "unknown",
+        "reason": "induction-gap",
+        "safety": "unknown",
+        "safetyReason": "induction-gap",
+        "hasCompletion": true,
+        "nativeConfirmed": false,
+        "goals": [
+          {
+            "entry": "work",
+            "status": "unknown",
+            "reason": "safety-prerequisite",
+            "nativeConfirmed": false,
+            "rank": {
+              "domain": "exact source-control integers",
+              "birth": "2",
+              "waiting": [
+                "1"
+              ],
+              "terminal": "0"
+            },
+            "classes": [
+              "per-reached-request-settlement:op=assumed-unused",
+              "continuing-runtime=assumed-unused",
+              "total-declared-environment-calls=assumed-unused",
+              "weak-resumption=missing"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ignored-profile-key",
+      "status": "verified",
+      "profile": {
+        "kind": "c1-action-cuts",
+        "version": 1,
+        "microtaskMode": "afterEvaluate",
+        "drain": "void 0;",
+        "resumption": "same-action-timed-drain",
+        "arrivals": "arbitrary-between-actions",
+        "eventBound": null,
+        "activationBound": null
+      },
+      "nativeConfirmed": false
+    },
+    {
+      "id": "fp64-control",
+      "result > k": {
+        "status": "counterexample",
+        "repeatStatus": "counterexample",
+        "witnessEqual": true
+      },
+      "result === k + 1": {
+        "status": "verified",
+        "repeatStatus": "verified",
+        "witnessEqual": true
+      }
+    },
+    {
+      "id": "rank-mutation",
+      "name": "stall",
+      "status": "counterexample",
+      "label": "own-progress"
+    },
+    {
+      "id": "rank-mutation",
+      "name": "half",
+      "status": "counterexample",
+      "label": "own-progress"
+    },
+    {
+      "id": "parity-comparator",
+      "refusesChangedQueries": true,
+      "comparesFullReportBytes": true,
+      "deletesWitnessFields": false
+    }
+  ]
+}

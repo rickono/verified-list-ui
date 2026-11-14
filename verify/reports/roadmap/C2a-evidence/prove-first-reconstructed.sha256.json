@@ -1,0 +1,16 @@
+{
+  "provenance": "reconstructed from focused-first archive and recorded small corrective deltas",
+  "note": "Earliest archive minus the later suspension-content reset. Unchanged root compiler dependencies are pinned by prepared parent 07c6485.",
+  "files": {
+    "verify/stateful/ast.mjs": "b9be90a61c8f6bc9ecbd535917df1993046de61db6115ec2dd381c350c5bbd91",
+    "verify/stateful/clauses.mjs": "04d13f1ef8118cdc95e3115bd1f6b22dcf0b41b2b18bdc09a227bde294958663",
+    "verify/stateful/environment.mjs": "f693da4ca7a24fd22429def227b465c7f7d1ddd56bbb52de43c5a2018de0f46c",
+    "verify/stateful/machine.mjs": "88322cd2c2def5870cdbd0b645b3970a7a0416b21a8e2f654ac7cf8de0479dc8",
+    "verify/stateful/projection.mjs": "87cc37ce318db20c9d3a3a98d8232039bb9838635ab9cb35eef2c687bccd362c",
+    "verify/stateful/protocol-machine.mjs": "4144b02ccb0287d2160b148a10e02ca5eb65fd24d003372fd46741e09d4f5752",
+    "verify/stateful/protocol-rules.mjs": "f7690c75d76990ab17213cfe075d0c40c81395b23c26b134badf8e5db8974da2",
+    "verify/stateful/protocol-transitions.mjs": "f3538ca12af8f24febfef4961aa2ed9b8d6d682af4889bac1700f84004171784",
+    "verify/stateful/transitions.mjs": "4afa9a2e3e5894dd3bb35d9b87c2bc563e618d2fb641a023d7698cc29722a364",
+    "verify/source.mjs": "0a06f25ae9182448e34056e43166fd073bb8bba82976b6c136bf2f142a9b0d8d"
+  }
+}

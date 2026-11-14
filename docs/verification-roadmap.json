@@ -1,7 +1,7 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
-  "asOf": "2026-11-13",
-  "status": "A, B, C, D, F, E, J, H, G, P, K and Q are integrated. PR #14 landed reviewed library composition, guarded throws, resource policy and current-model proof/bug maintenance. The matching source/test tree passed 483 tests, and the ten-stage numerical campaign passed independent review. R, S, T, U, V and W remain open. C2a native review passes; its request/activation proof correction is pending. Conditional completion passed 496 local tests and awaits independent review.",
+  "asOf": "2026-11-14",
+  "status": "K and Q are integrated, with the public milestone map in PR #15. Corrected C2a passed510/510 combined tests and is preparing publication with fresh model-bound campaigns; R/S/T remain unintegrated. Conditional completion has native reviewPASS and a compiled-artifact integrity finding to correct before U. The historical p-event timeout regression reproduces on unchanged old/fixed modules, but production admission is unsupported; V/W remain open.",
   "edgeMeaning": "All prerequisites apply. K and Q are integrated in their documented source subsets. C1 supplies the stateful safety foundation; listener/cancellation proof correction, environment usage and temporal completion reviews remain open. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
@@ -378,7 +378,7 @@
         "G",
         "H"
       ],
-      "status": "partial",
+      "status": "branch_ready",
       "extension": true,
       "area": "Stateful runtime semantics",
       "detail": "Model registering/removing listeners, callback identity, lifecycle ownership and legal state transitions. Callback writes use heap footprints rather than assumed purity.",
@@ -388,7 +388,7 @@
         "G",
         "H"
       ],
-      "workInProgress": "C2a standalone390/390; native reviewPASS, proof reviewISSUES on reflexive request/activation checks. Root correction and combined validation pending. No R/S completion."
+      "workInProgress": "Corrected C2a e1a76a3 passed510combined tests. Original proof finding corrected with shared source transition and8binding/mutation tests; native reviewPASS. Current-model campaign and publication pending. No main integration yet."
     },
     {
       "id": "S",
@@ -398,7 +398,7 @@
         "G",
         "H"
       ],
-      "status": "partial",
+      "status": "branch_ready",
       "extension": true,
       "area": "Async semantics / execution order",
       "detail": "Model suspension, resumption, Promise outcomes, cancellation and relevant happens-before relations. Specify the supported event-loop scheduling abstraction and its environment assumptions.",
@@ -408,7 +408,7 @@
         "G",
         "H"
       ],
-      "workInProgress": "C2a standalone390/390; native reviewPASS, proof reviewISSUES on reflexive request/activation checks. Root correction and combined validation pending. No R/S completion."
+      "workInProgress": "Corrected C2a e1a76a3 passed510combined tests. Original proof finding corrected with shared source transition and8binding/mutation tests; native reviewPASS. Current-model campaign and publication pending. No main integration yet."
     },
     {
       "id": "T",
@@ -417,7 +417,7 @@
       "deps": [
         "I"
       ],
-      "status": "partial",
+      "status": "branch_ready",
       "extension": true,
       "area": "Boundary models / protocol assumptions",
       "detail": "Specify external operations through nondeterministic outcomes and protocol contracts: success, failure, timing and response shape. Assumptions about servers and the browser remain visible rather than becoming implicit guarantees.",
@@ -426,7 +426,7 @@
       "capabilityDeps": [
         "F"
       ],
-      "workInProgress": "C1 environment outcomes and explicit premises are integrated. Conditional-completion implementation adds viability and precise premise usage; independent review remains pending. No T completion."
+      "workInProgress": "Corrected C2a e1a76a3 passed510combined tests. Original proof finding corrected with shared source transition and8binding/mutation tests; native reviewPASS. Current-model campaign and publication pending. No main integration yet."
     },
     {
       "id": "U",
@@ -449,7 +449,7 @@
         "T",
         "B"
       ],
-      "workInProgress": "Conditional source-completion implementation20ff205 passed61focused and496full tests locally. Correspondence/fairness and native/admission independent review remain pending; no U completion."
+      "workInProgress": "20ff205 passed496 standalone tests. Native reviewPASS; source review found mutable compiled viability/footprint binding gap. Public impossible-outcome source stays unknown. Producer ownership correction and combined integration pending."
     },
     {
       "id": "V",
@@ -459,7 +459,7 @@
         "U",
         "P"
       ],
-      "status": "planned",
+      "status": "partial",
       "extension": true,
       "area": "Application verification / integration",
       "detail": "Pin representative applications or subsystems. Connect actual code, transition models, environment contracts and executable event traces; preserve known race/lifecycle failures as regressions.",
@@ -469,7 +469,8 @@
         "U",
         "D",
         "P"
-      ]
+      ],
+      "workInProgress": "Pinned historical p-event issue7 native old/fixed cleanup regression passed with realp-timeout1.1.1. Both production APIs remain unsupported at use-strict directive. No universal corrected-source proof; next source-bridge designs planned."
     },
     {
       "id": "W",
@@ -807,5 +808,17 @@
     "mergeCommit": "e364946706b2790bf6a8029d3b5db83f27b00f47",
     "pullRequest": "https://github.com/rickono/verified-list-ui/pull/14",
     "landingReport": "../verify/reports/roadmap/KQ-landing.md"
+  },
+  "statefulProtocolsDelivery": {
+    "integrated": false,
+    "implementationCommit": "c1df5f6a7302dc70ede1c43649aa61295d3d80f7",
+    "correctionCommit": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+    "testedCodeHead": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+    "fullTests": 510,
+    "focusedAbortBindingTests": 8,
+    "report": "../verify/reports/roadmap/C2a-integration.md",
+    "nativeReview": "0baef16b995e892ad420a8d309339cbdcace4f24",
+    "originalProofReview": "ee0316ec83aab783f71e7d9b17542e26f94fb54d ISSUES corrected by coordinator; no independent corrected-code PASS claimed",
+    "scope": "Node22 EventTarget synchronous owned listeners, scalar C1 async plus one protocol await, advisory cancellation and explicit primitive/handle environment contracts."
   }
 }

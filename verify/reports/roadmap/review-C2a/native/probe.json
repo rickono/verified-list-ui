@@ -1,0 +1,2714 @@
+[
+  {
+    "id": "identity",
+    "node": "v22.23.1",
+    "listenerSha": "caffe023b53b4005064699ae33240af4eb9fb97aaf028182f16d312a652d1b73",
+    "advisorySha": "4358227cc2aed584cbb0220bf97da366443d924a03bfbbb12355ebe597e5118f",
+    "nativeSha": "fa84999228b2acca54f9e3a0bd957bdb60ccdd4df73879390805bdb7bcbd6b5f"
+  },
+  {
+    "id": "duplicate-once",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "n": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "n": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "n": 1
+    }
+  },
+  {
+    "id": "cleanup-210",
+    "ms": 68,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          },
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "empty-dispatch",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": false
+      },
+      {
+        "id": 2,
+        "live": false
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      },
+      {
+        "id": 2,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 1
+    }
+  },
+  {
+    "id": "readd-absent",
+    "ms": 64,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "n": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "n": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "empty-dispatch",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": false
+      },
+      {
+        "id": 2,
+        "live": false
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "cycle",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "n": 1
+    }
+  },
+  {
+    "id": "uninstrumented",
+    "raw": [
+      2,
+      1,
+      0,
+      1,
+      {
+        "seen": "Event",
+        "ignored": 1,
+        "order": [
+          "first",
+          "trail",
+          "added"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "targets-distinct",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "n": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "n": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "4000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "4000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "4008000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "4008000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      },
+      {
+        "id": 2,
+        "live": true
+      },
+      {
+        "id": 3,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "n": 3
+    }
+  },
+  {
+    "id": "targets-alias",
+    "ms": 62,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "n": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "n": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "n": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "n": "4000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "n": "4000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      },
+      {
+        "id": 2,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "n": 2
+    }
+  },
+  {
+    "id": "relation-native",
+    "ms": 61,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "x": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "call",
+        "state": {
+          "x": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "x": "4000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "x": "3ff0000000000000"
+            }
+          },
+          {
+            "kind": "handler",
+            "state": {
+              "x": "4000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      },
+      {
+        "id": 2,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      },
+      {
+        "id": 2,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "x": 2
+    }
+  },
+  {
+    "id": "relation-gap",
+    "ms": 607,
+    "status": "unknown",
+    "reason": "induction-gap",
+    "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof.",
+    "eventBound": null,
+    "searched": {
+      "maxDepth": 0,
+      "maxExecutions": 2000,
+      "numbers": [
+        {
+          "type": "number",
+          "bits": "0000000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "3ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff8000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "fff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "8000000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "4000000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "3ff0020000000004"
+        }
+      ],
+      "executions": 1
+    },
+    "verified": 37,
+    "units": 38,
+    "bad": [
+      {
+        "unit": "$closure_186",
+        "status": "counterexample",
+        "reason": null
+      }
+    ],
+    "violated": null
+  },
+  {
+    "id": "relation-strengthened",
+    "ms": 736,
+    "status": "verified",
+    "reason": null,
+    "message": null,
+    "eventBound": null,
+    "searched": null,
+    "verified": 38,
+    "units": 38,
+    "bad": [],
+    "violated": null
+  },
+  {
+    "id": "c1-endpoint",
+    "native": {
+      "ms": 60,
+      "machineProtocol": false,
+      "status": "ok",
+      "reason": null,
+      "message": null,
+      "violation": {
+        "kind": "always",
+        "text": "x-old(x)<=1",
+        "span": {
+          "start": 35,
+          "end": 56
+        }
+      },
+      "steps": [
+        {
+          "action": "init",
+          "state": {
+            "x": "0000000000000000"
+          }
+        },
+        {
+          "action": "call",
+          "state": {
+            "x": "4000000000000000"
+          }
+        }
+      ],
+      "registrations": null,
+      "requests": [],
+      "signals": null,
+      "invocations": null,
+      "decoded": {
+        "x": 2
+      }
+    },
+    "proof": {
+      "ms": 743,
+      "status": "counterexample",
+      "reason": null,
+      "message": null,
+      "eventBound": null,
+      "searched": {
+        "maxDepth": 1,
+        "numbers": [
+          {
+            "type": "number",
+            "bits": "0000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff8000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "7ff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "fff0000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "8000000000000000"
+          },
+          {
+            "type": "number",
+            "bits": "3ff2000000000000"
+          }
+        ],
+        "entryArguments": [
+          0,
+          1
+        ],
+        "maxExecutions": 5000,
+        "depth": 1,
+        "executions": 2
+      },
+      "verified": 1,
+      "units": 2,
+      "bad": [
+        {
+          "unit": "entry$0",
+          "status": "counterexample",
+          "reason": null
+        }
+      ],
+      "violated": {
+        "kind": "always",
+        "text": "x-old(x)<=1",
+        "span": {
+          "start": 35,
+          "end": 56
+        }
+      }
+    }
+  },
+  {
+    "id": "empty-dispatch",
+    "ms": 59,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "x !== old(x)",
+      "span": {
+        "start": 113,
+        "end": 135
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        }
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        },
+        "cuts": [
+          {
+            "kind": "empty-dispatch",
+            "state": {
+              "x": {
+                "type": "boolean",
+                "value": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": false
+      }
+    ],
+    "invocations": [],
+    "decoded": {
+      "x": false
+    }
+  },
+  {
+    "id": "allocate-stutter",
+    "ms": 59,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "x !== old(x)",
+      "span": {
+        "start": 113,
+        "end": 135
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        }
+      },
+      {
+        "action": "allocate",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": {
+                "type": "boolean",
+                "value": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": false
+      },
+      {
+        "signal": "31",
+        "owner": "30",
+        "aborted": false
+      }
+    ],
+    "invocations": [],
+    "decoded": {
+      "x": false
+    }
+  },
+  {
+    "id": "abort-stutter",
+    "ms": 60,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "x !== old(x)",
+      "span": {
+        "start": 113,
+        "end": 135
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        }
+      },
+      {
+        "action": "abort",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": {
+                "type": "boolean",
+                "value": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      }
+    ],
+    "invocations": [],
+    "decoded": {
+      "x": false
+    }
+  },
+  {
+    "id": "stutter-proof",
+    "ms": 381,
+    "status": "unknown",
+    "reason": "induction-gap",
+    "message": "An abstract induction obligation is satisfiable. Bounded native search found no property failure; its exhaustion is not a proof.",
+    "eventBound": null,
+    "searched": {
+      "maxDepth": 0,
+      "maxExecutions": 2000,
+      "numbers": [
+        {
+          "type": "number",
+          "bits": "0000000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "3ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff8000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "fff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "8000000000000000"
+        }
+      ],
+      "executions": 1
+    },
+    "verified": 31,
+    "units": 32,
+    "bad": [
+      {
+        "unit": "$stutter",
+        "status": "counterexample",
+        "reason": null
+      }
+    ],
+    "violated": null
+  },
+  {
+    "id": "fresh-proof",
+    "ms": 452,
+    "status": "verified",
+    "reason": null,
+    "message": null,
+    "eventBound": null,
+    "searched": null,
+    "verified": 45,
+    "units": 45,
+    "bad": [],
+    "violated": null
+  },
+  {
+    "id": "fresh-native",
+    "ms": 64,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "invoke",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 1
+    }
+  },
+  {
+    "id": "unguarded-native",
+    "ms": 62,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "!old(disposed) || shown === old(shown)",
+      "span": {
+        "start": 159,
+        "end": 207
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": true
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": true
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": true
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": true
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      },
+      {
+        "id": 2,
+        "entry": "dispose",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": true,
+      "shown": 1
+    }
+  },
+  {
+    "id": "unguarded-proof",
+    "ms": 489,
+    "status": "counterexample",
+    "reason": null,
+    "message": null,
+    "eventBound": null,
+    "searched": {
+      "maxDepth": 3,
+      "maxExecutions": 2000,
+      "numbers": [
+        {
+          "type": "number",
+          "bits": "0000000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "3ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff8000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "7ff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "fff0000000000000"
+        },
+        {
+          "type": "number",
+          "bits": "8000000000000000"
+        }
+      ],
+      "executions": 19
+    },
+    "verified": 37,
+    "units": 38,
+    "bad": [
+      {
+        "unit": "$closure_278",
+        "status": "counterexample",
+        "reason": null
+      }
+    ],
+    "violated": {
+      "kind": "always",
+      "text": "!old(disposed) || shown === old(shown)",
+      "span": {
+        "start": 159,
+        "end": 207
+      }
+    }
+  },
+  {
+    "id": "event-param",
+    "ms": 0,
+    "status": "unsupported",
+    "reason": null,
+    "message": "C2a handlers/removers are synchronous arrows without parameters or payload access.",
+    "eventBound": null,
+    "searched": null,
+    "verified": 0,
+    "units": 0,
+    "bad": [],
+    "violated": null
+  },
+  {
+    "id": "late-abort",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "abort",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "resolve",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "settled": true,
+        "invocation": 1
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 0
+    }
+  },
+  {
+    "id": "late-dispose",
+    "ms": 62,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": true
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": true
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "resolve",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": true
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": true
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "settled": true,
+        "invocation": 1
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      },
+      {
+        "id": 2,
+        "entry": "dispose",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": true,
+      "shown": 0
+    }
+  },
+  {
+    "id": "selected-then-abort",
+    "ms": 64,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "resolve",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "abort",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "settled": true,
+        "invocation": 1
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 1
+    }
+  },
+  {
+    "id": "already-aborted",
+    "ms": 62,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "resolve",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "settled": true,
+        "invocation": 1
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 0
+    }
+  },
+  {
+    "id": "settle-abort",
+    "ms": 62,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "settle-abort",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "settled": true,
+        "invocation": 1
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 0
+    }
+  },
+  {
+    "id": "distinct-abort",
+    "ms": 61,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "abort",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [],
+    "decoded": {
+      "disposed": false,
+      "shown": 0
+    }
+  },
+  {
+    "id": "shared-signal-owner",
+    "ms": 61,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Duplicate or malformed handle identity.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "signal-as-target",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Signal-as-target overlap is excluded.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "resume-state",
+    "ms": 61,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "state",
+      "text": "shown === 0",
+      "span": {
+        "start": 181,
+        "end": 201
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "resolve",
+        "state": {
+          "disposed": {
+            "type": "boolean",
+            "value": false
+          },
+          "shown": "3ff0000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "disposed": {
+                "type": "boolean",
+                "value": false
+              },
+              "shown": "3ff0000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "settled": true,
+        "invocation": 1
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": false
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "disposed": false,
+      "shown": 1
+    }
+  },
+  {
+    "id": "repair-abort",
+    "ms": 60,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "x !== old(x)",
+      "span": {
+        "start": 162,
+        "end": 184
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        }
+      },
+      {
+        "action": "abort",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": {
+                "type": "boolean",
+                "value": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [],
+    "decoded": {
+      "x": false
+    }
+  },
+  {
+    "id": "repair-settle",
+    "ms": 60,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "x !== old(x)",
+      "span": {
+        "start": 162,
+        "end": 184
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": {
+                "type": "boolean",
+                "value": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "action": "settle-abort",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": true
+          }
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": {
+                "type": "boolean",
+                "value": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [
+      {
+        "seq": 1,
+        "op": "lookup",
+        "settled": true,
+        "invocation": 1
+      }
+    ],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": true
+      },
+      {
+        "signal": "21",
+        "owner": "20",
+        "aborted": false
+      }
+    ],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "search",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "x": true
+    }
+  },
+  {
+    "id": "early-return",
+    "ms": 61,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Entry did not return a callable remover on this path.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "return-alias",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Returned alias must retain its identity.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "hash-mismatch",
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Trace protocolSha256 mismatch.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "bad-id",
+    "error": "TypeError: Only scalar numbers and booleans are trace values.\n    at encodeValue (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-84925/verify/stateful/values.mjs:5:40)\n    at encodeProtocolValue (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-84925/verify/stateful/protocol-values.mjs:6:68)\n    at Array.map (<anonymous>)\n    at file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-84925/verify/stateful/protocol-values.mjs:10:74\n    at Array.map (<anonymous>)\n    at protocolTraceOf (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-84925/verify/stateful/protocol-values.mjs:10:22)\n    at Object.traceOf (file:///private/var/folders/j2/bktt_shj3cjc240ny6cw9znm0000gn/T/c2a-native-review-84925/verify/stateful/values.mjs:16:32)\n    at play (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-12ed5a98/verify/reports/roadmap/review-C2a/native/probe.mjs:101:23)\n    at file:///Users/rick/.t3/worktrees/verified-list-ui/t3-12ed5a98/verify/reports/roadmap/review-C2a/native/probe.mjs:331:26\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)"
+  },
+  {
+    "id": "bad-zero-id",
+    "ms": 62,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Invalid controller/signal input ownership graph.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "duplicate-settlement",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Request identity is not pending or operation differs.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "suffix-after-violation",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Request identity is not pending or operation differs.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "unmarked-reject",
+    "ms": 65,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Unmarked rejection is forbidden.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "resolves-two",
+    "ms": 64,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Resolution violates resolves assumption.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "resolves-nan",
+    "ms": 66,
+    "machineProtocol": true,
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Resolution violates resolves assumption.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "fp-bits",
+    "7ff8000000000042": {
+      "status": "ok",
+      "violation": "state",
+      "shown": "7ff8000000000042"
+    },
+    "fff8000000000037": {
+      "status": "ok",
+      "violation": "state",
+      "shown": "fff8000000000037"
+    },
+    "8000000000000000": {
+      "status": "ok",
+      "violation": null,
+      "shown": "8000000000000000"
+    },
+    "0000000000000000": {
+      "status": "ok",
+      "violation": null,
+      "shown": "0000000000000000"
+    },
+    "7ff0000000000000": {
+      "status": "ok",
+      "violation": "state",
+      "shown": "7ff0000000000000"
+    },
+    "fff0000000000000": {
+      "status": "ok",
+      "violation": "state",
+      "shown": "fff0000000000000"
+    },
+    "0000000000000001": {
+      "status": "ok",
+      "violation": "state",
+      "shown": "0000000000000001"
+    }
+  },
+  {
+    "id": "realm-argument",
+    "ms": 61,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "flag": "0000000000000000",
+          "shown": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "flag": "0000000000000000",
+          "shown": "8000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "flag": "0000000000000000",
+              "shown": "8000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "f",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "flag": 0,
+      "shown": 0
+    }
+  },
+  {
+    "id": "script-timeout",
+    "ms": 162,
+    "machineProtocol": true,
+    "status": "unknown",
+    "reason": "replay-timeout",
+    "message": "Script execution timed out after 100ms",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "workers-after-script-timeout",
+    "workers": ""
+  },
+  {
+    "id": "parent-kill",
+    "ms": 762,
+    "machineProtocol": true,
+    "status": "unknown",
+    "reason": "replay-timeout",
+    "message": "Native replay containment deadline exceeded.",
+    "violation": null,
+    "registrations": null,
+    "requests": null,
+    "signals": null,
+    "invocations": null
+  },
+  {
+    "id": "workers-after-parent-kill",
+    "workers": ""
+  },
+  {
+    "id": "parent-prototype",
+    "unchanged": true
+  },
+  {
+    "id": "endpoint-mutant",
+    "ms": 63,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": {
+      "kind": "always",
+      "text": "x - old(x) <= 1",
+      "span": {
+        "start": 121,
+        "end": 146
+      }
+    },
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": "0000000000000000"
+        }
+      },
+      {
+        "action": "call",
+        "state": {
+          "x": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "call",
+        "state": {
+          "x": "0000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "action",
+            "state": {
+              "x": "0000000000000000"
+            }
+          }
+        ]
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "x": "4000000000000000"
+        },
+        "cuts": [
+          {
+            "kind": "handler",
+            "state": {
+              "x": "3ff0000000000000"
+            }
+          },
+          {
+            "kind": "handler",
+            "state": {
+              "x": "4000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "registrations": [
+      {
+        "id": 1,
+        "live": true
+      },
+      {
+        "id": 2,
+        "live": true
+      }
+    ],
+    "requests": [],
+    "signals": [],
+    "invocations": [
+      {
+        "id": 1,
+        "entry": "bind",
+        "phase": "completed"
+      },
+      {
+        "id": 2,
+        "entry": "bind",
+        "phase": "completed"
+      }
+    ],
+    "decoded": {
+      "x": 2
+    }
+  },
+  {
+    "id": "empty-mutant",
+    "ms": 59,
+    "machineProtocol": true,
+    "status": "ok",
+    "reason": null,
+    "message": null,
+    "violation": null,
+    "steps": [
+      {
+        "action": "init",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        }
+      },
+      {
+        "action": "dispatch",
+        "state": {
+          "x": {
+            "type": "boolean",
+            "value": false
+          }
+        },
+        "cuts": []
+      }
+    ],
+    "registrations": [],
+    "requests": [],
+    "signals": [
+      {
+        "signal": "11",
+        "owner": "10",
+        "aborted": false
+      }
+    ],
+    "invocations": [],
+    "decoded": {
+      "x": false
+    }
+  },
+  {
+    "id": "workers-final",
+    "workers": ""
+  }
+]

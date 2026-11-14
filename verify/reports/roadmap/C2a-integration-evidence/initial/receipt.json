@@ -1,0 +1,19 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "tests/verify/stateful-protocols.test.mjs",
+    "tests/verify/stateful-protocol-regression.test.mjs",
+    "tests/verify/loop-throw-integration.test.mjs",
+    "tests/verify/proof-phase-parity.test.mjs"
+  ],
+  "head": "df36b19adb3bc509a25aa1390cda84d4b6aa6e87",
+  "startedAt": "2026-11-14T04:01:54.130529+00:00",
+  "diffBefore": "",
+  "exitCode": 1,
+  "finishedAt": "2026-11-14T04:02:06.304482+00:00",
+  "inputsUnchanged": true,
+  "diffAfter": "",
+  "logSha256": "06b3fa0b9f9a6c74d231782e2961760ea4ed6be7fe4d3cf0d10893e412973111"
+}

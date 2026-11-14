@@ -1,0 +1,3 @@
+(node:38116) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+illegal-environment-action Entry did not return a callable remover on this path.

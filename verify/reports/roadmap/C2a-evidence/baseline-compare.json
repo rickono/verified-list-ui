@@ -1,0 +1,127 @@
+{
+  "base": "77c95f374742f9a78b931a2310c8bb1147f3c4d6",
+  "testedHead": "c1df5f6a7302dc70ede1c43649aa61295d3d80f7",
+  "rows": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/bugs.ts",
+      "sourceSha256": "97405cd1d3fdd6a92121f28ddb6d1f8bcc18d89bf5268f08ec59a15038c161a9",
+      "targets": 3,
+      "queries": 12,
+      "beforeArtifactSha256": "8e12cfdd83005fb8fbded189d3f861bc693722d68c5ecc32cf66f741d6b18755",
+      "afterArtifactSha256": "8e12cfdd83005fb8fbded189d3f861bc693722d68c5ecc32cf66f741d6b18755",
+      "beforeQueriesSha256": "7c977bfad804d917d31fe8d026f988096d786c9e9dda80d4dd95f497319053ae",
+      "afterQueriesSha256": "7c977bfad804d917d31fe8d026f988096d786c9e9dda80d4dd95f497319053ae",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/callback-bugs.ts",
+      "sourceSha256": "909131f424054348dc4f412159133cc3596b308db97aaa2a4144983d031557db",
+      "targets": 3,
+      "queries": 36,
+      "beforeArtifactSha256": "b091c0fdd28881a04103d880641736e7bf9c9c13991f16369b80cfe876eb0e78",
+      "afterArtifactSha256": "b091c0fdd28881a04103d880641736e7bf9c9c13991f16369b80cfe876eb0e78",
+      "beforeQueriesSha256": "ae393878f504f08babcc414164c733d08f9e248f0b0d050d60cb0743a4d76236",
+      "afterQueriesSha256": "ae393878f504f08babcc414164c733d08f9e248f0b0d050d60cb0743a4d76236",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/callbacks.ts",
+      "sourceSha256": "7aa05961f7157760962d61a54acfe29998e4e25bd3d36aa5938f33e53570b8b8",
+      "targets": 5,
+      "queries": 48,
+      "beforeArtifactSha256": "c1b34077c768301db48989b8a731e9fdfe99c6b4b0f76e6f81ea5a4afb2854d7",
+      "afterArtifactSha256": "c1b34077c768301db48989b8a731e9fdfe99c6b4b0f76e6f81ea5a4afb2854d7",
+      "beforeQueriesSha256": "75164fe8d4124dd2f8a00687da1f5199772fa89d44ad2bc5f9d5b917b35890d3",
+      "afterQueriesSha256": "75164fe8d4124dd2f8a00687da1f5199772fa89d44ad2bc5f9d5b917b35890d3",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/calls-bugs.ts",
+      "sourceSha256": "d06c3329a59a2070a253e56c214f91844df7b6fd5e1438b4f697ea198cdcbe15",
+      "targets": 4,
+      "queries": 16,
+      "beforeArtifactSha256": "dc76518900afe447881bc0a75cf5fedafae2eaa9b27eb682f9d3487fdc979d7b",
+      "afterArtifactSha256": "dc76518900afe447881bc0a75cf5fedafae2eaa9b27eb682f9d3487fdc979d7b",
+      "beforeQueriesSha256": "87c23746d4e13a0fb4ed61b32a9ff9fa90376b216db8543bfc2d77803db6278f",
+      "afterQueriesSha256": "87c23746d4e13a0fb4ed61b32a9ff9fa90376b216db8543bfc2d77803db6278f",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/calls.ts",
+      "sourceSha256": "9c3dcde1489b698ebb482bfd9533d135566c0a5cfa0f3c83a35050d73386f65f",
+      "targets": 4,
+      "queries": 20,
+      "beforeArtifactSha256": "6f38b373b56c0dc96eadeaba0f8063973f85b194045900ace472f921860bca39",
+      "afterArtifactSha256": "6f38b373b56c0dc96eadeaba0f8063973f85b194045900ace472f921860bca39",
+      "beforeQueriesSha256": "3c34dabf19bdf27d5c2c64766c2e3faa1f1023718cf5af121487cecc8d0cfd75",
+      "afterQueriesSha256": "3c34dabf19bdf27d5c2c64766c2e3faa1f1023718cf5af121487cecc8d0cfd75",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/collections.ts",
+      "sourceSha256": "88befe257e46628f0b90b4b6cf5d776010387a49295d3bc94643c015891ecd5c",
+      "targets": 6,
+      "queries": 32,
+      "beforeArtifactSha256": "d547393d99f17f9894e091ff0761ed20d56e98038c8878c9c159462cc552f455",
+      "afterArtifactSha256": "d547393d99f17f9894e091ff0761ed20d56e98038c8878c9c159462cc552f455",
+      "beforeQueriesSha256": "994ed8c185c9091da0688565730f4a9dd0152e63ed30f868861d15f71951f28f",
+      "afterQueriesSha256": "994ed8c185c9091da0688565730f4a9dd0152e63ed30f868861d15f71951f28f",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/heap-bugs.ts",
+      "sourceSha256": "d4359358d543678c1026ca7d51bb6360db107e334f2ce5bd887a3847ced48177",
+      "targets": 3,
+      "queries": 18,
+      "beforeArtifactSha256": "44d1d9abae48ea986d9af7d6b871cf7b98ee9532ac82d83123af5c51835c61d0",
+      "afterArtifactSha256": "44d1d9abae48ea986d9af7d6b871cf7b98ee9532ac82d83123af5c51835c61d0",
+      "beforeQueriesSha256": "2c22303c6cf94a5696557f2640e296cc33cf54ef435df0ca8b478f24372c65c1",
+      "afterQueriesSha256": "2c22303c6cf94a5696557f2640e296cc33cf54ef435df0ca8b478f24372c65c1",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/heap.ts",
+      "sourceSha256": "0dfe23776b089cc1ca15724892d8acb4581dfe6a8815baaf4f75251efbd00270",
+      "targets": 6,
+      "queries": 50,
+      "beforeArtifactSha256": "0b59e35bb05aea0d4a53e31c5076ab58a4f69ab3f340c10f25552fd1a5e93865",
+      "afterArtifactSha256": "0b59e35bb05aea0d4a53e31c5076ab58a4f69ab3f340c10f25552fd1a5e93865",
+      "beforeQueriesSha256": "b1b4d9c0975b7b95784a87de032559a00306babee57b4fd48674e409d83f9334",
+      "afterQueriesSha256": "b1b4d9c0975b7b95784a87de032559a00306babee57b4fd48674e409d83f9334",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/loop-gaps.ts",
+      "sourceSha256": "93e03bc3c4af378807d2e9041d3fded87db4fe86a8cf08c8734949d98c515cae",
+      "targets": 2,
+      "queries": 20,
+      "beforeArtifactSha256": "3db5365394f3ea98f25aa52172ece45609b8d63a60f0cc56afd4b8a2183dd866",
+      "afterArtifactSha256": "3db5365394f3ea98f25aa52172ece45609b8d63a60f0cc56afd4b8a2183dd866",
+      "beforeQueriesSha256": "b8b89c223a522a219b27d851c345ee0965c56fc3631b82a30710810898ac6bcb",
+      "afterQueriesSha256": "b8b89c223a522a219b27d851c345ee0965c56fc3631b82a30710810898ac6bcb",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/loops.ts",
+      "sourceSha256": "5cdcf93c330926d9d289bef6f1fb9cd4327605e6967c7248e8b214b7f4e2b217",
+      "targets": 2,
+      "queries": 34,
+      "beforeArtifactSha256": "bfebb9b022733207977eaf845f1863c89f4ad18793766fbc482b0b77bf4d92f7",
+      "afterArtifactSha256": "bfebb9b022733207977eaf845f1863c89f4ad18793766fbc482b0b77bf4d92f7",
+      "beforeQueriesSha256": "c6e00985f4810818c8b5aec471324dda9f10a0fef93bc45e2430dcdb6bacf2e1",
+      "afterQueriesSha256": "c6e00985f4810818c8b5aec471324dda9f10a0fef93bc45e2430dcdb6bacf2e1",
+      "exact": true
+    },
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-105287a3/verify/examples/valid.ts",
+      "sourceSha256": "f901cd04af1a8d23bc5da5409d2df917a9e4f6cb731d0417533181027471ab74",
+      "targets": 2,
+      "queries": 10,
+      "beforeArtifactSha256": "b1746899db6a89186c913618e50c600a49a2af803560235007ae74ce230842ad",
+      "afterArtifactSha256": "b1746899db6a89186c913618e50c600a49a2af803560235007ae74ce230842ad",
+      "beforeQueriesSha256": "175fd0f9f7c635cf4d4a692c4faa37957bc5b2f9b3230235714e06d59a6e3b7a",
+      "afterQueriesSha256": "175fd0f9f7c635cf4d4a692c4faa37957bc5b2f9b3230235714e06d59a6e3b7a",
+      "exact": true
+    }
+  ]
+}
