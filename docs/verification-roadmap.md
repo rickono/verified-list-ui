@@ -1,8 +1,8 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K, guarded throws, resource policy and current-model numerical maintenance passed independent reviews. The matching verifier tree passed 483 tests, and the maintained numerical campaign passed all ten stages. PR #14 is ready to merge. C2a native review passes; its proof review found unbound request/activation checks and correction remains pending. Conditional source completion passed a local 496-test suite and awaits independent review.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H, G, P, K and Q are integrated. PR #14 landed reviewed library composition, guarded throws, resource policy and current-model proof/bug maintenance. The matching source/test tree passed 483 tests, and the ten-stage numerical campaign passed independent review. R, S, T, U, V and W remain open. C2a native review passes; its request/activation proof correction is pending. Conditional completion passed 496 local tests and awaits independent review.
 
-All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites, completed reviews, and pending integration. Transitively redundant edges are omitted.
+All prerequisites apply. K and Q are integrated in their documented source subsets. C1 supplies the stateful safety foundation; listener/cancellation proof correction, environment usage and temporal completion reviews remain open. Transitively redundant edges are omitted.
 
 ```mermaid
 flowchart TD
@@ -17,13 +17,13 @@ flowchart TD
   G["G: Heap, aliases &amp; frames<br/>integrated"]
   H["H: Higher-order contracts<br/>integrated"]
   J["J: Search proof pilot<br/>integrated"]
-  K["K: Broader library proofs<br/>branch-ready"]
+  K["K: Broader library proofs<br/>integrated"]
   P["P: Project proof workflow<br/>integrated"]
-  Q["Q: Pure JS/TS proofs &amp; bugs<br/>PARTIAL"]
-  R["R: Event &amp; lifecycle semantics"]
-  S["S: Async ordering model"]
-  T["T: Environment contracts<br/>READY"]
-  U["U: Temporal verification"]
+  Q["Q: Pure JS/TS proofs &amp; bugs<br/>integrated"]
+  R["R: Event &amp; lifecycle semantics<br/>PARTIAL"]
+  S["S: Async ordering model<br/>PARTIAL"]
+  T["T: Environment contracts<br/>PARTIAL"]
+  U["U: Temporal verification<br/>PARTIAL"]
   V["V: Stateful app pilots"]
   W["W: Existing JS/TS verification"]
   NOW --> A
@@ -100,8 +100,8 @@ These counts describe the original isolated branches. D's original partial resul
 
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
-Ready packages: T.
-Branches awaiting integration: K.
+Ready packages: .
+Branches awaiting integration: none.
 
 To regenerate this document after editing the data:
 

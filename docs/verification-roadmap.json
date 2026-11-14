@@ -1,8 +1,8 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-13",
-  "status": "A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K, guarded throws, resource policy and current-model numerical maintenance passed independent reviews. The matching verifier tree passed 483 tests, and the maintained numerical campaign passed all ten stages. PR #14 is ready to merge. C2a native review passes; its proof review found unbound request/activation checks and correction remains pending. Conditional source completion passed a local 496-test suite and awaits independent review.",
-  "edgeMeaning": "All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites, completed reviews, and pending integration. Transitively redundant edges are omitted.",
+  "status": "A, B, C, D, F, E, J, H, G, P, K and Q are integrated. PR #14 landed reviewed library composition, guarded throws, resource policy and current-model proof/bug maintenance. The matching source/test tree passed 483 tests, and the ten-stage numerical campaign passed independent review. R, S, T, U, V and W remain open. C2a native review passes; its request/activation proof correction is pending. Conditional completion passed 496 local tests and awaits independent review.",
+  "edgeMeaning": "All prerequisites apply. K and Q are integrated in their documented source subsets. C1 supplies the stateful safety foundation; listener/cancellation proof correction, environment usage and temporal completion reviews remain open. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
     "Each node is a work package, not an equal-duration task or one person.",
@@ -318,18 +318,18 @@
         "G",
         "H"
       ],
-      "status": "branch_ready",
+      "status": "integrated",
       "area": "Library verification / integration",
       "detail": "Verify a selected corpus of unchanged library implementations, including helpers that mutate local storage or accept callbacks. Record contracts, assumptions, unsupported code and confirmed counterexamples.",
       "doneWhen": "Multiple realistic functions compose, seeded bugs are caught, and results survive contract/source changes honestly.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "J",
         "G",
         "H",
         "B"
       ],
-      "resultSummary": "Reviewed heap-writing loops and guarded throws compose with C1; current resource boundary passed483tests. Unchanged Reverse/take properties verified cold and in a fresh180000ms audit; seeded and real edit controls stay honest. PR14 ready to merge; historical60-second unknowns remain."
+      "resultSummary": "PR14 merged. Reviewed heap-writing loops, guarded throws and C1; matching483-test tree, realistic Reverse/take composition, seeded controls and honest source/contract edit results. Historical resource unknowns remain explicit."
     },
     {
       "id": "P",
@@ -359,16 +359,16 @@
         "K",
         "P"
       ],
-      "status": "partial",
+      "status": "integrated",
       "area": "Primary milestone",
       "detail": "Take existing JS/TS in the supported subset, add explicit contracts and purity/environment assumptions, and produce useful property proofs or reproducible real bugs in substantial software. Unknown remains an honest outcome.",
       "doneWhen": "Independent real-code campaigns produce reproducible bug reports and maintained universal proofs, without rewriting the implementations.",
-      "integrated": false,
+      "integrated": true,
       "capabilityDeps": [
         "K",
         "P"
       ],
-      "resultSummary": "Independent pinned harmonicMean and Ramda proofs/native failures, plus native d3 coverage cases, are maintained under model09d21829. Current10stage campaign and maintenance reviewPASS. No d3 solver proof, novelty or upstream-fix claim. K and campaign integration ready in PR14."
+      "resultSummary": "PR14 merged. Independent unchanged-source harmonicMean and Ramda universal proofs plus reproducible harmonic/d3 native bugs. Current-model ten-stage campaign and maintenance review pass. No d3 solver proof, novelty or upstream-fix claim."
     },
     {
       "id": "R",
@@ -378,7 +378,7 @@
         "G",
         "H"
       ],
-      "status": "planned",
+      "status": "partial",
       "extension": true,
       "area": "Stateful runtime semantics",
       "detail": "Model registering/removing listeners, callback identity, lifecycle ownership and legal state transitions. Callback writes use heap footprints rather than assumed purity.",
@@ -398,7 +398,7 @@
         "G",
         "H"
       ],
-      "status": "planned",
+      "status": "partial",
       "extension": true,
       "area": "Async semantics / execution order",
       "detail": "Model suspension, resumption, Promise outcomes, cancellation and relevant happens-before relations. Specify the supported event-loop scheduling abstraction and its environment assumptions.",
@@ -417,7 +417,7 @@
       "deps": [
         "I"
       ],
-      "status": "ready",
+      "status": "partial",
       "extension": true,
       "area": "Boundary models / protocol assumptions",
       "detail": "Specify external operations through nondeterministic outcomes and protocol contracts: success, failure, timing and response shape. Assumptions about servers and the browser remain visible rather than becoming implicit guarantees.",
@@ -425,7 +425,8 @@
       "integrated": false,
       "capabilityDeps": [
         "F"
-      ]
+      ],
+      "workInProgress": "C1 environment outcomes and explicit premises are integrated. Conditional-completion implementation adds viability and precise premise usage; independent review remains pending. No T completion."
     },
     {
       "id": "U",
@@ -436,7 +437,7 @@
         "S",
         "T"
       ],
-      "status": "planned",
+      "status": "partial",
       "extension": true,
       "area": "Transition systems / backend integration",
       "detail": "Translate supported stateful source behavior into transition obligations. Check safety across event sequences and liveness under stated scheduling/fairness assumptions. Choose SMT, induction or model-checking backends by the property.",
@@ -631,8 +632,10 @@
       "F"
     ],
     "next": [
-      "K",
-      "T"
+      "R",
+      "S",
+      "T",
+      "U"
     ],
     "agentRunFinished": true,
     "downstreamStarted": true,
@@ -753,7 +756,7 @@
     "scope": "Scalar source-linked async safety foundation; no cancellation, listeners, exact counts or liveness; no R/S/T/U completion."
   },
   "libraryProofDelivery": {
-    "integrated": false,
+    "integrated": true,
     "branch": "work/heap-loops-and-throws",
     "implementationCommit": "bc9fec06ff535da4fa87012904775ec6eece2804",
     "testedTree": "d874e6e355d82e2eb4b8544469739904c26089e8",
@@ -767,10 +770,13 @@
     "resourceStatus": "Reviewed180000ms shared admission ceiling, default10000ms unchanged. One recorded cold graph and one fresh audit verified all3targets, warm replay hit3. All15postconditions and36phase plans match. Historical60000ms unknowns remain; no future completion guarantee.",
     "testedCodeHead": "7feca2830d90e237227fc1522e77e1a11ce3abee",
     "historicalCombinedCode": "59ee1dcf7d646d46fdfc847f94e0798c631d7908",
-    "historicalCombinedTests": 477
+    "historicalCombinedTests": 477,
+    "mergeCommit": "e364946706b2790bf6a8029d3b5db83f27b00f47",
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/14",
+    "landingReport": "../verify/reports/roadmap/KQ-landing.md"
   },
   "numericalCampaignDelivery": {
-    "integrated": false,
+    "integrated": true,
     "implementationCommit": "42567fc7b286e2a8e838279396fcb444e1118253",
     "evidenceCommit": "7e6d9b56c36e89dac9d9b7943771feb8af4dd0ab",
     "reviewCommit": "7baad71df9d62fee14a9664e14fcaf80e994aab8",
@@ -781,10 +787,13 @@
     "maintenanceImplementation": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
     "maintenanceEvidence": "8364bfc92a79e231bc556d5521cb59c5f67d8e11",
     "maintenanceReview": "21707c862a02e5763490ba16aa8aa5ed4f0ec5d1",
-    "maintenanceReport": "../verify/reports/roadmap/library-campaigns/maintenance.md"
+    "maintenanceReport": "../verify/reports/roadmap/library-campaigns/maintenance.md",
+    "mergeCommit": "e364946706b2790bf6a8029d3b5db83f27b00f47",
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/14",
+    "landingReport": "../verify/reports/roadmap/KQ-landing.md"
   },
   "resourceBudgetDelivery": {
-    "integrated": false,
+    "integrated": true,
     "implementationCommit": "7feca2830d90e237227fc1522e77e1a11ce3abee",
     "reviewCommit": "6814713e95685c2c1bafd6f47adf73de5776bf91",
     "fullTests": 483,
@@ -794,6 +803,9 @@
     "defaultMs": 10000,
     "maxMs": 180000,
     "nativeReplayMs": 100,
-    "replayLimit": 256
+    "replayLimit": 256,
+    "mergeCommit": "e364946706b2790bf6a8029d3b5db83f27b00f47",
+    "pullRequest": "https://github.com/rickono/verified-list-ui/pull/14",
+    "landingReport": "../verify/reports/roadmap/KQ-landing.md"
   }
 }

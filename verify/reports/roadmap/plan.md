@@ -30,17 +30,18 @@ K passed both independent reviews; guarded throws passed a separate production
 review. Their combined tree passed 477 tests, followed by 483 after the reviewed
 resource-boundary change. A 180000 ms request proved the three-module graph
 cold and in a fresh audit; all fifteen postconditions and 36 phase plans match
-the earlier source. Historical 60000 ms unknowns remain. PR #14 is open.
+the earlier source. Historical 60000 ms unknowns remain. PR #14 has merged as `e364946`; K and Q meet their scoped completion predicates.
 The numerical campaign and current-model maintenance passed independent reviews;
 all ten current stages pass with strict library pins and no required private
-history. PR #14 is ready to merge. The completed temporal judgment selects the
+history. PR #14 merged as `e364946`. [The K/Q receipt](KQ-landing.md) records the scoped milestone. The completed temporal judgment selects the
 conditional source-completion rule; its first local implementation passed
 496 tests and awaits independent review.
 [The landing receipt](landing-summary.md) records the merges and checks.
 The numbered list below preserves the execution order chosen at the
 start; the remaining steps are still in progress.
 
-H and G were implemented in PRs #5 and #6 at the start of this run. Eight nodes remain: K, Q, R, S, T, U, V, W. C1 does not complete any of R/S/T/U. Baseline source is `32bd5b260aa116ca88642a1479bed8d3fc447f4b`,
+H and G were implemented in PRs #5 and #6 at the start of this run. K and Q
+landed in PR #14. Six nodes remain: R, S, T, U, V, W. C1 does not complete any of R/S/T/U. Baseline source is `32bd5b260aa116ca88642a1479bed8d3fc447f4b`,
 which passed 249/249 tests and JSON/text CLI checks. The final baseline log is
 `artifacts/heap-design/full-final.log` outside the repository.
 
