@@ -1,7 +1,7 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-13",
-  "status": "A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12 with 49 focused and 371 full tests; R/S/T/U remain incomplete. K Gate3 is implemented locally (418 tests) and awaits independent review. Guarded throws and the unchanged harmonicMean campaign passed independent review and await combined integration. Two cancellation/listener designs await comparison.",
+  "status": "A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K passed its two independent reviews; guarded throws passed a separate production review. Their combined suite passed 477 tests, and the numerical campaign passed independent review. These units remain unmerged. Composition has successful full-domain proofs but additional 60-second requests time out honestly; a resource-budget investigation is active. C2a is being implemented. Both temporal designs are complete, with a recovered cross-judge active.",
   "edgeMeaning": "All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
@@ -318,7 +318,7 @@
         "G",
         "H"
       ],
-      "status": "ready",
+      "status": "branch_ready",
       "area": "Library verification / integration",
       "detail": "Verify a selected corpus of unchanged library implementations, including helpers that mutate local storage or accept callbacks. Record contracts, assumptions, unsupported code and confirmed counterexamples.",
       "doneWhen": "Multiple realistic functions compose, seeded bugs are caught, and results survive contract/source changes honestly.",
@@ -328,7 +328,8 @@
         "G",
         "H",
         "B"
-      ]
+      ],
+      "resultSummary": "Heap-writing loops, guarded throws and C1 compose in477passing tests. Two K reviews PASS. Reverse/take content and length proofs and edit controls are recorded; some independent/current60-second requests remain unknown, never counted as proofs. Publication and resource investigation pending."
     },
     {
       "id": "P",
@@ -358,7 +359,7 @@
         "K",
         "P"
       ],
-      "status": "planned",
+      "status": "partial",
       "area": "Primary milestone",
       "detail": "Take existing JS/TS in the supported subset, add explicit contracts and purity/environment assumptions, and produce useful property proofs or reproducible real bugs in substantial software. Unknown remains an honest outcome.",
       "doneWhen": "Independent real-code campaigns produce reproducible bug reports and maintained universal proofs, without rewriting the implementations.",
@@ -366,7 +367,8 @@
       "capabilityDeps": [
         "K",
         "P"
-      ]
+      ],
+      "resultSummary": "Pinned harmonicMean and Ramda campaigns plus independent native d3 reproducers are maintained and reviewed; no d3 solver proof, novelty or upstream-fix claim. Integration and K prerequisite remain pending."
     },
     {
       "id": "R",
@@ -746,5 +748,28 @@
     "fullTests": 371,
     "report": "../verify/reports/roadmap/C1-landing.md",
     "scope": "Scalar source-linked async safety foundation; no cancellation, listeners, exact counts or liveness; no R/S/T/U completion."
+  },
+  "libraryProofDelivery": {
+    "integrated": false,
+    "branch": "work/heap-loops-and-throws",
+    "implementationCommit": "bc9fec06ff535da4fa87012904775ec6eece2804",
+    "testedTree": "59ee1dcf7d646d46fdfc847f94e0798c631d7908",
+    "fullTests": 477,
+    "report": "../verify/reports/roadmap/K-integration/README.md",
+    "reviews": {
+      "ownership": "4adee93ccff69dd36281791eab5fadb731d6ec18",
+      "semantics": "c7754225f0d7ec2aac71805bd183d09941252fe1"
+    },
+    "compositionReport": "../verify/reports/roadmap/library-composition/README.md",
+    "resourceStatus": "Some60-second requests remain unknown. All15postcondition SMT strings equal a prior successful whole-graph proof. No changed contract or bounded proof."
+  },
+  "numericalCampaignDelivery": {
+    "integrated": false,
+    "implementationCommit": "42567fc7b286e2a8e838279396fcb444e1118253",
+    "evidenceCommit": "7e6d9b56c36e89dac9d9b7943771feb8af4dd0ab",
+    "reviewCommit": "7baad71df9d62fee14a9664e14fcaf80e994aab8",
+    "report": "../verify/reports/roadmap/library-campaigns/report.md",
+    "stages": 10,
+    "scope": "Universal harmonic singleton total-return and Ramda predicate theorem; genuine harmonic overflow and independent native d3 cases. No solver proof of d3."
   }
 }

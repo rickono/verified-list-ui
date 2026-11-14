@@ -1,6 +1,6 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12 with 49 focused and 371 full tests; R/S/T/U remain incomplete. K Gate3 is implemented locally (418 tests) and awaits independent review. Guarded throws and the unchanged harmonicMean campaign passed independent review and await combined integration. Two cancellation/listener designs await comparison.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K passed its two independent reviews; guarded throws passed a separate production review. Their combined suite passed 477 tests, and the numerical campaign passed independent review. These units remain unmerged. Composition has successful full-domain proofs but additional 60-second requests time out honestly; a resource-budget investigation is active. C2a is being implemented. Both temporal designs are complete, with a recovered cross-judge active.
 
 All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites and awaits review and integration. Transitively redundant edges are omitted.
 
@@ -17,9 +17,9 @@ flowchart TD
   G["G: Heap, aliases &amp; frames<br/>integrated"]
   H["H: Higher-order contracts<br/>integrated"]
   J["J: Search proof pilot<br/>integrated"]
-  K["K: Broader library proofs<br/>READY"]
+  K["K: Broader library proofs<br/>branch-ready"]
   P["P: Project proof workflow<br/>integrated"]
-  Q["Q: Pure JS/TS proofs &amp; bugs"]
+  Q["Q: Pure JS/TS proofs &amp; bugs<br/>PARTIAL"]
   R["R: Event &amp; lifecycle semantics"]
   S["S: Async ordering model"]
   T["T: Environment contracts<br/>READY"]
@@ -100,8 +100,8 @@ These counts describe the original isolated branches. D's original partial resul
 
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
-Ready packages: K, T.
-Branches awaiting integration: none.
+Ready packages: T.
+Branches awaiting integration: K.
 
 To regenerate this document after editing the data:
 

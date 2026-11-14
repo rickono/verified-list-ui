@@ -1,0 +1,20 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:487) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: [{"fn":"Reverse","file":"/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js","span":{"start":247,"end":527},"line":7,"column":16,"assumptions":[{"kind":"param-type","name":"arr","type":{"kind":"array","element":"number"},"domain":"Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields."}],"status":"unknown","reason":"request-timeout","message":"The shared wall-clock verification budget was exhausted.","obligation":{"target":"/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js#Reverse","phase":"postcondition","domain":"full","postcondition":6,"postconditionCount":9,"backend":"z3"},"attempts":10,"solverReason":"The backend worker exceeded its wall-clock query budget.","label":{"kind":"invariant-preserve","span":{"start":247,"end":527},"loop":{"start":576,"end":709},"abstract":true},"phase":"invariant-preserve","loop":{"start":576,"end":709}},{"fn":"takeImplementation","file":"/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js","span":{"start":239,"end":373},"line":6,"column":1,"assumptions":[{"kind":"param-type","name":"array","type":{"kind":"array","element":"number"},"domain":"Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields."},{"kind":"param-type","name":"n","type":"number"},{"kind":"requires","text":"Number.isSafeInteger(n) && n >= 0","span":{"start":64,"end":97},"file":"/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/take.helper.js"}],"status":"verified"},{"fn":"reverseFirstTwo","file":"/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/caller.js","span":{"start":387,"end":453},"line":9,"column":1,"assumptions":[{"kind":"param-type","name":"array","type":{"kind":"array","element":"number"},"domain":"Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields."}],"status":"unknown","reason":"dependency","message":"Relies on Reverse (/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/reports/roadmap/library-composition/fixtures/gpl-3.0/Reverse.helper.js), whose final status is unknown."}]
+    at file:///Users/rick/verification-vibes/artifacts/roadmap-20261113/check-composition-current.mjs:28:10
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.23.1
