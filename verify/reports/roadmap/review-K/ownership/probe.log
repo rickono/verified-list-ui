@@ -1,0 +1,26 @@
+PASS registry-rollback {"counter":9,"next":10,"discarded":8,"liveName":"heap_num_79_v10","fields":["allocated","asserts","decls","exact","keys","reads","rootTypes","roots","used","versions","writes"]}
+PASS join-both-arms-omitted-log {"locations":["x","y"],"victim":"heap_num_78_v1"}
+PASS noop-restore-call-head {"versions":2,"head":"current"}
+PASS fresh-alias-nested-ref {"loops":1,"footprint":[]}
+PASS changing-scalar-target-rejected {}
+PASS preloop-flag-target-closed {"havoc":true}
+PASS alloc-body {"rejected":"allocate"}
+PASS alloc-test {"rejected":"allocate"}
+PASS alloc-update {"rejected":"allocate"}
+PASS alloc-return {"rejected":"allocate"}
+PASS alloc-transitive {"rejected":"allocating"}
+PASS ref-store {"rejected":"Reference stores"}
+PASS shape {"rejected":"length\\/shape"}
+PASS nested-loop {"rejected":"Nested loops"}
+PASS callee-cache-and-init-order {"init":0,"call":1,"callerVersions":[4,6],"calleeHasConstant":true}
+PASS discarded-fresh-names {"loops":[8,9],"predicates":[11],"calls":[12,13],"obligations":["invariant-init","call","invariant-preserve","rank"]}
+PASS spec-ref-commits-once {"attempts":[{"trialSpec":3,"outerSpec":0,"grow":1,"widen":["last"],"events":["invariant-init","store-domain","frame-write","invariant-preserve","rank"],"checks":0,"returns":0,"deps":[],"functions":0,"probes":0,"guards":1,"axioms":0},{"trialSpec":3,"outerSpec":0,"grow":0,"widen":[],"events":["invariant-init","store-domain","frame-write","invariant-preserve","rank"],"checks":0,"returns":0,"deps":[],"functions":0,"probes":0,"guards":1,"axioms":0}],"published":3}
+PASS compiler-join-frame {"obligations":["invariant-init","frame-write","frame-write","invariant-preserve","rank","invariant-preserve","rank"]}
+PASS break-exit-not-head-frame {"versions":[1,2]}
+PASS continue-update-back-edge {"versions":[1,2,3,7,9,10,11]}
+PASS store-domain-boundary {"kinds":["invariant-init","store-domain","frame-write","invariant-preserve","rank"]}
+PASS compiler-omitted-log-mutant {"detected":true}
+{
+  "probes": 22
+}
+EXIT:0
