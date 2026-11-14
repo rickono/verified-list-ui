@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/ramda/ramda",
+  "commit": "980b3bf7712adb8ad8b5d9b2c6aca525cb3cf143",
+  "release": "v0.30.1",
+  "path": "source/findIndex.js",
+  "sha256": "78467c00c06ef87c44d6d8415a9d9ee3cd7c41c549890fb0fef2b87d06e4bac1",
+  "licenseSha256": "62fba31dc0582fb6ee413403e47f2de319a4f14140ebd71be094c1f8c7a839ff",
+  "declaration": "findIndex",
+  "declarationSha256": "9005ea9989f87b9f5ce349fa5467f8256cd1c085a5a0e7faaca330eb68167275",
+  "license": "MIT",
+  "licensePath": "LICENSE.txt"
+}

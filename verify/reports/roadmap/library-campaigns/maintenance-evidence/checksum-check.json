@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "shasum",
+    "-a",
+    "256",
+    "-c",
+    "verify/reports/roadmap/library-campaigns/maintenance-SHA256SUMS"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+  "at": "2026-11-14T03:45:19.477543+00:00",
+  "status": 0,
+  "entries": 345,
+  "inventorySha256": "74b8d4daef6708dea783204c8abcd461986943ee5c389a4b4c0c9dfff8aaa464",
+  "stdoutSha256": "e84e2a6727d4fb0dfc93a7d802b1b84fb782e32d2ff14221dfd41fd8715c0bea",
+  "stderr": "",
+  "allEntriesOK": true,
+  "exclusions": [
+    "verify/reports/roadmap/library-campaigns/maintenance-SHA256SUMS",
+    "verify/reports/roadmap/library-campaigns/maintenance-evidence/checksum-check.json"
+  ]
+}

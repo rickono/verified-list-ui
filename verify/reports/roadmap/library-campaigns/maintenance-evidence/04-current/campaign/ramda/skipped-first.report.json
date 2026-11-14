@@ -1,0 +1,84 @@
+{
+  "name": "skipped-first",
+  "file": "ramda/skipped-first.js",
+  "sha256": "258ecf4f8532ed50e7dc55590903125ea5058ae38d57788a01a4d6352f2c59a6",
+  "trusted": [
+    "Acorn parser",
+    "Node TypeScript type stripping",
+    "project type and module resolution and source snapshots",
+    "source-to-SMT translation",
+    "exact rational specification replay",
+    "Z3 and its WASM bindings",
+    "unmodified standard Number/Math/Object/Array builtins and prototypes",
+    "JavaScript runtime",
+    "solver-model heap graphs replayed with shared identities and a write-monitoring Proxy membrane",
+    "solver-model predicate tables replayed as pure total JavaScript functions using Object.is"
+  ],
+  "modules": [
+    {
+      "file": "ramda/skipped-first.js",
+      "sha256": "258ecf4f8532ed50e7dc55590903125ea5058ae38d57788a01a4d6352f2c59a6",
+      "imports": []
+    }
+  ],
+  "dependencies": [],
+  "graphSha256": "26b4f3f5f5646d2e05360ff19d23b8582b3df295603d5f98cd9397c186e4293b",
+  "outcomes": [
+    {
+      "fn": "findIndex",
+      "file": "ramda/skipped-first.js",
+      "span": {
+        "start": 310,
+        "end": 659
+      },
+      "line": 6,
+      "column": 1,
+      "assumptions": [
+        {
+          "kind": "param-type",
+          "name": "fn",
+          "type": {
+            "kind": "function",
+            "params": [
+              "number"
+            ],
+            "result": "boolean"
+          },
+          "domain": "Pure total predicates from every binary64 number to a present boolean: includes NaN, infinities, signed zeros and subnormals; excludes undefined, effects, exceptions and mutable captures. NaN payloads are not distinguished; function identity, properties and this are unsupported."
+        },
+        {
+          "kind": "param-type",
+          "name": "list",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          },
+          "domain": "Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields."
+        }
+      ],
+      "status": "counterexample",
+      "inputs": {
+        "fn": {
+          "entries": [],
+          "else": "true"
+        },
+        "list": [
+          "0"
+        ]
+      },
+      "result": "-1",
+      "failed": [
+        {
+          "kind": "ensures",
+          "text": "list.every((value, i) => result !== -1 && result <= i || !fn(value))",
+          "span": {
+            "start": 241,
+            "end": 309
+          },
+          "file": "ramda/skipped-first.js"
+        }
+      ],
+      "confirmed": true
+    }
+  ]
+}

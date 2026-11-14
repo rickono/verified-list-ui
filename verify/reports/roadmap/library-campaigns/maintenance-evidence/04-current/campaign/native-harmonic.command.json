@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/Users/rick/.hermes/node/bin/node",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/check.mjs",
+    "--native-harmonic"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+  "startedAt": "2026-11-14T03:38:34.951Z",
+  "finishedAt": "2026-11-14T03:38:34.979Z",
+  "timeoutMs": 10000,
+  "pid": 81854,
+  "status": 0,
+  "signal": null,
+  "stdoutSha256": "7c0a4e5d19f19587dcaef8f2943c354e5df9b1d85e2c55de831e12c9cb223664",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "aliveAfterWait": false,
+  "reaping": "spawnSync returned after wait; this subprocess starts no workers"
+}

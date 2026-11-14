@@ -1,0 +1,181 @@
+[
+  {
+    "argv": [
+      "git",
+      "merge-base",
+      "--is-ancestor",
+      "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+      "5f0fb47a0a822d62537f296ef804d5037eebba5c"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "merge-base",
+      "--is-ancestor",
+      "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "524d03a44a7c5b8e151489673753c0a4c6afa2c7"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "--",
+      ".",
+      ":(exclude)verify/reports/roadmap/library-campaigns/**"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "HEAD",
+      "--",
+      "verify/reports/roadmap/library-campaigns"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "ls-files",
+      "--others",
+      "--exclude-standard"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "6a466127235d63cd56f42b270aac4781ba6f898a52113ee9db6af0e79697df48",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "524d03a44a7c5b8e151489673753c0a4c6afa2c7^{tree}"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "5683a908656505311033c9a9cdc557303ae7aac851dd52d0fd0a5d65869aead3",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+      "--",
+      "verify/reports/roadmap/library-campaigns/report.md",
+      "verify/reports/roadmap/library-campaigns/manifest.json",
+      "verify/reports/roadmap/library-campaigns/integrity.json",
+      "verify/reports/roadmap/library-campaigns/cleanup.json",
+      "verify/reports/roadmap/library-campaigns/SHA256SUMS",
+      "verify/reports/roadmap/library-campaigns/bugs.md",
+      "verify/reports/roadmap/library-campaigns/pins",
+      "verify/reports/roadmap/library-campaigns/evidence"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "show",
+      "7e6d9b56c36e89dac9d9b7943771feb8af4dd0ab:verify/reports/roadmap/library-campaigns/SHA256SUMS"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "d61f19549a918047629944aa04c4392ffd208adf725f5c41a01dffcdcb546226",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "cat-file",
+      "--batch"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": "814527d1f5f8d4a7e4e3323d147cf2ad8f0e582bf85d4bbfed806faaa03f1038",
+    "stdoutSha256": "b98976f7f6009b209f31ecd8de76a2a560ea729525362475044522986b42a7bb",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "ls-tree",
+      "-r",
+      "--name-only",
+      "-z",
+      "203ad818169be544432b3bad93ff1c4f01ef20a3"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "e0700cc4dc048daede4b65647b4c509f036d18fc014f01e51f4b9b00113d399c",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "cat-file",
+      "--batch"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": "c04cd6d3b84ad9cf0116c3e9df9e17fd998bcbe07e50bcb1d4e5ac49833ff95a",
+    "stdoutSha256": "507bee6cb76e6f231cd9414c01b693dc005a8588dacefe84ac6e0a4af6e605c2",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "cat-file",
+      "--batch"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": "b8c544582ead396ffede934f13748a9fc7ff6fe015c165fd5a8acd2658e4dd18",
+    "stdoutSha256": "11b2674a3b4efd329680ef93de17f664a112d8d18b3a016288215e5157a7c223",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "ps",
+      "-ax",
+      "-o",
+      "pid=,ppid=,pgid=,state=,command="
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "status": 0,
+    "stdinSha256": null,
+    "stdoutSha256": "2de0767120a69b34799985a5c5faaac23f6c44ae7c4145faa3ea6fa36b738960",
+    "stderr": ""
+  }
+]

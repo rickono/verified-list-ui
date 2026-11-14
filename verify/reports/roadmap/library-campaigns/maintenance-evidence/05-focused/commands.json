@@ -1,0 +1,219 @@
+[
+  {
+    "name": "git-normal",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:32.474Z",
+    "finishedAt": "2026-11-14T03:38:32.559Z",
+    "pid": 81703,
+    "status": 0,
+    "signal": null,
+    "stdoutSha256": "27db0e01842373476e28d47fe3d5551d22483bdf150fc200457a04cc6c07763a",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "git-old-object",
+    "argv": [
+      "git",
+      "show",
+      "a83f50762005ae47edfe3e07295f3840b485687b:unneeded"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:32.559Z",
+    "finishedAt": "2026-11-14T03:38:32.596Z",
+    "pid": 81706,
+    "status": 128,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "21c247af56c2fc66b26f4b4f7fb7e4e2dca265ed2d76c060ce37d3c0df264891",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "inputs-only",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:32.597Z",
+    "finishedAt": "2026-11-14T03:38:32.931Z",
+    "pid": 81709,
+    "status": 0,
+    "signal": null,
+    "stdoutSha256": "753e3bf56f1b528ca5d66cceb5d8909f19b249c90f1f1f5ddaa595db7d043915",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "optional-history",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only",
+      "--check-history"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:32.935Z",
+    "finishedAt": "2026-11-14T03:38:33.054Z",
+    "pid": 81712,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "bd5a6e703484163b75e5e4f67eb02bc1cb9c2d167c23f120a99afbf1d0e879fe",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "drift-library-source",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/refused-library-source"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.054Z",
+    "finishedAt": "2026-11-14T03:38:33.125Z",
+    "pid": 81716,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "6d22696190679bd3f009b97c50317590dbb018c322ea9e8aa7eb08812a59befc",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "drift-provenance",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/refused-provenance"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.125Z",
+    "finishedAt": "2026-11-14T03:38:33.185Z",
+    "pid": 81720,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "e10566239bdefb008d48315037d52ac55595a68e1b1f708bf28b62709e989028",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "drift-license",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/refused-license"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.185Z",
+    "finishedAt": "2026-11-14T03:38:33.249Z",
+    "pid": 81723,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "0ef78e93960710c815b235424ff158a10187e8604bc9abc6f19d07787c738521",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "drift-adapter",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/refused-adapter"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.250Z",
+    "finishedAt": "2026-11-14T03:38:33.318Z",
+    "pid": 81727,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "5c8e54c503a11c703994e589080172ec42e5789be0808c3727e2916021df9551",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "drift-application-contract",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/refused-application-contract"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.319Z",
+    "finishedAt": "2026-11-14T03:38:33.380Z",
+    "pid": 81730,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "de73c5e204f18bcfe8958780c3bb91c53dc925cb9dadea1fcbb5cd7554d730c5",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "drift-inherited-attestation",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/refused-inherited-attestation"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.380Z",
+    "finishedAt": "2026-11-14T03:38:33.449Z",
+    "pid": 81733,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "ee075900265767ffd925ba12ca6c183c7ee99b5ab0270bbf52926d870492e36c",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "existing-output",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.450Z",
+    "finishedAt": "2026-11-14T03:38:33.477Z",
+    "pid": 81736,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "0cf0aa7d63e2a91d358225fdbafd044e78f25bcb83c1a595bec19a331775a54b",
+    "aliveAfterWait": false
+  },
+  {
+    "name": "legacy-inputs",
+    "argv": [
+      "/Users/rick/.hermes/node/bin/node",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU/verify/reports/roadmap/library-campaigns/check.mjs",
+      "--inputs-only"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803/verify/reports/roadmap/library-campaigns/.maintenance-test-1O9eTU",
+    "gitForwardedTo": "/Users/rick/.t3/worktrees/verified-list-ui/t3-0a646803",
+    "startedAt": "2026-11-14T03:38:33.477Z",
+    "finishedAt": "2026-11-14T03:38:33.505Z",
+    "pid": 81737,
+    "status": 1,
+    "signal": null,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "501cdd0475c66b13416099f54944d2a527a6af0404c72568d802ffe3f5b2b39a",
+    "aliveAfterWait": false
+  }
+]

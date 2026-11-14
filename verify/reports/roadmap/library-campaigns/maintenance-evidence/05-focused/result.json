@@ -1,0 +1,140 @@
+{
+  "status": "PASS",
+  "codeHead": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+  "codeTree": "a17853b86d535fd245a8922ad1e2b011138d9b72",
+  "inputSnapshotSha256": "ab4a823128de2278bfe6b0ae388470715567e89f230b72948d87d4fa77704db3",
+  "checker": {
+    "verify/reports/roadmap/library-campaigns/campaign-inputs.mjs": "5e9cc4d8e5a07792821a0963aadad5477a0ccc11c15131fdf19655d663975abd",
+    "verify/reports/roadmap/library-campaigns/check.mjs": "03cb953f2272ac6a929302fec047ca54d8022f993687e6fafd77724604a0d09d",
+    "verify/reports/roadmap/library-campaigns/git-no-private-history.mjs": "f1433a065e79c0a68728f073cd919235a2008ab1057a8d561c242ef229b982cd",
+    "verify/reports/roadmap/library-campaigns/inputs.json": "746a8cf9b990aacf98c167307d4f720532c4c2835e4fefb312d15e315e4da3f7",
+    "verify/reports/roadmap/library-campaigns/provenance.json": "2a8a9b9eaf3bb1c9a8b5aa26f3b2b37ab0ebff10bef2f5a2b5cbfd4e627700d6",
+    "verify/reports/roadmap/library-campaigns/test-maintenance.mjs": "00b3f9b0fa40cb6f3bc4ad36957595be7ee438518aff4d5ca58db64b2da0c715"
+  },
+  "node": {
+    "version": "v22.23.1",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "checks": [
+    {
+      "name": "precise-object-availability",
+      "status": "PASS",
+      "detail": "Normal git forwards to the prepared repository; only old-object access is refused."
+    },
+    {
+      "name": "no-private-history-or-semantic-import",
+      "status": "PASS",
+      "detail": {
+        "kind": "inherited-document-attestation",
+        "historicalCampaignHead": "42567fc7b286e2a8e838279396fcb444e1118253",
+        "historicalEvidenceTip": "7e6d9b56c36e89dac9d9b7943771feb8af4dd0ab",
+        "reviewPath": "verify/reports/roadmap/review-library-campaigns/report.md",
+        "reviewSha256": "4ad4cc43c34ab87d35f096d13513473a836b9bef95ac839b0e04f82fa975d3da",
+        "scope": "The retained independent review attests the document digest, coverage sentence and example. Default maintenance checks vendored source/license and attestation bytes, not document bytes or a new download.",
+        "fullDocumentSha256": "728883f5266670f4abbccf6ef8ea57a9e4b15f5cec02969b3d48f24843fba531",
+        "checkedDocumentBytesThisRun": false,
+        "freshDownload": false
+      }
+    },
+    {
+      "name": "history-is-explicit-and-fails-when-absent",
+      "status": "PASS"
+    },
+    {
+      "name": "reject-library-source-drift-before-import",
+      "status": "PASS",
+      "detail": {
+        "path": "verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js",
+        "originalSha256": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
+        "changedSha256": "7c0f1d1e4690feaa9b5939bec28fcbbb75894397a1efef16a33d9116030be3c4",
+        "suffix": "\n// drift control\n",
+        "observed": "default launcher refused before semantic import or lane launch"
+      }
+    },
+    {
+      "name": "reject-provenance-drift-before-import",
+      "status": "PASS",
+      "detail": {
+        "path": "verify/reports/roadmap/library-campaigns/provenance.json",
+        "originalSha256": "2a8a9b9eaf3bb1c9a8b5aa26f3b2b37ab0ebff10bef2f5a2b5cbfd4e627700d6",
+        "changedSha256": "d4090bb2c5e47a3a86af8cff2b08b2a242c559d054f16aee1b5a2ad083c6421f",
+        "suffix": "\n// drift control\n",
+        "observed": "default launcher refused before semantic import or lane launch"
+      }
+    },
+    {
+      "name": "reject-license-drift-before-import",
+      "status": "PASS",
+      "detail": {
+        "path": "verify/reports/roadmap/library-campaigns/pins/d3-array/LICENSE",
+        "originalSha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
+        "changedSha256": "876ca808cfb400b56d74d4fdc950ba6189c3aed74d1f88e1a9abdfbf962f4478",
+        "suffix": "\n// drift control\n",
+        "observed": "default launcher refused before semantic import or lane launch"
+      }
+    },
+    {
+      "name": "reject-adapter-drift-before-import",
+      "status": "PASS",
+      "detail": {
+        "path": "verify/examples/simple-statistics/check-harmonic.mjs",
+        "originalSha256": "a51b4480dd2eb043289a428eaac94591f1d935c761c7c24aa1847da9a3cda09b",
+        "changedSha256": "2d67e535573d2a57cecfa3c8bbc5aa1e937b1bf5f98bf29a4cc963e4d93ab274",
+        "suffix": "\n// drift control\n",
+        "observed": "default launcher refused before semantic import or lane launch"
+      }
+    },
+    {
+      "name": "reject-application-contract-drift-before-import",
+      "status": "PASS",
+      "detail": {
+        "path": "verify/examples/simple-statistics/harmonic-positive.js",
+        "originalSha256": "d4a067ec6747c27c836ae46f46350e5ac9334bc2c32df3cc36e6a64948725189",
+        "changedSha256": "00623bcc62b7dc1bba0f095c3555df6524e585d3d4474c3f0f39d1248fc96306",
+        "suffix": "\n// drift control\n",
+        "observed": "default launcher refused before semantic import or lane launch"
+      }
+    },
+    {
+      "name": "reject-inherited-attestation-drift-before-import",
+      "status": "PASS",
+      "detail": {
+        "path": "verify/reports/roadmap/review-library-campaigns/report.md",
+        "originalSha256": "4ad4cc43c34ab87d35f096d13513473a836b9bef95ac839b0e04f82fa975d3da",
+        "changedSha256": "99c683f3d6ae335c1cdf760536172347136cfffde62d4df03e68d7398aa6cdd8",
+        "suffix": "\n// drift control\n",
+        "observed": "default launcher refused before semantic import or lane launch"
+      }
+    },
+    {
+      "name": "refuse-existing-artifacts",
+      "status": "PASS"
+    },
+    {
+      "name": "reject-ambiguous-legacy-inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "current-start-snapshot-and-changed-model",
+      "status": "PASS",
+      "detail": {
+        "currentIdentity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+        "historicalIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+        "changedFixtureIdentity": "7348c488a8d43271c57c08cd008d927723d7c388aaafbdbc40ef38a6c5f627b0",
+        "actualStartHead": "524d03a44a7c5b8e151489673753c0a4c6afa2c7",
+        "actualStartTree": "a17853b86d535fd245a8922ad1e2b011138d9b72",
+        "trackedFileCount": 1457,
+        "fixtureIndexBefore": "1c586efe44af4973f7e7704e4fa6d414ae7ca1f8ca5f2203ea791311741ebd58",
+        "fixtureIndexAfter": "642a0ea96b9a9d4ea415d8f229c6c0a87908cd29f4587369cd91fd0043582e0e",
+        "historicalReplay": "invalid-evidence",
+        "freshArtifactRequired": "Changed model cannot bind the previous snapshot; historical proof/witness artifacts are not admitted. A full fresh campaign is a separate required check."
+      }
+    }
+  ],
+  "realSnapshotUnchanged": true,
+  "fixtureRemoved": true,
+  "semanticImportAndLaneTraps": "No fixed-input control reached either trap; model control separately imports the real API without solving.",
+  "allSpawnedProcessesWaited": true,
+  "noRawSourceMutation": true
+}
