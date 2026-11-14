@@ -1,0 +1,24 @@
+diff --cc verify/source.mjs
+index 0adb0b4,1ad37e0..0000000
+--- a/verify/source.mjs
++++ b/verify/source.mjs
+@@@ -986,11 -1000,12 +1013,18 @@@ function iterate(node, spec, entry, wri
+    const head = and(entry.path, invariant(env));
+    const rank = measure(spec.decreases, env, contract);
+    const tested = new Map(env);
+++<<<<<<< HEAD
+ +  const c = need(expression(node.test, tested, { ...cx, guard: head }), "boolean", node.test);
+ +  const collectors = { breaks: [], continues: [], span: { start: node.start, end: node.end } };
+ +  const done = scopedStatements(blockStatements(node.body), [{ path: and(head, c), env: new Map(tested) }], returns, { ...cx, loop: collectors });
+++=======
++   const collectors = { breaks: [], continues: [] };
++   const iteration = { ...cx, loop: collectors };
++   const c = need(expression(node.test, tested, { ...iteration, guard: head }), "boolean", node.test);
++   const done = scopedStatements(blockStatements(node.body), [{ path: and(head, c), env: new Map(tested) }], returns, iteration);
+++>>>>>>> 85d121d (Derive audited loop cutpoints in isolated compiler trials)
+    const backs = [...done, ...collectors.continues];
+-   if (node.update) for (const b of backs) expression(node.update, b.env, { ...cx, guard: b.path });
++   if (node.update) for (const b of backs) expression(node.update, b.env, { ...iteration, guard: b.path });
+    for (const b of backs) {
+      unit.events.push({ guard: b.path, safe: invariant(b.env), assume: "true", label: label("invariant-preserve", spec.span) });
+      const next = measure(spec.decreases, b.env, contract);

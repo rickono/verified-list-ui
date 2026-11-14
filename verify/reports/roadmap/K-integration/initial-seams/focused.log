@@ -1,0 +1,534 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# Subtest: guarded throws require unreachability; native exceptions stay unconfirmed
+ok 1 - guarded throws require unreachability; native exceptions stay unconfirmed
+  ---
+  duration_ms: 952.884709
+  type: 'test'
+  ...
+# Subtest: requires-only feasibility and definedness run before throw obligations
+ok 2 - requires-only feasibility and definedness run before throw obligations
+  ---
+  duration_ms: 273.945625
+  type: 'test'
+  ...
+# Subtest: throw checks use preceding helper facts only and wait for final dependencies
+ok 3 - throw checks use preceding helper facts only and wait for final dependencies
+  ---
+  duration_ms: 839.906792
+  type: 'test'
+  ...
+# Subtest: throws inside and after a loop retain abstract attribution and gap messages
+ok 4 - throws inside and after a loop retain abstract attribution and gap messages
+  ---
+  duration_ms: 328.594208
+  type: 'test'
+  ...
+# Subtest: optional-widening retries commit exactly one throw check
+ok 5 - optional-widening retries commit exactly one throw check
+  ---
+  duration_ms: 167.395083
+  type: 'test'
+  ...
+# Subtest: unsupported throw values and shadowed Error reject at the original throw span, even when dead
+ok 6 - unsupported throw values and shadowed Error reject at the original throw span, even when dead
+  ---
+  duration_ms: 2.410833
+  type: 'test'
+  ...
+# Subtest: a private dropped-event mutant false-verifies and the native check detects it
+ok 7 - a private dropped-event mutant false-verifies and the native check detects it
+  ---
+  duration_ms: 492.55275
+  type: 'test'
+  ...
+# {"mutant":"verified","witness":["false"],"nativeFalse":0,"nativeTrue":"throws boom","detected":true}
+# Subtest: old reports and exact queries match P; its old evidence and receipts become stale
+not ok 8 - old reports and exact queries match P; its old evidence and receipts become stale
+  ---
+  duration_ms: 68.282375
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/tests/verify/guarded-throws.test.mjs:220:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+    
+      [
+        {
+    +     allocates: false,
+          callees: [],
+          declarations: '(declare-const heap_next0 Int)\n' +
+            '(declare-fun heap_kind (Int) Int)\n' +
+            '(declare-fun heap_length (Int) (_ BitVec 32))\n' +
+            '(declare-fun heap_element (Int) Int)\n' +
+    ...
+        {
+    +     allocates: false,
+          callees: [],
+          declarations: '(declare-const heap_next0 Int)\n' +
+            '(declare-fun heap_kind (Int) Int)\n' +
+            '(declare-fun heap_length (Int) (_ BitVec 32))\n' +
+            '(declare-fun heap_element (Int) Int)\n' +
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      id: 'throws.js#identity'
+      file: 'throws.js'
+      name: 'identity'
+      span:
+        start: 57
+        end: 91
+      params:
+        0:
+          name: 'x'
+          type: 'number'
+          typeAliases:
+          model:
+            kind: 'number'
+            symbol: 'input_0'
+      resultType: 'number'
+      effects:
+        kind: 'pure'
+      executableStart: 57
+      modifies:
+      footprint:
+      requires:
+      ensures:
+        0:
+          kind: 'ensures'
+          text: 'Object.is(result, x)'
+          span:
+            start: 36
+            end: 56
+          file: 'throws.js'
+      callees:
+      loops:
+      obligations:
+        0:
+          kind: 'ensures'
+          span: <Circular>
+          abstract: false
+      spec: false
+      predicates:
+        library: '__specification'
+        entry: '__entry_values'
+        params:
+          0: 'x'
+        requires:
+        ensures:
+          0: '(Object).is(result, x)'
+      executable: 'function identity(x) { return x; }'
+      declarations: |-
+        (declare-const heap_next0 Int)
+        (declare-fun heap_kind (Int) Int)
+        (declare-fun heap_length (Int) (_ BitVec 32))
+        (declare-fun heap_element (Int) Int)
+        (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+        (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+        (declare-fun heap_array_dense (Int) Bool)
+        (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+        (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+        (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+        (declare-const input_0 (_ BitVec 64))
+      probes:
+      smallWitness: 'true'
+      replayGuards:
+      pre: 'true'
+      preDefined: 'true'
+      post: '(= ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))'
+      postconditions:
+        0: '(= ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))'
+    1:
+      id: 'throws.js#one'
+      file: 'throws.js'
+      name: 'one'
+      span:
+        start: 116
+        end: 269
+      params:
+      resultType: 'number'
+      effects:
+        kind: 'pure'
+      executableStart: 116
+      modifies:
+      footprint:
+      requires:
+      ensures:
+        0:
+          kind: 'ensures'
+          text: 'result === 1'
+          span:
+            start: 103
+            end: 115
+          file: 'throws.js'
+      callees:
+      loops:
+        0:
+          start: 225
+          end: 255
+      obligations:
+        0:
+          kind: 'invariant-init'
+          span:
+            start: 148
+            end: 187
+          loop:
+            start: 225
+            end: 255
+          abstract: true
+        1:
+          kind: 'invariant-preserve'
+          span: <Circular>
+          loop:
+            start: 225
+            end: 255
+          abstract: true
+        2:
+          kind: 'rank'
+          span:
+            start: 203
+            end: 222
+          loop:
+            start: 225
+            end: 255
+          abstract: true
+        3:
+          kind: 'ensures'
+          span: <Circular>
+          abstract: true
+      spec: false
+      predicates:
+        library: '__specification'
+        entry: '__entry_values'
+        params:
+        requires:
+        ensures:
+          0: '__specification.binary("===", result, 1)'
+      executable: |-
+        function one() {
+          // invariant Number.isInteger(i) && 0 <= i && i <= 1
+          // decreases real("1") - real(i)
+          for (let i = 0; i < 1; i++) {}
+          return 1;
+        }
+      declarations: |-
+        (declare-const heap_next0 Int)
+        (declare-fun heap_kind (Int) Int)
+        (declare-fun heap_length (Int) (_ BitVec 32))
+        (declare-fun heap_element (Int) Int)
+        (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+        (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+        (declare-fun heap_array_dense (Int) Bool)
+        (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+        (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+        (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+        (declare-const loop_replay0 Bool)
+        (assert (= loop_replay0 (=> (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #xc06fe00000000000)))))
+        (declare-const loop1_u32 (_ BitVec 32))
+        (declare-const loop1_negative_zero Bool)
+      probes:
+      smallWitness: 'true'
+      replayGuards:
+        0: 'loop_replay0'
+      pre: 'true'
+      preDefined: 'true'
+      post: '(and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))))) (=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (and (bvule loop1_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))))) (=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (not (bvult loop1_u32 #x00000001))) (fp.eq ((_ to_fp 11 53) #x3ff0000000000000) ((_ to_fp 11 53) #x3ff0000000000000))))'
+      postconditions:
+        0: '(ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))))'
+        1: '(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))'
+        2: '(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (and (bvule loop1_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))'
+        3: '(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (not (bvult loop1_u32 #x00000001))) (fp.eq ((_ to_fp 11 53) #x3ff0000000000000) ((_ to_fp 11 53) #x3ff0000000000000)))'
+  actual:
+    0:
+      id: 'throws.js#identity'
+      file: 'throws.js'
+      name: 'identity'
+      span:
+        start: 57
+        end: 91
+      params:
+        0:
+          name: 'x'
+          type: 'number'
+          typeAliases:
+          model:
+            kind: 'number'
+            symbol: 'input_0'
+      resultType: 'number'
+      allocates: false
+      effects:
+        kind: 'pure'
+      executableStart: 57
+      modifies:
+      footprint:
+      requires:
+      ensures:
+        0:
+          kind: 'ensures'
+          text: 'Object.is(result, x)'
+          span:
+            start: 36
+            end: 56
+          file: 'throws.js'
+      callees:
+      loops:
+      obligations:
+        0:
+          kind: 'ensures'
+          span: <Circular>
+          abstract: false
+      spec: false
+      predicates:
+        library: '__specification'
+        entry: '__entry_values'
+        params:
+          0: 'x'
+        requires:
+        ensures:
+          0: '(Object).is(result, x)'
+      executable: 'function identity(x) { return x; }'
+      declarations: |-
+        (declare-const heap_next0 Int)
+        (declare-fun heap_kind (Int) Int)
+        (declare-fun heap_length (Int) (_ BitVec 32))
+        (declare-fun heap_element (Int) Int)
+        (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+        (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+        (declare-fun heap_array_dense (Int) Bool)
+        (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+        (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+        (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+        (declare-const input_0 (_ BitVec 64))
+      probes:
+      smallWitness: 'true'
+      replayGuards:
+      pre: 'true'
+      preDefined: 'true'
+      post: '(= ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))'
+      postconditions:
+        0: '(= ((_ to_fp 11 53) input_0) ((_ to_fp 11 53) input_0))'
+    1:
+      id: 'throws.js#one'
+      file: 'throws.js'
+      name: 'one'
+      span:
+        start: 116
+        end: 269
+      params:
+      resultType: 'number'
+      allocates: false
+      effects:
+        kind: 'pure'
+      executableStart: 116
+      modifies:
+      footprint:
+      requires:
+      ensures:
+        0:
+          kind: 'ensures'
+          text: 'result === 1'
+          span:
+            start: 103
+            end: 115
+          file: 'throws.js'
+      callees:
+      loops:
+        0:
+          start: 225
+          end: 255
+      obligations:
+        0:
+          kind: 'invariant-init'
+          span:
+            start: 148
+            end: 187
+          loop:
+            start: 225
+            end: 255
+          abstract: true
+        1:
+          kind: 'invariant-preserve'
+          span: <Circular>
+          loop:
+            start: 225
+            end: 255
+          abstract: true
+        2:
+          kind: 'rank'
+          span:
+            start: 203
+            end: 222
+          loop:
+            start: 225
+            end: 255
+          abstract: true
+        3:
+          kind: 'ensures'
+          span: <Circular>
+          abstract: true
+      spec: false
+      predicates:
+        library: '__specification'
+        entry: '__entry_values'
+        params:
+        requires:
+        ensures:
+          0: '__specification.binary("===", result, 1)'
+      executable: |-
+        function one() {
+          // invariant Number.isInteger(i) && 0 <= i && i <= 1
+          // decreases real("1") - real(i)
+          for (let i = 0; i < 1; i++) {}
+          return 1;
+        }
+      declarations: |-
+        (declare-const heap_next0 Int)
+        (declare-fun heap_kind (Int) Int)
+        (declare-fun heap_length (Int) (_ BitVec 32))
+        (declare-fun heap_element (Int) Int)
+        (declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))
+        (declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)
+        (declare-fun heap_array_dense (Int) Bool)
+        (declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)
+        (define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))
+        (define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))
+        (declare-const loop_replay0 Bool)
+        (assert (= loop_replay0 (=> (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #xc06fe00000000000)))))
+        (declare-const loop1_u32 (_ BitVec 32))
+        (declare-const loop1_negative_zero Bool)
+      probes:
+      smallWitness: 'true'
+      replayGuards:
+        0: 'loop_replay0'
+      pre: 'true'
+      preDefined: 'true'
+      post: '(and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))))) (=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (and (bvule loop1_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))))) (=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (not (bvult loop1_u32 #x00000001))) (fp.eq ((_ to_fp 11 53) #x3ff0000000000000) ((_ to_fp 11 53) #x3ff0000000000000))))'
+      postconditions:
+        0: '(ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x3ff0000000000000)) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))))'
+        1: '(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) #x00000001)) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))'
+        2: '(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (bvult loop1_u32 #x00000001)) (and (bvule loop1_u32 #x00000001) (bvuge (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop1_u32) ((_ zero_extend 1) #x00000001)))))'
+        3: '(=> (and (ite (bvule #x00000000 loop1_u32) (bvule loop1_u32 #x00000001) (bvule #x00000000 loop1_u32)) (not (bvult loop1_u32 #x00000001))) (fp.eq ((_ to_fp 11 53) #x3ff0000000000000) ((_ to_fp 11 53) #x3ff0000000000000)))'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/tests/verify/guarded-throws.test.mjs:233:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# (node:75983) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: heap-frame growth and optional widening commit one attributed throw check
+ok 9 - heap-frame growth and optional widening commit one attributed throw check
+  ---
+  duration_ms: 399.498042
+  type: 'test'
+  ...
+# (node:75987) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a real first discarded trial leaves the same ordered queries as starting at the fixed point
+ok 10 - a real first discarded trial leaves the same ordered queries as starting at the fixed point
+  ---
+  duration_ms: 45.765209
+  type: 'test'
+  ...
+# {"trials":[{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":10,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":["last"],"grow":1,"returns":0},{"events":["invariant-init","callback-fact","call","call","frame-inclusion","invariant-preserve","rank"],"declarations":13,"checks":0,"facts":3,"dependencies":["trial.ts\#positive"],"functions":1,"probes":1,"keys":["x","extra"],"widen":[],"grow":0,"returns":0}],"committedObligations":["invariant-init","call","frame-inclusion","invariant-preserve","rank"],"queries":5,"committedFacts":3}
+# Subtest: discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+ok 11 - discarded compiler trials cannot publish registry-only fields, roots, assertions or declarations
+  ---
+  duration_ms: 24.174208
+  type: 'test'
+  ...
+# Subtest: the heap owner rolls back field boundaries and provenance without reusing version names
+ok 12 - the heap owner rolls back field boundaries and provenance without reusing version names
+  ---
+  duration_ms: 0.361708
+  type: 'test'
+  ...
+# (node:75988) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: unsupported stateful loops return original source diagnostics instead of throwing
+ok 13 - unsupported stateful loops return original source diagnostics instead of throwing
+  ---
+  duration_ms: 30.512709
+  type: 'test'
+  ...
+# Subtest: original compiler rejects a false capture annotation before it can become a resumption assumption
+ok 14 - original compiler rejects a false capture annotation before it can become a resumption assumption
+  ---
+  duration_ms: 2.013833
+  type: 'test'
+  ...
+# Subtest: request parameter assumptions use the captured request value across interference
+ok 15 - request parameter assumptions use the captured request value across interference
+  ---
+  duration_ms: 125.867584
+  type: 'test'
+  ...
+# Subtest: always-only properties use pre-step old, including rejection stutter
+ok 16 - always-only properties use pre-step old, including rejection stutter
+  ---
+  duration_ms: 528.306041
+  type: 'test'
+  ...
+# Subtest: unsupported clauses and source constructs retain exact original spans
+ok 17 - unsupported clauses and source constructs retain exact original spans
+  ---
+  duration_ms: 2.330875
+  type: 'test'
+  ...
+# (node:75998) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: all recovered pilots/variants are audited by the production frontend
+ok 18 - all recovered pilots/variants are audited by the production frontend
+  ---
+  duration_ms: 40.011333
+  type: 'test'
+  ...
+# Subtest: closed grammar rejects case, colon, edit distance, block and unknown environment lines
+ok 19 - closed grammar rejects case, colon, edit distance, block and unknown environment lines
+  ---
+  duration_ms: 4.775958
+  type: 'test'
+  ...
+# Subtest: assumptions expose defaults, declared-unused settling and canonical identity
+ok 20 - assumptions expose defaults, declared-unused settling and canonical identity
+  ---
+  duration_ms: 1.741292
+  type: 'test'
+  ...
+# Subtest: module state, ambient signatures, binding identities and nested awaits fail closed
+ok 21 - module state, ambient signatures, binding identities and nested awaits fail closed
+  ---
+  duration_ms: 1.833417
+  type: 'test'
+  ...
+# Subtest: Unicode edits in clause keywords cannot silently discard properties
+ok 22 - Unicode edits in clause keywords cannot silently discard properties
+  ---
+  duration_ms: 1.340666
+  type: 'test'
+  ...
+# (node:76000) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:76390) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: default examples keep exact compiled obligations, graph hashes and outcome reports
+ok 23 - default examples keep exact compiled obligations, graph hashes and outcome reports
+  ---
+  duration_ms: 34783.83175
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 22
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 39532.935792
