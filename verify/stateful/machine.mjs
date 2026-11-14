@@ -3,9 +3,11 @@ import { Parser, tokenizer } from "acorn";
 import { blame, fail } from "../error.mjs";
 import { options, references, walk, sha256, span } from "./ast.mjs";
 import { parseClauses } from "./clauses.mjs";
-import { environmentOf, assumptionsOf, primitives, globals } from "./environment.mjs";
+import { environmentOf, assumptionsOf, primitives, handles, globals } from "./environment.mjs";
 
-const reserved = new Set([...globals, "Object", "Array", "result", "old", "real"]);
+import { protocolEntryOf, protocolOf } from "./protocol-machine.mjs";
+
+const reserved = new Set([...globals, "EventTarget", "Event", "AbortController", "AbortSignal", "Object", "Array", "result", "old", "real"]);
 function named(name, at, used) {
   if (name.startsWith("$") || reserved.has(name) || used.has(name)) fail(`Duplicate, shadowed or reserved binding ${name}.`, at);
   used.add(name);
@@ -20,11 +22,16 @@ function syntaxOf(source, stripped, program, strippedTokens) {
     const start = tokens[i].start;
     const expect = (text) => { const t = tokens[i++]; if (t?.text !== text) fail(`Environment declaration expected ${text}.`, t ?? { start, end: start + 1 }); return t; };
     const name = () => { const t = tokens[i++]; if (!t || !/^[A-Za-z_$][\w$]*$/.test(t.text)) fail("Expected a simple binding name.", t); return { type: "Identifier", name: t.text, start: t.start, end: t.end }; };
-    expect("declare"); expect("function"); const operation = name(); expect("(");
+    expect("declare");
+    if (tokens[i]?.text === "const") {
+      expect("const"); const target = name(); expect(":"); expect("EventTarget"); const end = expect(";").end;
+      ambient.push({ name: target.name, node: target, type: "EventTarget", start, end }); ranges.push({ start, end }); i--; continue;
+    }
+    expect("function"); const operation = name(); expect("(");
     const params = [], seen = new Set();
     while (tokens[i]?.text !== ")") {
       const node = name(); named(node.name, node, seen); expect(":");
-      const t = tokens[i++]; if (!primitives.has(t?.text)) fail("Environment parameters require scalar types.", t);
+      const t = tokens[i++]; if (!primitives.has(t?.text) && t?.text !== "AbortSignal") fail("Environment parameters require scalar or advisory signal types.", t);
       params.push({ name: node.name, node, type: t.text });
       if (tokens[i]?.text === ")") break;
       expect(",");
@@ -38,7 +45,7 @@ function syntaxOf(source, stripped, program, strippedTokens) {
   const annotation = (id, until) => {
     const text = source.slice(id.end, until).trim();
     if (!text) return;
-    const match = /^:\s*(number|boolean)$/.exec(text);
+    const match = /^:\s*(number|boolean|AbortSignal|AbortController|EventTarget)$/.exec(text);
     if (!match) fail("Only scalar annotations are supported; optional/default/rest parameters and assertions are unsupported.", id);
     types.set(id.end, match[1]); ranges.push({ start: id.end, end: until });
   };
@@ -77,9 +84,9 @@ export function machineOf(file, source) {
     try { program = Parser.parse(stripped, { ...options, onComment: comments, onToken: tokens }); }
     catch (e) { fail(e.message, { start: e.pos, end: e.pos + 1 }); }
     const syntax = syntaxOf(source, stripped, program, tokens);
-    const clauses = parseClauses(comments), { environment, used } = environmentOf(syntax.ambient, clauses, source);
+    const clauses = parseClauses(comments), { environment, targets, used } = environmentOf(syntax.ambient, clauses, source);
     const cells = new Map(), functions = [], names = new Set();
-    for (const op of environment.values()) named(op.name, op, names);
+    for (const op of [...environment.values(), ...targets.values()]) named(op.name, op, names);
     for (const top of program.body) {
       if (top.type === "VariableDeclaration" && top.kind === "let") {
         for (const d of top.declarations) {
@@ -105,8 +112,12 @@ export function machineOf(file, source) {
       (c.kind === "state" ? state : always).push(c); used.add(c);
     }
     if (!state.length && !always.length) fail("No state or always property; pending clauses alone cannot establish safety.", program);
-    const machine = { file, source, stripped, program, tokens, clauses, environment, cells, state, always, sourceSha256: sha256(source), entries: [] };
-    for (const fn of functions) machine.entries.push(entryOf(machine, fn, syntax.types, clauses, used, names));
+    const machine = { targets, types: syntax.types, file, source, stripped, program, tokens, clauses, environment, cells, state, always, sourceSha256: sha256(source), entries: [] };
+    if (targets.size || [...syntax.types.values()].some((t) => handles.has(t)) || [...environment.values()].some((op) => op.abort)) {
+      machine.protocol = protocolOf(machine);
+      for (const fn of functions) machine.entries.push(protocolEntryOf(machine, fn, syntax.types, clauses, used, names));
+      if (targets.size && machine.entries.some((e) => e.awaits.length)) fail("Listener and advisory-await modules are separate in C2a.", program);
+    } else for (const fn of functions) machine.entries.push(entryOf(machine, fn, syntax.types, clauses, used, names));
     for (const c of clauses) if (c.kind && !used.has(c)) fail(`Misplaced ${c.kind} clause.`, c.span);
     let executable = stripped;
     for (const top of program.body) if (top.type === "ExportNamedDeclaration") executable = executable.slice(0, top.start) + " ".repeat(top.declaration.start - top.start) + executable.slice(top.declaration.start);

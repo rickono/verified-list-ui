@@ -1,3 +1,4 @@
+import { protocolTraceOf } from "./protocol-values.mjs";
 // A JSON-safe scalar wire format. Decimal/string coercion loses NaN and -0.
 export function encodeValue(value) {
   if (typeof value === "boolean") return { type: "boolean", value };
@@ -11,7 +12,8 @@ export function decodeValue(value) {
   if (value.type === "number" && typeof value.bits === "string" && /^[a-f0-9]{16}$/.test(value.bits)) return Buffer.from(value.bits, "hex").readDoubleBE();
   throw new TypeError("Invalid scalar trace encoding.");
 }
-export function traceOf(machine, actions) {
+export function traceOf(machine, actions, options) {
+  if (machine.protocol) return protocolTraceOf(machine, actions, options);
   return { version: 1, sourceSha256: machine.sourceSha256, executableSha256: machine.executableSha256, assumptionsSha256: machine.assumptions.sha256,
     actions: actions.map((a) => a.kind === "call" ? { ...a, args: a.args.map(encodeValue) }
       : a.kind === "resolve" ? { ...a, value: encodeValue(a.value) } : { ...a }) };
