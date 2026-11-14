@@ -51,4 +51,4 @@ python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- n
 python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/review-C2a/native/followup.mjs
 ```
 
-Both lane commands printed “Acquired the solver test lane” and exited 0. The first probe execution also exited 0 and is preserved as `probe-attempt-1.json`. Logs: `probe.log`, `followup.log`. Temporary archives and both private mutants were removed. No replay worker remained. No canonical roadmap, audit, push, PR, or merge was written.
+Both lane commands printed “Acquired the solver test lane” and exited 0. The first probe execution also exited 0 and is preserved as `probe-attempt-1.json`. Logs: `probe.log.txt`, `followup.log.txt`. Temporary archives and both private mutants were removed. No replay worker remained. No canonical roadmap, audit, push, PR, or merge was written.
