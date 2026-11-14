@@ -170,6 +170,13 @@ Constructors allocate fresh controller/signal pairs. Abort changes signal
 contents without settling or deleting requests. Legal late fulfillment and
 already selected responses remain possible. Rejection requires `// rejects`.
 
+Source aborts and their induction rules use the same persistent state update.
+The checks bind changed signal contents and preserved request/invocation
+membership to that update and to the original source action. Substituting a
+matching rule name without its clauses is rejected. Private membership-deletion
+mutants fail the abstract checks; native replay remains the check for individual
+application failures. The protocol model and compiler remain trusted.
+
 Proofs check creation, removal, unary and pairwise preservation, and both
 registration index/occurrence directions over arbitrary representatives.
 No finite identity pool or event limit enters the queries. Protocol dispatch

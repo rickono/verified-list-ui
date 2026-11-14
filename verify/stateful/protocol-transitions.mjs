@@ -3,6 +3,7 @@ import { fail } from "../error.mjs";
 import { id, member, reference, references, transform, span, walk, sha256 } from "./ast.mjs";
 import { handles, primitives } from "./environment.mjs";
 import { protocolRules, validateProtocolUnits } from "./protocol-rules.mjs";
+import { advisoryAbort, abortClauses } from "./protocol-abort.mjs";
 import { variable, map, read, update, constant, equal, neg, projection } from "./projection.mjs";
 
 const clause = (c, ast) => ({ ...c, ast });
@@ -33,12 +34,17 @@ export function protocolTransitionsOf(machine) {
   protocolRules(emit, at);
   const steps = [];
   for (const entry of machine.entries) {
-    const variables = [], maps = [map("$signalOf", ["controller"], "signal"), map("$aborted", ["signal"], "boolean")];
+    const variables = [], maps = [map("$signalOf", ["controller"], "signal"), map("$aborted", ["signal"], "boolean"),
+      map("$pending", ["request"], "boolean"), map("$settled", ["request"], "boolean"), map("$running", ["invocation"], "boolean")];
+    const observer = variable("$abort_observer", "signal"), request = variable("$abort_request", "request"), invocation = variable("$abort_invocation", "invocation");
+    variables.push(observer, request, invocation);
     const terms = new Map();
     for (const b of entry.bindings.values()) if (sortOf(b.type)) {
       const t = variable(`$binding_${b.node.start}`, sortOf(b.type)); variables.push(t); terms.set(b.name, t);
     }
-    let signalOf = (...args) => read(maps[0], ...args), aborted = (...args) => read(maps[1], ...args);
+    let signalOf = (...args) => read(maps[0], ...args);
+    let protocolState = { aborted: (...args) => read(maps[1], ...args), pending: (...args) => read(maps[2], ...args),
+      settled: (...args) => read(maps[3], ...args), running: (...args) => read(maps[4], ...args) };
     const term = (n) => {
       if (n.type === "Identifier" && terms.has(n.name)) return terms.get(n.name);
       if (n.type === "MemberExpression" && !n.computed && n.property.name === "signal") return signalOf(term(n.object));
@@ -46,18 +52,18 @@ export function protocolTransitionsOf(machine) {
     };
     const rewrite = (node, extra = new Map()) => transform(node, (n, p, k) => {
       if (n.type === "ReturnStatement" && !n.argument) return ret(id("undefined", n), n);
-      if (n.type === "MemberExpression" && !n.computed && n.property.name === "aborted" && n.object.type === "Identifier" && entry.bindings.get(n.object.name)?.type === "AbortSignal") return projection(aborted(term(n.object)), n);
+      if (n.type === "MemberExpression" && !n.computed && n.property.name === "aborted" && n.object.type === "Identifier" && entry.bindings.get(n.object.name)?.type === "AbortSignal") return projection(protocolState.aborted(term(n.object)), n);
       if (n.type === "BinaryExpression" && ["===", "!=="].includes(n.operator) && (sortOf(entry.bindings.get(n.left.name)?.type) || n.left.type === "MemberExpression" && n.left.property.name === "signal")) {
         const comparison = equal(term(n.left), term(n.right)); return projection(n.operator === "!==" ? neg(comparison) : comparison, n);
       }
       return onCells(n, p, k) ?? (reference(n, p, k) && extra.has(n.name) ? extra.get(n.name) : undefined);
     });
     entry.segments.forEach((segment, k) => {
-      if (k) aborted = (...args) => read(maps[1], ...args); // contents may change across suspension
+      if (k) protocolState = { ...protocolState, aborted: (...args) => read(maps[1], ...args) }; // contents may change across suspension
       const before = entry.awaits[k - 1], after = entry.awaits[k];
       const self = before ? [...before.captures, { name: before.binding ?? "$resolved", type: before.op.result, node: before.bindingNode ?? before.statement }] : entry.params;
       const params = [stateParam, ...self.filter((p) => primitives.has(p.type)).map((p) => ({ ...p, node: id(p.name, p.node) }))];
-      const requires = state(), ensures = [...state(), ...always()], body = [], outputCaptures = [];
+      const requires = state(), ensures = [...state(), ...always()], body = [], outputCaptures = [], protocolAborts = [];
       if (before) {
         for (const [i, arg] of before.call.arguments.entries()) if (handles.has(before.op.params[i].type)) {
           // The request's immutable handle argument is an alias, not a fresh
@@ -74,8 +80,14 @@ export function protocolTransitionsOf(machine) {
         else if (action?.kind === "allocate") {
           const sig = variable(`$allocated_signal_${action.node.start}`, "signal"); variables.push(sig);
           signalOf = update(signalOf, [terms.get(action.binding.name)], sig);
-          aborted = update(aborted, [sig], constant(false));
-        } else if (action?.kind === "abort") aborted = update(aborted, [signalOf(term(action.receiver))], constant(true));
+          protocolState = { ...protocolState, aborted: update(protocolState.aborted, [sig], constant(false)) };
+        } else if (action?.kind === "abort") {
+          const signal = signalOf(term(action.receiver)), beforeState = protocolState;
+          protocolState = advisoryAbort(beforeState, signal);
+          const proof = { id: `${entry.name}$${k}$abort$${action.node.start}`, property: "source", span: span(action.node),
+            before: beforeState, after: protocolState, signal, observer, request, invocation };
+          protocolAborts.push(proof); ensures.push(...abortClauses(proof).ensures);
+        }
         else if (action?.kind === "closure") {
           for (const b of action.closure.captures.filter((b) => primitives.has(b.type))) {
             const field = `$capture_${action.closure.node.start}_${b.name}`;
@@ -114,7 +126,7 @@ export function protocolTransitionsOf(machine) {
       if (before) protocolActions.push({ kind: "request-resume", span: span(before), rules: ["$request$settlement"] });
       const protocolEffects = { writes: protocolActions.some((a) => ["add", "remove", "abort", "return-remover", "request-creation", "request-resume"].includes(a.kind)),
         reads: protocolActions.some((a) => ["alias", "return-handle"].includes(a.kind)), allocates: protocolActions.some((a) => ["allocate", "closure", "return-remover"].includes(a.kind)) };
-      steps.push({ protocolActions, protocolEffects, name: `${entry.name}$${k}`, kind: k ? "resume" : "entry", span: span(entry), params, requires, ensures, modifies, body, outputCaptures,
+      steps.push({ protocolActions, protocolEffects, protocolAborts, name: `${entry.name}$${k}`, kind: k ? "resume" : "entry", span: span(entry), params, requires, ensures, modifies, body, outputCaptures,
         protocolProjection: { variables: [...variables], maps }, rewrite });
     });
   }

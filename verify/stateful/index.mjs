@@ -27,7 +27,9 @@ export async function checkStateful(file, source, { timeoutMs = 60_000, maxDepth
   }
   Object.assign(report, { executableSha256: machine.executableSha256, assumptions: machine.assumptions, unitsSha256: transitions.sha256,
     properties: [...machine.state, ...machine.always].map(({ kind, text, span }) => ({ kind, text, span })) });
-  if (machine.protocol) report.protocol = { ...machine.protocol, structuralValidation: "complete required schema set", projectionReplay: "original source owner; internal identity predicates are not standalone executable predicates" };
+  if (machine.protocol) report.protocol = { ...machine.protocol, structuralValidation: "complete required schema set and source-bound advisory abort clauses",
+    advisoryAbortProof: "shared persistent before/after transition; contents, request and invocation frames checked at source aborts",
+    projectionReplay: "original source owner; internal identity predicates are not standalone executable predicates" };
   const outcomes = await solve(transitions.units.map((u) => u.target), Math.max(1, Math.floor(deadline - performance.now())));
   report.units = transitions.units.map((u, i) => ({ unit: u.name, kind: u.kind, span: u.span, ...(u.keeps ? { keeps: u.keeps } : {}), ...(u.protocolActions ? { protocolActions: u.protocolActions, effects: u.target.effects } : {}),
     scope: "abstract induction obligation; satisfiable is not an application counterexample", ...outcomes[i] }));

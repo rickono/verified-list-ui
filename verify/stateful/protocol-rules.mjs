@@ -1,4 +1,5 @@
 import { variable as v, constant as b, equal as eq, all, neg, implies, choose, map, read, update, projection } from "./projection.mjs";
+import { advisoryAbort, abortClauses, validateAbortClauses } from "./protocol-abort.mjs";
 
 // These are finite induction schemas over arbitrary representatives. A schema's
 // arity does not bound the finite sets in a runtime configuration. Every map
@@ -57,16 +58,20 @@ export function protocolRules(emit, at) {
   unit("$handles$keeps-unary", [...fresh, hc(ctrl), hs(signal(ctrl)), eq(owner(signal(ctrl)), ctrl)], [eq(nextOwner(nextSignal(ctrl)), ctrl)]);
   unit("$handles$keeps-pair", [...fresh, hs(sig), hc(owner(sig)), eq(signal(owner(sig)), sig)], [eq(nextSignal(nextOwner(sig)), sig)]);
   unit("$handles$alias-ownership", [eq(owner(signal(ctrl)), ctrl), eq(signal(owner(sig)), sig)], [implies(eq(signal(ctrl), sig), eq(ctrl, owner(sig))), implies(eq(ctrl, owner(sig)), eq(signal(ctrl), sig))]);
-  const afterAbort = update(aborted, [signal(ctrl)], b(true));
-  unit("$abort$contents", [], [afterAbort(signal(ctrl)), implies(neg(eq(sig, signal(ctrl))), eq(afterAbort(sig), aborted(sig))), implies(aborted(sig), afterAbort(sig))]);
   const req = variable("request", "request"), nr = variable("freshRequest", "request"), run = variable("invocation", "invocation");
   const requestHistory = fn("requestHistory", ["request"], "boolean"), pending = fn("pending", ["request"], "boolean"), settled = fn("settled", ["request"], "boolean"), running = fn("running", ["invocation"], "boolean");
   const pendingNew = update(pending, [nr], b(true)), settledNew = update(settled, [nr], b(false));
   unit("$request$creation", [neg(requestHistory(nr))], [pendingNew(nr), neg(settledNew(nr)), implies(neg(eq(req, nr)), eq(pendingNew(req), pending(req)))]);
   const pendingSettled = update(pending, [req], b(false)), selected = update(settled, [req], b(true));
   unit("$request$settlement", [pending(req), neg(settled(req))], [neg(pendingSettled(req)), selected(req)]);
-  unit("$request$abort-keeps", [], [eq(pending(req), pending(req)), eq(settled(req), settled(req)), eq(running(run), running(run))]);
-  unit("$request$selected-keeps", [settled(req)], [settled(req)]);
+  const abortBefore = { aborted, pending, settled, running };
+  const abortAfter = advisoryAbort(abortBefore, signal(ctrl));
+  for (const [name, property] of [["$abort$contents", "contents"], ["$request$abort-keeps", "keeps"], ["$request$selected-keeps", "selected"]]) {
+    const proof = { id: name, property, span: at, before: abortBefore, after: abortAfter,
+      signal: signal(ctrl), observer: sig, request: req, invocation: run };
+    emit({ name, kind: "protocol-rule", span: at, params: [], body: [], modifies: [],
+      protocolProjection: p, protocolAborts: [proof], ...abortClauses(proof) });
+  }
   const closure = variable("freshClosure", "closure"), oldClosure = variable("oldClosure", "closure");
   const ch = fn("closureHistory", ["closure"], "boolean");
   unit("$closure$allocation", [neg(ch(closure)), ch(oldClosure)], [neg(eq(closure, oldClosure)), update(ch, [closure], b(true))(closure)]);
@@ -94,4 +99,19 @@ export function validateProtocolUnits(units, machine) {
   }
   for (const u of units) for (const a of u.protocolActions ?? []) expected.push(...a.rules);
   for (const name of expected) if (!units.some((u) => u.name === name)) throw new Error(`Incomplete protocol induction: missing ${name}`);
+  for (const [name, property] of [["$abort$contents", "contents"], ["$request$abort-keeps", "keeps"], ["$request$selected-keeps", "selected"]]) {
+    const proofs = units.find((u) => u.name === name).protocolAborts;
+    if (proofs?.length !== 1 || proofs[0].id !== name || proofs[0].property !== property) throw new Error(`Incomplete protocol induction: missing advisory abort binding ${name}`);
+  }
+  for (const u of units) for (const proof of u.protocolAborts ?? []) validateAbortClauses(u, proof);
+  for (const entry of machine.entries) entry.segments.forEach((segment, k) => {
+    const u = units.find((u) => u.name === `${entry.name}$${k}`);
+    const actions = segment.map((s) => entry.actions.get(s)).filter((a) => a?.kind === "abort");
+    const proofs = u.protocolAborts ?? [];
+    if (proofs.length !== actions.length || actions.some((a, i) => proofs[i].id !== `${u.name}$abort$${a.node.start}` || proofs[i].property !== "source" || proofs[i].span.start !== a.node.start || proofs[i].span.end !== a.node.end ||
+        !u.protocolActions?.some((p) => p.kind === "abort" && p.span.start === a.node.start && p.span.end === a.node.end)) ||
+        actions.length && (!u.protocolEffects?.writes || u.target.effects.kind !== "writes")) {
+      throw new Error(`Incomplete protocol induction: missing source advisory abort frame ${u.name}`);
+    }
+  });
 }
