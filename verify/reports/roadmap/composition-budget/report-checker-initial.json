@@ -1,0 +1,28 @@
+{
+  "commands": [
+    [
+      "python3",
+      "verify/reports/roadmap/composition-budget/record.py"
+    ],
+    [
+      "python3",
+      "verify/reports/roadmap/composition-budget/record.py",
+      "--check"
+    ]
+  ],
+  "initialCheckerSha256": "5ddd2b6c2ef773957b37b0e36a3ba3d38f2d334b422ee93b1c6510e687ae724e",
+  "failures": [
+    {
+      "command": 0,
+      "error": "json.decoder.JSONDecodeError: Invalid \\escape: line 1 column 181 (char 180)",
+      "input": "full-final.txt:1092",
+      "cause": "The Node TAP reporter escapes # as \\# in a JSON diagnostic. The proof/test log is intact."
+    },
+    {
+      "command": 1,
+      "error": "FileNotFoundError: SHA256SUMS",
+      "cause": "The first command stopped before writing an inventory."
+    }
+  ],
+  "correction": "Decode the TAP reporter escape before parsing diagnostics. Keep actual unknowns and all assertions. This changes only the report checker; production and tests remain at the completed full-suite commit."
+}

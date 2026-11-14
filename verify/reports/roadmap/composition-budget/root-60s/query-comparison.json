@@ -1,0 +1,111 @@
+{
+  "queries": 15,
+  "allIdentical": true,
+  "rows": [
+    {
+      "name": "Reverse.1.smt2",
+      "kind": "invariant-init",
+      "equal": true,
+      "beforeSha256": "1655112c38ce5e00442280cd108824eeceaba08df4d5640c53afd67f3a0f863b",
+      "currentSha256": "1655112c38ce5e00442280cd108824eeceaba08df4d5640c53afd67f3a0f863b"
+    },
+    {
+      "name": "Reverse.2.smt2",
+      "kind": "store-domain",
+      "equal": true,
+      "beforeSha256": "d44087a27c721f98be5d3d633bf7215b10eab65d5fa0c9d22ea6ffacb41027f4",
+      "currentSha256": "d44087a27c721f98be5d3d633bf7215b10eab65d5fa0c9d22ea6ffacb41027f4"
+    },
+    {
+      "name": "Reverse.3.smt2",
+      "kind": "frame-write",
+      "equal": true,
+      "beforeSha256": "c06228d6f333e381f8b08a2c9af21efbf0235eb58fffe0f4a5e0aa70eb1f5c34",
+      "currentSha256": "c06228d6f333e381f8b08a2c9af21efbf0235eb58fffe0f4a5e0aa70eb1f5c34"
+    },
+    {
+      "name": "Reverse.4.smt2",
+      "kind": "store-domain",
+      "equal": true,
+      "beforeSha256": "93c03f40d68f8738087a59e4b714aee7bf9ee319c8b54785804ce03052709a77",
+      "currentSha256": "93c03f40d68f8738087a59e4b714aee7bf9ee319c8b54785804ce03052709a77"
+    },
+    {
+      "name": "Reverse.5.smt2",
+      "kind": "frame-write",
+      "equal": true,
+      "beforeSha256": "c06228d6f333e381f8b08a2c9af21efbf0235eb58fffe0f4a5e0aa70eb1f5c34",
+      "currentSha256": "c06228d6f333e381f8b08a2c9af21efbf0235eb58fffe0f4a5e0aa70eb1f5c34"
+    },
+    {
+      "name": "Reverse.6.smt2",
+      "kind": "invariant-preserve",
+      "equal": true,
+      "beforeSha256": "a12952814fda3922e53008fb48b59c08f5fb2366c592ccdc4752cb7faf8726f1",
+      "currentSha256": "a12952814fda3922e53008fb48b59c08f5fb2366c592ccdc4752cb7faf8726f1"
+    },
+    {
+      "name": "Reverse.7.smt2",
+      "kind": "rank",
+      "equal": true,
+      "beforeSha256": "09c07d3d16d61f34a3603c5c24eeebcf6fd08f2c474d176f623b8344534fab6f",
+      "currentSha256": "09c07d3d16d61f34a3603c5c24eeebcf6fd08f2c474d176f623b8344534fab6f"
+    },
+    {
+      "name": "Reverse.8.smt2",
+      "kind": "ensures",
+      "equal": true,
+      "beforeSha256": "29497059fb606fc7cb44c9d55084e5284295aad985a502144e392a70819e5acf",
+      "currentSha256": "29497059fb606fc7cb44c9d55084e5284295aad985a502144e392a70819e5acf"
+    },
+    {
+      "name": "Reverse.9.smt2",
+      "kind": "ensures",
+      "equal": true,
+      "beforeSha256": "e9ac660890c01995e32e019477d990024cf57b7465ecca0f1fe94f2bf02ea24d",
+      "currentSha256": "e9ac660890c01995e32e019477d990024cf57b7465ecca0f1fe94f2bf02ea24d"
+    },
+    {
+      "name": "takeImplementation.1.smt2",
+      "kind": "ensures",
+      "equal": true,
+      "beforeSha256": "9389d1e2d55621748b1cd2f14296c6ae9047e3ee36c5f703034f496c472254f7",
+      "currentSha256": "9389d1e2d55621748b1cd2f14296c6ae9047e3ee36c5f703034f496c472254f7"
+    },
+    {
+      "name": "takeImplementation.2.smt2",
+      "kind": "ensures",
+      "equal": true,
+      "beforeSha256": "3323fe70f1e6fae3bedace0e21018fd9e3daef42142162b395c468dac2825ac2",
+      "currentSha256": "3323fe70f1e6fae3bedace0e21018fd9e3daef42142162b395c468dac2825ac2"
+    },
+    {
+      "name": "reverseFirstTwo.1.smt2",
+      "kind": "frame-inclusion",
+      "equal": true,
+      "beforeSha256": "61e689dbb7f07178940d7947a030490d490049fa605194c2044656125feb4333",
+      "currentSha256": "61e689dbb7f07178940d7947a030490d490049fa605194c2044656125feb4333"
+    },
+    {
+      "name": "reverseFirstTwo.2.smt2",
+      "kind": "call",
+      "equal": true,
+      "beforeSha256": "a52c8873bff139e614372e91196bc1fd5eee9e2e61396241dd8199f38ba76a05",
+      "currentSha256": "a52c8873bff139e614372e91196bc1fd5eee9e2e61396241dd8199f38ba76a05"
+    },
+    {
+      "name": "reverseFirstTwo.3.smt2",
+      "kind": "ensures",
+      "equal": true,
+      "beforeSha256": "f255125430a19b131c2d8d74024849380ebb34d6c133880cdbb422e4443396b9",
+      "currentSha256": "f255125430a19b131c2d8d74024849380ebb34d6c133880cdbb422e4443396b9"
+    },
+    {
+      "name": "reverseFirstTwo.4.smt2",
+      "kind": "ensures",
+      "equal": true,
+      "beforeSha256": "e053d55dabb8a566c6f5b8791f7b74c423bb1c4c00a5e16a79fdfe1922bd4e7e",
+      "currentSha256": "e053d55dabb8a566c6f5b8791f7b74c423bb1c4c00a5e16a79fdfe1922bd4e7e"
+    }
+  ]
+}

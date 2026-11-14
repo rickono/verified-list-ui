@@ -1,0 +1,8 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+(node:30993) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"queries":15,"allIdentical":true,"identity":"09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef"}
+{"name":"cold","requestBudgetMs":180000,"elapsedMs":36139.706917,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"verified"}],"hits":0,"solved":3,"written":3}
+{"name":"warm","requestBudgetMs":180000,"elapsedMs":94.79954199999338,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"verified"}],"hits":3,"solved":0,"written":0}
+{"name":"audit","requestBudgetMs":180000,"elapsedMs":35429.267167000005,"outcomes":[{"fn":"Reverse","status":"verified"},{"fn":"takeImplementation","status":"verified"},{"fn":"reverseFirstTwo","status":"verified"}],"hits":3,"solved":3,"written":0,"disagreements":[]}

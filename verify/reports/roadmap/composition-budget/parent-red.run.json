@@ -1,0 +1,18 @@
+{
+  "command": [
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "node",
+    "--test",
+    "--test-name-pattern=public APIs accept",
+    "tests/verify/budgets.test.mjs"
+  ],
+  "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a",
+  "head": "2809e885ef01e09da906ddc31e070fde1df180a2",
+  "startedUnix": 1794621670.963871,
+  "elapsedIncludingQueueSeconds": 158.19911003112793,
+  "exitCode": 1,
+  "log": "parent-red.txt",
+  "trackedDiff": ""
+}

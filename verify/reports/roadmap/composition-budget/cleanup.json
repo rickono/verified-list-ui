@@ -1,0 +1,14 @@
+{
+  "checkedAtUtc": "2026-11-14T02:38:00.177344+00:00",
+  "ownedProcesses": [],
+  "processCommand": [
+    "ps",
+    "-Ao",
+    "pid=,ppid=,command="
+  ],
+  "temporaryDependencyLinkRemoved": true,
+  "temporaryDependencyTarget": "/Users/rick/verification-vibes/verified-list-ui/node_modules",
+  "privateScratchRemoved": true,
+  "allOwnedExecSessionsCompleted": true,
+  "scope": "All recorded commands exited; backend workers were awaited/reaped; no owned worker or report runner remains."
+}

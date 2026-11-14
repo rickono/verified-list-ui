@@ -1,0 +1,71 @@
+{
+  "baseline": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+  "baselineIsAncestor": true,
+  "verifyExists": true,
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a",
+  "parent": "2809e885ef01e09da906ddc31e070fde1df180a2",
+  "implementationHead": "7feca2830d90e237227fc1522e77e1a11ce3abee",
+  "policyFiles": [
+    {
+      "file": "verify/index.mjs",
+      "parentSha256": "5d2125c2cc86a847873afcad478250d43f682dc8f31960e30c299cff52f47571",
+      "currentSha256": "1c586efe44af4973f7e7704e4fa6d414ae7ca1f8ca5f2203ea791311741ebd58",
+      "unchanged": false
+    },
+    {
+      "file": "verify/proofs.mjs",
+      "parentSha256": "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba",
+      "currentSha256": "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba",
+      "unchanged": true
+    },
+    {
+      "file": "verify/backend.mjs",
+      "parentSha256": "c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb",
+      "currentSha256": "c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb",
+      "unchanged": true
+    },
+    {
+      "file": "verify/solver.mjs",
+      "parentSha256": "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2",
+      "currentSha256": "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2",
+      "unchanged": true
+    },
+    {
+      "file": "verify/data.mjs",
+      "parentSha256": "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6",
+      "currentSha256": "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6",
+      "unchanged": true
+    },
+    {
+      "file": "verify/cache.mjs",
+      "parentSha256": "7100b30c6fc411a355084a85d2b6f45f1ea110367ecfb3f0775e47aff371ebc0",
+      "currentSha256": "7100b30c6fc411a355084a85d2b6f45f1ea110367ecfb3f0775e47aff371ebc0",
+      "unchanged": true
+    },
+    {
+      "file": "verify/manifest.mjs",
+      "parentSha256": "406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f",
+      "currentSha256": "406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f",
+      "unchanged": true
+    }
+  ],
+  "environmentObservations": {
+    "cores": 10,
+    "beforeWorkLoadAverages": [
+      2.8,
+      2.97,
+      3.19
+    ],
+    "scratchActiveSample": {
+      "uptimeTimeLocal": "20:05",
+      "loadAverages": [
+        2.74,
+        3.1,
+        3.22
+      ],
+      "solverCpuPercent": 100.3,
+      "solverElapsedAtSampleSeconds": 12
+    },
+    "interpretation": "One busy solver worker in the scratch sample; shared lane serializes solver commands. Timings are resource/correctness observations, not benchmark comparisons."
+  }
+}

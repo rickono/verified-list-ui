@@ -1,0 +1,274 @@
+{
+  "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js",
+  "sha256": "d4a067ec6747c27c836ae46f46350e5ac9334bc2c32df3cc36e6a64948725189",
+  "trusted": [
+    "Acorn parser",
+    "Node TypeScript type stripping",
+    "project type and module resolution and source snapshots",
+    "source-to-SMT translation",
+    "exact rational specification replay",
+    "Z3 and its WASM bindings",
+    "unmodified standard Number/Math/Object/Array builtins and prototypes",
+    "JavaScript runtime",
+    "solver-model heap graphs replayed with shared identities and a write-monitoring Proxy membrane"
+  ],
+  "modules": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js",
+      "sha256": "d4a067ec6747c27c836ae46f46350e5ac9334bc2c32df3cc36e6a64948725189",
+      "imports": []
+    }
+  ],
+  "dependencies": [
+    {
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/package.json",
+      "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+      "kind": "package"
+    }
+  ],
+  "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+  "outcomes": [
+    {
+      "fn": "harmonicMean",
+      "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js",
+      "span": {
+        "start": 848,
+        "end": 1682
+      },
+      "line": 22,
+      "column": 1,
+      "assumptions": [
+        {
+          "kind": "param-type",
+          "name": "x",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          },
+          "domain": "Dense ordinary arrays, standard prototypes, no extra properties; every native array length is included. References may be shared across parameters and fields."
+        },
+        {
+          "kind": "requires",
+          "text": "x.length === 1",
+          "span": {
+            "start": 765,
+            "end": 779
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js"
+        },
+        {
+          "kind": "requires",
+          "text": "Number.isFinite(x[0]) && x[0] > 0",
+          "span": {
+            "start": 792,
+            "end": 825
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js"
+        }
+      ],
+      "status": "counterexample",
+      "inputs": {
+        "x": [
+          "3.3951948877e-313"
+        ]
+      },
+      "result": "0",
+      "failed": [
+        {
+          "kind": "ensures",
+          "text": "result > 0",
+          "span": {
+            "start": 837,
+            "end": 847
+          },
+          "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js"
+        }
+      ],
+      "confirmed": true
+    }
+  ],
+  "cache": {
+    "mode": "readwrite",
+    "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+    "protocol": "jsverify-receipt-1/query-1",
+    "backend": {
+      "package": "z3-solver@5.3.3",
+      "sha256": "86b294aa37c79743a43bebec164e16b6fcd03d882041d29311b225ec4424b685",
+      "files": [
+        [
+          "LICENSE.txt",
+          "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337"
+        ],
+        [
+          "README.md",
+          "c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f"
+        ],
+        [
+          "build/browser.d.ts",
+          "65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507"
+        ],
+        [
+          "build/browser.js",
+          "ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df"
+        ],
+        [
+          "build/high-level/high-level.d.ts",
+          "7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9"
+        ],
+        [
+          "build/high-level/high-level.js",
+          "b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986"
+        ],
+        [
+          "build/high-level/index.d.ts",
+          "5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb"
+        ],
+        [
+          "build/high-level/index.js",
+          "a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e"
+        ],
+        [
+          "build/high-level/types.d.ts",
+          "a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f"
+        ],
+        [
+          "build/high-level/types.js",
+          "6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616"
+        ],
+        [
+          "build/high-level/utils.d.ts",
+          "b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4"
+        ],
+        [
+          "build/high-level/utils.js",
+          "3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7"
+        ],
+        [
+          "build/kill-threads.d.ts",
+          "dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85"
+        ],
+        [
+          "build/kill-threads.js",
+          "2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238"
+        ],
+        [
+          "build/low-level/index.d.ts",
+          "592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390"
+        ],
+        [
+          "build/low-level/index.js",
+          "862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c"
+        ],
+        [
+          "build/low-level/types.__GENERATED__.d.ts",
+          "11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3"
+        ],
+        [
+          "build/low-level/types.__GENERATED__.js",
+          "d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e"
+        ],
+        [
+          "build/low-level/wrapper.__GENERATED__.d.ts",
+          "27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10"
+        ],
+        [
+          "build/low-level/wrapper.__GENERATED__.js",
+          "cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a"
+        ],
+        [
+          "build/node.d.ts",
+          "17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873"
+        ],
+        [
+          "build/node.js",
+          "28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98"
+        ],
+        [
+          "build/z3-built.js",
+          "5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6"
+        ],
+        [
+          "build/z3-built.wasm",
+          "591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377"
+        ],
+        [
+          "package.json",
+          "3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"
+        ]
+      ],
+      "node": "v22.23.1",
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "trust": "Receipt integrity and trusted writers are required; no proof certificates. Readonly does not authenticate. Audit re-solves independently of receipts.",
+    "keys": {
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js#harmonicMean": "aeee3d6e964a11858c7e53201c4965b989256af4fc14abad695a232d8f861c0d"
+    },
+    "hits": [],
+    "misses": [
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js#harmonicMean"
+    ],
+    "solved": [
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js#harmonicMean"
+    ],
+    "written": [],
+    "rejected": [],
+    "errors": [],
+    "dependencies": [
+      {
+        "target": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js#harmonicMean",
+        "blockedBy": []
+      }
+    ]
+  },
+  "evidence": {
+    "format": 1,
+    "kind": "jsverify-bugs",
+    "entry": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js",
+    "identity": "09d21829d8ea449858782577b32ed5531b112b3fa2b9cfbe06ced64f767b28ef",
+    "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+    "modules": [
+      {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/verify/examples/simple-statistics/harmonic-positive.js",
+        "sha256": "d4a067ec6747c27c836ae46f46350e5ac9334bc2c32df3cc36e6a64948725189",
+        "imports": []
+      }
+    ],
+    "dependencies": [
+      {
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-21fb6e7a/package.json",
+        "sha256": "5ed52678b94adb3342c11b843e6fa7eab743eea363f95c2cc249c537278f94d4",
+        "kind": "package"
+      }
+    ],
+    "witnesses": {
+      "harmonic-positive.js#harmonicMean": {
+        "key": "aeee3d6e964a11858c7e53201c4965b989256af4fc14abad695a232d8f861c0d",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "array",
+                "element": "number",
+                "values": [
+                  [
+                    "num",
+                    "0000001000008041"
+                  ]
+                ]
+              }
+            }
+          }
+        ],
+        "signature": "[\"counterexample\",null,null,[\"result > 0\"],null]",
+        "shrunk": {
+          "skipped": "heap, callback-probe or predicate-table witness"
+        }
+      }
+    }
+  }
+}

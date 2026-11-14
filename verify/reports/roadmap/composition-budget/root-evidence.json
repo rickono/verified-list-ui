@@ -1,0 +1,26 @@
+{
+  "historical": true,
+  "copiedBeforeProductionEdits": true,
+  "files": [
+    {
+      "original": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/combined-integration/composition-current/cold.json",
+      "copy": "root-60s/cold.json",
+      "sha256": "2eb2607b8ab7e18c929b2065894e7ae1ca82733ed5c62fa255c31863c18bc2dd"
+    },
+    {
+      "original": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/combined-integration/composition-current/model.json",
+      "copy": "root-60s/model.json",
+      "sha256": "4f691b55011f5e3511d255a8d85285425b542341bad5748049c568e199f75ddd"
+    },
+    {
+      "original": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/combined-integration/composition-current/query-comparison.json",
+      "copy": "root-60s/query-comparison.json",
+      "sha256": "3195f60748620f646d6f416471654d40c48bffde37df65b3a27578a750685b00"
+    },
+    {
+      "original": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/combined-integration/composition-current.log",
+      "copy": "root-60s/checker.txt",
+      "sha256": "5bb0b4fb119da3021e4dc4bca601fefbf4814dc9100f2b5397312ff5ea49c466"
+    }
+  ]
+}
