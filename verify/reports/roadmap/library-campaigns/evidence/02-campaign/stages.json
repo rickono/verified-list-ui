@@ -1,0 +1,64 @@
+[
+  {
+    "id": "native-harmonic",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:27:34.084Z",
+    "finishedAt": "2026-11-14T01:27:34.115Z"
+  },
+  {
+    "id": "native-d3",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:27:34.116Z",
+    "finishedAt": "2026-11-14T01:27:34.155Z"
+  },
+  {
+    "id": "native-cycle100",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:27:34.155Z",
+    "finishedAt": "2026-11-14T01:27:36.159Z"
+  },
+  {
+    "id": "native-cycle5",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:27:36.160Z",
+    "finishedAt": "2026-11-14T01:27:38.163Z"
+  },
+  {
+    "id": "cycle-diagnostic",
+    "status": "ISSUES",
+    "startedAt": "2026-11-14T01:27:38.163Z",
+    "finishedAt": "2026-11-14T01:27:38.165Z",
+    "message": "Cannot use import statement outside a module",
+    "stack": "SyntaxError: Cannot use import statement outside a module\n    at new Function (<anonymous>)\n    at cycleDiagnostic (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:147:18)\n    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:247:5\n    at async stage (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:188:7)\n    at async campaign (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:246:3)\n    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:368:41"
+  },
+  {
+    "id": "d3-admission",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:27:38.165Z",
+    "finishedAt": "2026-11-14T01:27:38.168Z"
+  },
+  {
+    "id": "harmonic",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:27:38.168Z",
+    "finishedAt": "2026-11-14T01:28:14.499Z"
+  },
+  {
+    "id": "ramda",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:28:14.499Z",
+    "finishedAt": "2026-11-14T01:28:23.797Z"
+  },
+  {
+    "id": "query-inputs",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:28:23.797Z",
+    "finishedAt": "2026-11-14T01:28:23.803Z"
+  },
+  {
+    "id": "freeze-and-model",
+    "status": "PASS",
+    "startedAt": "2026-11-14T01:28:23.803Z",
+    "finishedAt": "2026-11-14T01:28:23.998Z"
+  }
+]

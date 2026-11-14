@@ -42,7 +42,7 @@
     "verify/modules.mjs": "55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68",
     "verify/predicate-witness.mjs": "5f460cecd470fe62418c9ebb5358e97854ad65a642cebf68827daf1d6ae39085",
     "verify/proofs.mjs": "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba",
-    "verify/reports/roadmap/library-campaigns/check.mjs": "08cb078527918ffe8f0d6f217fe0f956bdbc71d01fe74dc74dd34b2496d771f6",
+    "verify/reports/roadmap/library-campaigns/check.mjs": "577bc3463fd9606de15c948199d812b6532b233a65155e5090fcf7902e03d17e",
     "verify/reports/roadmap/library-campaigns/pins/d3-array/LICENSE": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
     "verify/reports/roadmap/library-campaigns/pins/d3-array/nice.js": "a196d41fa2c9abbe017f41534218c5438f56f1fcd5766c665262fbbcc9c25b99",
     "verify/reports/roadmap/library-campaigns/pins/d3-array/ticks.js": "79eac11e378fd34364801fd59534cfb3b34f46e54693537ad65c06c93bcb9a0f",

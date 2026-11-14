@@ -1,0 +1,1717 @@
+{
+  "origin": "compiled static query plan, not a solver execution trace or certificate",
+  "identity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+  "budgetMsPerPublicRequest": 60000,
+  "queries": [
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "feasibility",
+      "domain": "full",
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "feasibility-witness",
+      "domain": "replay-witness",
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 1,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0)))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 1,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (and (ite (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000)))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (ite (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp 11 53) #x0000000000000000)) (and (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000)))) (fp.eq (fp.roundToIntegral RTZ ((_ to_fp 11 53) #x0000000000000000)) ((_ to_fp 11 53) #x0000000000000000))))) (forall ((every_q0 (_ BitVec 32))) (=> (bvult every_q0 (heap_length input_1_ref)) (ite (not (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0))) (not (input_0 (heap_array_num0 input_1_ref every_q0))) (fp.leq ((_ to_fp 11 53) #x0000000000000000) ((_ to_fp_unsigned 11 53) RNE every_q0)))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 2,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 2,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (ite (bvult loop2_u32 (heap_length input_1_ref)) true false)))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 3,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 3,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (forall ((every_q4 (_ BitVec 32))) (=> (bvult every_q4 (heap_length input_1_ref)) (ite (not (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))) (not (input_0 (heap_array_num0 input_1_ref every_q4))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q4))))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 4,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 4,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (not (input_0 (heap_array_num0 input_1_ref loop2_u32)))) (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (and (bvuge (heap_length input_1_ref) loop2_u32) (bvuge (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 5,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))) (ite (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) true false))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 5,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (=> (and (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))) (ite (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) true false))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 6,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 2) #x00000000) (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 2) #x00000000) (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 6,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (bvule ((_ zero_extend 2) #x00000000) (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 2) #x00000000) (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 7,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (ite (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (input_0 (heap_array_num0 input_1_ref ((_ extract 31 0) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))) (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000)))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 7,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (ite (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (ite (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)))) (input_0 (heap_array_num0 input_1_ref ((_ extract 31 0) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))) (ite (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref))) (bvule ((_ zero_extend 1) #x00000000) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))))) (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000)))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 8,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q5)) (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q5)) (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000)))))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 8,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (bvult loop2_u32 (heap_length input_1_ref))) (input_0 (heap_array_num0 input_1_ref loop2_u32))) (forall ((every_q5 (_ BitVec 32))) (=> (bvult every_q5 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q5)) (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))))) (not (input_0 (heap_array_num0 input_1_ref every_q5))) (ite (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000))) (bvule (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) every_q5)) (not (= (bvadd ((_ zero_extend 1) (bvadd ((_ zero_extend 1) loop2_u32) ((_ zero_extend 1) #x00000001))) (_ bv1 34)) ((_ zero_extend 2) #x00000000)))))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 9,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (ite (and (bvule ((_ zero_extend 1) #x00000001) ((_ zero_extend 1) (_ bv0 32))) (bvult (bvsub ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref)))) true false))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 9,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (=> (and (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (ite (and (bvule ((_ zero_extend 1) #x00000001) ((_ zero_extend 1) (_ bv0 32))) (bvult (bvsub ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) ((_ zero_extend 1) (heap_length input_1_ref)))) true false))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 10,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 10,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 11,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))))) (input_0 (heap_array_num0 input_1_ref (bvneg #x00000001))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 11,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (ite (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))))) (input_0 (heap_array_num0 input_1_ref (bvneg #x00000001))) (ite (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))) (bvult (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) (heap_length input_1_ref)) ((_ zero_extend 1) #x00000001))) (bvule (bvadd ((_ zero_extend 1) #x00000000) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32)))))) (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "postcondition",
+      "domain": "full",
+      "postcondition": 12,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (forall ((every_q6 (_ BitVec 32))) (=> (bvult every_q6 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))) (not (input_0 (heap_array_num0 input_1_ref every_q6))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))))))))"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    },
+    {
+      "target": "ramda/off-by-one.js#findIndex",
+      "phase": "counterexample-witness",
+      "domain": "replay-witness",
+      "postcondition": 12,
+      "postconditionCount": 12,
+      "declarations": "(declare-const heap_next0 Int)\n(declare-fun heap_kind (Int) Int)\n(declare-fun heap_length (Int) (_ BitVec 32))\n(declare-fun heap_element (Int) Int)\n(declare-fun heap_array_num (Int (_ BitVec 32)) (_ BitVec 64))\n(declare-fun heap_array_bool (Int (_ BitVec 32)) Bool)\n(declare-fun heap_array_dense (Int) Bool)\n(declare-fun heap_array_has_raw (Int (_ BitVec 32)) Bool)\n(define-fun heap_array_has ((r Int) (i (_ BitVec 32))) Bool (or (heap_array_dense r) (heap_array_has_raw r i)))\n(define-fun heap_array_num0 ((r Int) (i (_ BitVec 32))) (_ FloatingPoint 11 53) ((_ to_fp 11 53) (heap_array_num r i)))\n(declare-fun input_0 ((_ FloatingPoint 11 53)) Bool)\n(declare-const input_1_ref Int)\n(declare-const loop_replay1 Bool)\n(assert (= loop_replay1 (=> (and (not (or (fp.isNaN ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))) (fp.isInfinite ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref))))) (not (or (fp.isNaN ((_ to_fp 11 53) #x0000000000000000)) (fp.isInfinite ((_ to_fp 11 53) #x0000000000000000))))) (fp.geq ((_ to_fp 11 53) #x0000000000000000) (fp.add RTP ((_ to_fp_unsigned 11 53) RNE (heap_length input_1_ref)) ((_ to_fp 11 53) #xc070000000000000))))))\n(declare-const loop2_u32 (_ BitVec 32))\n(declare-const loop2_negative_zero Bool)\n(assert (and (>= input_1_ref 0) (< input_1_ref heap_next0) (= (heap_kind input_1_ref) 1) (=> (bvugt (heap_length input_1_ref) #x00000000) (= (heap_element input_1_ref) 1)) (heap_array_dense input_1_ref)))",
+      "assertions": [
+        "true",
+        "(not (=> (and (and (ite (bvule #x00000000 loop2_u32) (bvule loop2_u32 (heap_length input_1_ref)) (bvule #x00000000 loop2_u32)) (forall ((every_q3 (_ BitVec 32))) (=> (bvult every_q3 (heap_length input_1_ref)) (ite (not (bvule loop2_u32 every_q3)) (not (input_0 (heap_array_num0 input_1_ref every_q3))) (bvule loop2_u32 every_q3))))) (not (bvult loop2_u32 (heap_length input_1_ref)))) (forall ((every_q6 (_ BitVec 32))) (=> (bvult every_q6 (heap_length input_1_ref)) (ite (not (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))))) (not (input_0 (heap_array_num0 input_1_ref every_q6))) (ite (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)))) (bvule (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) (_ bv0 32))) (bvadd ((_ zero_extend 1) every_q6) ((_ zero_extend 1) #x00000001))) (not (= (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001)) (bvadd ((_ zero_extend 1) (_ bv0 32)) ((_ zero_extend 1) #x00000001))))))))))",
+        "(bvule (heap_length input_1_ref) (_ bv256 32))",
+        "loop_replay1"
+      ],
+      "models": [
+        {
+          "kind": "function",
+          "symbol": "input_0",
+          "params": [
+            "number"
+          ],
+          "result": "boolean"
+        },
+        {
+          "kind": "ref",
+          "symbol": "input_1_ref",
+          "type": {
+            "kind": "array",
+            "element": "number"
+          }
+        },
+        {
+          "kind": "heap",
+          "keys": [],
+          "roots": [
+            "input_1_ref"
+          ],
+          "types": [
+            {
+              "kind": "array",
+              "element": "number"
+            }
+          ],
+          "encoding": {
+            "arrayKind": 1,
+            "tags": {
+              "undefined": 0,
+              "number": 1,
+              "boolean": 2,
+              "object": 3,
+              "array": 4
+            },
+            "kind": "heap_kind",
+            "length": "heap_length",
+            "element": "heap_element",
+            "dense": "heap_array_dense",
+            "has": "heap_array_has",
+            "hasRaw": "heap_array_has_raw",
+            "arrayNum": "heap_array_num",
+            "arrayBool": "heap_array_bool",
+            "fields": []
+          }
+        }
+      ],
+      "replayGuards": [
+        "loop_replay1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,654 @@
+{
+  "schema": 1,
+  "status": "ISSUES",
+  "codeHead": "cf7c183a6cefcf14742738bc11e21a695f99cb67",
+  "runtimeEquivalentTo": "f974b30da4efcf16b69df889b909975e3321dcb2",
+  "preparedParent": "203ad818169be544432b3bad93ff1c4f01ef20a3",
+  "modelIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+  "checkerSha256": "08cb078527918ffe8f0d6f217fe0f956bdbc71d01fe74dc74dd34b2496d771f6",
+  "inputsSha256": "2b91929ba076cc4f8044d7ff42db9a58294143127eb481707a673ff90107cb88",
+  "pinDate": "2026-11-13",
+  "qComplete": false,
+  "kComplete": false,
+  "independentReviewComplete": false,
+  "noBenchmarkClaim": true,
+  "stages": [
+    {
+      "id": "native-harmonic",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:27:34.084Z",
+      "finishedAt": "2026-11-14T01:27:34.115Z"
+    },
+    {
+      "id": "native-d3",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:27:34.116Z",
+      "finishedAt": "2026-11-14T01:27:34.155Z"
+    },
+    {
+      "id": "native-cycle100",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:27:34.155Z",
+      "finishedAt": "2026-11-14T01:27:36.159Z"
+    },
+    {
+      "id": "native-cycle5",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:27:36.160Z",
+      "finishedAt": "2026-11-14T01:27:38.163Z"
+    },
+    {
+      "id": "cycle-diagnostic",
+      "status": "ISSUES",
+      "startedAt": "2026-11-14T01:27:38.163Z",
+      "finishedAt": "2026-11-14T01:27:38.165Z",
+      "message": "Cannot use import statement outside a module",
+      "stack": "SyntaxError: Cannot use import statement outside a module\n    at new Function (<anonymous>)\n    at cycleDiagnostic (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:147:18)\n    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:247:5\n    at async stage (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:188:7)\n    at async campaign (file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:246:3)\n    at async file:///Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/check.mjs:368:41"
+    },
+    {
+      "id": "d3-admission",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:27:38.165Z",
+      "finishedAt": "2026-11-14T01:27:38.168Z"
+    },
+    {
+      "id": "harmonic",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:27:38.168Z",
+      "finishedAt": "2026-11-14T01:28:14.499Z"
+    },
+    {
+      "id": "ramda",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:28:14.499Z",
+      "finishedAt": "2026-11-14T01:28:23.797Z"
+    },
+    {
+      "id": "query-inputs",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:28:23.797Z",
+      "finishedAt": "2026-11-14T01:28:23.803Z"
+    },
+    {
+      "id": "freeze-and-model",
+      "status": "PASS",
+      "startedAt": "2026-11-14T01:28:23.803Z",
+      "finishedAt": "2026-11-14T01:28:23.998Z"
+    }
+  ],
+  "claims": [
+    {
+      "id": "harmonic-independent-import",
+      "classification": "independent native reproducer",
+      "origin": "own execution",
+      "artifact": "native-harmonic.json",
+      "result": [
+        {
+          "input": {
+            "value": "5e-324",
+            "bits": "0000000000000001"
+          },
+          "reciprocal": {
+            "value": "Infinity",
+            "bits": "7ff0000000000000"
+          },
+          "result": {
+            "value": "0",
+            "bits": "0000000000000000"
+          },
+          "positive": false
+        },
+        {
+          "input": {
+            "value": "5.562684646268003e-309",
+            "bits": "0004000000000000"
+          },
+          "reciprocal": {
+            "value": "Infinity",
+            "bits": "7ff0000000000000"
+          },
+          "result": {
+            "value": "0",
+            "bits": "0000000000000000"
+          },
+          "positive": false
+        }
+      ],
+      "sourceModified": false
+    },
+    {
+      "id": "nice-coverage",
+      "classification": "independent native reproducer",
+      "origin": "own execution",
+      "sourceModified": false,
+      "artifact": "native-d3.json",
+      "cases": [
+        {
+          "event": "returned",
+          "id": "coverage-1",
+          "start": {
+            "value": "0.9299999999999999",
+            "bits": "3fedc28f5c28f5c2"
+          },
+          "stop": {
+            "value": "0.93",
+            "bits": "3fedc28f5c28f5c3"
+          },
+          "count": 1,
+          "increment": {
+            "value": "-10000000000000000",
+            "bits": "c341c37937e08000"
+          },
+          "result": [
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            },
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            }
+          ],
+          "covers": false
+        },
+        {
+          "event": "returned",
+          "id": "coverage-5000",
+          "start": {
+            "value": "0.9299999999999999",
+            "bits": "3fedc28f5c28f5c2"
+          },
+          "stop": {
+            "value": "0.93",
+            "bits": "3fedc28f5c28f5c3"
+          },
+          "count": 5000,
+          "increment": {
+            "value": "-50000000000000000000",
+            "bits": "c405af1d78b58c40"
+          },
+          "result": [
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            },
+            {
+              "value": "0.93",
+              "bits": "3fedc28f5c28f5c3"
+            }
+          ],
+          "covers": false
+        }
+      ]
+    },
+    {
+      "id": "nice-documented-and-fixed-282",
+      "classification": "finite control",
+      "origin": "own execution",
+      "artifact": "native-d3.json",
+      "cases": [
+        {
+          "event": "returned",
+          "id": "documented-example",
+          "start": {
+            "value": "1",
+            "bits": "3ff0000000000000"
+          },
+          "stop": {
+            "value": "9",
+            "bits": "4022000000000000"
+          },
+          "count": 5,
+          "increment": {
+            "value": "2",
+            "bits": "4000000000000000"
+          },
+          "result": [
+            {
+              "value": "0",
+              "bits": "0000000000000000"
+            },
+            {
+              "value": "10",
+              "bits": "4024000000000000"
+            }
+          ],
+          "covers": true
+        },
+        {
+          "event": "returned",
+          "id": "fixed-issue-282",
+          "start": {
+            "value": "0.9299999999999999",
+            "bits": "3fedc28f5c28f5c2"
+          },
+          "stop": {
+            "value": "1.07",
+            "bits": "3ff11eb851eb851f"
+          },
+          "count": 5000,
+          "increment": {
+            "value": "-50000",
+            "bits": "c0e86a0000000000"
+          },
+          "result": [
+            {
+              "value": "0.92998",
+              "bits": "3fedc2656abde3fc"
+            },
+            {
+              "value": "1.07",
+              "bits": "3ff11eb851eb851f"
+            }
+          ],
+          "covers": true
+        }
+      ],
+      "countedAsBug": false
+    },
+    {
+      "id": "nice-cycle100-timeout",
+      "classification": "unknown/unsupported",
+      "origin": "own execution",
+      "artifact": "native-cycle100.command.json",
+      "observation": "unchanged module did not return before a 2000 ms subprocess timeout; killed and waited",
+      "verified": false,
+      "provesNontermination": false
+    },
+    {
+      "id": "nice-cycle5-timeout",
+      "classification": "unknown/unsupported",
+      "origin": "own execution",
+      "artifact": "native-cycle5.command.json",
+      "observation": "unchanged module did not return before a 2000 ms subprocess timeout; killed and waited",
+      "verified": false,
+      "provesNontermination": false
+    },
+    {
+      "id": "nice-formal-boundary",
+      "classification": "unknown/unsupported",
+      "origin": "own execution",
+      "artifact": "d3-admission.json",
+      "outcome": {
+        "fn": null,
+        "file": "/Users/rick/.t3/worktrees/verified-list-ui/t3-a21ee524/verify/reports/roadmap/library-campaigns/pins/d3-array/ticks.js",
+        "status": "unsupported",
+        "span": {
+          "start": 0,
+          "end": 73
+        },
+        "line": 1,
+        "column": 1,
+        "message": "Only ordinary top-level functions and const function expressions are supported."
+      },
+      "verified": false,
+      "noSolver": true
+    },
+    {
+      "id": "harmonic-total",
+      "classification": "universal proof",
+      "origin": "own execution",
+      "artifact": "harmonic/total.report.json",
+      "domain": "all dense singletons with one finite positive binary64 element; no fixed value or reciprocal-finiteness restriction",
+      "ensures": "true; total return and termination"
+    },
+    {
+      "id": "harmonic-positivity",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution",
+      "artifact": "harmonic/positive.report.json",
+      "evidence": "harmonic/positive.evidence.json",
+      "apiAndCliReproduced": true,
+      "modelIdentity": "13874e722a282704130fc596a91147f0408bb33592127fd13e527c2ceafe4106",
+      "graphSha256": "48f186e1e6a863fc581597ff8f49aba20831ad1e474567773caa457170c70469",
+      "sourceModified": false,
+      "seededMutant": false
+    },
+    {
+      "id": "harmonic-weak",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution",
+      "artifact": "harmonic/weak.report.json",
+      "outcome": {
+        "status": "counterexample"
+      }
+    },
+    {
+      "id": "harmonic-P-controls",
+      "classification": "finite control",
+      "origin": "own execution",
+      "artifact": "harmonic/checks.json",
+      "warmReceiptHits": 1,
+      "staleSource": "stale",
+      "staleModel": "invalid-evidence"
+    },
+    {
+      "id": "ramda-first-match",
+      "classification": "universal proof",
+      "origin": "own execution",
+      "artifact": "ramda/upstream.report.json",
+      "scope": "Exact eager function, wrappers/currying/dispatch excluded; every native dense numeric-array length and every admitted pure total unary numeric predicate (no NaN-payload inspection).",
+      "theorem": "integer bounds, matching result, first-match order, absence, and termination; no proof array-length or predicate-table bound"
+    },
+    {
+      "id": "ramda-mutants",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution",
+      "artifact": "ramda.json",
+      "seededMutants": [
+        "off-by-one",
+        "skipped-first"
+      ],
+      "countedAsRealBugs": false
+    },
+    {
+      "id": "ramda-native-comparisons",
+      "classification": "finite control",
+      "origin": "own execution",
+      "artifact": "ramda.json",
+      "samples": 42
+    },
+    {
+      "id": "es-toolkit-inherited",
+      "classification": "universal proof",
+      "origin": "inherited; not rerun in this campaign",
+      "source": "verify/examples/es-toolkit/README.md",
+      "pin": "1913a7627a2995b095249d6b0b6453b900cdd4bc",
+      "scope": "empty-input sum returns +0, empty-input mean returns NaN, with termination; no nonempty summation or concatenation law",
+      "countsTowardFreshCoverage": false
+    }
+  ],
+  "artifacts": {
+    "api-calls.json": {
+      "sha256": "2ac9ca85d24c3ae0c03725ffb7058a2df4cf398e8f3a8786775388dd84d97fc5",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "cli-reproduce.command.json": {
+      "sha256": "8feb2ed77706cbd47cf4ef225784bb45d1de83e32ff434f579d92b9510728ffb",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "cli-reproduce.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "cli-reproduce.stdout.txt": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "cycle-diagnostic.failure.json": {
+      "sha256": "c112100302cb8930b863e90a9b6a2da0fca66bf0d8abb97e0c99fc01945e21f7",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "d3-admission.json": {
+      "sha256": "21ff3f1357417c999f28938154452397af2a4a5ce5d78d3600ef720992498e54",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "diagnostic/LICENSE": {
+      "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "diagnostic/nice.js": {
+      "sha256": "fe732f4c7e119b34ddfb5bc37281d939fc106f907601086bf213ccf4bfcc237c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "freeze.after.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "freeze.before.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/checks.json": {
+      "sha256": "7ac04a3773d1f7b4a973d4b5e0da157f9d61f09872b200fb1aadbb1434286d67",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/model.json": {
+      "sha256": "d11345fa116b87d7431619ce5290890bbffb448a4c8b71c5216702ff2ed65665",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/native.json": {
+      "sha256": "2849fa1f50c1c62a1c41f430b50a8f418482755208b2d5dfeb29744efb9fc1f1",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/negative.stale-model.json": {
+      "sha256": "948b33cfd5ccd9d1f7a86af4d4966857511ae7442132032cfccf640229e90127",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/negative.stale-source.json": {
+      "sha256": "38512a8f49efa30d9366ec6c32f43e4c8a7ea20f6cffc522c80262517c881cba",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/positive.evidence.json": {
+      "sha256": "402863e3a122ccef199c13b66bd9f2dddb4feb8f4fcd500bf3b28fefab444ab1",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/positive.original-reproduced.json": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/positive.relocated-reproduced.json": {
+      "sha256": "f073bd3af5c5dfef1291181d065af19556ba4cc0456f3f47d40e2c38d8106fa8",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/positive.report.json": {
+      "sha256": "70dd8b98b96ffd29c76387366f9e10e60245defefe698d1e42eca9b0b7af2642",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/positive.reproduced.json": {
+      "sha256": "95bfa379969f7138b5cadcd994a72eccf22883beb6c8fa612e56ded95464101c",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/sources.json": {
+      "sha256": "192d77690774f7ac5b4482c0baf5075cca1a4263a3309ff0ddcf94590bb12724",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/total.receipt.json": {
+      "sha256": "a3a219314d711d720f7ce4338579848b806d912edd75833bc2912d5af63e7ffe",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/total.report.json": {
+      "sha256": "71f08c0ba2145046e2a26449d4d211d9130bfecdda3ef6f878ac52a5f42ed178",
+      "classification": "universal proof",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/total.warm.json": {
+      "sha256": "90080a88b4e40aa59c0b60cb4feb885e3639e77609358d9fb2ae8f599ed4249f",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic/weak.report.json": {
+      "sha256": "cee62ef96091f0985870ddd2a0a6b0da31ffe089b20b166c6c2fe48ba86baeb1",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "harmonic-result.json": {
+      "sha256": "7ac04a3773d1f7b4a973d4b5e0da157f9d61f09872b200fb1aadbb1434286d67",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "model.json": {
+      "sha256": "505382b3b15532d0eae7438f76e0a66eee8a82eb28e70be3d7d2b5b490ed9346",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "native-cycle100.command.json": {
+      "sha256": "34a25806b9865190d5be0816220a7a763a525795fc68c03519675bec679dc2de",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "native-cycle100.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "native-cycle100.stdout.txt": {
+      "sha256": "4ad0364f568a6a39390ac529b1a95b69dac3185cb1c3f2485637e085d4763d11",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "native-cycle5.command.json": {
+      "sha256": "8a1548e4fe9224b998adb02bd7581dac17500002d5ebcb9d7318fb99c6df6e0b",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "native-cycle5.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "native-cycle5.stdout.txt": {
+      "sha256": "50645b2b8093a7f59191c07b3d311af3556690f8661d320d5264a6a94d2ae79c",
+      "classification": "unknown/unsupported",
+      "origin": "own execution or run metadata"
+    },
+    "native-d3.command.json": {
+      "sha256": "5798706de083c082dadfa01627b6620e4bf96313ed2f090e34f63b9f0919cb68",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "native-d3.json": {
+      "sha256": "ebae448af4ccb43f789e2f05555d8e5cfe391c7bded1d434c664fd9269694028",
+      "classification": "independent native reproducer",
+      "origin": "own execution or run metadata"
+    },
+    "native-d3.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "native-d3.stdout.txt": {
+      "sha256": "8ba8f303e10828035024812ca3ffbccba2dab6a190bf9dec2fee45b3bf958424",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "native-harmonic.command.json": {
+      "sha256": "cc18440c9a3aba61be1140a7414ed9a55ad0f3cea55b65b7e1a5cc9cb16b7843",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "native-harmonic.json": {
+      "sha256": "44afb1c6eb1e7454a6307d4a5b86005956058da692fd4805b3c8b13cc841169c",
+      "classification": "independent native reproducer",
+      "origin": "own execution or run metadata"
+    },
+    "native-harmonic.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "native-harmonic.stdout.txt": {
+      "sha256": "7c0a4e5d19f19587dcaef8f2943c354e5df9b1d85e2c55de831e12c9cb223664",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "query-inputs/harmonic-positive.json": {
+      "sha256": "f0deba3d7643815b701f31f0df2f77dbd34f6ddd685942b879d2bf3908a21107",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "query-inputs/harmonic-total.json": {
+      "sha256": "4adf6893670af9aa8c8d7767385d1badadaea65d8fb561766cf580852d9282bb",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "query-inputs/harmonic-weak.json": {
+      "sha256": "2cfa300c5f0092b4ebcea202c689019f00521f3e35ccd49e4238f434e1b8d0d5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "query-inputs/ramda-off-by-one.json": {
+      "sha256": "0b29596dcadf9d20601f8dcd83051c9bf96b6e19f86e0e37a97dda0659a2daf5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "query-inputs/ramda-skipped-first.json": {
+      "sha256": "244c4ca575fa3aa2dd8b7784aaed416368dcf53bd3f51c45dfbf8d09489962b5",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "query-inputs/ramda-upstream.json": {
+      "sha256": "a14a7fdc124b41aab206f1e8a55fb5f93df40f2ecf6752fe08f1e4a3bf6b1256",
+      "classification": "finite control",
+      "origin": "inferred static query plan; not an execution trace"
+    },
+    "ramda/off-by-one.report.json": {
+      "sha256": "0c7ddd4c4c406b7d671c52f0fa7b868bb4cb94096e68653028904159f3be08ae",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "ramda/skipped-first.report.json": {
+      "sha256": "0743a13414ed9afa29e3d9c2ee30b21e0e88215d7818b0044e4f5045cedffa85",
+      "classification": "solver-confirmed native failure",
+      "origin": "own execution or run metadata"
+    },
+    "ramda/upstream.report.json": {
+      "sha256": "f83989c901cc1e9832a5e7862e477dbb199cd6437a74090400cea29312d8d544",
+      "classification": "universal proof",
+      "origin": "own execution or run metadata"
+    },
+    "ramda-sources/LICENSE.txt": {
+      "sha256": "62fba31dc0582fb6ee413403e47f2de319a4f14140ebd71be094c1f8c7a839ff",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "ramda-sources/off-by-one.json": {
+      "sha256": "22a2cc57e79dab931b52f16514d648a8964d4c4c3c3ee6d58a8ff6f47239d675",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "ramda-sources/provenance.json": {
+      "sha256": "f14cbaf602c8f811d0ac4f25e6f9084873ced5c165248491f03dd50892427188",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "ramda-sources/skipped-first.json": {
+      "sha256": "c947214201f956a9b073bd08be92935883e1f97df632e6035e488a00ae82e94e",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "ramda-sources/upstream.json": {
+      "sha256": "13f8ced17c8f4d3d979825354250543485aa7944cdba3f8f36b743f4deb66edf",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "ramda.json": {
+      "sha256": "8dccf52f187a5cb5fb2878b26358a72adb2624aa96f488edba15586b05526b73",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "stages.json": {
+      "sha256": "ef1799afeb30c992aadb84e0978eb78f68ad0adeb804cdcd32c681a248603e7e",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    },
+    "supervisor-freeze.before.json": {
+      "sha256": "52d6635f939723fcbb672cef50616f406241128fb706fafa901eb8fb7f57f777",
+      "classification": "finite control",
+      "origin": "own execution or run metadata"
+    }
+  },
+  "trust": "Frontend, source snapshots, source-to-SMT and binary64 encoding, exact specification replay, Z3/WASM, native Node and unmodified standard builtins. Receipts require trusted writers and are not certificates. The diagnostic cycle argument assumes deterministic pure tickIncrement and builtins."
+}

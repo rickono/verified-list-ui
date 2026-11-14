@@ -127,8 +127,12 @@ async function cycleDiagnostic(out) {
   const modified = original.replace("export default function nice(", "function nice(")
     .replace("  while (true) {\n", `  while (true) {\n${hook}`);
   assert.equal(modified.replace(hook, "").replace("function nice(", "export default function nice("), original);
+  const imported = 'import {tickIncrement} from "./ticks.js";\n';
+  assert.ok(modified.startsWith(imported));
+  const bound = modified.slice(imported.length);
   mkdirSync(join(out, "diagnostic"));
   writeFileSync(join(out, "diagnostic/nice.js"), modified);
+  writeFileSync(join(out, "diagnostic/bound-function.js"), bound);
   writeFileSync(join(out, "diagnostic/LICENSE"), readFileSync(join(here, "pins/d3-array/LICENSE")));
   const results = [];
   for (const [id, [a, b, count]] of Object.entries(cycles)) {
@@ -144,14 +148,15 @@ async function cycleDiagnostic(out) {
       seen.set(key, iteration);
       if (iteration >= 16) throw new Error("No repeat in the diagnostic's 16-step limit.");
     };
-    const nice = new Function("tickIncrement", "trace", `${modified}\nreturn nice;`)(tickIncrement, trace);
+    const nice = new Function("tickIncrement", "trace", `${bound}\nreturn nice;`)(tickIncrement, trace);
     assert.throws(() => nice(fromBits(a), fromBits(b), count), (e) => e === stop);
     assert.deepEqual(repeat, { first: 2, repeated: 4, period: 2 });
     assert.ok(states.every((s) => !s.returns));
     results.push({ id, repeat, states });
   }
   return save(out, "d3-cycle-diagnostic.json", { classification: "finite control", origin: "own execution; inference conditional on pure deterministic builtins",
-    modifiedSourceSha256: sha(modified), originalSourceSha256: sha(original), results,
+    modifiedSourceSha256: sha(modified), boundFunctionSha256: sha(bound), originalSourceSha256: sha(original), results,
+    diagnosticBinding: "The module import/export are replaced by an explicit binding to the unchanged imported tickIncrement. The loop body has one added trace hook. Both diagnostic texts and the license are retained.",
     argument: "The full loop-head state (start, stop, fixed count, prestep) repeats bit-for-bit at iterations 2 and 4; neither intervening state returns. The unchanged transition with pure tickIncrement therefore repeats indefinitely. This diagnostic adds a trace/stop hook and is not an unchanged-source verifier proof." });
 }
 
