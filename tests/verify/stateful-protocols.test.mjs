@@ -201,3 +201,12 @@ test("protocol scalar transport retains all input bits, including noncanonical N
     assert.equal(r.trace.steps.at(-1).state.shown.bits,bits);
   }
 });
+
+test("returned handle admission checks the actual path's callability and owned sort", async () => {
+  const source=listener.replace('export function bind() {','export function bind(skip: boolean) {\n  if (skip) return;').replace('shown = value','shown = 1');
+  assert.equal((await checkStateful('returns.ts',source,{maxDepth:0})).status,'verified');
+  const bad=await replay(source,[call('bind',[true],{returns:'100'})],[]);
+  assert.equal(bad.status,'illegal-environment-action');assert.match(bad.message,/callable/);
+  const good=await replay(source,[call('bind',[false],{returns:'100'}),cleanup('100'),dispatch],[]);
+  assert.equal(good.status,'ok');assert.equal(good.registrations[0].live,false);
+});

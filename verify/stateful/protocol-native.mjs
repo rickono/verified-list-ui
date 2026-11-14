@@ -153,6 +153,11 @@ export function executeProtocolNative(machine, envelope, timeoutMs) {
           const kind = [...entry.actions.values()].find((v) => v.kind === "return-remover" || v.kind === "return-handle");
           if (!kind) illegal("Entry has no admitted handle return.");
           const sort = kind.kind === "return-remover" ? "remover" : wireSort(entry.bindings.get(kind.value.name)?.type ?? "AbortSignal");
+          if (sort === "remover") {
+            if (run("typeof $returned") !== "function") illegal("Entry did not return a callable remover on this path.");
+          } else if (!run(`$reverse.has($returned) && $handles.get($reverse.get($returned)).sort === ${JSON.stringify(sort)}`)) {
+            illegal("Entry did not return an owned handle of the declared sort.");
+          }
           const existing = run("$reverse.get($returned)");
           if (existing !== undefined) { if (existing !== a.returns) illegal("Returned alias must retain its identity."); }
           else { register(a.returns, sort); run(`$put(${JSON.stringify(a.returns)},${JSON.stringify(sort)},$returned);`); }
