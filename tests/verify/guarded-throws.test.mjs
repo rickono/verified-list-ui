@@ -9,6 +9,7 @@ import { verify, verifyFile, reproduce, affected } from "../../verify/index.mjs"
 import { parse, compile } from "../../verify/source.mjs";
 import { phases, obligation, solve } from "../../verify/proofs.mjs";
 import { runningIdentity } from "../../verify/manifest.mjs";
+import { legacyTargets } from "./fixtures/legacy-compiled.mjs";
 
 // Adapted from candidate A f5473537 and independent judgment e97d03d.
 const beforeThrows = "dedde91b9f6e1fec3a30f5e39cae65f5381b6b26";
@@ -230,7 +231,7 @@ function one() {
   return 1;
 }`;
   const a = targets(old), b = targets(old, parent.source);
-  assert.deepEqual(a, b);
+  assert.deepEqual(legacyTargets(a), b);
   for (let j = 0; j < a.length; j++) {
     assert.deepEqual(phases(a[j]), parent.proofs.phases(b[j]));
     for (const [phase, index] of phases(a[j])) assert.deepEqual(obligation(a[j], phase, index), parent.proofs.obligation(b[j], phase, index));

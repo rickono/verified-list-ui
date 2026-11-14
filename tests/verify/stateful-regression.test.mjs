@@ -7,16 +7,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { compile } from "../../verify/source.mjs";
 import { single, load } from "../../verify/modules.mjs";
 import { verify, verifyFile } from "../../verify/index.mjs";
+import { legacyTargets } from "./fixtures/legacy-compiled.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const parent = "8fa17d652d3b6e5b7ebbccc42b2d81e90ead701e";
-// K adds an allocation effect used by loop admission. Preserve the exact
-// comparison for every field that existed before C1; K tests its new effect.
 function legacyArtifact(compiled) {
-  return { ...compiled, targets: compiled.targets.map(({ allocates, ...target }) => {
-    assert.equal(typeof allocates, "boolean");
-    return target;
-  }) };
+  return { ...compiled, targets: legacyTargets(compiled.targets) };
 }
 test("default examples keep exact compiled obligations, graph hashes and outcome reports", async () => {
   const temporary = mkdtempSync(join(root, "verify/.stateful-baseline-"));
