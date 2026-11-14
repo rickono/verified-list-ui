@@ -1,0 +1,172 @@
+{
+  "classification": "measured",
+  "scope": "p-event historical issue7 only",
+  "startedUTC": "2026-11-14T13:37:35.376804+00:00",
+  "taskStatus": "PASS",
+  "preparedHead": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+  "executedHead": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+  "baseline": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+  "baselineAncestor": true,
+  "verifyPresent": true,
+  "coordinatorFullSuite": "Running when assigned; no result known or claimed by this pilot",
+  "nodeExecutable": "/Users/rick/.hermes/node/bin/node",
+  "nodeExecutableSha256": "2e3f1286a7eb3736346ed1803e458a0ff909e2b2d5bc746144dcb76970e9b99d",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c",
+  "runnerCommand": [
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+    "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/run.py",
+    "--output",
+    "verify/reports/roadmap/p-event-regression/evidence/run-01"
+  ],
+  "native": [
+    {
+      "variant": "before",
+      "outcome": "timeout",
+      "settlement": {
+        "kind": "rejected",
+        "name": "TimeoutError",
+        "message": "Promise timed out after 50 milliseconds",
+        "isPinnedTimeoutError": true,
+        "exactPinnedConstructor": true
+      },
+      "upstreamAssertion": {
+        "expression": "emitter.listenerCount('🦄') === 0",
+        "pass": false,
+        "actual": 1,
+        "expected": 0,
+        "name": "AssertionError",
+        "code": "ERR_ASSERTION"
+      },
+      "afterAwaitedOutcome": {
+        "event": {
+          "count": 1,
+          "listeners": [
+            {
+              "id": "managed:1:resolveHandler",
+              "name": "resolveHandler",
+              "owner": "managed"
+            }
+          ]
+        },
+        "error": {
+          "count": 2,
+          "listeners": [
+            {
+              "id": "caller:error",
+              "name": "callerErrorControl",
+              "owner": "caller"
+            },
+            {
+              "id": "managed:2:rejectHandler",
+              "name": "rejectHandler",
+              "owner": "managed"
+            }
+          ]
+        }
+      },
+      "allExpectedObservations": true
+    },
+    {
+      "variant": "fixed",
+      "outcome": "timeout",
+      "settlement": {
+        "kind": "rejected",
+        "name": "TimeoutError",
+        "message": "Promise timed out after 50 milliseconds",
+        "isPinnedTimeoutError": true,
+        "exactPinnedConstructor": true
+      },
+      "upstreamAssertion": {
+        "expression": "emitter.listenerCount('🦄') === 0",
+        "pass": true,
+        "actual": 0,
+        "expected": 0
+      },
+      "afterAwaitedOutcome": {
+        "event": {
+          "count": 0,
+          "listeners": []
+        },
+        "error": {
+          "count": 1,
+          "listeners": [
+            {
+              "id": "caller:error",
+              "name": "callerErrorControl",
+              "owner": "caller"
+            }
+          ]
+        }
+      },
+      "allExpectedObservations": true
+    },
+    {
+      "variant": "before",
+      "outcome": "success",
+      "settlement": {
+        "kind": "fulfilled",
+        "value": "🌈"
+      },
+      "upstreamAssertion": {
+        "expression": "emitter.listenerCount('🦄') === 0",
+        "pass": true,
+        "actual": 0,
+        "expected": 0
+      },
+      "afterAwaitedOutcome": {
+        "event": {
+          "count": 0,
+          "listeners": []
+        },
+        "error": {
+          "count": 1,
+          "listeners": [
+            {
+              "id": "caller:error",
+              "name": "callerErrorControl",
+              "owner": "caller"
+            }
+          ]
+        }
+      },
+      "allExpectedObservations": true
+    },
+    {
+      "variant": "fixed",
+      "outcome": "success",
+      "settlement": {
+        "kind": "fulfilled",
+        "value": "🌈"
+      },
+      "upstreamAssertion": {
+        "expression": "emitter.listenerCount('🦄') === 0",
+        "pass": true,
+        "actual": 0,
+        "expected": 0
+      },
+      "afterAwaitedOutcome": {
+        "event": {
+          "count": 0,
+          "listeners": []
+        },
+        "error": {
+          "count": 1,
+          "listeners": [
+            {
+              "id": "caller:error",
+              "name": "callerErrorControl",
+              "owner": "caller"
+            }
+          ]
+        }
+      },
+      "allExpectedObservations": true
+    }
+  ],
+  "productionAdmission": "unsupported for both complete unchanged modules through both production APIs",
+  "formalProof": "not admitted; no proof claim",
+  "solverStarted": false,
+  "implementationRuntimeBytesUnchanged": true,
+  "frozenInputsUnchanged": true,
+  "finishedUTC": "2026-11-14T13:37:36.337398+00:00"
+}

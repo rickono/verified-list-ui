@@ -1,0 +1,224 @@
+{
+  "scope": "Historical p-event issue7 timeout-cleanup only; no current-version or new-discovery claim",
+  "preparedHead": "e1a76a3eed05674cee184c69ef15efae54bf3ad4",
+  "baseline": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+  "coordinatorFullSuite": "Running when assigned; no result known or claimed by this pilot",
+  "preparedCheckout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c",
+  "suppliedPackage": "/Users/rick/verification-vibes/artifacts/roadmap-20261113/stateful-known-regressions",
+  "suppliedProvenanceSha256": "be09cdebd7742c251ac2602bb0fbf78c39c81924e36005f747c5af1ca8e8f245",
+  "suppliedSHA256SUMSSha256": "523c08c60810e6ecb400b1c5757deb56bc523b181fbf1c830d9ee68b0baaa723",
+  "target": {
+    "target": "timeout-cleanup",
+    "repo": "sindresorhus/p-event",
+    "issue": "https://github.com/sindresorhus/p-event/issues/7",
+    "fix": "https://github.com/sindresorhus/p-event/commit/da59143760a36bcf9e3f309609c2ddf33c27c8bd",
+    "snapshots": {
+      "before": {
+        "commit": "1674bd43fe7602d2f048d3d199be12d4ef16787c",
+        "files": {
+          "index.js": {
+            "sha256": "ce6a001c40f13395cdb87a322c16e3a19f086498d74adadc4e89167f59a5affd",
+            "bytes": 1519,
+            "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/index.js"
+          },
+          "test.js": {
+            "sha256": "56a04f1686335fe9aa6cb46da6216dd6f1b3d76b61bd341b2edd15602bf8f451",
+            "bytes": 4426,
+            "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/test.js"
+          },
+          "license": {
+            "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+            "bytes": 1119,
+            "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/license"
+          },
+          "package.json": {
+            "sha256": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+            "bytes": 879,
+            "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/package.json"
+          }
+        }
+      },
+      "fixed": {
+        "commit": "da59143760a36bcf9e3f309609c2ddf33c27c8bd",
+        "files": {
+          "index.js": {
+            "sha256": "5a8c58248377106a9591233c97c17a521812c742ded80e22f2842ccf141364d4",
+            "bytes": 1620,
+            "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/index.js"
+          },
+          "test.js": {
+            "sha256": "35c9636fe8358226e7ce2420f4f63e4064d77fb0810d0fcaa209d0d4a0909e41",
+            "bytes": 4468,
+            "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/test.js"
+          },
+          "license": {
+            "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+            "bytes": 1119,
+            "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/license"
+          },
+          "package.json": {
+            "sha256": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+            "bytes": 879,
+            "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/package.json"
+          }
+        }
+      }
+    },
+    "evidence": "Read upstream commit, original/fixed source and upstream regression tests only. No source execution or verifier proof."
+  },
+  "snapshotValidation": [
+    {
+      "path": "pins/p-event/before/index.js",
+      "sha256": "ce6a001c40f13395cdb87a322c16e3a19f086498d74adadc4e89167f59a5affd",
+      "bytes": 1519,
+      "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/index.js",
+      "matchesSuppliedDigest": true
+    },
+    {
+      "path": "pins/p-event/before/test.js",
+      "sha256": "56a04f1686335fe9aa6cb46da6216dd6f1b3d76b61bd341b2edd15602bf8f451",
+      "bytes": 4426,
+      "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/test.js",
+      "matchesSuppliedDigest": true
+    },
+    {
+      "path": "pins/p-event/before/license",
+      "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+      "bytes": 1119,
+      "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/license",
+      "matchesSuppliedDigest": true
+    },
+    {
+      "path": "pins/p-event/before/package.json",
+      "sha256": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+      "bytes": 879,
+      "url": "https://github.com/sindresorhus/p-event/blob/1674bd43fe7602d2f048d3d199be12d4ef16787c/package.json",
+      "matchesSuppliedDigest": true
+    },
+    {
+      "path": "pins/p-event/fixed/index.js",
+      "sha256": "5a8c58248377106a9591233c97c17a521812c742ded80e22f2842ccf141364d4",
+      "bytes": 1620,
+      "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/index.js",
+      "matchesSuppliedDigest": true
+    },
+    {
+      "path": "pins/p-event/fixed/test.js",
+      "sha256": "35c9636fe8358226e7ce2420f4f63e4064d77fb0810d0fcaa209d0d4a0909e41",
+      "bytes": 4468,
+      "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/test.js",
+      "matchesSuppliedDigest": true
+    },
+    {
+      "path": "pins/p-event/fixed/license",
+      "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+      "bytes": 1119,
+      "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/license",
+      "matchesSuppliedDigest": true
+    },
+    {
+      "path": "pins/p-event/fixed/package.json",
+      "sha256": "1859dafb3b929deb82ae268daac01aead365581569c912634f0a652582fc3b7f",
+      "bytes": 879,
+      "url": "https://github.com/sindresorhus/p-event/blob/da59143760a36bcf9e3f309609c2ddf33c27c8bd/package.json",
+      "matchesSuppliedDigest": true
+    }
+  ],
+  "packages": [
+    {
+      "name": "p-timeout",
+      "version": "1.1.1",
+      "role": "p-event runtime dependency",
+      "registryUrl": "https://registry.npmjs.org/p-timeout/1.1.1",
+      "registryFile": "pins/registry/p-timeout-1.1.1.json",
+      "tarballFile": "pins/tarballs/p-timeout-1.1.1.tgz",
+      "tarballUrl": "https://registry.npmjs.org/p-timeout/-/p-timeout-1.1.1.tgz",
+      "sha1": "d28e9fdf96e328886fbff078f886ad158c53bf6d",
+      "integrity": "sha512-Akx1D2lqD+PT+GV1lVFTTwAnBaqti40SNMiTpbazUCk0FeLFcv57B6tt5CAGYrHzxqrGtYQAaWU7gwaSw7fb6A==",
+      "tarballSha256": "e7fc442d58c5016a455be7ffcebefe5fd2eba72b1c267576677b9e32b47f53d7",
+      "license": "MIT",
+      "dependencies": {},
+      "members": {
+        "package.json": {
+          "bytes": 704,
+          "sha256": "892819d3c1991584ff3c9e8c3ac3fd5fa033c269f34bea957de16b92e0c8880b"
+        },
+        "index.js": {
+          "bytes": 823,
+          "sha256": "e256785c427c6de7f49d7a7f96899627b831b2226c038fce1df73887e49111ed"
+        },
+        "license": {
+          "bytes": 1119,
+          "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c"
+        },
+        "readme.md": {
+          "bytes": 1762,
+          "sha256": "473b764b498834f00cdabd40ad2d93359de9cd8f1f6fe7b48baf088790b0257f"
+        }
+      }
+    },
+    {
+      "name": "acorn",
+      "version": "8.19.0",
+      "role": "production verifier parser dependency",
+      "registryUrl": "https://registry.npmjs.org/acorn/8.19.0",
+      "registryFile": "pins/registry/acorn-8.19.0.json",
+      "tarballFile": "pins/tarballs/acorn-8.19.0.tgz",
+      "tarballUrl": "https://registry.npmjs.org/acorn/-/acorn-8.19.0.tgz",
+      "sha1": "6b26fd97ce1cc9dc50bdf7ad305e9f1384d4f28a",
+      "integrity": "sha512-oJlA3XiRm7Cyk6qFD2Jn8ak9B7jSy0qy00ADO3+8dpT0LSjFihQYv4C02LFCSYJV3Q37xYwwRy5m+IpIiUzqWw==",
+      "tarballSha256": "c6fad21ffa1f2ba20338bf1dde1de911c2093c1aaf7b3af17c477661bd3bfaaf",
+      "license": "MIT",
+      "dependencies": {},
+      "members": {
+        "bin/acorn": {
+          "bytes": 60,
+          "sha256": "4c3eb6f1d8932790dbff043839f8ee7686bc614a59ef577e96fed618a4a4b1b8"
+        },
+        "LICENSE": {
+          "bytes": 1099,
+          "sha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7"
+        },
+        "dist/acorn.js": {
+          "bytes": 246643,
+          "sha256": "b95392d79457d0357555c5ed3e56302d074b92dff119bcf3b44179500b10e9df"
+        },
+        "dist/bin.js": {
+          "bytes": 3329,
+          "sha256": "fffd9df1d9158c4580068ad17c3176c34fe46f59021b8cd5780454994764dc30"
+        },
+        "package.json": {
+          "bytes": 1067,
+          "sha256": "04d6fecaafb5e3d20a38fc3b64fed84bb3830a7759a8c00400ebcb87331fec00"
+        },
+        "CHANGELOG.md": {
+          "bytes": 24993,
+          "sha256": "dd9bc5e89646406105c458485f3d35e986c4a668d1bc6c1c5c7253de536cf464"
+        },
+        "README.md": {
+          "bytes": 11759,
+          "sha256": "b7783c23979634a89060164d8092e591639198b4460aefbed4ba9f8da478a977"
+        },
+        "dist/acorn.mjs": {
+          "bytes": 234658,
+          "sha256": "76254fc76529713b4dfd2532972d17a991ffd9aafeebb1f977445b5506b9fb0b"
+        },
+        "dist/acorn.d.mts": {
+          "bytes": 22462,
+          "sha256": "df8107deaf41869871690db7306f87b587e59660d659b1fbb64a7a30cea7cf36"
+        },
+        "dist/acorn.d.ts": {
+          "bytes": 22462,
+          "sha256": "df8107deaf41869871690db7306f87b587e59660d659b1fbb64a7a30cea7cf36"
+        }
+      }
+    }
+  ],
+  "preparationNotes": [
+    "Supplied timeout-cleanup files were checked against both provenance.json and SHA256SUMS before execution.",
+    "web open of the exact npm metadata URLs returned inaccessible; urllib.request then fetched the real npm registry metadata and tarballs.",
+    "An initially fetched p-finally 1.0.0 was unnecessary: actual p-timeout 1.1.1 has no runtime dependencies. The unused fetch was removed without execution.",
+    "No npm/pnpm install, lifecycle script, root dependency setup or lockfile edit. Tarballs are extracted only inside a private temporary directory at execution.",
+    "The unchanged upstream test.js files are reference evidence. AVA and delay are not executed; the harness reproduces only the timeout assertion and normal success schedule using native Node timers."
+  ]
+}

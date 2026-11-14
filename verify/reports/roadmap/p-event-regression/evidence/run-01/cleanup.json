@@ -1,0 +1,9 @@
+{
+  "classification": "measured",
+  "allChildrenWaited": true,
+  "allChildProcessGroupsAbsent": true,
+  "privateDependencyDirectory": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot",
+  "privateDependencyDirectoryRemoved": true,
+  "rootInstallOrLockfileEdit": false,
+  "lifecycleScriptsRun": false
+}

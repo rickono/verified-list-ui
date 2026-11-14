@@ -1,0 +1,67 @@
+{
+  "scope": "Predicted native outcomes, frozen before the first execution; four finite cases only",
+  "event": "🦄",
+  "value": "🌈",
+  "eventDelayMs": 200,
+  "timeoutMs": 50,
+  "successTimeoutMs": 250,
+  "subprocessDeadlineSeconds": 10,
+  "beforeRegistration": {
+    "event": 0,
+    "error": 1
+  },
+  "afterRegistration": {
+    "event": 1,
+    "error": 2
+  },
+  "callerOwnedControl": "One non-throwing caller error listener, present before registration and preserved through the awaited outcome. No caller listener on the awaited event.",
+  "cases": [
+    {
+      "variant": "before",
+      "outcome": "timeout",
+      "settlement": "rejected",
+      "errorName": "TimeoutError",
+      "errorMessage": "Promise timed out after 50 milliseconds",
+      "managedEventAfter": 1,
+      "managedErrorAfter": 1,
+      "upstreamEventCleanupAssertionPass": false
+    },
+    {
+      "variant": "fixed",
+      "outcome": "timeout",
+      "settlement": "rejected",
+      "errorName": "TimeoutError",
+      "errorMessage": "Promise timed out after 50 milliseconds",
+      "managedEventAfter": 0,
+      "managedErrorAfter": 0,
+      "upstreamEventCleanupAssertionPass": true
+    },
+    {
+      "variant": "before",
+      "outcome": "success",
+      "settlement": "fulfilled",
+      "managedEventAfter": 0,
+      "managedErrorAfter": 0,
+      "upstreamEventCleanupAssertionPass": true
+    },
+    {
+      "variant": "fixed",
+      "outcome": "success",
+      "settlement": "fulfilled",
+      "managedEventAfter": 0,
+      "managedErrorAfter": 0,
+      "upstreamEventCleanupAssertionPass": true
+    }
+  ],
+  "admission": {
+    "stateless": "unsupported",
+    "stateful": "unsupported",
+    "sourceRewrite": false,
+    "firstSpan": {
+      "start": 0,
+      "end": 13
+    },
+    "sourceAtSpan": "'use strict';"
+  },
+  "limits": "Historical native regression reproduction and source admission only; no proof, timer-precision, V/R/S/T/U/W completion or coordinator suite result."
+}

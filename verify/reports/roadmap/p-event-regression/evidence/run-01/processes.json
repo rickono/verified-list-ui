@@ -1,0 +1,120 @@
+[
+  {
+    "label": "native-before-timeout",
+    "command": [
+      "/Users/rick/.hermes/node/bin/node",
+      "--unhandled-rejections=strict",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/native.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/before/index.js",
+      "before",
+      "timeout",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/expectations.json"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c",
+    "pid": 97139,
+    "deadlineSeconds": 10,
+    "removedEnvironmentKeysWerePresent": {
+      "NODE_OPTIONS": false,
+      "NODE_PATH": false
+    },
+    "deadlineExceeded": false,
+    "returnCode": 0,
+    "waitCompleted": true,
+    "pidAbsentAfterWait": true,
+    "processGroupAbsentAfterWait": true
+  },
+  {
+    "label": "native-fixed-timeout",
+    "command": [
+      "/Users/rick/.hermes/node/bin/node",
+      "--unhandled-rejections=strict",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/native.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/fixed/index.js",
+      "fixed",
+      "timeout",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/expectations.json"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c",
+    "pid": 97140,
+    "deadlineSeconds": 10,
+    "removedEnvironmentKeysWerePresent": {
+      "NODE_OPTIONS": false,
+      "NODE_PATH": false
+    },
+    "deadlineExceeded": false,
+    "returnCode": 0,
+    "waitCompleted": true,
+    "pidAbsentAfterWait": true,
+    "processGroupAbsentAfterWait": true
+  },
+  {
+    "label": "native-before-success",
+    "command": [
+      "/Users/rick/.hermes/node/bin/node",
+      "--unhandled-rejections=strict",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/native.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/before/index.js",
+      "before",
+      "success",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/expectations.json"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c",
+    "pid": 97141,
+    "deadlineSeconds": 10,
+    "removedEnvironmentKeysWerePresent": {
+      "NODE_OPTIONS": false,
+      "NODE_PATH": false
+    },
+    "deadlineExceeded": false,
+    "returnCode": 0,
+    "waitCompleted": true,
+    "pidAbsentAfterWait": true,
+    "processGroupAbsentAfterWait": true
+  },
+  {
+    "label": "native-fixed-success",
+    "command": [
+      "/Users/rick/.hermes/node/bin/node",
+      "--unhandled-rejections=strict",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/native.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/.runtime-wseun9ot/fixed/index.js",
+      "fixed",
+      "success",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/expectations.json"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c",
+    "pid": 97142,
+    "deadlineSeconds": 10,
+    "removedEnvironmentKeysWerePresent": {
+      "NODE_OPTIONS": false,
+      "NODE_PATH": false
+    },
+    "deadlineExceeded": false,
+    "returnCode": 0,
+    "waitCompleted": true,
+    "pidAbsentAfterWait": true,
+    "processGroupAbsentAfterWait": true
+  },
+  {
+    "label": "admission",
+    "command": [
+      "/Users/rick/.hermes/node/bin/node",
+      "--unhandled-rejections=strict",
+      "--import",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/resolve-acorn.mjs",
+      "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c/verify/reports/roadmap/p-event-regression/scripts/admission.mjs"
+    ],
+    "cwd": "/Users/rick/.t3/worktrees/verified-list-ui/t3-42696d4c",
+    "pid": 97143,
+    "deadlineSeconds": 10,
+    "removedEnvironmentKeysWerePresent": {
+      "NODE_OPTIONS": false,
+      "NODE_PATH": false
+    },
+    "deadlineExceeded": false,
+    "returnCode": 0,
+    "waitCompleted": true,
+    "pidAbsentAfterWait": true,
+    "processGroupAbsentAfterWait": true
+  }
+]

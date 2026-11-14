@@ -1,0 +1,45 @@
+{
+  "classification": "measured",
+  "nativeCasesReadAndAllAssertionsChecked": 4,
+  "productionAdmissionResultsRead": 4,
+  "childLivenessCheckedAgain": [
+    {
+      "pid": 97139,
+      "absentNow": true,
+      "waitVerifiedInReceipt": true
+    },
+    {
+      "pid": 97140,
+      "absentNow": true,
+      "waitVerifiedInReceipt": true
+    },
+    {
+      "pid": 97141,
+      "absentNow": true,
+      "waitVerifiedInReceipt": true
+    },
+    {
+      "pid": 97142,
+      "absentNow": true,
+      "waitVerifiedInReceipt": true
+    },
+    {
+      "pid": 97143,
+      "absentNow": true,
+      "waitVerifiedInReceipt": true
+    }
+  ],
+  "privateDependencyDirectoryStillAbsent": true,
+  "frozenInputsStillMatch": true,
+  "implementationHashesStillMatch": true,
+  "outsideOwnedDirectoryDiff": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "reportWordCount": 830,
+  "serialWrapperExitCode": 0,
+  "wrapperExitEvidence": "Completed exec session 46167, exit_code 0; no detached wrapper remains",
+  "coordinatorSuiteResult": "unknown; not inspected",
+  "noNativeRerunDuringAudit": true
+}
