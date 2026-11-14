@@ -6,7 +6,7 @@ export function protocolOf(machine) {
   const record = { version: "C2a-1", event: machine.targets.size ? "node22-event-target-v1" : "none", runtime: "v22.23.1",
     registry: "initially empty; source-owned; outside mutation excluded", capture: false,
     delivery: "synchronous registration order; no external actions or microtasks between handlers",
-    abort: "advisory contents only; no request or invocation deletion", identity: "unbounded; allocation history; compatible inputs may alias",
+    abort: "advisory contents only; no request or invocation deletion", scalarStutters: "external allocation and abort observe stutters of module cells", identity: "unbounded; allocation history; compatible inputs may alias",
     counts: "unsupported", temporal: "unsupported" };
   return { ...record, sha256: sha256(JSON.stringify(record)) };
 }

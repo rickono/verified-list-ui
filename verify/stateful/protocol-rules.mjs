@@ -86,7 +86,7 @@ export function validateProtocolUnits(units, machine) {
   }
   const steps = [...machine.entries.flatMap((e) => e.segments.map((_, k) => `${e.name}$${k}`)),
     ...machine.entries.flatMap((e) => e.closures.filter((c) => c.kind === "handler").map((c) => c.name)),
-    ...(machine.targets.size || [...machine.environment.values()].some((op) => op.rejects) ? ["$stutter"] : [])];
+    "$stutter"];
   expected.push(...steps);
   for (const step of steps) for (const e of machine.entries) {
     for (const c of e.closures.filter((c) => c.kind === "handler")) expected.push(`${step}$keeps$${c.name}`);

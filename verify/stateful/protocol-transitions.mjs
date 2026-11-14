@@ -118,7 +118,7 @@ export function protocolTransitionsOf(machine) {
         protocolProjection: { variables: [...variables], maps }, rewrite });
     });
   }
-  if ([...machine.environment.values()].some((op) => op.rejects) || machine.targets.size) steps.push({ name: "$stutter", kind: "stutter", span: at, params: [stateParam], requires: state(), ensures: [...state(), ...always()], modifies: [], body: [] });
+  steps.push({ name: "$stutter", kind: "stutter", span: at, params: [stateParam], requires: state(), ensures: [...state(), ...always()], modifies: [], body: [] });
   const handlers = [];
   for (const e of machine.entries) for (const c of e.closures.filter((c) => c.kind === "handler")) {
     const captures = c.captures.filter((b) => primitives.has(b.type));

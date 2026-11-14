@@ -210,3 +210,12 @@ test("returned handle admission checks the actual path's callability and owned s
   const good=await replay(source,[call('bind',[false],{returns:'100'}),cleanup('100'),dispatch],[]);
   assert.equal(good.status,'ok');assert.equal(good.registrations[0].live,false);
 });
+
+test("all protocol modules check external stutters; private deletion exposes a false proof", async () => {
+  const source=`let x=false;\n// state true\n// always x !== old(x)\nexport function flip(controller:AbortController){x=!x;}`;
+  const m=machineOf('stutter.ts',source),t=transitionsOf(m),remaining=t.units.filter(u=>u.name!=='$stutter');
+  assert.throws(()=>validateProtocolUnits(remaining,m),/missing \$stutter/);
+  const oldProof=await solve(remaining.map(u=>u.target),30000);assert.ok(oldProof.every(r=>r.status==='verified'));
+  const native=await replay(source,[{kind:'abort',controller:h('controller','10')}]);assert.equal(native.status,'ok');assert.equal(native.violation.kind,'always');
+  const report=await checkStateful('stutter.ts',source,{maxDepth:0});assert.equal(report.status,'unknown');assert.equal(report.reason,'induction-gap');
+});
