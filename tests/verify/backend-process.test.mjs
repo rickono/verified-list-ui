@@ -25,15 +25,15 @@ test("worker errors, signal exits, invalid verdicts, ids, and witnesses fail clo
   }
 });
 
-test("a controlled hard deadline interrupts and reaps an unresponsive worker", async () => {
+for (const timeoutMs of [25, 180_000]) test(`a controlled ${timeoutMs} ms hard deadline interrupts and reaps an unresponsive worker`, async () => {
   let fire;
-  const timers = { setTimeout: (callback) => { fire = callback; return callback; }, clearTimeout: () => {} };
+  const timers = { setTimeout: (callback, ms) => { assert.ok(ms === 100 || ms === timeoutMs); fire = callback; return callback; }, clearTimeout: () => {} };
   const backend = createBackend({ worker: fixture, timers });
   try {
     await backend.start(100);
-    const pending = backend.check(query("hang"), 25);
+    const pending = backend.check(query("hang"), timeoutMs);
     const rejected = assert.rejects(pending, (e) => e.reason === "worker-timeout");
-    await assert.rejects(backend.check(query("unknown"), 25), (e) => e.reason === "worker-error");
+    await assert.rejects(backend.check(query("unknown"), timeoutMs), (e) => e.reason === "worker-error");
     fire();
     await rejected;
   } finally { await backend.close(); }

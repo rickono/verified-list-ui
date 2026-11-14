@@ -186,7 +186,7 @@ function replay(targets, modules, target, witness, phase) {
  * A verdict trusts the frontend, replay interpretation, and Z3.
  */
 function options({ timeoutMs = 10_000, targets, cache, evidence = false, plan = false } = {}) {
-  if (!Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 60_000) throw new TypeError("Expected a timeoutMs integer between 1 and 60000.");
+  if (!Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 180_000) throw new TypeError("Expected a timeoutMs integer between 1 and 180000.");
   if (targets !== undefined && (!Array.isArray(targets) || !targets.length || targets.some((t) => typeof t !== "string" || !t))) throw new TypeError("Expected targets to be a nonempty array of names or ids.");
   if (cache !== undefined && (!cache || typeof cache.dir !== "string" || !cache.dir || cache.mode !== undefined && !MODES.includes(cache.mode))) throw new TypeError("Expected cache {dir, mode?: readwrite|readonly|audit}.");
   if (typeof evidence !== "boolean" || typeof plan !== "boolean") throw new TypeError("Expected boolean evidence/plan options.");
