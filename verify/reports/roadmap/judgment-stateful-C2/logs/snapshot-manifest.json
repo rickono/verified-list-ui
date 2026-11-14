@@ -1,0 +1,1064 @@
+[
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/pilots/search-env.ts",
+    "sha256": "f7f5c94d315c15ea8bb7dd0fcb179e804a3b35404d401f43694c49d91c0e23bd"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/pilots/search-gap.ts",
+    "sha256": "4e8afd57619eeedbd2f59669a16f487a8abd190a84c615b0045c2ab68dce232f"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/pilots/search-overclaim.ts",
+    "sha256": "aef7948cf705c530c6b1844de83f3404d21f350baeb5797e5dd8f76d40ba9004"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/pilots/search-stale.ts",
+    "sha256": "ee0ce5440aad45acd72e58d6678cee3fac3eaa3fa2e92ad54171903ab7bf63b1"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/pilots/search-unsupported.ts",
+    "sha256": "3cd34a591efe4614344459eb2f89108348e9a27a84c80166db886f8870b54876"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/pilots/search.ts",
+    "sha256": "240391c0b3f0b50c791e1393abca5ea881ad2db81c90e73b8dba7585211aaeb9"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V1-leads-no-settles.ts",
+    "sha256": "6f0acc1772265e3a821bbaf66ec5a52dc548e13819512bb3bad68a1abdf1d3b6"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V10-rejects-sometimes.ts",
+    "sha256": "df6d42ecd275e7d4d4a93b881d7706c7ff9b50e5486d629073635c521c1f7430"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V11-rejects.ts",
+    "sha256": "33ef92574541756ed9603a065ec891ebc12fd41fe4f1691953cbc08c99128b38"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V14-entry-calls-entry.ts",
+    "sha256": "ef6b4f980c1350804157b4068fd6870d276e49df8fbe84f03c8707e8541dac54"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V15-old-in-state.ts",
+    "sha256": "c5ee36921383be5edcf8aa4919e764c65940f6e7d9f71fc4c23e7a9f428aad7e"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V16-undeclared-write.ts",
+    "sha256": "efafe9fff05146dc8f8e8584903ab627ace77e35358dad01aac3ef921b159f98"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V18-two-awaits.ts",
+    "sha256": "2649614b15e7127a5e384724afabcd2dad9f100b137b9e0b96b1ae6ea5fa950d"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V18b-two-awaits-annotated.ts",
+    "sha256": "b7670d2008679938c4f04ae77c8cb02b2a8ea015b11d32db4be02d9a3370fd70"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V1b-leads-settles.ts",
+    "sha256": "3c3a56e68dd2871261b514c0f3267171af106a7437cb1db363a998841e45c3ec"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V2-entry-ensures-false.ts",
+    "sha256": "14f3e84462e3070208574108d498e8400319d18c90ce41fe3d08efb502dd46ba"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V3-state-colon-typo.ts",
+    "sha256": "2a605602add676a1b596b840263cd18b813af235a28c95a52feca0a007006906"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V4-block-comment-state.ts",
+    "sha256": "d049d99ffd6786f1dabdce589d7a7aa0a5c321ab4b2cdc890b5962944d8dc6f5"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V5-no-properties.ts",
+    "sha256": "97bce0a5e840d55ffc56b19a677fe5035b43a2fa378083c5160049a21cb0559c"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V5b-no-properties-no-pending.ts",
+    "sha256": "da81526b187b55b9c8f4cc179bf085e57329cf59f8c84e1d3caed5f59069151c"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V6-inflight-count.ts",
+    "sha256": "586bbae13db57f0d5ee1327448c551654f49a7aedb52d8a1fb0a9f0a23e10b04"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V7-latest-2p53.ts",
+    "sha256": "dd363489b4ff802655e3d5e98439acd53064ffd5438b80383d02aed2e5e91b87"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V8-second-entry-clear.ts",
+    "sha256": "6176a743050292ca3a5afcde283c759cb9d73b1ac842f0efca74e5ddb6cb522f"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V8b-second-entry-reset.ts",
+    "sha256": "bd27ac6ef67656d7c2639be1be7b09f7d2c164bc00ff2ba397ce6b29f3e0e494"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/fixtures/stateful/variants/V9-resolves-typo.ts",
+    "sha256": "363b595a4687878038160c82b53a74a65d1cba7dca1c9a6af0bacbb873add81e"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/stateful-boundaries.test.mjs",
+    "sha256": "f964ce0273ef9713d0633d5f6ee6f9b3fdccc9a0f182f4354e76af740e473d85"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "tests/verify/stateful-replay.test.mjs",
+    "sha256": "366d1cca9327d237cefbbdaa6a0d2b052dc650cd1909b7ecdbc294ea481f0491"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/README.md",
+    "sha256": "4e70c118f1d3fe8986f00559184f22dd575bfe6a75291579b2e81f6675300c40"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/backend.mjs",
+    "sha256": "c0b69326dbe4af694735f06baa3a0934c3cca2c17899c5b6847491697f953bbb"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/bin/jsverify.mjs",
+    "sha256": "20ce339ff296e3dbc47431a5bcf810ff5bfd1a9dcc54da21871ee6c02a233940"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/cache.mjs",
+    "sha256": "7100b30c6fc411a355084a85d2b6f45f1ea110367ecfb3f0775e47aff371ebc0"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/check-native-baseline.mjs",
+    "sha256": "021a5db32b73d7661206cea19f1b83f49fb787aaafe68ed2f6a0831b684065e1"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/conformance/aliases.mjs",
+    "sha256": "1c7b6a48d2079276dfb4695b120536c7c4526f21d0034d752cdc60c7fd7bba05"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/conformance/corpus.mjs",
+    "sha256": "b97cb83ccbc096d1a9a42394f4193b116c72d65dc59deeb83788fcb24b929577"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/conformance/heap.mjs",
+    "sha256": "1de7688f023de0ddf156854b409ee4b623cdff87360dce5dbeb8d0da9d5dfdca"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/conformance/mutations.mjs",
+    "sha256": "cf6e31212e9231ae71915c5b5a2680ba9ceae3e066b96c8290a6446ea55a66de"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/conformance/run.mjs",
+    "sha256": "4a4ab44e08fd2dd167d1af40af864b0288b2b36230a09ee0205a032cab0ee441"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/conformance/runner.mjs",
+    "sha256": "5189fab5b0ffba02439de306ac939f038fd296e8085ff93f94f644f821813071"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/data.mjs",
+    "sha256": "63f39ff7edc16e4e4d7f0eef3563c9d7f84d63cef0a475239dfe98f32173c5f6"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/callbacks.md",
+    "sha256": "0d156edef02c74fbf0f6726f9d63db382096a7a8edfaf13c6527d989dc61e0bc"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/calls.md",
+    "sha256": "4caad39153f4aa2f75895bdd55f2f6b0daf3aca7f5998e8a1c379224845b1451"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/conformance-corpus.md",
+    "sha256": "79ff460d69d4cb59e6aed308146566bedf359121deb3482fe22f23eb95f2714d"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/guarded-throws.md",
+    "sha256": "2313008c1360ccc3a3d2918b371384f33a63d48bb25bea761591f9397f44cedd"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/heap-write-audit.md",
+    "sha256": "d6f0f10aae7af088c6b53b8fd261f0fb0449c5e8478eb1e69f2cae7eca0bb112"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/heap.md",
+    "sha256": "095b079cdbbb2d23381519042fd2aa09726a67b98cd62b4506ec9775e876420b"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/imports.md",
+    "sha256": "c302d30553e47a5e05fa151d7ef1c68017fa4364f1a53c5bf5b470660f1e92d2"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/loops.md",
+    "sha256": "83b3010a7c984e12c69dc2a306232665398bccc28d37edc2250b4aa17d9a2d6f"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/mutating-loops.md",
+    "sha256": "8541a2f16caf5fdb98c3a75a022fe1eca4344890f587f402423a8ce8173296dd"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/numeric-metadata.md",
+    "sha256": "f65e3dbf82e070e8aa057a3c65a3b515c6a18738affc6a68ca96b25d538e272a"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/prefix.md",
+    "sha256": "7d5d8028388b8de62ffc00753a3c1ab620eb9653fa062aaa75e3aace83c1a222"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/project-frontend.md",
+    "sha256": "7f253e194b156929c8ba5280c887328f073ba5af276051af22bdc0a171f2f5a3"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/project-workflow.md",
+    "sha256": "022f2b2086767feb2dcc36ec5899dc6feddc85b48127bad1fd3518e363d38634"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/proof-backends.md",
+    "sha256": "2bdb34a8e5aed70d36b86f53022f44000ea8c4a611eabf456f988bf59ffa845d"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/scalar-state.md",
+    "sha256": "fe3fced86e628e36f8421bef1a53ec9e0632233e61375871ed14723601a84c87"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/specifications.md",
+    "sha256": "83552c05775e02fda06897321c756a7489a24235e9e3b8434c4abb6ec8ae64fb"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/design/stateful-foundation.md",
+    "sha256": "80086bbea71710a1c9903691826c7bbf2a0c30a9a82363e441ca447e16b07593"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/error.mjs",
+    "sha256": "15f9572637f32a545a037c671ccbf20b394b030f68d840c76068d7ee5a456e62"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/evidence.mjs",
+    "sha256": "f70f4aa94295477e8a0bc3a91712722a254c8a52205ee2f2eef8a9dc550ed62e"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/bugs.ts",
+    "sha256": "97405cd1d3fdd6a92121f28ddb6d1f8bcc18d89bf5268f08ec59a15038c161a9"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/callback-bugs.ts",
+    "sha256": "909131f424054348dc4f412159133cc3596b308db97aaa2a4144983d031557db"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/callbacks.ts",
+    "sha256": "7aa05961f7157760962d61a54acfe29998e4e25bd3d36aa5938f33e53570b8b8"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/calls-bugs.ts",
+    "sha256": "d06c3329a59a2070a253e56c214f91844df7b6fd5e1438b4f697ea198cdcbe15"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/calls.ts",
+    "sha256": "9c3dcde1489b698ebb482bfd9533d135566c0a5cfa0f3c83a35050d73386f65f"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/collections.ts",
+    "sha256": "88befe257e46628f0b90b4b6cf5d776010387a49295d3bc94643c015891ecd5c"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/LICENSE",
+    "sha256": "51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/README.md",
+    "sha256": "ca73fe54400c857587fdbde51826f1213897f5e98de628db3d94171b5cf1028a"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/check.mjs",
+    "sha256": "c899e3d4be7c827a553d252a350f535a218fcf323aaa7e0398baf1416d7381da"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/mean.spec.upstream.ts",
+    "sha256": "27c1b2e5a4afd77e10c5f54549939d22a9abda2929b1543ec3f4dac324e69182"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/mean.upstream.ts",
+    "sha256": "b0445d7e281b1e8b646c9729efa1d3d4806217c93dc9954cc434261690573ca7"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/provenance.json",
+    "sha256": "b05eccb5068d04ac12750fcaeb693498bd8551e90cae937af30cb07111e903d1"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/sum.spec.upstream.ts",
+    "sha256": "2be85eec5f5a6eedf9fe2295146e04fd18f13cb30caa3f8b6bad11f517be8a62"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/es-toolkit/sum.upstream.ts",
+    "sha256": "932fb45fe749f343a198e093a9c4fc1628aa8c21204957cf481e038903347507"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/heap-bugs.ts",
+    "sha256": "d4359358d543678c1026ca7d51bb6360db107e334f2ce5bd887a3847ced48177"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/heap.ts",
+    "sha256": "0dfe23776b089cc1ca15724892d8acb4581dfe6a8815baaf4f75251efbd00270"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/lodash/LICENSE",
+    "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/lodash/README.md",
+    "sha256": "7cbc4f8dc66fb393f1f4ba98ece92a106e3c6641df88c03d382d2bb1cc3d7dff"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/lodash/check.mjs",
+    "sha256": "774b5c36dfdca67347fb2440475a8d7022fc057271cc2fdc6734992318a3f6f7"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/lodash/provenance.json",
+    "sha256": "658ab2e366ec2e5d96e55c6645065e06c280d82f5618daeef87868b8c81fd5d4"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/lodash/strictIndexOf.upstream.js",
+    "sha256": "394592bfc902ec6451478cee5e466052e8358d0ffbee50d31419d26d8d14ff00"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/loop-gaps.ts",
+    "sha256": "93e03bc3c4af378807d2e9041d3fded87db4fe86a8cf08c8734949d98c515cae"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/loops.ts",
+    "sha256": "5cdcf93c330926d9d289bef6f1fb9cd4327605e6967c7248e8b214b7f4e2b217"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/README.md",
+    "sha256": "916a5e04191ca13dc5d82d718068ec1de810a9def06690ed13ed9a9ed6f18692"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/barrel.ts",
+    "sha256": "7b4f97d99c012c2365a1e5207a3223cb17e50397d2ef7d6c8f86810351076ba9"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/check-baseline.mjs",
+    "sha256": "ead10262c3fdcfc1fa96b7897c08c725e7b2f266e4caa73e7b7fee2d4727c86d"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/check-project.mjs",
+    "sha256": "4ee74df09136f4af0da18a4a20a2f66e0853075854388a699c6cdf7703b1c2ae"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/entry.ts",
+    "sha256": "805d2a1eb1b3bab186a559f45600400c37d139a5c579188f15e7b78d77557434"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/helpers.ts",
+    "sha256": "8f8675050d71161e15ee611669de19b4fa1377338aa7ba4022d68902026e87d1"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/tsconfig.json",
+    "sha256": "07572aa8a1fe9c37d4682e78cf2ab94ebfe26ef3f17cf7291f321bc9f719fa92"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/types/data.ts",
+    "sha256": "8096647e9b5c9b72fa300f8d94e940adf6a9c92ae8cfdf2aef4d836b867f13e8"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/d3/LICENSE",
+    "sha256": "3e6849627f74ff73c257a3ae1efb574015d94fc1035c05ec3c15805165efcbc4"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/d3/identity.js",
+    "sha256": "72e432562a07ac19d950071cb21c93b4456d81bdb7f7416085044f586688f9cc"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/d3/identity.upstream.js",
+    "sha256": "9ef78f0410542ac2fe2d3f93a3ce9b4e4de3cf52bedf8f9cc3e2583dafa8abf1"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/d3/package.json",
+    "sha256": "3214e4ced1283ab614b3c59e50a1c082323924d16473f686a26ad088f90d7f71"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/d3/provenance.json",
+    "sha256": "c45708b464c7f80e331f3bb3b59c2f075624be2c26deed57e4810cce1d88705a"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/take/LICENSE",
+    "sha256": "acf30083045d768ce20640237313ee31a45d548d66ef76df5bb5fb0745479535"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/take/index.js",
+    "sha256": "3a10c589727ea95be47ba4a4ab048e76f9ac7b728a5b0279262d39dfc5927566"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/take/package.json",
+    "sha256": "c88035e6602024c15d8635d085e2eea958be5f930ce04005badd844c0c12068d"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/project/vendor/take/types.ts",
+    "sha256": "5324c8281301f91219f646f7c132d16e0b951b83b26a44cebea36c3d11fd381b"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/ramda/LICENSE.txt",
+    "sha256": "62fba31dc0582fb6ee413403e47f2de319a4f14140ebd71be094c1f8c7a839ff"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/ramda/README.md",
+    "sha256": "0613382e0173fa77f0e921e6bd5ccd632ff56cc68001ac264cf15308db37caf8"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/ramda/check.mjs",
+    "sha256": "a33eda2d5daf86d3b31a52222b31970466c28db540d303e66344d6d4038cb129"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/ramda/findIndex.upstream.js",
+    "sha256": "78467c00c06ef87c44d6d8415a9d9ee3cd7c41c549890fb0fef2b87d06e4bac1"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/ramda/provenance.json",
+    "sha256": "f14cbaf602c8f811d0ac4f25e6f9084873ced5c165248491f03dd50892427188"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/ramda/search.js",
+    "sha256": "a588b7ceaa00346778072e95195bcbb6850d56d1f701338f4c4f7d4993d7fbd8"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/LICENSE",
+    "sha256": "acf30083045d768ce20640237313ee31a45d548d66ef76df5bb5fb0745479535"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/check-calls.mjs",
+    "sha256": "664127576066fa861fc99b7e4df8d6d266aa3cb326143a14745b0585f3a84e12"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/check-imports.mjs",
+    "sha256": "b6d3205f45cccce54d3ff0788b85ac2d4d44282e693fb9d2362c41d7c7c9279f"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/check.mjs",
+    "sha256": "4b33ea6d3abbcca102a4ef42a271eeb9f234e552fa79fb074dcc708212259ea1"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/composed.js",
+    "sha256": "d59bcb92f8ce5b9c5a9fb2865d1516c13def44921cf4d7e4269c67d854984e90"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/provenance.json",
+    "sha256": "59cc5f645e039b5852445f120abc5615973a2634f60a1c7dde5e0f30b7f3c1db"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/shifted.js",
+    "sha256": "0b919e44640c69561de39735f79363cef1aba492d632cef0118f2cfecdfd961b"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/take.helper.js",
+    "sha256": "3a10c589727ea95be47ba4a4ab048e76f9ac7b728a5b0279262d39dfc5927566"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/remeda/take.upstream.ts",
+    "sha256": "64ccd5ad15d4c387b2aa57cb6173a541b8bd79dcdfa06cc57e0136141e539bdf"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/examples/valid.ts",
+    "sha256": "f901cd04af1a8d23bc5da5409d2df917a9e4f6cb731d0417533181027471ab74"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/heap-witness.mjs",
+    "sha256": "c8a60bbf7961bad2926a1fc5006c610d80d95997c73a6632f07a9f55fe58edb3"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/heap.mjs",
+    "sha256": "25bccf21abbb3e5a4c94fd88ceae26124436385daebd0c08b0ed8fc8f00d7311"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/index.mjs",
+    "sha256": "bcb92bc429c375505863ff97d881b960fa3422cda35886803d1832820a03d7e9"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/manifest.mjs",
+    "sha256": "406625f381f34f44dc65e927b59a481d8d0d8e31cf8354cbc94656eecc306b6f"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/modules.mjs",
+    "sha256": "55e90b864b5907e34668e27092f26206b50b4075ffad8828c38bb818ab43ce68"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/predicate-witness.mjs",
+    "sha256": "5f460cecd470fe62418c9ebb5358e97854ad65a642cebf68827daf1d6ae39085"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/proofs.mjs",
+    "sha256": "50cf540bd5ad12ffb8949cee8a90a52d60f5676b01b544f8bac19158b4b0d8ba"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/solver.mjs",
+    "sha256": "fa42823d65276d939ccdc8b68f702095430073d404465772e0699eae55b14ad2"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/source.mjs",
+    "sha256": "6f8568d62114fe50ec62e6784e8b7eac500ea681f32a0e0e71e6c77a63d9f4ba"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/specifications.mjs",
+    "sha256": "869d1385d30dd4747c2db0467bdd2086ae26d0e452694bd49b471260f2240c6f"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/ast.mjs",
+    "sha256": "b9be90a61c8f6bc9ecbd535917df1993046de61db6115ec2dd381c350c5bbd91"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/clauses.mjs",
+    "sha256": "26a46b17885768a4d1a4dbe5e2232eb98eb2df85cebde6574d621c4df48bfeac"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/environment.mjs",
+    "sha256": "780cb8d4da5b625e1da70ffab22d016ec2d8e59aab26a39f80db691692bd5756"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/index.mjs",
+    "sha256": "9070313a60c7429ee8039e11701ab5ab03c481d077ee3acbf897b08fab9fc669"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/machine.mjs",
+    "sha256": "c34cd405d0212e7f27a6118162ef5c24c98d3f45d4ff54a4905a44138dd327d7"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/native.mjs",
+    "sha256": "26d093c916821cf4405e3f8176c69133d6d464e4aad246b7685571cfb3ae7800"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/replay-worker.mjs",
+    "sha256": "e581ba7a53039480fd8680d93e66bc3d7e486ef55e2c00f4d690deb92238d563"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/traces.mjs",
+    "sha256": "821647ee9058214a25ef2d5bf66e56fe68911f2de89c0a36304e9b77001c4147"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/transitions.mjs",
+    "sha256": "7f63987bf9d34ec81a8b215671cad5e1f16cb6ee074aba87c94ada5e2a98e636"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/stateful/values.mjs",
+    "sha256": "5f496b9ae0403b3b8a9f8ac1dc4c574f770df5824c89eeb7a67a0cc0568e78ca"
+  },
+  {
+    "snapshot": "current",
+    "commit": "bd0d9570e8f910a8cf7db14cf517728ba3fd673e",
+    "path": "verify/types.mjs",
+    "sha256": "9ea60c9f2bf3983a75bd7f23d6c02d1cbeaed75ab6d2e2bfed6b9754c8a5993f"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/SHA256SUMS",
+    "sha256": "5e6bbca2d2560028d4b89f0454881639ad89166e6ee2ea9f2440a3c4284aea48"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/contracts.md",
+    "sha256": "ace5811be496944e687610ce2221f296156f4d687db43f336b11024dc5f67959"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/design.md",
+    "sha256": "196b6469690c1dda0067a9766846c74ba2cba2c54446089314643a821c39b485"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/evidence.md",
+    "sha256": "4817a8a4b1cb8964aaad490ad60bb01ae18816f873f8f5239244a1c21a4c9fb2"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/grounding.md",
+    "sha256": "ce551c2b14824ed4e4fb799a088edf3c7f73505e97cc3a5b357c3c7418779621"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/dispose-guarded.json",
+    "sha256": "6c1433953b4e9c4a9ee2bd52998776018cd8768122e825bd714363836dbc9666"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/dispose-unguarded.json",
+    "sha256": "7d98be80d3e1759f5bd9998b0da56002d6fd37dd26d9117b82e50459b9ef9981"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/inputs.json",
+    "sha256": "e7957b128d751e081769d74d33c6ba53f512963d2ef561c0f280c8a4c929aeb7"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/inventory.log.txt",
+    "sha256": "41571aad35af2b38e3e104892b40474efa2d50ecca43022a3b5abd969e2d3035"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/manifest-first.log.txt",
+    "sha256": "7a31c2c2ceb56ee01f4dca25a0c7ab23fc3b9f0a1d5921e377e8738dce725f55"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/native-protocols.json",
+    "sha256": "d9391bd979d3e3724353af6b310be719bf9b48ad680350130c972b7726c7d5ea"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/native-protocols.log.txt",
+    "sha256": "3b83c8c07d67986613ef95168ce644d9ae7bf7e823eff4c8a8e28066c0bf0db0"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/package-check.log.txt",
+    "sha256": "192722f0ace2f8dc58e26eaccfc5f7685a3e7ab35b45e16e28595253a73fa0cc"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/source-seam.json",
+    "sha256": "1d1a4feafdbf439750ef2859e27da5123cf9878378ffc4b8869b47d2b62a483c"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/logs/source-seam.log.txt",
+    "sha256": "e7f46f5dd8164cb321258841f6434638fa78b5ff6dc573c7125c5cba6e51bb61"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/pilots/cancel-contract.ts",
+    "sha256": "8fe86e5fd7a67cd1547c9370ac1c9bdbcbd65f262af62c0ee5b6445979c147f6"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/pilots/dispose-guarded.ts",
+    "sha256": "e9d4eaa664e5458188a2c24348ec54f8f13ad1c86760a0580c27e20ccd68dbd3"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/pilots/dispose-unguarded.ts",
+    "sha256": "ad0f2a173dc959b00bda9563339a2e59a4a6de48309ed8b1e184516371f34949"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/pilots/handle-constructor.ts",
+    "sha256": "613a00f26c0432441eea1d9a4d6bb378014913615457962bdcfa7dedde6a45e3"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/pilots/listener-identity.ts",
+    "sha256": "91dd06b819cf179ceefba455d78d611991754d620eb806f7ea7d1734174bcb95"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/pilots/mutable-capture.ts",
+    "sha256": "69454383aab24b3c1f850b18ee313c980caf50d74965efc22ee103f861b19e36"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/probes/inventory.mjs",
+    "sha256": "da7a1da4bce7e29a05dbb0862021760ea605d72b9ceb58ad4bccacdcfe1338b6"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/probes/native-protocols.mjs",
+    "sha256": "edcf0687697b99f50607f9a4b26249c6630f0d1fa30bdd59e44c41ec29432696"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/probes/register-deps.mjs",
+    "sha256": "19ced3bda5e222581c6288c805a2e6502659c66b512b141633cc0e2081852b7a"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/probes/resolve-deps.mjs",
+    "sha256": "f68930c8217d4d3551260dab3433e9451fcf704e87f8eaea09099056e67bd9a3"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/probes/run.sh",
+    "sha256": "37cdeed5e602c4585a1c9402382a93de681f6d05806e67661372ca9bab95abb1"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/probes/source-seam.mjs",
+    "sha256": "719cc6dfea2258798f9cc008d9571b8ed24cc0b28f6486a08529c3de3275a0f6"
+  },
+  {
+    "snapshot": "A",
+    "commit": "d87f70040f05c4b2449476334936feabe727ba01",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-codex/sketch.mjs",
+    "sha256": "960802e487543da363880a9de3d235745e885dff817725af24abd83bcc4c2c76"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/contracts.md",
+    "sha256": "1c7e63580963eee69137ee0d8f4fafabd4ede521826c933c12ee61fe324daac0"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/design.md",
+    "sha256": "75c086709784902b2a486ed55c5df6744bdc90137523fa24e0aa067df9855516"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/evidence.md",
+    "sha256": "83df51b9fc7c61943ad6d5c6c450e1b67d39849cf8a893467b769492d9b8f2fb"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/evidence/SHA256SUMS",
+    "sha256": "816610b966df199ccb18c2218c8022cbd89a9720724989a2561ca5b4d4963903"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/evidence/c1-frontier.json",
+    "sha256": "de8f58a7b84f7f806fb2227ac23d809a5997bf67a6849cbf2339862dac1bbdd4"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/evidence/protocol-native.json",
+    "sha256": "87797f959c7becbace92f94b736907ebd4661e93286a637c7d22cd08b88a8565"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/evidence/seam-solve.json",
+    "sha256": "d1e5eea4dbcdaf67ba3e2d45c876feff93ad19604b97218820132ab687a57a32"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/evidence/stale-replay.json",
+    "sha256": "ae3e4cbffc8fc6df01c2941cc978e097db2b1f5948a5282de4d709f1fbe04877"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/grounding.md",
+    "sha256": "91ffd1269f7b7a67e5f79e456969933da7942684fdb5f7aa126cbab2a25bbaf6"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/probes/c1-frontier.mjs",
+    "sha256": "2f2eca5456f22fcbf4ae798f3eb5a79bce22ec720ca7601385a71da9aa8bda7c"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/probes/protocol-native.mjs",
+    "sha256": "18d841ce140425dd48e2fe66b12380b68667e3de7b3cfe2ddfefe94c02c6f0f5"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/probes/seam-replay.mjs",
+    "sha256": "8cca937dec409d451ce9aeb9423ad6bd2fabc40c766048d323c92f1c2d605e46"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/probes/seam-solve.mjs",
+    "sha256": "96d40b3f55bcdab30648f206d3bdb7982df035d48b532bf34a64f0dd6e06722c"
+  },
+  {
+    "snapshot": "B",
+    "commit": "d764ed854be9fec825871b39b494875a4c7de2af",
+    "path": "verify/reports/roadmap/candidate-stateful-C2-grok/sketch.mjs",
+    "sha256": "f9e07cd793948f1ebd13215262e1c21751e7cca5466553c3efd26c288e2db2e8"
+  }
+]

@@ -1,0 +1,35 @@
+Working directory for every invocation:
+/Users/rick/.t3/worktrees/verified-list-ui/t3-a3d6fc68
+
+Initial HEAD bd0d9570e8f910a8cf7db14cf517728ba3fd673e; git status --short empty.
+git merge-base --is-ancestor 32bd5b260aa116ca88642a1479bed8d3fc447f4b HEAD
+exit 0
+test -d verify
+exit 0
+
+python3 verify/reports/roadmap/judgment-stateful-C2/scripts/prepare.py
+exit 0; 177 immutable git-show blobs; logs/snapshot-manifest.json.
+
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- node verify/reports/roadmap/judgment-stateful-C2/scripts/native.mjs > verify/reports/roadmap/judgment-stateful-C2/logs/native.log 2>&1
+exit 0; NATIVE_CONTROLS_PASS. No C2 verifier is invoked by this script.
+
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- env NODE_OPTIONS=--import=/Users/rick/.t3/worktrees/verified-list-ui/t3-a3d6fc68/verify/reports/roadmap/judgment-stateful-C2/scripts/register-deps.mjs node verify/reports/roadmap/judgment-stateful-C2/scripts/source.mjs > verify/reports/roadmap/judgment-stateful-C2/logs/source.log 2>&1
+exit 1 after successful solver/native checks, at judge assertion requiring every entry/resume to have writes effects. search$0 reads/captures only, so its actual heap effect is correct. Historical script bytes in logs/source-first.mjs.txt; historical results in logs/source-first.json. No product fix.
+
+python3 /Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py -- env NODE_OPTIONS=--import=/Users/rick/.t3/worktrees/verified-list-ui/t3-a3d6fc68/verify/reports/roadmap/judgment-stateful-C2/scripts/register-deps.mjs node verify/reports/roadmap/judgment-stateful-C2/scripts/source.mjs --frontier-only > verify/reports/roadmap/judgment-stateful-C2/logs/source-frontier.log 2>&1
+exit 0; SOURCE_CONTROLS_PASS. Rechecks the effects assertion against retained own observations, then executes only remaining frontend cases. It does not rerun prior solver/native checks. Final source.json explicitly combines both own runs.
+
+Replay limits: timeoutMs default 100ms per VM action and parent hard deadline 300ms; process cleanup awaited. Deliberate continuation loop returned unknown/replay-timeout in 180.932ms. Proof request 20000ms, maxDepth=0; separate intentional 1ms request returned unknown/solver. H admission request 20000ms. Native finite controls use two registrations, six explicit producer schedules; no universal C2 claim. No proof query was weakened or injected.
+
+Dependency resolution maps only acorn and z3-solver to existing installed packages, read-only; NODE_OPTIONS propagates to contained workers. No dependency links or installs. Node v22.23.1; package versions/hashes in source.json and provenance.json.
+
+Read-only inspection misses: a shell glob for callback test files matched nothing; rg across tests located predicates.test.mjs. An initial git diff pathspec also included report scripts; the exact 27 runtime paths were subsequently compared byte-for-byte and recorded in provenance.json. These were inspection commands, not verifier runs.
+
+Reproduction: run prepare.py, then the native command and the source command using corrected scripts/source.mjs (without --frontier-only). Historical first-run failure is intentionally preserved separately. All writes stay in this package; .snapshots is disposable and must be removed after replay. No full suite is required for this design judgment.
+
+node --check verify/reports/roadmap/judgment-stateful-C2/scripts/source.mjs
+exit 0 after the assertion correction.
+python3 verify/reports/roadmap/judgment-stateful-C2/scripts/finalize.py
+exit 0; 177 snapshots hash-checked unchanged and removed; zero dependency links or own remaining processes; no production diff; judgment 1798 words. logs/cleanup.json retains the receipt.
+git diff --check
+exit 0.
