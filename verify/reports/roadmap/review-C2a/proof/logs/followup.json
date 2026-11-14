@@ -1,0 +1,58 @@
+{
+  "handlerPre": "(and (ite (not (fp.eq (heap_num0_73686f776e input_0_ref) ((_ to_fp 11 53) #x0000000000000000))) (fp.eq (heap_num0_73686f776e input_0_ref) ((_ to_fp 11 53) #x3ff0000000000000)) (fp.eq (heap_num0_73686f776e input_0_ref) ((_ to_fp 11 53) #x0000000000000000))) (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x3ff0000000000000)))",
+  "handlerPostTail": [
+    "(=> (not (heap_bool_646973706f736564 input_0_ref)) (or (= input_0_ref input_0_ref) (>= input_0_ref heap_next0)))",
+    "(ite (not (fp.eq (heap_num_73686f776e_v2 input_0_ref) ((_ to_fp 11 53) #x0000000000000000))) (fp.eq (heap_num_73686f776e_v2 input_0_ref) ((_ to_fp 11 53) #x3ff0000000000000)) (fp.eq (heap_num_73686f776e_v2 input_0_ref) ((_ to_fp 11 53) #x0000000000000000)))",
+    "(ite (not (not (heap_bool_646973706f736564 input_0_ref))) (fp.eq (heap_num_73686f776e_v2 input_0_ref) (heap_num0_73686f776e input_0_ref)) (not (heap_bool_646973706f736564 input_0_ref)))"
+  ],
+  "entryPost": [
+    "(=> call_fact0 (ite (not (fp.eq (heap_num0_73686f776e input_0_ref) ((_ to_fp 11 53) #x0000000000000000))) (fp.eq (heap_num0_73686f776e input_0_ref) ((_ to_fp 11 53) #x3ff0000000000000)) (fp.eq (heap_num0_73686f776e input_0_ref) ((_ to_fp 11 53) #x0000000000000000))))",
+    "(=> call_fact0 (fp.eq (heap_num_24636170747572655f3237385f76616c7565_v1 heap_next0) ((_ to_fp 11 53) #x3ff0000000000000)))"
+  ],
+  "requestCreation": {
+    "pre": "(not ($requestHistory $freshRequest))",
+    "post": [
+      "(ite (and (= $freshRequest $freshRequest)) true ($pending $freshRequest))",
+      "(not (ite (and (= $freshRequest $freshRequest)) false ($settled $freshRequest)))",
+      "(or (not (not (= $request $freshRequest))) (= (ite (and (= $request $freshRequest)) true ($pending $request)) ($pending $request)))"
+    ]
+  },
+  "closureAlloc": {
+    "pre": "(and (not ($closureHistory $freshClosure)) ($closureHistory $oldClosure))",
+    "post": [
+      "(not (= $freshClosure $oldClosure))",
+      "(ite (and (= $freshClosure $freshClosure)) true ($closureHistory $freshClosure))"
+    ]
+  },
+  "plusLoose": {
+    "proved": false,
+    "bad": [
+      {
+        "name": "$closure_211",
+        "status": "counterexample"
+      }
+    ]
+  },
+  "plusExact": {
+    "proved": false,
+    "bad": [
+      {
+        "name": "$closure_211",
+        "status": "counterexample"
+      }
+    ]
+  },
+  "plusAlias": {
+    "proved": false,
+    "bad": [
+      {
+        "name": "$closure_211",
+        "status": "counterexample"
+      }
+    ]
+  },
+  "nanOr": {
+    "proved": true,
+    "bad": []
+  }
+}
