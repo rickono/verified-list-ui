@@ -1,6 +1,6 @@
 # Source verifier roadmap
 
-Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K and guarded throws passed independent reviews; their combined source passed 477 tests, followed by 483 with the reviewed resource ceiling. A 180000 ms request verified the three-module Reverse/take graph cold and in a fresh audit; historical 60000 ms unknowns remain. PR #14 is open. Numerical campaign maintenance is in progress after a model change. C2a passed its standalone 390-test suite and awaits two independent reviews. The temporal judgment selects a source-completion rule; implementation is in progress.
+Status as of 2026-11-13: A, B, C, D, F, E, J, H, G and P are integrated. C1 is merged in PR #12. K, guarded throws, resource policy and current-model numerical maintenance passed independent reviews. The matching verifier tree passed 483 tests, and the maintained numerical campaign passed all ten stages. PR #14 is ready to merge. C2a native review passes; its proof review found unbound request/activation checks and correction remains pending. Conditional source completion passed a local 496-test suite and awaits independent review.
 
 All prerequisites apply. H, G and P are integrated. C1 provides the shared stateful safety foundation; cancellation, listeners, exact counts and liveness remain incomplete. K has its original prerequisites, completed reviews, and pending integration. Transitively redundant edges are omitted.
 
