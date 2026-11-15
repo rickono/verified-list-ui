@@ -1,0 +1,18 @@
+{
+  "testedCodeHead": "7575926e3185b5a382bc9bd3b3400ffc52caf874",
+  "ciRun": "https://github.com/rickono/verified-list-ui/actions/runs/43664632863",
+  "archives": {
+    "ci-43653331532.tar.gz": {
+      "sha256": "4e71f021f3b156046f71ddb7b1eb0a2bfeb7aaca7991164e81d20fa24c40edc1",
+      "status": "FAIL",
+      "runId": "43653331532"
+    },
+    "ci-43664632863.tar.gz": {
+      "sha256": "a53eeab39dd66f9778f4e21b8e95d7963ccd626b8411f4766410ad6a51cb8b43",
+      "status": "PASS",
+      "runId": "43664632863"
+    }
+  },
+  "scope": "Recorded consistency and source bindings; no solver run, native replay or receipt admission by the checker.",
+  "currentModel": "11803bd5a1f41ccf93d1c4aea60b0eca08a766d320738c3a457a06b062915872"
+}

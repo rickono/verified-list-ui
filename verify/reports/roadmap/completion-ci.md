@@ -58,3 +58,12 @@ must not report a counterexample. Function source equality checks confirm that
 only the companion contract comments change. No verifier verdict, solver budget
 or replay rule changes. The new controls run before the next full hosted suite;
 that run remains pending. The first failed hosted artifact is retained separately.
+
+
+## Accepted hosted run
+
+Run43664632863 at `7575926` passes535/535, the four loop controls and all ten
+campaign stages. Source, dependency, raw-log and platform bindings are retained
+in [the completion evidence](completion-ownership-evidence/summary.json). Earlier
+failures remain separate. Receipt-only imports do not change the tested runtime,
+tests or CI commands; they do not require another solver run.

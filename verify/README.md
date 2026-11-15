@@ -146,12 +146,32 @@ The proof checks initialization, arbitrary steps and interference with every
 other pending activation. Native trace replay confirms property failures.
 Witness-search depth never bounds a proof. Number/boolean state, immutable
 primitive captures and declared operation outcomes are supported. The scheduler
-drains microtasks between external actions. General reference state and liveness
-remain unsupported; settling assumptions are unused by safety. The restricted
+drains microtasks between external actions. General reference state remains
+unsupported; settling assumptions are unused by safety. The restricted
 protocol extension below adds listeners and advisory cancellation. This API has its own source subset and does not use P caching.
 
 See [the safety foundation receipt](reports/roadmap/C1-landing.md) for scope,
 assumptions, independent reviews and the final 371-test combined run.
+
+## Conditional invocation completion
+
+Scalar modules may add `// leads work completes` to require every invocation
+of `work` to return normally or reach declared environment rejection. This does
+not require a successful result, a published update or global draining. The
+[one-await fixture](../tests/verify/fixtures/stateful/completion/one.ts) and
+[two-await fixture](../tests/verify/fixtures/stateful/completion/two.ts) show the
+syntax. Each reached operation must declare `// settles eventually`; a continuing
+runtime and total declared calls are explicit premises. Safety uses none of
+those progress premises. The source-control rank and outcome-existence checks
+cover arbitrary modeled sequences, without a hidden event-count bound.
+
+Reports separate `safety` from `completion.goals`. A missing settlement premise
+is a symbolic `liveness-gap`; an impossible outcome domain leaves completion
+unknown. Finite replay never confirms an infinite failure, and `nativeConfirmed`
+is false for completion. Loops, Promise adoption, global leads-to, exact counts
+and protocol completion remain unsupported. The [completion receipt](reports/roadmap/completion-ownership-integration.md)
+records the source-bound compiler checks, trust, review limits and 535-test
+hosted validation.
 
 ## Restricted listener and advisory protocols
 

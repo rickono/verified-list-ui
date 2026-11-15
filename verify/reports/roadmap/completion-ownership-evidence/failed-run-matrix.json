@@ -1,0 +1,131 @@
+{
+  "receipt": "full-bit-exact/receipt.json",
+  "tests": 531,
+  "passed": 519,
+  "failed": 12,
+  "rows": [
+    {
+      "test": "not ok 188 - native rank arithmetic stays rounded; explicit real arithmetic is exact",
+      "durationMs": 284293.042334,
+      "actual": [
+        "request-timeout"
+      ],
+      "resourceReasonTokens": [
+        "induction-gap",
+        "request-timeout"
+      ]
+    },
+    {
+      "test": "not ok 383 - a pinned imported take proves composition, catches a shifted prefix and invalidates a weakened summary",
+      "durationMs": 1034127.197708,
+      "actual": [
+        "unknown"
+      ],
+      "resourceReasonTokens": [
+        "request-timeout",
+        "solver"
+      ]
+    },
+    {
+      "test": "not ok 384 - the unchanged Remeda eager take preserves its prefix and a shifted slice fails on contents",
+      "durationMs": 888987.54175,
+      "actual": [],
+      "resourceReasonTokens": []
+    },
+    {
+      "test": "not ok 393 - undefined assignments and postfix numeric conversion preserve presence",
+      "durationMs": 536572.715875,
+      "actual": [
+        "unknown"
+      ],
+      "resourceReasonTokens": [
+        "request-timeout",
+        "solver"
+      ]
+    },
+    {
+      "test": "not ok 425 - number bridges check finiteness, presence, and signed zero",
+      "durationMs": 989218.285625,
+      "actual": [],
+      "resourceReasonTokens": [
+        "request-timeout",
+        "solver"
+      ]
+    },
+    {
+      "test": "not ok 444 - a real abort transformation that loses settled fails both its schema and source step",
+      "durationMs": 1009159.696292,
+      "actual": [
+        "unknown"
+      ],
+      "resourceReasonTokens": [
+        "request-timeout",
+        "solver"
+      ]
+    },
+    {
+      "test": "not ok 2 - pilots/search-stale.ts",
+      "durationMs": 639332.952417,
+      "actual": [
+        "unknown"
+      ],
+      "resourceReasonTokens": [
+        "request-timeout",
+        "solver"
+      ]
+    },
+    {
+      "test": "not ok 4 - pilots/search-env.ts",
+      "durationMs": 1024774.42625,
+      "actual": [
+        "unknown"
+      ],
+      "resourceReasonTokens": [
+        "request-timeout",
+        "solver"
+      ]
+    },
+    {
+      "test": "not ok 19 - variants/V6-inflight-count.ts",
+      "durationMs": 927812.614542,
+      "actual": [
+        "replay-timeout"
+      ],
+      "resourceReasonTokens": [
+        "induction-gap",
+        "replay-timeout"
+      ]
+    },
+    {
+      "test": "not ok 20 - variants/V18-two-awaits.ts",
+      "durationMs": 1001003.214458,
+      "actual": [
+        "replay-timeout"
+      ],
+      "resourceReasonTokens": [
+        "induction-gap",
+        "replay-timeout"
+      ]
+    },
+    {
+      "test": "not ok 22 - variants/V8-second-entry-clear.ts",
+      "durationMs": 674243.475209,
+      "actual": [
+        "unknown"
+      ],
+      "resourceReasonTokens": [
+        "request-timeout",
+        "solver"
+      ]
+    },
+    {
+      "test": "not ok 457 - six pilots and all corrected judge variants run through production",
+      "durationMs": 4290117.841042,
+      "actual": [],
+      "resourceReasonTokens": [
+        "subtestsFailed"
+      ]
+    }
+  ],
+  "scope": "Failed run preserved. Resource-related unknown outcomes; OS suspension overlaps. No rerun or waived expectation in this record."
+}

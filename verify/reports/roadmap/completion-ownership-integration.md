@@ -67,9 +67,9 @@ were unchanged. One earlier clone test failed on Acorn function tokens before
 its assertion; that harness error remains separate. The new comparison retains
 trusted function references rather than attempting to serialize parser code.
 
-Final combined validation and the fresh current-model campaign are pending.
-No original roadmap acceptance sentence is changed, and U is not yet marked
-integrated. Historical 496, 510 and 530 results describe their own trees.
+Final hosted validation is recorded below. No original roadmap acceptance
+sentence is changed; integration status follows the actual merge. Historical
+496, 510 and 530 results describe their own trees.
 
 ## Current validation and review scope
 
@@ -94,3 +94,37 @@ and failed before its assertion; that harness error is preserved separately.
 There is no completed second proof-axis review: automatic safety review rejected
 that delegate, and it was not retried. Historical source/native findings,
 coordinator regression controls and the independent completed axis remain distinct.
+
+## Final hosted acceptance
+
+[GitHub run 43664632863](https://github.com/rickono/verified-list-ui/actions/runs/43664632863)
+passed on exact head `7575926e3185b5a382bc9bd3b3400ffc52caf874`: **535/535**
+full tests, **4/4** focused loop controls and **10/10** numerical campaign stages.
+Node 22.23.1 on Linux x86_64 used the frozen dependency lockfile. Each recorder
+retains an empty before/after tracked diff and identical input maps. This is a
+new combined result, not a relabeling of the earlier suspended or failed runs.
+
+The original three loop fixtures still must not falsely verify. Separate
+comment-only companion contracts retain strict native-confirmed failures, and
+a correct zero-iteration control forbids a false bug report. This corrects the
+witness-sensitive test oracle found by the first hosted run, without changing
+verifier behavior, proof domains or budgets of the original fixtures.
+
+The new Linux model is `11803bd5a1f41ccf93d1c4aea60b0eca08a766d320738c3a457a06b062915872`.
+Harmonic total return and Ramda first-match verify. The harmonic positivity
+failure reproduces through API and CLI with witness bits `0000100000000000`
+and native result `+0`; its weak invariant remains `unknown/induction-gap`.
+Native d3 coverage failures and separately classified timeouts/diagnostics keep
+their existing scope. All campaign snapshots agree and no child group remains.
+This platform/model identity is explicit: a different platform must regenerate
+evidence, rather than reusing this receipt or promoting a foreign cache.
+
+The complete successful and failed hosted artifacts are retained as raw archives
+under [completion evidence](completion-ownership-evidence/summary.json), together
+with prior local logs, power events, partial review data and coordinator RED
+controls. Historical probe source is preserved as text, not executable modules.
+`python3 verify/reports/roadmap/completion-ownership-evidence/check.py --current`
+checks archive/log hashes, recorded statuses, ancestry and current runtime/test/
+CI-helper inputs. It neither runs a solver nor admits cached proof receipts.
+Remaining review limits above still apply; the completed review is not relabeled
+as a review of the later numeric correction.

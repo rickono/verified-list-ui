@@ -1,6 +1,6 @@
 # Source verifier roadmap
 
-Status as of 2026-11-14: R, S and T are integrated in the scoped C1/C2a domain after PR #16. K/Q remain integrated with fresh current-model campaign evidence. U is next: conditional completion needs producer-owned proof artifacts before integration. V has an unchanged-source historical native regression; factory proof designs are in progress. W remains open.
+Status as of 2026-11-14: R/S/T are integrated. U is ready in PR18 after535/535 hosted tests and a fresh ten-stage model-bound campaign; actual merge pending. V has a pinned native lifecycle regression and a selected source-bridge design, with the first callable-cell compiler unit in progress. W remains open.
 
 All prerequisites apply. Integrated nodes refer to their documented first-layer subsets. U can build on the landed stateful safety and explicit-environment foundation; V and W still require maintained real stateful source proofs. Transitively redundant edges are omitted.
 
@@ -23,7 +23,7 @@ flowchart TD
   R["R: Event &amp; lifecycle semantics<br/>integrated"]
   S["S: Async ordering model<br/>integrated"]
   T["T: Environment contracts<br/>integrated"]
-  U["U: Temporal verification<br/>NEXT"]
+  U["U: Temporal verification<br/>branch-ready"]
   V["V: Stateful app pilots<br/>PARTIAL"]
   W["W: Existing JS/TS verification"]
   NOW --> A
@@ -105,7 +105,7 @@ These counts describe the original isolated branches. D's original partial resul
 [The graph data](verification-roadmap.json) contains the dependency edges, capability requirements, acceptance criteria and branch evidence. The integration baseline is `ff2518cd7494300084f2ab54da71f4d79185e586`.
 
 Ready packages: .
-Branches awaiting integration: none.
+Branches awaiting integration: U.
 
 To regenerate this document after editing the data:
 

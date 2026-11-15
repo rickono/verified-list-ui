@@ -1,0 +1,21 @@
+{
+  "code": "776fa71",
+  "cases": [
+    {
+      "kind": "numeric-zero",
+      "status": "rejected-before-compilation",
+      "toJSONCalls": 0
+    },
+    {
+      "kind": "added-toJSON",
+      "status": "rejected-before-compilation",
+      "toJSONCalls": 0
+    },
+    {
+      "kind": "added-function-control",
+      "status": "rejected-before-compilation",
+      "toJSONCalls": 0
+    }
+  ],
+  "scope": "Coordinator data-boundary checks; no new solver verdict, native trace or independent review."
+}

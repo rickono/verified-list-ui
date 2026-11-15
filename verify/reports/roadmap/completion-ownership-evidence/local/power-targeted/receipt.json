@@ -1,0 +1,23 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-name-pattern=native rank arithmetic|a pinned imported take|the unchanged Remeda eager take|undefined assignments and postfix|number bridges check|a real abort transformation that loses settled|six pilots and all corrected judge variants",
+    "tests/verify/loops.test.mjs",
+    "tests/verify/remeda-imports.test.mjs",
+    "tests/verify/remeda-take.test.mjs",
+    "tests/verify/scalar-state.test.mjs",
+    "tests/verify/specifications.test.mjs",
+    "tests/verify/stateful-abort-frames.test.mjs",
+    "tests/verify/stateful-outcomes.test.mjs"
+  ],
+  "head": "c977489dcc3dae81343bf4903160b935d9e0999b",
+  "startedAt": "2026-11-14T21:27:23.969854+00:00",
+  "diffBefore": "",
+  "exitCode": 1,
+  "finishedAt": "2026-11-14T21:59:50.248470+00:00",
+  "inputsUnchanged": true,
+  "diffAfter": "",
+  "logSha256": "931d38c8b4b5010ead5937df4cc97e43ccf3a3a4a285c94d7d0588761a2d3d9a"
+}

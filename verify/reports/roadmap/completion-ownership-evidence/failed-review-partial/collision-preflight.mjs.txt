@@ -1,0 +1,29 @@
+import { writeFileSync } from "node:fs";
+import { machineOf, temporalMachineIdentity } from "../../../../stateful/machine.mjs";
+import { transitionsOf, ownsCompletionGraph } from "../../../../stateful/transitions.mjs";
+import { completionPlan } from "../../../../stateful/temporal.mjs";
+
+const source = `// @environment
+// resolves Object.is(result, 0) && Object.is(result, -0)
+// settles eventually
+declare function op(): Promise<number>;
+let n = 0;
+// state n >= 0
+// leads work completes
+export async function work() { await op(); n = 1; }
+`;
+const machine = machineOf("signed-zero.ts", source);
+const before = temporalMachineIdentity(machine);
+const literal = machine.environment.get("op").resolves[0].ast.left.arguments[1];
+const span = { start: literal.start, end: literal.end };
+literal.value = -0;
+const after = temporalMachineIdentity(machine);
+const graph = transitionsOf(machine);
+const plan = completionPlan(machine, graph);
+const output = { source, sourceSpan: span, sourceSlice: source.slice(span.start, span.end),
+  changedValueIsNegativeZero: Object.is(literal.value, -0), before, after,
+  sameIdentity: before === after, owned: ownsCompletionGraph(machine, graph),
+  missing: plan.obligations.filter((o) => o.status === "missing"),
+  viability: graph.units.find((u) => u.name === "work$0").target.control.checks.filter((c) => c.kind === "outcome-viability") };
+writeFileSync(new URL("./collision-preflight.json", import.meta.url), JSON.stringify(output, null, 2) + "\n");
+console.log(JSON.stringify(output, null, 2));

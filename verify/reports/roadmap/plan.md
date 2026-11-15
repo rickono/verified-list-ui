@@ -30,8 +30,10 @@ one shared before/after operation and source-bound clauses. Its original native
 review passes; its original proof finding is corrected locally with executable
 mutation controls. The fresh current-model campaign passed all ten stages, and PR #16 merged at `a60ae39`. R/S/T now meet their original predicates within the documented C1/C2a subset.
 The local conditional-completion unit passed 496 tests and native review; its
-proof review found compiled-artifact ownership/footprint binding gaps to correct
-before integration. A pinned historical p-event timeout regression reproduces
+proof review found compiled-artifact ownership/footprint binding gaps. The
+coordinator corrected those and numeric provenance;535/535 hosted tests, four
+loop controls and a fresh ten-stage campaign pass on7575926. PR18 is ready for
+integration with original review limits preserved. A pinned historical p-event timeout regression reproduces
 on unchanged old/fixed source with real dependencies. Production admission is
 still unsupported, so the corrected source has no universal proof yet.
 [The landing receipt](landing-summary.md) records the merges and checks.

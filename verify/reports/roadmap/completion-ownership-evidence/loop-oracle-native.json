@@ -1,0 +1,49 @@
+{
+  "scope": "Native oracle controls, no solver result",
+  "rows": [
+    {
+      "id": "H01-fresh-array",
+      "sameBody": true,
+      "inputs": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "post": [
+        false,
+        false
+      ]
+    },
+    {
+      "id": "H02-fresh-record",
+      "sameBody": true,
+      "inputs": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "post": [
+        false,
+        false
+      ]
+    },
+    {
+      "id": "H03-fresh-array-boolean",
+      "sameBody": true,
+      "inputs": [
+        [
+          true
+        ]
+      ],
+      "post": [
+        false
+      ]
+    }
+  ]
+}
