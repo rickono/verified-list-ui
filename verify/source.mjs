@@ -770,13 +770,17 @@ function scopedStatements(list, states, returns, cx, functionBody = false) {
 function statements(list, states, returns, cx) {
   const at = (s) => ({ ...cx, guard: s.path });
   for (const node of list) {
+    // An internal wrapper can supply fallthrough after a source tail whose
+    // branches all return. Only the compiler knows whether that exit exists.
+    if (!states.length && cx.control && node.completionFallthrough) continue;
     if (!states.length) fail("Unreachable statements are outside the supported source subset.", node);
     if (node.type === "ReturnStatement") {
       if (!node.argument) fail("Every path must return a supported value.", node);
       for (const s of states) {
         const value = expression(node.argument, s.env, at(s));
         if (value.sort === "function") fail("Function-valued returns are unsupported.", node.argument);
-        returns.push({ path: s.path, value, heap: s.env.get(HEAP)?.value });
+        returns.push({ path: s.path, value, heap: s.env.get(HEAP)?.value,
+          ...(cx.control ? { exit: node.completionExit, span: { start: node.start, end: node.end } } : {}) });
       }
       states = [];
     } else if (node.type === "ThrowStatement") {
@@ -817,7 +821,12 @@ function statements(list, states, returns, cx) {
     } else if (node.type === "BlockStatement") {
       states = scopedStatements(node.body, states, returns, cx);
     } else if (node.type === "ExpressionStatement") {
-      for (const s of states) if (expression(node.expression, s.env, at(s)).sort === "function") fail("Unused function values are unsupported.", node);
+      for (const s of states) {
+        const value = expression(node.expression, s.env, at(s));
+        if (value.sort === "function") fail("Unused function values are unsupported.", node);
+        if (cx.control && node.completionReturnExpression && !["number", "boolean", "undefined"].includes(value.sort))
+          fail("Completion return expressions must be scalar; Promise adoption is unsupported.", node.expression);
+      }
     } else if (node.type === "EmptyStatement") {
       continue;
     } else if (node.type === "WhileStatement" || node.type === "ForStatement") {
@@ -1194,7 +1203,7 @@ function body(h, scope) {
       }
     }
     const returns = [];
-    const cx = { ...spec, contract: h.spec, phase: "body", checks: [], loops: h.loops };
+    const cx = { ...spec, contract: h.spec, phase: "body", checks: [], loops: h.loops, ...(h.control ? { control: h.control } : {}) };
     if (fn.body.type === "BlockStatement") {
       const bodyEnv = new Map(env);
       varBindings(fn.body, bodyEnv);
@@ -1255,6 +1264,53 @@ function body(h, scope) {
     while (names.has(library)) library += "_";
     while (names.has(entry)) entry += "_";
     const replay = { library, entry, params: params.map((p) => p.name) };
+    // Opt-in source-exit evidence for the C1 temporal owner. These checks use
+    // this body's actual guarded returns, heap and expression compiler. They
+    // do not alter legacy postconditions or introduce another evaluator.
+    let control;
+    if (h.control) {
+      const checks = [], add = (kind, smt, span, exit) => {
+        const index = checks.length;
+        // Keep constant-folded true checks: their explicit solver discharge
+        // must still be tied to the source exit that generated them.
+        checks.push({ kind, smt, span, ...(exit === undefined ? {} : { exit }) });
+        return index;
+      };
+      add("segment-totality", and(...obligations.map((o) => o.smt), ...cx.checks,
+        implies(allFacts, or(...returns.map((r) => r.path)))), h.control.span);
+      const exits = returns.map((r, i) => {
+        if (!r.exit) fail("Missing compiler completion-exit binding.", r.span);
+        const previous = specifications.exact(String(h.control.rankBefore)), next = specifications.exact(String(r.exit.rankAfter));
+        const guard = and(r.path, allFacts);
+        const progress = add("own-progress", implies(guard, specifications.rankDecrease(previous, next)), r.exit.span, i);
+        const nonnegative = add("rank-nonnegative", implies(guard,
+          specifications.binary(">=", next, specifications.exact("0")).smt), r.exit.span, i);
+        let viability;
+        if (r.exit.request) {
+          const request = r.exit.request, symbol = unit.fresh("completion_outcome");
+          const outcome = data.input(request.result, symbol);
+          const at = new Map(env).set("result", { kind: "contract", value: r.value })
+            .set("$outcome", { kind: "contract", value: outcome.value });
+          at.set(HEAP, { declaration: HEAP_DECL, kind: "heap", value: r.heap });
+          const defined = [], scx = { ...spec, guard: "true", checks: defined };
+          const legal = request.resolves.map((c) => need(expression(c.ast, at, scx), "boolean", c.span));
+          // Quantify the complete declared result domain, never a finite set
+          // of proposed values, and never assume the domain being proved.
+          const exists = request.rejects ? "true" : `(exists ((${symbol} ${request.result === "number" ? "(_ BitVec 64)" : "Bool"})) ${and(...defined, ...legal)})`;
+          viability = add("outcome-viability", implies(guard, exists), r.exit.span, i);
+        }
+        return { ...r.exit, path: r.path, progress, nonnegative, ...(viability === undefined ? {} : { viability }) };
+      });
+      const scalar = (type) => ["number", "boolean", "undefined"].includes(type);
+      const scalarRecord = (type) => type?.kind === "object" && type.fields.every((f) => scalar(f.type) && !f.optional);
+      control = { ...h.control, exits, checks, cutpoints: unit.cutpoints,
+        // No source input/output or write footprint can denote an invocation,
+        // its control location, or another invocation's request ownership.
+        identityFrame: h.params.every((p) => scalar(p.type) || p.name === "$s" && scalarRecord(p.type))
+          && (scalar(data.valueType(result)) || scalarRecord(data.valueType(result)))
+          && unit.frame.every((f) => f.path[0] === "$s"),
+        callees: [...unit.dependencies, ...callerEvents.filter((e) => e.callee).map((e) => e.callee)] };
+    }
     const finished = heap.finish(unit);
     return {
       id: h.id, file: h.file, name, span: { start: top.start, end: top.end }, params, resultType: data.valueType(result),
@@ -1281,6 +1337,7 @@ function body(h, scope) {
       smallWitness: and(...lengths.map((len) => `(bvule ${len} (_ bv${data.REPLAY_LIMIT} 32))`)),
       replayGuards: unit.replayGuards,
       pre: pre.value, preDefined: pre.defined, post, postconditions: postconditions.length ? postconditions : ["true"],
+      ...(control ? { control } : {}),
     };
   });
 }

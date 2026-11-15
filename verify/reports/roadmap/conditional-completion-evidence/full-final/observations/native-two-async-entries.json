@@ -1,0 +1,226 @@
+{
+  "source": "// @environment\n// resolves Number.isFinite(result)\n// rejects\n// settles eventually\ndeclare function op(): Promise<number>;\n// @environment\n// resolves false\n// settles eventually\ndeclare function unused(): Promise<number>;\nlet n = 0;\n// state n >= 0\n// fairness resumptions weak\n// leads work completes\n// leads disturb completes\n// leads other completes\nexport async function work() {\n  // pending n >= 0\n  const a: number = await op();\n  n = 1;\n  // pending n >= 0\n  const b: number = await op();\n  if (a === 0) { if (b === 0) return; }\n  n = 2;\n}\nexport function disturb() { n = 3; }\n\nexport async function other() { await op(); n = 4; }\n",
+  "result": {
+    "status": "ok",
+    "trace": {
+      "version": 1,
+      "sourceSha256": "a70e35a0989c92adc43acf99ad9c2d5f46ef807230bfe86842d9f2fcc1e9d5c7",
+      "executableSha256": "93a59a4898f2a8c39d44636f55fa6bbaca1b84c9a21c0ca94b0c5d9b08563dce",
+      "assumptionsSha256": "cbea98674d4b1a8f67bf1a8e80c5402da674a709ca500bce361f71dd268b7f2b",
+      "actions": [
+        {
+          "kind": "call",
+          "entry": "work",
+          "args": []
+        },
+        {
+          "kind": "call",
+          "entry": "other",
+          "args": []
+        },
+        {
+          "kind": "resolve",
+          "request": 2,
+          "op": "op",
+          "value": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          }
+        },
+        {
+          "kind": "resolve",
+          "request": 1,
+          "op": "op",
+          "value": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          }
+        },
+        {
+          "kind": "resolve",
+          "request": 3,
+          "op": "op",
+          "value": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "activations": []
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "call",
+            "entry": "work",
+            "args": []
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": {
+            "kind": "call",
+            "entry": "other",
+            "args": []
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            },
+            {
+              "id": "2",
+              "entry": "other",
+              "status": "live"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": {
+            "kind": "resolve",
+            "request": 2,
+            "op": "op",
+            "value": {
+              "type": "number",
+              "bits": "3ff0000000000000"
+            }
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "4010000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            },
+            {
+              "id": "2",
+              "entry": "other",
+              "status": "returned"
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "action": {
+            "kind": "resolve",
+            "request": 1,
+            "op": "op",
+            "value": {
+              "type": "number",
+              "bits": "3ff0000000000000"
+            }
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "3ff0000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            },
+            {
+              "id": "2",
+              "entry": "other",
+              "status": "returned"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "action": {
+            "kind": "resolve",
+            "request": 3,
+            "op": "op",
+            "value": {
+              "type": "number",
+              "bits": "3ff0000000000000"
+            }
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "4000000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "returned"
+            },
+            {
+              "id": "2",
+              "entry": "other",
+              "status": "returned"
+            }
+          ]
+        }
+      ]
+    },
+    "requests": [
+      {
+        "seq": 1,
+        "op": "op",
+        "args": [],
+        "settled": true,
+        "activation": "1"
+      },
+      {
+        "seq": 2,
+        "op": "op",
+        "args": [],
+        "settled": true,
+        "activation": "2"
+      },
+      {
+        "seq": 3,
+        "op": "op",
+        "args": [],
+        "settled": true,
+        "activation": "1"
+      }
+    ]
+  }
+}

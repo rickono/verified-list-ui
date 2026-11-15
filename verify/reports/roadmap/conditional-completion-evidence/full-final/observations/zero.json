@@ -1,0 +1,341 @@
+{
+  "source": "let done = false;\n// state done === true || done === false\n// leads work completes\nexport function work() { done = true; }\n",
+  "report": {
+    "file": "zero.ts",
+    "sourceSha256": "a9de68ab5dc802fcde32d5453acef9fa3bd81052cb87bd449bb6ea2e5fe39e43",
+    "trusted": [
+      "Acorn and Node type stripping",
+      "closed stateful frontend and AST binding rewrites",
+      "existing source body/expression/heap compiler",
+      "representative init/step/keeps induction",
+      "existing proof scheduler and Z3 binary64 backend",
+      "strict native JavaScript replay and timed process containment"
+    ],
+    "executableSha256": "0723f7b98d873bc60790a0536af8ea12f76b4fa8f973fb19716ede669e998118",
+    "assumptions": {
+      "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+      "eventBound": null,
+      "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+      "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+      "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+      "initial": {
+        "done": "false"
+      },
+      "environment": [],
+      "entries": [
+        {
+          "entry": "work",
+          "params": []
+        }
+      ],
+      "fairness": "none used by safety; settles eventually is recorded only",
+      "unsupported": [
+        "references",
+        "imports",
+        "handlers",
+        "cancellation",
+        "ordering/abort contracts",
+        "entry contracts",
+        "pairwise/uniqueness/count induction",
+        "nested awaits",
+        "entry-to-entry calls",
+        "unverified helpers",
+        "temporal goals beyond per-invocation completion"
+      ],
+      "completion": {
+        "goals": [
+          {
+            "entry": "work",
+            "goal": "completes",
+            "span": {
+              "start": 59,
+              "end": 82
+            }
+          }
+        ],
+        "profile": {
+          "kind": "c1-action-cuts",
+          "version": 1,
+          "microtaskMode": "afterEvaluate",
+          "drain": "void 0;",
+          "resumption": "same-action-timed-drain",
+          "arrivals": "arbitrary-between-actions",
+          "eventBound": null,
+          "activationBound": null
+        },
+        "continuingRuntime": "assumed for completion",
+        "declaredEnvironmentCalls": "assumed total for completion",
+        "resumption": "checked only after finite source totality and complete exit correspondence",
+        "settlement": "assumed separately per reached request; no safety use"
+      },
+      "sha256": "e5ca524df7bdf92a139ff14f3b7635f86c40adffc1e4931e9e1905f7344253cc"
+    },
+    "unitsSha256": "4459868950c57939fba746877c0451b97e6ccb770a8330d313bb164015c266f9",
+    "properties": [
+      {
+        "kind": "state",
+        "text": "done === true || done === false",
+        "span": {
+          "start": 18,
+          "end": 58
+        }
+      }
+    ],
+    "units": [
+      {
+        "unit": "$init",
+        "kind": "init",
+        "span": {
+          "start": 18,
+          "end": 58
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          {
+            "roots": [],
+            "nodes": {}
+          }
+        ]
+      },
+      {
+        "unit": "work$0",
+        "kind": "entry",
+        "span": {
+          "start": 108,
+          "end": 120
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "verified",
+        "witness": [
+          "0",
+          {
+            "roots": [
+              "0"
+            ],
+            "nodes": {
+              "0": {
+                "kind": "object",
+                "fields": {
+                  "done": [
+                    "bool",
+                    "false"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "status": "verified",
+    "scope": "safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions",
+    "safety": {
+      "status": "verified",
+      "scope": "safety for arbitrary-length sequences and unboundedly many activations under the recorded assumptions",
+      "assumptionsUse": "temporal premises unused"
+    },
+    "completion": {
+      "manifestSha256": "090b39bb0a97a6121541907c38543b477fc63212d13f84e0113e925f2f60d709",
+      "binding": {
+        "sourceSha256": "a9de68ab5dc802fcde32d5453acef9fa3bd81052cb87bd449bb6ea2e5fe39e43",
+        "executableSha256": "0723f7b98d873bc60790a0536af8ea12f76b4fa8f973fb19716ede669e998118",
+        "assumptionsSha256": "e5ca524df7bdf92a139ff14f3b7635f86c40adffc1e4931e9e1905f7344253cc",
+        "safetyUnitsSha256": "4459868950c57939fba746877c0451b97e6ccb770a8330d313bb164015c266f9",
+        "implementationSha256": "40c6562e34e187360b07552ef60d7c1c3a59eaf2a7a445e2262c0802452c80ba",
+        "runtime": "v22.23.1",
+        "rule": "c1-per-invocation-completion-1",
+        "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45",
+        "goalsSha256": "1b584300f1af588deacff20a069f31b7ae798260b1cbf0f78fdf483428cd0016"
+      },
+      "closed": true,
+      "profile": {
+        "kind": "c1-action-cuts",
+        "version": 1,
+        "microtaskMode": "afterEvaluate",
+        "drain": "void 0;",
+        "resumption": "same-action-timed-drain",
+        "arrivals": "arbitrary-between-actions",
+        "eventBound": null,
+        "activationBound": null
+      },
+      "obligations": [
+        {
+          "id": "init",
+          "kind": "init",
+          "status": "discharged",
+          "safetyUnit": "$init",
+          "rule": "initial empty identity support"
+        },
+        {
+          "id": "work$0:safety",
+          "kind": "safety-step",
+          "status": "discharged",
+          "safetyUnit": "work$0"
+        },
+        {
+          "id": "work$0:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$0"
+        },
+        {
+          "id": "work$0:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 0,
+          "action": "call",
+          "sourceSpan": {
+            "start": 90,
+            "end": 122
+          },
+          "sourceSha256": "a9de68ab5dc802fcde32d5453acef9fa3bd81052cb87bd449bb6ea2e5fe39e43"
+        },
+        {
+          "id": "work$0:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$0:creation",
+          "kind": "creation",
+          "status": "checked",
+          "rule": "fresh invocation; positive birth ordinal; call executes first segment"
+        },
+        {
+          "id": "work$0:deletion",
+          "kind": "deletion",
+          "status": "checked",
+          "rule": "only actor reaches terminal; other identities remain live"
+        },
+        {
+          "id": "work$0:0:own-progress",
+          "kind": "own-progress",
+          "status": "discharged",
+          "unit": "work$0",
+          "check": 1,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 108,
+              "end": 120
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "a55a5daa6d317b01c63211e60fc03fe0acbb47d0c62a094b0c70e1cb4b0be54e"
+        },
+        {
+          "id": "work$0:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "discharged",
+          "unit": "work$0",
+          "check": 2,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 108,
+              "end": 120
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "a55a5daa6d317b01c63211e60fc03fe0acbb47d0c62a094b0c70e1cb4b0be54e"
+        },
+        {
+          "id": "profile",
+          "kind": "profile-correspondence",
+          "status": "checked",
+          "profile": {
+            "kind": "c1-action-cuts",
+            "version": 1,
+            "microtaskMode": "afterEvaluate",
+            "drain": "void 0;",
+            "resumption": "same-action-timed-drain",
+            "arrivals": "arbitrary-between-actions",
+            "eventBound": null,
+            "activationBound": null
+          },
+          "rule": "finite total source segments; native settlement and timed microtask drain are the same C1 action"
+        }
+      ],
+      "units": [
+        {
+          "unit": "work$0",
+          "querySha256": "a55a5daa6d317b01c63211e60fc03fe0acbb47d0c62a094b0c70e1cb4b0be54e",
+          "status": "verified",
+          "witness": [
+            "0",
+            {
+              "roots": [
+                "0"
+              ],
+              "nodes": {
+                "0": {
+                  "kind": "object",
+                  "fields": {
+                    "done": [
+                      "bool",
+                      "false"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "goals": [
+        {
+          "entry": "work",
+          "goal": "completes",
+          "span": {
+            "start": 59,
+            "end": 82
+          },
+          "status": "verified",
+          "scope": "each invocation returns normally (including suppressed writes) or reaches declared environment rejection",
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "1",
+            "waiting": [],
+            "terminal": "0"
+          },
+          "assumptions": [
+            {
+              "kind": "continuing-runtime",
+              "classification": "assumed-used"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "weak-resumption",
+              "classification": "discharged-unused",
+              "requested": false,
+              "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45"
+            }
+          ],
+          "nativeConfirmed": false
+        }
+      ],
+      "nativeConfirmed": false,
+      "trusted": [
+        "finite-control completion rule and source/identity frame checker",
+        "compiler exit/definedness coverage",
+        "C1 native action and timed-drain correspondence",
+        "Z3 including quantified outcome viability"
+      ],
+      "limitations": [
+        "no checked infinite-word realizability",
+        "no global draining/success/commit/count theorem",
+        "protocol temporal mode unsupported"
+      ]
+    }
+  }
+}

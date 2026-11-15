@@ -1,0 +1,71 @@
+{
+  "source": "// requires k === 9007199254740992\n// ensures result > k\nexport function bump(k: number) { return k + 1; }",
+  "report": {
+    "file": "input.ts",
+    "sha256": "438a36ba042253a0e087dc96dd09bcd7efdc513089db46a69905e0799eaba226",
+    "trusted": [
+      "Acorn parser",
+      "Node TypeScript type stripping",
+      "project type and module resolution and source snapshots",
+      "source-to-SMT translation",
+      "exact rational specification replay",
+      "Z3 and its WASM bindings",
+      "unmodified standard Number/Math/Object/Array builtins and prototypes",
+      "JavaScript runtime"
+    ],
+    "modules": [
+      {
+        "file": "input.ts",
+        "sha256": "438a36ba042253a0e087dc96dd09bcd7efdc513089db46a69905e0799eaba226",
+        "imports": []
+      }
+    ],
+    "dependencies": [],
+    "graphSha256": "7ce9ddb6c00b8f775a3039cd0cf32a2c268ec87619dfa75f66687a888ff242fa",
+    "outcomes": [
+      {
+        "fn": "bump",
+        "file": "input.ts",
+        "span": {
+          "start": 57,
+          "end": 106
+        },
+        "line": 3,
+        "column": 1,
+        "assumptions": [
+          {
+            "kind": "param-type",
+            "name": "k",
+            "type": "number"
+          },
+          {
+            "kind": "requires",
+            "text": "k === 9007199254740992",
+            "span": {
+              "start": 12,
+              "end": 34
+            },
+            "file": "input.ts"
+          }
+        ],
+        "status": "counterexample",
+        "inputs": {
+          "k": "9007199254740992"
+        },
+        "result": "9007199254740992",
+        "failed": [
+          {
+            "kind": "ensures",
+            "text": "result > k",
+            "span": {
+              "start": 46,
+              "end": 56
+            },
+            "file": "input.ts"
+          }
+        ],
+        "confirmed": true
+      }
+    ]
+  }
+}

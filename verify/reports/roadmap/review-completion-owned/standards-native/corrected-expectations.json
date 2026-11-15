@@ -1,0 +1,24 @@
+{
+  "note": "These rows are harness mistakes. They are not product findings. The corrected executions are in corrected.",
+  "discarded": [
+    {
+      "probe": "probe.mjs captures-and-admission letAfter/constAfter/letArgument",
+      "what": "Module-level let held is a scalar cell, so a later read is not a capture. Module-level const is rejected as a top-level VariableDeclaration before any capture check.",
+      "observed": {
+        "letAfter": "ADMITTED by the wrong program",
+        "constAfter": "Unsupported stateful top-level VariableDeclaration."
+      }
+    },
+    {
+      "command": "unannotated local let/const held",
+      "what": "The argument check rejects an unannotated local before the immutable-capture check.",
+      "observed": "Request arguments require scalar literals or visible bindings of the declared type."
+    }
+  ],
+  "corrected": [
+    { "id": "local-let-after", "binding": "let held: number = 1; n = held", "result": "REJECTED Captured held requires an immutable annotated scalar binding." },
+    { "id": "local-const-after", "binding": "const held: number = 1; n = held", "result": "ADMITTED captures include const:held" },
+    { "id": "local-let-argument-only", "binding": "let held: number = 1; n = a", "result": "ADMITTED; held is not a capture" },
+    { "id": "local-const-argument-only", "binding": "const held: number = 1; n = a", "result": "ADMITTED; held is not a capture" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "make",
+    "test-verify"
+  ],
+  "head": "1f326fdf2d1fcae58961b76ab1f90eee92e653f5",
+  "startedAt": "2026-11-14T14:53:42.385337+00:00",
+  "diffBefore": "",
+  "exitCode": 0,
+  "finishedAt": "2026-11-14T15:09:32.586317+00:00",
+  "inputsUnchanged": true,
+  "diffAfter": "",
+  "logSha256": "49f61de32895fc44b03721d7d46765ca2dc817e9e0288371ec48174db057d9e9"
+}

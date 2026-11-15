@@ -1,4 +1,5 @@
 import { stripTypeScriptTypes } from "node:module";
+import { isDeepStrictEqual } from "node:util";
 import { Parser, tokenizer } from "acorn";
 import { blame, fail } from "../error.mjs";
 import { options, references, walk, sha256, span } from "./ast.mjs";
@@ -6,6 +7,28 @@ import { parseClauses } from "./clauses.mjs";
 import { environmentOf, assumptionsOf, primitives, handles, globals } from "./environment.mjs";
 
 import { protocolEntryOf, protocolOf } from "./protocol-machine.mjs";
+
+// Preserve source admission provenance before any lowering consumer can edit
+// parsed clauses, operation domains, entries or the scheduler assumptions.
+const temporalMachines = new WeakMap();
+// Parser data includes signed zero, nonfinite literals, Maps and parser function
+// references. Retain those values directly; JSON is a lossy identity for them.
+function sourceSnapshot(value, copies = new Map()) {
+  if (!value || typeof value !== "object") return value;
+  if (copies.has(value)) return copies.get(value);
+  const copy = value instanceof Map ? new Map() : value instanceof Set ? new Set()
+    : value instanceof RegExp ? new RegExp(value.source, value.flags)
+      : Array.isArray(value) ? [] : Object.create(Object.getPrototypeOf(value));
+  copies.set(value, copy);
+  if (value instanceof Map) for (const [key, item] of value) copy.set(sourceSnapshot(key, copies), sourceSnapshot(item, copies));
+  if (value instanceof Set) for (const item of value) copy.add(sourceSnapshot(item, copies));
+  for (const [key, item] of Object.entries(value)) copy[key] = sourceSnapshot(item, copies);
+  return copy;
+}
+export function temporalMachineIdentity(machine) {
+  const owner = temporalMachines.get(machine);
+  return owner && isDeepStrictEqual(machine, owner.snapshot) ? owner.identity : undefined;
+}
 
 const reserved = new Set([...globals, "EventTarget", "Event", "AbortController", "AbortSignal", "Object", "Array", "result", "old", "real"]);
 function named(name, at, used) {
@@ -120,12 +143,42 @@ export function machineOf(file, source) {
       for (const fn of functions) machine.entries.push(protocolEntryOf(machine, fn, syntax.types, clauses, used, names));
       if (targets.size && machine.entries.some((e) => e.awaits.length)) fail("Listener and advisory-await modules are separate in C2a.", program);
     } else for (const fn of functions) machine.entries.push(entryOf(machine, fn, syntax.types, clauses, used, names));
+    const goals = clauses.filter((c) => c.kind === "leads"), fairness = clauses.filter((c) => c.kind === "fairness");
+    if (goals.length || fairness.length) {
+      if (machine.protocol) fail("Protocol temporal mode is unsupported until its correspondence is checked.", (goals[0] ?? fairness[0]).span);
+      if (!goals.length) fail("Resumption fairness requires a completion goal.", fairness[0].span);
+      if (fairness.length > 1) fail("Duplicate resumption fairness request.", fairness[1].span);
+      const seen = new Set();
+      for (const c of [...goals, ...fairness]) {
+        if (inside(c)) fail("Temporal clauses belong at module scope.", c.span);
+        const index = clauses.indexOf(c);
+        for (const direction of [-1, 1]) {
+          let cursor = c.comment;
+          for (let i = index + direction; i >= 0 && i < clauses.length; i += direction) {
+            const next = clauses[i];
+            const between = direction === -1 ? machine.source.slice(next.comment.end, cursor.start) : machine.source.slice(cursor.end, next.comment.start);
+            if (between.trim()) break;
+            if (!next.kind) fail("Unknown line in temporal contract block.", next.comment);
+            cursor = next.comment;
+          }
+        }
+        used.add(c);
+      }
+      for (const goal of goals) {
+        const name = goal.text.split(" ")[0];
+        if (!machine.entries.some((e) => e.name === name)) fail(`Unknown completion entry ${name}.`, goal.span);
+        if (seen.has(name)) fail(`Duplicate completion goal ${name}.`, goal.span);
+        seen.add(name);
+      }
+      machine.temporal = { goals: goals.map((c) => ({ ...c, entry: c.text.split(" ")[0] })), fairness };
+    }
     for (const c of clauses) if (c.kind && !used.has(c)) fail(`Misplaced ${c.kind} clause.`, c.span);
     let executable = stripped;
     for (const top of program.body) if (top.type === "ExportNamedDeclaration") executable = executable.slice(0, top.start) + " ".repeat(top.declaration.start - top.start) + executable.slice(top.declaration.start);
     machine.executable = executable;
     machine.executableSha256 = sha256(executable);
     machine.assumptions = assumptionsOf(machine);
+    if (machine.temporal) temporalMachines.set(machine, { identity: Symbol("source-owned completion"), snapshot: sourceSnapshot(machine) });
     return machine;
   });
 }

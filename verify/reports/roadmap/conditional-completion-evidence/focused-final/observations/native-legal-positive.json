@@ -1,0 +1,98 @@
+{
+  "source": "// @environment\n// resolves result > 0\n// settles eventually\ndeclare function op(): Promise<number>;\nlet n = 0;\n// state n >= 0\n// leads work completes\nexport async function work() { await op(); n = 1; }\n",
+  "result": {
+    "status": "ok",
+    "trace": {
+      "version": 1,
+      "sourceSha256": "217bf78db003981d8e105a097b8b7ff257878bc0c94e65d3b301ab73465bf51c",
+      "executableSha256": "ce231ad9f73f3a15cef03dc523a19bd52393d39ab9b204677188294e0c045795",
+      "assumptionsSha256": "ba7ed21863be783456cfe0567e51a9524006a70a369d8490e347ee060047f07f",
+      "actions": [
+        {
+          "kind": "call",
+          "entry": "work",
+          "args": []
+        },
+        {
+          "kind": "resolve",
+          "request": 1,
+          "op": "op",
+          "value": {
+            "type": "number",
+            "bits": "3ff0000000000000"
+          }
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "activations": []
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "call",
+            "entry": "work",
+            "args": []
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "0000000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": {
+            "kind": "resolve",
+            "request": 1,
+            "op": "op",
+            "value": {
+              "type": "number",
+              "bits": "3ff0000000000000"
+            }
+          },
+          "state": {
+            "n": {
+              "type": "number",
+              "bits": "3ff0000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "returned"
+            }
+          ]
+        }
+      ]
+    },
+    "requests": [
+      {
+        "seq": 1,
+        "op": "op",
+        "args": [],
+        "settled": true,
+        "activation": "1"
+      }
+    ]
+  }
+}

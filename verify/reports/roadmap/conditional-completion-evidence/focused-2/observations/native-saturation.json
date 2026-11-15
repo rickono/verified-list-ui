@@ -1,0 +1,102 @@
+{
+  "source": "// @environment\n// resolves Number.isFinite(result)\n// settles eventually\ndeclare function op(): Promise<number>;\nlet latest = 9007199254740991;\n// state true\n// leads work completes\nexport async function work() {\n  const id: number = latest + 1;\n  latest = id;\n  await op();\n}\n",
+  "result": {
+    "status": "ok",
+    "trace": {
+      "version": 1,
+      "sourceSha256": "f02b2454ee1cf88f47e2c9170a633acfb888f310aac5e03e3401a5488c789694",
+      "executableSha256": "938966cfaf363f2113a8930add908dff139ed7cb01384a6f82510a3a5e52ffcb",
+      "assumptionsSha256": "7e16e0786e5164a1eeec50620c04f820f838931346266a607f540937477b1457",
+      "actions": [
+        {
+          "kind": "call",
+          "entry": "work",
+          "args": []
+        },
+        {
+          "kind": "call",
+          "entry": "work",
+          "args": []
+        }
+      ],
+      "steps": [
+        {
+          "step": 0,
+          "action": {
+            "kind": "init"
+          },
+          "state": {
+            "latest": {
+              "type": "number",
+              "bits": "433fffffffffffff"
+            }
+          },
+          "activations": []
+        },
+        {
+          "step": 1,
+          "action": {
+            "kind": "call",
+            "entry": "work",
+            "args": []
+          },
+          "state": {
+            "latest": {
+              "type": "number",
+              "bits": "4340000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": {
+            "kind": "call",
+            "entry": "work",
+            "args": []
+          },
+          "state": {
+            "latest": {
+              "type": "number",
+              "bits": "4340000000000000"
+            }
+          },
+          "activations": [
+            {
+              "id": "1",
+              "entry": "work",
+              "status": "live"
+            },
+            {
+              "id": "2",
+              "entry": "work",
+              "status": "live"
+            }
+          ]
+        }
+      ]
+    },
+    "requests": [
+      {
+        "seq": 1,
+        "op": "op",
+        "args": [],
+        "settled": false,
+        "activation": "1"
+      },
+      {
+        "seq": 2,
+        "op": "op",
+        "args": [],
+        "settled": false,
+        "activation": "2"
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "command": [
+    "/usr/bin/caffeinate",
+    "-i",
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py",
+    "--",
+    "python3",
+    "/Users/rick/verification-vibes/artifacts/roadmap-20261113/completion-owned/capture.py",
+    "power-targeted",
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-name-pattern=native rank arithmetic|a pinned imported take|the unchanged Remeda eager take|undefined assignments and postfix|number bridges check|a real abort transformation that loses settled|six pilots and all corrected judge variants",
+    "tests/verify/loops.test.mjs",
+    "tests/verify/remeda-imports.test.mjs",
+    "tests/verify/remeda-take.test.mjs",
+    "tests/verify/scalar-state.test.mjs",
+    "tests/verify/specifications.test.mjs",
+    "tests/verify/stateful-abort-frames.test.mjs",
+    "tests/verify/stateful-outcomes.test.mjs"
+  ],
+  "startedAt": "2026-11-14T21:27:23.770258+00:00",
+  "finishedAt": "2026-11-14T21:59:50.288349+00:00",
+  "exitCode": 1,
+  "powerEvents": [
+    {
+      "time": "2026-11-14T16:27:40-05:00",
+      "kind": "Sleep",
+      "summary": "Entering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:59%) 323 secs"
+    },
+    {
+      "time": "2026-11-14T16:33:03-05:00",
+      "kind": "DarkWake",
+      "summary": "DarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using BATT (Charge:59%) 5 secs"
+    },
+    {
+      "time": "2026-11-14T16:33:08-05:00",
+      "kind": "Sleep",
+      "summary": "Entering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:59%) 24 secs"
+    },
+    {
+      "time": "2026-11-14T16:33:32-05:00",
+      "kind": "DarkWake",
+      "summary": "DarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using BATT (Charge:59%) 6 secs"
+    },
+    {
+      "time": "2026-11-14T16:33:38-05:00",
+      "kind": "Sleep",
+      "summary": "Entering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:59%) 701 secs"
+    },
+    {
+      "time": "2026-11-14T16:45:19-05:00",
+      "kind": "DarkWake",
+      "summary": "DarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using BATT (Charge:59%) 17 secs"
+    },
+    {
+      "time": "2026-11-14T16:45:36-05:00",
+      "kind": "Sleep",
+      "summary": "Entering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:59%) 151 secs"
+    },
+    {
+      "time": "2026-11-14T16:48:07-05:00",
+      "kind": "DarkWake",
+      "summary": "DarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using BATT (Charge:59%) 8 secs"
+    },
+    {
+      "time": "2026-11-14T16:48:15-05:00",
+      "kind": "Sleep",
+      "summary": "Entering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:59%) 354 secs"
+    },
+    {
+      "time": "2026-11-14T16:54:09-05:00",
+      "kind": "DarkWake",
+      "summary": "DarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using BATT (Charge:59%) 15 secs"
+    },
+    {
+      "time": "2026-11-14T16:54:24-05:00",
+      "kind": "Sleep",
+      "summary": "Entering Sleep state due to 'Maintenance Sleep':TCPKeepAlive=active Using Batt (Charge:58%) 326 secs"
+    },
+    {
+      "time": "2026-11-14T16:59:50-05:00",
+      "kind": "DarkWake",
+      "summary": "DarkWake from Deep Idle [CDNP] : due to smc.sysState.Wake(0x70070000) wifibt SMC.OutboxNotEmpty/ Using BATT (Charge:58%)"
+    }
+  ],
+  "sleepObserved": true,
+  "status": "FAIL",
+  "scope": "Temporary idle-sleep assertion scoped to this utility; no display or global sleep-setting change. Explicit sleep can still occur."
+}

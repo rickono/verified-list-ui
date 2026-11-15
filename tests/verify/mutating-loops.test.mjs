@@ -31,8 +31,34 @@ for (const c of cases) test(`K judgment ${c.id}`, async (t) => {
     assert.ok(o.status === "verified" || o.status === "unknown", JSON.stringify(o));
   } else {
     unproved(o);
-    if (/H0[123]-/.test(c.id)) { assert.equal(o.status, "counterexample"); assert.equal(o.confirmed, true); }
+    // A weak invariant can yield a zero-iteration model whose replay passes.
+    // Original cases still cannot verify; the companions below require a bug.
   }
+});
+
+for (const c of cases.filter((c) => /^H0[123]-/.test(c.id))) test(`K replay ${c.id} has only natively failing inputs`, async (t) => {
+  const source = c.id === "H03-fresh-array-boolean" ? "// requires flag\n" + c.source
+    : c.source.replace("0 <= n", "1 <= n");
+  assert.notEqual(source, c.source);
+  const original = Function(stripTypeScriptTypes(c.source, { mode: "strip" }) + "\nreturn f;")();
+  const fn = Function(stripTypeScriptTypes(source, { mode: "strip" }) + "\nreturn f;")();
+  assert.equal(fn.toString(), original.toString(), "Only the companion precondition changes");
+  const inputs = c.id === "H03-fresh-array-boolean" ? [[true]] : [[1], [2]];
+  for (const args of inputs) assert.equal(c.post(fn(...args), args, args), false);
+  const r = await check(source), o = r.outcomes.find((o) => o.fn === "f");
+  t.diagnostic(JSON.stringify({ id: c.id, scope: "all companion inputs fail natively", ...brief(o) }));
+  assert.equal(o.status, "counterexample", JSON.stringify(o));
+  assert.equal(o.confirmed, true);
+});
+
+test("K zero-iteration fresh-array control cannot report a native contract failure", async (t) => {
+  const c = cases.find((c) => c.id === "H01-fresh-array");
+  const source = c.source.replace("0 <= n && n <= 2", "n === 0");
+  const fn = Function(stripTypeScriptTypes(source, { mode: "strip" }) + "\nreturn f;")();
+  for (const n of [0, -0]) assert.equal(c.post(fn(n), [n], [n]), true);
+  const o = (await check(source)).outcomes.at(-1);
+  t.diagnostic(JSON.stringify({ scope: "correct zero-iteration source; invariant may be insufficient", ...brief(o) }));
+  assert.ok(o.status === "verified" || o.status === "unknown" && ["induction-gap", "request-timeout"].includes(o.reason), JSON.stringify(o));
 });
 
 for (const c of pilots) test(`K candidate ${c.name}`, async (t) => {

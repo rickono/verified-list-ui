@@ -1,0 +1,172 @@
+{
+  "status": "PASS",
+  "baselineAncestor": "32bd5b260aa116ca88642a1479bed8d3fc447f4b",
+  "preparedSnapshot": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+  "implementation": "20ff20556fe19a72f73ccf3708d7bd7329ec2bc0",
+  "implementationTree": "822ba0be03d00525e0539f03137d86f1ccace12f",
+  "checkout": "/Users/rick/.t3/worktrees/verified-list-ui/t3-64551363",
+  "runtime": "v22.23.1",
+  "packageSnapshots": {
+    "acorn@8.19.0": {
+      "path": "/Users/rick/verification-vibes/verified-list-ui/node_modules/.pnpm/acorn@8.19.0/node_modules/acorn",
+      "files": {
+        "CHANGELOG.md": "dd9bc5e89646406105c458485f3d35e986c4a668d1bc6c1c5c7253de536cf464",
+        "LICENSE": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7",
+        "README.md": "b7783c23979634a89060164d8092e591639198b4460aefbed4ba9f8da478a977",
+        "bin/acorn": "4c3eb6f1d8932790dbff043839f8ee7686bc614a59ef577e96fed618a4a4b1b8",
+        "dist/acorn.d.mts": "df8107deaf41869871690db7306f87b587e59660d659b1fbb64a7a30cea7cf36",
+        "dist/acorn.d.ts": "df8107deaf41869871690db7306f87b587e59660d659b1fbb64a7a30cea7cf36",
+        "dist/acorn.js": "b95392d79457d0357555c5ed3e56302d074b92dff119bcf3b44179500b10e9df",
+        "dist/acorn.mjs": "76254fc76529713b4dfd2532972d17a991ffd9aafeebb1f977445b5506b9fb0b",
+        "dist/bin.js": "fffd9df1d9158c4580068ad17c3176c34fe46f59021b8cd5780454994764dc30",
+        "package.json": "04d6fecaafb5e3d20a38fc3b64fed84bb3830a7759a8c00400ebcb87331fec00"
+      }
+    },
+    "z3-solver@5.3.3": {
+      "path": "/Users/rick/verification-vibes/verified-list-ui/node_modules/.pnpm/z3-solver@5.3.3/node_modules/z3-solver",
+      "files": {
+        "LICENSE.txt": "e617cad2ab9347e3129c2b171e87909332174e17961c5c3412d0799469111337",
+        "README.md": "c1fc1a53a4142bdffa60e091bfb5b993c793d430b7fb7d1e0faacd1f54d9c86f",
+        "build/browser.d.ts": "65615af0947d38ea3a77ba0e9ce0502402a2c15502539d37cb6061c90b3d6507",
+        "build/browser.js": "ee4bf26710d4361249e490922796b5f12c039f1007e59c75c91c534981f912df",
+        "build/high-level/high-level.d.ts": "7b54a133f4b16350db630766bba9473f7d05203d1ed311d14e822ca5db7497c9",
+        "build/high-level/high-level.js": "b15a29989f810e1c8a819e40b3916d53f4fb3445fe0132ea61a2d0a10a140986",
+        "build/high-level/index.d.ts": "5f4f1c736a2c413acea9f391b62177660334912926f1d6568bb65540f77ae8eb",
+        "build/high-level/index.js": "a94d556c8ad7b672656098c0bedd7cc9bd542a5befaafa7560c5af1280da265e",
+        "build/high-level/types.d.ts": "a95c8f807afb8cc82d8b808a852a548904fa48efce6fa12d49cb4eba420f850f",
+        "build/high-level/types.js": "6864671cf1f11072e16cbc8174dc1ed297cef44c7099dee7b81eb1f98e17c616",
+        "build/high-level/utils.d.ts": "b287e0142e45b6e755400ee228f835d9f00ddd1b4098600f64ce44cb634cb6f4",
+        "build/high-level/utils.js": "3bceccc1f965845b3e008b849e572379c06522a8cedf085a9706b938f51dfaf7",
+        "build/kill-threads.d.ts": "dc23e2119eb15db5c4dd6d1c350b701c1b432155ae56db14f017d41d6a898a85",
+        "build/kill-threads.js": "2bd41cbd133be2c9a9cbbec7b2d3772d1fe21305208f2bf53d6e7375d9265238",
+        "build/low-level/index.d.ts": "592cc93cf93f81e8280bf661cda76532f4c46294ec12b1bf73a77d674951e390",
+        "build/low-level/index.js": "862752e3941e15fc708e7c1cfa331d9f7ddc4be20e2b71dd0df293d205dac48c",
+        "build/low-level/types.__GENERATED__.d.ts": "11e3f971e77905cbce09a56fa96a81d3333403d0bfc627bc04f60f85af7f0dc3",
+        "build/low-level/types.__GENERATED__.js": "d7b1ce9c14c5c9ef1c3580f9a532694fd5c727598fd4567760ee2e0f61155f3e",
+        "build/low-level/wrapper.__GENERATED__.d.ts": "27d6cdc6852361cd00f8e668afbb5fc214ed6b200d87c6b5e39fb1ddc10d2e10",
+        "build/low-level/wrapper.__GENERATED__.js": "cf9bdc2fa7df5a82486dcaf710472e5486893c478183dc0ae58f36080047d94a",
+        "build/node.d.ts": "17aecca3c4edf6c20ad6d22bdcdbb2c5845941d5e6b3d538fea9616bece8c873",
+        "build/node.js": "28d5055ef6271b5cabd0b6f1647d1fb4fafed130ad8d09fabdcfee3384c36c98",
+        "build/z3-built.js": "5d2063b4c07d5b5cd78ad546a44577f50882276650c531b3d0c8c1098fd957f6",
+        "build/z3-built.wasm": "591c5a534abf69c74d6c21813ef36c7e1b2d9b6151bf871a7be4803f542fa377",
+        "package.json": "3185912abc91c649fde0433bf7ce5e3f09dbabdabc73a83899fbc0d89a70151b"
+      }
+    },
+    "async-mutex@0.3.2": {
+      "path": "/Users/rick/verification-vibes/verified-list-ui/node_modules/.pnpm/async-mutex@0.3.2/node_modules/async-mutex",
+      "files": {
+        "LICENSE": "afdf40d8e1d2478ab7ee49dfa0e75847033d59ed70c4368ddd4846f1eab2ff9e",
+        "README.md": "cc447fc6d7dc9311f32782f45926a2d7d4999684206ca46af87e2a8c8b1eb9ed",
+        "es6/Mutex.js": "32798db733032f550279616e123bf2d5449ca8e03776c5e19cf299cd1a7ea4c3",
+        "es6/MutexInterface.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "es6/Semaphore.js": "dd3f20c59fe68771f69e400365d9ff50d00b4e135b254bcf908ca658b2b7af41",
+        "es6/SemaphoreInterface.js": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "es6/errors.js": "338f3f53258049722e661533ed6ca489e226a7c60d7f94ecddb01541f083fb07",
+        "es6/index.js": "ae6e1c284fe0cff719fcbac6bdfa0b6f2016aa2f0d43acac0c8b2f47352faf5b",
+        "es6/tryAcquire.js": "32cc9ea0829d2d97b5b5e7c9c5ded1028e98d048287c07b4631fda31f7126ed5",
+        "es6/withTimeout.js": "d5eb76629c7ee6bcd18a0a41c57cdddb6ee4fdc279c379074a39ac6f4dff71e2",
+        "index.mjs": "f4781d3a259c032bd6814962cd2ac609730edd952c7d2c48df36160b62b7606f",
+        "lib/Mutex.d.ts": "4a24d83c0d8f489465c4d38ed9fd87121c8a2cf50c47efe09c2eca93d39fa908",
+        "lib/Mutex.js": "3f1eb573be7e5c5e89047ad7612d75dee4c178117ee5275280613f138b428651",
+        "lib/MutexInterface.d.ts": "fb14266ae4070bd16db6b071e98887452bc359695c40742e38515a89dbc80a63",
+        "lib/MutexInterface.js": "d43aa81f5bc89faa359e0f97c814ba25155591ff078fbb9bfd40f8c7c9683230",
+        "lib/Semaphore.d.ts": "b15cdbb45919bc3b8e6b6f962d65382e85061d70bc26a968604f3dce4ad3a891",
+        "lib/Semaphore.js": "44eb5bc26073831dbdba2a47dfaa9ddc7d729d66d4091abc4d756bca61239886",
+        "lib/SemaphoreInterface.d.ts": "c052e32b9de53cd2596f196a0901801961bd7a31be9fac4ac2f117e4103e3a07",
+        "lib/SemaphoreInterface.js": "d43aa81f5bc89faa359e0f97c814ba25155591ff078fbb9bfd40f8c7c9683230",
+        "lib/errors.d.ts": "a5c38939c3e22954a7166d80ab931ac6757283737b000f1e6dc924c6f4402b88",
+        "lib/errors.js": "14c30962b07d44a0de1b93165129d42b44ff5d26b3481c961481fdfc7b1cf1d8",
+        "lib/index.d.ts": "31a863da9da2a3edec16665695bdbc3134e853195f82dafec58e98c8e1bb3119",
+        "lib/index.js": "4e6d3766d65e1bb7bc26224a15c0ab54e8bf97136c1d93e4b7fd09a38efa710a",
+        "lib/tryAcquire.d.ts": "f0b9f6d5db82c3d1679f71b187c4451dbc2875ba734ce416a4804ad47390970a",
+        "lib/tryAcquire.js": "cc000cf19408a7f038c0c5e9198e552caa3072a4dabd31b10c8bdee58a30dcff",
+        "lib/withTimeout.d.ts": "d6b58d955981bc1742501b792f1ab9f4cba0c4611f28dcf1c99376c1c33c9f9c",
+        "lib/withTimeout.js": "ebc3e00595950e71974237fb793c40b210838b0ecb3abb74985f3366731001db",
+        "package.json": "36e3a798a703f04c07a701f475a97de91672c5d3e0d759ab6f428b45537c109a"
+      }
+    },
+    "tslib@2.9.1": {
+      "path": "/Users/rick/verification-vibes/verified-list-ui/node_modules/.pnpm/tslib@2.9.1/node_modules/tslib",
+      "files": {
+        "CopyrightNotice.txt": "da16ddb65f8ca390998fb99223d0112498b56b45784d00afd77ff8ce1ac4de8b",
+        "LICENSE.txt": "210b19e543130388c68654b7497e967119ce17145f66ab7d85688fbd70f08751",
+        "README.md": "02c17a12403fe504e67304c8c39fa0e833392b580935ad468423f1d003ae07ca",
+        "SECURITY.md": "89c4e4b9ba7ec705482e2de05135d0626d33bf8c2c66119c65d7a306dd83459c",
+        "modules/index.d.ts": "b8f34dd1757f68e03262b1ca3ddfa668a855b872f8bdd5224d6f993a7b37dc2c",
+        "modules/index.js": "b3a4765da2bc019c79f2c2c12b36f860e946119d976897f1ce945caf227d0468",
+        "modules/package.json": "f2a77d1fa2e7ee710b2835b2933d75d9c7f5dad4f1bab69e1679876e32b5e9eb",
+        "package.json": "7e9ccc6977540dd94f86f98d0ab9ac405cd3507ac5a2c34752498b250718366b",
+        "tslib.d.ts": "38fc716135a3a6f39a6d656dff26da7404c375b61fdfde3913109214e4ca4008",
+        "tslib.es6.html": "759c26504a9ccbbfcd730269c9c5ef15512cf16ba617e61a92212365e57c9f5d",
+        "tslib.es6.js": "41e3426dec3004b8d683fe1ed78ea82c3504f6426d0b705f62811b918298d865",
+        "tslib.es6.mjs": "2497254650a79bbf970717b93a2d21591cce264bfef88264ccdad546003b0460",
+        "tslib.html": "e14179f388a9690437165289d45ff7747f0f839538b5abec63d2dcfe21c2a5f4",
+        "tslib.js": "26d4007ca82663612bdef5321614b21865cfe4fc299bd339d3680f5134de550d"
+      }
+    }
+  },
+  "finalSourceAndTestFiles": 38,
+  "publicReportControls": {
+    "zero": "verified",
+    "one": "verified",
+    "two": "verified",
+    "branching-prefix": "verified",
+    "two-async-entries": "verified",
+    "boolean-outcome": "verified",
+    "correlated-outcome": "verified",
+    "reachable-partial-domain": "verified",
+    "positive-outcome": "verified",
+    "rejection-only": "verified",
+    "false": "unknown",
+    "partial": "unknown",
+    "missing-settlement": "unknown",
+    "saturation": "verified",
+    "wrong-safety": "counterexample",
+    "max-depth-zero": "unknown",
+    "timeout-one": "unknown"
+  },
+  "parity": {
+    "prepared": "5f0fb47a0a822d62537f296ef804d5037eebba5c",
+    "defaults": [
+      "bugs.ts",
+      "callback-bugs.ts",
+      "callbacks.ts",
+      "calls-bugs.ts",
+      "calls.ts",
+      "collections.ts",
+      "heap-bugs.ts",
+      "heap.ts",
+      "loop-gaps.ts",
+      "loops.ts",
+      "valid.ts"
+    ],
+    "stateful": [
+      "pilots/search-env.ts",
+      "pilots/search-gap.ts",
+      "pilots/search-overclaim.ts",
+      "pilots/search-stale.ts",
+      "pilots/search.ts",
+      "variants/V11-rejects.ts",
+      "variants/V18-two-awaits.ts",
+      "variants/V18b-two-awaits-annotated.ts",
+      "variants/V6-inflight-count.ts",
+      "variants/V7-latest-2p53.ts",
+      "variants/V8-second-entry-clear.ts",
+      "variants/V8b-second-entry-reset.ts"
+    ],
+    "reports": [
+      "pilots/search.ts",
+      "variants/V11-rejects.ts",
+      "valid.ts",
+      "bugs.ts"
+    ],
+    "native": [
+      "pilots/search.ts",
+      "variants/V11-rejects.ts"
+    ]
+  },
+  "ownedProcesses": [],
+  "coreUnchangedDuringAllRuns": true,
+  "nativeInfiniteConfirmed": false,
+  "cleanup": "temporary dependency link removed; solver/replay/test processes reaped"
+}

@@ -1,0 +1,62 @@
+name: Source verifier
+"on":
+  pull_request:
+    paths:
+      - '.github/workflows/verify.yml'
+      - 'scripts/*verifier*.py'
+      - 'scripts/serial-verify.py'
+      - 'verify/*.mjs'
+      - 'verify/bin/**'
+      - 'verify/stateful/**'
+      - 'verify/conformance/**'
+      - 'verify/examples/**'
+      - 'verify/reports/**/*.mjs'
+      - 'verify/reports/**/*.js'
+      - 'verify/reports/**/*.ts'
+      - 'verify/reports/roadmap/library-campaigns/inputs.json'
+      - 'tests/verify/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'Makefile'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: source-verifier-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    name: Verifier (Node 22, Linux)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          version: 10.15.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22.23.1
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Check immutable campaign inputs
+        run: node verify/reports/roadmap/library-campaigns/check.mjs --inputs-only
+      - name: Check deterministic loop replay controls
+        run: python3 scripts/serial-verify.py -- python3 scripts/record-verifier-run.py "$RUNNER_TEMP/verifier-ci/loop-controls" -- node --test --test-concurrency=1 --test-name-pattern='K replay|K zero-iteration' tests/verify/mutating-loops.test.mjs
+      - name: Run the full verifier suite
+        run: python3 scripts/serial-verify.py -- python3 scripts/record-verifier-run.py "$RUNNER_TEMP/verifier-ci/full" -- make test-verify
+      - name: Run the current-model numerical campaign
+        run: python3 scripts/record-verifier-run.py "$RUNNER_TEMP/verifier-ci/campaign-command" -- node verify/reports/roadmap/library-campaigns/check.mjs "$RUNNER_TEMP/verifier-ci/campaign"
+      - name: Keep logs, source hashes and native evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: verifier-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/verifier-ci/
+          if-no-files-found: warn
+          retention-days: 14

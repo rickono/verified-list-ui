@@ -1,0 +1,25 @@
+{
+  "source": "// @environment\n// resolves Object.is(result, 0) && Object.is(result, -0)\n// settles eventually\ndeclare function op(): Promise<number>;\nlet n = 0;\n// state n >= 0\n// leads work completes\nexport async function work() { await op(); n = 1; }\n",
+  "sourceSpan": {
+    "start": 46,
+    "end": 47
+  },
+  "sourceSlice": "0",
+  "changedValueIsNegativeZero": true,
+  "before": "377d6aed9f43a0985fbb34de70fc5d78e438f598aa95a81797ed596db1a50a80",
+  "after": "377d6aed9f43a0985fbb34de70fc5d78e438f598aa95a81797ed596db1a50a80",
+  "sameIdentity": true,
+  "owned": true,
+  "missing": [],
+  "viability": [
+    {
+      "kind": "outcome-viability",
+      "smt": "(=> call_fact0 (exists ((completion_outcome0 (_ BitVec 64))) (ite (= ((_ to_fp 11 53) completion_outcome0) ((_ to_fp 11 53) #x8000000000000000)) (= ((_ to_fp 11 53) completion_outcome0) (fp.neg ((_ to_fp 11 53) #x0000000000000000))) (= ((_ to_fp 11 53) completion_outcome0) ((_ to_fp 11 53) #x8000000000000000)))))",
+      "span": {
+        "start": 218,
+        "end": 229
+      },
+      "exit": 0
+    }
+  ]
+}

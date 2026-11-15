@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import { writeFileSync, readFileSync } from 'node:fs';
+import { machineOf, temporalMachineIdentity } from '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/stateful/machine.mjs';
+import { transitionsOf } from '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/verify/stateful/transitions.mjs';
+const root='/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator';
+const text=readFileSync(root+'/tests/verify/fixtures/stateful/completion/false.ts','utf8');
+const cases=[];
+for (const kind of ['numeric-zero', 'added-toJSON', 'added-function-control']) {
+ const m=machineOf('false.ts',text); assert.ok(temporalMachineIdentity(m));
+ let calls=0;
+ if(kind==='added-toJSON') { m.toJSON=()=>{calls++; return {};}; m.environment.get('op').resolves=[]; }
+ if(kind==='added-function-control') m.entries[0].segments.find((segment)=>segment.length)[0].completionFallthrough=()=>true;
+ if(kind==='numeric-zero') {
+   const source=text.replace('// resolves false','// resolves Object.is(result, 0) && Object.is(result, -0)');
+   const signed=machineOf('signed.ts',source);
+   signed.environment.get('op').resolves[0].ast.left.arguments[1].value=-0;
+   assert.equal(temporalMachineIdentity(signed),undefined);
+   assert.throws(()=>transitionsOf(signed),/Source-bound completion requires/);
+ } else {
+   assert.equal(temporalMachineIdentity(m),undefined);
+   assert.throws(()=>transitionsOf(m),/Source-bound completion requires/);
+ }
+ assert.equal(calls,0); cases.push({kind,status:'rejected-before-compilation',toJSONCalls:calls});
+}
+writeFileSync(new URL('./current-source-boundary.json',import.meta.url),JSON.stringify({code:'776fa71',cases,scope:'Coordinator data-boundary checks; no new solver verdict, native trace or independent review.'},null,2)+'\n');
+console.log(JSON.stringify({status:'PASS',cases:cases.length}));

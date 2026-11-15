@@ -3,6 +3,21 @@ import { fail } from "../error.mjs";
 import { id, member, reference, transform, span, walk, sha256 } from "./ast.mjs";
 
 import { protocolTransitionsOf } from "./protocol-transitions.mjs";
+import { temporalMachineIdentity } from "./machine.mjs";
+
+// Only the transition producer can register a completion graph. A copied or
+// substituted compiler result cannot gain provenance by rebuilding its plan.
+const completionGraphs = new WeakMap();
+function freezeGraph(value, seen = new WeakSet()) {
+  if (!value || typeof value !== "object" || seen.has(value)) return;
+  seen.add(value);
+  for (const child of Object.values(value)) freezeGraph(child, seen);
+  Object.freeze(value);
+}
+export function ownsCompletionGraph(machine, graph) {
+  const owner = completionGraphs.get(graph);
+  return !!owner && owner.machine === machine && owner.identity === temporalMachineIdentity(machine);
+}
 
 const clause = (c, ast) => ({ ...c, ast });
 const undef = (at) => id("undefined", at);
@@ -18,21 +33,25 @@ const captures = (entry, k) => entry.awaits[k].captures;
  */
 export function transitionsOf(machine) {
   if (machine.protocol) return protocolTransitionsOf(machine);
-  const units = [], cells = [...machine.cells.values()], at = machine.state[0]?.span ?? machine.always[0].span;
+  const sourceIdentity = machine.temporal ? temporalMachineIdentity(machine) : undefined;
+  if (machine.temporal && !sourceIdentity)
+    fail("Source-bound completion requires the unchanged frontend machine.", machine.temporal.goals[0].span);
+  const units = [], completionRejections = [], cells = [...machine.cells.values()], at = machine.state[0]?.span ?? machine.always[0].span;
   const stateType = { kind: "object", fields: cells.map((c) => ({ name: c.name, type: c.type, optional: false })) };
   const stateParam = { name: "$s", type: stateType, node: id("$s", at) };
   const state = (owner) => machine.state.map((c) => clause(c, transform(c.ast, onCells(machine, owner))));
   const always = () => machine.always.map((c) => clause(c, transform(c.ast, onCells(machine, "$s"))));
-  const emit = (u) => {
+  const emit = (u, into = units) => {
     const body = { type: "BlockStatement", body: u.body, ...u.span };
     const fn = { type: "FunctionDeclaration", id: id(u.name, u.span), params: u.params.map((p) => p.node), body, async: false, generator: false, ...u.span };
-    const header = { name: u.name, top: fn, fn, params: u.params, requires: u.requires, ensures: u.ensures, modifies: u.modifies };
+    const header = { name: u.name, top: fn, fn, params: u.params, requires: u.requires, ensures: u.ensures, modifies: u.modifies,
+      ...(u.control ? { control: u.control } : {}) };
     const target = compileAstUnit(machine, header);
     for (const binding of u.outputCaptures ?? []) {
       const field = target.resultType.fields?.find((f) => f.name === binding.name);
       if (field?.type !== binding.type || field.optional) fail(`Captured ${binding.name} does not have its declared scalar type.`, binding.node);
     }
-    units.push({ ...u, target });
+    into.push({ ...u, target });
   };
   const initial = state("result");
   if (!initial.length) initial.push({ kind: "ensures", text: "true", span: at, ast: { type: "Literal", value: true, raw: "true", ...at } });
@@ -50,12 +69,22 @@ export function transitionsOf(machine) {
       requires.push(...before.op.resolves.map((c) => clause(c, transform(c.ast, rename(names)))));
     }
     const ensures = [...state("$s"), ...always()];
+    const temporal = !!machine.temporal;
+    if (temporal) for (const s of segment) walk(s, (n) => {
+      if (["ArrayExpression", "ObjectExpression", "NewExpression"].includes(n.type))
+        fail("Completion supports scalar acyclic segments; adoption and allocation effects are unsupported.", n);
+    });
+    const exit = (kind, node, rankAfter, request) => ({ kind, span: span(node), rankAfter,
+      ...(request ? { request } : {}) });
+    const terminalReturn = (n) => ({ ...returning(undef(n), n),
+      ...(temporal ? { completionExit: exit("returned", n, 0) } : {}) });
     const body = segment.map((s) => transform(s, (n, p, key) => {
       if (n.type === "ReturnStatement") {
         // Keep evaluation of explicit return expressions; entry return values
         // are not properties of this stateful slice.
-        if (!n.argument) return returning(undef(n), n);
-        return { type: "BlockStatement", body: [{ type: "ExpressionStatement", expression: transform(n.argument, onCells(machine, "$s")), ...span(n.argument) }, returning(undef(n), n)], ...span(n) };
+        if (!n.argument) return terminalReturn(n);
+        return { type: "BlockStatement", body: [{ type: "ExpressionStatement", expression: transform(n.argument, onCells(machine, "$s")), ...span(n.argument),
+          ...(temporal ? { completionReturnExpression: true } : {}) }, terminalReturn(n)], ...span(n) };
       }
       return onCells(machine, "$s")(n, p, key);
     }));
@@ -65,16 +94,33 @@ export function transitionsOf(machine) {
       const names = new Map(entry.live[k].map((p) => [p.name, member("result", p.name, p.node)]));
       ensures.push(...after.pending.map((c) => clause(c, transform(c.ast, (n, p, key) =>
         onCells(machine, "$s")(n, p, key) ?? (reference(n, p, key) ? names.get(n.name) : undefined)))));
-      body.push(returning(record(live.map((p) => [p.name, p.argument ? transform(p.node, onCells(machine, "$s")) : id(p.name, p.node)]), after), after));
-    } else if (segment.at(-1)?.type !== "ReturnStatement") body.push(returning(undef(at), at));
+      const value = returning(record(live.map((p) => [p.name, p.argument ? transform(p.node, onCells(machine, "$s")) : id(p.name, p.node)]), after), after);
+      if (temporal) {
+        const names = new Map([["result", "$outcome"]]);
+        const argumentsByName = new Map(after.op.params.map((p, i) => [p.name, member("result", `$request_${i}`, p.node)]));
+        const resolves = after.op.resolves.map((c) => clause(c, transform(c.ast, (n, p, key) =>
+          reference(n, p, key) ? argumentsByName.get(n.name) ?? rename(names)(n, p, key) : undefined)));
+        value.completionExit = { ...exit("waiting", after, entry.awaits.length - k,
+          { op: after.op.name, result: after.op.result, rejects: after.op.rejects, resolves }), site: k };
+      }
+      body.push(value);
+    } else if (segment.at(-1)?.type !== "ReturnStatement") body.push({ ...terminalReturn(at),
+      ...(temporal ? { completionFallthrough: true, completionExit: exit("fallthrough", at, 0) } : {}) });
     const writes = new Map();
     for (const s of segment) walk(s, (n) => {
       const target = n.type === "AssignmentExpression" ? n.left : n.type === "UpdateExpression" ? n.argument : undefined;
       if (target?.type === "Identifier" && machine.cells.has(target.name)) writes.set(target.name, target);
     });
     const modifies = [...writes].map(([name, node]) => ({ kind: "modifies", text: name, span: span(node), ast: member("$s", name, node) }));
-    steps.push({ name: `${entry.name}$${k}`, kind: k === 0 ? "entry" : "resume", entry: entry.name, segment: k, span: at,
-      params, requires, ensures, modifies, body, outputCaptures: after ? captures(entry, k) : [] });
+    const step = { name: `${entry.name}$${k}`, kind: k === 0 ? "entry" : "resume", entry: entry.name, segment: k, span: at,
+      params, requires, ensures, modifies, body, outputCaptures: after ? captures(entry, k) : [],
+      ...(temporal ? { control: { entry: entry.name, segment: k, action: k === 0 ? "call" : "resolve",
+        rankBefore: entry.segments.length - k, span: at } } : {}) };
+    steps.push(step);
+    if (temporal && before?.op.rejects) emit({ ...step, name: `${entry.name}$reject$${k}`, kind: "rejection", span: span(before),
+      requires: requires.slice(0, requires.length - before.op.resolves.length), ensures: [...state("$s"), ...always()], modifies: [], outputCaptures: [],
+      body: [{ ...returning(undef(before), before), completionExit: exit("environment-rejected", before, 0) }],
+      control: { entry: entry.name, segment: k, action: "reject", rankBefore: entry.segments.length - k, span: span(before) } }, completionRejections);
   });
   // An unhandled rejection discards the resumed activation and changes no
   // cells. It must still establish always and keep every other representative.
@@ -88,8 +134,17 @@ export function transitionsOf(machine) {
     const pending = w.pending.map((c) => clause(c, transform(c.ast, (n, p, key) =>
       onCells(machine, "$s")(n, p, key) ?? rename(names)(n, p, key))));
     emit({ ...step, name: `${step.name}$keeps$${entry.name}$${j + 1}`, kind: "interference", keeps: { entry: entry.name, span: span(w) },
-      params: [...step.params, ...other], requires: [...step.requires, ...pending], ensures: pending });
+      params: [...step.params, ...other], requires: [...step.requires, ...pending], ensures: pending,
+      ...(machine.temporal ? { control: undefined } : {}) });
   });
-  return { units, sha256: sha256(JSON.stringify(units.map(({ target }) => ({ id: target.id, declarations: target.declarations,
-    pre: target.pre, preDefined: target.preDefined, postconditions: target.postconditions })))) };
+  const graph = { units, sha256: sha256(JSON.stringify(units.map(({ target }) => ({ id: target.id, declarations: target.declarations,
+    pre: target.pre, preDefined: target.preDefined, postconditions: target.postconditions })))),
+    ...(machine.temporal ? { completionRejections } : {}) };
+  if (machine.temporal) {
+    freezeGraph(graph);
+    if (temporalMachineIdentity(machine) !== sourceIdentity)
+      fail("Source-bound completion machine changed during lowering.", machine.temporal.goals[0].span);
+    completionGraphs.set(graph, { machine, identity: sourceIdentity });
+  }
+  return graph;
 }

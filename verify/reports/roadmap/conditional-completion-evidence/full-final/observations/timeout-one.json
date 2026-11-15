@@ -1,0 +1,1781 @@
+{
+  "source": "// @environment\n// resolves Number.isFinite(result)\n// rejects\n// settles eventually\ndeclare function op(): Promise<number>;\n// @environment\n// resolves false\n// settles eventually\ndeclare function unused(): Promise<number>;\nlet n = 0;\n// state n >= 0\n// fairness resumptions weak\n// leads work completes\n// leads disturb completes\nexport async function work() {\n  // pending n >= 0\n  const a: number = await op();\n  n = 1;\n  // pending n >= 0\n  const b: number = await op();\n  if (a === 0) { if (b === 0) return; }\n  n = 2;\n}\nexport function disturb() { n = 3; }\n",
+  "options": {
+    "timeoutMs": 1,
+    "maxDepth": 0
+  },
+  "report": {
+    "file": "timeout-one.ts",
+    "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302",
+    "trusted": [
+      "Acorn and Node type stripping",
+      "closed stateful frontend and AST binding rewrites",
+      "existing source body/expression/heap compiler",
+      "representative init/step/keeps induction",
+      "existing proof scheduler and Z3 binary64 backend",
+      "strict native JavaScript replay and timed process containment"
+    ],
+    "executableSha256": "fc0d5c253aa7f8e5c965b45ee03826d302eec4a47a3b906486206b7355f7fd36",
+    "assumptions": {
+      "numericDomain": "JavaScript binary64 (including NaN, infinities, signed zero and 2^53 identity collisions)",
+      "eventBound": null,
+      "scheduler": "JS run-to-completion; external actions with microtasks drained before the next environment action",
+      "entryCalls": "external only; no entry-to-entry or recursive calls; unboundedly repeated",
+      "activationPool": "unbounded multiset; distinct identities per invocation, unary pending invariants",
+      "initial": {
+        "n": "0"
+      },
+      "environment": [
+        {
+          "op": "op",
+          "params": [],
+          "result": "number",
+          "resolves": [
+            "Number.isFinite(result)"
+          ],
+          "rejects": "may-reject",
+          "settles": "eventually",
+          "settlementOrder": "any",
+          "settlementCount": "at most once per request",
+          "settlesUse": "declared-unused for safety"
+        },
+        {
+          "op": "unused",
+          "params": [],
+          "result": "number",
+          "resolves": [
+            "false"
+          ],
+          "rejects": "never-rejects",
+          "settles": "eventually",
+          "settlementOrder": "any",
+          "settlementCount": "at most once per request",
+          "settlesUse": "declared-unused for safety"
+        }
+      ],
+      "entries": [
+        {
+          "entry": "work",
+          "params": []
+        },
+        {
+          "entry": "disturb",
+          "params": []
+        }
+      ],
+      "fairness": "none used by safety; settles eventually is recorded only",
+      "unsupported": [
+        "references",
+        "imports",
+        "handlers",
+        "cancellation",
+        "ordering/abort contracts",
+        "entry contracts",
+        "pairwise/uniqueness/count induction",
+        "nested awaits",
+        "entry-to-entry calls",
+        "unverified helpers",
+        "temporal goals beyond per-invocation completion"
+      ],
+      "completion": {
+        "goals": [
+          {
+            "entry": "work",
+            "goal": "completes",
+            "span": {
+              "start": 281,
+              "end": 304
+            }
+          },
+          {
+            "entry": "disturb",
+            "goal": "completes",
+            "span": {
+              "start": 305,
+              "end": 331
+            }
+          }
+        ],
+        "profile": {
+          "kind": "c1-action-cuts",
+          "version": 1,
+          "microtaskMode": "afterEvaluate",
+          "drain": "void 0;",
+          "resumption": "same-action-timed-drain",
+          "arrivals": "arbitrary-between-actions",
+          "eventBound": null,
+          "activationBound": null
+        },
+        "continuingRuntime": "assumed for completion",
+        "declaredEnvironmentCalls": "assumed total for completion",
+        "resumption": "checked only after finite source totality and complete exit correspondence",
+        "settlement": "assumed separately per reached request; no safety use"
+      },
+      "sha256": "b1b2fc72c195cec793ccf27cf28b4d5d2a5f5d5451d846caa54e13ebf10f994f"
+    },
+    "unitsSha256": "8cf9e858621297b766b578ccd8bf36ebb260d364c6b1d907edbaf198feb33804",
+    "properties": [
+      {
+        "kind": "state",
+        "text": "n >= 0",
+        "span": {
+          "start": 236,
+          "end": 251
+        }
+      }
+    ],
+    "units": [
+      {
+        "unit": "$init",
+        "kind": "init",
+        "span": {
+          "start": 236,
+          "end": 251
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#$init",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$0",
+        "kind": "entry",
+        "span": {
+          "start": 385,
+          "end": 414
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$0",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$1",
+        "kind": "resume",
+        "span": {
+          "start": 417,
+          "end": 423
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$2",
+        "kind": "resume",
+        "span": {
+          "start": 478,
+          "end": 524
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "disturb$0",
+        "kind": "entry",
+        "span": {
+          "start": 555,
+          "end": 561
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#disturb$0",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "$reject",
+        "kind": "stutter",
+        "span": {
+          "start": 236,
+          "end": 251
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#$reject",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$0$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 385,
+          "end": 414
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 385,
+            "end": 414
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$0$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$0$keeps$work$2",
+        "kind": "interference",
+        "span": {
+          "start": 385,
+          "end": 414
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 446,
+            "end": 475
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$0$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$1$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 417,
+          "end": 423
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 385,
+            "end": 414
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$1$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$1$keeps$work$2",
+        "kind": "interference",
+        "span": {
+          "start": 417,
+          "end": 423
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 446,
+            "end": 475
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$1$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$2$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 478,
+          "end": 524
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 385,
+            "end": 414
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$2$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "work$2$keeps$work$2",
+        "kind": "interference",
+        "span": {
+          "start": 478,
+          "end": 524
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 446,
+            "end": 475
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#work$2$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "disturb$0$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 555,
+          "end": 561
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 385,
+            "end": 414
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#disturb$0$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "disturb$0$keeps$work$2",
+        "kind": "interference",
+        "span": {
+          "start": 555,
+          "end": 561
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 446,
+            "end": 475
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#disturb$0$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "$reject$keeps$work$1",
+        "kind": "interference",
+        "span": {
+          "start": 236,
+          "end": 251
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 385,
+            "end": 414
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#$reject$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      },
+      {
+        "unit": "$reject$keeps$work$2",
+        "kind": "interference",
+        "span": {
+          "start": 236,
+          "end": 251
+        },
+        "keeps": {
+          "entry": "work",
+          "span": {
+            "start": 446,
+            "end": 475
+          }
+        },
+        "scope": "abstract induction obligation; satisfiable is not an application counterexample",
+        "status": "unknown",
+        "reason": "request-timeout",
+        "message": "The shared wall-clock verification budget was exhausted.",
+        "obligation": {
+          "target": "timeout-one.ts#$reject$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "attempts": 0
+      }
+    ],
+    "searched": {
+      "maxDepth": 0,
+      "executions": 0,
+      "stopped": "request-budget"
+    },
+    "status": "unknown",
+    "reason": "solver",
+    "abstract": [
+      "$init",
+      "work$0",
+      "work$1",
+      "work$2",
+      "disturb$0",
+      "$reject",
+      "work$0$keeps$work$1",
+      "work$0$keeps$work$2",
+      "work$1$keeps$work$1",
+      "work$1$keeps$work$2",
+      "work$2$keeps$work$1",
+      "work$2$keeps$work$2",
+      "disturb$0$keeps$work$1",
+      "disturb$0$keeps$work$2",
+      "$reject$keeps$work$1",
+      "$reject$keeps$work$2"
+    ],
+    "solver": [
+      {
+        "unit": "$init",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#$init",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$0",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$0",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$1",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$2",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "disturb$0",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#disturb$0",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "$reject",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#$reject",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$0$keeps$work$1",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$0$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$0$keeps$work$2",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$0$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$1$keeps$work$1",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$1$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$1$keeps$work$2",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$1$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$2$keeps$work$1",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$2$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "work$2$keeps$work$2",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#work$2$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "disturb$0$keeps$work$1",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#disturb$0$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "disturb$0$keeps$work$2",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#disturb$0$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "$reject$keeps$work$1",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#$reject$keeps$work$1",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      },
+      {
+        "unit": "$reject$keeps$work$2",
+        "reason": "request-timeout",
+        "obligation": {
+          "target": "timeout-one.ts#$reject$keeps$work$2",
+          "phase": "feasibility",
+          "domain": "full",
+          "backend": "z3"
+        },
+        "message": "The shared wall-clock verification budget was exhausted."
+      }
+    ],
+    "safety": {
+      "status": "unknown",
+      "reason": "solver",
+      "assumptionsUse": "temporal premises unused"
+    },
+    "completion": {
+      "manifestSha256": "9db6e04e2cf41ac9b471675ddc544185086f6a1e2f98897a62ffaf6d90c9b3dd",
+      "binding": {
+        "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302",
+        "executableSha256": "fc0d5c253aa7f8e5c965b45ee03826d302eec4a47a3b906486206b7355f7fd36",
+        "assumptionsSha256": "b1b2fc72c195cec793ccf27cf28b4d5d2a5f5d5451d846caa54e13ebf10f994f",
+        "safetyUnitsSha256": "8cf9e858621297b766b578ccd8bf36ebb260d364c6b1d907edbaf198feb33804",
+        "implementationSha256": "40c6562e34e187360b07552ef60d7c1c3a59eaf2a7a445e2262c0802452c80ba",
+        "runtime": "v22.23.1",
+        "rule": "c1-per-invocation-completion-1",
+        "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45",
+        "goalsSha256": "3a4f68a1d704e950a937e713863aea46f08cc8081075e39f8977a873250e982c"
+      },
+      "closed": true,
+      "profile": {
+        "kind": "c1-action-cuts",
+        "version": 1,
+        "microtaskMode": "afterEvaluate",
+        "drain": "void 0;",
+        "resumption": "same-action-timed-drain",
+        "arrivals": "arbitrary-between-actions",
+        "eventBound": null,
+        "activationBound": null
+      },
+      "obligations": [
+        {
+          "id": "init",
+          "kind": "init",
+          "status": "missing",
+          "safetyUnit": "$init",
+          "rule": "initial empty identity support"
+        },
+        {
+          "id": "rejection-safety",
+          "kind": "safety-step",
+          "status": "missing",
+          "safetyUnit": "$reject"
+        },
+        {
+          "id": "work$0:safety",
+          "kind": "safety-step",
+          "status": "missing",
+          "safetyUnit": "work$0"
+        },
+        {
+          "id": "work$0:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$0"
+        },
+        {
+          "id": "work$0:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 0,
+          "action": "call",
+          "sourceSpan": {
+            "start": 339,
+            "end": 526
+          },
+          "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"
+        },
+        {
+          "id": "work$0:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$0:creation",
+          "kind": "creation",
+          "status": "checked",
+          "rule": "fresh invocation; positive birth ordinal; call executes first segment"
+        },
+        {
+          "id": "work$0:0:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "work$0",
+          "check": 1,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 385,
+              "end": 414
+            },
+            "path": "true",
+            "rankBefore": "3",
+            "rankAfter": "2"
+          },
+          "querySha256": "65178bdd5307f1b8fbfbb7e393b1310f384bec26adc091ed0492a7e77d1b732f"
+        },
+        {
+          "id": "work$0:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "work$0",
+          "check": 2,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 385,
+              "end": 414
+            },
+            "path": "true",
+            "rankBefore": "3",
+            "rankAfter": "2"
+          },
+          "querySha256": "65178bdd5307f1b8fbfbb7e393b1310f384bec26adc091ed0492a7e77d1b732f"
+        },
+        {
+          "id": "work$0:0:outcome-viability",
+          "kind": "outcome-viability",
+          "status": "unresolved",
+          "unit": "work$0",
+          "check": 3,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 385,
+              "end": 414
+            },
+            "path": "true",
+            "rankBefore": "3",
+            "rankAfter": "2"
+          },
+          "querySha256": "65178bdd5307f1b8fbfbb7e393b1310f384bec26adc091ed0492a7e77d1b732f"
+        },
+        {
+          "id": "work$1:safety",
+          "kind": "safety-step",
+          "status": "missing",
+          "safetyUnit": "work$1"
+        },
+        {
+          "id": "work$1:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$1"
+        },
+        {
+          "id": "work$1:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 1,
+          "action": "resolve",
+          "sourceSpan": {
+            "start": 339,
+            "end": 526
+          },
+          "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"
+        },
+        {
+          "id": "work$1:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$1:0:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "work$1",
+          "check": 1,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 446,
+              "end": 475
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "1"
+          },
+          "querySha256": "5711430f72e0535922a5c17406ff67c1509202c4d16639b72b7b110a369946dc"
+        },
+        {
+          "id": "work$1:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "work$1",
+          "check": 2,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 446,
+              "end": 475
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "1"
+          },
+          "querySha256": "5711430f72e0535922a5c17406ff67c1509202c4d16639b72b7b110a369946dc"
+        },
+        {
+          "id": "work$1:0:outcome-viability",
+          "kind": "outcome-viability",
+          "status": "unresolved",
+          "unit": "work$1",
+          "check": 3,
+          "sourceExit": {
+            "kind": "waiting",
+            "span": {
+              "start": 446,
+              "end": 475
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "1"
+          },
+          "querySha256": "5711430f72e0535922a5c17406ff67c1509202c4d16639b72b7b110a369946dc"
+        },
+        {
+          "id": "work$reject$1:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$reject$1"
+        },
+        {
+          "id": "work$reject$1:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 1,
+          "action": "reject",
+          "sourceSpan": {
+            "start": 385,
+            "end": 414
+          },
+          "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"
+        },
+        {
+          "id": "work$reject$1:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$reject$1:deletion",
+          "kind": "deletion",
+          "status": "checked",
+          "rule": "only actor reaches terminal; other identities remain live"
+        },
+        {
+          "id": "work$reject$1:0:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "work$reject$1",
+          "check": 1,
+          "sourceExit": {
+            "kind": "environment-rejected",
+            "span": {
+              "start": 385,
+              "end": 414
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "0"
+          },
+          "querySha256": "b59fcb3530f2f42a46d1f7599e90de00588552cbced060cf2c2a8838ea10d9ed"
+        },
+        {
+          "id": "work$reject$1:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "work$reject$1",
+          "check": 2,
+          "sourceExit": {
+            "kind": "environment-rejected",
+            "span": {
+              "start": 385,
+              "end": 414
+            },
+            "path": "true",
+            "rankBefore": "2",
+            "rankAfter": "0"
+          },
+          "querySha256": "b59fcb3530f2f42a46d1f7599e90de00588552cbced060cf2c2a8838ea10d9ed"
+        },
+        {
+          "id": "work$2:safety",
+          "kind": "safety-step",
+          "status": "missing",
+          "safetyUnit": "work$2"
+        },
+        {
+          "id": "work$2:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$2"
+        },
+        {
+          "id": "work$2:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 2,
+          "action": "resolve",
+          "sourceSpan": {
+            "start": 339,
+            "end": 526
+          },
+          "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"
+        },
+        {
+          "id": "work$2:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$2:deletion",
+          "kind": "deletion",
+          "status": "checked",
+          "rule": "only actor reaches terminal; other identities remain live"
+        },
+        {
+          "id": "work$2:0:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "work$2",
+          "check": 1,
+          "sourceExit": {
+            "kind": "returned",
+            "span": {
+              "start": 506,
+              "end": 513
+            },
+            "path": "(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000)))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c4e2329d4ccfb8e2901c034eec0c04f1c344710d8454423f4a8b12e96a3c8253"
+        },
+        {
+          "id": "work$2:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "work$2",
+          "check": 2,
+          "sourceExit": {
+            "kind": "returned",
+            "span": {
+              "start": 506,
+              "end": 513
+            },
+            "path": "(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000)))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c4e2329d4ccfb8e2901c034eec0c04f1c344710d8454423f4a8b12e96a3c8253"
+        },
+        {
+          "id": "work$2:1:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "work$2",
+          "check": 3,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 478,
+              "end": 524
+            },
+            "path": "(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (not (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000))))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c4e2329d4ccfb8e2901c034eec0c04f1c344710d8454423f4a8b12e96a3c8253"
+        },
+        {
+          "id": "work$2:1:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "work$2",
+          "check": 4,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 478,
+              "end": 524
+            },
+            "path": "(and (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)) (not (fp.eq ((_ to_fp 11 53) input_2) ((_ to_fp 11 53) #x0000000000000000))))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c4e2329d4ccfb8e2901c034eec0c04f1c344710d8454423f4a8b12e96a3c8253"
+        },
+        {
+          "id": "work$2:2:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "work$2",
+          "check": 5,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 478,
+              "end": 524
+            },
+            "path": "(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c4e2329d4ccfb8e2901c034eec0c04f1c344710d8454423f4a8b12e96a3c8253"
+        },
+        {
+          "id": "work$2:2:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "work$2",
+          "check": 6,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 478,
+              "end": 524
+            },
+            "path": "(not (fp.eq ((_ to_fp 11 53) input_1) ((_ to_fp 11 53) #x0000000000000000)))",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "c4e2329d4ccfb8e2901c034eec0c04f1c344710d8454423f4a8b12e96a3c8253"
+        },
+        {
+          "id": "work$reject$2:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "work$reject$2"
+        },
+        {
+          "id": "work$reject$2:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "work",
+          "segment": 2,
+          "action": "reject",
+          "sourceSpan": {
+            "start": 446,
+            "end": 475
+          },
+          "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"
+        },
+        {
+          "id": "work$reject$2:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "work$reject$2:deletion",
+          "kind": "deletion",
+          "status": "checked",
+          "rule": "only actor reaches terminal; other identities remain live"
+        },
+        {
+          "id": "work$reject$2:0:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "work$reject$2",
+          "check": 1,
+          "sourceExit": {
+            "kind": "environment-rejected",
+            "span": {
+              "start": 446,
+              "end": 475
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "3d09d41c41e95e678cfe605e91b5511d05136273f6400801ec48c504561ac12f"
+        },
+        {
+          "id": "work$reject$2:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "work$reject$2",
+          "check": 2,
+          "sourceExit": {
+            "kind": "environment-rejected",
+            "span": {
+              "start": 446,
+              "end": 475
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "3d09d41c41e95e678cfe605e91b5511d05136273f6400801ec48c504561ac12f"
+        },
+        {
+          "id": "disturb$0:safety",
+          "kind": "safety-step",
+          "status": "missing",
+          "safetyUnit": "disturb$0"
+        },
+        {
+          "id": "disturb$0:totality",
+          "kind": "segment-totality",
+          "status": "checked",
+          "unit": "disturb$0"
+        },
+        {
+          "id": "disturb$0:exits",
+          "kind": "source-exit-coverage",
+          "status": "checked",
+          "entry": "disturb",
+          "segment": 0,
+          "action": "call",
+          "sourceSpan": {
+            "start": 534,
+            "end": 563
+          },
+          "sourceSha256": "abf93ebbd32aa9ec00be81de6bf53daffa8973488c07c900529e7451cdcd8302"
+        },
+        {
+          "id": "disturb$0:terminal",
+          "kind": "terminal-equivalence",
+          "status": "checked",
+          "rule": "zero iff post-terminal; every live source location is positive"
+        },
+        {
+          "id": "disturb$0:creation",
+          "kind": "creation",
+          "status": "checked",
+          "rule": "fresh invocation; positive birth ordinal; call executes first segment"
+        },
+        {
+          "id": "disturb$0:deletion",
+          "kind": "deletion",
+          "status": "checked",
+          "rule": "only actor reaches terminal; other identities remain live"
+        },
+        {
+          "id": "disturb$0:0:own-progress",
+          "kind": "own-progress",
+          "status": "unresolved",
+          "unit": "disturb$0",
+          "check": 1,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 555,
+              "end": 561
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "45d1690cd78bd911ae7aff03d5173d7892102133edf2d72434873b3e7eb6cf84"
+        },
+        {
+          "id": "disturb$0:0:rank-nonnegative",
+          "kind": "rank-nonnegative",
+          "status": "unresolved",
+          "unit": "disturb$0",
+          "check": 2,
+          "sourceExit": {
+            "kind": "fallthrough",
+            "span": {
+              "start": 555,
+              "end": 561
+            },
+            "path": "true",
+            "rankBefore": "1",
+            "rankAfter": "0"
+          },
+          "querySha256": "45d1690cd78bd911ae7aff03d5173d7892102133edf2d72434873b3e7eb6cf84"
+        },
+        {
+          "id": "work$0:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "allocation is fresh relative to every existing identity"
+        },
+        {
+          "id": "work$0:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$0",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "2"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$0:observes:work:0:alias"
+        },
+        {
+          "id": "work$1:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "same actor: own progress",
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$1:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$1",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "2"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$1:observes:work:0:alias"
+        },
+        {
+          "id": "work$reject$1:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "same actor: own progress",
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$reject$1:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$reject$1",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "2"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$reject$1:observes:work:0:alias"
+        },
+        {
+          "id": "work$2:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$2:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$2",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "2"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$2:observes:work:0:alias"
+        },
+        {
+          "id": "work$reject$2:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$reject$2:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$reject$2",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "2"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$reject$2:observes:work:0:alias"
+        },
+        {
+          "id": "disturb$0:observes:work:0:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "allocation is fresh relative to every existing identity"
+        },
+        {
+          "id": "disturb$0:observes:work:0:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "disturb$0",
+          "observed": {
+            "entry": "work",
+            "site": 0,
+            "rank": "2"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "disturb$0:observes:work:0:alias"
+        },
+        {
+          "id": "work$0:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "work$0$keeps$work$1"
+        },
+        {
+          "id": "work$1:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "work$1$keeps$work$1"
+        },
+        {
+          "id": "work$2:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "work$2$keeps$work$1"
+        },
+        {
+          "id": "disturb$0:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "disturb$0$keeps$work$1"
+        },
+        {
+          "id": "$reject:keeps:work:0",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "$reject$keeps$work$1"
+        },
+        {
+          "id": "work$0:observes:work:1:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "allocation is fresh relative to every existing identity"
+        },
+        {
+          "id": "work$0:observes:work:1:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$0",
+          "observed": {
+            "entry": "work",
+            "site": 1,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$0:observes:work:1:alias"
+        },
+        {
+          "id": "work$1:observes:work:1:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$1:observes:work:1:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$1",
+          "observed": {
+            "entry": "work",
+            "site": 1,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$1:observes:work:1:alias"
+        },
+        {
+          "id": "work$reject$1:observes:work:1:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$reject$1:observes:work:1:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$reject$1",
+          "observed": {
+            "entry": "work",
+            "site": 1,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$reject$1:observes:work:1:alias"
+        },
+        {
+          "id": "work$2:observes:work:1:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "same actor: own progress",
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$2:observes:work:1:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$2",
+          "observed": {
+            "entry": "work",
+            "site": 1,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$2:observes:work:1:alias"
+        },
+        {
+          "id": "work$reject$2:observes:work:1:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "same actor: own progress",
+            "distinct actor: frame"
+          ],
+          "rule": "request belongs to exactly one invocation; at most one settlement"
+        },
+        {
+          "id": "work$reject$2:observes:work:1:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "work$reject$2",
+          "observed": {
+            "entry": "work",
+            "site": 1,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "work$reject$2:observes:work:1:alias"
+        },
+        {
+          "id": "disturb$0:observes:work:1:alias",
+          "kind": "identity-alias",
+          "status": "checked",
+          "cases": [
+            "distinct actor: frame"
+          ],
+          "rule": "allocation is fresh relative to every existing identity"
+        },
+        {
+          "id": "disturb$0:observes:work:1:nonincrease",
+          "kind": "interference-nonincrease",
+          "status": "checked",
+          "unit": "disturb$0",
+          "observed": {
+            "entry": "work",
+            "site": 1,
+            "rank": "1"
+          },
+          "rule": "distinct-identity frame: body writes scalar cells/actor locals; only actor control changes",
+          "aliases": "disturb$0:observes:work:1:alias"
+        },
+        {
+          "id": "work$0:keeps:work:1",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "work$0$keeps$work$2"
+        },
+        {
+          "id": "work$1:keeps:work:1",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "work$1$keeps$work$2"
+        },
+        {
+          "id": "work$2:keeps:work:1",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "work$2$keeps$work$2"
+        },
+        {
+          "id": "disturb$0:keeps:work:1",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "disturb$0$keeps$work$2"
+        },
+        {
+          "id": "$reject:keeps:work:1",
+          "kind": "pending-keeps",
+          "status": "missing",
+          "safetyUnit": "$reject$keeps$work$2"
+        },
+        {
+          "id": "profile",
+          "kind": "profile-correspondence",
+          "status": "checked",
+          "profile": {
+            "kind": "c1-action-cuts",
+            "version": 1,
+            "microtaskMode": "afterEvaluate",
+            "drain": "void 0;",
+            "resumption": "same-action-timed-drain",
+            "arrivals": "arbitrary-between-actions",
+            "eventBound": null,
+            "activationBound": null
+          },
+          "rule": "finite total source segments; native settlement and timed microtask drain are the same C1 action"
+        }
+      ],
+      "units": [
+        {
+          "unit": "work$0",
+          "querySha256": "65178bdd5307f1b8fbfbb7e393b1310f384bec26adc091ed0492a7e77d1b732f",
+          "status": "unknown",
+          "reason": "request-timeout"
+        },
+        {
+          "unit": "work$1",
+          "querySha256": "5711430f72e0535922a5c17406ff67c1509202c4d16639b72b7b110a369946dc",
+          "status": "unknown",
+          "reason": "request-timeout"
+        },
+        {
+          "unit": "work$reject$1",
+          "querySha256": "b59fcb3530f2f42a46d1f7599e90de00588552cbced060cf2c2a8838ea10d9ed",
+          "status": "unknown",
+          "reason": "request-timeout"
+        },
+        {
+          "unit": "work$2",
+          "querySha256": "c4e2329d4ccfb8e2901c034eec0c04f1c344710d8454423f4a8b12e96a3c8253",
+          "status": "unknown",
+          "reason": "request-timeout"
+        },
+        {
+          "unit": "work$reject$2",
+          "querySha256": "3d09d41c41e95e678cfe605e91b5511d05136273f6400801ec48c504561ac12f",
+          "status": "unknown",
+          "reason": "request-timeout"
+        },
+        {
+          "unit": "disturb$0",
+          "querySha256": "45d1690cd78bd911ae7aff03d5173d7892102133edf2d72434873b3e7eb6cf84",
+          "status": "unknown",
+          "reason": "request-timeout"
+        }
+      ],
+      "goals": [
+        {
+          "entry": "work",
+          "goal": "completes",
+          "span": {
+            "start": 281,
+            "end": 304
+          },
+          "status": "unknown",
+          "reason": "safety-prerequisite",
+          "scope": "each invocation returns normally (including suppressed writes) or reaches declared environment rejection",
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "3",
+            "waiting": [
+              "2",
+              "1"
+            ],
+            "terminal": "0"
+          },
+          "assumptions": [
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "op",
+              "classification": "assumed-unused",
+              "declared": true,
+              "scope": "each reached request occurrence, not operation-kind fairness"
+            },
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "unused",
+              "classification": "assumed-unused",
+              "declared": true,
+              "scope": "each reached request occurrence, not operation-kind fairness"
+            },
+            {
+              "kind": "continuing-runtime",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "weak-resumption",
+              "classification": "missing",
+              "requested": true,
+              "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45"
+            }
+          ],
+          "nativeConfirmed": false
+        },
+        {
+          "entry": "disturb",
+          "goal": "completes",
+          "span": {
+            "start": 305,
+            "end": 331
+          },
+          "status": "unknown",
+          "reason": "safety-prerequisite",
+          "scope": "each invocation returns normally (including suppressed writes) or reaches declared environment rejection",
+          "rank": {
+            "domain": "exact source-control integers",
+            "birth": "1",
+            "waiting": [],
+            "terminal": "0"
+          },
+          "assumptions": [
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "op",
+              "classification": "assumed-unused",
+              "declared": true,
+              "scope": "each reached request occurrence, not operation-kind fairness"
+            },
+            {
+              "kind": "per-reached-request-settlement",
+              "op": "unused",
+              "classification": "assumed-unused",
+              "declared": true,
+              "scope": "each reached request occurrence, not operation-kind fairness"
+            },
+            {
+              "kind": "continuing-runtime",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "total-declared-environment-calls",
+              "classification": "assumed-unused"
+            },
+            {
+              "kind": "weak-resumption",
+              "classification": "missing",
+              "requested": true,
+              "profileSha256": "bbaa22ba80b5121680aa7a8c6657e13a483673cd5e2f8e1d657fed2a4f4c5e45"
+            }
+          ],
+          "nativeConfirmed": false
+        }
+      ],
+      "nativeConfirmed": false,
+      "trusted": [
+        "finite-control completion rule and source/identity frame checker",
+        "compiler exit/definedness coverage",
+        "C1 native action and timed-drain correspondence",
+        "Z3 including quantified outcome viability"
+      ],
+      "limitations": [
+        "no checked infinite-word realizability",
+        "no global draining/success/commit/count theorem",
+        "protocol temporal mode unsupported"
+      ]
+    }
+  }
+}

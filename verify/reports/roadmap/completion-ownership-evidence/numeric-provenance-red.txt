@@ -1,0 +1,39 @@
+Waiting for the shared solver test lane.
+Acquired the solver test lane.
+TAP version 13
+# (node:43050) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: source provenance preserves signed zero and nonfinite numeric literal identity
+not ok 1 - source provenance preserves signed zero and nonfinite numeric literal identity
+  ---
+  duration_ms: 40.414875
+  type: 'test'
+  location: '/Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/tests/verify/completion-ownership.test.mjs:97:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    0
+    + actual - expected
+    
+    + '6af967ceb50d6d0a56bf375b10ad74f28641697756d820622d6221fe29b42566'
+    - undefined
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual: '6af967ceb50d6d0a56bf375b10ad74f28641697756d820622d6221fe29b42566'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/rick/.t3/worktrees/verified-list-ui/ready-now-coordinator/tests/verify/completion-ownership.test.mjs:106:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 119.997958

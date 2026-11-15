@@ -1,0 +1,8 @@
+{
+  "source": "// @environment\n// resolves result > 0\n// settles eventually\ndeclare function op(): Promise<number>;\nlet n = 0;\n// state n >= 0\n// leads work completes\nexport async function work() { await op(); n = 1; }\n",
+  "result": {
+    "status": "illegal-environment-action",
+    "reason": "invalid-trace",
+    "message": "Resolution violates the declared resolves assumption."
+  }
+}

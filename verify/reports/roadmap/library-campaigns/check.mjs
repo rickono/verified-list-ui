@@ -9,7 +9,7 @@ import { bindModel, checkInputs, freeze } from "./campaign-inputs.mjs";
 
 const self = fileURLToPath(import.meta.url), here = dirname(self);
 const root = resolve(here, "../../../..");
-const lane = "/Users/rick/verification-vibes/artifacts/ready-now/serial-verify.py";
+const lane = resolve(process.env.JSVERIFY_SERIAL_LANE ?? join(root, "scripts/serial-verify.py"));
 const sha = (data) => createHash("sha256").update(data).digest("hex");
 const read = (file) => readFileSync(file, "utf8");
 const json = (file) => JSON.parse(read(file));

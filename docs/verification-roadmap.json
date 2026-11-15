@@ -1,7 +1,7 @@
 {
   "title": "From source contracts to verification of existing JS/TS",
   "asOf": "2026-11-14",
-  "status": "R, S and T are integrated in the scoped C1/C2a domain after PR #16. K/Q remain integrated with fresh current-model campaign evidence. U is next: conditional completion needs producer-owned proof artifacts before integration. V has an unchanged-source historical native regression; factory proof designs are in progress. W remains open.",
+  "status": "R/S/T are integrated. U is ready in PR18 after535/535 hosted tests and a fresh ten-stage model-bound campaign; actual merge pending. V has a pinned native lifecycle regression and a selected source-bridge design, with the first callable-cell compiler unit in progress. W remains open.",
   "edgeMeaning": "All prerequisites apply. Integrated nodes refer to their documented first-layer subsets. U can build on the landed stateful safety and explicit-environment foundation; V and W still require maintained real stateful source proofs. Transitively redundant edges are omitted.",
   "assumptions": [
     "Properties and environment assumptions are supplied explicitly; this is not automatic proof of arbitrary JavaScript.",
@@ -440,7 +440,7 @@
         "S",
         "T"
       ],
-      "status": "next",
+      "status": "branch_ready",
       "extension": true,
       "area": "Transition systems / backend integration",
       "detail": "Translate supported stateful source behavior into transition obligations. Check safety across event sequences and liveness under stated scheduling/fairness assumptions. Choose SMT, induction or model-checking backends by the property.",
@@ -452,7 +452,7 @@
         "T",
         "B"
       ],
-      "workInProgress": "20ff205 passed496 standalone tests. Native reviewPASS; source review found mutable compiled viability/footprint binding gap. Public impossible-outcome source stays unknown. Producer ownership correction and combined integration pending."
+      "workInProgress": "PR18 ready after535/535 hosted tests,4/4 strict loop controls and10/10 current-model campaign stages. Source-owned immutable plans and numeric-preserving frontend snapshots correct prior findings. Native/standards reviewPASS on1f326fd; separate proof delegate rejected, partial finding corrected. Original acceptance unchanged; actual merge pending."
     },
     {
       "id": "V",

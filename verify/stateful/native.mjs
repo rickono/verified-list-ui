@@ -2,6 +2,7 @@ import { executeProtocolNative } from "./protocol-native.mjs";
 import { Script, createContext } from "node:vm";
 import { reference, walk } from "./ast.mjs";
 import { decodeValue, encodeValue } from "./values.mjs";
+import { C1_PROFILE } from "./environment.mjs";
 
 // Only observation expressions are rendered. Application execution uses the
 // unchanged type-stripped source, with export keywords blanked at their spans.
@@ -34,15 +35,16 @@ export function executeNative(machine, envelope, timeoutMs) {
     for (const [key, expected] of Object.entries({ version: 1, sourceSha256: machine.sourceSha256, executableSha256: machine.executableSha256, assumptionsSha256: machine.assumptions.sha256 }))
       if (envelope?.[key] !== expected) illegal(`Trace ${key} mismatch.`);
     if (!Array.isArray(envelope.actions)) illegal("Trace actions must be an array.");
-    const context = createContext(Object.create(null), { microtaskMode: "afterEvaluate", codeGeneration: { strings: false, wasm: false } });
+    const context = createContext(Object.create(null), { microtaskMode: C1_PROFILE.microtaskMode, codeGeneration: { strings: false, wasm: false } });
     const run = (text, filename = "stateful-replay-harness") => new Script(`"use strict";\n${text}`, { filename }).runInContext(context, { timeout: timeoutMs });
     run(`const $requests = [], $faults = [], $rejection = Object.freeze({environmentRejection: true});
       let $returned, $args, $value, $pre, $post;
       const $fault = e => { if(e !== $rejection) $faults.push(String(e?.message ?? e)); };`);
+    if (machine.temporal) run("const $activations = []; let $nextActivation = 0n, $currentActivation;");
     for (const op of machine.environment.values()) {
       run(`globalThis[${JSON.stringify(op.name)}] = (...args) => {
         if (args.length !== ${op.params.length} || ![${op.params.map((p, i) => `typeof args[${i}] === ${JSON.stringify(p.type)}`).join(",")}].every(Boolean)) throw new Error("Environment request argument domain violation");
-        return new Promise((resolve,reject) => $requests.push({seq:$requests.length+1, op:${JSON.stringify(op.name)}, args, resolve, reject, settled:false}));
+        return new Promise((resolve,reject) => $requests.push({seq:$requests.length+1, op:${JSON.stringify(op.name)}, args, resolve, reject, settled:false${machine.temporal ? ", activation:$currentActivation.id" : ""}}));
       };`);
     }
     run(machine.executable, machine.file);
@@ -59,8 +61,11 @@ export function executeNative(machine, envelope, timeoutMs) {
       }
     };
     let state = observe(), violation = check(undefined, state);
-    steps.push({ step: 0, action: { kind: "init" }, state: encodedState(state) });
-    const open = () => run("$requests.map(({seq,op,args,settled})=>({seq,op,args,settled}))")
+    const activations = () => machine.temporal ? { activations: [...run("$activations.map(({id,entry,status})=>({id,entry,status}))")] } : {};
+    steps.push({ step: 0, action: { kind: "init" }, state: encodedState(state), ...activations() });
+    const open = () => run(machine.temporal
+      ? "$requests.map(({seq,op,args,settled,activation})=>({seq,op,args,settled,activation}))"
+      : "$requests.map(({seq,op,args,settled})=>({seq,op,args,settled}))")
       .map((r) => ({ ...r, args: [...r.args].map(encodeValue) }));
     let firstViolation = violation;
     for (const action of envelope.actions) {
@@ -73,12 +78,24 @@ export function executeNative(machine, envelope, timeoutMs) {
         try { args = action.args.map(decodeValue); } catch { illegal("Invalid argument encoding."); }
         if (!entry.params.every((p, i) => shape(args[i], p.type))) illegal("Invalid entry argument domain.");
         context.$args = args; run("$args = globalThis.$args;");
-        run(`try { $returned = ${entry.name}(...$args); if($returned instanceof Promise) $returned.catch($fault); } catch(e) { $fault(e); }`);
+        if (machine.temporal) run(`{
+          const a = {id:String(++$nextActivation), entry:${JSON.stringify(entry.name)}, status:"live"};
+          $activations.push(a); $currentActivation = a;
+          try {
+            $returned = ${entry.name}(...$args);
+            if ($returned instanceof Promise) $returned.then(() => { a.status = "returned"; }, e => {
+              a.status = e === $rejection ? "environment-rejected" : "fault"; $fault(e);
+            });
+            else a.status = "returned";
+          } catch(e) { a.status = "fault"; $fault(e); }
+        }`);
+        else run(`try { $returned = ${entry.name}(...$args); if($returned instanceof Promise) $returned.catch($fault); } catch(e) { $fault(e); }`);
       } else if (action?.kind === "resolve" || action?.kind === "reject") {
         if (!keys(action, action.kind === "resolve" ? ["kind", "request", "op", "value"] : ["kind", "request", "op"]) || !Number.isSafeInteger(action.request) || action.request < 1 || typeof action.op !== "string") illegal("Invalid settlement action shape.");
         const request = run(`$requests[${action.request - 1}]`);
         if (!request || request.settled || request.op !== action.op) illegal("Request identity is not pending or its operation differs.");
         const op = machine.environment.get(request.op);
+        if (machine.temporal) run(`$currentActivation = $activations.find(a => a.id === ${JSON.stringify(request.activation)});`);
         if (action.kind === "reject") {
           if (!op.rejects) illegal("Environment never-rejects assumption forbids rejection.");
           run(`$requests[${action.request - 1}].settled = true; $requests[${action.request - 1}].reject($rejection);`);
@@ -92,9 +109,10 @@ export function executeNative(machine, envelope, timeoutMs) {
           run(`$requests[${action.request - 1}].settled = true; $requests[${action.request - 1}].resolve($value);`);
         }
       } else illegal("Unknown action type.");
-      run("void 0;"); // Explicit timed microtask drain, also after invocation.
+      run(C1_PROFILE.drain); // Explicit timed microtask drain, also after invocation.
       state = observe(); violation = check(pre, state);
-      steps.push({ step: steps.length, action, state: encodedState(state) });
+      steps.push({ step: steps.length, action, state: encodedState(state), ...activations() });
+      if (machine.temporal) run("$currentActivation = undefined;");
       firstViolation ??= violation;
       const faults = run("$faults.slice()");
       if (faults.length) return { status: "unknown", reason: "replay-runtime", faults: [...faults], trace: { ...envelope, steps }, requests: open() };
