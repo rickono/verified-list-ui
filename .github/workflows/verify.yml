@@ -46,6 +46,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Check immutable campaign inputs
         run: node verify/reports/roadmap/library-campaigns/check.mjs --inputs-only
+      - name: Check deterministic loop replay controls
+        run: python3 scripts/serial-verify.py -- python3 scripts/record-verifier-run.py "$RUNNER_TEMP/verifier-ci/loop-controls" -- node --test --test-concurrency=1 --test-name-pattern='K replay|K zero-iteration' tests/verify/mutating-loops.test.mjs
       - name: Run the full verifier suite
         run: python3 scripts/serial-verify.py -- python3 scripts/record-verifier-run.py "$RUNNER_TEMP/verifier-ci/full" -- make test-verify
       - name: Run the current-model numerical campaign

@@ -35,3 +35,26 @@ has read-only contents permission and does not publish or deploy software.
 Proof receipts are not supplied from a shared cache. Dependency caching stores
 package-manager files, not verification outcomes. Remote results are pending;
 U remains unintegrated until its acceptance checks pass.
+
+## First hosted result and witness-oracle correction
+
+GitHub run `43653331532` tested head `3b111ad` on Linux x86_64. Installation,
+immutable input validation and artifact retention passed. The full suite was
+530/531 with unchanged inputs; the campaign was not started. H01-fresh-array
+returned `unknown/induction-gap` at ensures, while its test demanded a confirmed
+counterexample. The original case's own fixture description says reject means
+must not verify. The function returns 0 when n is either signed zero and 1 for
+n=1 or n=2. Thus a valid abstract model in its declared domain can replay without
+a failure; the observed induction gap is consistent with that zero-iteration
+case. The old run did not retain the actual candidate, so its exact bits are
+not claimed. Changing to Linux exposed a witness-sensitive oracle, not a false
+proof.
+
+The original H01/H02/H03 fixtures and runtime bodies remain unchanged and still
+must not verify. Three separate companion contracts permit only native-failing
+inputs (n=1 or2, or flag=true). They retain strict confirmed-counterexample
+assertions. A signed-zero zero-iteration companion has no native failure and
+must not report a counterexample. Function source equality checks confirm that
+only the companion contract comments change. No verifier verdict, solver budget
+or replay rule changes. The new controls run before the next full hosted suite;
+that run remains pending. The first failed hosted artifact is retained separately.
